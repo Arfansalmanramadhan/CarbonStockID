@@ -10,7 +10,7 @@ CarbonStockID adalah sebuah aplikasi berbasis web yang dirancang untuk memberika
 ### Menjalankan Aplkasi 
 * Mengambil kode dari repo dengan cara di bawah ini
 ```
-git clone https://github.com/chevalierlab-sas/web-BE_hijau-2023
+git clone https://github.com/Arfansalmanramadhan/CarbonStockID
 ```
 * intall package dengan cara di bawah ini
 ```
