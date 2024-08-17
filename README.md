@@ -14,7 +14,7 @@ git clone https://github.com/Arfansalmanramadhan/CarbonStockID
 ```
 * intall package dengan cara di bawah ini
 ```
-composer install
+composer update
 ```
 * Package dan alamat database tidak terbawa ke repo dengan cara di bawah ini
 ```
