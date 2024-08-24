@@ -28,11 +28,8 @@ php artisan key:generate
 ```
 php artisan migrate
 ```
-* membuat akun admin dengan cara di bawah ini 
-```
-php artisan db:seed
-```
-* Menjalankan aplikasi pembukuan dengan cara di bawah ini 
+
+* Menjalankan aplikasi CarbonStockID dengan cara di bawah ini 
 ```
 php artisan serve 
 ```
