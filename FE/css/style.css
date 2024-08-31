@@ -1,0 +1,464 @@
+:root {
+  --pr-color1: #4caf4f;
+  --pr-color2: #ffffff;
+  --pr-color3: #abbed1;
+  --pr-color4: #000000;
+  --pr-color5: #c4c4c4;
+  --pr-color6: #2b313a;
+  --pr-color7: #6c7581;
+  --pr-color8: #abbed1;
+  --pr-color9: #edf7ed;
+  --pr-colorA: #263238;
+  --pr-colorB: #e6e6e6;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+  background-color: var(--pr-color2);
+  margin: 0;
+  padding: 0;
+}
+
+h1,
+h2,
+h3 {
+  font-family: "DM Sans", sans-serif;
+}
+
+/* Navbar Style */
+.navbar {
+  display: flex;
+  padding: 18px 78px;
+  align-items: center;
+  background-color: var(--pr-color2);
+  z-index: 3;
+}
+
+/* Navbar Color */
+
+.nav-color {
+  background-color: var(--pr-color2);
+  box-shadow: 0px 8px 12px 0px rgba(0, 0, 0, 0.05);
+  transition: all ease-in-out 0.3s;
+}
+
+.bg-transparent {
+  transition: all ease-in-out 0.3s;
+}
+
+* {
+  z-index: 2;
+}
+
+.navbar-brand {
+  font-weight: 700;
+  color: var(--pr-color6);
+  font-size: 28px;
+  line-height: 150%;
+  display: flex;
+  align-items: center;
+}
+
+.navbar-brand img {
+  margin-right: 8px;
+}
+
+.nav-link {
+  color: var(--pr-color6);
+  font-family: "DM Sans";
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%; /* 36px */
+  letter-spacing: 0.48px;
+}
+
+.nav-link.active {
+  font-weight: 700;
+  color: var(--pr-color1);
+  font-family: "DM Sans";
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%; /* 36px */
+  letter-spacing: 0.48px;
+}
+
+.btn-masuk {
+  width: 154px;
+  height: 62px;
+  border-radius: 8px;
+  padding: 16px 40px;
+  font-weight: 700;
+  font-family: "DM Sans";
+  font-size: 24px;
+  color: var(--pr-color4);
+  background-color: var(--pr-color2);
+  border: 1px solid var(--pr-color3);
+  margin-right: 5px;
+}
+
+.btn-daftar {
+  width: 154px;
+  height: 62px;
+  border-radius: 8px;
+  padding: 16px 40px;
+  background: var(--pr-color1);
+  color: var(--pr-color2);
+  border: none;
+  font-family: "DM Sans";
+  font-size: 24px;
+  font-weight: 700;
+}
+
+/* Hero Section */
+#hero {
+  background: var(--pr-color2);
+  display: flex;
+  padding: 67px 78px;
+  align-items: center;
+  position: relative;
+  height: 675px;
+  gap: 9px;
+  overflow: hidden;
+}
+
+.hero-tagline h1 {
+  color: #2b313a;
+  font-size: 52px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: 2px;
+  width: 800px;
+  margin-bottom: 50px;
+}
+
+.hero-tagline span {
+  color: var(--pr-color1);
+  font-size: 52px;
+  font-style: normal;
+  font-weight: 700;
+}
+
+.hero-tagline p {
+  color: var(--pr-color7);
+  font-family: "DM Sans";
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 150%;
+  letter-spacing: 0.48px;
+  width: 546px;
+  margin-bottom: 50px;
+}
+
+.button-hero {
+  width: 254px;
+  height: 62px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  background-color: var(--pr-color1);
+  color: var(--pr-color2);
+  font-family: "DM Sans";
+  font-size: 24px;
+  font-weight: 700;
+  border: none;
+  margin-bottom: 100px;
+}
+
+.img-hero {
+  position: relative;
+  bottom: 0;
+  width: 40%; /* Mengurangi lebar untuk menyesuaikan posisi */
+  max-width: none; /* Menghilangkan batas lebar default */
+  height: auto;
+  z-index: 1; /* Memastikan gambar berada di belakang teks */
+}
+
+/* Fitur Section */
+#Fitur {
+  padding: 67px 78px;
+  background-color: #edf7ed;
+}
+
+h2 {
+  color: var(--pr-color1);
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: 4px;
+}
+
+h3 {
+  color: var(--pr-color6);
+  font-size: 38px;
+  font-weight: 700;
+  line-height: 1.5;
+  letter-spacing: -0.5px;
+}
+
+p {
+  color: var(--pr-color7);
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: 0.48px;
+}
+
+.card-fitur {
+  width: 100%;
+  height: 300px;
+  border-radius: 8px;
+  background-color: var(--pr-colorB);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-fitur p {
+  color: var(--pr-color4);
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.info-card {
+  margin-top: 10px;
+}
+
+.info-card h3 {
+  color: var(--pr-color6);
+  font-size: 34px;
+  font-weight: 700;
+}
+
+.info-card p {
+  color: var(--pr-color7);
+  font-size: 24px;
+  font-weight: 400;
+}
+
+/* Pertanyaan Section */
+#Pertanyaan {
+  padding: 67px 78px;
+  background-color: var(--pr-color2);
+  height: auto;
+  transition: height 0.3s ease; /* Smooth transition */
+}
+
+#Pertanyaan h2 {
+  color: var(--pr-color1);
+  text-align: center;
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: 4px;
+}
+
+#Pertanyaan p {
+  color: var(--pr-color6);
+  text-align: center;
+  font-family: "DM Sans";
+  font-size: 26px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 150%;
+  letter-spacing: -0.5px;
+}
+
+.card-pertanyaan {
+  background-color: var(--pr-color9);
+  border-radius: 8px;
+  padding: 15px 20px;
+  margin-bottom: 15px;
+  transition: all 0.3s ease;
+}
+
+.card-pertanyaan .pertanyaan-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}
+
+.pertanyaan-header p {
+  margin: 0;
+  color: var(--pr-color6);
+  font-family: "DM Sans";
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.pertanyaan-header i {
+  font-size: 16px;
+  color: var(--pr-color6);
+  transition: transform 0.3s ease;
+}
+
+.card-pertanyaan .pertanyaan-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+
+.card-pertanyaan.active .pertanyaan-body {
+  max-height: 1000px; /* Adjust as needed */
+}
+
+.card-pertanyaan.active .pertanyaan-header i {
+  transform: rotate(180deg);
+}
+
+.card-pertanyaan .pertanyaan-body span {
+  color: var(--pr-color7);
+  font-family: "DM Sans";
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 1.5;
+  margin-top: 10px;
+  display: block;
+}
+
+#TentangKami {
+  padding: 67px 78px;
+  background-color: var(--pr-color9); /* Sesuaikan dengan warna latar belakang gambar */
+}
+
+#TentangKami h2 {
+  color: var(--pr-color1); /* Sesuaikan dengan warna teks judul */
+  text-align: center;
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: 4px;
+  margin-bottom: 20px; /* Tambahkan margin bawah untuk jarak */
+}
+
+#TentangKami p {
+  color: var(--pr-color6); /* Sesuaikan dengan warna teks sub-judul */
+  text-align: center;
+  font-family: "DM Sans";
+  font-size: 38px; /* Perubahan ukuran teks */
+  font-style: normal;
+  font-weight: 700; /* Perubahan ketebalan teks */
+  line-height: 150%;
+  letter-spacing: -0.5px;
+  margin-bottom: 50px;
+}
+
+.penjelasan h3,
+h4 {
+  color: var(--pr-color7); /* Sesuaikan dengan warna teks konten */
+  font-size: 22px;
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: 0.48px;
+  margin-bottom: 30px;
+  width: 100%; /* Sesuaikan lebar agar lebih responsif */
+}
+
+#TentangKami .video-container {
+  text-align: center;
+}
+
+.video-responsive {
+  overflow: hidden;
+  padding-bottom: 56.25%;
+  position: relative;
+  height: 0;
+  margin-top: 20px; /* Tambahkan margin atas agar seimbang dengan teks */
+}
+
+.video-responsive iframe {
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Tambahkan bayangan untuk tampilan lebih baik */
+}
+
+/* Footer */
+#Footer {
+  background-color: var(--pr-colorA);
+  color: var(--pr-color2);
+  padding: 67px 78px;
+}
+
+#Footer p {
+  color: var(--pr-color2);
+  font-size: 19px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%;
+  letter-spacing: 0.48px;
+}
+
+#Footer span {
+  color: var(--Neutral-6, #f0f1f2);
+  font-size: 22px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 150%;
+}
+
+#Footer .container .row > div {
+  padding: 0 15px;
+}
+
+.circle-icon {
+  width: 38px;
+  height: 38px;
+  background-color: var(--pr-color7);
+  border-radius: 50%;
+}
+
+#Footer h5 {
+  font-size: 26px;
+  font-weight: 700;
+  margin-bottom: 33px;
+}
+
+#Footer ul {
+  padding: 0;
+  list-style: none;
+}
+
+#Footer ul li {
+  margin-bottom: 10px;
+}
+
+#Footer ul li a {
+  color: white;
+  text-decoration: none;
+}
+
+#Footer ul li i {
+  margin-right: 10px;
+}
+
+.list-navigasi {
+  color: var(--pr-color2);
+  font-size: 24px;
+  line-height: 150%;
+  letter-spacing: 0.48px;
+}
+
+.list-kontak {
+  color: var(--pr-color2);
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 150%;
+  letter-spacing: 0.48px;
+}
+
+.circle-scroll {
+  width: 70px;
+  height: 70px;
+  background-color: #4caf4f;
+  border-radius: 50%;
+}
+
+.circle-scroll img {
+  width: 24px;
+  height: 24px;
+}

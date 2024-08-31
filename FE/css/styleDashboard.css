@@ -1,0 +1,134 @@
+:root {
+  --pr-color1: #4caf4f;
+  --pr-color2: #ffffff;
+  --pr-color3: #abbed1;
+  --pr-color4: #000000;
+  --pr-color5: #c4c4c4;
+  --pr-color6: #2b313a;
+  --pr-color7: #6c7581;
+  --pr-color8: #abbed1;
+  --pr-color9: #edf7ed;
+  --pr-color10: #263238;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+  background-color: var(--pr-color2);
+  margin: 0;
+  padding: 0;
+}
+
+h1,
+h2,
+h3 {
+  font-family: "DM Sans", sans-serif;
+}
+
+/* Navbar Style */
+.navbar {
+  display: flex;
+  padding: 18px 48px;
+  align-items: center;
+  background-color: var(--pr-color2);
+}
+
+.navbar-brand {
+  font-weight: 700;
+  color: var(--pr-color6);
+  font-size: 28px;
+  line-height: 150%;
+  display: flex;
+  align-items: center;
+}
+
+.navbar-brand img {
+  margin-right: 8px;
+}
+
+.btn-tambahData {
+  width: 232px;
+  height: 62px;
+  border-radius: 8px;
+  padding: 16px 40px;
+  font-size: 22px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 125%;
+  color: var(--pr-color2);
+  background-color: var(--pr-color1);
+}
+
+.form-control {
+  width: 389px;
+  height: 62px;
+  border-radius: 8px;
+}
+
+.search-input {
+  padding-left: 50px; /* Adjust padding to ensure space for the icon */
+}
+
+.search-icon {
+  position: absolute;
+  left: 15px; /* Adjust this value to position the icon correctly */
+  top: 50%;
+  transform: translateY(-50%);
+  width: 24px; /* Adjust width according to your icon size */
+  height: 24px; /* Adjust height according to your icon size */
+  pointer-events: none; /* Prevent the icon from interfering with input field functionality */
+}
+
+/* .form-control::placeholder {
+  font-size: 22px;
+  color: var(--pr-color7);
+} */
+
+/* ---- */
+
+.table th,
+.table td {
+  vertical-align: middle;
+  text-align: center;
+}
+
+.card-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-align: center;
+}
+
+.card {
+  border: none;
+  background: #f8f9fa;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Sidebar Styles */
+.sidebar {
+  width: 240px;
+  background-color: #f8f9fa;
+  transition: all 0.3s ease;
+}
+
+.sidebar .nav-link {
+  color: var(--pr-color6);
+  font-size: 18px;
+  padding: 10px 20px;
+  display: block;
+}
+
+.sidebar .nav-link.active {
+  background-color: var(--pr-color9);
+  border-radius: 4px;
+}
+
+.sidebar.hidden {
+  margin-left: -240px;
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    position: absolute;
+    z-index: 1000;
+  }
+}
