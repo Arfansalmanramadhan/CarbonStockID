@@ -13,29 +13,29 @@ return new class extends Migration
     {
         Schema::create('polt_a', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger("port_area_id");
-            $table->foreign("port_area_id")->references("id")->on("polt-area");
+            $table->unsignedBigInteger("polt-area_id");
+            $table->foreign("polt-area_id")->references("id")->on("polt-area");
             $table->string("jenis");
             $table->timestamps();
         });
         Schema::create('polt_b', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger("port_area_id");
-            $table->foreign("port_area_id")->references("id")->on("polt-area");
+            $table->unsignedBigInteger("polt-area_id");
+            $table->foreign("polt-area_id")->references("id")->on("polt-area");
             $table->string("jenis");
             $table->timestamps();
         });
         Schema::create('polt_c', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger("port_area_id");
-            $table->foreign("port_area_id")->references("id")->on("polt-area");
+            $table->unsignedBigInteger("polt-area_id");
+            $table->foreign("polt-area_id")->references("id")->on("polt-area");
             $table->string("jenis");
             $table->timestamps();
         });
         Schema::create('polt_d', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger("port_area_id");
-            $table->foreign("port_area_id")->references("id")->on("polt-area");
+            $table->unsignedBigInteger("polt-area_id");
+            $table->foreign("polt-area_id")->references("id")->on("polt-area");
             $table->string("jenis");
             $table->timestamps();
         });
