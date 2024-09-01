@@ -15,8 +15,9 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger("registrasi_id");
             $table->foreign("registrasi_id")->references("id")->on("registrasi")->onDelete('cascade')->onUpdate('cascade');
+            $table->string("slug", 255);
             $table->string('email')->unique();
-            $table->string('password');
+            $table->integer('no_hp');
             $table->timestamps();
         });
     }
