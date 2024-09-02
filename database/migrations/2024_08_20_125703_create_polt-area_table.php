@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create("polt-area", function (Blueprint $table){
             $table->id();
-            $table->unsignedBigInteger("login_id");
-            $table->foreign("login_id")->references("id")->on("login");
+            $table->unsignedBigInteger("profil_id");
+            $table->foreign("profil_id")->references("id")->on("profil");
             $table->string("nama_polt");
             $table->string("jenis");
             $table->string("slug",255);
