@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Authentication\AuthController;
+use App\Http\Controllers\ProfilController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -29,5 +30,12 @@ Route::middleware("auth:sanctum")->group(function () {
     Route::controller(AuthController::class)->group(function () {
         Route::post("/logout", "logout");
         Route::get("/getUser", "getUser");
+    });
+    Route::controller(ProfilController::class)->group(function () {
+        Route::get("/profil", "index");
+        Route::post("/profil/buat", "store");
+        Route::get("/profil/show/{id}", "show");
+        Route::get("/profil/edit/{id}", "edit");
+        Route::post("/profil/update/{id}", "update");
     });
 });
