@@ -15,8 +15,6 @@ class ProfilRequest extends FormRequest
     {
         return [
             'registrasi_id' => 'required|exists:registrasi,id',
-            'namadepan' => 'required',
-            'namabelakang' => 'required',
             'no_hp' => 'required|unique:profil'
         ];
     }

@@ -16,8 +16,6 @@ class ProfilResources extends JsonResource
     {
         return [
             'registrasi_id' => $this->whenLoaded("user"),
-            'namadepan' => $this->namadepan,
-            'namabelakang' => $this->namabelakang,
             'no_hp' => $this->no_hp
         ];
     }
