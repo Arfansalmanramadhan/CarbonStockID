@@ -1,0 +1,264 @@
+:root {
+  --pr-color1: #4caf50;
+  --pr-color2: #ffffff;
+  --pr-color3: #abbed1;
+  --pr-color4: #000000;
+  --pr-color5: #c4c4c4;
+  --pr-color6: #2b313a;
+  --pr-color7: #6c7581;
+  --pr-color8: #abbed1;
+  --pr-color9: #edf7ed;
+  --pr-color10: #263238;
+  --pr-colorB: #89939e;
+  --pr-colorC: #171e22;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+  background-color: var(--pr-color2);
+  overflow: hidden;
+}
+
+h1,
+h2,
+h3 {
+  font-family: "DM Sans", sans-serif;
+}
+
+.left-side {
+  padding: 75px 78px;
+}
+
+.right-side {
+  padding: 75px 78px;
+}
+
+.navbar-brand {
+  font-weight: 700;
+  color: var(--pr-color6);
+  font-size: 28px;
+  line-height: 150%;
+  margin-bottom: 30px;
+}
+
+.navbar-brand img {
+  margin-right: 8px;
+}
+
+.judul h1 {
+  color: var(--pr-colorC);
+  font-family: "DM Sans";
+  font-size: 42px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 150%; /* 81px */
+  letter-spacing: 1.08px;
+  margin-bottom: 30px;
+}
+
+.bg-holder {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  right: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.bg-holder::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.text-white {
+  color: var(--pr-color2) !important;
+}
+
+h1.fw-bold {
+  font-size: 1.75rem;
+  color: var(--pr-color10);
+}
+
+h2.fw-bold {
+  font-size: 2rem;
+}
+
+.form-label {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--pr-color6);
+}
+
+.btn-success {
+  width: 100%;
+  height: 62px;
+  border-radius: 8px;
+  background: var(--pr-color1);
+  border: none;
+  color: var(--pr-color2);
+  font-family: "DM Sans";
+  font-size: 22px;
+  font-weight: 700;
+  display: flex;
+  align-items: center; /* Vertically center */
+  justify-content: center; /* Horizontally center */
+  text-decoration: none;
+}
+
+.btn-success:hover {
+  background-color: var;
+  color: var(--pr-color2);
+}
+
+.form-control {
+  display: flex;
+  padding: 16px 20px;
+  border-radius: 8px;
+  border: 1px solid var(--pr-colorB);
+}
+
+.lupa-sandi {
+  color: var(--Text-Shade-40, #2b313a);
+  font-family: "DM Sans";
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 125%; /* 22.5px */
+}
+
+.masuk-dengan {
+  position: relative;
+  font-family: "DM Sans";
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--Secondary-Shade-40, #171e22);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.masuk-dengan::before,
+.masuk-dengan::after {
+  content: "";
+  flex: 1;
+  border-top: 1px solid var(--pr-color4);
+  margin: 0 5px;
+}
+
+.form-check-label {
+  color: var(--pr-colorC);
+  font-family: "DM Sans";
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 125%; /* 22.5px */
+}
+
+.btn-outline-dark {
+  width: 564px;
+  height: 62px;
+  font-size: 20px;
+  font-weight: 700;
+  background: var(--pr-color2);
+  color: var(--pr-color4);
+  border-color: var(--pr-colorB);
+  border-radius: 8px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center; /* Vertically center */
+  justify-content: center; /* Horizontally center */
+  text-decoration: none;
+}
+
+.btn-outline-dark:hover {
+  background-color: var(--pr-color4);
+  color: var(--pr-color2);
+}
+
+.form-check-input {
+  width: 24px;
+  height: 24px;
+  fill: var(--White-0, #fff);
+  stroke-width: 1px;
+  stroke: var(--Neutral-4, #89939e);
+  border-radius: 8px;
+}
+
+.form-check-input:checked {
+  background-color: var(--pr-color1);
+  border-color: var(--pr-color1);
+}
+
+.teks p {
+  color: var(--Text-Shade-40, #2b313a);
+  text-align: center;
+  font-family: "DM Sans";
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 125%; /* 22.5px */
+}
+.daftar {
+  color: var(--pr-color1);
+  text-align: center;
+  font-family: "DM Sans";
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 125%; /* 22.5px */
+}
+
+.bg-holder {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: 1;
+}
+
+.content-overlay {
+  z-index: 2;
+}
+
+.penjelasan h2 {
+  width: 510px;
+  height: 154px;
+  flex-shrink: 0;
+  color: var(--pr-color2);
+  text-align: center;
+  font-size: 38px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: 4px;
+}
+
+.penjelasan p {
+  width: 510px;
+  color: var(--pr-color2);
+  text-align: center;
+  font-family: "DM Sans";
+  font-size: 50px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%; /* 36px */
+  letter-spacing: 0.48px;
+}
+
+.text-white h2 {
+  font-size: 2rem;
+  color: var(--pr-color2);
+}
+
+.text-white p {
+  font-size: 1.125rem;
+  color: var(--pr-color2);
+}
