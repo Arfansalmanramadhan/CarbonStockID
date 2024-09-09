@@ -13,18 +13,16 @@ return new class extends Migration
     {
         Schema::create('pancang', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger("polt_b_id");
-            $table->foreign("polt_b_id")->references("id")->on("polt_b");
-            $table->string("no_port", 255);
-            $table->string("no_pohon", 255);
-            $table->float('keliling', 10, 7)->defaul(0);
-            $table->float('diameter', 10, 7)->defaul(0);
+            $table->unsignedBigInteger("polt-area_id");
+            $table->foreign("polt-area_id")->references("id")->on("polt-area");
+            $table->decimal('keliling', 8, 2)->defaul(0);
+            $table->decimal('diameter', 8, 2)->defaul(0);
             $table->string("nama-lokal",255);
             $table->string("nama-ilmiah",255);
-            $table->float('kerapatan_jenis_kayu', 10, 7)->defaul(0);
-            $table->float('bio_di_atas_tabah', 10, 7);
-            $table->float('kandungan_karbon', 10, 7);
-            $table->float('CO2', 10, 7);
+            $table->decimal('kerapatan_jenis_kayu', 8, 4)->defaul(0);
+            $table->decimal('bio_di_atas_tabah', 10, 2);
+            $table->decimal('kandungan_karbon', 10, 2);
+            $table->decimal('CO2', 10, 2);
             $table->timestamps();
         });
     }

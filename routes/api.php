@@ -1,9 +1,10 @@
 <?php
 
-use App\Http\Controllers\Authentication\AuthController;
-use App\Http\Controllers\ProfilController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProfilController;
+use App\Http\Controllers\PoltAreaController;
+use App\Http\Controllers\Authentication\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,6 +26,9 @@ Route::controller(AuthController::class)->group(function () {
     Route::post("/loginn", "login");
     Route::post("/forgotPassword", "forgotPassword");
     Route::post("/resetPassword", "resetPassword");
+});
+Route::controller(PoltAreaController::class)->group(function () {
+    Route::post("/polt-area", "store");
 });
 Route::middleware("auth:sanctum")->group(function () {
     Route::controller(AuthController::class)->group(function () {
