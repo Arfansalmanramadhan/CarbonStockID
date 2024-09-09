@@ -13,10 +13,9 @@ return new class extends Migration
     {
         Schema::create('profil', function (Blueprint $table) {
             $table->id();
+            $table->string("nama_lengkap");
             $table->unsignedBigInteger("registrasi_id");
             $table->foreign("registrasi_id")->references("id")->on("registrasi")->onDelete('cascade')->onUpdate('cascade');
-            $table->string('namadepan');
-            $table->string('namabelakang');
             $table->integer('no_hp');
             $table->timestamps();
         });

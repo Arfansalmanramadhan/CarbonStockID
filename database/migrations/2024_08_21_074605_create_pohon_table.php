@@ -13,18 +13,16 @@ return new class extends Migration
     {
         Schema::create('pohon', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger("polt_d_id");
-            $table->foreign("polt_d_id")->references("id")->on("polt_d");
-            $table->string("no_port", 255);
-            $table->string("no_pohon", 255);
-            $table->float('keliling', 10, 7)->defaul(0);
-            $table->float('diameter', 10, 7)->defaul(0);
-            $table->string("nama-lokal",255);
-            $table->string("nama-ilmiah",255);
-            $table->float('kerapatan_jenis_kayu', 10, 7)->defaul(0);
-            $table->float('bio_di_atas_tabah', 10, 7);
-            $table->float('kandungan_karbon', 10, 7);
-            $table->float('CO2', 10, 7);
+            $table->unsignedBigInteger("polt-area_id");
+            $table->foreign("polt-area_id")->references("id")->on("polt-area");
+            $table->float('keliling', 8, 2)->defaul(0);
+            $table->float('diameter', 8, 2)->defaul(0);
+            $table->string("nama-lokal", 255);
+            $table->string("nama-ilmiah", 255);
+            $table->float('kerapatan_jenis_kayu', 8, 4)->defaul(0);
+            $table->float('bio_di_atas_tabah', 10, 2);
+            $table->float('kandungan_karbon', 10, 2);
+            $table->float('CO2', 10, 2);
             $table->timestamps();
         });
     }

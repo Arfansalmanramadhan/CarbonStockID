@@ -15,9 +15,8 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger("profil_id");
             $table->foreign("profil_id")->references("id")->on("profil")->onDelete('cascade')->onUpdate('cascade');
-            $table->string("nama_polt");
-            $table->string("jenis");
-            $table->string("dareh");
+            $table->string("daerah");
+            $table->string("slug", 255);
             $table->decimal('latitude', 10, 7);
             $table->decimal('longitude', 10, 7);
             $table->float('ukuran_port', 10, 7);

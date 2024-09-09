@@ -13,17 +13,16 @@ return new class extends Migration
     {
         Schema::create('necromass', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger("polt_a_id");
-            $table->foreign("polt_a_id")->references("id")->on("polt_a");
-            $table->string("no_port", 255);
-            $table->float('diameter_pangkal', 10, 7)->defaul(0);
-            $table->float('diameter_ujung', 10, 7)->defaul(0);
-            $table->float('panjang', 10, 7)->defaul(0);
-            $table->float('volume', 10, 7);
-            $table->float('berat_jenis_kayu', 10, 7);
-            $table->float('biomasa', 10, 7);
-            $table->float('carbon', 10, 7);
-            $table->float('co2', 10, 7);
+            $table->unsignedBigInteger("polt-area_id");
+            $table->foreign("polt-area_id")->references("id")->on("polt-area");
+            $table->decimal('diameter_pangkal', 8, 2)->defaul(0);
+            $table->decimal('diameter_ujung', 8, 2)->defaul(0);
+            $table->decimal('panjang', 8, 2)->defaul(0);
+            $table->decimal('volume', 10, 2);
+            $table->decimal('berat_jenis_kayu', 10, 2);
+            $table->decimal('biomasa', 10, 2);
+            $table->decimal('carbon', 10, 2);
+            $table->decimal('co2', 10, 2);
             $table->timestamps();
         });
     }

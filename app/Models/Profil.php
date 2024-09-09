@@ -26,4 +26,14 @@ class Profil extends Model
     {
         return $this->belongsTo(User::class, 'registrasi_id', 'id');
     }
+
+    /**
+     * Get the poltarea that owns the Profil
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function poltarea(): BelongsTo
+    {
+        return $this->belongsTo(PoltArea::class, 'profil_id');
+    }
 }
