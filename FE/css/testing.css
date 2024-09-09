@@ -26,22 +26,19 @@ h3 {
 
 /* Navbar Style */
 .navbar {
-  display: flex;
-  padding: 18px 48px;
-  align-items: center;
+  padding: 16px 48px;
   background-color: var(--pr-color2);
 }
 
 .burger-button {
   background-color: transparent;
   border: none;
-  padding: 0;
   cursor: pointer;
+  padding: 0;
 }
 
-.menu-button img {
-  width: 24px; /* Sesuaikan ukuran gambar */
-  height: auto;
+.burger-icon {
+  width: 24px; /* Adjust the size of the burger icon */
 }
 
 .navbar-brand {
@@ -49,25 +46,16 @@ h3 {
   color: var(--pr-color6);
   font-size: 28px;
   line-height: 150%;
-  display: flex;
-  align-items: center;
-}
-
-.navbar-brand img {
-  margin-right: 8px;
 }
 
 .btn-tambahData {
-  width: 232px;
-  height: 62px;
+  background-color: var(--pr-color1);
+  color: var(--pr-color2);
   border-radius: 8px;
   padding: 16px 40px;
   font-size: 22px;
-  font-style: normal;
   font-weight: 700;
   line-height: 125%;
-  color: var(--pr-color2);
-  background-color: var(--pr-color1);
 }
 
 .form-control {
@@ -77,25 +65,26 @@ h3 {
 }
 
 .search-input {
-  padding-left: 50px; /* Adjust padding to ensure space for the icon */
+  padding-left: 50px; /* Space for the search icon */
 }
 
 .search-icon {
   position: absolute;
-  left: 15px; /* Adjust this value to position the icon correctly */
+  left: 15px;
   top: 50%;
   transform: translateY(-50%);
-  width: 24px; /* Adjust width according to your icon size */
-  height: 24px; /* Adjust height according to your icon size */
-  pointer-events: none; /* Prevent the icon from interfering with input field functionality */
+  width: 24px;
+  height: 24px;
+  pointer-events: none;
 }
 
-/* .form-control::placeholder {
-  font-size: 22px;
-  color: var(--pr-color7);
-} */
+.user-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+}
 
-/* ---- */
+/* side bar */
 
 .table th,
 .table td {

@@ -22,58 +22,60 @@
   </head>
   <body>
     <div class="container-fluid">
-      <div class="row vh-100 g-0">
+      <div class="row vh-100">
         <!-- Left Side -->
-        <div class="col-lg-6 d-flex justify-content-center align-items-center p-5">
-          <div class="w-75">
-            <a class="navbar-brand d-flex align-items-center" href="#">
+        <div class="left-side col-lg-6 d-flex align-items-center">
+          <div class="w-100">
+            <div class="navbar-brand d-flex align-items-center" href="#">
               <img src="assets/img/logoCarbonStockID-DarkMode.png" alt="Logo" width="30" class="d-inline-block align-middle me-2" />
               <span>CarbonStockID</span>
-            </a>
-            <div class="judul text-center mb-4">
-              <h1 class="fw-bold">Masuk ke Akun Anda</h1>
             </div>
-            <form>
-              <div class="mb-3">
-                <label for="email" class="form-label">Email</label>
-                <input type="email" class="form-control" id="email" placeholder="Masukkan Email" />
+            <div class="judul mb-4">
+              <h1>Masuk ke Akun Anda</h1>
+            </div>
+            <form id="loginForm">
+              <div class="mb-2">
+                <label for="email" class="form-label">Email / Username</label>
+                <input type="email" class="form-control" id="email" placeholder="Masukkan Email / Username" />
               </div>
-              <div class="mb-3">
+              <div class="mb-2">
                 <label for="password" class="form-label">Sandi</label>
                 <input type="password" class="form-control" id="password" placeholder="Masukkan Sandi" />
               </div>
               <div class="d-flex justify-content-between align-items-center mb-3">
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" id="rememberMe" />
+                <div class="form-check d-flex align-items-center">
+                  <input class="form-check-input me-2" type="checkbox" id="rememberMe" />
                   <label class="form-check-label" for="rememberMe">Ingatkan Saya</label>
                 </div>
-                <a href="#" class="text-decoration-none">Lupa Sandi</a>
+                <a href="#" class="lupa-sandi text-decoration-none">Lupa Sandi</a>
               </div>
-              <a href="dashboard.html" type="submit" class="btn btn-success w-100">Masuk</a>
-              <div class="text-center mt-3">Atau masuk dengan</div>
-              <button type="button" class="btn btn-outline-dark w-100 mt-2">
+              <button type="submit" class="btn-success w-100">Masuk</button>
+              <p class="masuk-dengan text-center mt-2 mb-2"><span>Atau masuk dengan</span></p>
+              <a type="button" class="btn btn-outline-dark w-100 mt-2" href="dashboard.html">
                 <img src="assets/img/iconGoogle.png" alt="Google Icon" class="me-2" style="width: 20px" />
                 Masuk dengan Google
-              </button>
-              <div class="text-center mt-3">
+              </a>
+              <div class="teks text-center">
                 <p>
                   Anda belum memiliki akun?
-                  <a href="register.html" class="text-decoration-none">Daftar</a>
+                  <a href="register.html" class="daftar">Daftar</a>
                 </p>
               </div>
             </form>
           </div>
         </div>
         <!-- Right Side -->
-        <div class="col-lg-6 position-relative d-none d-lg-block">
+        <div class="col-lg-6 position-relative d-none d-lg-block right-side">
           <div class="bg-holder" style="background-image: url(assets/img/loginImage.png)"></div>
-          <div class="position-absolute top-50 start-50 translate-middle text-white text-center p-3">
-            <h2 class="fw-bold">Hitung, Kelola dan Prediksi Cadangan Karbon Jadi Mudah dan Efisien</h2>
-            <p class="mt-3">Masuk ke akun anda! untuk menikmati fitur-fitur platform CarbonStockID.</p>
+          <div class="penjelasan position-absolute top-50 start-50 translate-middle text-white text-center p-3 content-overlay">
+            <h2>Hitung, Kelola dan Prediksi Cadangan Karbon Jadi Mudah dan Efisien</h2>
+            <p>Masuk ke akun anda! untuk menikmati fitur - fitur platform CarbonStockID.</p>
           </div>
         </div>
       </div>
     </div>
+
+    <script src="js/scriptLogin.js"></script>
     <!-- Bootstrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-cpNmN1hPckj2KdUMJj6UG4l3kNxodFjGkOn37cTh/j04WIF6P2R9Qkz5gMYZXLoN" crossorigin="anonymous"></script>
   </body>
