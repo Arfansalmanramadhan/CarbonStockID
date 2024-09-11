@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger("polt-area_id");
             $table->foreign("polt-area_id")->references("id")->on("polt-area");
-            $table->string("no_port", 255);
             $table->decimal('kedalaman_sample', 8, 2)->defaul(0);
             $table->decimal('berat_jenis_tanah', 8, 3)->defaul(0);
             $table->decimal('C_organic_tanah', 5, 2)->defaul(0);

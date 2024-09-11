@@ -20,9 +20,9 @@ return new class extends Migration
             $table->string("nama-lokal",255);
             $table->string("nama-ilmiah",255);
             $table->decimal('kerapatan_jenis_kayu', 8, 4)->defaul(0);
-            $table->decimal('bio_di_atas_tabah', 10, 2);
+            $table->decimal('bio_di_atas_tanah', 10, 2);
             $table->decimal('kandungan_karbon', 10, 2);
-            $table->decimal('CO2', 10, 2);
+            $table->decimal('co2', 10, 2);
             $table->timestamps();
         });
     }
