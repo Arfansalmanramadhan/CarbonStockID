@@ -1,0 +1,824 @@
+:root {
+  --pr-color1: #4caf4f;
+  --pr-color2: #ffffff;
+  --pr-color3: #f0f1f2;
+  --pr-color4: #000000;
+  --pr-color6: #2b313a;
+  --pr-color9: #edf7ed;
+  --pr-color10: #263238;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+  background-color: var(--pr-color2);
+  margin: 0;
+  padding: 0;
+  overflow: scroll;
+  background: var(--pr-color3);
+}
+
+h1,
+h2,
+h3 {
+  font-family: "DM Sans", sans-serif;
+}
+
+/* Navbar Style */
+.navbar {
+  padding: 16px 48px;
+  background-color: #ffffff !important;
+  box-shadow: 0px 8px 11.9px 0px rgba(0, 0, 0, 0.05);
+}
+
+.burger-button {
+  background-color: transparent;
+  width: 30px;
+  height: 30px;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.burger-icon {
+  width: 22px;
+}
+
+.navbar-brand {
+  font-weight: 700;
+  color: var(--pr-color6);
+  font-size: 28px;
+  line-height: 150%;
+}
+
+.btn-plot-area {
+  background-color: var(--pr-color1);
+  color: var(--pr-color2);
+  border-radius: 8px;
+  padding: 16px 40px;
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 125%;
+  width: 224px;
+  height: 62px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* .btn-plot-area:hover {
+  background-color: darkgreen;
+  color: var(--pr-color2);
+} */
+
+.btn-plot-area img {
+  margin-left: 8px; /* Memberi jarak antara teks dan gambar */
+}
+
+.user-profile-dropdown {
+  position: absolute;
+  top: 100px;
+  right: 40px;
+  background-color: white;
+  border: 1px solid #ddd;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  width: 344px;
+  height: 232px;
+  padding: 15px;
+  z-index: 1000;
+}
+
+.user-info {
+  display: flex;
+  align-items: center; /* Agar gambar dan teks rata di tengah secara vertikal */
+}
+
+.user-avatar {
+  width: 62px; /* Sesuaikan dengan ukuran yang diinginkan */
+  height: 62px;
+  border-radius: 50%; /* Membuat gambar menjadi bulat */
+  margin-right: 15px; /* Memberikan jarak antara gambar dan teks */
+}
+
+.user-details h4 {
+  margin: 0; /* Hilangkan margin default */
+  font-size: 1.2em; /* Sesuaikan ukuran font */
+}
+
+.user-details p {
+  margin: 0; /* Hilangkan margin default */
+  font-size: 0.9em; /* Sesuaikan ukuran font */
+  color: gray; /* Warna teks yang lebih soft untuk email */
+}
+
+.user-options .option {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.user-options .option a {
+  text-decoration: none;
+}
+
+.user-options .option span {
+  margin-right: 10px;
+  font-size: 18px;
+}
+
+.user-options .option:hover span {
+  color: var(--pr-color1); /* Mengubah warna teks menjadi hijau saat hover */
+}
+
+.user-options .option:hover img {
+  filter: invert(60%) sepia(25%) saturate(500%) hue-rotate(60deg) brightness(95%) contrast(90%);
+  /* Menyesuaikan filter untuk mendekati warna #4caf4f */
+}
+
+/* Dropdown Plot Area */
+
+.dropdown-plot-area {
+  position: absolute;
+  background-color: white;
+  border: 1px solid #ddd;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  width: 158px;
+  height: 235px;
+  z-index: 1000;
+  top: 100px;
+  right: 170px;
+  border: var(--pr-color1);
+}
+
+.header-dropdown {
+  display: flex;
+  height: 47px;
+  padding: 5px 35px;
+  align-items: center;
+  gap: 14px;
+  align-self: stretch;
+  background: var(--Primary-Tint-80, #dbefdc);
+  color: var(--Text-Tint-20, #6c7581);
+  font-family: "DM Sans";
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 125%; /* 22.5px */
+  border-radius: 7px 7px 0 0;
+}
+.dropdown-plot-area ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.dropdown-plot-area li {
+  padding: 10px;
+  font-size: 18px;
+  color: var(--Text-Tint-20, #6c7581);
+  /* Desktop/Label/Regular */
+  font-family: "DM Sans";
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 125%; /* 22.5px */
+  cursor: pointer;
+}
+
+.dropdown-plot-area li:hover {
+  background: var(--Primary-Tint-80, #dbefdc);
+  color: var(--pr-color1); /* Hijau */
+  border-radius: 4px;
+}
+
+/* Dropdown Plot Area */
+
+/* Styling for the main plot area section */
+.container-tambah-data {
+  background-color: var(--pr-color3);
+  width: auto;
+  height: 1000px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin: 0 auto;
+}
+
+.container-isi {
+  background-color: var(--pr-color3);
+  width: 1070px;
+  height: 1000px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin: 0 auto;
+}
+
+.plot-info-card {
+  border-radius: 8px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  width: 1070px;
+  margin: 0 auto; /* Centers the container horizontally */
+}
+
+.plot-info-card-B {
+  border-radius: 8px;
+  box-shadow: -1px 5px 20px 0px rgba(0, 0, 0, 0.05);
+  margin: 0 auto; /* Centers the container horizontally */
+  width: 1070px;
+  height: 718px;
+  display: flex;
+  padding: 35px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 35px;
+  align-self: stretch;
+  background: var(--Warning, #fff);
+}
+
+.card-header {
+  border-radius: 8px 8px 0 0;
+  padding: 16px;
+  background-color: var(--pr-color1) !important;
+  width: 1070px;
+  height: 71px;
+  border: none;
+}
+
+.card-header h5 {
+  color: var(--Warning, #fff);
+  /* Desktop/Heading 4/Bold/DMSans */
+  font-family: "DM Sans";
+  font-size: 26px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 150%; /* 39px */
+}
+
+.card-body {
+  width: 1070px;
+  height: 763px;
+  display: flex;
+  padding: 35px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 35px;
+  align-self: stretch;
+  border-radius: 0px 0px 8px 8px;
+  background: var(--Warning, #fff);
+}
+
+.map-section img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.btn-success {
+  padding: 12px;
+  width: 245px;
+  height: 62px;
+  display: flex;
+  padding: 16px 40px;
+  justify-content: center;
+  align-items: center;
+  gap: 14px;
+  border-radius: 8px;
+  background: var(--Primary-0, #4caf4f);
+  color: var(--Warning, #fff);
+  font-family: "DM Sans";
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 125%; /* 30px */
+  bottom: 35px;
+  right: 35px;
+  border: none;
+  justify-content: center;
+  margin-top: 35px;
+}
+
+.btn-back {
+  width: 245px;
+  height: 62px;
+  display: flex;
+  padding: 16px 40px;
+  justify-content: center;
+  align-items: center;
+  gap: 14px;
+  border-radius: 8px;
+  background: var(--pr-color3);
+  color: var(--pr-color1);
+  font-family: "DM Sans";
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 125%; /* 30px */
+  bottom: 35px;
+  right: 35px;
+  border-color: var(--pr-color1);
+  margin-top: 35px;
+  margin-right: 580px;
+}
+
+.btn-success img {
+  margin-left: 8px; /* Memberikan jarak antara teks dan gambar */
+}
+
+.form-label {
+  color: var(--Text-Shade-40, #2b313a);
+  font-family: "DM Sans";
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 150%; /* 27px */
+  letter-spacing: 0.36px;
+}
+
+.form-label span {
+  float: right;
+  color: var(--pr-color1);
+  font-size: 16px;
+}
+
+.form-control {
+  width: 1000px;
+  height: 59px;
+  display: flex;
+  padding: 16px 20px;
+  align-items: center;
+  align-self: stretch;
+  border-radius: 8px;
+  border: 1px solid var(--Neutral-4, #89939e);
+  background: var(--White-0, #fff);
+  color: var(--Text-Shade-40, #2b313a);
+  font-family: "DM Sans";
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%; /* 27px */
+  letter-spacing: 0.36px;
+}
+
+/* Animasi lanjut berikutnya */
+.slide-out-left {
+  animation: slideOutLeft 0.3s forwards;
+}
+
+@keyframes slideOutLeft {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+/* Animasi masuk dari kanan  */
+.slide-in-right {
+  animation: slideInRight 0.3s forwards;
+}
+
+@keyframes slideInRight {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+/* Animasi kembali sebelumnya */
+
+/* Animasi keluar ke kanan */
+.slide-out-right {
+  animation: slideOutRight 0.3s forwards;
+}
+
+@keyframes slideOutRight {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* Animasi masuk dari kiri */
+.slide-in-left {
+  animation: slideInLeft 0.3s forwards;
+}
+
+@keyframes slideInLeft {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+/* Hidden state */
+.hidden {
+  display: none;
+}
+
+.card-body-sup-plot {
+  width: 767px;
+  height: 570px;
+  display: flex;
+  padding: 35px;
+  flex-direction: column;
+  align-items: flex-start;
+  align-self: stretch;
+  border-radius: 0px 0px 8px 8px;
+  background: var(--Warning, #fff);
+}
+
+.card-body-sup-plot-last {
+  width: 767px;
+  height: 534px;
+  display: flex;
+  padding: 35px;
+  flex-direction: column;
+  align-items: flex-start;
+  align-self: stretch;
+  border-radius: 0px 0px 8px 8px;
+  background: var(--Warning, #fff);
+}
+
+.batas {
+  margin-bottom: 35px;
+}
+
+/* Table Styles */
+.table-container {
+  width: 100%;
+  padding: 20px;
+  background-color: var(--pr-color2);
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.table-container h2 {
+  color: var(--Primary-0, #4caf4f);
+  /* Desktop/P16/Regular */
+  font-family: "DM Sans";
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%; /* 36px */
+  letter-spacing: 0.48px;
+  position: relative;
+  display: inline-block;
+  color: #4caf50; /* Ubah warna sesuai kebutuhan */
+}
+
+.h2-pancang-container {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  margin-bottom: 20px; /* Jarak ke elemen berikutnya */
+}
+
+.h2-pancang-container::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%; /* Garis abu-abu panjang */
+  height: 1px;
+  background-color: #b5bac0;
+  z-index: 0; /* Pastikan garis abu-abu berada di bawah */
+}
+
+.h2-pancang-container::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100px; /* Panjang garis hijau */
+  height: 2px;
+  background-color: #4caf50; /* Warna garis hijau */
+  z-index: 1; /* Pastikan garis hijau di atas garis abu-abu */
+}
+
+.section-tiang::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 90px; /* Panjang garis hijau */
+  height: 2px;
+  background-color: #4caf50; /* Warna garis hijau */
+  z-index: 1; /* Pastikan garis hijau di atas garis abu-abu */
+}
+
+.table-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  font-size: 14px;
+  color: #666;
+  border: none;
+}
+
+.table-header label {
+  margin-right: 5px;
+}
+
+.table-header select {
+  margin: 0 5px;
+  padding: 5px;
+  border: 1px solid #d4d4d4;
+  border-radius: 4px;
+  background-color: #ffffff;
+  color: #666;
+  background-color: transparent; /* Atur warna background jika ingin transparan */
+  border: none;
+}
+
+.custom-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #ffffff;
+}
+
+.custom-table thead {
+  background-color: #4caf50;
+  color: white;
+  text-align: left;
+}
+
+.custom-table th,
+.custom-table td {
+  padding: 10px 15px;
+  font-size: 14px;
+}
+
+.custom-table th {
+  font-weight: bold;
+}
+
+.custom-table tbody tr {
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.custom-table tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.custom-table tbody tr:last-child {
+  border-bottom: none;
+}
+
+.custom-table tbody tr:hover {
+  background-color: #f1f1f1;
+}
+
+.custom-table td .view-btn,
+.custom-table td .edit-btn,
+.custom-table td .delete-btn {
+  margin-right: 8px;
+  border: none;
+  padding: 5px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.view-btn {
+  background-color: #4caf50;
+  color: white;
+}
+
+.edit-btn {
+  background-color: #03a9f4;
+  color: white;
+}
+
+.delete-btn {
+  background-color: #f44336;
+  color: white;
+}
+
+.table-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+  font-size: 14px;
+  color: #666;
+}
+
+.pagination {
+  display: flex;
+  align-items: center;
+}
+
+.page-btn {
+  margin: 0 5px;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  background-color: #ffffff;
+  color: #666;
+  border: none;
+}
+
+.page-btn.active {
+  background-color: #4caf50;
+  color: #ffffff;
+}
+
+.page-btn:hover {
+  background-color: #4caf50;
+  color: #ffffff;
+}
+
+.btn-tambah-data {
+  width: 151px;
+  height: 55px;
+  display: flex;
+  padding: 16px 40px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  background: var(--Primary-0, #4caf4f);
+  color: var(--Warning, #fff);
+  /* Desktop/Label/Bold */
+  font-family: "DM Sans";
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 125%; /* 22.5px */
+}
+
+.btn-rataan {
+  width: 151px;
+  height: 55px;
+  display: flex;
+  padding: 16px 40px;
+  align-items: flex-start;
+  border-radius: 8px;
+  background: var(--pr-color2);
+  border: 1px solid var(--Primary-0, #4caf4f);
+  color: var(--Primary-0, #4caf4f);
+  /* Desktop/Label/Bold */
+  font-family: "DM Sans";
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 125%; /* 22.5px */
+}
+
+.input-container {
+  position: relative;
+  width: 593px; /* Sesuaikan dengan lebar input */
+}
+
+.form-control-plot-b {
+  width: 593px;
+  height: 59px;
+  display: flex;
+  padding: 16px 20px;
+  align-items: center;
+  align-self: stretch;
+  border-radius: 8px;
+  border: 1px solid var(--Neutral-4, #89939e);
+  background: var(--White-0, #fff);
+  color: var(--Text-Shade-40, #2b313a);
+  font-family: "DM Sans";
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%; /* 27px */
+  letter-spacing: 0.36px;
+  padding-right: 40px;
+  border-radius: 8px; /* Default border-radius */
+  transition: border-radius 0.3s; /* Animasi untuk transisi border-radius */
+}
+
+.chevron-icon {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+.dropdown {
+  display: none; /* Mulanya dropdown disembunyikan */
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 0 0 8px 8px; /* Tambahkan border-radius pada dropdown */
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.dropdown li {
+  display: flex;
+  height: 47px;
+  padding: 5px 35px;
+  align-items: center;
+  gap: 14px;
+  align-self: stretch;
+  cursor: pointer;
+  color: var(--Text-Tint-20, #6c7581);
+  /* Desktop/Label/Regular */
+  font-family: "DM Sans";
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 125%; /* 22.5px */
+}
+
+.dropdown li:hover {
+  background: var(--Primary-Tint-80, #dbefdc);
+}
+
+.btn-tambah-data {
+  background-color: #28a745;
+  color: white;
+}
+
+/* =-----------------------------------------= */
+
+.modal-dialog {
+  max-width: none;
+  width: 725px;
+  height: 987px;
+  display: flex;
+  padding: 50px;
+  flex-direction: column;
+  align-items: center; /* Center the modal horizontally */
+  justify-content: center; /* Center the modal vertically */
+  gap: 50px;
+  border-radius: 8px;
+  background-color: var(--White-0, #fff);
+  margin: auto; /* Ensure it's centered on the screen */
+  position: relative;
+  border-bottom: none; /* Pastikan border-bottom diatur ke none */
+}
+
+.modal-content {
+  background-color: var(--pr-color2);
+  background: var(--pr-color2);
+  box-shadow: none; /* Menghilangkan bayangan pada modal-content */
+  border: none;
+}
+
+.modal-title {
+  color: var(--Secondary-Shade-40, #171e22);
+  font-family: "DM Sans";
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 150%; /* 36px */
+  letter-spacing: 0.48px;
+  border-bottom: none;
+}
+
+.form-control-plot-b.is-invalid {
+  border-color: #e3342f;
+  background-color: #fce4e4;
+}
+
+.invalid-feedback {
+  font-size: 0.875rem;
+  color: #e3342f;
+}
+
+.form-control-plot-b:focus {
+  border: 1px solid var(--Primary-0, #4caf4f);
+  box-shadow: none;
+}
+
+.text-success {
+  color: #38c172;
+}
+
+.btn-success-plot {
+  width: 169px;
+  height: 62px;
+  display: flex;
+  padding: 16px 40px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  background: var(--Primary-0, #4caf4f);
+  color: var(--Warning, #fff);
+  font-family: "DM Sans";
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 125%;
+  border: none;
+}

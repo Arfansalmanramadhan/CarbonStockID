@@ -19,7 +19,10 @@
     <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-    <!-- Logo Tittle -->
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+
+    <!-- Favicon -->
     <link rel="icon" href="assets/img/logoCarbonStockID-LightMode.png" type="image/x-icon" />
     <title>CarbonStockID</title>
   </head>
@@ -27,22 +30,42 @@
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg bg-transparent w-100">
       <div class="container d-flex justify-content-between align-items-center">
-        <div>
+        <div class="d-flex align-items-center">
           <button class="burger-button">
-            <img src="assets/img/burgerIcon.png" alt="menu" />
+            <img src="assets/img/burgerIcon.png" alt="Burger Menu" class="burger-icon" />
           </button>
-          <a class="navbar-brand d-flex align-items-center" href="#">
+          <a class="navbar-brand d-flex align-items-center ms-3" href="#">
             <img src="assets/img/logoCarbonStockID-DarkMode.png" alt="Logo" width="30" class="d-inline-block align-middle me-2" />
             <span>CarbonStockID</span>
           </a>
         </div>
         <div class="d-flex align-items-center">
-          <form class="d-flex flex-grow-1 me-2 position-relative" role="search">
-            <input class="form-control me-2 search-input" type="search" placeholder="Cari..." aria-label="Search" />
+          <form class="d-flex me-2 position-relative" role="search">
+            <input class="form-control search-input" type="search" placeholder="Cari..." aria-label="Search" />
             <img src="assets/img/iconSearch.png" alt="Search Icon" class="search-icon" />
           </form>
-          <a href="plot1.html" class="btn btn-light btn-tambahData" type="button">Tambah data</a>
-          <img src="assets/img/userIcon.png" alt="" class="ms-3" />
+          <a href="tambahData.html" class="btn btn-light btn-tambahData">Tambah data</a>
+          <img src="assets/img/userIcon.png" alt="User Avatar" id="userIcon" class="ms-3 user-avatar" />
+          <div class="user-profile-dropdown" id="userProfileDropdown" style="display: none">
+            <div class="user-info">
+              <img src="assets/img/userIcon.png" alt="User Avatar" class="user-avatar" />
+              <div class="user-details">
+                <h4>Chistoper Govert</h4>
+                <p>chistoper@gmail.com</p>
+              </div>
+            </div>
+            <hr />
+            <div class="user-options">
+              <div class="option">
+                <img class="me-1" src="assets/img/PersonFill.svg" alt="" />
+                <a href="profile.html"><span>Profil Saya</span></a>
+              </div>
+              <div class="option">
+                <img class="ms-1 me-1" src="assets/img/majesticons_logout.svg" alt="" />
+                <a href="index.html"><span>Keluar</span></a>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </nav>
@@ -51,78 +74,202 @@
     <div class="d-flex">
       <div class="sidebar bg-light p-3" id="sidebar">
         <ul class="nav flex-column">
-          <li class="nav-item mb-2">
-            <a class="nav-link active" href="#">Beranda</a>
+          <li class="nav-item">
+            <a class="d-flex align-items-center ms-3 nav-link active" href="#beranda">
+              <img src="assets/img/iconamoon_home-fill.svg" alt="Home Icon" />
+              <span>Beranda</span>
+            </a>
           </li>
-          <li class="nav-item mb-2">
-            <a class="nav-link" href="#">Data Plot</a>
+          <li class="nav-item">
+            <a class="d-flex align-items-center ms-3 nav-link" href="#panduan">
+              <img src="assets/img/logoPdf.png" alt="Guide Icon" />
+              <span>Panduan</span>
+            </a>
           </li>
-          <li class="nav-item mb-2">
-            <a class="nav-link" href="#">Sampah</a>
+          <li class="nav-item">
+            <a class="d-flex align-items-center ms-3 nav-link" href="#data-plot">
+              <img src="assets/img/FolderFill.svg" alt="Data Plot Icon" />
+              <span>Data Plot</span>
+            </a>
           </li>
-          <li class="nav-item mb-2">
-            <a class="nav-link" href="#">Panduan</a>
+          <li class="nav-item">
+            <a class="d-flex align-items-center ms-3 nav-link" href="#panduan">
+              <img src="assets/img/prediksiLogo.svg" alt="Guide Icon" />
+              <span>Prediksi</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="d-flex align-items-center ms-3 nav-link" href="#sampah">
+              <img src="assets/img/logoTempatSampah.png" alt="Trash Icon" />
+              <span>Sampah</span>
+            </a>
           </li>
         </ul>
       </div>
-      <div class="content p-4 w-100">
-        <div class="d-flex justify-content-between align-items-center mb-4">
-          <h4>Data plot area terakhir</h4>
-        </div>
-        <table class="table table-bordered">
-          <thead>
-            <tr>
-              <th>NOMOR</th>
-              <th>NAMA PLOT</th>
-              <th>LATITUDE</th>
-              <th>LONGITUDE</th>
-              <th>CADANGAN CO2</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>00001</td>
-              <td>Plot Area 1</td>
-              <td>-6.937154839...</td>
-              <td>-6.937178839...</td>
-              <td>2,761.15 Ton C / Ha</td>
-            </tr>
-            <tr>
-              <td>00002</td>
-              <td>Plot Area 2</td>
-              <td>-6.88599686...</td>
-              <td>-6.937154509...</td>
-              <td>2,500.75 Ton C / Ha</td>
-            </tr>
-            <tr>
-              <td>00003</td>
-              <td>Plot Area 3</td>
-              <td>-6.89030968...</td>
-              <td>-6.937154839...</td>
-              <td>1,892.27 Ton C / Ha</td>
-            </tr>
-          </tbody>
-        </table>
 
-        <div class="d-flex justify-content-between mt-5">
-          <div class="card" style="width: 30%">
-            <div class="card-body">
-              <h5 class="card-title">Estimasi Cadangan Karbon Plot Area 1</h5>
-              <canvas id="chart1"></canvas>
+      <div class="content p-4 w-100">
+        <!-- Content for Beranda (default visible) -->
+        <div id="beranda-content" class="page-content active mt-2">
+          <h4>Prediksi Cadangan Karbon</h4>
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>NOMOR</th>
+                <th>NAMA PLOT</th>
+                <th>CADANGAN CO2</th>
+                <th>TAHUN</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>DP-001</td>
+                <td>Plot X</td>
+                <td>3,000.50 Ton C / Ha</td>
+                <td>2023</td>
+              </tr>
+              <tr>
+                <td>DP-002</td>
+                <td>Plot Y</td>
+                <td>2,500.75 Ton C / Ha</td>
+                <td>2022</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Content for Data Plot (initially hidden) -->
+        <div id="data-plot-content" class="page-content">
+          <div class="image-container mt-4">
+            <img src="assets/img/dataPlot-Image.svg" alt="" class="mb-4 img-normal" />
+            <div class="text-overlay">
+              <p class="small-text">Data Plot</p>
+              <p class="large-text">Data Plot Area</p>
             </div>
           </div>
-          <div class="card" style="width: 30%">
-            <div class="card-body">
-              <h5 class="card-title">Estimasi Cadangan Karbon Plot Area 2</h5>
-              <canvas id="chart2"></canvas>
+          <div class="table-container">
+            <div class="table-header">
+              <label for="show-entries">Tampilkan</label>
+              <select id="show-entries">
+                <option value="5">5</option>
+                <option value="10">10</option>
+                <option value="20">20</option>
+              </select>
+              <span>data</span>
+            </div>
+            <table class="custom-table">
+              <thead>
+                <tr>
+                  <th>NOMOR</th>
+                  <th>DAERAH</th>
+                  <th>AKSI</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>00001</td>
+                  <td>Mekarjaya, Kec. Banjaran, Kabupaten Bandung</td>
+                  <td>
+                    <button class="view-btn">👁️</button>
+                    <button class="edit-btn">✏️</button>
+                    <button class="delete-btn">🗑️</button>
+
+                    <!-- Modal -->
+                    <div id="deleteModal" class="modal">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <span class="close">&times;</span>
+                          <img src="" alt="Delete Icon" class="icon" />
+                        </div>
+                        <div class="modal-body">
+                          <h2>Kamu yakin untuk menghapus Plot Area ini?</h2>
+                          <p>Jika anda menghapus plot area ini, semua data terkait plot ini akan dipindahkan ke Sampah.</p>
+                        </div>
+                        <div class="modal-footer">
+                          <button id="cancelBtn" class="cancel-btn">Batal</button>
+                          <button id="deleteBtn" class="delete-confirm-btn">Hapus</button>
+                        </div>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>00002</td>
+                  <td>Haurpanggung, Kec. Tarogong Kidul, Kabupaten ...</td>
+                  <td>
+                    <button class="view-btn">👁️</button>
+                    <button class="edit-btn">✏️</button>
+                    <button class="delete-btn">🗑️</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>00003</td>
+                  <td>Haurpanggung, Kec. Tarogong Kidul, Kabupaten ...</td>
+                  <td>
+                    <button class="view-btn">👁️</button>
+                    <button class="edit-btn">✏️</button>
+                    <button class="delete-btn">🗑️</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>00004</td>
+                  <td>Haurpanggung, Kec. Tarogong Kidul, Kabupaten ...</td>
+                  <td>
+                    <button class="view-btn">👁️</button>
+                    <button class="edit-btn">✏️</button>
+                    <button class="delete-btn">🗑️</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>00005</td>
+                  <td>Haurpanggung, Kec. Tarogong Kidul, Kabupaten ...</td>
+                  <td>
+                    <button class="view-btn">👁️</button>
+                    <button class="edit-btn">✏️</button>
+                    <button class="delete-btn">🗑️</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>00006</td>
+                  <td>Haurpanggung, Kec. Tarogong Kidul, Kabupaten ...</td>
+                  <td>
+                    <button class="view-btn">👁️</button>
+                    <button class="edit-btn">✏️</button>
+                    <button class="delete-btn">🗑️</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>00007</td>
+                  <td>Haurpanggung, Kec. Tarogong Kidul, Kabupaten ...</td>
+                  <td>
+                    <button class="view-btn">👁️</button>
+                    <button class="edit-btn">✏️</button>
+                    <button class="delete-btn">🗑️</button>
+                  </td>
+                </tr>
+                <!-- Tambahkan baris lainnya di sini -->
+              </tbody>
+            </table>
+            <div class="table-footer">
+              <span>Menampilkan 1 sampai 5 dari 40 data</span>
+              <div class="pagination">
+                <button class="page-btn">Kembali</button>
+                <button class="page-btn active">1</button>
+                <button class="page-btn">2</button>
+                <button class="page-btn">3</button>
+                <button class="page-btn">4</button>
+                <button class="page-btn">Lanjut</button>
+              </div>
             </div>
           </div>
-          <div class="card" style="width: 30%">
-            <div class="card-body">
-              <h5 class="card-title">Estimasi Cadangan Karbon Plot Area 3</h5>
-              <canvas id="chart3"></canvas>
-            </div>
-          </div>
+        </div>
+        <div id="sampah-content" class="page-content">
+          <h4>Recycle Bin</h4>
+          <!-- Add content for the 'Sampah' section here -->
+        </div>
+
+        <div id="panduan-content" class="page-content">
+          <h4>Guide</h4>
+          <!-- Add content for the 'Panduan' section here -->
         </div>
       </div>
     </div>

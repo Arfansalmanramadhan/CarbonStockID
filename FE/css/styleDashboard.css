@@ -1,12 +1,9 @@
 :root {
   --pr-color1: #4caf4f;
   --pr-color2: #ffffff;
-  --pr-color3: #abbed1;
+  --pr-color3: #f0f1f2;
   --pr-color4: #000000;
-  --pr-color5: #c4c4c4;
   --pr-color6: #2b313a;
-  --pr-color7: #6c7581;
-  --pr-color8: #abbed1;
   --pr-color9: #edf7ed;
   --pr-color10: #263238;
 }
@@ -16,6 +13,8 @@ body {
   background-color: var(--pr-color2);
   margin: 0;
   padding: 0;
+  overflow: hidden;
+  background: var(--pr-color3);
 }
 
 h1,
@@ -24,24 +23,27 @@ h3 {
   font-family: "DM Sans", sans-serif;
 }
 
+.content {
+  overflow-y: scroll !important;
+}
 /* Navbar Style */
 .navbar {
-  display: flex;
-  padding: 18px 48px;
-  align-items: center;
-  background-color: var(--pr-color2);
+  padding: 16px 48px;
+  background-color: #ffffff !important;
+  box-shadow: 0px 8px 11.9px 0px rgba(0, 0, 0, 0.05);
 }
 
 .burger-button {
   background-color: transparent;
+  width: 30px;
+  height: 30px;
   border: none;
-  padding: 0;
   cursor: pointer;
+  padding: 0;
 }
 
-.menu-button img {
-  width: 24px; /* Sesuaikan ukuran gambar */
-  height: auto;
+.burger-icon {
+  width: 22px;
 }
 
 .navbar-brand {
@@ -49,25 +51,18 @@ h3 {
   color: var(--pr-color6);
   font-size: 28px;
   line-height: 150%;
-  display: flex;
-  align-items: center;
-}
-
-.navbar-brand img {
-  margin-right: 8px;
 }
 
 .btn-tambahData {
-  width: 232px;
-  height: 62px;
+  background-color: var(--pr-color1);
+  color: var(--pr-color2);
   border-radius: 8px;
   padding: 16px 40px;
   font-size: 22px;
-  font-style: normal;
   font-weight: 700;
   line-height: 125%;
-  color: var(--pr-color2);
-  background-color: var(--pr-color1);
+  width: 233px;
+  height: 62px;
 }
 
 .form-control {
@@ -77,70 +72,457 @@ h3 {
 }
 
 .search-input {
-  padding-left: 50px; /* Adjust padding to ensure space for the icon */
+  padding-left: 50px;
 }
 
 .search-icon {
   position: absolute;
-  left: 15px; /* Adjust this value to position the icon correctly */
+  left: 15px;
   top: 50%;
   transform: translateY(-50%);
-  width: 24px; /* Adjust width according to your icon size */
-  height: 24px; /* Adjust height according to your icon size */
-  pointer-events: none; /* Prevent the icon from interfering with input field functionality */
+  width: 24px;
+  height: 24px;
+  pointer-events: none;
 }
 
-/* .form-control::placeholder {
-  font-size: 22px;
-  color: var(--pr-color7);
-} */
-
-/* ---- */
-
-.table th,
-.table td {
-  vertical-align: middle;
-  text-align: center;
+.user-profile-dropdown {
+  position: absolute;
+  top: 100px;
+  right: 40px;
+  background-color: white;
+  border: 1px solid #ddd;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  width: 300px;
+  height: 200px;
+  padding: 15px;
+  z-index: 1000;
 }
 
-.card-title {
-  font-size: 1.2rem;
-  font-weight: bold;
-  text-align: center;
+.user-info {
+  display: flex;
+  align-items: center; /* Agar gambar dan teks rata di tengah secara vertikal */
 }
 
-.card {
-  border: none;
-  background: #f8f9fa;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+.user-avatar {
+  width: 62px; /* Sesuaikan dengan ukuran yang diinginkan */
+  height: 62px;
+  border-radius: 50%; /* Membuat gambar menjadi bulat */
+  margin-right: 15px; /* Memberikan jarak antara gambar dan teks */
+}
+
+.user-details h4 {
+  margin: 0; /* Hilangkan margin default */
+  font-size: 1.2em; /* Sesuaikan ukuran font */
+}
+
+.user-details p {
+  margin: 0; /* Hilangkan margin default */
+  font-size: 0.9em; /* Sesuaikan ukuran font */
+  color: gray; /* Warna teks yang lebih soft untuk email */
+}
+
+.user-options .option {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.user-options .option a {
+  text-decoration: none;
+}
+
+.user-options .option span {
+  margin-right: 10px;
+  font-size: 18px;
+}
+
+.user-options .option:hover span {
+  color: var(--pr-color1); /* Mengubah warna teks menjadi hijau saat hover */
+}
+
+.user-options .option:hover img {
+  filter: invert(60%) sepia(25%) saturate(500%) hue-rotate(60deg) brightness(95%) contrast(90%);
+  /* Menyesuaikan filter untuk mendekati warna #4caf4f */
 }
 
 /* Sidebar Styles */
 .sidebar {
   width: 240px;
-  background-color: #f8f9fa;
+  background-color: #ffffff !important;
+  padding: 16px 0;
+  height: 100vh;
   transition: all 0.3s ease;
+  overflow-y: auto;
 }
 
-.sidebar .nav-link {
-  color: var(--pr-color6);
-  font-size: 18px;
-  padding: 10px 20px;
+.sidebar.collapsed {
+  width: 0;
+  padding: 0;
+  transform: translateX(-100%);
+}
+
+.nav-item {
+  padding: 7px 0;
+  color: var(--Text-Tint-20, #6c7581);
+  /* Desktop/P16/Regular */
+  font-family: "DM Sans";
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%; /* 36px */
+  letter-spacing: 0.48px;
+}
+
+/* Active sidebar item style */
+.nav-item .active {
+  background-color: var(--pr-color1); /* Light green background */
+  color: var(--pr-color2); /* Text color when active */
+  border-radius: 8px;
+  display: flex;
+  width: 175px;
+  height: 55px;
+  padding: 0px 20px;
+  align-items: center;
+  gap: 5px;
+}
+
+/* Efek Hover untuk Nav Links di Sidebar */
+.nav-link {
+  color: var(--pr-color6); /* Warna default */
+  border-radius: 8px;
+  display: flex;
+  width: 175px;
+  height: 55px;
+  padding: 0px 20px;
+  align-items: center;
+  gap: 5px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.nav-link:hover {
+  background-color: var(--pr-color1); /* Background warna hijau saat hover */
+  color: var(--pr-color2); /* Mengubah warna teks menjadi putih saat hover */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Efek shadow ringan */
+}
+
+.nav-link img {
+  margin-right: 10px;
+}
+
+.content {
+  padding: 20px;
+  flex: 1;
+}
+
+/* Page Content Styles */
+.page-content {
+  display: none;
+}
+
+.page-content.active {
   display: block;
+  opacity: 1;
+  transition: opacity 0.3s ease;
 }
 
-.sidebar .nav-link.active {
+/* Table Styles */
+.table-container {
+  width: 100%;
+  padding: 20px;
+  background-color: #f7f7f7;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.table-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  font-size: 14px;
+  color: #666;
+  border: none;
+}
+
+.table-header label {
+  margin-right: 5px;
+}
+
+.table-header select {
+  margin: 0 5px;
+  padding: 5px;
+  border: 1px solid #d4d4d4;
+  border-radius: 4px;
+  background-color: #ffffff;
+  color: #666;
+  background-color: transparent; /* Atur warna background jika ingin transparan */
+  border: none;
+}
+
+.custom-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #ffffff;
+}
+
+.custom-table thead {
+  background-color: #4caf50;
+  color: white;
+  text-align: left;
+}
+
+.custom-table th,
+.custom-table td {
+  padding: 10px 15px;
+  border: 1px solid #e0e0e0;
+  font-size: 14px;
+  color: #333;
+}
+
+.custom-table th {
+  font-weight: bold;
+}
+
+.custom-table tbody tr {
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.custom-table tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.custom-table tbody tr:last-child {
+  border-bottom: none;
+}
+
+.custom-table tbody tr:hover {
+  background-color: #f1f1f1;
+}
+
+.custom-table td .view-btn,
+.custom-table td .edit-btn,
+.custom-table td .delete-btn {
+  margin-right: 8px;
+  border: none;
+  padding: 5px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.view-btn {
+  background-color: #4caf50;
+  color: white;
+}
+
+.edit-btn {
+  background-color: #03a9f4;
+  color: white;
+}
+
+.delete-btn {
+  background-color: #f44336;
+  color: white;
+}
+
+.table-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+  font-size: 14px;
+  color: #666;
+}
+
+.pagination {
+  display: flex;
+  align-items: center;
+}
+
+.page-btn {
+  margin: 0 5px;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  background-color: #ffffff;
+  color: #666;
+  border: none;
+}
+
+.page-btn.active {
+  background-color: #4caf50;
+  color: #ffffff;
+}
+
+.page-btn:hover {
+  background-color: #4caf50;
+  color: #ffffff;
+}
+
+/* Table Berandaa Masih harus diperbaikin */
+.table-container {
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.table th {
+  background-color: var(--pr-color1);
+  color: var(--pr-color2);
+  border-radius: 8px;
+}
+
+.table tbody tr:nth-child(even) {
   background-color: var(--pr-color9);
+}
+
+.table tbody tr:nth-child(odd) {
+  background-color: var(--pr-color2);
+}
+
+.table td,
+.table th {
+  vertical-align: middle;
+  text-align: left;
+}
+/* Table Berandaa Masih harus diperbaikin */
+
+/* Tambahkan ini pada CSS Anda */
+.img-fullscreen {
+  width: 100%;
+  height: auto;
+  transition: width 0.3s ease;
+}
+
+.image-container {
+  position: relative;
+  width: 100%;
+  height: auto;
+}
+
+.img-normal {
+  width: 100%;
+  height: auto;
+  transition: width 0.3s ease;
+}
+
+.text-overlay {
+  position: absolute;
+  top: 70px; /* Sesuaikan jarak dari atas gambar */
+  left: 150px; /* Sesuaikan jarak dari sisi kiri gambar */
+  transform: translate(-50%, -50%);
+  color: white;
+}
+
+.small-text {
+  font-size: 16px;
+}
+
+.large-text {
+  font-size: 32px;
+  font-weight: bold;
+}
+
+.btn-sm {
+  padding: 6px 10px;
+  margin-right: 4px;
   border-radius: 4px;
 }
 
-.sidebar.hidden {
-  margin-left: -240px;
+/* Modal base styling */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4); /* Background with opacity */
 }
 
-@media (max-width: 768px) {
-  .sidebar {
-    position: absolute;
-    z-index: 1000;
-  }
+/* Modal content box */
+.modal-content {
+  background-color: white;
+  margin: 15% auto;
+  padding: 20px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  width: 50%;
+  text-align: center;
+}
+
+/* Modal header with icon */
+.modal-header .icon {
+  width: 50px;
+  margin-bottom: 10px;
+}
+
+/* Close button */
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  cursor: pointer;
+}
+
+/* Modal body */
+.modal-body h2 {
+  font-weight: bold;
+}
+
+.modal-body p {
+  color: #666;
+  margin: 10px 0;
+}
+
+/* Modal footer buttons */
+.modal-footer {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+}
+
+.cancel-btn,
+.delete-confirm-btn {
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.cancel-btn {
+  background-color: white;
+  border: 2px solid red;
+  color: red;
+}
+
+.delete-confirm-btn {
+  background-color: red;
+  border: none;
+  color: white;
+}
+
+.cancel-btn:hover,
+.delete-confirm-btn:hover {
+  opacity: 0.8;
+}
+
+/* Card Fitur */
+.card-fitur {
+  background-color: var(--pr-color9);
+  padding: 40px;
+  border-radius: 8px;
+  text-align: center;
+  font-weight: 700;
 }
