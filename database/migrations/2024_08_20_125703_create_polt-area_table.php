@@ -11,16 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create("polt-area", function (Blueprint $table){
+        Schema::create("polt-area", function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger("profil_id");
-            $table->foreign("profil_id")->references("id")->on("profil");
-            $table->string("nama_polt");
-            $table->string("jenis");
-            $table->string("slug",255);
-            $table->decimal('latitude', 10, 7);
-            $table->decimal('longitude', 10, 7);
-            $table->float('ukuran_port', 10, 7);
+            $table->foreign("profil_id")->references("id")->on("profil")->onDelete('cascade')->onUpdate('cascade');
+            $table->string("daerah");
+            $table->string("slug", 255);
+            $table->decimal('latitude', 10, 8);
+            $table->decimal('longitude', 11, 8);
             $table->timestamps();
         });
     }
