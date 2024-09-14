@@ -13,7 +13,7 @@ body {
   background-color: var(--pr-color2);
   margin: 0;
   padding: 0;
-  overflow: hidden;
+  overflow: scroll;
   background: var(--pr-color3);
 }
 
@@ -23,9 +23,9 @@ h3 {
   font-family: "DM Sans", sans-serif;
 }
 
-.content {
+/* .content {
   overflow-y: scroll !important;
-}
+} */
 /* Navbar Style */
 .navbar {
   padding: 16px 48px;
@@ -93,8 +93,8 @@ h3 {
   border: 1px solid #ddd;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
-  width: 300px;
-  height: 200px;
+  width: 344px;
+  height: 232px;
   padding: 15px;
   z-index: 1000;
 }
@@ -149,10 +149,10 @@ h3 {
 
 /* Sidebar Styles */
 .sidebar {
-  width: 240px;
+  width: 273px;
   background-color: #ffffff !important;
   padding: 16px 0;
-  height: 100vh;
+  height: 909px;
   transition: all 0.3s ease;
   overflow-y: auto;
 }
@@ -166,13 +166,16 @@ h3 {
 .nav-item {
   padding: 7px 0;
   color: var(--Text-Tint-20, #6c7581);
-  /* Desktop/P16/Regular */
+  width: 210px;
+  height: 62px;
   font-family: "DM Sans";
-  font-size: 20px;
+  font-size: 24px;
   font-style: normal;
   font-weight: 400;
   line-height: 150%; /* 36px */
   letter-spacing: 0.48px;
+  margin-bottom: 25px;
+  gap: 10px !important;
 }
 
 /* Active sidebar item style */
@@ -181,11 +184,15 @@ h3 {
   color: var(--pr-color2); /* Text color when active */
   border-radius: 8px;
   display: flex;
-  width: 175px;
-  height: 55px;
+  width: 210px;
+  height: 62px;
   padding: 0px 20px;
   align-items: center;
-  gap: 5px;
+  gap: 10px !important;
+}
+
+.nav-item .active img {
+  filter: brightness(0) invert(1); /* Mengubah warna menjadi putih */
 }
 
 /* Efek Hover untuk Nav Links di Sidebar */
@@ -193,11 +200,11 @@ h3 {
   color: var(--pr-color6); /* Warna default */
   border-radius: 8px;
   display: flex;
-  width: 175px;
-  height: 55px;
+  width: 210px;
+  height: 62px;
   padding: 0px 20px;
   align-items: center;
-  gap: 5px;
+  gap: 10px;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
@@ -207,8 +214,8 @@ h3 {
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Efek shadow ringan */
 }
 
-.nav-link img {
-  margin-right: 10px;
+.nav-link:hover img {
+  filter: brightness(0) invert(1); /* Mengubah warna menjadi putih */
 }
 
 .content {
@@ -410,11 +417,13 @@ h3 {
 }
 
 .text-overlay {
-  position: absolute;
-  top: 70px; /* Sesuaikan jarak dari atas gambar */
-  left: 150px; /* Sesuaikan jarak dari sisi kiri gambar */
-  transform: translate(-50%, -50%);
-  color: white;
+  position: absolute; /* Agar teks bisa berada di atas gambar */
+  top: 50%; /* Tetap di tengah secara vertikal */
+  left: 20px; /* Posisikan di sisi kiri dengan jarak 20px dari tepi kiri */
+  transform: translateY(-50%); /* Hapus efek translate di sumbu X, hanya gunakan di sumbu Y */
+  color: white; /* Ubah warna teks agar terlihat */
+  font-size: 32px;
+  font-weight: bold;
 }
 
 .small-text {
@@ -424,6 +433,26 @@ h3 {
 .large-text {
   font-size: 32px;
   font-weight: bold;
+}
+
+.pdf-container {
+  display: flex;
+  width: 1100px;
+  height: 630px;
+  padding: 35px 0px;
+  flex-direction: column;
+  align-items: center;
+  gap: 35px;
+  flex-shrink: 0;
+  border-radius: 8px;
+  background: var(--Neutral-7, #fff);
+  box-shadow: -1px 5px 20px 0px rgba(0, 0, 0, 0.05);
+}
+
+.pdf-frame {
+  width: 90%; /* Sesuaikan dengan container */
+  height: 600px; /* Atur tinggi sesuai kebutuhan */
+  border: none; /* Hapus border dari iframe */
 }
 
 .btn-sm {

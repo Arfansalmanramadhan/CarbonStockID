@@ -77,31 +77,31 @@
           <li class="nav-item">
             <a class="d-flex align-items-center ms-3 nav-link active" href="#beranda">
               <img src="assets/img/iconamoon_home-fill.svg" alt="Home Icon" />
-              <span>Beranda</span>
+              <span class="ms-2">Beranda</span>
             </a>
           </li>
           <li class="nav-item">
             <a class="d-flex align-items-center ms-3 nav-link" href="#panduan">
-              <img src="assets/img/logoPdf.png" alt="Guide Icon" />
-              <span>Panduan</span>
+              <img src="assets/img/FileEarmarkPdfFill.svg" alt="Guide Icon" />
+              <span class="ms-2">Panduan</span>
             </a>
           </li>
           <li class="nav-item">
             <a class="d-flex align-items-center ms-3 nav-link" href="#data-plot">
               <img src="assets/img/FolderFill.svg" alt="Data Plot Icon" />
-              <span>Data Plot</span>
+              <span class="ms-2">Data Plot</span>
             </a>
           </li>
           <li class="nav-item">
-            <a class="d-flex align-items-center ms-3 nav-link" href="#panduan">
+            <a class="d-flex align-items-center ms-3 nav-link" href="#prediksi">
               <img src="assets/img/prediksiLogo.svg" alt="Guide Icon" />
-              <span>Prediksi</span>
+              <span class="ms-2">Prediksi</span>
             </a>
           </li>
           <li class="nav-item">
             <a class="d-flex align-items-center ms-3 nav-link" href="#sampah">
-              <img src="assets/img/logoTempatSampah.png" alt="Trash Icon" />
-              <span>Sampah</span>
+              <img src="assets/img/TrashFill.svg" alt="Trash Icon" />
+              <span class="ms-2">Sampah</span>
             </a>
           </li>
         </ul>
@@ -136,7 +136,17 @@
             </tbody>
           </table>
         </div>
-
+        <div id="panduan-content" class="page-content">
+          <div class="image-container mt-4">
+            <img src="assets/img/dataPlot-Image.svg" alt="" class="mb-4 img-normal" />
+            <div class="text-overlay">
+              <p class="large-text">Panduan Perhitungan Cadangan Karbon</p>
+            </div>
+          </div>
+          <div class="pdf-container">
+            <iframe src="File/SNI7724_Pengukuran Lapangan Cadangan Karbon.pdf" class="pdf-frame"></iframe>
+          </div>
+        </div>
         <!-- Content for Data Plot (initially hidden) -->
         <div id="data-plot-content" class="page-content">
           <div class="image-container mt-4">
@@ -262,14 +272,19 @@
             </div>
           </div>
         </div>
-        <div id="sampah-content" class="page-content">
-          <h4>Recycle Bin</h4>
-          <!-- Add content for the 'Sampah' section here -->
+        <div id="prediksi-content" class="page-content">
+          <div class="image-container mt-4">
+            <img src="assets/img/dataPlot-Image.svg" alt="" class="mb-4 img-normal" />
+            <p class="large-text text-overlay">Prediksi Cadangan Karbon</p>
+          </div>
         </div>
-
-        <div id="panduan-content" class="page-content">
-          <h4>Guide</h4>
-          <!-- Add content for the 'Panduan' section here -->
+        <div id="sampah-content" class="page-content">
+          <div class="image-container mt-4">
+            <img src="assets/img/dataPlot-Image.svg" alt="" class="mb-4 img-normal" />
+            <div class="text-overlay">
+              <p class="large-text">Sampah</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>

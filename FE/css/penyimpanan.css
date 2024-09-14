@@ -1061,62 +1061,7 @@ h3 {
   border: none;
 }
 
-/* --------------------------------Table Pancang ---------------------------- */
-
-.custom-table-pancang {
-  width: 100%;
-  border-collapse: collapse;
-  background-color: white;
-  border-radius: 8px;
-  overflow: hidden;
-  text-align: center !important;
-}
-
-.custom-table-pancang th,
-.custom-table-pancang td {
-  text-align: center !important;
-  padding: 15px;
-  border-bottom: 2px solid #4caf4f;
-  text-align: left;
-  font-family: "DM Sans";
-  font-size: 16px;
-  color: #4caf4f;
-}
-
-.custom-table-pancang th {
-  background-color: #4caf4f;
-  color: white;
-}
-
-.custom-table-pancang thead {
-  text-align: center !important;
-}
-
-.custom-table-pancang tbody td {
-  border-top: 1px solid #4caf4f; /* Border hijau di atas */
-  border-bottom: 2px solid #4caf4f; /* Border hijau di bawah */
-  padding: 12px;
-  font-weight: 700;
-  color: #6c7581; /* Warna teks */
-  font-size: 16px;
-  text-align: left;
-}
-
-.custom-table-pancang tbody tr {
-  border: 1px solid #4caf4f; /* Border hijau di baris */
-}
-
-.custom-table-pancang tfoot td {
-  background-color: #4caf4f; /* Warna hijau untuk footer */
-  color: white;
-  font-weight: bold;
-  padding: 12px;
-  text-align: left;
-}
-
-.hidden-column {
-  display: none;
-}
+/* Percobaan */
 
 .table-wrapper {
   overflow-x: auto;
@@ -1124,12 +1069,34 @@ h3 {
   width: 100%;
 }
 
+.custom-table-hasil {
+  border-collapse: collapse;
+  width: 100%;
+  table-layout: auto;
+}
+
+.custom-table-hasil th,
+.custom-table-hasil td {
+  border: 1px solid #dddddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.custom-table-hasil th {
+  background-color: #4caf50;
+  color: white;
+}
+
+.hidden-column {
+  display: none;
+}
+
 .table-wrapper::-webkit-scrollbar {
   height: 10px;
 }
 
 .table-wrapper::-webkit-scrollbar-thumb {
-  background-color: #6c7581;
+  background-color: #4caf50;
   border-radius: 10px;
 }
 
@@ -1143,97 +1110,3 @@ h3 {
     display: table-cell;
   }
 }
-
-/* --------------------------------Table Pancang ---------------------------- */
-
-/* --------------------------------Bagian Hasil ---------------------------- */
-
-.table-header-hasil {
-  display: flex;
-  justify-content: flex-end; /* Align items to the left */
-  margin-bottom: 20px; /* Optional: add some spacing under the button */
-}
-.btn-unduhPDF {
-  display: flex;
-  padding: 16px 40px;
-  justify-content: flex-end;
-  align-items: center;
-  border-radius: 8px;
-  background: var(--Primary-0, #4caf4f);
-  color: var(--Warning, #fff);
-  font-family: "DM Sans";
-  font-size: 24px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 125%; /* 30px */
-}
-
-.plot-info {
-  display: flex;
-  flex-direction: column;
-  padding: 15px;
-  background-color: #edf7ed;
-  border-radius: 8px;
-  margin-top: 20px;
-  margin-bottom: 20px;
-}
-
-.plot-info p {
-  font-family: "DM Sans";
-  font-size: 16px;
-  color: #6c7581;
-  font-weight: 700;
-}
-
-.custom-table-hasil {
-  width: 100%;
-  border-collapse: collapse;
-  background-color: white;
-  border-radius: 8px;
-  overflow: hidden;
-  text-align: center !important;
-}
-
-.custom-table-hasil th,
-.custom-table-hasil td {
-  text-align: center !important;
-  padding: 15px;
-  border-bottom: 2px solid #4caf4f;
-  text-align: left;
-  font-family: "DM Sans";
-  font-size: 16px;
-  color: #4caf4f;
-}
-
-.custom-table-hasil th {
-  background-color: #4caf4f;
-  color: white;
-}
-
-.custom-table-hasil thead {
-  text-align: center !important;
-}
-
-.custom-table-hasil tbody td {
-  border-top: 1px solid #4caf4f; /* Border hijau di atas */
-  border-bottom: 2px solid #4caf4f; /* Border hijau di bawah */
-  padding: 12px;
-  font-weight: 700;
-  color: #6c7581; /* Warna teks */
-  font-size: 16px;
-  text-align: left;
-}
-
-.custom-table-hasil tbody tr {
-  border: 1px solid #4caf4f; /* Border hijau di baris */
-}
-
-.custom-table-hasil tfoot td {
-  background-color: #4caf4f; /* Warna hijau untuk footer */
-  color: white;
-  font-weight: bold;
-  padding: 12px;
-  text-align: left;
-}
-
-/* --------------------------------Bagian Hasil ---------------------------- */

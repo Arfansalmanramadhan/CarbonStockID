@@ -42,7 +42,7 @@ document.addEventListener("DOMContentLoaded", function () {
         // Cek response dari server
         if (data.success) {
           // Redirect ke dashboard jika registrasi berhasil
-          window.location.href = "dashboard.html";
+          window.location.href = "login.html";
         } else {
           // Tampilkan pesan error jika gagal
           alert("Registrasi gagal: " + data.message);

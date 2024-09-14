@@ -4,6 +4,7 @@ const berandaContent = document.getElementById("beranda-content");
 const dataPlotContent = document.getElementById("data-plot-content");
 const sampahContent = document.getElementById("sampah-content");
 const panduanContent = document.getElementById("panduan-content");
+const prediksiContent = document.getElementById("prediksi-content");
 const navItems = document.querySelectorAll(".nav-item");
 const dataPlotImage = document.querySelector("#data-plot-content img");
 const tableBody = document.querySelector(".custom-table tbody");
@@ -73,6 +74,7 @@ function switchContent(target) {
   dataPlotContent.classList.remove("active");
   sampahContent.classList.remove("active");
   panduanContent.classList.remove("active");
+  prediksiContent.classList.remove("active");
 
   // Remove active class from all nav items
   navItems.forEach((item) => {
@@ -92,6 +94,9 @@ function switchContent(target) {
   } else if (target === "panduan") {
     panduanContent.classList.add("active");
     document.querySelector('a[href="#panduan"]').classList.add("active");
+  } else if (target === "prediksi") {
+    prediksiContent.classList.add("active");
+    document.querySelector('a[href="#prediksi"]').classList.add("active");
   }
 }
 
@@ -101,6 +106,7 @@ document.querySelector('a[href="#beranda"]').addEventListener("click", () => swi
 document.querySelector('a[href="#data-plot"]').addEventListener("click", () => switchContent("data-plot"));
 document.querySelector('a[href="#sampah"]').addEventListener("click", () => switchContent("sampah"));
 document.querySelector('a[href="#panduan"]').addEventListener("click", () => switchContent("panduan"));
+document.querySelector('a[href="#prediksi"]').addEventListener("click", () => switchContent("prediksi"));
 
 // Function to update table rows based on selected value
 function updateTableRows(entries) {
