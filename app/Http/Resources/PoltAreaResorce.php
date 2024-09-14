@@ -5,7 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class ProfilResources extends JsonResource
+class PoltAreaResorce extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,8 +16,10 @@ class ProfilResources extends JsonResource
     {
         return [
             'id' => $this->id,
-            'registrasi_id' => $this->whenLoaded("user"),
-            'no_hp' => $this->no_hp
+            'daerah' => $this->daerah,
+            'slug' => $this->slug,
+            'latitude' => $this->latitude,
+            'longitude' => $this->longitude,
         ];
     }
 }
