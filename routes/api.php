@@ -27,9 +27,6 @@ Route::controller(AuthController::class)->group(function () {
     Route::post("/forgotPassword", "forgotPassword");
     Route::post("/resetPassword", "resetPassword");
 });
-Route::controller(PoltAreaController::class)->group(function () {
-    Route::post("/polt-area", "store");
-});
 Route::middleware("auth:sanctum")->group(function () {
     Route::controller(AuthController::class)->group(function () {
         Route::post("/logout", "logout");
@@ -41,5 +38,14 @@ Route::middleware("auth:sanctum")->group(function () {
         Route::get("/profil/show/{id}", "show");
         Route::get("/profil/edit/{id}", "edit");
         Route::post("/profil/update/{id}", "update");
+    });
+    Route::controller(PoltAreaController::class)->group(function () {
+        Route::get("/polt-area", "index");
+        Route::post("/polt-area/buat", "store");
+        Route::get("/polt-area/{slug}", "show");
+        Route::post("/polt-area/{slug}", "update");
+        Route::delete("/polt-area/{slug}", "destroy");
+        Route::post("/polt-area/restore/{slug}", "restore");
+        Route::delete("/polt-area/force-delete/{slug}", "forceDelete");
     });
 });

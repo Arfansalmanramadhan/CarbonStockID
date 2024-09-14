@@ -11,10 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create("roles", function (Blueprint $table) {
-            $table->id();
-            $table->string("name_role");
-            $table->timestamps();
+        Schema::table('polt-area', function (Blueprint $table) {
+            $table->softDeletes(); // menambahkan kolom deleted_at
         });
     }
 
@@ -23,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists("roles");
+        Schema::table('polt-area', function (Blueprint $table) {
+            $table->dropSoftDeletes(); // menghapus kolom deleted_at
+        });
     }
 };

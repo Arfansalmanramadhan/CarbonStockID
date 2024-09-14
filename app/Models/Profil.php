@@ -12,8 +12,6 @@ class Profil extends Model
     protected $table = 'profil';
     protected $fillable = [
         'registrasi_id',
-        'namadepan',
-        'namabelakang',
         'no_hp'
     ];
 
@@ -32,8 +30,8 @@ class Profil extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function poltarea(): BelongsTo
+    public function poltarea()
     {
-        return $this->belongsTo(PoltArea::class, 'profil_id');
+        return $this->hasMany(PoltArea::class, 'profil_id');
     }
 }
