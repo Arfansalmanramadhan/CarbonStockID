@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\PoltAreaController;
 use App\Http\Controllers\Authentication\AuthController;
+use App\Http\Controllers\SemaiController;
 use App\Http\Controllers\SerasahController;
 
 /*
@@ -55,4 +56,11 @@ Route::middleware("auth:sanctum")->group(function () {
         Route::post("/Serasah/update/{id}", "update");
         Route::delete("/Serasah/{id}", "destroy");
     });
+    Route::controller(SemaiController::class)->group(function () {
+        Route::post("/Semai/buat", "store");
+        Route::get("/Semai", "index");
+        Route::post("/Semai/update/{id}", "update");
+        Route::delete("/Semai/{id}", "destroy");
+    });
+
 });
