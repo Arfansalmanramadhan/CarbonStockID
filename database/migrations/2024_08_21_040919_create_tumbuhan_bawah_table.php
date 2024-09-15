@@ -17,8 +17,8 @@ return new class extends Migration
             $table->foreign("polt-area_id")->references("id")->on("polt-area");
             $table->decimal('total_berat_basah', 8, 3)->defaul(0);
             $table->decimal('sample_berat_basah', 8, 3)->defaul(0);
-            $table->decimal('total_berat_kering', 8, 3)->defaul(0);
             $table->decimal('sample_berat_kering', 8, 3)->defaul(0);
+            $table->decimal('total_berat_kering', 8, 3)->defaul(0);
             $table->decimal('kandungan_karbon', 10, 2);
             $table->decimal('co2', 10, 2);
             $table->timestamps();

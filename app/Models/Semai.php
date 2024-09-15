@@ -14,8 +14,8 @@ class Semai extends Model
         "polt-area_id",
         'total_berat_basah',
         'sample_berat_basah',
-        'total_berat_kering',
         'sample_berat_basah',
+        'total_berat_kering',
         'kandungan_karbon',
         'co2',
     ];
