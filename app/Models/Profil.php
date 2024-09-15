@@ -11,6 +11,7 @@ class Profil extends Model
     use HasFactory;
     protected $table = 'profil';
     protected $fillable = [
+        'nama_lengkap',
         'registrasi_id',
         'no_hp'
     ];

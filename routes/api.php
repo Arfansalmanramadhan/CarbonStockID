@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\PoltAreaController;
 use App\Http\Controllers\Authentication\AuthController;
+use App\Http\Controllers\SerasahController;
 
 /*
 |--------------------------------------------------------------------------
@@ -47,5 +48,11 @@ Route::middleware("auth:sanctum")->group(function () {
         Route::delete("/polt-area/{slug}", "destroy");
         Route::post("/polt-area/restore/{slug}", "restore");
         Route::delete("/polt-area/force-delete/{slug}", "forceDelete");
+    });
+    Route::controller(SerasahController::class)->group(function () {
+        Route::post("/Serasah/buat", "store");
+        Route::get("/Serasah", "index");
+        Route::post("/Serasah/update/{id}", "update");
+        Route::delete("/Serasah/{id}", "destroy");
     });
 });

@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\SerasahResource;
 use App\Models\PoltArea;
+use App\Models\Serasah;
 use Illuminate\Http\Request;
 use Symfony\Component\Console\Input\Input;
 
@@ -13,7 +15,8 @@ class SerasahController extends Controller
      */
     public function index()
     {
-        //
+        $serasah = Serasah::get();
+        return SerasahResource::collection($serasah);
     }
 
     /**
@@ -39,16 +42,48 @@ class SerasahController extends Controller
             ], 404);
         }
 
-        // validasi reques 
-        $validatedData = $request->validate([
-            'polt-area_id' => 'required|integer|exists:polt-area,id', 
-            'total_berat_basah' => 'required|numeric|min:0',           
-            'sample_berat_basah' => 'required|numeric|min:0',          
-            'total_berat_kering' => 'required|numeric|min:0',          
-            'sample_berat_basah' => 'required|numeric|min:0',          
-            'kandungan_karbon' => 'required|numeric|min:0',            
-            'co2' => 'required|numeric|min:0',
-        ]);
+        try {
+            // validasi reques 
+            $validatedData = $request->validate([
+                'polt-area_id' => 'required|integer|exists:polt-area,id',
+                'total_berat_basah' => 'required|numeric|min:0',
+                'sample_berat_basah' => 'required|numeric|min:0',
+                'sample_berat_kering' => 'required|numeric|min:0',
+            ]);
+
+            // Pastikan tidak ada pembagian dengan nol
+            if ($request->sample_berat_basah == 0) {
+                return response()->json([
+                    'message' => 'Sample berat basah tidak boleh nol.'
+                ], 400);
+            }
+            // lakuan perhitungan 
+            $TotalBeratKering = ($request->sample_berat_kering / $request->sample_berat_basah) * $request->total_berat_basah;
+            $kandunganKarbon =  $TotalBeratKering * 0.47;
+            $co2 = $kandunganKarbon * (44 / 12);
+            // menyimpan data ke database, termaksud hasil pergitungan 
+            $Serasah = Serasah::create([
+                'polt-area_id' => $polt->id,
+                'total_berat_basah' => $request->total_berat_basah,
+                'sample_berat_basah' => $request->sample_berat_basah,
+                'sample_berat_kering' => $request->sample_berat_kering,
+                'total_berat_kering' => $TotalBeratKering,
+                'kandungan_karbon' => $kandunganKarbon,
+                'co2' => $co2,
+            ]);
+
+            // Response sukses
+            return response()->json([
+                'message' => 'Serasah berhasil dibuat',
+                'data' => $Serasah
+            ], 201);
+        } catch (\Exception $e) {
+            // Response error
+            return response()->json([
+                'message' => 'Gagal membuat Serasah',
+                'error' => $e->getMessage()
+            ], 500);
+        }
     }
 
     /**
@@ -72,7 +107,47 @@ class SerasahController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        try {
+            // validasi reques 
+            $validatedData = $request->validate([
+                'total_berat_basah' => 'required|numeric|min:0',
+                'sample_berat_basah' => 'required|numeric|min:0',
+                'sample_berat_kering' => 'required|numeric|min:0',
+            ]);
+            // Cari data Serasah berdasarkan ID
+            $serasah = Serasah::findOrFail($id);
+            // Pastikan tidak ada pembagian dengan nol
+            if ($request->sample_berat_basah == 0) {
+                return response()->json([
+                    'message' => 'Sample berat basah tidak boleh nol.'
+                ], 400);
+            }
+            // lakuan perhitungan 
+            $TotalBeratKering = ($request->sample_berat_kering / $request->sample_berat_basah) * $request->total_berat_basah;
+            $kandunganKarbon =  $TotalBeratKering * 0.47;
+            $co2 = $kandunganKarbon * (44 / 12);
+            // update data ke database, termaksud hasil pergitungan 
+            $serasah->update([
+                'total_berat_basah' => $request->total_berat_basah,
+                'sample_berat_basah' => $request->sample_berat_basah,
+                'sample_berat_kering' => $request->sample_berat_kering,
+                'total_berat_kering' => $TotalBeratKering,
+                'kandungan_karbon' => $kandunganKarbon,
+                'co2' => $co2,
+            ]);
+
+            // Response sukses
+            return response()->json([
+                'message' => 'Serasah berhasil diupdate',
+                'data' => $serasah
+            ], 201);
+        } catch (\Exception $e) {
+            // Response error
+            return response()->json([
+                'message' => 'Gagal mengapdate Serasah',
+                'error' => $e->getMessage()
+            ], 500);
+        }
     }
 
     /**
@@ -80,6 +155,23 @@ class SerasahController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        try {
+            // Cari data Serasah berdasarkan ID
+            $serasah = Serasah::findOrFail($id);
+
+            // Hapus data
+            $serasah->delete();
+
+            // Response sukses
+            return response()->json([
+                'message' => 'Serasah berhasil dihapus'
+            ], 200);
+        } catch (\Exception $e) {
+            // Response error
+            return response()->json([
+                'message' => 'Gagal menghapus Serasah',
+                'error' => $e->getMessage()
+            ], 500);
+        }
     }
 }
