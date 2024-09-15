@@ -7,6 +7,7 @@ use App\Http\Controllers\PoltAreaController;
 use App\Http\Controllers\Authentication\AuthController;
 use App\Http\Controllers\SemaiController;
 use App\Http\Controllers\SerasahController;
+use App\Http\Controllers\TunmbuhanBawahController;
 
 /*
 |--------------------------------------------------------------------------
@@ -61,6 +62,12 @@ Route::middleware("auth:sanctum")->group(function () {
         Route::get("/Semai", "index");
         Route::post("/Semai/update/{id}", "update");
         Route::delete("/Semai/{id}", "destroy");
+    });
+    Route::controller(TunmbuhanBawahController::class)->group(function () {
+        Route::post("/Tumbuhanbawah/buat", "store");
+        Route::get("/Tumbuhanbawah", "index");
+        Route::post("/Tumbuhanbawah/update/{id}", "update");
+        Route::delete("/Tumbuhanbawah/{id}", "destroy");
     });
 
 });
