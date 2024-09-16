@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\PoltAreaController;
 use App\Http\Controllers\Authentication\AuthController;
+use App\Http\Controllers\PancangContrller;
 use App\Http\Controllers\SemaiController;
 use App\Http\Controllers\SerasahController;
 use App\Http\Controllers\TanahController;
@@ -75,5 +76,11 @@ Route::middleware("auth:sanctum")->group(function () {
         Route::get("/Tanah", "index");
         Route::post("/Tanah/update/{id}", "update");
         Route::delete("/Tanah/{id}", "destroy");
+    });
+    Route::controller(PancangContrller::class)->group(function () {
+        Route::post("/Pancang/buat", "store");
+        Route::get("/Pancang", "index");
+        Route::post("/Pancang/update/{id}", "update");
+        Route::delete("/Pancang/{id}", "destroy");
     });
 });
