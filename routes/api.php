@@ -9,6 +9,7 @@ use App\Http\Controllers\PancangContrller;
 use App\Http\Controllers\SemaiController;
 use App\Http\Controllers\SerasahController;
 use App\Http\Controllers\TanahController;
+use App\Http\Controllers\TiangController;
 use App\Http\Controllers\TunmbuhanBawahController;
 
 /*
@@ -82,5 +83,11 @@ Route::middleware("auth:sanctum")->group(function () {
         Route::get("/Pancang", "index");
         Route::post("/Pancang/update/{id}", "update");
         Route::delete("/Pancang/{id}", "destroy");
+    });
+    Route::controller(TiangController::class)->group(function () {
+        Route::post("/Tiang/buat", "store");
+        Route::get("/Tiang", "index");
+        Route::post("/Tiang/update/{id}", "update");
+        Route::delete("/Tiang/{id}", "destroy");
     });
 });
