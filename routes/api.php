@@ -5,7 +5,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\PoltAreaController;
 use App\Http\Controllers\Authentication\AuthController;
+use App\Http\Controllers\NekromasController;
 use App\Http\Controllers\PancangContrller;
+use App\Http\Controllers\PohonController;
 use App\Http\Controllers\SemaiController;
 use App\Http\Controllers\SerasahController;
 use App\Http\Controllers\TanahController;
@@ -27,7 +29,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 Route::controller(AuthController::class)->group(function () {
-    Route::get("/getUser", 'getUser');
     Route::post("/registasi", "registasi");
     Route::post("/login", "login")->name('login');
     Route::post("/loginn", "login");
@@ -37,7 +38,7 @@ Route::controller(AuthController::class)->group(function () {
 Route::middleware("auth:sanctum")->group(function () {
     Route::controller(AuthController::class)->group(function () {
         Route::post("/logout", "logout");
-        // Route::get("/getUser", "getUser");
+        Route::get("/getUser", "getUser");
     });
     Route::controller(ProfilController::class)->group(function () {
         Route::get("/profil", "index");
@@ -90,5 +91,17 @@ Route::middleware("auth:sanctum")->group(function () {
         Route::get("/Tiang", "index");
         Route::post("/Tiang/update/{id}", "update");
         Route::delete("/Tiang/{id}", "destroy");
+    });
+    Route::controller(PohonController::class)->group(function () {
+        Route::post("/Pohon/buat", "store");
+        Route::get("/Pohon", "index");
+        Route::post("/Pohon/update/{id}", "update");
+        Route::delete("/Pohon/{id}", "destroy");
+    });
+    Route::controller(NekromasController::class)->group(function () {
+        Route::post("/Nekromass/buat", "store");
+        Route::get("/Nekromass", "index");
+        Route::post("/Nekromass/update/{id}", "update");
+        Route::delete("/Nekromass/{id}", "destroy");
     });
 });
