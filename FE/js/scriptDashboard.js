@@ -156,3 +156,38 @@ window.addEventListener("click", function (e) {
 });
 
 // Profile Pop up
+
+// chart
+
+document.addEventListener("DOMContentLoaded", function () {
+  var ctx = document.getElementById("carbonEmissionsChart").getContext("2d");
+
+  var data = [
+    { t: new Date(2022, 0, 1), o: 9200, h: 9600, l: 9000, c: 9400 },
+    { t: new Date(2023, 0, 1), o: 9400, h: 9700, l: 9200, c: 9600 },
+    { t: new Date(2024, 0, 1), o: 9600, h: 9800, l: 9300, c: 9500 },
+    { t: new Date(2025, 0, 1), o: 9500, h: 9700, l: 9200, c: 9400 },
+  ];
+
+  var chart = new Chart(ctx, {
+    type: "candlestick",
+    data: {
+      datasets: [
+        {
+          label: "Prediksi Emisi Karbon Indonesia",
+          data: data,
+        },
+      ],
+    },
+    options: {
+      scales: {
+        x: {
+          type: "time",
+          time: {
+            unit: "year",
+          },
+        },
+      },
+    },
+  });
+});

@@ -16,7 +16,7 @@
 body {
   font-family: "Inter", sans-serif;
   background-color: var(--pr-color2);
-  overflow: hidden;
+  overflow-y: scroll;
 }
 
 h1,

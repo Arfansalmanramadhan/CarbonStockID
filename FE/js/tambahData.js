@@ -21,12 +21,66 @@ window.addEventListener("click", function (e) {
 //  dropdown plot area
 document.querySelector(".btn-plot-area").addEventListener("click", function () {
   var dropdown = document.getElementById("dropdownPlotArea");
+  var button = this.getBoundingClientRect(); // Dapatkan posisi tombol
+
   if (dropdown.style.display === "none" || dropdown.style.display === "") {
+    // Posisi dropdown berdasarkan tombol
+    dropdown.style.top = button.bottom + window.scrollY + "px";
+    dropdown.style.left = button.left + "px";
     dropdown.style.display = "block";
   } else {
     dropdown.style.display = "none";
   }
 });
+
+// Fungsi untuk memperbarui posisi saat window diresize
+window.addEventListener("resize", function () {
+  var dropdown = document.getElementById("dropdownPlotArea");
+  var button = document.querySelector(".btn-plot-area").getBoundingClientRect();
+
+  if (dropdown.style.display === "block") {
+    dropdown.style.top = button.bottom + window.scrollY + "px";
+    dropdown.style.left = button.left + "px";
+  }
+});
+
+// Fungsi untuk mengubah teks pada tombol Plot Area
+function updatePlotAreaText(newText) {
+  var plotAreaSpan = document.querySelector(".btn-plot-area span");
+  plotAreaSpan.textContent = newText;
+}
+
+// document.querySelector('li:contains("Sub Plot A")').addEventListener("click", function () {
+//   const currentContent = document.getElementById("currentContent");
+//   const subPlotAContent = document.getElementById("subPlotAContent");
+
+//   // Slide out current content
+//   currentContent.classList.add("slide-out-left");
+
+//   // When the slide-out animation is done
+//   currentContent.addEventListener(
+//     "animationend",
+//     function () {
+//       // Hide current content and reset animation
+//       currentContent.style.display = "none";
+//       currentContent.classList.remove("slide-out-left");
+
+//       // Show Sub Plot A content and apply slide-in-right animation
+//       subPlotAContent.style.display = "block";
+//       subPlotAContent.classList.add("slide-in-right");
+
+//       // Remove slide-in-right animation once it's done
+//       subPlotAContent.addEventListener(
+//         "animationend",
+//         function () {
+//           subPlotAContent.classList.remove("slide-in-right");
+//         },
+//         { once: true }
+//       );
+//     },
+//     { once: true }
+//   );
+// });
 
 // Fungsi umum untuk menangani animasi konten
 function handleContentTransition(oldContentId, newContentId, direction) {
@@ -62,47 +116,81 @@ function handleContentTransition(oldContentId, newContentId, direction) {
 document.querySelector(".btn-success").addEventListener("click", function (e) {
   e.preventDefault();
   handleContentTransition("currentContent", "newContent", "left");
+  updatePlotAreaText("Sub Plot A"); // Ubah teks Plot Area ketika pindah ke konten baru
 });
 
 document.getElementById("previousButton").addEventListener("click", function (e) {
   e.preventDefault();
   handleContentTransition("newContent", "currentContent", "right");
+  updatePlotAreaText("Plot Area"); // Kembalikan teks Plot Area ke awal saat pindah ke konten sebelumnya
 });
 
 document.querySelector(".btn-success-2").addEventListener("click", function (e) {
   e.preventDefault();
   handleContentTransition("newContent", "newContent2", "left");
+  updatePlotAreaText("Sub Plot B");
 });
 
 document.getElementById("previousButton2").addEventListener("click", function (e) {
   e.preventDefault();
   handleContentTransition("newContent2", "newContent", "right");
+  updatePlotAreaText("Sub Plot A");
 });
 
 document.querySelector(".btn-success-3").addEventListener("click", function (e) {
   e.preventDefault();
   handleContentTransition("newContent2", "newContent3", "left");
+  updatePlotAreaText("Sub Plot C");
 });
 
 document.getElementById("previousButton3").addEventListener("click", function (e) {
   e.preventDefault();
   handleContentTransition("newContent3", "newContent2", "right");
+  updatePlotAreaText("Sub Plot B");
 });
 
 document.querySelector(".btn-success-4").addEventListener("click", function (e) {
   e.preventDefault();
   handleContentTransition("newContent3", "newContent4", "left");
+  updatePlotAreaText("Sub Plot D");
 });
 
 document.getElementById("previousButton4").addEventListener("click", function (e) {
   e.preventDefault();
   handleContentTransition("newContent4", "newContent3", "right");
+  updatePlotAreaText("Sub Plot C");
 });
 
 document.querySelector(".btn-success-5").addEventListener("click", function (e) {
   e.preventDefault();
   handleContentTransition("newContent4", "newContent5", "left");
+  updatePlotAreaText("Hasil Hitung");
 });
+
+// document.getElementById("plotA").addEventListener("click", function () {
+//   handleContentTransition("currentContent", "newContent", "left");
+//   updatePlotAreaText("Sub Plot A");
+// });
+
+// document.getElementById("plotB").addEventListener("click", function () {
+//   handleContentTransition("newContent", "newContent2", "left");
+//   updatePlotAreaText("Sub Plot B");
+// });
+
+// document.getElementById("plotC").addEventListener("click", function () {
+//   handleContentTransition("newContent2", "newContent3", "left");
+//   updatePlotAreaText("Sub Plot C");
+// });
+
+// document.getElementById("plotD").addEventListener("click", function () {
+//   handleContentTransition("newContent3", "newContent4", "left");
+//   updatePlotAreaText("Sub Plot D");
+// });
+
+// document.getElementById("hasilHitung").addEventListener("click", function () {
+//   handleContentTransition("newContent4", "newContent5", "left");
+//   updatePlotAreaText("Hasil Hitung");
+// });
 
 // MODAL
 
@@ -110,78 +198,28 @@ document.querySelector(".btn-primary").addEventListener("click", function () {
   alert("Data disimpan!");
 });
 
-// DropDown
-const toggleIcon = document.getElementById("toggleDropdown");
-const dropdownList = document.getElementById("dropdownList");
-const inputField = document.getElementById("namaLokal");
+// ---------------------- DropDown dataPlot -----------------------------
+function setupDropdown(toggleIconId, dropdownListId, inputFieldId) {
+  const toggleIcon = document.getElementById(toggleIconId);
+  const dropdownList = document.getElementById(dropdownListId);
+  const inputField = document.getElementById(inputFieldId);
 
-toggleIcon.addEventListener("click", function () {
-  const isDropdownVisible = dropdownList.style.display === "block";
+  toggleIcon.addEventListener("click", function () {
+    const isDropdownVisible = dropdownList.style.display === "block";
 
-  // Toggle visibility of the dropdown
-  dropdownList.style.display = isDropdownVisible ? "none" : "block";
+    // Toggle visibility of the dropdown
+    dropdownList.style.display = isDropdownVisible ? "none" : "block";
 
-  // Change border-radius when dropdown is visible
-  if (isDropdownVisible) {
-    inputField.style.borderRadius = "8px"; // Reset to default when dropdown is hidden
-  } else {
-    inputField.style.borderRadius = "8px 8px 0px 0px"; // Apply new border-radius when dropdown is shown
-  }
-});
+    // Change border-radius when dropdown is visible
+    inputField.style.borderRadius = isDropdownVisible ? "8px" : "8px 8px 0px 0px";
+  });
+}
 
-const toggleIcon2 = document.getElementById("toggleDropdown2");
-const dropdownList2 = document.getElementById("dropdownList2");
-const inputField2 = document.getElementById("namaLokal2");
-
-toggleIcon2.addEventListener("click", function () {
-  const isDropdownVisible2 = dropdownList2.style.display === "block";
-
-  // Toggle visibility of the dropdown
-  dropdownList2.style.display = isDropdownVisible2 ? "none" : "block";
-
-  // Change border-radius when dropdown is visible
-  if (isDropdownVisible2) {
-    inputField2.style.borderRadius = "8px"; // Reset to default when dropdown is hidden
-  } else {
-    inputField2.style.borderRadius = "8px 8px 0px 0px"; // Apply new border-radius when dropdown is shown
-  }
-});
-
-const toggleIcon3 = document.getElementById("toggleDropdown3");
-const dropdownList3 = document.getElementById("dropdownList3");
-const inputField3 = document.getElementById("namaLokal3");
-
-toggleIcon3.addEventListener("click", function () {
-  const isDropdownVisible3 = dropdownList3.style.display === "block";
-
-  // Toggle visibility of the dropdown
-  dropdownList3.style.display = isDropdownVisible3 ? "none" : "block";
-
-  // Change border-radius when dropdown is visible
-  if (isDropdownVisible3) {
-    inputField3.style.borderRadius = "8px"; // Reset to default when dropdown is hidden
-  } else {
-    inputField3.style.borderRadius = "8px 8px 0px 0px"; // Apply new border-radius when dropdown is shown
-  }
-});
-
-const toggleIcon4 = document.getElementById("toggleDropdown4");
-const dropdownList4 = document.getElementById("dropdownList4");
-const inputField4 = document.getElementById("namaLokal4");
-
-toggleIcon4.addEventListener("click", function () {
-  const isDropdownVisible4 = dropdownList4.style.display === "block";
-
-  // Toggle visibility of the dropdown
-  dropdownList4.style.display = isDropdownVisible4 ? "none" : "block";
-
-  // Change border-radius when dropdown is visible
-  if (isDropdownVisible4) {
-    inputField4.style.borderRadius = "8px"; // Reset to default when dropdown is hidden
-  } else {
-    inputField4.style.borderRadius = "8px 8px 0px 0px"; // Apply new border-radius when dropdown is shown
-  }
-});
+// Setup dropdowns
+setupDropdown("toggleDropdown", "dropdownList", "namaLokal");
+setupDropdown("toggleDropdown2", "dropdownList2", "namaLokal2");
+setupDropdown("toggleDropdown3", "dropdownList3", "namaLokal3");
+setupDropdown("toggleDropdown4", "dropdownList4", "namaLokal4");
 
 // Handle item click
 dropdownList.addEventListener("click", function (e) {
@@ -192,9 +230,9 @@ dropdownList.addEventListener("click", function (e) {
   }
 });
 
-function toggleImage() {
-  const img = document.getElementById("toggleDropdown");
-  const input = document.getElementById("namaLokal");
+function toggleImage(toggleIconId, inputFieldId) {
+  const img = document.getElementById(toggleIconId);
+  const input = document.getElementById(inputFieldId);
 
   // Ubah gambar dan border secara bersamaan
   if (img.src.includes("ChevronUp.svg")) {
@@ -208,53 +246,13 @@ function toggleImage() {
   }
 }
 
-function toggleImage2() {
-  const img2 = document.getElementById("toggleDropdown2");
-  const input2 = document.getElementById("namaLokal2");
+// Setup multiple image toggles
+toggleImage("toggleDropdown", "namaLokal");
+toggleImage("toggleDropdown2", "namaLokal2");
+toggleImage("toggleDropdown3", "namaLokal3");
+toggleImage("toggleDropdown4", "namaLokal4");
 
-  // Ubah gambar dan border secara bersamaan
-  if (img2.src.includes("ChevronUp.svg")) {
-    img2.src = "assets/img/ChevronDownMini.svg";
-    input2.style.border = "1px solid var(--Primary-0, #4CAF4F)";
-    input2.style.borderRadius = "8px 8px 0px 0px"; // Opsional: mengubah border-radius
-  } else {
-    img2.src = "assets/img/ChevronUp.svg";
-    input2.style.border = ""; // Mengembalikan border ke default
-    input2.style.borderRadius = ""; // Mengembalikan border-radius ke default
-  }
-}
-
-function toggleImage3() {
-  const img3 = document.getElementById("toggleDropdown3");
-  const input3 = document.getElementById("namaLokal3");
-
-  // Ubah gambar dan border secara bersamaan
-  if (img3.src.includes("ChevronUp.svg")) {
-    img3.src = "assets/img/ChevronDownMini.svg";
-    input3.style.border = "1px solid var(--Primary-0, #4CAF4F)";
-    input3.style.borderRadius = "8px 8px 0px 0px"; // Opsional: mengubah border-radius
-  } else {
-    img3.src = "assets/img/ChevronUp.svg";
-    input3.style.border = ""; // Mengembalikan border ke default
-    input3.style.borderRadius = ""; // Mengembalikan border-radius ke default
-  }
-}
-
-function toggleImage4() {
-  const img4 = document.getElementById("toggleDropdown4");
-  const input4 = document.getElementById("namaLokal4");
-
-  // Ubah gambar dan border secara bersamaan
-  if (img4.src.includes("ChevronUp.svg")) {
-    img4.src = "assets/img/ChevronDownMini.svg";
-    input4.style.border = "1px solid var(--Primary-0, #4CAF4F)";
-    input4.style.borderRadius = "8px 8px 0px 0px"; // Opsional: mengubah border-radius
-  } else {
-    img4.src = "assets/img/ChevronUp.svg";
-    input4.style.border = ""; // Mengembalikan border ke default
-    input4.style.borderRadius = ""; // Mengembalikan border-radius ke default
-  }
-}
+// ---------------------- DropDown dataPlot -----------------------------
 
 // dropdown data yang ditampilkan
 
@@ -296,3 +294,109 @@ document.getElementById("pohonBtn").addEventListener("click", function () {
   this.classList.add("active");
   document.getElementById("nekromasBtn").classList.remove("active");
 });
+
+// ----------------API MAP-------------------
+
+// Masukkan token API dari Mapbox
+mapboxgl.accessToken = "pk.eyJ1IjoicGVuZG9zYXRhdWJhdCIsImEiOiJjbTEzZzhiOGYxZDExMmtzZm1pNG01NDlvIn0.c_7si8BDiAd8JOwgfgKMkQ";
+
+navigator.geolocation.getCurrentPosition(successLocation, errorLocation, {
+  enableHighAccuracy: true,
+});
+
+function successLocation(position) {
+  console.log(position);
+  setupMap([position.coords.longitude, position.coords.latitude]);
+
+  // Mengisi field latitude dan longitude secara otomatis
+  document.getElementById("latitude").value = position.coords.latitude;
+  document.getElementById("longitude").value = position.coords.longitude;
+}
+
+function errorLocation() {
+  setupMap([106.8456, -6.2088]); // Default ke Jakarta jika gagal
+}
+
+function setupMap(center) {
+  const map = new mapboxgl.Map({
+    container: "map",
+    style: "mapbox://styles/mapbox/streets-v11",
+    center: center,
+    zoom: 12,
+  });
+
+  // Menambahkan marker pada lokasi
+  new mapboxgl.Marker().setLngLat(center).addTo(map);
+}
+
+// ---------- NO data -----------
+
+// document.addEventListener("DOMContentLoaded", function () {
+//   const noDataMessage = document.getElementById("noData");
+//   const tableContainer = document.getElementById("tableContainer");
+//   const tableBody = document.querySelector(".custom-table-pancang tbody");
+//   const addDataBtn = document.getElementById("addData");
+//   const saveDataBtn = document.querySelector(".btn-success-plot");
+
+//   let dataEntries = []; // Array untuk menyimpan data baru
+
+//   // Fungsi untuk menampilkan tabel jika ada data
+//   function renderTable() {
+//     if (dataEntries.length > 0) {
+//       noDataMessage.style.display = "none"; // Sembunyikan pesan tidak ada data
+//       tableContainer.style.display = "block"; // Tampilkan tabel
+//     } else {
+//       noDataMessage.style.display = "block"; // Tampilkan pesan tidak ada data
+//       tableContainer.style.display = "none"; // Sembunyikan tabel
+//     }
+//   }
+
+//   // Fungsi untuk menambah data ke tabel
+//   function addDataToTable(newData) {
+//     const newRow = document.createElement("tr");
+//     newRow.innerHTML = `
+//       <td>${dataEntries.length}</td>
+//       <td>${newData.keliling} cm</td>
+//       <td>${newData.diameter} cm</td>
+//       <td>${newData.namaLokal}</td>
+//       <td>${newData.namaIlmiah}</td>
+//       <td class="hidden-column">${newData.kerapatan} gr/cm3</td>
+//       <td class="hidden-column">${newData.biomassa} kg</td>
+//       <td class="hidden-column">${newData.karbon} kg</td>
+//       <td class="hidden-column">${newData.co2} kg</td>
+//       <td class="hidden-column aksi-button">
+//         <button class="edit-btn">
+//           <img src="assets/img/PencilSquare.svg" alt="Edit" />
+//         </button>
+//         <button class="delete-btn">
+//           <img src="assets/img/Trash.svg" alt="Delete" />
+//         </button>
+//       </td>
+//     `;
+//     tableBody.appendChild(newRow);
+//   }
+
+//   // Saat tombol Simpan ditekan
+//   saveDataBtn.addEventListener("click", function () {
+//     const newData = {
+//       keliling: document.getElementById("keliling").value,
+//       diameter: document.getElementById("diameter").value,
+//       namaLokal: document.getElementById("namaLokal").value,
+//       namaIlmiah: document.getElementById("namaIlmiah").value,
+//       kerapatan: document.getElementById("kerapatanKayu").value,
+//       biomassa: "xx", // Isi sesuai kalkulasi
+//       karbon: "xx", // Isi sesuai kalkulasi
+//       co2: "xx", // Isi sesuai kalkulasi
+//     };
+
+//     dataEntries.push(newData); // Tambah data baru ke array
+//     addDataToTable(newData); // Tambah data ke tabel
+//     renderTable(); // Render tabel jika ada data
+
+//     // Reset form setelah data disimpan
+//     document.querySelector("form").reset();
+//   });
+
+//   // Inisialisasi pertama kali
+//   renderTable(); // Tampilkan pesan tidak ada data
+// });

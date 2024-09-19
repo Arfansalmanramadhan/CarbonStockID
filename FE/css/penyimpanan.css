@@ -55,7 +55,7 @@ h3 {
   color: var(--pr-color2);
   border-radius: 8px;
   padding: 16px 40px;
-  font-size: 22px;
+  font-size: 21px;
   font-weight: 700;
   line-height: 125%;
   width: 224px;
@@ -138,36 +138,34 @@ h3 {
 
 /* Dropdown Plot Area */
 
+/* Dropdown container styling */
 .dropdown-plot-area {
   position: absolute;
   background-color: white;
-  border: 1px solid #ddd;
+  border: 1px solid #4caf4f; /* Border sesuai permintaan */
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
   width: 158px;
-  height: 235px;
   z-index: 1000;
-  top: 100px;
-  right: 170px;
-  border: var(--pr-color1);
+  display: none;
 }
 
+/* Header styling */
 .header-dropdown {
-  display: flex;
-  height: 47px;
-  padding: 5px 35px;
-  align-items: center;
-  gap: 14px;
-  align-self: stretch;
-  background: var(--Primary-Tint-80, #dbefdc);
-  color: var(--Text-Tint-20, #6c7581);
-  font-family: "DM Sans";
+  list-style-type: none;
+  text-align: center;
+  padding: 14px 0; /* Sesuaikan jarak padding */
+  background-color: #dbefdc; /* Warna hijau yang lebih cerah */
+  color: #6c7581;
+  font-family: "DM Sans", sans-serif;
   font-size: 18px;
-  font-style: normal;
   font-weight: 400;
-  line-height: 125%; /* 22.5px */
-  border-radius: 7px 7px 0 0;
+  line-height: 22.5px; /* Sejajarkan dengan font-size */
+  border-radius: 8px 8px 0 0;
+  margin: 0; /* Hilangkan margin */
 }
+
+/* List styling */
 .dropdown-plot-area ul {
   list-style-type: none;
   padding: 0;
@@ -175,22 +173,25 @@ h3 {
 }
 
 .dropdown-plot-area li {
-  padding: 10px;
+  padding: 14px 0; /* Sesuaikan padding vertikal */
   font-size: 18px;
-  color: var(--Text-Tint-20, #6c7581);
-  /* Desktop/Label/Regular */
-  font-family: "DM Sans";
-  font-size: 18px;
-  font-style: normal;
+  color: #6c7581;
+  font-family: "DM Sans", sans-serif;
   font-weight: 400;
-  line-height: 125%; /* 22.5px */
+  line-height: 22.5px;
+  text-align: center; /* Align text to center */
   cursor: pointer;
 }
 
 .dropdown-plot-area li:hover {
-  background: var(--Primary-Tint-80, #dbefdc);
-  color: var(--pr-color1); /* Hijau */
-  border-radius: 4px;
+  background-color: #dbefdc; /* Background hover */
+  color: #4caf4f; /* Warna hijau sesuai permintaan */
+}
+
+.akhir:hover {
+  background-color: #dbefdc; /* Background hover */
+  color: #4caf4f; /* Warna hijau sesuai permintaan */
+  border-radius: 0 0 8px 8px;
 }
 
 /* Dropdown Plot Area */
@@ -537,28 +538,48 @@ h3 {
 
 .tampilkan {
   display: inline-flex;
-  align-items: center;
+  align-items: flex-start;
   font-family: "DM Sans", sans-serif;
-  font-size: 14px;
+  font-size: 16px;
   color: #6c7581;
-  position: relative; /* Menambahkan position: relative */
+  position: relative;
 }
 
 .tampilkan label {
   margin-right: 5px;
 }
 
+.number-selection {
+  display: inline-block;
+  padding-bottom: 2px;
+  width: 78.919px;
+  text-align: center; /* Tetap di tengah secara default */
+  position: relative;
+  margin-left: -10px; /* Geser sedikit ke kiri dengan margin negatif */
+}
+
+.number-selection::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 2px;
+  background-color: var(--pr-color1);
+}
+
 .tampilkan img {
   width: 12px;
   height: 12px;
   margin-left: 5px;
+  margin-right: 20px; /* Memberikan jarak yang lebih besar agar tidak tumpang tindih dengan "data" */
   cursor: pointer;
 }
 
 .tampilkan ul {
-  display: none; /* Mulai dalam keadaan tersembunyi */
+  display: none;
   position: absolute;
-  top: 100%; /* Agar dropdown muncul di bawah container */
+  top: 100%; /* Dropdown akan muncul tepat di bawah elemen .number-selection */
   left: 0;
   list-style: none;
   margin: 0;
@@ -567,7 +588,8 @@ h3 {
   border: 1px solid #e5e5e5;
   border-radius: 5px;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-  z-index: 999; /* Tambahkan z-index untuk memastikan dropdown muncul di atas elemen lain */
+  z-index: 999;
+  width: 100%; /* Membuat dropdown selebar elemen induk */
 }
 
 .tampilkan ul li {
@@ -581,15 +603,14 @@ h3 {
 }
 
 .tampilkan span {
-  margin-left: 5px;
   font-size: 14px;
-  text-decoration: underline;
-  text-underline-offset: 2px;
   color: #6c7581;
+  text-decoration: none;
+  margin-left: 5px; /* Menyesuaikan jarak antara teks "data" dan gambar */
 }
 
 .tampilkan.active ul {
-  display: block; /* Dropdown akan muncul ketika class active ditambahkan */
+  display: block;
 }
 
 .h2-pancang-container {
@@ -792,45 +813,19 @@ h3 {
   background-color: #f1f1f1;
 }
 
-.custom-table td .view-btn,
-.custom-table td .edit-btn,
-.custom-table td .delete-btn {
-  margin-right: 8px;
-  border: none;
-  padding: 5px;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.view-btn {
-  background-color: #4caf50;
-  color: white;
-}
-
-.edit-btn {
-  background-color: #03a9f4;
-  color: white;
-}
-
-.delete-btn {
-  background-color: #f44336;
-  color: white;
-}
-
 .table-footer {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-top: 20px;
   font-size: 14px;
-  color: #666;
 }
 
 .table-footer span {
   color: var(--Text-Tint-20, #6c7581);
   /* Desktop/Label/Regular */
   font-family: "DM Sans";
-  font-size: 18px;
+  font-size: 16px;
   font-style: normal;
   font-weight: 400;
   line-height: 125%; /* 22.5px */
@@ -852,7 +847,7 @@ h3 {
   color: var(--Text-Tint-20, #6c7581);
   /* Desktop/Label/Regular */
   font-family: "DM Sans";
-  font-size: 18px;
+  font-size: 16px;
   font-style: normal;
   font-weight: 400;
   line-height: 125%; /* 22.5px */
@@ -890,7 +885,7 @@ h3 {
   width: 151px;
   height: 55px;
   display: flex;
-  padding: 16px 40px;
+  padding: 16px 42px;
   align-items: flex-start;
   border-radius: 8px;
   background: var(--pr-color2);
@@ -913,12 +908,32 @@ h3 {
   width: 593px;
   height: 59px;
   display: flex;
-  padding: 16px 40px;
   align-items: center;
   align-self: stretch;
   border-radius: 8px;
   border: 1px solid var(--Neutral-4, #89939e);
   background: var(--White-0, #fff);
+  color: var(--Text-Shade-40, #2b313a);
+  font-family: "DM Sans";
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%; /* 27px */
+  letter-spacing: 0.36px;
+  padding-right: 40px;
+  border-radius: 8px; /* Default border-radius */
+  transition: border-radius 0.3s; /* Animasi untuk transisi border-radius */
+}
+
+.form-control-plot-b-non {
+  width: 593px;
+  height: 59px;
+  display: flex;
+  align-items: center;
+  align-self: stretch;
+  border-radius: 8px;
+  border: 1px solid var(--Neutral-4, #89939e);
+  background: var(--Neutral-6, #f0f1f2);
   color: var(--Text-Shade-40, #2b313a);
   font-family: "DM Sans";
   font-size: 18px;
@@ -1061,43 +1076,74 @@ h3 {
   border: none;
 }
 
-/* Percobaan */
+/* --------------------------------Table Pancang ---------------------------- */
 
-.table-wrapper {
-  overflow-x: auto;
-  white-space: nowrap;
+.custom-table-pancang {
   width: 100%;
-}
-
-.custom-table-hasil {
   border-collapse: collapse;
-  width: 100%;
-  table-layout: auto;
+  background-color: white;
+  overflow: hidden;
+  text-align: center !important;
 }
 
-.custom-table-hasil th,
-.custom-table-hasil td {
-  border: 1px solid #dddddd;
-  padding: 8px;
+.custom-table-pancang th,
+.custom-table-pancang td {
+  text-align: center !important;
+  padding: 15px;
+  border-bottom: 1px solid #4caf4f;
+  text-align: left;
+  font-family: "DM Sans";
+  font-size: 16px;
+  color: #4caf4f;
+}
+
+.custom-table-pancang th {
+  background-color: #4caf4f;
+  color: white;
+}
+
+.custom-table-pancang thead {
+  text-align: center !important;
+}
+
+.custom-table-pancang tbody td {
+  padding: 12px;
+  font-weight: 700;
+  color: #6c7581; /* Warna teks */
+  font-size: 16px;
   text-align: left;
 }
 
-.custom-table-hasil th {
-  background-color: #4caf50;
+/* .custom-table-pancang tbody tr {
+  border: 1px solid #4caf4f; 
+} */
+
+.custom-table-pancang tfoot td {
+  background-color: #4caf4f; /* Warna hijau untuk footer */
   color: white;
+  font-weight: bold;
+  padding: 12px;
+  text-align: left;
 }
 
 .hidden-column {
   display: none;
 }
 
+.table-wrapper {
+  overflow-x: auto;
+  white-space: nowrap;
+  width: 100%;
+  padding-bottom: 20px; /* Tambahkan padding untuk jarak di bawah */
+}
+
 .table-wrapper::-webkit-scrollbar {
-  height: 10px;
+  height: 8px;
 }
 
 .table-wrapper::-webkit-scrollbar-thumb {
-  background-color: #4caf50;
-  border-radius: 10px;
+  background-color: #6c7581;
+  border-radius: 8px;
 }
 
 /* Media query to show the hidden columns on scroll */
@@ -1109,4 +1155,160 @@ h3 {
   .hidden-column {
     display: table-cell;
   }
+}
+
+.edit-btn {
+  display: flex;
+  padding: 10px;
+  align-items: flex-start;
+  gap: 10px;
+  border-radius: 8px;
+  background: var(--Info-0, #0dcaf0);
+  border: none;
+  margin-right: 8px;
+}
+
+.delete-btn {
+  display: flex;
+  padding: 10px;
+  align-items: flex-start;
+  gap: 10px;
+  border-radius: 8px;
+  background: var(--Error-0, #dc3545);
+  border: none;
+}
+
+.aksi-button {
+  display: flex !important;
+  align-items: center; /* Ratakan vertikal */
+  justify-content: flex-start; /* Biarkan tombol bersebelahan di sisi kiri */
+  padding: 0; /* Pastikan padding tidak menambah ketinggian */
+  border: none; /* Jika ada garis bawah yang tidak diinginkan */
+}
+
+/* --------------------------------Table Pancang ---------------------------- */
+
+/* --------------------------------Bagian Hasil ---------------------------- */
+
+.table-header-hasil {
+  display: flex;
+  justify-content: flex-end; /* Align items to the left */
+  margin-bottom: 20px; /* Optional: add some spacing under the button */
+}
+.btn-unduhPDF {
+  display: flex;
+  padding: 16px 40px;
+  justify-content: flex-end;
+  align-items: center;
+  border-radius: 8px;
+  background: var(--Primary-0, #4caf4f);
+  color: var(--Warning, #fff);
+  font-family: "DM Sans";
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 125%; /* 30px */
+}
+
+.plot-info {
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+  background-color: #edf7ed;
+  border-radius: 8px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.plot-info p {
+  font-family: "DM Sans";
+  font-size: 16px;
+  color: #6c7581;
+  font-weight: 700;
+}
+
+.custom-table-hasil {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: white;
+  border-radius: 8px;
+  overflow: hidden;
+  text-align: center !important;
+}
+
+.custom-table-hasil th,
+.custom-table-hasil td {
+  text-align: center !important;
+  padding: 15px;
+  border-bottom: 2px solid #4caf4f;
+  text-align: left;
+  font-family: "DM Sans";
+  font-size: 16px;
+  color: #4caf4f;
+}
+
+.custom-table-hasil th {
+  background-color: #4caf4f;
+  color: white;
+}
+
+.custom-table-hasil thead {
+  text-align: center !important;
+}
+
+.custom-table-hasil tbody td {
+  border-top: 1px solid #4caf4f; /* Border hijau di atas */
+  border-bottom: 2px solid #4caf4f; /* Border hijau di bawah */
+  padding: 12px;
+  font-weight: 700;
+  color: #6c7581; /* Warna teks */
+  font-size: 16px;
+  text-align: left;
+}
+
+.custom-table-hasil tbody tr {
+  border: 1px solid #4caf4f; /* Border hijau di baris */
+}
+
+.custom-table-hasil tfoot td {
+  background-color: #4caf4f; /* Warna hijau untuk footer */
+  color: white;
+  font-weight: bold;
+  padding: 12px;
+  text-align: left;
+}
+
+/* --------------------------------Bagian Hasil ---------------------------- */
+
+#map {
+  height: 400px;
+  width: 100%;
+  margin-bottom: 10px;
+  border-radius: 8px;
+}
+
+.frame-no-data {
+  display: flex;
+  width: 996px;
+  height: 513px;
+  padding: 10px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center !important;
+  gap: 10px;
+  background: var(--pr-color2);
+}
+
+.frame-no-data p {
+  color: var(--Text-Tint-20, #6c7581);
+  text-align: center !important;
+  font-family: "DM Sans";
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%; /* 27px */
+  letter-spacing: 0.36px;
+  width: 596px;
+  height: 54px;
+  flex-shrink: 0;
 }

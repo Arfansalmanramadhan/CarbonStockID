@@ -296,3 +296,101 @@ document.getElementById("pohonBtn").addEventListener("click", function () {
   this.classList.add("active");
   document.getElementById("nekromasBtn").classList.remove("active");
 });
+
+// ----------------API MAP-------------------
+
+// Masukkan token API dari Mapbox
+mapboxgl.accessToken = "pk.eyJ1IjoicGVuZG9zYXRhdWJhdCIsImEiOiJjbTEzZzhiOGYxZDExMmtzZm1pNG01NDlvIn0.c_7si8BDiAd8JOwgfgKMkQ";
+
+// Inisialisasi peta
+var map = new mapboxgl.Map({
+  container: "map", // ID elemen tempat peta akan ditampilkan
+  style: "mapbox://styles/mapbox/streets-v11", // Gaya peta
+  center: [107.642609, -6.86617], // Titik awal peta (longitude, latitude)
+  zoom: 12, // Zoom level awal
+});
+
+// Menambahkan kontrol navigasi di peta
+map.addControl(new mapboxgl.NavigationControl());
+
+// Event listener untuk mengambil latitude dan longitude saat pengguna mengklik peta
+map.on("click", function (e) {
+  var latitude = e.lngLat.lat;
+  var longitude = e.lngLat.lng;
+
+  // Menampilkan nilai latitude dan longitude di input field
+  document.getElementById("latitude").value = latitude;
+  document.getElementById("longitude").value = longitude;
+});
+
+// ---------- NO data -----------
+
+document.addEventListener("DOMContentLoaded", function () {
+  const noDataMessage = document.getElementById("noData");
+  const tableContainer = document.getElementById("tableContainer");
+  const tableBody = document.querySelector(".custom-table-pancang tbody");
+  const addDataBtn = document.getElementById("addData");
+  const saveDataBtn = document.querySelector(".btn-success-plot");
+
+  let dataEntries = []; // Array untuk menyimpan data baru
+
+  // Fungsi untuk menampilkan tabel jika ada data
+  function renderTable() {
+    if (dataEntries.length > 0) {
+      noDataMessage.style.display = "none"; // Sembunyikan pesan tidak ada data
+      tableContainer.style.display = "block"; // Tampilkan tabel
+    } else {
+      noDataMessage.style.display = "block"; // Tampilkan pesan tidak ada data
+      tableContainer.style.display = "none"; // Sembunyikan tabel
+    }
+  }
+
+  // Fungsi untuk menambah data ke tabel
+  function addDataToTable(newData) {
+    const newRow = document.createElement("tr");
+    newRow.innerHTML = `
+      <td>${dataEntries.length}</td>
+      <td>${newData.keliling} cm</td>
+      <td>${newData.diameter} cm</td>
+      <td>${newData.namaLokal}</td>
+      <td>${newData.namaIlmiah}</td>
+      <td class="hidden-column">${newData.kerapatan} gr/cm3</td>
+      <td class="hidden-column">${newData.biomassa} kg</td>
+      <td class="hidden-column">${newData.karbon} kg</td>
+      <td class="hidden-column">${newData.co2} kg</td>
+      <td class="hidden-column aksi-button">
+        <button class="edit-btn">
+          <img src="assets/img/PencilSquare.svg" alt="Edit" />
+        </button>
+        <button class="delete-btn">
+          <img src="assets/img/Trash.svg" alt="Delete" />
+        </button>
+      </td>
+    `;
+    tableBody.appendChild(newRow);
+  }
+
+  // Saat tombol Simpan ditekan
+  saveDataBtn.addEventListener("click", function () {
+    const newData = {
+      keliling: document.getElementById("keliling").value,
+      diameter: document.getElementById("diameter").value,
+      namaLokal: document.getElementById("namaLokal").value,
+      namaIlmiah: document.getElementById("namaIlmiah").value,
+      kerapatan: document.getElementById("kerapatanKayu").value,
+      biomassa: "xx", // Isi sesuai kalkulasi
+      karbon: "xx", // Isi sesuai kalkulasi
+      co2: "xx", // Isi sesuai kalkulasi
+    };
+
+    dataEntries.push(newData); // Tambah data baru ke array
+    addDataToTable(newData); // Tambah data ke tabel
+    renderTable(); // Render tabel jika ada data
+
+    // Reset form setelah data disimpan
+    document.querySelector("form").reset();
+  });
+
+  // Inisialisasi pertama kali
+  renderTable(); // Tampilkan pesan tidak ada data
+});

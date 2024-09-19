@@ -155,7 +155,12 @@ h3 {
   line-height: 125%; /* 30px */
 }
 
+.foto-image {
+  border-radius: 8px;
+}
+
 .text-muted {
+  text-align: left;
   color: var(--Text-Tint-20, #6c7581);
   font-family: "DM Sans";
   font-size: 16px;
