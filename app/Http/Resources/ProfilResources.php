@@ -18,7 +18,8 @@ class ProfilResources extends JsonResource
             'id' => $this->id,
             'nama_lengkap' => $this->nama_lengkap,
             'registrasi_id' => $this->whenLoaded("user"),
-            'no_hp' => $this->no_hp
+            'no_hp' => $this->no_hp,
+            'image' => $this->image
         ];
     }
 }

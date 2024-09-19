@@ -13,7 +13,8 @@ class Profil extends Model
     protected $fillable = [
         'nama_lengkap',
         'registrasi_id',
-        'no_hp'
+        'no_hp',
+        'image'
     ];
 
     /**
