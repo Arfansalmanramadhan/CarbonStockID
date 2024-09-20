@@ -1,34 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
-
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&family=Inter:wght@400;700&display=swap" rel="stylesheet" />
-
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="css/style.css" />
-
-    <!-- Responsive Style -->
-    <link rel="stylesheet" href="css/responsive.css" />
-
-    <!-- Logo Tittle -->
-    <link rel="icon" href="assets/img/logoCarbonStockID-LightMode.png" type="image/x-icon" />
-    <title>CarbonStockID</title>
-  </head>
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+    
+        <!-- Bootstrap CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+    
+        <!-- Google Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&family=Inter:wght@400;700&display=swap" rel="stylesheet" />
+    
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="{{ asset('/css/style.css') }}" />
+    
+        <!-- Logo Title -->
+        <link rel="icon" href="{{ asset('/images/logoCarbonStockID-LightMode.png') }}" type="image/x-icon" />
+        <title>CarbonStockID</title>
+      </head>
   <body>
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg bg-transparent w-100">
       <div class="container">
         <a class="navbar-brand d-flex align-items-center" href="#">
-          <img src="assets/img/logoCarbonStockID-DarkMode.png" alt="Logo" width="30" class="d-inline-block align-middle me-2" />
+          <img src="{{ asset('/images/logoCarbonStockID-DarkMode.png') }}" alt="Logo" width="30" class="d-inline-block align-middle me-2" />
           <span>CarbonStockID</span>
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -47,7 +44,7 @@
             </li>
           </ul>
           <div>
-            <a href="login.html" class="btn btn-light btn-masuk" type="button">Masuk</a>
+            <a href="login" class="btn btn-light btn-masuk" type="button">Masuk</a>
             <a href="register.html" class="btn btn-success btn-daftar" type="button">Daftar</a>
           </div>
         </div>
@@ -64,7 +61,7 @@
             <a href="login.html" class="btn btn-success button-hero">Mulai sekarang</a>
           </div>
           <div class="col-md-5">
-            <img src="assets/img/imagehero.png" alt="Hero Image" class="position-absolute end-0 bottom-0 img-hero" />
+            <img src="{{ asset('/images/imagehero.png') }}" alt="Hero Image" class="position-absolute end-0 bottom-0 img-hero" />
           </div>
         </div>
       </div>
@@ -125,7 +122,7 @@
               <div class="pertanyaan-header">
                 <p>Apa itu CarbonStockID?</p>
                 <i class="fas fa-chevron-down"></i>
-                <img src="assets/img/ChevronDown.png" alt="" />
+                <img src="{{ asset('/images/ChevronDown.png') }}" alt="" />
               </div>
               <div class="pertanyaan-body">
                 <span>Aplikasi inovatif yang dirancang untuk membantu pengguna mengukur, mengelola, dan memprediksi cadangan karbon.</span>
@@ -135,7 +132,7 @@
               <div class="pertanyaan-header">
                 <p>Siapa yang bisa menggunakan?</p>
                 <i class="fas fa-chevron-down"></i>
-                <img src="assets/img/ChevronDown.png" alt="" />
+                <img src="{{ asset('/images/ChevronDown.png') }}" alt="" />
               </div>
               <div class="pertanyaan-body">
                 <span>Aplikasi inovatif yang dirancang untuk membantu pengguna mengukur, mengelola, dan memprediksi cadangan karbon.</span>
@@ -145,7 +142,7 @@
               <div class="pertanyaan-header">
                 <p>Bagaimana cara kerjanya?</p>
                 <i class="fas fa-chevron-down"></i>
-                <img src="assets/img/ChevronDown.png" alt="" />
+                <img src="{{ asset('/images/ChevronDown.png') }}" alt="" />
               </div>
               <div class="pertanyaan-body">
                 <span>Aplikasi inovatif yang dirancang untuk membantu pengguna mengukur, mengelola, dan memprediksi cadangan karbon.</span>
@@ -155,7 +152,7 @@
               <div class="pertanyaan-header">
                 <p>Bagaimana cara memulainya?</p>
                 <i class="fas fa-chevron-down"></i>
-                <img src="assets/img/ChevronDown.png" alt="" />
+                <img src="{{ asset('/images/ChevronDown.png') }}" alt="" />
               </div>
               <div class="pertanyaan-body">
                 <span>Aplikasi inovatif yang dirancang untuk membantu pengguna mengukur, mengelola, dan memprediksi cadangan karbon.</span>
@@ -167,7 +164,7 @@
               <div class="pertanyaan-header">
                 <p>Apakah data yang saya masukkan aman?</p>
                 <i class="fas fa-chevron-down"></i>
-                <img src="assets/img/ChevronDown.png" alt="" />
+                <img src="{{ asset('/images/ChevronDown.png') }}" alt="" />
               </div>
               <div class="pertanyaan-body">
                 <span>Aplikasi inovatif yang dirancang untuk membantu pengguna mengukur, mengelola, dan memprediksi cadangan karbon.</span>
@@ -177,7 +174,7 @@
               <div class="pertanyaan-header">
                 <p>Apakah bisa mengunduh hasil kalkulasi?</p>
                 <i class="fas fa-chevron-down"></i>
-                <img src="assets/img/ChevronDown.png" alt="" />
+                <img src="{{ asset('/images/ChevronDown.png') }}" alt="" />
               </div>
               <div class="pertanyaan-body">
                 <span>Aplikasi inovatif yang dirancang untuk membantu pengguna mengukur, mengelola, dan memprediksi cadangan karbon.</span>
@@ -187,7 +184,7 @@
               <div class="pertanyaan-header">
                 <p>Apakah pengukuran sesuai standar SNI?</p>
                 <i class="fas fa-chevron-down"></i>
-                <img src="assets/img/ChevronDown.png" alt="" />
+                <img src="{{ asset('/images/ChevronDown.png') }}" alt="" />
               </div>
               <div class="pertanyaan-body">
                 <span>Aplikasi inovatif yang dirancang untuk membantu pengguna mengukur, mengelola, dan memprediksi cadangan karbon.</span>
@@ -197,7 +194,7 @@
               <div class="pertanyaan-header">
                 <p>Bagaimana jika saya mengalami masalah?</p>
                 <i class="fas fa-chevron-down"></i>
-                <img src="assets/img/ChevronDown.png" alt="" />
+                <img src="{{ asset('/images/ChevronDown.png') }}" alt="" />
               </div>
               <div class="pertanyaan-body">
                 <span>Aplikasi inovatif yang dirancang untuk membantu pengguna mengukur, mengelola, dan memprediksi cadangan karbon.</span>
@@ -235,22 +232,22 @@
           <div class="row text-white py-5">
             <div class="col-md-4">
               <div class="d-flex align-items-center mb-3">
-                <img src="assets/img/logoCarbonStockID-LightMode.png" alt="Logo" class="me-2" />
+                <img src="logoCarbonStockID-LightMode.png {{ asset('/images/logoCarbonStockID-LightMode.png') }}" alt="Logo" class="me-2" />
                 <span>CarbonStockID</span>
               </div>
               <p>Hak Cipta © 2024 CarbonStockID. Semua hak dilindungi</p>
               <div class="social-links d-flex">
                 <div class="circle-icon position-relative me-2">
-                  <a href="https://instagram.com"><img src="assets/img/Instagram.png" alt="Instagram" class="position-absolute top-50 start-50 translate-middle" /></a>
+                  <a href="https://instagram.com"><img src="{{ asset('/images/Instagram.png') }}" alt="Instagram" class="position-absolute top-50 start-50 translate-middle" /></a>
                 </div>
                 <div class="circle-icon position-relative me-2">
-                  <a href="https://google.com"><img src="assets/img/Google.png" alt="Google" class="position-absolute top-50 start-50 translate-middle" /></a>
+                  <a href="https://google.com"><img src="{{ asset('/images/Google.png') }}" alt="Google" class="position-absolute top-50 start-50 translate-middle" /></a>
                 </div>
                 <div class="circle-icon position-relative me-2">
-                  <a href="https://linkedin.com"><img src="assets/img/Linkedin.png" alt="LinkedIn" class="position-absolute top-50 start-50 translate-middle" /></a>
+                  <a href="https://linkedin.com"><img src="{{ asset('/images/Linkedin.png') }}" alt="LinkedIn" class="position-absolute top-50 start-50 translate-middle" /></a>
                 </div>
                 <div class="circle-icon position-relative">
-                  <a href="https://youtube.com"><img src="assets/img/Youtube.png" alt="YouTube" class="position-absolute top-50 start-50 translate-middle" /></a>
+                  <a href="https://youtube.com"><img src="{{ asset('/images/Youtube.png') }}" alt="YouTube" class="position-absolute top-50 start-50 translate-middle" /></a>
                 </div>
               </div>
             </div>
@@ -267,22 +264,22 @@
               <h5>Kontak</h5>
               <ul class="list-kontak">
                 <div class="d-flex align-items-center">
-                  <img src="assets/img/TelephoneFill.png" alt="Logo" class="me-2" />
+                  <img src="{{ asset('/images/TelephoneFill.png') }}" alt="Logo" class="me-2" />
                   <li><i class="fa fa-phone"></i> +62 813-5800-8183</li>
                 </div>
                 <div class="d-flex align-items-center">
-                  <img src="assets/img/EnvelopeFill.png" alt="Logo" class="me-2" />
+                  <img src="{{ asset('/images/EnvelopeFill.png') }}" alt="Logo" class="me-2" />
                   <li><i class="fa fa-envelope"></i> carbonstockid@gmail.com</li>
                 </div>
                 <div class="d-flex align-items-center">
-                  <img src="assets/img/GeoAltFill.png" alt="Logo" class="me-2" />
+                  <img src="{{ asset('/images/GeoAltFill.png') }}" alt="Logo" class="me-2" />
                   <li><i class="fa fa-map-marker"></i> Telkom University, Kabupaten Bandung, Jawa Barat 40257</li>
                 </div>
               </ul>
             </div>
             <div class="col-md-1">
               <div class="circle-scroll position-relative">
-                <a href="#"><img src="assets/img/ChevronUp.png" alt="chevronup" class="position-absolute top-50 start-50 translate-middle" /></a>
+                <a href="#"><img src="{{ asset('/images/ChevronUp.png') }}" alt="chevronup" class="position-absolute top-50 start-50 translate-middle" /></a>
               </div>
             </div>
           </div>
@@ -290,7 +287,7 @@
       </div>
     </footer>
 
-    <script src="js/script.js"></script>
+    <script src="{{ asset('/js/script.js') }}"></script>
 
     <!-- Bootstrap JS Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>

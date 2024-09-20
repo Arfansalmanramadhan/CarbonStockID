@@ -14,7 +14,7 @@
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&family=Inter:wght@400;700&display=swap" rel="stylesheet" />
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="css/styleDashboard.css" />
+    <link rel="stylesheet" href="{{ asset('css/styleDashboard.css') }}" />
 
     <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -24,7 +24,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
 
     <!-- Favicon -->
-    <link rel="icon" href="assets/img/logoCarbonStockID-LightMode.png" type="image/x-icon" />
+    <link rel="icon" href="{{ asset('/images/logoCarbonStockID-LightMode.png') }}" type="image/x-icon" />
     <title>CarbonStockID</title>
   </head>
   <body>
@@ -33,23 +33,23 @@
       <div class="container d-flex justify-content-between align-items-center">
         <div class="d-flex align-items-center">
           <button class="burger-button">
-            <img src="assets/img/burgerIcon.png" alt="Burger Menu" class="burger-icon" />
+            <img src="{{ asset('/images/burgerIcon.png') }}" alt="Burger Menu" class="burger-icon" />
           </button>
           <a class="navbar-brand d-flex align-items-center ms-3" href="#">
-            <img src="assets/img/logoCarbonStockID-DarkMode.png" alt="Logo" width="30" class="d-inline-block align-middle me-2" />
+            <img src="{{ asset('/images/logoCarbonStockID-DarkMode.png') }}" alt="Logo" width="30" class="d-inline-block align-middle me-2" />
             <span>CarbonStockID</span>
           </a>
         </div>
         <div class="d-flex align-items-center">
           <form class="d-flex me-2 position-relative" role="search">
             <input class="form-control search-input" type="search" placeholder="Cari..." aria-label="Search" />
-            <img src="assets/img/iconSearch.png" alt="Search Icon" class="search-icon" />
+            <img src="{{ asset('/images/iconSearch.png') }}" alt="Search Icon" class="search-icon" />
           </form>
           <a href="tambahData.html" class="btn btn-light btn-tambahData">Tambah data</a>
-          <img src="assets/img/userIcon.png" alt="User Avatar" id="userIcon" class="ms-3 user-avatar" />
+          <img src="{{ asset('/images/userIcon.png') }}" alt="User Avatar" id="userIcon" class="ms-3 user-avatar" />
           <div class="user-profile-dropdown" id="userProfileDropdown" style="display: none">
             <div class="user-info">
-              <img src="assets/img/userIcon.png" alt="User Avatar" class="user-avatar" />
+              <img src="{{ asset('/images/userIcon.png') }}" alt="User Avatar" class="user-avatar" />
               <div class="user-details">
                 <h4>Chistoper Govert</h4>
                 <p>chistoper@gmail.com</p>
@@ -58,11 +58,11 @@
             <hr />
             <div class="user-options">
               <div class="option">
-                <img class="me-1" src="assets/img/PersonFill.svg" alt="" />
+                <img class="me-1" src="{{ asset('/images/PersonFill.svg') }}" alt="" />
                 <a href="profile.html"><span>Profil Saya</span></a>
               </div>
               <div class="option">
-                <img class="ms-1 me-1" src="assets/img/majesticons_logout.svg" alt="" />
+                <img class="ms-1 me-1" src="{{ asset('/images/majesticons_logout.svg') }}" alt="" />
                 <a href="index.html"><span>Keluar</span></a>
               </div>
             </div>
@@ -77,31 +77,31 @@
         <ul class="nav flex-column">
           <li class="nav-item">
             <a class="d-flex align-items-center ms-3 nav-link active" href="#beranda">
-              <img src="assets/img/iconamoon_home-fill.svg" alt="Home Icon" />
+              <img src="{{ asset('/images/iconamoon_home-fill.svg') }}" alt="Home Icon" />
               <span class="ms-2">Beranda</span>
             </a>
           </li>
           <li class="nav-item">
             <a class="d-flex align-items-center ms-3 nav-link" href="#panduan">
-              <img src="assets/img/FileEarmarkPdfFill.svg" alt="Guide Icon" />
+              <img src="{{ asset('/images/FileEarmarkPdfFill.svg') }}" alt="Guide Icon" />
               <span class="ms-2">Panduan</span>
             </a>
           </li>
           <li class="nav-item">
             <a class="d-flex align-items-center ms-3 nav-link" href="#data-plot">
-              <img src="assets/img/FolderFill.svg" alt="Data Plot Icon" />
+              <img src="{{ asset('/images/FolderFill.svg') }}" alt="Data Plot Icon" />
               <span class="ms-2">Data Plot</span>
             </a>
           </li>
           <li class="nav-item">
             <a class="d-flex align-items-center ms-3 nav-link" href="#prediksi">
-              <img src="assets/img/prediksiLogo.svg" alt="Guide Icon" />
+              <img src="{{ asset('/images/prediksiLogo.svg') }}" alt="Guide Icon" />
               <span class="ms-2">Prediksi</span>
             </a>
           </li>
           <li class="nav-item">
             <a class="d-flex align-items-center ms-3 nav-link" href="#sampah">
-              <img src="assets/img/TrashFill.svg" alt="Trash Icon" />
+              <img src="{{ asset('/images/TrashFill.svg') }}" alt="Trash Icon" />
               <span class="ms-2">Sampah</span>
             </a>
           </li>
@@ -147,7 +147,7 @@
         </div>
         <div id="panduan-content" class="page-content">
           <div class="image-container mt-4">
-            <img src="assets/img/dataPlot-Image.svg" alt="" class="mb-4 img-normal" />
+            <img src="{{ asset('/images/dataPlot-Image.svg') }}" alt="" class="mb-4 img-normal" />
             <div class="text-overlay">
               <p class="large-text">Panduan Perhitungan Cadangan Karbon</p>
             </div>
@@ -159,7 +159,7 @@
         <!-- Content for Data Plot (initially hidden) -->
         <div id="data-plot-content" class="page-content">
           <div class="image-container mt-4">
-            <img src="assets/img/dataPlot-Image.svg" alt="" class="mb-4 img-normal" />
+            <img src="{{ asset('/images/dataPlot-Image.svg') }}" alt="" class="mb-4 img-normal" />
             <div class="text-overlay">
               <p class="small-text">Data Plot</p>
               <p class="large-text">Data Plot Area</p>
@@ -187,15 +187,15 @@
                 <tr>
                   <td>00001</td>
                   <td>Mekarjaya, Kec. Banjaran, Kabupaten Bandung</td>
-                  <td class="aksi-button">
+                  <td class="aksi-dataplot">
                     <button class="view-btn">
-                      <img src="assets/img/PencilSquare.svg" alt="" />
+                      <img src="assets/img/Eye.svg {{ asset('/images/Eye.svg') }}" alt="" />
                     </button>
                     <button class="edit-btn">
-                      <img src="assets/img/PencilSquare.svg" alt="" />
+                      <img src="{{ asset('/images/PencilSquare.svg') }}" alt="" />
                     </button>
                     <button class="delete-btn">
-                      <img src="assets/img/Trash.svg" alt="" />
+                      <img src="{{ asset('/images/Trash.svg') }}" alt="" />
                     </button>
 
                     <!-- Modal -->
@@ -287,13 +287,13 @@
         </div>
         <div id="prediksi-content" class="page-content">
           <div class="image-container mt-4">
-            <img src="assets/img/dataPlot-Image.svg" alt="" class="mb-4 img-normal" />
+            <img src="{{ asset('/images/dataPlot-Image.svg') }}" alt="" class="mb-4 img-normal" />
             <p class="large-text text-overlay">Prediksi Cadangan Karbon</p>
           </div>
         </div>
         <div id="sampah-content" class="page-content">
           <div class="image-container mt-4">
-            <img src="assets/img/dataPlot-Image.svg" alt="" class="mb-4 img-normal" />
+            <img src="{{ asset('/images/dataPlot-Image.svg') }}" alt="" class="mb-4 img-normal" />
             <div class="text-overlay">
               <p class="large-text">Sampah</p>
             </div>
@@ -303,7 +303,7 @@
               <div class="tampilkan-data">
                 <label for="show-entries">Tampilkan</label>
                 <span class="number-selection-data">5</span>
-                <img src="assets/img/downbaru.svg" alt="" class="pancang" id="toggleDropdownBanyakData" />
+                <img src="{{ asset('/images/downbaru.svg') }}" alt="" class="pancang" id="toggleDropdownBanyakData" />
                 <ul class="dropdownJumlahData" id="dropdownListDataPlot">
                   <li>5</li>
                   <li>10</li>
@@ -313,7 +313,7 @@
               </div>
               <div class="tampilkan">
                 <span class="number-selection">Hapus Semua</span>
-                <img src="assets/img/CaretDownFill.svg" alt="" class="pancang" id="toggleDropdownBanyakData" />
+                <img src="{{ asset('/images/CaretDownFill.svg') }}" alt="" class="pancang" id="toggleDropdownBanyakData" />
                 <ul class="dropdownData" id="dropdownListDataPlot">
                   <li>Hapus Semua</li>
                   <li>Pulihkan Semua</li>
@@ -332,10 +332,10 @@
                   <td>Mekarjaya, Kec. Banjaran, Kabupaten Bandung</td>
                   <td class="aksi-button">
                     <button class="restrore-btn-sampah">
-                      <img src="assets/img/restoreIcon.svg" alt="" />
+                      <img src="{{ asset('/images/restoreIcon.svg') }}" alt="" />
                     </button>
                     <button class="delete-btn-sampah">
-                      <img src="assets/img/sampahIconItem.svg" alt="" />
+                      <img src="{{ asset('/images/sampahIconItem.svg') }}" alt="" />
                     </button>
                     <input class="form-check-sampah" type="checkbox" id="rememberMe" />
                   </td>
@@ -345,10 +345,10 @@
                   <td>Mekarjaya, Kec. Banjaran, Kabupaten Bandung</td>
                   <td class="aksi-button">
                     <button class="restrore-btn-sampah">
-                      <img src="assets/img/restoreIcon.svg" alt="" />
+                      <img src="{{ asset('/images/restoreIcon.svg') }}" alt="" />
                     </button>
                     <button class="delete-btn-sampah">
-                      <img src="assets/img/sampahIconItem.svg" alt="" />
+                      <img src="{{ asset('/images/sampahIconItem.svg') }}" alt="" />
                     </button>
                     <input class="form-check-sampah" type="checkbox" id="rememberMe" />
                   </td>
@@ -358,10 +358,10 @@
                   <td>Mekarjaya, Kec. Banjaran, Kabupaten Bandung</td>
                   <td class="aksi-button">
                     <button class="restrore-btn-sampah">
-                      <img src="assets/img/restoreIcon.svg" alt="" />
+                      <img src="{{ asset('/images/restoreIcon.svg') }}" alt="" />
                     </button>
                     <button class="delete-btn-sampah">
-                      <img src="assets/img/sampahIconItem.svg" alt="" />
+                      <img src="{{ asset('/images/sampahIconItem.svg') }}" alt="" />
                     </button>
                     <input class="form-check-sampah" type="checkbox" id="rememberMe" />
                   </td>
@@ -371,10 +371,10 @@
                   <td>Mekarjaya, Kec. Banjaran, Kabupaten Bandung</td>
                   <td class="aksi-button">
                     <button class="restrore-btn-sampah">
-                      <img src="assets/img/restoreIcon.svg" alt="" />
+                      <img src="{{ asset('/images/restoreIcon.svg') }}" alt="" />
                     </button>
                     <button class="delete-btn-sampah">
-                      <img src="assets/img/sampahIconItem.svg" alt="" />
+                      <img src="{{ asset('/images/sampahIconItem.svg') }}" alt="" />
                     </button>
                     <input class="form-check-sampah" type="checkbox" id="rememberMe" />
                   </td>
@@ -384,10 +384,10 @@
                   <td>Mekarjaya, Kec. Banjaran, Kabupaten Bandung</td>
                   <td class="aksi-button">
                     <button class="restrore-btn-sampah">
-                      <img src="assets/img/restoreIcon.svg" alt="" />
+                      <img src="{{ asset('/images/restoreIcon.svg') }}" alt="" />
                     </button>
                     <button class="delete-btn-sampah">
-                      <img src="assets/img/sampahIconItem.svg" alt="" />
+                      <img src="{{ asset('/images/sampahIconItem.svg') }}" alt="" />
                     </button>
                     <input class="form-check-sampah" type="checkbox" id="rememberMe" />
                   </td>
@@ -415,7 +415,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-chart-financial"></script>
 
-    <script src="js/scriptDashboard.js"></script>
+    <script src="{{ asset('js/profile.js') }}"></script>
 
     <!-- Bootstrap JS Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
