@@ -8,6 +8,7 @@ use App\Http\Controllers\Authentication\AuthController;
 use App\Http\Controllers\NekromasController;
 use App\Http\Controllers\PancangContrller;
 use App\Http\Controllers\PohonController;
+use App\Http\Controllers\RingkasanController;
 use App\Http\Controllers\SemaiController;
 use App\Http\Controllers\SerasahController;
 use App\Http\Controllers\TanahController;
@@ -103,5 +104,9 @@ Route::middleware("auth:sanctum")->group(function () {
         Route::get("/Nekromass", "index");
         Route::post("/Nekromass/update/{id}", "update");
         Route::delete("/Nekromass/{id}", "destroy");
+    });
+    Route::controller(RingkasanController::class)->group(function () {
+        Route::get("/akar/{polt_area}", 'akar');
+        Route::get("/ringkasan/{polt_area}", 'ringkasan');
     });
 });

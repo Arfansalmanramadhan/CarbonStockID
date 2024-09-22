@@ -18,7 +18,7 @@ class AuthController extends Controller
 {
     public function registasi(RegisterRequests $request)
     {
-        dd($request->all());
+        // dd($request->all());
         try {
             $request["password"] = Hash::make($request->password);
             $user = User::create($request->all());
