@@ -21,4 +21,5 @@ class LoginRequests extends FormRequest
             'password' => 'required|min:8'
         ];
     }
+
 }

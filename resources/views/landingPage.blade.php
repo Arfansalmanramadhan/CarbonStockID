@@ -44,12 +44,13 @@
             </li>
           </ul>
           <div>
-            <a href="login" class="btn btn-light btn-masuk" type="button">Masuk</a>
-            <a href="register.html" class="btn btn-success btn-daftar" type="button">Daftar</a>
+            <a href="{{ route('login') }}" class="btn btn-light btn-masuk" type="button">Masuk</a>
+            <a href="{{ route('register') }}" class="btn btn-success btn-daftar" type="button">Daftar</a>
           </div>
         </div>
       </div>
     </nav>
+    
 
     <!-- Hero Section -->
     <section id="hero">

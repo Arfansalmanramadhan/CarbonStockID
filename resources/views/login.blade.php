@@ -14,7 +14,7 @@
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&family=Inter:wght@400;700&display=swap" rel="stylesheet" />
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="{{ asset('css/styleRegister.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/styleLogin.css') }}" />
 
     <!-- Logo Title -->
     <link rel="icon" href="{{ asset('/images/logoCarbonStockID-LightMode.png') }}" type="image/x-icon" />
@@ -33,21 +33,15 @@
             <div class="judul mb-4">
               <h1>Masuk ke Akun Anda</h1>
             </div>
-            <form id="loginForm">
+            <form action="{{ route('login') }}" method="POST">
+              @csrf
               <div class="mb-2">
                 <label for="email" class="form-label">Email / Username</label>
-                <input type="email" class="form-control" id="email" placeholder="Masukkan Email / Username" />
+                <input type="text" name="email" class="form-control" id="email" placeholder="Masukkan Email / Username" />
               </div>
               <div class="mb-2">
                 <label for="password" class="form-label">Sandi</label>
-                <input type="password" class="form-control" id="password" placeholder="Masukkan Sandi" />
-              </div>
-              <div class="d-flex justify-content-between align-items-center mb-3">
-                <div class="form-check d-flex align-items-center">
-                  <input class="form-check-input me-2" type="checkbox" id="rememberMe" />
-                  <label class="form-check-label" for="rememberMe">Ingatkan Saya</label>
-                </div>
-                <a href="#" class="lupa-sandi text-decoration-none">Lupa Sandi</a>
+                <input type="password" name="password" class="form-control" id="password" placeholder="Masukkan Sandi" />
               </div>
               <button type="submit" class="btn-success w-100">Masuk</button>
               <p class="masuk-dengan text-center mt-2 mb-2"><span>Atau masuk dengan</span></p>
@@ -62,6 +56,14 @@
                 </p>
               </div>
             </form>
+            
+            @if(session('success'))
+                <div>{{ session('success') }}</div>
+            @endif
+
+            @if(session('error'))
+                <div>{{ session('error') }}</div>
+            @endif
           </div>
         </div>
         <!-- Right Side -->
@@ -75,7 +77,7 @@
       </div>
     </div>
 
-    <script src="{{ asset('/js/scriptRegister.js') }}"></script>
+    {{-- <script src="{{ asset('/js/scriptRegister.js') }}"></script> --}}
     <!-- Bootstrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-cpNmN1hPckj2KdUMJj6UG4l3kNxodFjGkOn37cTh/j04WIF6P2R9Qkz5gMYZXLoN" crossorigin="anonymous"></script>
   </body>

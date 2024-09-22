@@ -16,7 +16,7 @@ use Illuminate\Auth\Events\PasswordReset;
 
 class AuthController extends Controller
 {
-    public function registasi(RegisterRequests $request)
+    /* public function registasi(RegisterRequests $request)
     {
         // dd($request->all());
         try {
@@ -31,36 +31,67 @@ class AuthController extends Controller
                 "mesage" => $error->getMessage(),
             ], 500);
         }
+    } */
+    public function registasi(Request $request)
+    {
+        try {
+            $request["password"] = Hash::make($request->password);
+            $user = User::create($request->all());
+            // Redirect ke halaman login jika berhasil
+            return redirect()->route('login')->with('success', 'Pengguna berhasil registrasi, silakan login');
+        } catch (Exception $error) {
+            return redirect()->back()->with('error', $error->getMessage());
+        }
     }
     public function login(LoginRequests $request)
     {
-        // Mengambil hanya password dari request
+        $credentials = [
+            'password' => $request->input('password'),
+        ];
+
+        if (filter_var($request->input('email_or_username'), FILTER_VALIDATE_EMAIL)) {
+            $credentials['email'] = $request->input('email_or_username');
+        } else {
+            $credentials['username'] = $request->input('email_or_username');
+        }
+
+        // Autentikasi
+        if (!Auth::attempt($credentials)) {
+            return redirect()->back()->with('error', 'Invalid credentials');
+        }
+
+        // Jika berhasil login
+        return redirect()->route('dashboard')->with('success', 'Login berhasil');
+    }
+
+
+    /* public function login(LoginRequests $request)
+    {
+        // Mengambil password dari request
         $credentials = $request->only('password');
 
-        // Cek apakah pengguna login dengan username atau email
+        // Menambahkan email atau username ke credentials
         if ($request->has('username')) {
             $credentials['username'] = $request->username;
         } elseif ($request->has('email')) {
             $credentials['email'] = $request->email;
         }
 
-        // Coba autentikasi pengguna dengan kredensial yang diberikan
-        if (!Auth::attempt($credentials)) {
-            return response()->json([
-                "message" => "invalid credentials",
-            ], 500);
+        // Mengambil data pengguna dari database berdasarkan email atau username
+        $user = User::where('email', $credentials['email'] ?? null)
+                    ->orWhere('username', $credentials['username'] ?? null)
+                    ->first();
+
+        // Jika pengguna tidak ditemukan atau password salah
+        if (!$user || !Hash::check($credentials['password'], $user->password)) {
+            return redirect()->back()->with('error', 'Email/Username atau password salah.');
         }
-        $user = Auth::user();
-        $user->tokens()->delete();
-        $token = $user->createToken("token")->plainTextToken;
-        return response()->json([
-            "message" => "login sukses",
-            "data" => [
-                "user" => $user,
-                "token" => $token
-            ]
-        ], 200);
-    }
+
+        // Autentikasi sukses, buat token baru atau autentikasi Laravel standar
+        auth()->login($user);
+        return redirect()->route('dashboard')->with('success', 'Login sukses.');
+    } */
+
     public function forgotPassword(Request $request)
     {
         //validasi email

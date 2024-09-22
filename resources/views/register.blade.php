@@ -38,25 +38,37 @@
         <!-- Right Side -->
         <div class="right-side col-lg-6 d-flex align-items-center">
           <div class="w-100">
+            {{-- Pesan sukses/error --}}
+            @if(session('success'))
+                <div class="alert alert-success">
+                    {{ session('success') }}
+                </div>
+            @endif
+            @if(session('error'))
+                <div class="alert alert-danger">
+                    {{ session('error') }}
+                </div>
+            @endif
             <div class="judul mb-3">
               <h1>Buat Akun Anda</h1>
             </div>
-            <form id="FormLogin">
+            <form id="FormLogin" action="{{route('daftar')}}" method="POST">
+              @csrf
               <div class="mb-2">
-                <label for="name" class="form-label">Nama</label>
-                <input type="text" class="form-control" id="name" placeholder="Masukkan Nama" />
+                  <label for="name" class="form-label">Nama</label>
+                  <input type="text" class="form-control" id="name" name="username" placeholder="Masukkan Nama" />
               </div>
               <div class="mb-2">
-                <label for="email" class="form-label">Email</label>
-                <input type="email" class="form-control" id="email" placeholder="Masukkan Email" />
+                  <label for="email" class="form-label">Email</label>
+                  <input type="email" class="form-control" id="email" name="email" placeholder="Masukkan Email" />
               </div>
               <div class="mb-2">
-                <label for="password" class="form-label">Sandi</label>
-                <input type="password" class="form-control" id="password" placeholder="Masukkan Sandi" />
+                  <label for="password" class="form-label">Sandi</label>
+                  <input type="password" class="form-control" id="password" name="password" placeholder="Masukkan Sandi" />
               </div>
               <div class="mb-3">
-                <label for="confirm-password" class="form-label">Konfirmasi Sandi</label>
-                <input type="password" class="form-control" id="confirm-password" placeholder="Masukkan Sandi" />
+                  <label for="confirm-password" class="form-label">Konfirmasi Sandi</label>
+                  <input type="password" class="form-control" id="confirm-password" name="password_confirmation" placeholder="Masukkan Sandi" />
               </div>
               <button type="submit" class="btn btn-success w-100">Daftar</button>
             </form>
@@ -65,7 +77,7 @@
       </div>
     </div>
 
-    <script src="{{ asset('/js/scriptRegister.js') }}"></script>
+    {{-- <script src="{{ asset('/js/scriptRegister.js') }}"></script> --}}
 
     <!-- Bootstrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>

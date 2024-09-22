@@ -36,17 +36,19 @@ Route::controller(AuthController::class)->group(function () {
     Route::post("/forgotPassword", "forgotPassword");
     Route::post("/resetPassword", "resetPassword");
 });
+
+Route::controller(ProfilController::class)->group(function () {
+    Route::get("/profil", "index");
+    Route::post("/profil/buat", "store");
+    Route::get("/profil/show/{id}", "show");
+    Route::get("/profil/edit/{id}", "edit");
+    Route::post("/profil/update/{id}", "update");
+});
+
 Route::middleware("auth:sanctum")->group(function () {
     Route::controller(AuthController::class)->group(function () {
         Route::post("/logout", "logout");
         Route::get("/getUser", "getUser");
-    });
-    Route::controller(ProfilController::class)->group(function () {
-        Route::get("/profil", "index");
-        Route::post("/profil/buat", "store");
-        Route::get("/profil/show/{id}", "show");
-        Route::get("/profil/edit/{id}", "edit");
-        Route::post("/profil/update/{id}", "update");
     });
     Route::controller(PoltAreaController::class)->group(function () {
         Route::get("/polt-area", "index");
