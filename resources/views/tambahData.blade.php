@@ -16,7 +16,7 @@
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&family=Inter:wght@400;700&display=swap" rel="stylesheet" />
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="css/tambahData.css" />
+    <link rel="stylesheet" href="{{ asset('css/tambahData.css') }}" />
 
     <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -25,7 +25,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
 
     <!-- Favicon -->
-    <link rel="icon" href="assets/img/logoCarbonStockID-LightMode.png" type="image/x-icon" />
+    <link rel="icon" href="{{ asset('/images/logoCarbonStockID-LightMode.png') }}" type="image/x-icon" />
     <title>CarbonStockID</title>
   </head>
   <body>
@@ -34,17 +34,17 @@
       <div class="container d-flex justify-content-between align-items-center">
         <div class="d-flex align-items-center">
           <a href="dashboard.html" class="burger-button">
-            <img src="assets/img/leftProfile.svg" alt="Burger Menu" class="burger-icon" />
+            <img src="{{ asset('/images/leftProfile.svg') }}" alt="Burger Menu" class="burger-icon" />
           </a>
           <a class="navbar-brand d-flex align-items-center ms-3" href="#">
-            <img src="assets/img/logoCarbonStockID-DarkMode.png" alt="Logo" width="30" class="d-inline-block align-middle me-2" />
+            <img src="{{ asset('/images/logoCarbonStockID-DarkMode.png') }}" alt="Logo" width="30" class="d-inline-block align-middle me-2" />
             <span>CarbonStockID</span>
           </a>
         </div>
         <div class="d-flex align-items-center">
           <button class="btn btn-light btn-plot-area d-flex justify-content-between align-items-center">
             <span>Plot Area</span>
-            <img src="assets/img/CaretUpFill.svg" alt="Caret Icon" />
+            <img src="{{ asset('/images/CaretUpFill.svg') }}" alt="Caret Icon" />
           </button>
           <div class="dropdown-plot-area" id="dropdownPlotArea" style="display: none">
             <ul>
@@ -56,10 +56,10 @@
               <li id="hasilHitung" class="akhir">Hasil Hitung</li>
             </ul>
           </div>
-          <img src="assets/img/userIcon.png" alt="User Avatar" id="userIcon" class="ms-3 user-avatar" />
+          <img src="{{ asset('/images/userIcon.png') }}" alt="User Avatar" id="userIcon" class="ms-3 user-avatar" />
           <div class="user-profile-dropdown" id="userProfileDropdown" style="display: none">
             <div class="user-info">
-              <img src="assets/img/userIcon.png" alt="User Avatar" class="user-avatar" />
+              <img src="{{ asset('/images/userIcon.png') }}" alt="User Avatar" class="user-avatar" />
               <div class="user-details">
                 <h4>Chistoper Govert</h4>
                 <p>chistoper@gmail.com</p>
@@ -68,11 +68,11 @@
             <hr />
             <div class="user-options">
               <div class="option">
-                <img class="me-1" src="assets/img/PersonFill.svg" alt="" />
+                <img class="me-1" src="{{ asset('/images/PersonFill.svg') }}" alt="" />
                 <a href="profile.html"><span>Profil Saya</span></a>
               </div>
               <div class="option">
-                <img class="ms-1 me-1" src="assets/img/majesticons_logout.svg" alt="" />
+                <img class="ms-1 me-1" src="{{ asset('/images/majesticons_logout.svg') }}" alt="" />
                 <a href="index.html"><span>Keluar</span></a>
               </div>
             </div>
@@ -112,7 +112,7 @@
           </div>
           <button type="submit" class="btn btn-success d-flex align-items-center justify-content-center">
             <span>Berikutnya</span>
-            <img src="assets/img/ArrowRight.svg" alt="Arrow Icon" class="ms-2" />
+            <img src="{{ asset('/images/ArrowRight.svg') }}" alt="Arrow Icon" class="ms-2" />
           </button>
         </div>
       </div>
@@ -236,12 +236,12 @@
           </div>
           <div class="d-flex jarak">
             <button type="submit" class="btn btn-back d-flex align-items-center justify-content-center" id="previousButton">
-              <img src="assets/img/ArrowLeft.svg" alt="Arrow Icon" />
+              <img src="{{ asset('/images/ArrowLeft.svg') }}" alt="Arrow Icon" />
               <span class="ms-2">Sebelumnya</span>
             </button>
             <button type="submit" class="btn btn-success btn-success-2 d-flex align-items-center justify-content-center">
               <span>Berikutnya</span>
-              <img src="assets/img/ArrowRight.svg" alt="Arrow Icon" class="ms-2" />
+              <img src="{{ asset('/images/ArrowRight.svg') }}" alt="Arrow Icon" class="ms-2" />
             </button>
           </div>
         </div>
@@ -256,7 +256,7 @@
               <div class="tampilkan">
                 <label for="show-entries">Tampilkan</label>
                 <span class="number-selection">5</span>
-                <img src="assets/img/downbaru.svg" alt="" class="pancang" id="toggleDropdownBanyakData" />
+                <img src="{{ asset('/images/downbaru.svg') }}" alt="" class="pancang" id="toggleDropdownBanyakData" />
                 <ul class="dropdownData" id="dropdownListDataPlot">
                   <li>5</li>
                   <li>10</li>
@@ -362,10 +362,10 @@
                     <td class="hidden-column">146.20 kg</td>
                     <td class="hidden-column aksi-button">
                       <button class="edit-btn">
-                        <img src="assets/img/PencilSquare.svg" alt="" />
+                        <img src="{{ asset('/images/PencilSquare.svg') }}" alt="" />
                       </button>
                       <button class="delete-btn">
-                        <img src="assets/img/Trash.svg" alt="" />
+                        <img src="{{ asset('/images/Trash.svg') }}" alt="" />
                       </button>
                     </td>
                   </tr>
@@ -381,10 +381,10 @@
                     <td class="hidden-column">146.20 kg</td>
                     <td class="hidden-column aksi-button">
                       <button class="edit-btn">
-                        <img src="assets/img/PencilSquare.svg" alt="" />
+                        <img src="{{ asset('/images/PencilSquare.svg') }}" alt="" />
                       </button>
                       <button class="delete-btn">
-                        <img src="assets/img/Trash.svg" alt="" />
+                        <img src="{{ asset('/images/Trash.svg') }}" alt="" />
                       </button>
                     </td>
                   </tr>
@@ -400,10 +400,10 @@
                     <td class="hidden-column">146.20 kg</td>
                     <td class="hidden-column aksi-button">
                       <button class="edit-btn">
-                        <img src="assets/img/PencilSquare.svg" alt="" />
+                        <img src="{{ asset('/images/PencilSquare.svg') }}" alt="" />
                       </button>
                       <button class="delete-btn">
-                        <img src="assets/img/Trash.svg" alt="" />
+                        <img src="{{ asset('/images/Trash.svg') }}" alt="" />
                       </button>
                     </td>
                   </tr>
@@ -419,10 +419,10 @@
                     <td class="hidden-column">146.20 kg</td>
                     <td class="hidden-column aksi-button">
                       <button class="edit-btn">
-                        <img src="assets/img/PencilSquare.svg" alt="" />
+                        <img src="{{ asset('/images/PencilSquare.svg') }}" alt="" />
                       </button>
                       <button class="delete-btn">
-                        <img src="assets/img/Trash.svg" alt="" />
+                        <img src="{{ asset('/images/Trash.svg') }}" alt="" />
                       </button>
                     </td>
                   </tr>
@@ -438,10 +438,10 @@
                     <td class="hidden-column">146.20 kg</td>
                     <td class="hidden-column aksi-button">
                       <button class="edit-btn">
-                        <img src="assets/img/PencilSquare.svg" alt="" />
+                        <img src="{{ asset('/images/PencilSquare.svg') }}" alt="" />
                       </button>
                       <button class="delete-btn">
-                        <img src="assets/img/Trash.svg" alt="" />
+                        <img src="{{ asset('/images/Trash.svg') }}" alt="" />
                       </button>
                     </td>
                   </tr>
@@ -462,12 +462,12 @@
           </div>
           <div class="d-flex jarak">
             <button type="submit" class="btn btn-back d-flex align-items-center justify-content-center" id="previousButton2">
-              <img src="assets/img/ArrowLeft.svg" alt="Arrow Icon" />
+              <img src="{{ asset('/images/ArrowLeft.svg') }}" alt="Arrow Icon" />
               <span class="ms-2">Sebelumnya</span>
             </button>
             <button type="submit" class="btn btn-success btn-success-3 d-flex align-items-center justify-content-center">
               <span>Berikutnya</span>
-              <img src="assets/img/ArrowRight.svg" alt="Arrow Icon" class="ms-2" />
+              <img src="{{ asset('/images/ArrowRight.svg') }}" alt="Arrow Icon" class="ms-2" />
             </button>
           </div>
         </div>
@@ -516,7 +516,7 @@
                             <label for="namaLokal2" class="form-label">Nama Lokal</label>
                             <div class="input-container">
                               <input type="text" class="form-control form-control-plot-b" id="namaLokal2" value="Jati" autocomplete="off" readonly />
-                              <img src="assets/img/ChevronUp.svg" alt="" class="chevron-icon" id="toggleDropdown2" onclick="toggleImage2()" />
+                              <img src="{{ asset('/images/ChevronUp.svg') }}" alt="" class="chevron-icon" id="toggleDropdown2" onclick="toggleImage2()" />
                               <ul class="dropdown" id="dropdownList2">
                                 <li>Damar</li>
                                 <li>Jati</li>
@@ -583,10 +583,10 @@
                     <td class="hidden-column">146.20 kg</td>
                     <td class="hidden-column aksi-button">
                       <button class="edit-btn">
-                        <img src="assets/img/PencilSquare.svg" alt="" />
+                        <img src="{{ asset('/images/PencilSquare.svg') }} alt="" />
                       </button>
                       <button class="delete-btn">
-                        <img src="assets/img/Trash.svg" alt="" />
+                        <img src="{{ asset('/images/Trash.svg') }}" alt="" />
                       </button>
                     </td>
                   </tr>
@@ -602,10 +602,10 @@
                     <td class="hidden-column">146.20 kg</td>
                     <td class="hidden-column aksi-button">
                       <button class="edit-btn">
-                        <img src="assets/img/PencilSquare.svg" alt="" />
+                        <img src="{{ asset('/images/PencilSquare.svg') }} alt="" />
                       </button>
                       <button class="delete-btn">
-                        <img src="assets/img/Trash.svg" alt="" />
+                        <img src="{{ asset('/images/Trash.svg') }}" alt="" />
                       </button>
                     </td>
                   </tr>
@@ -621,10 +621,10 @@
                     <td class="hidden-column">146.20 kg</td>
                     <td class="hidden-column aksi-button">
                       <button class="edit-btn">
-                        <img src="assets/img/PencilSquare.svg" alt="" />
+                        <img src="{{ asset('/images/PencilSquare.svg') }} alt="" />
                       </button>
                       <button class="delete-btn">
-                        <img src="assets/img/Trash.svg" alt="" />
+                        <img src="{{ asset('/images/Trash.svg') }}" alt="" />
                       </button>
                     </td>
                   </tr>
@@ -640,10 +640,10 @@
                     <td class="hidden-column">146.20 kg</td>
                     <td class="hidden-column aksi-button">
                       <button class="edit-btn">
-                        <img src="assets/img/PencilSquare.svg" alt="" />
+                        <img src="{{ asset('/images/PencilSquare.svg') }} alt="" />
                       </button>
                       <button class="delete-btn">
-                        <img src="assets/img/Trash.svg" alt="" />
+                        <img src="{{ asset('/images/Trash.svg') }}" alt="" />
                       </button>
                     </td>
                   </tr>
@@ -659,10 +659,10 @@
                     <td class="hidden-column">146.20 kg</td>
                     <td class="hidden-column aksi-button">
                       <button class="edit-btn">
-                        <img src="assets/img/PencilSquare.svg" alt="" />
+                        <img src="{{ asset('/images/PencilSquare.svg') }} alt="" />
                       </button>
                       <button class="delete-btn">
-                        <img src="assets/img/Trash.svg" alt="" />
+                        <img src="{{ asset('/images/Trash.svg') }}" alt="" />
                       </button>
                     </td>
                   </tr>
@@ -683,12 +683,12 @@
           </div>
           <div class="d-flex jarak">
             <button type="submit" class="btn btn-back d-flex align-items-center justify-content-center" id="previousButton3">
-              <img src="assets/img/ArrowLeft.svg" alt="Arrow Icon" />
+              <img src="{{ asset('/images/ArrowLeft.svg') }}" alt="Arrow Icon" />
               <span class="ms-2">Sebelumnya</span>
             </button>
             <button type="submit" class="btn btn-success btn-success-4 d-flex align-items-center justify-content-center">
               <span>Berikutnya</span>
-              <img src="assets/img/ArrowRight.svg" alt="Arrow Icon" class="ms-2" />
+              <img src="{{ asset('/images/ArrowRight.svg') }}" alt="Arrow Icon" class="ms-2" />
             </button>
           </div>
         </div>
@@ -740,7 +740,7 @@
                               <label for="namaLokal" class="form-label">Nama Lokal</label>
                               <div class="input-container">
                                 <input type="text" class="form-control form-control-plot-b" id="namaLokal3" value="Jati" autocomplete="off" readonly />
-                                <img src="assets/img/ChevronUp.svg" alt="" class="chevron-icon" id="toggleDropdown3" onclick="toggleImage3()" />
+                                <img src="{{ asset('/images/ChevronUp.svg') }}" alt="" class="chevron-icon" id="toggleDropdown3" onclick="toggleImage3()" />
                                 <ul class="dropdown" id="dropdownList3">
                                   <li>Damar</li>
                                   <li>Jati</li>
@@ -807,10 +807,10 @@
                       <td class="hidden-column">146.20 kg</td>
                       <td class="hidden-column aksi-button">
                         <button class="edit-btn">
-                          <img src="assets/img/PencilSquare.svg" alt="" />
+                          <img src="{{ asset('/images/PencilSquare.svg') }}" alt="" />
                         </button>
                         <button class="delete-btn">
-                          <img src="assets/img/Trash.svg" alt="" />
+                          <img src="{{ asset('/images/Trash.svg') }}" alt="" />
                         </button>
                       </td>
                     </tr>
@@ -826,10 +826,10 @@
                       <td class="hidden-column">146.20 kg</td>
                       <td class="hidden-column aksi-button">
                         <button class="edit-btn">
-                          <img src="assets/img/PencilSquare.svg" alt="" />
+                          <img src="{{ asset('/images/PencilSquare.svg') }}" alt="" />
                         </button>
                         <button class="delete-btn">
-                          <img src="assets/img/Trash.svg" alt="" />
+                          <img src="{{ asset('/images/Trash.svg') }}" alt="" />
                         </button>
                       </td>
                     </tr>
@@ -845,10 +845,10 @@
                       <td class="hidden-column">146.20 kg</td>
                       <td class="hidden-column aksi-button">
                         <button class="edit-btn">
-                          <img src="assets/img/PencilSquare.svg" alt="" />
+                          <img src="{{ asset('/images/PencilSquare.svg') }}" alt="" />
                         </button>
                         <button class="delete-btn">
-                          <img src="assets/img/Trash.svg" alt="" />
+                          <img src="{{ asset('/images/Trash.svg') }}" alt="" />
                         </button>
                       </td>
                     </tr>
@@ -864,10 +864,10 @@
                       <td class="hidden-column">146.20 kg</td>
                       <td class="hidden-column aksi-button">
                         <button class="edit-btn">
-                          <img src="assets/img/PencilSquare.svg" alt="" />
+                          <img src="{{ asset('/images/PencilSquare.svg') }}" alt="" />
                         </button>
                         <button class="delete-btn">
-                          <img src="assets/img/Trash.svg" alt="" />
+                          <img src="{{ asset('/images/Trash.svg') }}" alt="" />
                         </button>
                       </td>
                     </tr>
@@ -883,10 +883,10 @@
                       <td class="hidden-column">146.20 kg</td>
                       <td class="hidden-column aksi-button">
                         <button class="edit-btn">
-                          <img src="assets/img/PencilSquare.svg" alt="" />
+                          <img src="{{ asset('/images/PencilSquare.svg') }}" alt="" />
                         </button>
                         <button class="delete-btn">
-                          <img src="assets/img/Trash.svg" alt="" />
+                          <img src="{{ asset('/images/Trash.svg') }}" alt="" />
                         </button>
                       </td>
                     </tr>
@@ -946,7 +946,7 @@
                               <label for="namaLokal" class="form-label">Nama Lokal</label>
                               <div class="input-container">
                                 <input type="text" class="form-control form-control-plot-b" id="namaLokal4" value="Jati" autocomplete="off" readonly />
-                                <img src="assets/img/ChevronUp.svg" alt="" class="chevron-icon" id="toggleDropdown4" onclick="toggleImage4()" />
+                                <img src="{{ asset('/images/ChevronUp.svg') }}" alt="" class="chevron-icon" id="toggleDropdown4" onclick="toggleImage4()" />
                                 <ul class="dropdown" id="dropdownList4">
                                   <li>Damar</li>
                                   <li>Jati</li>
@@ -1013,10 +1013,10 @@
                       <td class="hidden-column">146.20 kg</td>
                       <td class="hidden-column aksi-button">
                         <button class="edit-btn">
-                          <img src="assets/img/PencilSquare.svg" alt="" />
+                          <img src="{{ asset('/images/PencilSquare.svg ') }}" alt="" />
                         </button>
                         <button class="delete-btn">
-                          <img src="assets/img/Trash.svg" alt="" />
+                          <img src="{{ asset('/images/Trash.svg ') }}" alt="" />
                         </button>
                       </td>
                     </tr>
@@ -1032,10 +1032,10 @@
                       <td class="hidden-column">146.20 kg</td>
                       <td class="hidden-column aksi-button">
                         <button class="edit-btn">
-                          <img src="assets/img/PencilSquare.svg" alt="" />
+                          <img src="{{ asset('/images/PencilSquare.svg ') }}" alt="" />
                         </button>
                         <button class="delete-btn">
-                          <img src="assets/img/Trash.svg" alt="" />
+                          <img src="{{ asset('/images/Trash.svg ') }}" alt="" />
                         </button>
                       </td>
                     </tr>
@@ -1051,10 +1051,10 @@
                       <td class="hidden-column">146.20 kg</td>
                       <td class="hidden-column aksi-button">
                         <button class="edit-btn">
-                          <img src="assets/img/PencilSquare.svg" alt="" />
+                          <img src="{{ asset('/images/PencilSquare.svg ') }}" alt="" />
                         </button>
                         <button class="delete-btn">
-                          <img src="assets/img/Trash.svg" alt="" />
+                          <img src="{{ asset('/images/Trash.svg ') }}" alt="" />
                         </button>
                       </td>
                     </tr>
@@ -1070,10 +1070,10 @@
                       <td class="hidden-column">146.20 kg</td>
                       <td class="hidden-column aksi-button">
                         <button class="edit-btn">
-                          <img src="assets/img/PencilSquare.svg" alt="" />
+                          <img src="{{ asset('/images/PencilSquare.svg ') }}" alt="" />
                         </button>
                         <button class="delete-btn">
-                          <img src="assets/img/Trash.svg" alt="" />
+                          <img src="{{ asset('/images/Trash.svg ') }}" alt="" />
                         </button>
                       </td>
                     </tr>
@@ -1089,10 +1089,10 @@
                       <td class="hidden-column">146.20 kg</td>
                       <td class="hidden-column aksi-button">
                         <button class="edit-btn">
-                          <img src="assets/img/PencilSquare.svg" alt="" />
+                          <img src="{{ asset('/images/PencilSquare.svg ') }}" alt="" />
                         </button>
                         <button class="delete-btn">
-                          <img src="assets/img/Trash.svg" alt="" />
+                          <img src="{{ asset('/images/Trash.svg ') }}" alt="" />
                         </button>
                       </td>
                     </tr>
@@ -1114,12 +1114,12 @@
           </div>
           <div class="d-flex jarak">
             <button type="submit" class="btn btn-back d-flex align-items-center justify-content-center" id="previousButton4">
-              <img src="assets/img/ArrowLeft.svg" alt="Arrow Icon" />
+              <img src="{{ asset('/images/ArrowLeft.svg ') }}" alt="Arrow Icon" />
               <span class="ms-2">Sebelumnya</span>
             </button>
             <button type="submit" class="btn btn-success btn-success-5 d-flex align-items-center justify-content-center">
               <span>Hasil</span>
-              <img src="assets/img/ArrowRight.svg" alt="Arrow Icon" class="ms-2" />
+              <img src="{{ asset('/images/ArrowRight.svg ') }}" alt="Arrow Icon" class="ms-2" />
             </button>
           </div>
         </div>
@@ -1131,7 +1131,7 @@
               <h2 class="h2-tiang">Ringkasan Hitungan</h2>
             </div>
             <div class="frame-no-data">
-              <img src="assets/img/imageNoData.svg" alt="" />
+              <img src="{{ asset('/images/imageNoData.svg') }}" alt="" />
               <p>Data yang Anda masukkan masih kosong. Mohon lengkapi semua informasi yang diperlukan.</p>
             </div>
             <!-- <div class="table-header-hasil d-flex">

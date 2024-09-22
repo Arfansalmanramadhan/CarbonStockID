@@ -589,7 +589,7 @@ h3 {
   font-style: normal;
   font-weight: 700;
   line-height: 125%; /* 22.5px */
-  width: 130px;
+  width: 20px;
   flex-shrink: 0;
 }
 
@@ -851,12 +851,10 @@ h3 {
   background: var(--Primary-Tint-80, #dbefdc);
 }
 
-.aksi-button {
+.aksi-dataplot {
   display: flex;
-  width: 101px;
-  align-items: center;
-  gap: 14px;
 }
+
 
 .restrore-btn-sampah {
   width: 24px;

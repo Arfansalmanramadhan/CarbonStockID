@@ -1,46 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" />
-
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&family=Inter:wght@400;700&display=swap" rel="stylesheet" />
-
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="css/profile.css" />
-
-    <!-- Chart.js -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
-
-    <!-- Favicon -->
-    <link rel="icon" href="assets/img/logoCarbonStockID-LightMode.png" type="image/x-icon" />
-    <title>CarbonStockID</title>
-  </head>
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+    
+        <!-- Bootstrap CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+    
+        <!-- Google Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&family=Inter:wght@400;700&display=swap" rel="stylesheet" />
+    
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="{{ asset('css/profile.css') }}" />
+    
+        <!-- Logo Title -->
+        <link rel="icon" href="{{ asset('/images/logoCarbonStockID-LightMode.png') }}" type="image/x-icon" />
+        <title>CarbonStockID</title>
+    </head>
   <body>
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg bg-transparent w-100">
       <div class="container d-flex justify-content-between align-items-center">
         <div class="d-flex align-items-center">
           <a href="dashboard.html" class="burger-button">
-            <img src="assets/img/leftProfile.svg" alt="Burger Menu" class="burger-icon" />
+            <img src="{{ asset('images/leftProfile.svg') }}" alt="Burger Menu" class="burger-icon" />
           </a>
           <a class="navbar-brand d-flex align-items-center ms-3" href="#">
-            <img src="assets/img/logoCarbonStockID-DarkMode.png" alt="Logo" width="30" class="d-inline-block align-middle me-2" />
+            <img src="{{ asset('images/logoCarbonStockID-DarkMode.png') }}" alt="Logo" width="30" class="d-inline-block align-middle me-2" />
             <span>CarbonStockID</span>
           </a>
         </div>
         <div class="d-flex align-items-center">
-          <img src="assets/img/userIcon.png" alt="User Avatar" id="userIcon" class="ms-3 user-avatar" />
+          <img src="{{ asset('images/userIcon.png') }}" alt="User Avatar" id="userIcon" class="ms-3 user-avatar" />
         </div>
       </div>
     </nav>
@@ -48,7 +42,7 @@
     <!-- Profile Form Section -->
     <section class="container-form mt-5 profile-card">
       <div class="image-container">
-        <img src="assets/img/frameProfile.svg" alt="" class="img-normal" />
+        <img src="{{ asset('images/frameProfile.svg') }}" alt="" class="img-normal" />
         <div class="text-overlay">
           <p class="large-text">Profil Pengguna</p>
         </div>
@@ -56,7 +50,7 @@
       <div class="card p-4 shadow-sm">
         <div class="card-body">
           <div class="profile-container d-flex align-items-center">
-            <img src="assets/img/profileImage.svg" alt="User Photo" width="168" />
+            <img src="{{ asset('images/profileImage.svg') }}" alt="User Photo" width="168" />
             <div>
               <button class="btn btn-success mb-2" id="uploadButton">Pilih Foto</button>
               <input type="file" class="foto-image" id="fileInput" accept="image/*" style="display: none" />
@@ -85,7 +79,7 @@
           <!-- Pop-up Box -->
           <div id="popup" class="popup-container">
             <div class="popup-content">
-              <img src="assets/img/HandThumbsUpFill.svg" alt="Success Icon" class="success-icon" />
+              <img src="{{ asset('images/HandThumbsUpFill.svg') }}" alt="Success Icon" class="success-icon" />
               <h2>Perubahan berhasil disimpan</h2>
               <p>Pembaruan pada profil kamu berhasil disimpan. Jangan ragu untuk melakukan perubahan lainnya kapan saja.</p>
               <button id="popup-close" class="btn btn-success-oke">Oke</button>
@@ -96,7 +90,7 @@
     </section>
 
     <!-- Custom JS -->
-    <script src="js/profile.js"></script>
+    <script src="{{ asset('js/profile.js') }}"></script>
 
     <!-- Bootstrap JS Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
