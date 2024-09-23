@@ -1,3 +1,7 @@
+document.getElementById('submitButton').addEventListener('click', function() {
+  document.getElementById('plotAreaForm').submit();
+});
+
 // Profile pop up
 
 document.getElementById("userIcon").addEventListener("click", function () {

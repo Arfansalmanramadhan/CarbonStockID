@@ -7,6 +7,7 @@ use App\Http\Resources\ProfilResources;
 use App\Models\Profil;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ProfilController extends Controller
 {
@@ -15,8 +16,15 @@ class ProfilController extends Controller
      */
     public function index()
     {
-        $profil = Profil::with('user:id,username,email')->get();
-        return  ProfilResources::collection($profil);
+        // $user = Profil::with('user:id,username,email')->get();
+        // return  ProfilResources::collection($user);
+
+        // Mengambil data pengguna yang sedang login
+        $user = Auth::user();
+        // dd($user);
+        
+        // Menampilkan halaman profil dengan data pengguna
+        return view('profile', ['user' => $user]);
     }
 
     /**

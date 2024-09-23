@@ -16,56 +16,31 @@ use Illuminate\Auth\Events\PasswordReset;
 
 class AuthController extends Controller
 {
-    /* public function registasi(RegisterRequests $request)
+    public function index()
     {
-        // dd($request->all());
-        try {
-            $request["password"] = Hash::make($request->password);
-            $user = User::create($request->all());
-            return response()->json([
-                "mesage" => "Pengguna berhasil registasi",
-                "data" =>  $user
-            ], 200);
-        } catch (Exception $error) {
-            return response()->json([
-                "mesage" => $error->getMessage(),
-            ], 500);
-        }
-    } */
+        return view('login');
+    }
     public function registasi(Request $request)
     {
         try {
             $request["password"] = Hash::make($request->password);
             $user = User::create($request->all());
+            /* return response()->json([
+                "mesage" => "Pengguna berhasil registasi",
+                "data" =>  $user
+            ], 200); */
             // Redirect ke halaman login jika berhasil
             return redirect()->route('login')->with('success', 'Pengguna berhasil registrasi, silakan login');
         } catch (Exception $error) {
+            /* return response()->json([
+                "mesage" => $error->getMessage(),
+            ], 500); */
             return redirect()->back()->with('error', $error->getMessage());
         }
     }
+   
+
     public function login(LoginRequests $request)
-    {
-        $credentials = [
-            'password' => $request->input('password'),
-        ];
-
-        if (filter_var($request->input('email_or_username'), FILTER_VALIDATE_EMAIL)) {
-            $credentials['email'] = $request->input('email_or_username');
-        } else {
-            $credentials['username'] = $request->input('email_or_username');
-        }
-
-        // Autentikasi
-        if (!Auth::attempt($credentials)) {
-            return redirect()->back()->with('error', 'Invalid credentials');
-        }
-
-        // Jika berhasil login
-        return redirect()->route('dashboard')->with('success', 'Login berhasil');
-    }
-
-
-    /* public function login(LoginRequests $request)
     {
         // Mengambil password dari request
         $credentials = $request->only('password');
@@ -84,13 +59,38 @@ class AuthController extends Controller
 
         // Jika pengguna tidak ditemukan atau password salah
         if (!$user || !Hash::check($credentials['password'], $user->password)) {
-            return redirect()->back()->with('error', 'Email/Username atau password salah.');
+            return response()->json([
+                "message" => "invalid credentials",
+            ], 500);
         }
 
-        // Autentikasi sukses, buat token baru atau autentikasi Laravel standar
-        auth()->login($user);
-        return redirect()->route('dashboard')->with('success', 'Login sukses.');
-    } */
+        // Autentikasi sukses, buat token baru
+        $user->tokens()->delete();
+        $token = $user->createToken("token")->plainTextToken;
+
+        $credentials = $request->validate([
+            'email' => ['required', 'email'],
+            'password' => ['required'],
+        ]);
+ 
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
+ 
+            return redirect()->intended('dashboard');
+        }
+
+        // return redirect()->route('dashboard');
+
+        /* return response()->json([
+            "message" => "login sukses",
+            "data" => [
+                "user" => $user,
+                "token" => $token,
+                'redirect_url' => route('dashboard') 
+            ]
+        ], 200); */
+    }
+
 
     public function forgotPassword(Request $request)
     {

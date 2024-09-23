@@ -70,7 +70,13 @@
                   <label for="confirm-password" class="form-label">Konfirmasi Sandi</label>
                   <input type="password" class="form-control" id="confirm-password" name="password_confirmation" placeholder="Masukkan Sandi" />
               </div>
-              <button type="submit" class="btn btn-success w-100">Daftar</button>
+              <button type="submit" class="btn btn-success w-100 mb-2">Daftar</button>
+              <div class="teks text-center">
+                <p>
+                  Anda sudah memiliki akun?
+                  <a href="{{ route('login') }}" class="daftar">Masuk</a>
+                </p>
+              </div>
             </form>
           </div>
         </div>

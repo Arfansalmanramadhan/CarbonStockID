@@ -25,7 +25,7 @@
     <nav class="navbar navbar-expand-lg bg-transparent w-100">
       <div class="container d-flex justify-content-between align-items-center">
         <div class="d-flex align-items-center">
-          <a href="dashboard.html" class="burger-button">
+          <a href="{{ route('dashboard') }}" class="burger-button">
             <img src="{{ asset('images/leftProfile.svg') }}" alt="Burger Menu" class="burger-icon" />
           </a>
           <a class="navbar-brand d-flex align-items-center ms-3" href="#">
@@ -59,23 +59,25 @@
           </div>
           <form class="form">
             <div class="mb-2">
-              <label for="fullName" class="form-label ms-1">Nama Lengkap</label>
-              <input type="text" class="form-control" id="fullName" value="Chistoper Govert" />
+                <label for="fullName" class="form-label ms-1">Nama Lengkap</label>
+                <input type="text" class="form-control" id="fullName" />
+            </div>
+            {{-- {{ Auth::user() }} --}}
+            <div class="mb-2">
+                <label for="username" class="form-label ms-1">Username</label>
+                <input type="text" class="form-control" id="username" value="{{ $user->username }}" />
             </div>
             <div class="mb-2">
-              <label for="username" class="form-label ms-1">Username</label>
-              <input type="text" class="form-control" id="username" value="chistopergovert" />
+                <label for="email" class="form-label ms-1">Email</label>
+                <input type="email" class="form-control" id="email" value="{{ $user->email }}" />
             </div>
             <div class="mb-2">
-              <label for="email" class="form-label ms-1">Email</label>
-              <input type="email" class="form-control" id="email" value="chistoper@gmail.com" />
-            </div>
-            <div class="mb-2">
-              <label for="phone" class="form-label ms-1">Nomor Telepon</label>
-              <input type="text" class="form-control" id="phone" value="081234567980" />
+                <label for="phone" class="form-label ms-1">Nomor Telepon</label>
+                <input type="text" class="form-control" id="phone" value="{{ $user->phone }}" />
             </div>
             <button type="submit" class="btn btn-simpan-perubahan">Simpan Perubahan</button>
-          </form>
+        </form>
+        
           <!-- Pop-up Box -->
           <div id="popup" class="popup-container">
             <div class="popup-content">

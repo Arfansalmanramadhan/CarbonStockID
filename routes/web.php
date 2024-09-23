@@ -2,6 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Authentication\AuthController;
+use App\Http\Controllers\ProfilController;
+use App\Http\Controllers\PoltAreaController;
+
+
 
 
 /*
@@ -19,44 +23,44 @@ Route::get('/', function () {
     return view('landingPage');
 });
 
-Route::get('/login', [AuthController::class, 'index']);
+// Rute untuk halaman login
+Route::get('/login', [AuthController::class, 'index'])->name('login');
+
+// Rute untuk proses login
+Route::post('/login', [AuthController::class, 'login']);
 
 
-Route::post('/register', [AuthController::class, 'registasi'])->name('daftar');
+// Route::get('/login', function () {
+//     return view('login');
+// });
 
-
-Route::post('/login', [AuthController::class, 'login'])->name('login');
-
-
-
+// Rute untuk halaman register
 Route::get('/register', function () {
     return view('register');
-});
+})->name('register');
+
+// Rute untuk proses registrasi
+Route::post('/register', [AuthController::class, 'registasi'])->name('daftar');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
-});
+})->name('dashboard');
 
-Route::get('/profile', function () {
-    return view('profile');
-});
 
+Route::get('/profile', [ProfilController::class, 'index'])->name('profile');
+
+// Route untuk halaman tambah data
 Route::get('/tambahData', function () {
     return view('tambahData');
 });
 
+Route::get('/percobaan', function () {
+    return view('percobaan');
+});
+
+Route::post('/plotarea/store', [PoltAreaController::class, 'store'])->name('plotarea.store');
 
 
-// Route untuk halaman login
-Route::get('/login', function () {
-    return view('login');
-})->name('login');
-
-
-// Route untuk halaman register
-Route::get('/register', function () {
-    return view('register');
-})->name('register');
 
 // // Route untuk halaman utama
 // Route::get('/', function () {

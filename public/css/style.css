@@ -216,11 +216,10 @@ p {
   justify-content: center;
 }
 
-.card-fitur p {
-  color: var(--pr-color4);
-  font-size: 20px;
-  font-weight: 700;
+.card-fitur img {
+  width: 100%;
 }
+
 
 .info-card {
   margin-top: 10px;

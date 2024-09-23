@@ -45,11 +45,11 @@
             <input class="form-control search-input" type="search" placeholder="Cari..." aria-label="Search" />
             <img src="{{ asset('/images/iconSearch.png') }}" alt="Search Icon" class="search-icon" />
           </form>
-          <a href="tambahData.html" class="btn btn-light btn-tambahData">Tambah data</a>
+          <a href="{{ url('/tambahData') }}" class="btn btn-light btn-tambahData">Tambah data</a>
           <img src="{{ asset('/images/userIcon.png') }}" alt="User Avatar" id="userIcon" class="ms-3 user-avatar" />
           <div class="user-profile-dropdown" id="userProfileDropdown" style="display: none">
             <div class="user-info">
-              <img src="{{ asset('/images/userIcon.png') }}" alt="User Avatar" class="user-avatar" />
+              <img src="assets/img/userIcon.png" alt="User Avatar" class="user-avatar" />
               <div class="user-details">
                 <h4>Chistoper Govert</h4>
                 <p>chistoper@gmail.com</p>
@@ -58,11 +58,11 @@
             <hr />
             <div class="user-options">
               <div class="option">
-                <img class="me-1" src="{{ asset('/images/PersonFill.svg') }}" alt="" />
-                <a href="profile.html"><span>Profil Saya</span></a>
+                <img class="me-1" src="assets/img/PersonFill.svg" alt="" />
+                <a href="{{ url('/profile') }}"><span>Profil Saya</span></a>
               </div>
               <div class="option">
-                <img class="ms-1 me-1" src="{{ asset('/images/majesticons_logout.svg') }}" alt="" />
+                <img class="ms-1 me-1" src="assets/img/majesticons_logout.svg" alt="" />
                 <a href="index.html"><span>Keluar</span></a>
               </div>
             </div>

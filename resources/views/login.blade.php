@@ -52,7 +52,7 @@
               <div class="teks text-center">
                 <p>
                   Anda belum memiliki akun?
-                  <a href="register.html" class="daftar">Daftar</a>
+                  <a href="{{ route('register') }}" class="daftar">Daftar</a>
                 </p>
               </div>
             </form>
@@ -77,7 +77,7 @@
       </div>
     </div>
 
-    {{-- <script src="{{ asset('/js/scriptRegister.js') }}"></script> --}}
+    <script src="{{ asset('/js/scriptLogin.js') }}"></script>
     <!-- Bootstrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-cpNmN1hPckj2KdUMJj6UG4l3kNxodFjGkOn37cTh/j04WIF6P2R9Qkz5gMYZXLoN" crossorigin="anonymous"></script>
   </body>

@@ -83,7 +83,7 @@
         <div class="row text-center mt-5">
           <div class="col-md-4">
             <div class="card-fitur d-flex flex-column justify-content-center align-items-center">
-              <p>Gambar</p>
+              <img src="{{ asset('/images/fitur1.svg') }}" alt="">
             </div>
             <div class="info-card mt-3">
               <h3>Management Data Plot</h3>
@@ -92,7 +92,7 @@
           </div>
           <div class="col-md-4">
             <div class="card-fitur d-flex flex-column justify-content-center align-items-center">
-              <p>Gambar</p>
+              <img src="{{ asset('/images/fitur2.svg') }}" alt="">
             </div>
             <div class="info-card mt-3">
               <h3>Prediksi</h3>
@@ -101,7 +101,7 @@
           </div>
           <div class="col-md-4">
             <div class="card-fitur d-flex flex-column justify-content-center align-items-center">
-              <p>Gambar</p>
+              <img src="{{ asset('/images/fitur3.svg') }}" alt="">
             </div>
             <div class="info-card mt-3">
               <h3>Kalkulasi</h3>
@@ -233,7 +233,7 @@
           <div class="row text-white py-5">
             <div class="col-md-4">
               <div class="d-flex align-items-center mb-3">
-                <img src="logoCarbonStockID-LightMode.png {{ asset('/images/logoCarbonStockID-LightMode.png') }}" alt="Logo" class="me-2" />
+                <img src="{{ asset('/images/logoCarbonStockID-LightMode.png') }}" alt="Logo" class="me-2" />
                 <span>CarbonStockID</span>
               </div>
               <p>Hak Cipta © 2024 CarbonStockID. Semua hak dilindungi</p>
