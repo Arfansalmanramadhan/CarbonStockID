@@ -853,6 +853,7 @@ h3 {
 
 .aksi-dataplot {
   display: flex;
+  text-decoration: none;
 }
 
 
@@ -1091,6 +1092,13 @@ h3 {
 .page-btn-data:hover {
   background-color: #4caf50;
   color: #ffffff;
+}
+
+.aksi-button {
+  display: flex;
+  width: 101px;
+  align-items: center;
+  gap: 14px;
 }
 
 /* ---------------------------------- Sampah konten -----------------------------------*/

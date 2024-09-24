@@ -49,7 +49,7 @@
           <img src="{{ asset('/images/userIcon.png') }}" alt="User Avatar" id="userIcon" class="ms-3 user-avatar" />
           <div class="user-profile-dropdown" id="userProfileDropdown" style="display: none">
             <div class="user-info">
-              <img src="assets/img/userIcon.png" alt="User Avatar" class="user-avatar" />
+              <img src="{{ asset('/images/userIcon.png') }}" alt="User Avatar" class="user-avatar" />
               <div class="user-details">
                 <h4>Chistoper Govert</h4>
                 <p>chistoper@gmail.com</p>
@@ -58,12 +58,12 @@
             <hr />
             <div class="user-options">
               <div class="option">
-                <img class="me-1" src="assets/img/PersonFill.svg" alt="" />
+                <img class="me-1" src="{{ asset('/images/PersonFill.svg') }}" alt="" />
                 <a href="{{ url('/profile') }}"><span>Profil Saya</span></a>
               </div>
               <div class="option">
-                <img class="ms-1 me-1" src="assets/img/majesticons_logout.svg" alt="" />
-                <a href="index.html"><span>Keluar</span></a>
+                <img class="ms-1 me-1" src="{{ asset('/images/majesticons_logout.svg') }}" alt="" />
+                <a href="{{ url('') }}"><span>Keluar</span></a>
               </div>
             </div>
           </div>
@@ -189,7 +189,7 @@
                   <td>Mekarjaya, Kec. Banjaran, Kabupaten Bandung</td>
                   <td class="aksi-dataplot">
                     <button class="view-btn">
-                      <img src="assets/img/Eye.svg {{ asset('/images/Eye.svg') }}" alt="" />
+                      <img src="{{ asset('/images/Eye.svg') }}" alt="" />
                     </button>
                     <button class="edit-btn">
                       <img src="{{ asset('/images/PencilSquare.svg') }}" alt="" />
@@ -220,54 +220,134 @@
                 <tr>
                   <td>00002</td>
                   <td>Haurpanggung, Kec. Tarogong Kidul, Kabupaten ...</td>
-                  <!-- <button class="view-btn">
-                    <img src="assets/img/PencilSquare.svg" alt="" />
-                  </button>
-                  <button class="edit-btn">
-                    <img src="assets/img/PencilSquare.svg" alt="" />
-                  </button>
-                  <button class="delete-btn">
-                    <img src="assets/img/Trash.svg" alt="" />
-                  </button> -->
+                  <td class="aksi-dataplot">
+                    <button class="view-btn">
+                      <img src="{{ asset('/images/Eye.svg') }}" alt="" />
+                    </button>
+                    <button class="edit-btn">
+                      <img src="{{ asset('/images/PencilSquare.svg') }}" alt="" />
+                    </button>
+                    <button class="delete-btn">
+                      <img src="{{ asset('/images/Trash.svg') }}" alt="" />
+                    </button>
+
+                    <!-- Modal -->
+                    <div id="deleteModal" class="modal">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <span class="close">&times;</span>
+                          <img src="" alt="Delete Icon" class="icon" />
+                        </div>
+                        <div class="modal-body">
+                          <h2>Kamu yakin untuk menghapus Plot Area ini?</h2>
+                          <p>Jika anda menghapus plot area ini, semua data terkait plot ini akan dipindahkan ke Sampah.</p>
+                        </div>
+                        <div class="modal-footer">
+                          <button id="cancelBtn" class="cancel-btn">Batal</button>
+                          <button id="deleteBtn" class="delete-confirm-btn">Hapus</button>
+                        </div>
+                      </div>
+                    </div>
+                  </td>
                 </tr>
                 <tr>
                   <td>00003</td>
                   <td>Haurpanggung, Kec. Tarogong Kidul, Kabupaten ...</td>
-                  <!-- <button class="view-btn">
-                    <img src="assets/img/PencilSquare.svg" alt="" />
-                  </button>
-                  <button class="edit-btn">
-                    <img src="assets/img/PencilSquare.svg" alt="" />
-                  </button>
-                  <button class="delete-btn">
-                    <img src="assets/img/Trash.svg" alt="" />
-                  </button> -->
+                  <td class="aksi-dataplot">
+                    <button class="view-btn">
+                      <img src="{{ asset('/images/Eye.svg') }}" alt="" />
+                    </button>
+                    <button class="edit-btn">
+                      <img src="{{ asset('/images/PencilSquare.svg') }}" alt="" />
+                    </button>
+                    <button class="delete-btn">
+                      <img src="{{ asset('/images/Trash.svg') }}" alt="" />
+                    </button>
+
+                    <!-- Modal -->
+                    <div id="deleteModal" class="modal">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <span class="close">&times;</span>
+                          <img src="" alt="Delete Icon" class="icon" />
+                        </div>
+                        <div class="modal-body">
+                          <h2>Kamu yakin untuk menghapus Plot Area ini?</h2>
+                          <p>Jika anda menghapus plot area ini, semua data terkait plot ini akan dipindahkan ke Sampah.</p>
+                        </div>
+                        <div class="modal-footer">
+                          <button id="cancelBtn" class="cancel-btn">Batal</button>
+                          <button id="deleteBtn" class="delete-confirm-btn">Hapus</button>
+                        </div>
+                      </div>
+                    </div>
+                  </td>
                 </tr>
                 <tr>
                   <td>00004</td>
                   <td>Haurpanggung, Kec. Tarogong Kidul, Kabupaten ...</td>
-                  <!-- <button class="view-btn">
-                    <img src="assets/img/PencilSquare.svg" alt="" />
-                  </button>
-                  <button class="edit-btn">
-                    <img src="assets/img/PencilSquare.svg" alt="" />
-                  </button>
-                  <button class="delete-btn">
-                    <img src="assets/img/Trash.svg" alt="" />
-                  </button> -->
+                  <td class="aksi-dataplot">
+                    <button class="view-btn">
+                      <img src="{{ asset('/images/Eye.svg') }}" alt="" />
+                    </button>
+                    <button class="edit-btn">
+                      <img src="{{ asset('/images/PencilSquare.svg') }}" alt="" />
+                    </button>
+                    <button class="delete-btn">
+                      <img src="{{ asset('/images/Trash.svg') }}" alt="" />
+                    </button>
+
+                    <!-- Modal -->
+                    <div id="deleteModal" class="modal">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <span class="close">&times;</span>
+                          <img src="" alt="Delete Icon" class="icon" />
+                        </div>
+                        <div class="modal-body">
+                          <h2>Kamu yakin untuk menghapus Plot Area ini?</h2>
+                          <p>Jika anda menghapus plot area ini, semua data terkait plot ini akan dipindahkan ke Sampah.</p>
+                        </div>
+                        <div class="modal-footer">
+                          <button id="cancelBtn" class="cancel-btn">Batal</button>
+                          <button id="deleteBtn" class="delete-confirm-btn">Hapus</button>
+                        </div>
+                      </div>
+                    </div>
+                  </td>
                 </tr>
                 <tr>
                   <td>00005</td>
                   <td>Haurpanggung, Kec. Tarogong Kidul, Kabupaten ...</td>
-                  <!-- <button class="view-btn">
-                    <img src="assets/img/PencilSquare.svg" alt="" />
-                  </button>
-                  <button class="edit-btn">
-                    <img src="assets/img/PencilSquare.svg" alt="" />
-                  </button>
-                  <button class="delete-btn">
-                    <img src="assets/img/Trash.svg" alt="" />
-                  </button> -->
+                  <td class="aksi-dataplot">
+                    <button class="view-btn">
+                      <img src="{{ asset('/images/Eye.svg') }}" alt="" />
+                    </button>
+                    <button class="edit-btn">
+                      <img src="{{ asset('/images/PencilSquare.svg') }}" alt="" />
+                    </button>
+                    <button class="delete-btn">
+                      <img src="{{ asset('/images/Trash.svg') }}" alt="" />
+                    </button>
+
+                    <!-- Modal -->
+                    <div id="deleteModal" class="modal">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <span class="close">&times;</span>
+                          <img src="" alt="Delete Icon" class="icon" />
+                        </div>
+                        <div class="modal-body">
+                          <h2>Kamu yakin untuk menghapus Plot Area ini?</h2>
+                          <p>Jika anda menghapus plot area ini, semua data terkait plot ini akan dipindahkan ke Sampah.</p>
+                        </div>
+                        <div class="modal-footer">
+                          <button id="cancelBtn" class="cancel-btn">Batal</button>
+                          <button id="deleteBtn" class="delete-confirm-btn">Hapus</button>
+                        </div>
+                      </div>
+                    </div>
+                  </td>
                 </tr>
                 <!-- Tambahkan baris lainnya di sini -->
               </tbody>

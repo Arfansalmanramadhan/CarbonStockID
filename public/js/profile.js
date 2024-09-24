@@ -36,3 +36,4 @@ document.getElementById("fileInput").addEventListener("change", function (event)
     reader.readAsDataURL(file); // Read the file as a data URL to display the image
   }
 });
+

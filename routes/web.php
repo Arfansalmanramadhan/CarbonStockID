@@ -48,6 +48,8 @@ Route::get('/dashboard', function () {
 
 
 Route::get('/profile', [ProfilController::class, 'index'])->name('profile');
+Route::post('/profile/update', [ProfilController::class, 'update'])->name('profile.update');
+
 
 // Route untuk halaman tambah data
 Route::get('/tambahData', function () {

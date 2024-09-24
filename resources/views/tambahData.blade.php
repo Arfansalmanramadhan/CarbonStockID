@@ -73,7 +73,7 @@
               </div>
               <div class="option">
                 <img class="ms-1 me-1" src="{{ asset('/images/majesticons_logout.svg') }}" alt="" />
-                <a href=""><span>Keluar</span></a>
+                <a href="{{ url('') }}"><span>Keluar</span></a>
               </div>
             </div>
           </div>

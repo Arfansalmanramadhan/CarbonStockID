@@ -108,37 +108,36 @@ document.querySelector('a[href="#sampah"]').addEventListener("click", () => swit
 document.querySelector('a[href="#panduan"]').addEventListener("click", () => switchContent("panduan"));
 document.querySelector('a[href="#prediksi"]').addEventListener("click", () => switchContent("prediksi"));
 
-// Function to update table rows based on selected value
-function updateTableRows(entries) {
-  // Get all rows from the table
-  const allRows = Array.from(tableBody.querySelectorAll("tr"));
+// // Function to update table rows based on selected value
+// function updateTableRows(entries) {
+//   // Get all rows from the table
+// //   const allRows = Array.from(tableBody.querySelectorAll("tr"));
 
-  // Hide all rows initially
-  allRows.forEach((row, index) => {
-    row.style.display = "none";
-  });
+//   // Hide all rows initially
+//   allRows.forEach((row, index) => {
+//     row.style.display = "none";
+//   });
 
-  // Show only the number of rows specified by the selected value
-  for (let i = 0; i < entries && i < allRows.length; i++) {
-    allRows[i].style.display = "table-row";
-  }
+//   // Show only the number of rows specified by the selected value
+//   for (let i = 0; i < entries && i < allRows.length; i++) {
+//     allRows[i].style.display = "table-row";
+//   }
 
-  // Update the table footer text to reflect the number of entries displayed
-  const footerText = document.querySelector(".table-footer span");
-  footerText.textContent = `Menampilkan 1 sampai ${Math.min(entries, allRows.length)} dari ${allRows.length} data`;
-}
+//   // Update the table footer text to reflect the number of entries displayed
+//   const footerText = document.querySelector(".table-footer span");
+//   footerText.textContent = `Menampilkan 1 sampai ${Math.min(entries, allRows.length)} dari ${allRows.length} data`;
+// }
 
-// Event listener for change in select dropdown
-showEntriesSelect.addEventListener("change", function () {
-  const selectedValue = parseInt(this.value);
-  updateTableRows(selectedValue);
-});
+// // Event listener for change in select dropdown
+// showEntriesSelect.addEventListener("change", function () {
+//   const selectedValue = parseInt(this.value);
+//   updateTableRows(selectedValue);
+// });
 
-// Initial setup: Show 5 rows by default
-updateTableRows(5);
+// // Initial setup: Show 5 rows by default
+// updateTableRows(5);
 
 // Profile pop up
-
 document.getElementById("userIcon").addEventListener("click", function () {
   var dropdown = document.getElementById("userProfileDropdown");
   if (dropdown.style.display === "none" || dropdown.style.display === "") {

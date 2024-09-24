@@ -57,26 +57,31 @@
               <p class="text-muted">Gambar Profile Anda sebaiknya memiliki rasio 1:1 dan berukuran tidak lebih dari 2MB.</p>
             </div>
           </div>
-          <form class="form">
+          <form class="form" id="profileForm" method="POST" action="{{ route('profile.update') }}" enctype="multipart/form-data" >
+            @csrf
             <div class="mb-2">
-                <label for="fullName" class="form-label ms-1">Nama Lengkap</label>
-                <input type="text" class="form-control" id="fullName" />
+              <label for="fullName" class="form-label ms-1">Nama Lengkap</label>
+              <input type="text" class="form-control" id="fullName" name="full_name" value="{{ $user->name }}"/>
             </div>
             {{-- {{ Auth::user() }} --}}
             <div class="mb-2">
-                <label for="username" class="form-label ms-1">Username</label>
-                <input type="text" class="form-control" id="username" value="{{ $user->username }}" />
+              <label for="username" class="form-label ms-1">Username</label>
+              <input type="text" class="form-control" id="username" name="username" value="{{ $user->username }}" />
             </div>
             <div class="mb-2">
-                <label for="email" class="form-label ms-1">Email</label>
-                <input type="email" class="form-control" id="email" value="{{ $user->email }}" />
+              <label for="email" class="form-label ms-1">Email</label>
+              <input type="email" class="form-control" id="email" name="email" value="{{ $user->email }}" />
             </div>
             <div class="mb-2">
-                <label for="phone" class="form-label ms-1">Nomor Telepon</label>
-                <input type="text" class="form-control" id="phone" value="{{ $user->phone }}" />
+              <label for="phone" class="form-label ms-1">Nomor Telepon</label>
+              <input type="text" class="form-control" name="phone" id="phone" value="{{ $user->phone }}" />
+            </div>
+            <div class="mb-2">
+              <label for="image" class="form-label ms-1">Upload Foto</label>
+              <input type="file" class="form-control" name="image" id="fileInput" accept="image/*"/>
             </div>
             <button type="submit" class="btn btn-simpan-perubahan">Simpan Perubahan</button>
-        </form>
+         </form>
         
           <!-- Pop-up Box -->
           <div id="popup" class="popup-container">
