@@ -21,11 +21,15 @@ class ProfilController extends Controller
         // return  ProfilResources::collection($user);
 
         // Mengambil data pengguna yang sedang login
-        $user = Auth::user();
-        // dd($user);
-        
-        // Menampilkan halaman profil dengan data pengguna
-        return view('profile', ['user' => $user]);
+        // $user = Auth::user();
+        // // dd($user);
+
+        // // Menampilkan halaman profil dengan data pengguna
+        // return view('profile', ['user' => $user]);
+        $user = Auth::user(); // Ambil pengguna yang sedang login
+        $profil = Profil::where('registrasi_id', $user->id)->first(); // Ambil profil berdasarkan user
+
+        return view('profile', compact('user', 'profil'));
     }
 
     /**
@@ -57,13 +61,13 @@ class ProfilController extends Controller
                 ]);
                 // dd($id);
                 $profil = Profil::findOrFail($id);
-    
+
                 // Jika ada file gambar baru
                 if ($request->hasFile('image')) {
                     $image = $request->file('image');
                     $imageName = time() . '.' . $image->getClientOriginalExtension();
                     $image->move(public_path('images/profils'), $imageName); // Simpan gambar ke folder public/images/profils
-    
+
                     // Update data profil dengan path gambar baru
                     $profil->update(array_merge(
                         $request->all(),
@@ -73,17 +77,18 @@ class ProfilController extends Controller
                     // Update data profil tanpa gambar
                     $profil->update($request->all());
                 }
-                return response()->json([
-                    "success" => true,
-                    "message" => "Data updated successfully",
-                    "data" => $profil
-                ], 200);
+                // return response()->json([
+                //     "success" => true,
+                //     "message" => "Data updated successfully",
+                //     "data" => $profil
+                // ], 200);
+                return redirect()->back()->with('success', 'Profil berhasil diperbarui.');
             } catch (Exception $e) {
-                return response()->json([
-                    "message" => $e->getMessage()
-                ], 500);
+                return redirect()->back()->with('error', $e->getMessage());
+                // return response()->json([
+                //     "message" => $e->getMessage()
+                // ], 500);
             }
-
         } else {
 
             try {
@@ -93,7 +98,7 @@ class ProfilController extends Controller
                     $image = $request->file('image');
                     $imageName = time() . '.' . $image->getClientOriginalExtension();
                     $image->move(public_path('images/profils'), $imageName); // Simpan gambar ke folder public/images/profils
-    
+
                     // Simpan profil dengan path gambar
                     $profil = Profil::create(array_merge(
                         $request->all(),
@@ -103,12 +108,13 @@ class ProfilController extends Controller
                     // Jika tidak ada gambar
                     $profil = Profil::create($request->all());
                 }
-                return response()->json([
-                    "sukses" => true,
-                    "pesan" => "Data profil berhasil terkirim",
-                    "data" => $profil
-                
-                ], 200);
+                // return response()->json([
+                //     "sukses" => true,
+                //     "pesan" => "Data profil berhasil terkirim",
+                //     "data" => $profil
+
+                // ], 200);
+
                 // dd($profil);
             } catch (Exception $e) {
                 Log::error('Error saat menyimpan profil: ' . $e->getMessage(), ['exception' => $e]);
@@ -116,7 +122,6 @@ class ProfilController extends Controller
                     "pesan"  => $e->getMessage()
                 ], 500);
             }
-
         }
     }
 
@@ -173,15 +178,17 @@ class ProfilController extends Controller
                 // Update data profil tanpa gambar
                 $profil->update($request->all());
             }
-            return response()->json([
-                "success" => true,
-                "message" => "Data updated successfully",
-                "data" => $profil
-            ], 200);
+            // return response()->json([
+            //     "success" => true,
+            //     "message" => "Data updated successfully",
+            //     "data" => $profil
+            // ], 200);
+            return redirect()->back()->with('success', 'Profil berhasil diperbarui.');
         } catch (Exception $e) {
-            return response()->json([
-                "message" => $e->getMessage()
-            ], 500);
+            // return response()->json([
+            //     "message" => $e->getMessage()
+            // ], 500);
+            return redirect()->back()->with('error', $e->getMessage());
         }
     }
 
