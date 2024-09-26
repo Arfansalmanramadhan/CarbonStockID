@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Authentication;
 
 use Exception;
 use App\Models\User;
+use App\Models\Profil;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -25,6 +26,12 @@ class AuthController extends Controller
         try {
             $request["password"] = Hash::make($request->password);
             $user = User::create($request->all());
+            Profil::create([ 
+                'nama_lengkap' => '', 
+                'registrasi_id' => $user->id,
+                'no_hp' => '',
+                'image' => ''
+                ]);
             /* return response()->json([
                 "mesage" => "Pengguna berhasil registasi",
                 "data" =>  $user

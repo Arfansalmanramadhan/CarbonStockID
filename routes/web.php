@@ -46,15 +46,15 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
 
-
 Route::get('/profile', [ProfilController::class, 'index'])->name('profile');
-Route::post('/profile/update', [ProfilController::class, 'update'])->name('profile.update');
+// Route::post('/profile/{id}', [ProfilController::class, 'store'])->name('profile.store');
+Route::put('/profile/{id}', [ProfilController::class, 'update'])->name('profile.update');
 
 
 // Route untuk halaman tambah data
 Route::get('/tambahData', function () {
     return view('tambahData');
-});
+}); 
 
 Route::get('/percobaan', function () {
     return view('percobaan');

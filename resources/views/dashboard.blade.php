@@ -59,7 +59,7 @@
             <div class="user-options">
               <div class="option">
                 <img class="me-1" src="{{ asset('/images/PersonFill.svg') }}" alt="" />
-                <a href="{{ url('/profile') }}"><span>Profil Saya</span></a>
+                <a href="/profile"><span>Profil Saya</span></a>
               </div>
               <div class="option">
                 <img class="ms-1 me-1" src="{{ asset('/images/majesticons_logout.svg') }}" alt="" />
