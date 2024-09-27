@@ -27,9 +27,8 @@ class ProfilController extends Controller
         // // Menampilkan halaman profil dengan data pengguna
         // return view('profile', ['user' => $user]);
         $user = Auth::user(); // Ambil pengguna yang sedang login
-        $profil = Profil::where('registrasi_id', $user->id)->first(); // Ambil profil berdasarkan user
-
-        return view('profile', compact('user', 'profil'));
+        // $profil = Profil::where('registrasi_id', $user->id)->first(); // Ambil profil berdasarkan user
+        return view('profile', compact('user', '$user'));
     }
 
     /**
@@ -150,7 +149,7 @@ class ProfilController extends Controller
      */
     public function update(Request $request, $id)
     {
-        dd($request->all());
+        // dd($request->all());
         try {
             // dd("Hanif");
             $validatedData = $request->validate([
@@ -178,17 +177,17 @@ class ProfilController extends Controller
                 // Update data profil tanpa gambar
                 $profil->update($request->all());
             }
-            // return response()->json([
-            //     "success" => true,
-            //     "message" => "Data updated successfully",
-            //     "data" => $profil
-            // ], 200);
-            return redirect()->back()->with('success', 'Profil berhasil diperbarui.');
+            return response()->json([
+                "success" => true,
+                "message" => "Data updated successfully",
+                "data" => $profil
+            ], 200);
+            // return redirect()->back()->with('success', 'Profil berhasil diperbarui.');
         } catch (Exception $e) {
-            // return response()->json([
-            //     "message" => $e->getMessage()
-            // ], 500);
-            return redirect()->back()->with('error', $e->getMessage());
+            return response()->json([
+                "message" => $e->getMessage()
+            ], 500);
+            // return redirect()->back()->with('error', $e->getMessage());
         }
     }
 
