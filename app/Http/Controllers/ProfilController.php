@@ -27,8 +27,8 @@ class ProfilController extends Controller
         // // Menampilkan halaman profil dengan data pengguna
         // return view('profile', ['user' => $user]);
         $user = Auth::user(); // Ambil pengguna yang sedang login
-        // $profil = Profil::where('registrasi_id', $user->id)->first(); // Ambil profil berdasarkan user
-        return view('profile', compact('user', '$user'));
+        $profil = Profil::where('registrasi_id', $user?->id)->first(); // Ambil profil berdasarkan user
+        return view('profile', compact('user', 'profil'));
     }
 
     /**
