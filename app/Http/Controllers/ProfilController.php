@@ -27,8 +27,9 @@ class ProfilController extends Controller
         // // Menampilkan halaman profil dengan data pengguna
         // return view('profile', ['user' => $user]);
         $user = Auth::user(); // Ambil pengguna yang sedang login
-        // $profil = Profil::where('registrasi_id', $user->id)->first(); // Ambil profil berdasarkan user
-        return view('profile', compact('user', '$user'));
+        $profil = Profil::where('registrasi_id', $user->id)->first(); // Ambil profil berdasarkan user
+
+        return view('profile', compact('user', 'profil'));
     }
 
     /**
@@ -52,12 +53,14 @@ class ProfilController extends Controller
             try {
                 // dd("Hanif");
                 $validatedData = $request->validate([
-                    'nama_lengkap' => "required",
-                    'no_hp' => 'required',
+                    'nama_lengkap' => 'required|string|max:255',
+                    'no_hp' => 'required|string|max:15', // Sesuaikan max sesuai dengan batas panjang no_hp
                     'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048|dimensions:ratio=1/1', // Validasi gambar
+                ], [
                     'image.max' => 'Gambar tidak boleh lebih dari 2MB.',
                     'image.dimensions' => 'Gambar harus memiliki rasio 1:1.',
                 ]);
+
                 // dd($id);
                 $profil = Profil::findOrFail($id);
 
@@ -178,17 +181,17 @@ class ProfilController extends Controller
                 // Update data profil tanpa gambar
                 $profil->update($request->all());
             }
-            return response()->json([
-                "success" => true,
-                "message" => "Data updated successfully",
-                "data" => $profil
-            ], 200);
-            // return redirect()->back()->with('success', 'Profil berhasil diperbarui.');
+            // return response()->json([
+            //     "success" => true,
+            //     "message" => "Data updated successfully",
+            //     "data" => $profil
+            // ], 200);
+            return redirect()->back()->with('success', 'Profil berhasil diperbarui.');
         } catch (Exception $e) {
-            return response()->json([
-                "message" => $e->getMessage()
-            ], 500);
-            // return redirect()->back()->with('error', $e->getMessage());
+            // return response()->json([
+            //     "message" => $e->getMessage()
+            // ], 500);
+            return redirect()->back()->with('error', $e->getMessage());
         }
     }
 
