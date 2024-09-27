@@ -24,7 +24,7 @@ class Profil extends Model
      */
     public function user(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'registrasi_id', 'id');
+        return $this->belongsTo(User::class, 'registrasi_id');
     }
 
     /**

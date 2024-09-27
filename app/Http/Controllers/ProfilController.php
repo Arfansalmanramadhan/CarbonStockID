@@ -150,13 +150,14 @@ class ProfilController extends Controller
      */
     public function update(Request $request, $id)
     {
-        dd($request->all());
+        // dd($request->all());
         try {
             // dd("Hanif");
             $validatedData = $request->validate([
-                'nama_lengkap' => "required",
-                'no_hp' => 'required',
+                'nama_lengkap' => 'required|string|max:255',
+                'no_hp' => 'required|string|max:15', // Sesuaikan max sesuai dengan batas panjang no_hp
                 'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048|dimensions:ratio=1/1', // Validasi gambar
+            ], [
                 'image.max' => 'Gambar tidak boleh lebih dari 2MB.',
                 'image.dimensions' => 'Gambar harus memiliki rasio 1:1.',
             ]);

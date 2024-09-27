@@ -71,8 +71,8 @@
                         </div>
                     </div>
                     <div class="mb-2">
-                        <label for="fullName" class="form-label ms-1">Nama Lengkap</label>
-                        <input type="text" class="form-control" id="fullName" name="nama_lengkap"
+                        <label for="nama_lengkap" class="form-label ms-1">Nama Lengkap</label>
+                        <input type="text" class="form-control" id="nama_lengkap" name="nama_lengkap"
                             value="{{ $profil->nama_lengkap }}" />
                     </div>
                     {{-- {{ Auth::user() }} --}}
