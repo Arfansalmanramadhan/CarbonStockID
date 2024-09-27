@@ -26,12 +26,12 @@ class AuthController extends Controller
         try {
             $request["password"] = Hash::make($request->password);
             $user = User::create($request->all());
-            Profil::create([ 
-                'nama_lengkap' => '', 
+            Profil::create([
+                'nama_lengkap' => $request->input('nama_lengkap', ''),
                 'registrasi_id' => $user->id,
-                'no_hp' => '',
-                'image' => ''
-                ]);
+                'no_hp' => $request->input('no_hp', null),
+                'image' => $request->input('image', '')
+            ]);
             /* return response()->json([
                 "mesage" => "Pengguna berhasil registasi",
                 "data" =>  $user
@@ -45,7 +45,7 @@ class AuthController extends Controller
             return redirect()->back()->with('error', $error->getMessage());
         }
     }
-   
+
 
     public function login(LoginRequests $request)
     {
@@ -61,8 +61,8 @@ class AuthController extends Controller
 
         // Mengambil data pengguna dari database berdasarkan email atau username
         $user = User::where('email', $credentials['email'] ?? null)
-                    ->orWhere('username', $credentials['username'] ?? null)
-                    ->first();
+            ->orWhere('username', $credentials['username'] ?? null)
+            ->first();
 
         // Jika pengguna tidak ditemukan atau password salah
         if (!$user || !Hash::check($credentials['password'], $user->password)) {
@@ -79,10 +79,10 @@ class AuthController extends Controller
             'email' => ['required', 'email'],
             'password' => ['required'],
         ]);
- 
+
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
- 
+
             return redirect()->intended('dashboard');
         }
 
