@@ -30,8 +30,6 @@ class ProfilController extends Controller
         $profil = Profil::where('registrasi_id', $user->id)->first(); // Ambil profil berdasarkan user
 
         return view('profile', compact('user', 'profil'));
-        $profil = Profil::where('registrasi_id', $user?->id)->first(); // Ambil profil berdasarkan user
-        return view('profile', compact('user', 'profil'));
     }
 
     /**
