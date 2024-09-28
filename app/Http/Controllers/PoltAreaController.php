@@ -21,10 +21,14 @@ class PoltAreaController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $poltArea = PoltArea::get();
-        return PoltAreaResorce::collection($poltArea);
+        // $poltArea = PoltArea::get();
+        // return PoltAreaResorce::collection($poltArea);
+        // $profileId = $request->input('profil_id'); // Pastikan profil_id dikirim dari frontend
+        $profile = Profil::all();
+        $poltArea = PoltArea::where('profil_id', $profile->id)->first();
+        return view("tambahData", compact("profil", "poltarea"));
     }
 
     /**
@@ -41,18 +45,17 @@ class PoltAreaController extends Controller
     public function store(Request $request)
     {
         // Ambil profil berdasarkan ID yang dikirimkan dalam request
-        $profileId = $request->input('profil_id'); // Pastikan profil_id dikirim dari frontend
-        $profile = Profil::find($profileId);
+
 
         // $profile = $user->profil;
-        if (!$profileId) {
-            // Untuk debugging, periksa user dan profil
-            return response()->json([
-                'message' => 'Profil tidak terkirim',
-                // 'profil' => $profile,
-                'profil' => $profileId
-            ], 404);
-        }
+        // if (!$profileId) {
+        //     // Untuk debugging, periksa user dan profil
+        //     return response()->json([
+        //         'message' => 'Profil tidak terkirim',
+        //         // 'profil' => $profile,
+        //         'profil' => $profileId
+        //     ], 404);
+        // }
 
         // Validasi request
         $validatedData = $request->validate([
@@ -64,7 +67,7 @@ class PoltAreaController extends Controller
         try {
             // Membuat instance PoltArea baru
             $poltArea = PoltArea::create([
-                "profil_id" => $profile->id,
+                // "profil_id" => $profile->id,
                 "daerah" => $validatedData['daerah'],
                 "latitude" => $validatedData['latitude'],
                 "longitude" => $validatedData['longitude']

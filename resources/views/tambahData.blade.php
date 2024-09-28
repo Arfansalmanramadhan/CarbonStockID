@@ -96,6 +96,7 @@
               <!-- Form -->
               <form method="POST" action="{{ route('plotarea.store') }}" id="plotAreaForm">
                 @csrf
+                @method('POST')
                 <div class="mb-4">
                   <label for="plotName" class="form-label">Daerah Plot Area</label>
                   <input type="text" class="form-control" name="daerah" id="plotName" placeholder="Masukkan nama daerah pengamatan" />

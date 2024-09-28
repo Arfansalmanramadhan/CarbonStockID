@@ -56,7 +56,15 @@ Route::get('/profile/{id}', [ProfilController::class, 'show'])->name('profile.sh
 Route::get('/tambahData', function () {
     return view('tambahData');
 });
-
+Route::controller(PoltAreaController::class)->group(function () {
+    Route::get("/polt-area", "index")->name("tambahData");
+    Route::post("/polt-area/buat", "store")->name("tambahData.store");
+    Route::get("/polt-area/{slug}", "show")->name("tambahData.show");
+    Route::post("/polt-area/{slug}", "update")->name("tambahData.update");
+    Route::delete("/polt-area/{slug}", "destroy")->name("tambahData.destroy");
+    Route::post("/polt-area/restore/{slug}", "restore")->name("tambahData.restore");
+    Route::delete("/polt-area/force-delete/{slug}", "forceDelete")->name("tambahData.foreDelete");
+});
 Route::get('/percobaan', function () {
     return view('percobaan');
 });
