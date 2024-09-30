@@ -46,13 +46,13 @@
             <img src="{{ asset('/images/iconSearch.png') }}" alt="Search Icon" class="search-icon" />
           </form>
           <a href="{{ url('/tambahData') }}" class="btn btn-light btn-tambahData">Tambah data</a>
-          <img src="{{ asset('/images/userIcon.png') }}" alt="User Avatar" id="userIcon" class="ms-3 user-avatar" />
+          <img src="{{ $profil->image ? asset($profil->image) : asset('/images/PersonFill.svg') }}" alt="User Avatar" id="userIcon" class="ms-3 user-avatar" />
           <div class="user-profile-dropdown" id="userProfileDropdown" style="display: none">
             <div class="user-info">
-              <img src="{{ asset('/images/userIcon.png') }}" alt="User Avatar" class="user-avatar" />
+              <img src="{{ $profil->image ? asset($profil->image) : asset('/images/PersonFill.svg') }}" alt="User Avatar" id="userIcon" class="ms-3 user-avatar" />
               <div class="user-details">
-                <h4>Chistoper Govert</h4>
-                <p>chistoper@gmail.com</p>
+                <h4>{{ $user->username }}</h4>
+                <p>{{ $user->email }}</p>
               </div>
             </div>
             <hr />

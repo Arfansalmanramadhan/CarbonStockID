@@ -71,10 +71,11 @@ class PoltAreaController extends Controller
             ]);
 
             // Response berhasil
-            return response()->json([
-                'message' => 'PoltArea berhasil di buat',
-                'data' => $poltArea
-            ], 201);
+            // return response()->json([
+            //     'message' => 'PoltArea berhasil di buat',
+            //     'data' => $poltArea
+            // ], 201);
+            return redirect()->back()->with('success', 'Plot area berhasil ditambahkan!');
         } catch (\Exception $e) {
             // Response error
             return response()->json([

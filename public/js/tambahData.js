@@ -1,6 +1,3 @@
-document.getElementById('submitButton').addEventListener('click', function() {
-  document.getElementById('plotAreaForm').submit();
-});
 
 // Profile pop up
 
@@ -85,6 +82,22 @@ function updatePlotAreaText(newText) {
 //     { once: true }
 //   );
 // });
+
+document.addEventListener("DOMContentLoaded", function() {
+  if (document.getElementById('myToast')) {
+    document.querySelector('.btn-success').click();
+  }
+});
+
+
+document.getElementById('submitButton').addEventListener('click', function() {
+  if (!document.getElementById('myToast')) {
+    document.getElementById('plotAreaForm').submit(); // Trigger form submission
+  }
+});
+
+
+
 
 // Fungsi umum untuk menangani animasi konten
 function handleContentTransition(oldContentId, newContentId, direction) {
@@ -171,6 +184,9 @@ document.querySelector(".btn-success-5").addEventListener("click", function (e) 
   updatePlotAreaText("Hasil Hitung");
 });
 
+
+
+
 // document.getElementById("plotA").addEventListener("click", function () {
 //   handleContentTransition("currentContent", "newContent", "left");
 //   updatePlotAreaText("Sub Plot A");
@@ -255,7 +271,6 @@ toggleImage("toggleDropdown", "namaLokal");
 toggleImage("toggleDropdown2", "namaLokal2");
 toggleImage("toggleDropdown3", "namaLokal3");
 toggleImage("toggleDropdown4", "namaLokal4");
-
 // ---------------------- DropDown dataPlot -----------------------------
 
 // dropdown data yang ditampilkan

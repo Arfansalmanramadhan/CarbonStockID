@@ -38,7 +38,7 @@
                 </a>
             </div>
             <div class="d-flex align-items-center">
-                <img src="{{ asset('images/userIcon.png') }}" alt="User Avatar" id="userIcon"
+                <img src="{{ $profil->image ? asset($profil->image) : asset('/images/PersonFill.svg') }}" alt="User Avatar" id="userIcon"
                     class="ms-3 user-avatar" />
             </div>
         </div>
@@ -55,13 +55,13 @@
         <div class="card p-4 shadow-sm">
             <div class="card-body">
                 <form class="form" id="profileForm" method="POST" action="{{ route('profile.update', $user->id) }}"
-                    {{-- {{ route('profile.update', $user->id) }} --}}
-                    enctype="multipart/form-data">
+                    {{-- {{ route('profile.update', $user->id) }} --}} enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
                     <input type="hidden" id="registrasi_id" name="registrasi_id" value="{{ $user->id }}">
                     <div class="profile-container d-flex align-items-center">
-                        <img src="{{  asset($profil->image ?? 'images/profileImage.svg') }}" alt="User Photo" width="168" />
+                        <img src="{{ $profil->image ? asset($profil->image) : asset('/images/profileImage.svg') }}" alt="User Photo"
+                            width="168" />
                         <div>
                             <button type="button" class="btn btn-success mb-2" id="uploadButton">Pilih Foto</button>
                             <input type="file" class="foto-image" name="image" id="fileInput" accept="image/*"
@@ -88,7 +88,8 @@
                     </div>
                     <div class="mb-2">
                         <label for="no_hp" class="form-label ms-1">Nomor Telepon</label>
-                        <input type="text" class="form-control" name="no_hp" id="no_hp"  value="{{$profil->no_hp}}"/>
+                        <input type="text" class="form-control" name="no_hp" id="no_hp"
+                            value="{{ $profil->no_hp }}" />
                     </div>
                     <button type="submit" class="btn btn-simpan-perubahan">Simpan Perubahan</button>
                 </form>

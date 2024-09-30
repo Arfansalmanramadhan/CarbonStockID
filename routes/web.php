@@ -4,6 +4,13 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Authentication\AuthController;
 use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\PoltAreaController;
+use App\Http\Controllers\SerasahController;
+use App\Http\Controllers\SemaiController;
+use App\Http\Controllers\TunmbuhanBawahController;
+use App\Http\Controllers\TanahController;
+use App\Models\Profil; 
+use App\Models\PoltArea;
+// use App\Models\PlotArea;
 
 
 
@@ -43,7 +50,11 @@ Route::get('/register', function () {
 Route::post('/register', [AuthController::class, 'registasi'])->name('daftar');
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    $user = Auth::user();
+    $profil = Profil::where('id', $user->id)->first();
+    $poltArea = PoltArea::where('profil_id', $profil->id)->first();
+    // $plotAreas = PlotArea::where('profil_id', $profil->id)->get();
+    return view('dashboard', compact('user', 'profil', 'poltArea')); // Kirim $profil ke view
 })->name('dashboard');
 
 Route::get('/profile', [ProfilController::class, 'index'])->name('profile');
@@ -54,7 +65,11 @@ Route::get('/profile/{id}', [ProfilController::class, 'show'])->name('profile.sh
 
 // Route untuk halaman tambah data
 Route::get('/tambahData', function () {
-    return view('tambahData');
+    $user = Auth::user();
+    $profil = Profil::where('id', $user->id)->first();
+    $poltArea = PoltArea::where('profil_id', $profil->id)->first();
+    // dd($user, $profil, $poltArea);   
+    return view('tambahData', compact('user', 'profil', 'poltArea'));
 });
 
 Route::get('/percobaan', function () {
@@ -63,35 +78,30 @@ Route::get('/percobaan', function () {
 
 Route::post('/plotarea/store', [PoltAreaController::class, 'store'])->name('plotarea.store');
 
+// Route::post('/Serasah/store', [SerasahController::class, 'store'])->name('Serasah.store');
 
+Route::controller(SerasahController::class)->group(function () {
+    Route::post("/Serasah/store", "store")->name('Serasah.store');
+    Route::get("/Serasah", "index")->name('tambahData.index');
+    Route::post("/Serasah/update/{id}", "update");
+    Route::delete("/Serasah/{id}", "destroy");
+});;
 
-// // Route untuk halaman utama
-// Route::get('/', function () {
-//     return view('landingPage');
-// });
-
-// // Route untuk halaman login
-// Route::get('/login', [AuthController::class, 'index'])->name('login');
-
-// // Route untuk halaman register
-// Route::get('/register', function () {
-//     return view('register');
-// })->name('register');
-
-// // Route untuk menangani form register POST
-// Route::post('/register', [AuthController::class, 'registasi'])->name('daftar');
-
-// // Route untuk halaman dashboard
-// Route::get('/dashboard', function () {
-//     return view('dashboard');
-// });
-
-// // Route untuk halaman profile
-// Route::get('/profile', function () {
-//     return view('profile');
-// });
-
-// // Route untuk halaman tambah data
-// Route::get('/tambahData', function () {
-//     return view('tambahData');
-// });
+Route::controller(SemaiController::class)->group(function () {
+    Route::post("/Semai/store", "store")->name('Semai.store');
+    Route::get("/Semai", "index");
+    Route::post("/Semai/update/{id}", "update");
+    Route::delete("/Semai/{id}", "destroy");
+});
+Route::controller(TunmbuhanBawahController::class)->group(function () {
+    Route::post("/Tumbuhanbawah/store", "store")->name('tumbuhanBawah.store');
+    Route::get("/Tumbuhanbawah", "index");
+    Route::post("/Tumbuhanbawah/update/{id}", "update");
+    Route::delete("/Tumbuhanbawah/{id}", "destroy");
+});
+Route::controller(TanahController::class)->group(function () {
+    Route::post("/Tanah/store", "store")->name('tanah.store');
+    Route::get("/Tanah", "index");
+    Route::post("/Tanah/update/{id}", "update");
+    Route::delete("/Tanah/{id}", "destroy");
+});
