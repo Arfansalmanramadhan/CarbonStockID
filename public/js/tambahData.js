@@ -256,12 +256,12 @@ function toggleImage(toggleIconId, inputFieldId) {
 
   // Ubah gambar dan border secara bersamaan
   if (img.src.includes("ChevronUp.svg")) {
-    img.src = "assets/img/ChevronDownMini.svg";
-    input.style.border = "1px solid var(--Primary-0, #4CAF4F)";
+    // img.src = "assets/img/ChevronDownMini.svg";
+    // input.style.border = "1px solid var(--Primary-0, #4CAF4F)";
     input.style.borderRadius = "8px 8px 0px 0px"; // Opsional: mengubah border-radius
   } else {
-    img.src = "assets/img/ChevronUp.svg";
-    input.style.border = ""; // Mengembalikan border ke default
+    // img.src = "assets/img/ChevronUp.svg";
+    // input.style.border = ""; // Mengembalikan border ke default
     input.style.borderRadius = ""; // Mengembalikan border-radius ke default
   }
 }
