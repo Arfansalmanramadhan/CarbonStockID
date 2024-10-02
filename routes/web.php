@@ -1,15 +1,24 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Authentication\AuthController;
-use App\Http\Controllers\ProfilController;
-use App\Http\Controllers\PoltAreaController;
-use App\Http\Controllers\SerasahController;
-use App\Http\Controllers\SemaiController;
-use App\Http\Controllers\TunmbuhanBawahController;
-use App\Http\Controllers\TanahController;
 use App\Models\Profil; 
 use App\Models\PoltArea;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\SemaiController;
+use App\Http\Controllers\TanahController;
+use App\Http\Controllers\PancangContrller;
+use App\Http\Controllers\ProfilController;
+use App\Http\Controllers\SerasahController;
+use App\Http\Controllers\PoltAreaController;
+use App\Http\Controllers\TunmbuhanBawahController;
+use App\Http\Controllers\Authentication\AuthController;
+use App\Models\Pancang;
+use App\Models\Pohon;
+use App\Models\Semai;
+use App\Models\Serasah;
+use App\Models\Tanah;
+use App\Models\TumbuhanBawah;
+
 // use App\Models\PlotArea;
 
 
@@ -68,8 +77,14 @@ Route::get('/tambahData', function () {
     $user = Auth::user();
     $profil = Profil::where('id', $user->id)->first();
     $poltArea = PoltArea::where('profil_id', $profil->id)->first();
+    $serasah = Serasah::where('polt-area_id', $poltArea->id)->first();
+    $semai = Semai::where('polt-area_id', $poltArea->id)->first();
+    $tanah = Tanah::where('polt-area_id', $poltArea->id)->first();
+    $tumbuhanbawah = TumbuhanBawah::where('polt-area_id', $poltArea->id)->first();
+    $pohon = Pohon::where('polt-area_id', $poltArea->id)->first();
+    $pancang = Pancang::where('polt-area_id', $poltArea->id)->first();
     // dd($user, $profil, $poltArea);   
-    return view('tambahData', compact('user', 'profil', 'poltArea'));
+    return view('tambahData', compact('user', 'profil', 'poltArea', 'serasah', 'semai', 'pancang'));
 });
 
 Route::get('/percobaan', function () {
@@ -104,4 +119,10 @@ Route::controller(TanahController::class)->group(function () {
     Route::get("/Tanah", "index");
     Route::post("/Tanah/update/{id}", "update");
     Route::delete("/Tanah/{id}", "destroy");
+});
+Route::controller(PancangContrller::class)->group(function () {
+    Route::post("/Pancang/buat", "store")->name('pancang.store');
+    Route::get("/Pancang", "index");
+    Route::post("/Pancang/update/{id}", "update");
+    Route::delete("/Pancang/{id}", "destroy");
 });

@@ -72,10 +72,11 @@ class PancangContrller extends Controller
             ]);
 
             // Response sukses
-            return response()->json([
-                'message' => ' pancang berhasil dibuat',
-                'data' => $Pancang
-            ], 201);
+            // return response()->json([
+            //     'message' => ' pancang berhasil dibuat',
+            //     'data' => $Pancang
+            // ], 201);
+            return redirect()->back()->with('success', 'Serasah berhasil ditambahkan!');
         } catch (\Exception $e) {
             // Response error
             return response()->json([
