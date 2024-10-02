@@ -369,14 +369,18 @@
                                     <div class="modal-content">
                                         <h5 class="ms-3 modal-title" id="dataModalLabel">Sub Plot B - Pancang</h5>
                                         <div class="modal-body">
-                                            <form>
+                                            <form method="POST" action="{{ route('pancang.store') }}"
+                                                id="plotAreaForm">
+                                                @csrf
+                                                <input type="hidden" id="polt-area_id" name="polt-area_id"
+                                                    value="{{ $poltArea->id }}" />
                                                 <!-- Keliling -->
                                                 <div class="mb-3">
                                                     <label for="keliling" class="form-label">Keliling</label>
-                                                    <input type="text" class="form-control form-control-plot-b"
-                                                        id="keliling" value="35" />
+                                                    <input type="text" name="keliling" id="keliling"
+                                                        class="form-control form-control-plot-b" id="keliling"
+                                                        value="35" />
                                                 </div>
-
                                                 <!-- Diameter -->
                                                 <div class="mb-3">
                                                     <label for="diameter" class="form-label">Diameter</label>
@@ -392,10 +396,10 @@
                                                     <label for="namaLokal" class="form-label">Nama Lokal</label>
                                                     <div class="input-container">
                                                         <input type="text" class="form-control form-control-plot-b"
-                                                            id="namaLokal" value="Jati" autocomplete="off"
-                                                            readonly />
-                                                        <img src="{{ asset('/images/ChevronUp.svg') }}" alt=""
-                                                            class="chevron-icon" id="toggleDropdown"
+                                                            id="namaLokal" name="nama_lokal" value="Jati"
+                                                            autocomplete="off" readonly />
+                                                        <img src="{{ asset('/images/ChevronUp.svg') }}"
+                                                            alt="" class="chevron-icon" id="toggleDropdown"
                                                             onclick="toggleImage()" />
                                                         <ul class="dropdown" id="dropdownList">
                                                             <li>Damar</li>
@@ -409,7 +413,8 @@
                                                 <div class="mb-3">
                                                     <label for="namaIlmiah" class="form-label">Nama Ilmiah</label>
                                                     <input type="text" class="form-control form-control-plot-b-non"
-                                                        id="namaIlmiah" value="Tectona grandis" readonly />
+                                                        id="namaIlmiah" name="nama_ilmiah" value="Tectona grandis"
+                                                        readonly />
                                                 </div>
 
                                                 <!-- Kerapatan Kayu -->
@@ -417,7 +422,7 @@
                                                     <label for="kerapatanKayu" class="form-label">Kerapatan Jenis
                                                         Kayu</label>
                                                     <input type="text" class="form-control form-control-plot-b"
-                                                        id="kerapatanKayu"
+                                                        id="kerapatanKayu" name="kerapatan_jenis_kayu"
                                                         placeholder="Masukkan kerapatan jenis kayu (gr/cm3)" />
                                                 </div>
 
@@ -428,11 +433,11 @@
                                                     <p class="form-label">Kandungan Karbon<span>xx Kg</span></p>
                                                     <p class="form-label">Serapan CO2<span>xx Kg</span></p>
                                                 </div>
+                                                <div class="modal-footer">
+                                                    <button type="submit"
+                                                        class="btn btn-success-plot btn-primary">Simpan</button>
+                                                </div>
                                             </form>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button"
-                                                class="btn btn-success-plot btn-primary">Simpan</button>
                                         </div>
                                     </div>
                                 </div>
@@ -609,6 +614,8 @@
                                         <h5 class="ms-3 modal-title" id="dataModalLabel">Sub Plot C - Tiang</h5>
                                         <div class="modal-body">
                                             <form>
+                                                <input type="hidden" id="polt-area_id" name="polt-area_id"
+                                                    value="{{ $poltArea->id }}" />
                                                 <!-- Keliling -->
                                                 <div class="mb-3">
                                                     <label for="keliling" class="form-label">Keliling</label>
@@ -628,12 +635,16 @@
                                                 <div class="mb-3">
                                                     <label for="namaLokal2" class="form-label">Nama Lokal</label>
                                                     <div class="input-container">
-                                                        <input type="text" class="form-control form-control-plot-b" id="namaLokal2" value="Jati" autocomplete="off" readonly />
-                                                        <img src="{{ asset('/images/ChevronUp.svg') }}" alt="" class="chevron-icon" id="toggleDropdown2" onclick="toggleImage2()" />
+                                                        <input type="text" class="form-control form-control-plot-b"
+                                                            id="namaLokal2" value="Jati" autocomplete="off"
+                                                            readonly />
+                                                        <img src="{{ asset('/images/ChevronUp.svg') }}"
+                                                            alt="" class="chevron-icon" id="toggleDropdown2"
+                                                            onclick="toggleImage2()" />
                                                         <ul class="dropdown" id="dropdownList2">
-                                                        <li>Damar</li>
-                                                        <li>Jati</li>
-                                                        <li>Mahoni</li>
+                                                            <li>Damar</li>
+                                                            <li>Jati</li>
+                                                            <li>Mahoni</li>
                                                         </ul>
                                                     </div>
                                                 </div>
@@ -843,12 +854,15 @@
                                         <div class="modal-content">
                                             <h5 class="ms-3 modal-title" id="dataModalLabel">Sub Plot D - Pohon</h5>
                                             <div class="modal-body">
-                                                <form>
+                                                <form method="POST" action="{{ route('nekromas.store') }}">
+                                                    <input type="hidden" id="polt-area_id" name="polt-area_id"
+                                                        value="{{ $poltArea->id }}" />
                                                     <!-- Keliling -->
                                                     <div class="mb-3">
                                                         <label for="keliling" class="form-label">Keliling</label>
-                                                        <input type="text" class="form-control form-control-plot-b"
-                                                            id="keliling" value="35" />
+                                                        <input type="text" name="keliling"
+                                                            class="form-control form-control-plot-b" id="keliling"
+                                                            value="35" />
                                                     </div>
 
                                                     <!-- Diameter -->
@@ -867,8 +881,8 @@
                                                         <div class="input-container">
                                                             <input type="text"
                                                                 class="form-control form-control-plot-b"
-                                                                id="namaLokal3" value="Jati" autocomplete="off"
-                                                                readonly />
+                                                                id="namaLokal3" name="namalokal" value="Jati"
+                                                                autocomplete="off" readonly />
                                                             <img src="{{ asset('/images/ChevronUp.svg') }}"
                                                                 alt="" class="chevron-icon"
                                                                 id="toggleDropdown3" onclick="toggleImage3()" />
@@ -883,15 +897,17 @@
                                                     <!-- Nama Ilmiah -->
                                                     <div class="mb-3">
                                                         <label for="namaIlmiah" class="form-label">Nama Ilmiah</label>
-                                                        <input type="text" class="form-control form-control-plot-b"
-                                                            id="namaIlmiah" value="Tectona grandis" readonly />
+                                                        <input type="text" name="namaIlmiah"
+                                                            class="form-control form-control-plot-b" id="namaIlmiah"
+                                                            value="Tectona grandis" readonly />
                                                     </div>
 
                                                     <!-- Kerapatan Kayu -->
                                                     <div class="mb-3">
                                                         <label for="kerapatanKayu" class="form-label">Kerapatan Jenis
                                                             Kayu</label>
-                                                        <input type="text" class="form-control form-control-plot-b"
+                                                        <input type="text"
+                                                            name="kerapatan_jenis_kayu"class="form-control form-control-plot-b"
                                                             id="kerapatanKayu"
                                                             placeholder="Masukkan kerapatan jenis kayu (gr/cm3)" />
                                                     </div>
@@ -903,11 +919,10 @@
                                                         <p class="form-label">Kandungan Karbon<span>xx Kg</span></p>
                                                         <p class="form-label">Serapan CO2<span>xx Kg</span></p>
                                                     </div>
+                                                    <div class="modal-footer">
+                                                        <button type="submit" class="btn btn-success-plot btn-primary">Simpan</button>
+                                                    </div>
                                                 </form>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button"
-                                                    class="btn btn-success-plot btn-primary">Simpan</button>
                                             </div>
                                         </div>
                                     </div>

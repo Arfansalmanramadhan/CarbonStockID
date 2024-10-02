@@ -57,10 +57,11 @@ class SemaiController extends Controller
             ]);
 
             // Response sukses
-            return response()->json([
-                'message' => 'Semai berhasil dibuat',
-                'data' => $Semai
-            ], 201);
+            // return response()->json([
+            //     'message' => 'Semai berhasil dibuat',
+            //     'data' => $Semai
+            // ], 201);
+            return redirect()->back()->with('success', 'Serasah berhasil ditambahkan!');
         } catch (\Exception $e) {
             // Response error
             return response()->json([

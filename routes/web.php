@@ -8,6 +8,8 @@ use App\Http\Controllers\SerasahController;
 use App\Http\Controllers\SemaiController;
 use App\Http\Controllers\TunmbuhanBawahController;
 use App\Http\Controllers\TanahController;
+use App\Http\Controllers\PancangContrller;
+use App\Http\Controllers\NekromasController;
 use App\Models\Profil; 
 use App\Models\PoltArea;
 // use App\Models\PlotArea;
@@ -104,4 +106,18 @@ Route::controller(TanahController::class)->group(function () {
     Route::get("/Tanah", "index");
     Route::post("/Tanah/update/{id}", "update");
     Route::delete("/Tanah/{id}", "destroy");
+});
+
+Route::controller(PancangContrller::class)->group(function () {
+    Route::post("/Pancang/store", "store")->name('pancang.store');
+    Route::get("/Pancang", "index");
+    Route::post("/Pancang/update/{id}", "update");
+    Route::delete("/Pancang/{id}", "destroy");
+});
+
+Route::controller(NekromasController::class)->group(function () {
+    Route::post("/Nekromass/store", "store")->name('nekromas.store');
+    Route::get("/Nekromass", "index");
+    Route::post("/Nekromass/update/{id}", "update");
+    Route::delete("/Nekromass/{id}", "destroy");
 });
