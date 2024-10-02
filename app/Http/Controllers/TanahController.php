@@ -68,13 +68,14 @@ class TanahController extends Controller
             //     'message' => 'Tanah berhasil dibuat',
             //     'data' => $Tanah
             // ], 201);
-            return redirect()->back()->with('success', 'Serasah berhasil ditambahkan!');
+            return redirect()->back()->with('success', 'Tanah berhasil ditambahkan!');
         } catch (\Exception $e) {
             // Response error
-            return response()->json([
-                'message' => 'Gagal membuat Tanah',
-                'error' => $e->getMessage()
-            ], 500);
+            // return response()->json([
+            //     'message' => 'Gagal membuat Tanah',
+            //     'error' => $e->getMessage()
+            // ], 500);
+            return redirect()->back()->with('error', $e->getMessage());
         }
     }
 

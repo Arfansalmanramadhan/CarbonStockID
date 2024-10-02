@@ -144,10 +144,11 @@ class SerasahController extends Controller
             return redirect()->back()->with('success', 'Serasah berhasil ditambahkan!');
         } catch (\Exception $e) {
             // Response error
-            return response()->json([
-                'message' => 'Gagal membuat Serasah',
-                'error' => $e->getMessage()
-            ], 500);
+            // return response()->json([
+            //     'message' => 'Gagal membuat Serasah',
+            //     'error' => $e->getMessage()
+            // ], 500);
+            return redirect()->back()->with('error', $e->getMessage());
         }
     }
 

@@ -61,13 +61,14 @@ class SemaiController extends Controller
             //     'message' => 'Semai berhasil dibuat',
             //     'data' => $Semai
             // ], 201);
-            return redirect()->back()->with('success', 'Serasah berhasil ditambahkan!');
+            return redirect()->back()->with('success', 'Semai berhasil ditambahkan!');
         } catch (\Exception $e) {
             // Response error
-            return response()->json([
-                'message' => 'Gagal membuat Semai',
-                'error' => $e->getMessage()
-            ], 500);
+            // return response()->json([
+            //     'message' => 'Gagal membuat Semai',
+            //     'error' => $e->getMessage()
+            // ], 500);
+            return redirect()->back()->with('error', $e->getMessage());
         }
     }
 

@@ -61,13 +61,14 @@ class TunmbuhanBawahController extends Controller
             //     'message' => 'TumbuhanBawah berhasil dibuat',
             //     'data' => $TumbuhanBawah
             // ], 201);
-            return redirect()->back()->with('success', 'Serasah berhasil ditambahkan!');
+            return redirect()->back()->with('success', 'Tumbuhan bawah berhasil ditambahkan!');
         } catch (\Exception $e) {
             // Response error
-            return response()->json([
-                'message' => 'Gagal membuat TumbuhanBawah',
-                'error' => $e->getMessage()
-            ], 500);
+            // return response()->json([
+            //     'message' => 'Gagal membuat TumbuhanBawah',
+            //     'error' => $e->getMessage()
+            // ], 500);
+            return redirect()->back()->with('error', $e->getMessage());
         }
     }
 

@@ -1,36 +1,28 @@
 <?php
 
-<<<<<<< HEAD
-=======
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Authentication\AuthController;
-use App\Http\Controllers\ProfilController;
-use App\Http\Controllers\PoltAreaController;
-use App\Http\Controllers\SerasahController;
-use App\Http\Controllers\SemaiController;
-use App\Http\Controllers\TunmbuhanBawahController;
-use App\Http\Controllers\TanahController;
-use App\Http\Controllers\PancangContrller;
-use App\Http\Controllers\NekromasController;
->>>>>>> 5fea1ee4447f87d6360d575885a9331895ba0a41
-use App\Models\Profil; 
-use App\Models\PoltArea;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\SemaiController;
-use App\Http\Controllers\TanahController;
-use App\Http\Controllers\PancangContrller;
-use App\Http\Controllers\ProfilController;
-use App\Http\Controllers\SerasahController;
-use App\Http\Controllers\PoltAreaController;
-use App\Http\Controllers\TunmbuhanBawahController;
-use App\Http\Controllers\Authentication\AuthController;
-use App\Models\Pancang;
 use App\Models\Pohon;
 use App\Models\Semai;
-use App\Models\Serasah;
 use App\Models\Tanah;
+use App\Models\Tiang;
+use App\Models\Pancang;
+use App\Models\Profil;
+use App\Models\Serasah;
+use App\Models\PoltArea;
+use App\Models\Necromass;
 use App\Models\TumbuhanBawah;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PohonController;
+use App\Http\Controllers\SemaiController;
+use App\Http\Controllers\TanahController;
+use App\Http\Controllers\TiangController;
+use App\Http\Controllers\PancangContrller;
+use App\Http\Controllers\ProfilController;
+use App\Http\Controllers\SerasahController;
+use App\Http\Controllers\NekromasController;
+use App\Http\Controllers\PoltAreaController;
+use App\Http\Controllers\TunmbuhanBawahController;
+use App\Http\Controllers\Authentication\AuthController;
 
 // use App\Models\PlotArea;
 
@@ -96,12 +88,26 @@ Route::get('/tambahData', function () {
     $tumbuhanbawah = TumbuhanBawah::where('polt-area_id', $poltArea->id)->first();
     $pohon = Pohon::where('polt-area_id', $poltArea->id)->first();
     $pancang = Pancang::where('polt-area_id', $poltArea->id)->first();
+    $tiang = Tiang::where('polt-area_id', $poltArea->id)->first();
+    $nertromas = Necromass::where('polt-area_id', $poltArea->id)->first();
     // dd($user, $profil, $poltArea);   
-    return view('tambahData', compact('user', 'profil', 'poltArea', 'serasah', 'semai', 'pancang'));
+    return view('tambahData', compact('user', 'profil', 'poltArea', 'serasah', 'semai', 'pancang', 'tiang', 'nertromas', 'pohon'));
 });
 
 Route::get('/percobaan', function () {
-    return view('percobaan');
+    $user = Auth::user();
+    $profil = Profil::where('id', $user->id)->first();
+    $poltArea = PoltArea::where('profil_id', $profil->id)->first();
+    $serasah = Serasah::where('polt-area_id', $poltArea->id)->first();
+    $semai = Semai::where('polt-area_id', $poltArea->id)->first();
+    $tanah = Tanah::where('polt-area_id', $poltArea->id)->first();
+    $tumbuhanbawah = TumbuhanBawah::where('polt-area_id', $poltArea->id)->first();
+    $pohon = Pohon::where('polt-area_id', $poltArea->id)->first();
+    $pancang = Pancang::where('polt-area_id', $poltArea->id)->first();
+    $tiang = Tiang::where('polt-area_id', $poltArea->id)->first();
+    $nertromas = Necromass::where('polt-area_id', $poltArea->id)->first();
+    // dd($user, $profil, $poltArea);   
+    return view('percobaan', compact('user', 'profil', 'poltArea', 'serasah', 'semai', 'pancang', 'tiang', 'nertromas', 'pohon'));
 });
 
 Route::post('/plotarea/store', [PoltAreaController::class, 'store'])->name('plotarea.store');
@@ -133,20 +139,13 @@ Route::controller(TanahController::class)->group(function () {
     Route::post("/Tanah/update/{id}", "update");
     Route::delete("/Tanah/{id}", "destroy");
 });
-<<<<<<< HEAD
-Route::controller(PancangContrller::class)->group(function () {
-    Route::post("/Pancang/buat", "store")->name('pancang.store');
-=======
 
 Route::controller(PancangContrller::class)->group(function () {
     Route::post("/Pancang/store", "store")->name('pancang.store');
->>>>>>> 5fea1ee4447f87d6360d575885a9331895ba0a41
     Route::get("/Pancang", "index");
     Route::post("/Pancang/update/{id}", "update");
     Route::delete("/Pancang/{id}", "destroy");
 });
-<<<<<<< HEAD
-=======
 
 Route::controller(NekromasController::class)->group(function () {
     Route::post("/Nekromass/store", "store")->name('nekromas.store');
@@ -154,4 +153,15 @@ Route::controller(NekromasController::class)->group(function () {
     Route::post("/Nekromass/update/{id}", "update");
     Route::delete("/Nekromass/{id}", "destroy");
 });
->>>>>>> 5fea1ee4447f87d6360d575885a9331895ba0a41
+Route::controller(TiangController::class)->group(function () {
+    Route::post("/Tiang/buat", "store")->name('tiang.store');
+    Route::get("/Tiang", "index");
+    Route::post("/Tiang/update/{id}", "update");
+    Route::delete("/Tiang/{id}", "destroy");
+});
+Route::controller(PohonController::class)->group(function () {
+    Route::post("/Pohon/buat", "store")->name('pohon.store');
+    Route::get("/Pohon", "index");
+    Route::post("/Pohon/update/{id}", "update");
+    Route::delete("/Pohon/{id}", "destroy");
+});

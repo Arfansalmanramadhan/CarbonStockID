@@ -369,14 +369,6 @@
                                     <div class="modal-content">
                                         <h5 class="ms-3 modal-title" id="dataModalLabel">Sub Plot B - Pancang</h5>
                                         <div class="modal-body">
-<<<<<<< HEAD
-                                            <form method="POST" action="{{ route('pancang.store') }}" id="tanahForm">
-                                                <!-- Keliling -->
-                                                <div class="mb-3">
-                                                    <label for="keliling" class="form-label">Keliling</label>
-                                                    <input type="text" name="keliling" class="form-control form-control-plot-b"
-                                                        id="keliling" value="35" />
-=======
                                             <form method="POST" action="{{ route('pancang.store') }}"
                                                 id="plotAreaForm">
                                                 @csrf
@@ -388,7 +380,6 @@
                                                     <input type="text" name="keliling" id="keliling"
                                                         class="form-control form-control-plot-b" id="keliling"
                                                         value="35" />
->>>>>>> 5fea1ee4447f87d6360d575885a9331895ba0a41
                                                 </div>
                                                 <!-- Diameter -->
                                                 <div class="mb-3">
@@ -405,17 +396,10 @@
                                                     <label for="nama_lokal" class="form-label">Nama Lokal</label>
                                                     <div class="input-container">
                                                         <input type="text" class="form-control form-control-plot-b"
-<<<<<<< HEAD
-                                                            id="nama_lokal" value="Jati" autocomplete="off" name="nama_lokal" 
-                                                            readonly />
-                                                        <img src="{{ asset('/images/ChevronUp.svg') }}" alt=""
-                                                            class="chevron-icon" id="toggleDropdown"
-=======
                                                             id="namaLokal" name="nama_lokal" value="Jati"
                                                             autocomplete="off" readonly />
                                                         <img src="{{ asset('/images/ChevronUp.svg') }}"
                                                             alt="" class="chevron-icon" id="toggleDropdown"
->>>>>>> 5fea1ee4447f87d6360d575885a9331895ba0a41
                                                             onclick="toggleImage()" />
                                                         <ul class="dropdown" id="dropdownList">
                                                             <li>Damar</li>
@@ -429,26 +413,16 @@
                                                 <div class="mb-3">
                                                     <label for="nama_ilmiah" class="form-label">Nama Ilmiah</label>
                                                     <input type="text" class="form-control form-control-plot-b-non"
-<<<<<<< HEAD
-                                                        id="nama_ilmiah"  value="{{ $pancang ? $pancang->nama_ilmiah : '' }}" readonly />
-=======
                                                         id="namaIlmiah" name="nama_ilmiah" value="Tectona grandis"
                                                         readonly />
->>>>>>> 5fea1ee4447f87d6360d575885a9331895ba0a41
                                                 </div>
 
                                                 <!-- Kerapatan Kayu -->
                                                 <div class="mb-3">
-                                                    <label for="kerapatan_jenis_kayu" class="form-label">Kerapatan Jenis
-                                                        Kayu</label>
+                                                    <label for="kerapatan_jenis_kayu" class="form-label">Kerapatan Jenis Kayu</label>
                                                     <input type="text" class="form-control form-control-plot-b"
-<<<<<<< HEAD
-                                                        id="kerapatan_jenis_kayu"
-                                                        placeholder="Masukkan kerapatan jenis kayu (gr/cm3)" name="kerapatan_jenis_kayu" value="{{ $pancang ? $pancang->kerapatan_jenis_kayu : '' }}" />
-=======
-                                                        id="kerapatanKayu" name="kerapatan_jenis_kayu"
+                                                        id="kerapatan_jenis_kayu" name="kerapatan_jenis_kayu" value="{{ $pancang ? $pancang->kerapatan_jenis_kayu : '' }}"
                                                         placeholder="Masukkan kerapatan jenis kayu (gr/cm3)" />
->>>>>>> 5fea1ee4447f87d6360d575885a9331895ba0a41
                                                 </div>
 
                                                 <!-- Biomassa, Karbon, CO2 -->
@@ -464,7 +438,7 @@
                                                     </p>
                                                     <p class="form-label">
                                                         Serapan CO2:
-                                                        <span>{{ $pancang ? $pancang->kandungan_karbon : '' }} Kg</span>
+                                                        <span>{{ $pancang ? $pancang->co2: '' }} Kg</span>
                                                     </p>
                                                 </div>
                                                 </div>
@@ -648,35 +622,39 @@
                                     <div class="modal-content">
                                         <h5 class="ms-3 modal-title" id="dataModalLabel">Sub Plot C - Tiang</h5>
                                         <div class="modal-body">
-                                            <form>
+                                            <form method="POST" action="{{ route('tiang.store') }}"
+                                                id="plotAreaForm">
+                                                @csrf
                                                 <input type="hidden" id="polt-area_id" name="polt-area_id"
                                                     value="{{ $poltArea->id }}" />
                                                 <!-- Keliling -->
                                                 <div class="mb-3">
                                                     <label for="keliling" class="form-label">Keliling</label>
-                                                    <input type="text" class="form-control form-control-plot-b"
-                                                        id="keliling" value="35" />
+                                                    <input type="text" name="keliling" id="keliling"
+                                                        class="form-control form-control-plot-b" id="keliling"
+                                                        value="35" />
                                                 </div>
-
                                                 <!-- Diameter -->
                                                 <div class="mb-3">
                                                     <label for="diameter" class="form-label">Diameter</label>
                                                     <input type="text"
-                                                        class="form-control form-control-plot-b is-invalid"
-                                                        id="diameter" value="15.27" readonly />
-                                                    <div class="invalid-feedback">Diameter harus diantara 10 hingga 19
+                                                        class="form-control form-control-plot-b-non is-invalid"
+                                                        id="diameter"  value="{{ $tiang ? $tiang->diameter : '' }}" name="diameter" readonly  />
+                                                    <div class="invalid-feedback">Diameter harus diantara 10 hingga 19 
                                                         cm.</div>
                                                 </div>
+
+                                                <!-- Nama Lokal with Datalist -->
                                                 <div class="mb-3">
-                                                    <label for="namaLokal2" class="form-label">Nama Lokal</label>
+                                                    <label for="nama_lokal" class="form-label">Nama Lokal</label>
                                                     <div class="input-container">
                                                         <input type="text" class="form-control form-control-plot-b"
-                                                            id="namaLokal2" value="Jati" autocomplete="off"
-                                                            readonly />
+                                                            id="namaLokal" name="nama_lokal" value="Jati"
+                                                            autocomplete="off" readonly />
                                                         <img src="{{ asset('/images/ChevronUp.svg') }}"
-                                                            alt="" class="chevron-icon" id="toggleDropdown2"
-                                                            onclick="toggleImage2()" />
-                                                        <ul class="dropdown" id="dropdownList2">
+                                                            alt="" class="chevron-icon" id="toggleDropdown"
+                                                            onclick="toggleImage()" />
+                                                        <ul class="dropdown" id="dropdownList">
                                                             <li>Damar</li>
                                                             <li>Jati</li>
                                                             <li>Mahoni</li>
@@ -686,26 +664,40 @@
 
                                                 <!-- Nama Ilmiah -->
                                                 <div class="mb-3">
-                                                    <label for="namaIlmiah" class="form-label">Nama Ilmiah</label>
-                                                    <input type="text" class="form-control form-control-plot-b"
-                                                        id="namaIlmiah" value="Tectona grandis" readonly />
+                                                    <label for="nama_ilmiah" class="form-label">Nama Ilmiah</label>
+                                                    <input type="text" class="form-control form-control-plot-b-non"
+                                                        id="namaIlmiah" name="nama_ilmiah" value="Tectona grandis"
+                                                        readonly />
                                                 </div>
 
                                                 <!-- Kerapatan Kayu -->
                                                 <div class="mb-3">
-                                                    <label for="kerapatanKayu" class="form-label">Kerapatan Jenis
-                                                        Kayu</label>
+                                                    <label for="kerapatan_jenis_kayu" class="form-label">Kerapatan Jenis Kayu</label>
                                                     <input type="text" class="form-control form-control-plot-b"
-                                                        id="kerapatanKayu"
+                                                        id="kerapatan_jenis_kayu" name="kerapatan_jenis_kayu" value="{{ $tiang ? $tiang->kerapatan_jenis_kayu : '' }}"
                                                         placeholder="Masukkan kerapatan jenis kayu (gr/cm3)" />
                                                 </div>
 
                                                 <!-- Biomassa, Karbon, CO2 -->
                                                 <div class="mb-3">
-                                                    <p class="form-label">Biomassa diatas Permukaan Tanah<span>xx
-                                                            Kg</span></p>
-                                                    <p class="form-label">Kandungan Karbon<span>xx Kg</span></p>
-                                                    <p class="form-label">Serapan CO2<span>xx Kg</span></p>
+                                                   <div class="mb-3">
+                                                    <p class="form-label">
+                                                        Biomassa di atas Permukaan Tanah:
+                                                        <span>{{ $tiang ? $tiang->bio_di_atas_tanah : '' }} Kg</span>
+                                                    </p>
+                                                    <p class="form-label">
+                                                        Kandungan Karbon:
+                                                        <span>{{ $tiang ? $tiang->kandungan_karbon : '' }} Kg</span>
+                                                    </p>
+                                                    <p class="form-label">
+                                                        Serapan CO2:
+                                                        <span>{{ $tiang ? $tiang->co2: '' }} Kg</span>
+                                                    </p>
+                                                </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="submit"
+                                                        class="btn btn-success-plot btn-primary">Simpan</button>
                                                 </div>
                                             </form>
                                         </div>
@@ -889,75 +881,84 @@
                                         <div class="modal-content">
                                             <h5 class="ms-3 modal-title" id="dataModalLabel">Sub Plot D - Pohon</h5>
                                             <div class="modal-body">
-                                                <form method="POST" action="{{ route('nekromas.store') }}">
-                                                    <input type="hidden" id="polt-area_id" name="polt-area_id"
-                                                        value="{{ $poltArea->id }}" />
-                                                    <!-- Keliling -->
-                                                    <div class="mb-3">
-                                                        <label for="keliling" class="form-label">Keliling</label>
-                                                        <input type="text" name="keliling"
-                                                            class="form-control form-control-plot-b" id="keliling"
-                                                            value="35" />
-                                                    </div>
+                                                <form method="POST" action="{{ route('pohon.store') }}"
+                                                id="plotAreaForm">
+                                                @csrf
+                                                <input type="hidden" id="polt-area_id" name="polt-area_id"
+                                                    value="{{ $poltArea->id }}" />
+                                                <!-- Keliling -->
+                                                <div class="mb-3">
+                                                    <label for="keliling" class="form-label">Keliling</label>
+                                                    <input type="text" name="keliling" id="keliling"
+                                                        class="form-control form-control-plot-b" id="keliling"
+                                                        value="35" />
+                                                </div>
+                                                <!-- Diameter -->
+                                                <div class="mb-3">
+                                                    <label for="diameter" class="form-label">Diameter</label>
+                                                    <input type="text"
+                                                        class="form-control form-control-plot-b-non is-invalid"
+                                                        id="diameter"  value="{{ $pohon ? $pohon->diameter : '' }}" name="diameter" readonly  />
+                                                    <div class="invalid-feedback">Diameter harus diantara 20
+                                                        cm.</div>
+                                                </div>
 
-                                                    <!-- Diameter -->
-                                                    <div class="mb-3">
-                                                        <label for="diameter" class="form-label">Diameter</label>
-                                                        <input type="text"
-                                                            class="form-control form-control-plot-b is-invalid"
-                                                            id="diameter" value="15.27" readonly />
-                                                        <div class="invalid-feedback">Diameter harus diantara 10 hingga
-                                                            19 cm.</div>
+                                                <!-- Nama Lokal with Datalist -->   
+                                                <div class="mb-3">
+                                                    <label for="nama_lokal" class="form-label">Nama Lokal</label>
+                                                    <div class="input-container">
+                                                        <input type="text" class="form-control form-control-plot-b"
+                                                            id="namaLokal" name="nama_lokal" value="Jati"
+                                                            autocomplete="off" readonly />
+                                                        <img src="{{ asset('/images/ChevronUp.svg') }}"
+                                                            alt="" class="chevron-icon" id="toggleDropdown"
+                                                            onclick="toggleImage()" />
+                                                        <ul class="dropdown" id="dropdownList">
+                                                            <li>Damar</li>
+                                                            <li>Jati</li>
+                                                            <li>Mahoni</li>
+                                                        </ul>
                                                     </div>
+                                                </div>
 
-                                                    <!-- Nama Lokal with Datalist -->
-                                                    <div class="mb-3">
-                                                        <label for="namaLokal" class="form-label">Nama Lokal</label>
-                                                        <div class="input-container">
-                                                            <input type="text"
-                                                                class="form-control form-control-plot-b"
-                                                                id="namaLokal3" name="namalokal" value="Jati"
-                                                                autocomplete="off" readonly />
-                                                            <img src="{{ asset('/images/ChevronUp.svg') }}"
-                                                                alt="" class="chevron-icon"
-                                                                id="toggleDropdown3" onclick="toggleImage3()" />
-                                                            <ul class="dropdown" id="dropdownList3">
-                                                                <li>Damar</li>
-                                                                <li>Jati</li>
-                                                                <li>Mahoni</li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
+                                                <!-- Nama Ilmiah -->
+                                                <div class="mb-3">
+                                                    <label for="nama_ilmiah" class="form-label">Nama Ilmiah</label>
+                                                    <input type="text" class="form-control form-control-plot-b-non"
+                                                        id="namaIlmiah" name="nama_ilmiah" value="Tectona grandis"
+                                                        readonly />
+                                                </div>
 
-                                                    <!-- Nama Ilmiah -->
-                                                    <div class="mb-3">
-                                                        <label for="namaIlmiah" class="form-label">Nama Ilmiah</label>
-                                                        <input type="text" name="namaIlmiah"
-                                                            class="form-control form-control-plot-b" id="namaIlmiah"
-                                                            value="Tectona grandis" readonly />
-                                                    </div>
+                                                <!-- Kerapatan Kayu -->
+                                                <div class="mb-3">
+                                                    <label for="kerapatan_jenis_kayu" class="form-label">Kerapatan Jenis Kayu</label>
+                                                    <input type="text" class="form-control form-control-plot-b"
+                                                        id="kerapatan_jenis_kayu" name="kerapatan_jenis_kayu" value="{{ $pohon ? $pohon->kerapatan_jenis_kayu : '' }}"
+                                                        placeholder="Masukkan kerapatan jenis kayu (gr/cm3)" />
+                                                </div>
 
-                                                    <!-- Kerapatan Kayu -->
-                                                    <div class="mb-3">
-                                                        <label for="kerapatanKayu" class="form-label">Kerapatan Jenis
-                                                            Kayu</label>
-                                                        <input type="text"
-                                                            name="kerapatan_jenis_kayu"class="form-control form-control-plot-b"
-                                                            id="kerapatanKayu"
-                                                            placeholder="Masukkan kerapatan jenis kayu (gr/cm3)" />
-                                                    </div>
-
-                                                    <!-- Biomassa, Karbon, CO2 -->
-                                                    <div class="mb-3">
-                                                        <p class="form-label">Biomassa diatas Permukaan Tanah<span>xx
-                                                                Kg</span></p>
-                                                        <p class="form-label">Kandungan Karbon<span>xx Kg</span></p>
-                                                        <p class="form-label">Serapan CO2<span>xx Kg</span></p>
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="submit" class="btn btn-success-plot btn-primary">Simpan</button>
-                                                    </div>
-                                                </form>
+                                                <!-- Biomassa, Karbon, CO2 -->
+                                                <div class="mb-3">
+                                                   <div class="mb-3">
+                                                    <p class="form-label">
+                                                        Biomassa di atas Permukaan Tanah:
+                                                        <span>{{ $pohon ? $pohon->bio_di_atas_tanah : '' }} Kg</span>
+                                                    </p>
+                                                    <p class="form-label">
+                                                        Kandungan Karbon:
+                                                        <span>{{ $pohon ? $pohon->kandungan_karbon : '' }} Kg</span>
+                                                    </p>
+                                                    <p class="form-label">
+                                                        Serapan CO2:
+                                                        <span>{{ $pohon ? $pohon->co2: '' }} Kg</span>
+                                                    </p>
+                                                </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="submit"
+                                                        class="btn btn-success-plot btn-primary">Simpan</button>
+                                                </div>
+                                            </form>
                                             </div>
                                         </div>
                                     </div>
@@ -1113,68 +1114,65 @@
                                 <div class="modal" id="dataModal4" aria-hidden="true">
                                     <div class="modal-dialog" id="dataModal4">
                                         <div class="modal-content">
-                                            <h5 class="ms-3 modal-title" id="dataModalLabel">Sub Plot D - Pohon</h5>
+                                            <h5 class="ms-3 modal-title" id="dataModalLabel">Sub Plot D - Nekromas</h5>
                                             <div class="modal-body">
                                                 <form>
-                                                    <!-- Keliling -->
+                                                    <!-- Diameter Pangkal -->
                                                     <div class="mb-3">
-                                                        <label for="keliling" class="form-label">Keliling</label>
+                                                        <label for="diameter_pangkal" class="form-label">Diameter Pangkal</label>
                                                         <input type="text" class="form-control form-control-plot-b"
-                                                            id="keliling" value="35" />
+                                                            id="diameter_pangkal"  />
                                                     </div>
 
-                                                    <!-- Diameter -->
+                                                    <!-- Diameter ujung -->
                                                     <div class="mb-3">
-                                                        <label for="diameter" class="form-label">Diameter</label>
+                                                        <label for="diameter_ujung" class="form-label">Diameter ujung</label>
                                                         <input type="text"
                                                             class="form-control form-control-plot-b is-invalid"
-                                                            id="diameter" value="15.27" readonly />
-                                                        <div class="invalid-feedback">Diameter harus diantara 10 hingga
-                                                            19 cm.</div>
+                                                            id="diameter_ujung" name="diameter_ujung" readonly />
                                                     </div>
 
-                                                    <!-- Nama Lokal with Datalist -->
+                                                    <!-- Panjang-->
                                                     <div class="mb-3">
-                                                        <label for="namaLokal" class="form-label">Nama Lokal</label>
-                                                        <div class="input-container">
-                                                            <input type="text"
-                                                                class="form-control form-control-plot-b"
-                                                                id="namaLokal4" value="Jati" autocomplete="off"
-                                                                readonly />
-                                                            <img src="{{ asset('/images/ChevronUp.svg') }}"
-                                                                alt="" class="chevron-icon"
-                                                                id="toggleDropdown4" onclick="toggleImage4()" />
-                                                            <ul class="dropdown" id="dropdownList4">
-                                                                <li>Damar</li>
-                                                                <li>Jati</li>
-                                                                <li>Mahoni</li>
-                                                            </ul>
-                                                        </div>
+                                                        <label for="panjang" class="form-label">Panjang</label>
+                                                        <input type="text"
+                                                            class="form-control form-control-plot-b is-invalid"
+                                                            id="panjang" name="panjang" readonly />
                                                     </div>
 
-                                                    <!-- Nama Ilmiah -->
+                                                    <!-- volume -->
                                                     <div class="mb-3">
-                                                        <label for="namaIlmiah" class="form-label">Nama Ilmiah</label>
+                                                        <label for="volume" class="form-label">Kerapatan Jenis Kayu</label>
                                                         <input type="text" class="form-control form-control-plot-b"
-                                                            id="namaIlmiah" value="Tectona grandis" readonly />
-                                                    </div>
-
-                                                    <!-- Kerapatan Kayu -->
-                                                    <div class="mb-3">
-                                                        <label for="kerapatanKayu" class="form-label">Kerapatan Jenis
-                                                            Kayu</label>
-                                                        <input type="text" class="form-control form-control-plot-b"
-                                                            id="kerapatanKayu"
+                                                            id="volume" name="volume" value="{{ $nertromas ? $nertromas->volume : '' }}"
                                                             placeholder="Masukkan kerapatan jenis kayu (gr/cm3)" />
+                                                    </div>
+
+                                                    <!-- Berat Jenis Kayu-->
+                                                    <div class="mb-3">
+                                                        <label for="berat_jenis_kayu" class="form-label">Berat Jenis Kayu</label>
+                                                        <input type="text"
+                                                            class="form-control form-control-plot-b is-invalid"
+                                                            id="berat_jenis_kayu" name="berat_jenis_kayu" readonly />
                                                     </div>
 
                                                     <!-- Biomassa, Karbon, CO2 -->
                                                     <div class="mb-3">
-                                                        <p class="form-label">Biomassa diatas Permukaan Tanah<span>xx
-                                                                Kg</span></p>
-                                                        <p class="form-label">Kandungan Karbon<span>xx Kg</span></p>
-                                                        <p class="form-label">Serapan CO2<span>xx Kg</span></p>
-                                                    </div>
+                                                        <div class="mb-3">
+                                                            <p class="form-label">
+                                                                Biomassa :
+                                                                <span>{{ $nertromas ? $nertromas->biomasa : '' }} Kg</span>
+                                                            </p>
+                                                            <p class="form-label">
+                                                                Kandungan Karbon:
+                                                                <span>{{ $nertromas ? $nertromas->carbon : '' }} Kg</span>
+                                                            </p>
+                                                            <p class="form-label">
+                                                                Serapan CO2:
+                                                                <span>{{ $nertromas ? $nertromas->co2: '' }} Kg</span>
+                                                            </p>
+                                                        </div>
+                                                     </div>
                                                 </form>
                                             </div>
                                             <div class="modal-footer">

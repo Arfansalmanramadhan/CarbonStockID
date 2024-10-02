@@ -45,9 +45,10 @@ class PohonController extends Controller
 
             // Tentukan rentang diameter (2-9 atau 10-19)
             if ( $diameter < 20.00) {
-                return response()->json([
-                    "pesan" => "Diameter harus diantara 20 cm.",
-                ], 404);
+                // return response()->json([
+                //     "pesan" => "Diameter harus diantara 20 cm.",
+                // ], 404);
+                return redirect()->back()->with('pesan', 'Diameter harus diantara 20 cm.');
             }
 
 
@@ -72,16 +73,18 @@ class PohonController extends Controller
             ]);
 
             // Response sukses
-            return response()->json([
-                'message' => ' Pohon berhasil dibuat',
-                'data' => $Pohon
-            ], 201);
+            // return response()->json([
+            //     'message' => ' Pohon berhasil dibuat',
+            //     'data' => $Pohon
+            // ], 201);
+            return redirect()->back()->with('success', 'Pohon berhasil ditambahkan!');
         } catch (\Exception $e) {
             // Response error
-            return response()->json([
-                'message' => 'Gagal membuat Pohon',
-                'error' => $e->getMessage()
-            ], 500);
+            // return response()->json([
+            //     'message' => 'Gagal membuat Pohon',
+            //     'error' => $e->getMessage()
+            // ], 500);
+            return redirect()->back()->with('error', $e->getMessage());
         }
     }
     public function update(Request $request, string $id)

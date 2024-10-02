@@ -70,16 +70,18 @@ class NekromasController extends Controller
             ]);
 
             // Response sukses
-            return response()->json([
-                'message' => ' Necromass berhasil dibuat',
-                'data' => $Necro
-            ], 201);
+            // return response()->json([
+            //     'message' => ' Necromass berhasil dibuat',
+            //     'data' => $Necro
+            // ], 201);
+            return redirect()->back()->with('success', 'Pohon berhasil ditambahkan!');
         } catch (\Exception $e) {
             // Response error
-            return response()->json([
-                'message' => 'Gagal membuat Necromass',
-                'error' => $e->getMessage()
-            ], 500);
+            // return response()->json([
+            //     'message' => 'Gagal membuat Necromass',
+            //     'error' => $e->getMessage()
+            // ], 500);
+            return redirect()->back()->with('error', $e->getMessage());
         }
     }
     public function update(Request $request, string $id)

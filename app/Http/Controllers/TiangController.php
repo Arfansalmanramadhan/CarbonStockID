@@ -45,9 +45,10 @@ class TiangController extends Controller
 
             // Tentukan rentang diameter (2-9 atau 10-19)
             if ($diameter < 10.00 || $diameter > 19.00) {
-                return response()->json([
-                    "pesan" => "Diameter harus diantara 10 hingga 19 cm.",
-                ], 404);
+                // return response()->json([
+                //     "pesan" => "Diameter harus diantara 10 hingga 19 cm.",
+                // ], 404);
+                return redirect()->back()->with('Pesan', 'Diameter harus diantara 10 hingga 19 cm.');
             }
 
 
@@ -72,16 +73,18 @@ class TiangController extends Controller
             ]);
 
             // Response sukses
-            return response()->json([
-                'message' => ' Tiang berhasil dibuat',
-                'data' => $Tiang
-            ], 201);
+            // return response()->json([
+            //     'message' => ' Tiang berhasil dibuat',
+            //     'data' => $Tiang
+            // ], 201);
+            return redirect()->back()->with('success', 'Tiang berhasil ditambahkan!');
         } catch (\Exception $e) {
             // Response error
-            return response()->json([
-                'message' => 'Gagal membuat Tiang',
-                'error' => $e->getMessage()
-            ], 500);
+            // return response()->json([
+            //     'message' => 'Gagal membuat Tiang',
+            //     'error' => $e->getMessage()
+            // ], 500);
+            return redirect()->back()->with('error', $e->getMessage());
         }
     }
     public function update(Request $request, string $id)

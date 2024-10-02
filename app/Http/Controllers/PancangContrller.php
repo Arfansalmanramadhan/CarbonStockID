@@ -45,9 +45,10 @@ class PancangContrller extends Controller
 
             // Tentukan rentang diameter (2-9 atau 10-19)
             if ($diameter < 2.00 || $diameter > 9.00) {
-                return response()->json([
-                    "pesan" => "Diameter harus diantara 2 hingga 9 cm.",
-                ], 404);
+                // return response()->json([
+                //     "pesan" => "Diameter harus diantara 2 hingga 9 cm.",
+                // ], 404);
+                return redirect()->back()->with('Pesan', 'Diameter harus diantara 2 hingga 9 cm.');
             }
 
 
@@ -79,10 +80,11 @@ class PancangContrller extends Controller
             return redirect()->back()->with('success', 'Serasah berhasil ditambahkan!');
         } catch (\Exception $e) {
             // Response error
-            return response()->json([
-                'message' => 'Gagal membuat pancang',
-                'error' => $e->getMessage()
-            ], 500);
+            // return response()->json([
+            //     'message' => 'Gagal membuat pancang',
+            //     'error' => $e->getMessage()
+            // ], 500);
+            return redirect()->back()->with('error', $e->getMessage());
         }
     }
     public function update(Request $request, string $id)
