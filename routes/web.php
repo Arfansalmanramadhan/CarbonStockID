@@ -1,5 +1,18 @@
 <?php
 
+<<<<<<< HEAD
+=======
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Authentication\AuthController;
+use App\Http\Controllers\ProfilController;
+use App\Http\Controllers\PoltAreaController;
+use App\Http\Controllers\SerasahController;
+use App\Http\Controllers\SemaiController;
+use App\Http\Controllers\TunmbuhanBawahController;
+use App\Http\Controllers\TanahController;
+use App\Http\Controllers\PancangContrller;
+use App\Http\Controllers\NekromasController;
+>>>>>>> 5fea1ee4447f87d6360d575885a9331895ba0a41
 use App\Models\Profil; 
 use App\Models\PoltArea;
 use Illuminate\Support\Facades\Auth;
@@ -120,9 +133,25 @@ Route::controller(TanahController::class)->group(function () {
     Route::post("/Tanah/update/{id}", "update");
     Route::delete("/Tanah/{id}", "destroy");
 });
+<<<<<<< HEAD
 Route::controller(PancangContrller::class)->group(function () {
     Route::post("/Pancang/buat", "store")->name('pancang.store');
+=======
+
+Route::controller(PancangContrller::class)->group(function () {
+    Route::post("/Pancang/store", "store")->name('pancang.store');
+>>>>>>> 5fea1ee4447f87d6360d575885a9331895ba0a41
     Route::get("/Pancang", "index");
     Route::post("/Pancang/update/{id}", "update");
     Route::delete("/Pancang/{id}", "destroy");
 });
+<<<<<<< HEAD
+=======
+
+Route::controller(NekromasController::class)->group(function () {
+    Route::post("/Nekromass/store", "store")->name('nekromas.store');
+    Route::get("/Nekromass", "index");
+    Route::post("/Nekromass/update/{id}", "update");
+    Route::delete("/Nekromass/{id}", "destroy");
+});
+>>>>>>> 5fea1ee4447f87d6360d575885a9331895ba0a41
