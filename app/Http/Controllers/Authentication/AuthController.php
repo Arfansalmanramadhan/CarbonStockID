@@ -12,6 +12,7 @@ use App\Http\Requests\LoginRequests;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\RegisterRequests;
+use App\Models\PoltArea;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Auth\Events\PasswordReset;
 
@@ -26,11 +27,18 @@ class AuthController extends Controller
         try {
             $request["password"] = Hash::make($request->password);
             $user = User::create($request->all());
-            Profil::create([
+            $profil = Profil::create([
                 'nama_lengkap' => $request->input('nama_lengkap', ''),
                 'registrasi_id' => $user->id,
                 'no_hp' => $request->input('no_hp', null),
                 'image' => $request->input('image', '')
+            ]);
+            PoltArea::create([
+                'profil_id' => $profil->id,
+                'daerah' => $request->input('daerah', ''),
+                "slug" => $request->input('slug', ''),
+                'latitude' => $request->input('latitude', null),
+                'longitude' => $request->input('longitude', null),
             ]);
             /* return response()->json([
                 "mesage" => "Pengguna berhasil registasi",

@@ -196,17 +196,26 @@ class RingkasanController extends Controller
         $TotalKarbon = $Serasa + $Necromass + $co2tanaman + $tanah + $akar;
         $BaselineLahanKosong = $TotalKarbon - (((10 + 4) / 2) * 11.5);
         // Mengembalikan hasil dalam JSON atau sesuai kebutuhan
-        return response()->json([
-            "CO2",
+        // return response()->json([
+        //     "CO2",
+        //     'Serasah' => number_format($Serasa, 2, '.', ''),
+        //     'Necromass' => number_format($Necromass, 2, '.', ''),
+        //     'Co2 Tanaman' =>  number_format($co2tanaman, 2, '.', ''),
+        //     'Tanah' => number_format($tanah, 2, '.', ''),
+        //     "Berat Biomassa Akar" =>  number_format($akar, 2, '.', ''),
+        //     'Total Carbon 5 Pool (ton)' => number_format($TotalKarbon, 2, '.', ''),
+        //     "Baseline Lahan Kosongh" => number_format($BaselineLahanKosong, 2, '.', ''),
+
+        // ], 200);
+        return view('ringkasan', [
             'Serasah' => number_format($Serasa, 2, '.', ''),
             'Necromass' => number_format($Necromass, 2, '.', ''),
-            'Co2 Tanaman' =>  number_format($co2tanaman, 2, '.', ''),
+            'Co2Tanaman' => number_format($co2tanaman, 2, '.', ''),
             'Tanah' => number_format($tanah, 2, '.', ''),
-            "Berat Biomassa Akar" =>  number_format($akar, 2, '.', ''),
-            'Total Carbon 5 Pool (ton)' => number_format($TotalKarbon, 2, '.', ''),
-            "Baseline Lahan Kosongh" => number_format($BaselineLahanKosong, 2, '.', ''),
-
-        ], 200);
+            'BeratBiomassaAkar' => number_format($akar, 2, '.', ''),
+            'TotalCarbon' => number_format($TotalKarbon, 2, '.', ''),
+            'BaselineLahanKosong' => number_format($BaselineLahanKosong, 2, '.', ''),
+        ]);
         // return response()->json([
         //     "TOTAL BERAT MASA" => $totalBerat,
         //     "bioma" => $beratMasa,
