@@ -91,7 +91,7 @@ Route::get('/tambahData', function () {
     $tiang = Tiang::where('polt-area_id', $poltArea->id)->first();
     $nertromas = Necromass::where('polt-area_id', $poltArea->id)->first();
     // dd($user, $profil, $poltArea);   
-    return view('tambahData', compact('user', 'profil', 'poltArea', 'serasah', 'semai', 'pancang', 'tiang', 'nertromas', 'pohon'));
+    return view('tambahData', compact('user', 'profil', 'poltArea', 'serasah', 'semai', 'pancang', 'tiang', 'nertromas', 'pohon', 'tumbuhanbawah'));
 });
 
 Route::get('/percobaan', function () {
@@ -105,9 +105,9 @@ Route::get('/percobaan', function () {
     $pohon = Pohon::where('polt-area_id', $poltArea->id)->first();
     $pancang = Pancang::where('polt-area_id', $poltArea->id)->first();
     $tiang = Tiang::where('polt-area_id', $poltArea->id)->first();
-    $nertromas = Necromass::where('polt-area_id', $poltArea->id)->first();
+    $nekromas = Necromass::where('polt-area_id', $poltArea->id)->first();
     // dd($user, $profil, $poltArea);   
-    return view('percobaan', compact('user', 'profil', 'poltArea', 'serasah', 'semai', 'pancang', 'tiang', 'nertromas', 'pohon'));
+    return view('percobaan', compact('user', 'profil', 'poltArea', 'serasah', 'semai', 'pancang', 'tiang', 'nekromas', 'pohon', 'tanah'));
 });
 
 Route::post('/plotarea/store', [PoltAreaController::class, 'store'])->name('plotarea.store');
