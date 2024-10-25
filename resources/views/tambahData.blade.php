@@ -199,7 +199,7 @@
                                 readonly />
                           </div>
                           <p class="form-label">Kandungan Karbon <span>{{ $serasah ? $serasah->kandungan_karbon : '' }} Kg</span></p>
-                          <p class="form-label">Serapan CO2 <span>{{$serasah ? $seresah->co2: ''}} Kg</span></p>
+                          <p class="form-label">Serapan CO2 <span>{{$serasah ? $seresah->co2 : ''}} Kg</span></p>
                           <button type="submit"
                               class="btn btn-submit-plotA d-flex align-items-center justify-content-center"
                               id="submitSerasah">
@@ -381,7 +381,7 @@
                                                 <div class="mb-3">
                                                     <label for="diameter" class="form-label">Diameter</label>
                                                     <input type="text"
-                                                        class="form-control form-control-plot-b-non is-invalid" id="diameter" value="{{$pancnag ? $pancang->diameter : ''}}" readonly />
+                                                        class="form-control form-control-plot-b-non is-invalid" id="diameter" value="{{$pancang ? $pancang->diameter : ''}}" readonly />
                                                     <div class="invalid-feedback">Diameter harus diantara 2 hingga 9
                                                         cm.</div>
                                                 </div>
@@ -885,7 +885,7 @@
                                 <div class="mb-3">
                                   <p class="form-label">Biomassa diatas Permukaan Tanah<span>{{$pohon ? $pohon->bio_di_atas_tanah : ' '}} Kg</span></p>
                                   <p class="form-label">Kandungan Karbon<span>{{$pohon ? $pohon->kandungan_karbon : ' '}} Kg</span></p>
-                                  <p class="form-label">Serapan CO2<span>{{$pohon ? $pohon->co2}} Kg</span></p>
+                                  <p class="form-label">Serapan CO2<span>{{$pohon ? $pohon->co2 : ''}} Kg</span></p>
                                 </div>
                               </form>
                             </div>
@@ -1075,9 +1075,9 @@
                                 <!-- Biomassa, Karbon, CO2 -->
                                 <div class="mb-3">
                                   <p class="form-label">Volume<span>{{$nekromas ? $nekromas->volume : ''}} M3</span></p>
-                                  <p class="form-label">Biomassa <span>{{$nekromas ? $nekromas->biomasa}} Kg</span></p>
-                                  <p class="form-label">Kandungan Karbon<span>{{$nekromas ? $nekromas->carbon}} Kg</span></p>
-                                  <p class="form-label">Serapan CO2<span>{{$nekromas ? $nekromas->co2}} Kg</span></p>
+                                  <p class="form-label">Biomassa <span>{{$nekromas ? $nekromas->biomasa : ''}} Kg</span></p>
+                                  <p class="form-label">Kandungan Karbon<span>{{$nekromas ? $nekromas->carbon : ''}} Kg</span></p>
+                                  <p class="form-label">Serapan CO2<span>{{$nekromas ? $nekromas->co2 : ''}} Kg</span></p>
                                 </div>
                               </form>
                             </div>
@@ -1220,12 +1220,12 @@
               </div>
               <div class="d-flex jarak">
                 <button type="submit" class="btn btn-back d-flex align-items-center justify-content-center" id="previousButton4">
-                  <img src="assets/img/ArrowLeft.svg" alt="Arrow Icon" />
+                    <img src="{{ asset('/images/ArrowLeft.svg') }}" alt="Arrow Icon" />
                   <span class="ms-2">Sebelumnya</span>
                 </button>
                 <button type="submit" class="btn btn-success btn-success-5 d-flex align-items-center justify-content-center">
                   <span>Hasil</span>
-                  <img src="assets/img/ArrowRight.svg" alt="Arrow Icon" class="ms-2" />
+                  <img src="{{ asset('/images/ArrowRight.svg') }}" alt="Arrow Icon" class="ms-2" />
                 </button>
               </div>
             </div>

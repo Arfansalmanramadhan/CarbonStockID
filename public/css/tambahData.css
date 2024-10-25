@@ -387,9 +387,9 @@ h3 {
   letter-spacing: 0.36px;
 }
 
-.content-plotD {
-  display: none; /* Sembunyikan semua konten secara default */
-}
+/* .content-plotD {
+  display: none; Sembunyikan semua konten secara default
+} */
 
 .activeD {
   display: block; /* Tampilkan konten yang aktif */

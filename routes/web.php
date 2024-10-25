@@ -89,9 +89,9 @@ Route::get('/tambahData', function () {
     $pohon = Pohon::where('polt-area_id', $poltArea->id)->first();
     $pancang = Pancang::where('polt-area_id', $poltArea->id)->first();
     $tiang = Tiang::where('polt-area_id', $poltArea->id)->first();
-    $nertromas = Necromass::where('polt-area_id', $poltArea->id)->first();
+    $nekromas = Necromass::where('polt-area_id', $poltArea->id)->first();
     // dd($user, $profil, $poltArea);   
-    return view('tambahData', compact('user', 'profil', 'poltArea', 'serasah', 'semai', 'pancang', 'tiang', 'nertromas', 'pohon', 'tumbuhanbawah'));
+    return view('tambahData', compact('user', 'profil', 'poltArea', 'serasah', 'semai', 'tanah', 'pancang', 'tiang', 'nekromas', 'pohon', 'tumbuhanbawah'));
 });
 
 Route::get('/percobaan', function () {
