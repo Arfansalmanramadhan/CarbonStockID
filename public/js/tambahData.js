@@ -183,6 +183,12 @@ document.querySelector(".btn-success-5").addEventListener("click", function (e) 
   handleContentTransition("newContent4", "newContent5", "left");
   updatePlotAreaText("Hasil Hitung");
 });
+document.getElementById("previousButton5").addEventListener("click", function (e) {
+  e.preventDefault();
+  handleContentTransition("newContent5", "newContent4", "right");
+  updatePlotAreaText("Sub Plot D");
+});
+
 
 
 

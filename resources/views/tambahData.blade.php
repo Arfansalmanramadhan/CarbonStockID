@@ -370,7 +370,7 @@
                                     <div class="modal-content">
                                         <h5 class="ms-3 modal-title" id="dataModalLabel">Sub Plot B - Pancang</h5>
                                         <div class="modal-body">
-                                            <form>
+                                            <form method="POST" action="{{ route('pancang.store') }}" id="pancangForm">
                                                 <!-- Keliling -->
                                                 <div class="mb-3">
                                                     <label for="keliling" class="form-label">Keliling</label>
@@ -606,7 +606,7 @@
                                     <div class="modal-content">
                                         <h5 class="ms-3 modal-title" id="dataModalLabel">Sub Plot C - Tiang</h5>
                                         <div class="modal-body">
-                                            <form>
+                                            <form method="POST" action="{{ route('tiang.store') }}" id="tiangForm">
                                                 <!-- Keliling -->
                                                 <div class="mb-3">
                                                     <label for="keliling" class="form-label">Keliling</label>
@@ -701,7 +701,7 @@
                                     <td class="hidden-column">146.20 kg</td>
                                     <td class="hidden-column aksi-button">
                                         <button class="edit-btn">
-                                            <img src="{{ asset('/images/PencilSquare.svg') }} alt="" />
+                                            <img src="{{ asset('/images/PencilSquare.svg') }}" alt="" />
                                         </button>
                                         <button class="delete-btn">
                                             <img src="{{ asset('/images/Trash.svg') }}" alt="" />
@@ -720,7 +720,7 @@
                                     <td class="hidden-column">146.20 kg</td>
                                     <td class="hidden-column aksi-button">
                                         <button class="edit-btn">
-                                            <img src="{{ asset('/images/PencilSquare.svg') }} alt="" />
+                                            <img src="{{ asset('/images/PencilSquare.svg') }}" alt="" />
                                         </button>
                                         <button class="delete-btn">
                                             <img src="{{ asset('/images/Trash.svg') }}" alt="" />
@@ -739,7 +739,7 @@
                                     <td class="hidden-column">146.20 kg</td>
                                     <td class="hidden-column aksi-button">
                                         <button class="edit-btn">
-                                            <img src="{{ asset('/images/PencilSquare.svg') }} alt="" />
+                                            <img src="{{ asset('/images/PencilSquare.svg') }}" alt="" />
                                         </button>
                                         <button class="delete-btn">
                                             <img src="{{ asset('/images/Trash.svg') }}" alt="" />
@@ -758,7 +758,7 @@
                                     <td class="hidden-column">146.20 kg</td>
                                     <td class="hidden-column aksi-button">
                                         <button class="edit-btn">
-                                            <img src="{{ asset('/images/PencilSquare.svg') }} alt="" />
+                                            <img src="{{ asset('/images/PencilSquare.svg') }}" alt="" />
                                         </button>
                                         <button class="delete-btn">
                                             <img src="{{ asset('/images/Trash.svg') }}" alt="" />
@@ -777,7 +777,7 @@
                                     <td class="hidden-column">146.20 kg</td>
                                     <td class="hidden-column aksi-button">
                                         <button class="edit-btn">
-                                            <img src="{{ asset('/images/PencilSquare.svg') }} alt="" />
+                                            <img src="{{ asset('/images/PencilSquare.svg') }}" alt="" />
                                         </button>
                                         <button class="delete-btn">
                                             <img src="{{ asset('/images/Trash.svg') }}" alt="" />
@@ -841,7 +841,7 @@
                           <div class="modal-content">
                             <h5 class="ms-3 modal-title" id="dataModalLabel">Sub Plot D - Pohon</h5>
                             <div class="modal-body">
-                              <form>
+                              <form method="POST" action="{{ route('pohon.store') }}" id="pohonForm">
                                 <!-- Keliling -->
                                 <div class="mb-3">
                                   <label for="keliling" class="form-label">Keliling</label>
@@ -1047,8 +1047,9 @@
                           <div class="modal-content">
                             <h5 class="ms-3 modal-title" id="dataModalLabel">Sub Plot D - Nekromas</h5>
                             <div class="modal-body">
-                              <form>
-                                <!-- Keliling -->
+                              <form method="POST" action="{{ route('nekromas.store') }}" id="nekromasForm">
+                            </button>
+                            <!-- Keliling -->
                                 <div class="mb-3">
                                   <label for="diameterujung" class="form-label">Diameter Ujung</label>
                                   <input type="text" class="form-control form-control-plot-b" id="diameterujung" name="diameter_ujung" />
@@ -1095,12 +1096,12 @@
                       <thead>
                         <tr>
                           <th class="kiriPancang">No</th>
-                          <th>Keliling</th>
-                          <th>Diameter</th>
-                          <th>Nama Lokal</th>
-                          <th>Nama Ilmiah</th>
-                          <th class="hidden-column">Kerapatan Jenis Kayu</th>
-                          <th class="hidden-column">Bio diatas tanah</th>
+                          <th>Diameter Ujung</th>
+                          <th>Diameter Pangkal</th>
+                          <th>Panjang</th>
+                          <th>Berat Jenis Kayu</th>
+                          <th class="hidden-column">Volume</th>
+                          <th class="hidden-column">Biomasa</th>
                           <th class="hidden-column">Kandungan karbon</th>
                           <th class="hidden-column">Serapan CO2</th>
                           <th class="hidden-column kananPancang">Aksi</th>
@@ -1119,10 +1120,10 @@
                           <td class="hidden-column">146.20 kg</td>
                           <td class="hidden-column aksi-button">
                             <button class="edit-btn">
-                              <img src="assets/img/PencilSquare.svg" alt="" />
+                              <img src="{{ asset('/images/PencilSquare.svg') }}" alt="" />
                             </button>
                             <button class="delete-btn">
-                              <img src="assets/img/Trash.svg" alt="" />
+                              <img src="{{ asset('/images/Trash.svg') }}" alt="" />
                             </button>
                           </td>
                         </tr>
@@ -1236,11 +1237,11 @@
                     <div class="h2-pancang-container section-hasil">
                         <h2 class="h2-tiang">Ringkasan Hitungan</h2>
                     </div>
-                    <div class="frame-no-data">
+                    {{-- <div class="frame-no-data">
                         <img src="{{ asset('/images/imageNoData.svg') }}" alt="" />
                         <p>Data yang Anda masukkan masih kosong. Mohon lengkapi semua informasi yang diperlukan.</p>
-                    </div>
-                    <!-- <div class="table-header-hasil d-flex">
+                    </div> --}}
+                     <div class="table-header-hasil d-flex">
               <button class="btn btn-unduhPDF" id="averageData">Unduh PDF</button>
             </div>
             <div class="plot-info">
@@ -1300,7 +1301,7 @@
                   <td>2,761.15 Ton C/Ha</td>
                 </tr>
               </tfoot>
-            </table> -->
+            </table> 
                 </div>
             </div>
         </div>
