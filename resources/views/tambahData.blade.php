@@ -456,101 +456,27 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>48 cm</td>
-                                    <td>15.27 cm</td>
-                                    <td>Jati</td>
-                                    <td>Tectona grandis</td>
-                                    <td class="hidden-column">0.61 gr/cm3</td>
-                                    <td class="hidden-column">84.84 kg</td>
-                                    <td class="hidden-column">39.87 kg</td>
-                                    <td class="hidden-column">146.20 kg</td>
-                                    <td class="hidden-column aksi-button">
-                                        <button class="edit-btn">
-                                            <img src="{{ asset('/images/PencilSquare.svg') }}" alt="" />
-                                        </button>
-                                        <button class="delete-btn">
-                                            <img src="{{ asset('/images/Trash.svg') }}" alt="" />
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>48 cm</td>
-                                    <td>15.27 cm</td>
-                                    <td>Jati</td>
-                                    <td>Tectona grandis</td>
-                                    <td class="hidden-column">0.61 gr/cm3</td>
-                                    <td class="hidden-column">84.84 kg</td>
-                                    <td class="hidden-column">39.87 kg</td>
-                                    <td class="hidden-column">146.20 kg</td>
-                                    <td class="hidden-column aksi-button">
-                                        <button class="edit-btn">
-                                            <img src="{{ asset('/images/PencilSquare.svg') }}" alt="" />
-                                        </button>
-                                        <button class="delete-btn">
-                                            <img src="{{ asset('/images/Trash.svg') }}" alt="" />
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>48 cm</td>
-                                    <td>15.27 cm</td>
-                                    <td>Jati</td>
-                                    <td>Tectona grandis</td>
-                                    <td class="hidden-column">0.61 gr/cm3</td>
-                                    <td class="hidden-column">84.84 kg</td>
-                                    <td class="hidden-column">39.87 kg</td>
-                                    <td class="hidden-column">146.20 kg</td>
-                                    <td class="hidden-column aksi-button">
-                                        <button class="edit-btn">
-                                            <img src="{{ asset('/images/PencilSquare.svg') }}" alt="" />
-                                        </button>
-                                        <button class="delete-btn">
-                                            <img src="{{ asset('/images/Trash.svg') }}" alt="" />
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>4</td>
-                                    <td>48 cm</td>
-                                    <td>15.27 cm</td>
-                                    <td>Jati</td>
-                                    <td>Tectona grandis</td>
-                                    <td class="hidden-column">0.61 gr/cm3</td>
-                                    <td class="hidden-column">84.84 kg</td>
-                                    <td class="hidden-column">39.87 kg</td>
-                                    <td class="hidden-column">146.20 kg</td>
-                                    <td class="hidden-column aksi-button">
-                                        <button class="edit-btn">
-                                            <img src="{{ asset('/images/PencilSquare.svg') }}" alt="" />
-                                        </button>
-                                        <button class="delete-btn">
-                                            <img src="{{ asset('/images/Trash.svg') }}" alt="" />
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>5</td>
-                                    <td>48 cm</td>
-                                    <td>15.27 cm</td>
-                                    <td>Jati</td>
-                                    <td>Tectona grandis</td>
-                                    <td class="hidden-column">0.61 gr/cm3</td>
-                                    <td class="hidden-column">84.84 kg</td>
-                                    <td class="hidden-column">39.87 kg</td>
-                                    <td class="hidden-column">146.20 kg</td>
-                                    <td class="hidden-column aksi-button">
-                                        <button class="edit-btn">
-                                            <img src="{{ asset('/images/PencilSquare.svg') }}" alt="" />
-                                        </button>
-                                        <button class="delete-btn">
-                                            <img src="{{ asset('/images/Trash.svg') }}" alt="" />
-                                        </button>
-                                    </td>
-                                </tr>
+                              $@foreach ($pancang as $item) 
+                              <tr>
+                                  <td>{{$loop->iteration}}</td>
+                                  <td>{{$item->keliling}} cm</td>
+                                  <td>{{$item->diameter}} cm</td>
+                                  <td>{{$item->nama_lokal}}</td>
+                                  <td>{{$item->nama_ilmiah}}</td>
+                                  <td class="hidden-column">{{$item->kerapatan_jenis_kayu}}gr/cm3</td>
+                                  <td class="hidden-column">{{$item->bio_di_atas_tanah}} kg</td>
+                                  <td class="hidden-column">{{$item->kandungan_karbon}}kg</td>
+                                  <td class="hidden-column">{{$item->co2}} kg</td>
+                                  <td class="hidden-column aksi-button">
+                                      <button class="edit-btn">
+                                          <img src="{{ asset('/images/PencilSquare.svg') }}" alt="" />
+                                      </button>
+                                      <button class="delete-btn">
+                                          <img src="{{ asset('/images/Trash.svg') }}" alt="" />
+                                      </button>
+                                  </td>
+                              </tr>
+                              @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -687,16 +613,17 @@
                                 </tr>
                             </thead>
                             <tbody>
+                              $@foreach ($tiang as $item)
                                 <tr>
-                                    <td>1</td>
-                                    <td>48 cm</td>
-                                    <td>15.27 cm</td>
-                                    <td>Jati</td>
-                                    <td>Tectona grandis</td>
-                                    <td class="hidden-column">0.61 gr/cm3</td>
-                                    <td class="hidden-column">84.84 kg</td>
-                                    <td class="hidden-column">39.87 kg</td>
-                                    <td class="hidden-column">146.20 kg</td>
+                                    <td>{{$loop->iteration}}</td>
+                                    <td>{{$item->keliling}} cm</td>
+                                    <td>{{$item->diameter}} cm</td>
+                                    <td>{{$item->nama_lokal}}</td>
+                                    <td>{{$item->nama_ilmiah}}</td>
+                                    <td class="hidden-column">{{$item->kerapatan_jenis_kayu}} gr/cm3</td>
+                                    <td class="hidden-column">{{$item->bio_di_atas_tanah}} kg</td>
+                                    <td class="hidden-column">{{$item->kandunngan_karbon}}kg</td>
+                                    <td class="hidden-column">{{$item->co2}} kg</td>
                                     <td class="hidden-column aksi-button">
                                         <button class="edit-btn">
                                             <img src="{{ asset('/images/PencilSquare.svg') }}" alt="" />
@@ -706,82 +633,7 @@
                                         </button>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>48 cm</td>
-                                    <td>15.27 cm</td>
-                                    <td>Jati</td>
-                                    <td>Tectona grandis</td>
-                                    <td class="hidden-column">0.61 gr/cm3</td>
-                                    <td class="hidden-column">84.84 kg</td>
-                                    <td class="hidden-column">39.87 kg</td>
-                                    <td class="hidden-column">146.20 kg</td>
-                                    <td class="hidden-column aksi-button">
-                                        <button class="edit-btn">
-                                            <img src="{{ asset('/images/PencilSquare.svg') }}" alt="" />
-                                        </button>
-                                        <button class="delete-btn">
-                                            <img src="{{ asset('/images/Trash.svg') }}" alt="" />
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>48 cm</td>
-                                    <td>15.27 cm</td>
-                                    <td>Jati</td>
-                                    <td>Tectona grandis</td>
-                                    <td class="hidden-column">0.61 gr/cm3</td>
-                                    <td class="hidden-column">84.84 kg</td>
-                                    <td class="hidden-column">39.87 kg</td>
-                                    <td class="hidden-column">146.20 kg</td>
-                                    <td class="hidden-column aksi-button">
-                                        <button class="edit-btn">
-                                            <img src="{{ asset('/images/PencilSquare.svg') }}" alt="" />
-                                        </button>
-                                        <button class="delete-btn">
-                                            <img src="{{ asset('/images/Trash.svg') }}" alt="" />
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>4</td>
-                                    <td>48 cm</td>
-                                    <td>15.27 cm</td>
-                                    <td>Jati</td>
-                                    <td>Tectona grandis</td>
-                                    <td class="hidden-column">0.61 gr/cm3</td>
-                                    <td class="hidden-column">84.84 kg</td>
-                                    <td class="hidden-column">39.87 kg</td>
-                                    <td class="hidden-column">146.20 kg</td>
-                                    <td class="hidden-column aksi-button">
-                                        <button class="edit-btn">
-                                            <img src="{{ asset('/images/PencilSquare.svg') }}" alt="" />
-                                        </button>
-                                        <button class="delete-btn">
-                                            <img src="{{ asset('/images/Trash.svg') }}" alt="" />
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>5</td>
-                                    <td>48 cm</td>
-                                    <td>15.27 cm</td>
-                                    <td>Jati</td>
-                                    <td>Tectona grandis</td>
-                                    <td class="hidden-column">0.61 gr/cm3</td>
-                                    <td class="hidden-column">84.84 kg</td>
-                                    <td class="hidden-column">39.87 kg</td>
-                                    <td class="hidden-column">146.20 kg</td>
-                                    <td class="hidden-column aksi-button">
-                                        <button class="edit-btn">
-                                            <img src="{{ asset('/images/PencilSquare.svg') }}" alt="" />
-                                        </button>
-                                        <button class="delete-btn">
-                                            <img src="{{ asset('/images/Trash.svg') }}" alt="" />
-                                        </button>
-                                    </td>
-                                </tr>
+                              @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -913,16 +765,17 @@
                         </tr>
                       </thead>
                       <tbody>
+                        @foreach ($pohon as $item)
                         <tr>
-                          <td>1</td>
-                          <td>48 cm</td>
-                          <td>15.27 cm</td>
-                          <td>Jati</td>
-                          <td>Tectona grandis</td>
-                          <td class="hidden-column">0.61 gr/cm3</td>
-                          <td class="hidden-column">84.84 kg</td>
-                          <td class="hidden-column">39.87 kg</td>
-                          <td class="hidden-column">146.20 kg</td>
+                          <td>{{$loop->iteration}}</td>
+                          <td>{{$loop->keliling}} cm</td>
+                          <td>{{$loop->diameter}} cm</td>
+                          <td>{{$loop->nama_lokal}}</td>
+                          <td>{{$loop->nama_ilmiah}}</td>
+                          <td class="hidden-column">{{$loop->kerapatan_jenis_kayu}} gr/cm3</td>
+                          <td class="hidden-column">{{$loop->bio_di_atas_tanah}} kg</td>
+                          <td class="hidden-column">{{$loop->kandungan_karbon}} kg</td>
+                          <td class="hidden-column">{{$loop->co2}} kg</td>
                           <td class="hidden-column aksi-button">
                             <button class="edit-btn">
                               <img src="{{ asset('/images/PencilSquare.svg') }}" alt="" />
@@ -932,82 +785,7 @@
                             </button>
                           </td>
                         </tr>
-                        <tr>
-                          <td>2</td>
-                          <td>48 cm</td>
-                          <td>15.27 cm</td>
-                          <td>Jati</td>
-                          <td>Tectona grandis</td>
-                          <td class="hidden-column">0.61 gr/cm3</td>
-                          <td class="hidden-column">84.84 kg</td>
-                          <td class="hidden-column">39.87 kg</td>
-                          <td class="hidden-column">146.20 kg</td>
-                          <td class="hidden-column aksi-button">
-                            <button class="edit-btn">
-                              <img src="{{ asset('/images/PencilSquare.svg') }}" alt="" />
-                            </button>
-                            <button class="delete-btn">
-                              <img src="{{ asset('/images/Trash.svg') }}" alt="" />
-                            </button>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>3</td>
-                          <td>48 cm</td>
-                          <td>15.27 cm</td>
-                          <td>Jati</td>
-                          <td>Tectona grandis</td>
-                          <td class="hidden-column">0.61 gr/cm3</td>
-                          <td class="hidden-column">84.84 kg</td>
-                          <td class="hidden-column">39.87 kg</td>
-                          <td class="hidden-column">146.20 kg</td>
-                          <td class="hidden-column aksi-button">
-                            <button class="edit-btn">
-                              <img src="{{ asset('/images/PencilSquare.svg') }}" alt="" />
-                            </button>
-                            <button class="delete-btn">
-                              <img src="{{ asset('/images/Trash.svg') }}" alt="" />
-                            </button>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>4</td>
-                          <td>48 cm</td>
-                          <td>15.27 cm</td>
-                          <td>Jati</td>
-                          <td>Tectona grandis</td>
-                          <td class="hidden-column">0.61 gr/cm3</td>
-                          <td class="hidden-column">84.84 kg</td>
-                          <td class="hidden-column">39.87 kg</td>
-                          <td class="hidden-column">146.20 kg</td>
-                          <td class="hidden-column aksi-button">
-                            <button class="edit-btn">
-                              <img src="{{ asset('/images/PencilSquare.svg') }}" alt="" />
-                            </button>
-                            <button class="delete-btn">
-                              <img src="{{ asset('/images/Trash.svg') }}" alt="" />
-                            </button>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>5</td>
-                          <td>48 cm</td>
-                          <td>15.27 cm</td>
-                          <td>Jati</td>
-                          <td>Tectona grandis</td>
-                          <td class="hidden-column">0.61 gr/cm3</td>
-                          <td class="hidden-column">84.84 kg</td>
-                          <td class="hidden-column">39.87 kg</td>
-                          <td class="hidden-column">146.20 kg</td>
-                          <td class="hidden-column aksi-button">
-                            <button class="edit-btn">
-                              <img src="{{ asset('/images/PencilSquare.svg') }}" alt="" />
-                            </button>
-                            <button class="delete-btn">
-                              <img src="{{ asset('/images/Trash.svg') }}" alt="" />
-                            </button>
-                          </td>
-                        </tr>
+                        @endforeach
                       </tbody>
                     </table>
                   </div>
@@ -1094,8 +872,8 @@
                       <thead>
                         <tr>
                           <th class="kiriPancang">No</th>
-                          <th>Diameter Ujung</th>
                           <th>Diameter Pangkal</th>
+                          <th>Diameter Ujung</th>
                           <th>Panjang</th>
                           <th>Berat Jenis Kayu</th>
                           <th class="hidden-column">Volume</th>
@@ -1106,16 +884,17 @@
                         </tr>
                       </thead>
                       <tbody>
+                        $@foreach ($nekromas as $item)   
                         <tr>
-                          <td>1</td>
-                          <td>48 cm</td>
-                          <td>15.27 cm</td>
-                          <td>Jati</td>
-                          <td>Tectona grandis</td>
-                          <td class="hidden-column">0.61 gr/cm3</td>
-                          <td class="hidden-column">84.84 kg</td>
-                          <td class="hidden-column">39.87 kg</td>
-                          <td class="hidden-column">146.20 kg</td>
+                          <td>{{$loop->iteration}}</td>
+                          <td>{{$loop->diameter_pangkal}} cm</td>
+                          <td>{{$loop->diameter_ujung}} cm</td>
+                          <td>{{$loop->panjang}}</td>
+                          <td>{{$loop->berat_jenis_kayu}}</td>
+                          <td class="hidden-column">{{$loop->volume}} gr/cm3</td>
+                          <td class="hidden-column">{{$loop->biomasa}}kg</td>
+                          <td class="hidden-column">{{$loop->carbon}} kg</td>
+                          <td class="hidden-column">{{$loop->co2}} kg</td>
                           <td class="hidden-column aksi-button">
                             <button class="edit-btn">
                               <img src="{{ asset('/images/PencilSquare.svg') }}" alt="" />
@@ -1125,82 +904,7 @@
                             </button>
                           </td>
                         </tr>
-                        <tr>
-                          <td>2</td>
-                          <td>48 cm</td>
-                          <td>15.27 cm</td>
-                          <td>Jati</td>
-                          <td>Tectona grandis</td>
-                          <td class="hidden-column">0.61 gr/cm3</td>
-                          <td class="hidden-column">84.84 kg</td>
-                          <td class="hidden-column">39.87 kg</td>
-                          <td class="hidden-column">146.20 kg</td>
-                          <td class="hidden-column aksi-button">
-                            <button class="edit-btn">
-                              <img src="assets/img/PencilSquare.svg" alt="" />
-                            </button>
-                            <button class="delete-btn">
-                              <img src="assets/img/Trash.svg" alt="" />
-                            </button>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>3</td>
-                          <td>48 cm</td>
-                          <td>15.27 cm</td>
-                          <td>Jati</td>
-                          <td>Tectona grandis</td>
-                          <td class="hidden-column">0.61 gr/cm3</td>
-                          <td class="hidden-column">84.84 kg</td>
-                          <td class="hidden-column">39.87 kg</td>
-                          <td class="hidden-column">146.20 kg</td>
-                          <td class="hidden-column aksi-button">
-                            <button class="edit-btn">
-                              <img src="assets/img/PencilSquare.svg" alt="" />
-                            </button>
-                            <button class="delete-btn">
-                              <img src="assets/img/Trash.svg" alt="" />
-                            </button>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>4</td>
-                          <td>48 cm</td>
-                          <td>15.27 cm</td>
-                          <td>Jati</td>
-                          <td>Tectona grandis</td>
-                          <td class="hidden-column">0.61 gr/cm3</td>
-                          <td class="hidden-column">84.84 kg</td>
-                          <td class="hidden-column">39.87 kg</td>
-                          <td class="hidden-column">146.20 kg</td>
-                          <td class="hidden-column aksi-button">
-                            <button class="edit-btn">
-                              <img src="assets/img/PencilSquare.svg" alt="" />
-                            </button>
-                            <button class="delete-btn">
-                              <img src="assets/img/Trash.svg" alt="" />
-                            </button>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>5</td>
-                          <td>48 cm</td>
-                          <td>15.27 cm</td>
-                          <td>Jati</td>
-                          <td>Tectona grandis</td>
-                          <td class="hidden-column">0.61 gr/cm3</td>
-                          <td class="hidden-column">84.84 kg</td>
-                          <td class="hidden-column">39.87 kg</td>
-                          <td class="hidden-column">146.20 kg</td>
-                          <td class="hidden-column aksi-button">
-                            <button class="edit-btn">
-                              <img src="assets/img/PencilSquare.svg" alt="" />
-                            </button>
-                            <button class="delete-btn">
-                              <img src="assets/img/Trash.svg" alt="" />
-                            </button>
-                          </td>
-                        </tr>
+                        @endforeach
                       </tbody>
                     </table>
                   </div>
