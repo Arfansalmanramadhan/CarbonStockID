@@ -456,7 +456,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                              $@foreach ($pancang as $item) 
+                              {{-- @foreach ($pancang as $item) 
                               <tr>
                                   <td>{{$loop->iteration}}</td>
                                   <td>{{$item->keliling}} cm</td>
@@ -476,7 +476,7 @@
                                       </button>
                                   </td>
                               </tr>
-                              @endforeach
+                              @endforeach --}}
                             </tbody>
                         </table>
                     </div>
@@ -613,7 +613,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                              $@foreach ($tiang as $item)
+                              {{-- $@foreach ($tiang as $item)
                                 <tr>
                                     <td>{{$loop->iteration}}</td>
                                     <td>{{$item->keliling}} cm</td>
@@ -633,7 +633,7 @@
                                         </button>
                                     </td>
                                 </tr>
-                              @endforeach
+                              @endforeach --}}
                             </tbody>
                         </table>
                     </div>
@@ -765,7 +765,7 @@
                         </tr>
                       </thead>
                       <tbody>
-                        @foreach ($pohon as $item)
+                        {{-- @foreach ($pohon as $item)
                         <tr>
                           <td>{{$loop->iteration}}</td>
                           <td>{{$loop->keliling}} cm</td>
@@ -785,7 +785,7 @@
                             </button>
                           </td>
                         </tr>
-                        @endforeach
+                        @endforeach --}}
                       </tbody>
                     </table>
                   </div>
@@ -884,7 +884,7 @@
                         </tr>
                       </thead>
                       <tbody>
-                        $@foreach ($nekromas as $item)   
+                        {{-- $@foreach ($nekromas as $item)   
                         <tr>
                           <td>{{$loop->iteration}}</td>
                           <td>{{$loop->diameter_pangkal}} cm</td>
@@ -904,7 +904,7 @@
                             </button>
                           </td>
                         </tr>
-                        @endforeach
+                        @endforeach --}}
                       </tbody>
                     </table>
                   </div>
