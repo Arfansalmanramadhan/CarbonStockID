@@ -22,6 +22,7 @@ return new class extends Migration
             $table->decimal('kandungan_karbon', 10, 2);
             $table->decimal('co2', 10, 2);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

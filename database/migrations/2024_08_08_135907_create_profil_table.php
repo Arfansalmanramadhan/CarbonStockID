@@ -17,6 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger("registrasi_id");
             $table->foreign("registrasi_id")->references("id")->on("registrasi")->onDelete('cascade')->onUpdate('cascade');
             $table->string('no_hp')->nullable();
+            $table->string('image')->nullable(); 
             $table->timestamps();
         });
     }

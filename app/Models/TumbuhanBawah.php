@@ -5,10 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class TumbuhanBawah extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
     protected $table = "tumbuhan_bawah";
     protected $fillable = [
         "polt-area_id",

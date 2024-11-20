@@ -26,8 +26,6 @@ class PoltArea extends Model
     // Jika ada atribut yang ingin di-guard (tidak bisa diisi langsung)
     protected $guarded = [];
 
-    // Atribut tanggal yang soft delete
-    protected $dates = ['deleted_at'];
 
     protected static function boot()
     {

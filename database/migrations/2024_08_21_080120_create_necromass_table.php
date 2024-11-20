@@ -24,6 +24,7 @@ return new class extends Migration
             $table->decimal('carbon', 10, 2);
             $table->decimal('co2', 10, 2);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
