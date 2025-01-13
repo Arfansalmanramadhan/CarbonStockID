@@ -63,7 +63,12 @@
               </div>
               <div class="option">
                 <img class="ms-1 me-1" src="{{ asset('/images/majesticons_logout.svg') }}" alt="" />
-                <a href="{{ url('') }}"><span>Keluar</span></a>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: inline;">
+                    @csrf
+                    <button type="submit" style="border: none; background: none; padding: 0; cursor: pointer;">
+                        <span>Keluar</span>
+                    </button>
+                </form>
               </div>
             </div>
           </div>

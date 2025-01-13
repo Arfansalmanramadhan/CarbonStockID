@@ -23,6 +23,10 @@ class AuthController extends Controller
     {
         return view('login');
     }
+    public function registasii()
+    {
+        return view('register');
+    }
     public function registasi(Request $request)
     {
         try {
@@ -162,19 +166,27 @@ class AuthController extends Controller
     {
         // Memeriksa apakah pengguna saat ini sudah login
         if (!Auth::check()) {
-            return response()->json([
-                "message" => "Anda belum masuk"
-            ], 401);
+            return redirect()->route('login')->withHeaders([
+                'error' => 'anda belum login'
+            ]);
+            // return response()->json([
+            //     "message" => "Anda belum masuk"
+            // ], 401);
         }
 
         // Menghapus token yang digunakan saat ini
-        $user = auth()->user();
-        $tokenId = $request->bearerToken(); // Mengambil token dari header Authorization
-        $user->tokens()->where('id', $tokenId)->delete();
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
 
-        return response()->json([
-            "message" => "Logout sukses"
-        ], 200);
+        // $user = auth()->user();
+        // $tokenId = $request->bearerToken(); // Mengambil token dari header Authorization
+        // $user->tokens()->where('id', $tokenId)->delete();
+
+        // return response()->json([
+        //     "message" => "Logout sukses"
+        // ], 200);
+        return redirect()->route('login')->with('success', 'Logout sukses.');
     }
     public function getUser()
     {
