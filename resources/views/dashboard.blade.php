@@ -72,7 +72,7 @@
     </nav>
 
     <!-- Sidebar -->
-    <div class="d-flex">
+    <section class="d-flex">
       <div class="sidebar bg-light p-3" id="sidebar">
         <ul class="nav flex-column">
           <li class="nav-item">
@@ -489,7 +489,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </section>
 
     <!-- Custom JS -->
 

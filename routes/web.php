@@ -22,7 +22,9 @@ use App\Http\Controllers\SerasahController;
 use App\Http\Controllers\NekromasController;
 use App\Http\Controllers\PoltAreaController;
 use App\Http\Controllers\TunmbuhanBawahController;
+use App\Http\Controllers\PanduanController;
 use App\Http\Controllers\Authentication\AuthController;
+use Illuminate\Routing\Route as RoutingRoute;
 
 // use App\Models\PlotArea;
 
@@ -75,7 +77,7 @@ Route::get('/profile', [ProfilController::class, 'index'])->name('profile');
 // Route::post('/profile/{id}', [ProfilController::class, 'store'])->name('profile.store');
 Route::put('/profile/{id}', [ProfilController::class, 'update'])->name('profile.update');
 Route::get('/profile/{id}', [ProfilController::class, 'show'])->name('profile.show');
-
+// Route::get('/panduan', [PanduanController::class, 'index']);
 
 // Route untuk halaman tambah data
 Route::get('/tambahData', function () {
@@ -109,6 +111,7 @@ Route::get('/percobaan', function () {
     // dd($user, $profil, $poltArea);   
     return view('percobaan', compact('user', 'profil', 'poltArea', 'serasah', 'semai', 'pancang', 'tiang', 'nekromas', 'pohon', 'tanah'));
 });
+
 
 Route::post('/plotarea/store', [PoltAreaController::class, 'store'])->name('plotarea.store');
 

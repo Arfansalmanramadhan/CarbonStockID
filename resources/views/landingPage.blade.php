@@ -15,6 +15,11 @@
     
         <!-- Custom CSS -->
         <link rel="stylesheet" href="{{ asset('/css/style.css') }}" />
+        <style>
+          section {
+            padding-top: 5rem
+          }
+        </style>
     
         <!-- Logo Title -->
         <link rel="icon" href="{{ asset('/images/logoCarbonStockID-LightMode.png') }}" type="image/x-icon" />
@@ -22,7 +27,7 @@
       </head>
   <body>
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg bg-transparent w-100">
+    <nav class="navbar navbar-expand-lg  bg-body-tertiary fixed-top">
       <div class="container">
         <a class="navbar-brand d-flex align-items-center" href="#">
           <img src="{{ asset('/images/logoCarbonStockID-DarkMode.png') }}" alt="Logo" width="30" class="d-inline-block align-middle me-2" />
@@ -34,7 +39,7 @@
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav mx-auto">
             <li class="nav-item me-2">
-              <a class="nav-link active" aria-current="page" href="#">Fitur</a>
+              <a class="nav-link active" aria-current="page" href="#fitur">Fitur</a>
             </li>
             <li class="nav-item mx-2">
               <a class="nav-link" href="#">Pertanyaan</a>
@@ -55,13 +60,13 @@
     <!-- Hero Section -->
     <section id="hero">
       <div class="container h-100 position-relative">
-        <div class="row h-100">
+        <div class="row">
           <div class="col-md-6 hero-tagline mt-5">
             <h1>Hitung, Kelola dan Prediksi Cadangan Karbon Jadi <span>Mudah dan Efisien</span></h1>
             <p>Solusi terintegrasi untuk perhitungan dan pengelolaan cadangan karbon yang akurat dan efisien. Mengoptimalan carbon trading di Indonesia dengan teknologi machine learning.</p>
             <a href="login.html" class="btn btn-success button-hero">Mulai sekarang</a>
           </div>
-          <div class="col-md-5">
+          <div class="col-md-6">
             <img src="{{ asset('/images/imagehero.png') }}" alt="Hero Image" class="position-absolute end-0 bottom-0 img-hero" />
           </div>
         </div>
@@ -71,41 +76,32 @@
     <!-- Fitur Section -->
     <section id="Fitur">
       <div class="container">
-        <h2>FITUR ANDALAN</h2>
+        <h2 id="fitur">FITUR ANDALAN</h2>
         <div class="row align-items-center">
-          <div class="col-md-6">
+          <div class="col-lg-6">
             <h3>Fitur Terbaik untuk Pengelolaan Cadangan Karbon yang Efisien</h3>
           </div>
-          <div class="col-md-6">
+          <div class="col-lg-6">
             <p>Platform CarbonStockID menawarkan fitur - fitur yang tentunya akan menghemat waktu Anda dalam proses perhitungan cadangan karbon.</p>
           </div>
         </div>
         <div class="row text-center mt-5">
-          <div class="col-md-4">
-            <div class="card-fitur d-flex flex-column justify-content-center align-items-center">
-              <img src="{{ asset('/images/fitur1.svg') }}" alt="">
-            </div>
-            <div class="info-card mt-3">
-              <h3>Management Data Plot</h3>
-              <p>Memudahkan pengguna dalam mengelola data plot area pengukuran serta sub plot.</p>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="card-fitur d-flex flex-column justify-content-center align-items-center">
-              <img src="{{ asset('/images/fitur2.svg') }}" alt="">
-            </div>
-            <div class="info-card mt-3">
-              <h3>Prediksi</h3>
-              <p>Memperkirakan cadangan karbon untuk periode mendatang menggunakan Machine Learning.</p>
+          <div class="col-lg-6 mt-2"> 
+            <div class="card" >
+              <img  src="{{ asset('/images/fitur1.svg') }}" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title">Management Data Plot</h5>
+                <p class="card-text">Memudahkan pengguna dalam mengelola data plot area pengukuran serta sub plot.</p>
+              </div>
             </div>
           </div>
-          <div class="col-md-4">
-            <div class="card-fitur d-flex flex-column justify-content-center align-items-center">
-              <img src="{{ asset('/images/fitur3.svg') }}" alt="">
-            </div>
-            <div class="info-card mt-3">
-              <h3>Kalkulasi</h3>
-              <p>Menghitung cadanagan karbon secara otomatis berdasarkan parameter yang diinput.</p>
+          <div class="col-lg-6 mt-2"> 
+            <div class="card" >
+              <img src="{{ asset('/images/fitur3.svg') }}" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title">Kalkulasi</h5>
+                <p class="card-text">Menghitung cadanagan karbon secara otomatis berdasarkan parameter yang diinput.</p>
+              </div>
             </div>
           </div>
         </div>
@@ -114,11 +110,11 @@
 
     <!-- Pertanyaan Section -->
     <section id="Pertanyaan">
-      <div class="container">
+      <div class="container text-center">
         <h2>PERTANYAAN & JAWABAN</h2>
         <p>Pelajari tentang platform CarbonStockID melalui pertanyaan berikut</p>
         <div class="row mt-5">
-          <div class="col-md-6">
+          <div class="col-lg-6">
             <div class="card-pertanyaan" onclick="toggleAnswer(this)">
               <div class="pertanyaan-header">
                 <p>Apa itu CarbonStockID?</p>
@@ -160,7 +156,7 @@
               </div>
             </div>
           </div>
-          <div class="col-md-6">
+          <div class="col-lg-6">
             <div class="card-pertanyaan" onclick="toggleAnswer(this)">
               <div class="pertanyaan-header">
                 <p>Apakah data yang saya masukkan aman?</p>
