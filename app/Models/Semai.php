@@ -9,10 +9,11 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Semai extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory;
+    use SoftDeletes;
     protected $table = "semai";
     protected $fillable = [
-        "polt-area_id",
+        "zona_id",
         'total_berat_basah',
         'sample_berat_basah',
         'sample_berat_kering',
@@ -20,13 +21,15 @@ class Semai extends Model
         'kandungan_karbon',
         'co2',
     ];
+    // Jika ada atribut yang ingin di-guard (tidak bisa diisi langsung)
+    protected $guarded = [];
     /**
      * Get the poltarea that owns the poltarea
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function poltarea(): BelongsTo
+    public function zona(): BelongsTo
     {
-        return $this->belongsTo(PoltArea::class, 'polt-area_id');
+        return $this->belongsTo(Zona::class, 'zona_id');
     }
 }

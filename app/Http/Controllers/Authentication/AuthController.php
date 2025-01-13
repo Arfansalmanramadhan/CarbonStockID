@@ -11,6 +11,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\LoginRequests;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
 use App\Http\Requests\RegisterRequests;
 use App\Models\PoltArea;
 use Illuminate\Support\Facades\Password;
@@ -33,13 +34,13 @@ class AuthController extends Controller
                 'no_hp' => $request->input('no_hp', null),
                 'image' => $request->input('image', '')
             ]);
-            PoltArea::create([
-                'profil_id' => $profil->id,
-                'daerah' => $request->input('daerah', ''),
-                "slug" => $request->input('slug', ''),
-                'latitude' => $request->input('latitude', null),
-                'longitude' => $request->input('longitude', null),
-            ]);
+            // PoltArea::create([
+            //     'profil_id' => $profil->id,
+            //     'daerah' => $request->input('daerah', ''),
+            //     "slug" => $request->input('slug', ''),
+            //     'latitude' => $request->input('latitude', null),
+            //     'longitude' => $request->input('longitude', null),
+            // ]);
             /* return response()->json([
                 "mesage" => "Pengguna berhasil registasi",
                 "data" =>  $user
@@ -50,6 +51,7 @@ class AuthController extends Controller
             /* return response()->json([
                 "mesage" => $error->getMessage(),
             ], 500); */
+            DB::rollBack();
             return redirect()->back()->with('error', $error->getMessage());
         }
     }

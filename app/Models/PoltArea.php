@@ -22,6 +22,7 @@ class PoltArea extends Model
         "slug",
         'latitude',
         'longitude',
+        "status"
     ];
     // Jika ada atribut yang ingin di-guard (tidak bisa diisi langsung)
     protected $guarded = [];
@@ -41,41 +42,9 @@ class PoltArea extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function profil(): BelongsTo
+    public function zona(): BelongsTo
     {
-        return $this->belongsTo(Profil::class, 'profil_id');
-    }
-    public function semai(): BelongsTo
-    {
-        return $this->belongsTo(Semai::class, 'polt-area_id');
-    }
-    public function serasah(): BelongsTo
-    {
-        return $this->belongsTo(Serasah::class, 'polt-area_id');
-    }
-    public function tumbuhanbawah(): BelongsTo
-    {
-        return $this->belongsTo(TumbuhanBawah::class, 'polt-area_id');
-    }
-    public function tanah(): BelongsTo
-    {
-        return $this->belongsTo(Tanah::class, 'polt-area_id');
-    }
-    public function pancang(): BelongsTo
-    {
-        return $this->belongsTo(Pancang::class, 'polt-area_id');
-    }
-    public function tiang(): BelongsTo
-    {
-        return $this->belongsTo(Tiang::class, 'polt-area_id');
-    }
-    public function pohon(): BelongsTo
-    {
-        return $this->belongsTo(Pohon::class, 'polt-area_id');
-    }
-    public function necromass(): BelongsTo
-    {
-        return $this->belongsTo(Necromass::class, 'polt-area_id');
+        return $this->belongsTo(Zona::class, 'zona_id');
     }
     public function sluggable(): array
     {

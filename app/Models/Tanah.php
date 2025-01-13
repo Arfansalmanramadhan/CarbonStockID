@@ -21,6 +21,8 @@ class Tanah extends Model
         'carbonkg',
         'co2kg',
     ];
+    // Jika ada atribut yang ingin di-guard (tidak bisa diisi langsung)
+    protected $guarded = [];
     /**
      * Get the poltarea that owns the poltarea
      *
@@ -28,6 +30,6 @@ class Tanah extends Model
      */
     public function poltarea(): BelongsTo
     {
-        return $this->belongsTo(PoltArea::class, 'polt-area_id');
+        return $this->belongsTo(Zona::class, 'polt-area_id');
     }
 }

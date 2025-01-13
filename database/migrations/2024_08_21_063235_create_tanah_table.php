@@ -13,15 +13,15 @@ return new class extends Migration
     {
         Schema::create('tanah', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger("polt-area_id");
-            $table->foreign("polt-area_id")->references("id")->on("polt-area");
-            $table->decimal('kedalaman_sample', 8, 2)->defaul(0);
-            $table->decimal('berat_jenis_tanah', 8, 3)->defaul(0);
-            $table->decimal('C_organic_tanah', 5, 2)->defaul(0);
-            $table->decimal('carbongr', 8, 4);
-            $table->decimal('carbonton', 10, 3);
-            $table->decimal('carbonkg', 10, 2);
-            $table->decimal('co2kg', 10, 2);
+            $table->unsignedBigInteger("zona_id");
+            $table->foreign("zona_id")->references("id")->on("zona");
+            $table->decimal('kedalaman_sample', 8, 2)->default(0);
+            $table->decimal('berat_jenis_tanah', 8, 3)->default(0);
+            $table->decimal('C_organic_tanah', 5, 2)->default(0);
+            $table->decimal('carbongr', 8, 4)->default(0);
+            $table->decimal('carbonton', 10, 3)->default(0);
+            $table->decimal('carbonkg', 10, 2)->default(0);
+            $table->decimal('co2kg', 10, 2)->default(0);
             $table->timestamps();
             $table->softDeletes();
         });

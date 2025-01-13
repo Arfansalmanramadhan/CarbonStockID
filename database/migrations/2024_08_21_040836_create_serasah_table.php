@@ -13,14 +13,14 @@ return new class extends Migration
     {
         Schema::create('serasah', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger("polt-area_id");
-            $table->foreign("polt-area_id")->references("id")->on("polt-area");
-            $table->decimal('total_berat_basah', 8, 3)->defaul(0);
-            $table->decimal('sample_berat_basah', 8, 3)->defaul(0);
-            $table->decimal('sample_berat_kering', 8, 3)->defaul(0);
-            $table->decimal('total_berat_kering', 8, 3)->defaul(0);
-            $table->decimal('kandungan_karbon', 10, 2);
-            $table->decimal('co2', 10, 2);
+            $table->unsignedBigInteger("zona_id");
+            $table->foreign("zona_id")->references("id")->on("zona");
+            $table->decimal('total_berat_basah', 8, 3)->default(0);
+            $table->decimal('sample_berat_basah', 8, 3)->default(0);
+            $table->decimal('sample_berat_kering', 8, 3)->default(0);
+            $table->decimal('total_berat_kering', 8, 3)->default(0);
+            $table->decimal('kandungan_karbon', 10, 2)->default(0);
+            $table->decimal('co2', 10, 2)->default(0);
             $table->timestamps();
             $table->softDeletes();
         });

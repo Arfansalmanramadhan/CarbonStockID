@@ -12,7 +12,7 @@ class Necromass extends Model
     use HasFactory, SoftDeletes;
     protected $table = 'necromass';
     protected $fillable = [
-        'polt-area_id',
+        'zona_id',
         'diameter_pangkal',
         'diameter_ujung',
         'panjang',
@@ -22,13 +22,15 @@ class Necromass extends Model
         'carbon',
         'co2',
     ];
+    // Jika ada atribut yang ingin di-guard (tidak bisa diisi langsung)
+    protected $guarded = [];
     /**
      * Get the poltarea that owns the poltarea
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function poltarea(): BelongsTo
+    public function zona(): BelongsTo
     {
-        return $this->belongsTo(PoltArea::class, 'polt-area_id');
+        return $this->belongsTo(Zona::class, 'zona_id');
     }
 }
