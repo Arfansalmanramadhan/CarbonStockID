@@ -28,24 +28,24 @@
   <body>
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg  bg-body-tertiary fixed-top">
-      <div class="container">
+      <div class="container-fluid">
         <a class="navbar-brand d-flex align-items-center" href="#">
           <img src="{{ asset('/images/logoCarbonStockID-DarkMode.png') }}" alt="Logo" width="30" class="d-inline-block align-middle me-2" />
           <span>CarbonStockID</span>
         </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler bg-success" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav mx-auto">
             <li class="nav-item me-2">
-              <a class="nav-link active" aria-current="page" href="#fitur">Fitur</a>
+              <a class="nav-link" href="#fitur">Fitur</a>
             </li>
             <li class="nav-item mx-2">
-              <a class="nav-link" href="#">Pertanyaan</a>
+              <a class="nav-link" href="#Pertanyaan">Pertanyaan</a>
             </li>
             <li class="nav-item mx-2">
-              <a class="nav-link" href="#">Tentang Kami</a>
+              <a class="nav-link" href="#TentangKami">Tentang Kami</a>
             </li>
           </ul>
           <div>
@@ -61,12 +61,12 @@
     <section id="hero">
       <div class="container h-100 position-relative">
         <div class="row">
-          <div class="col-md-6 hero-tagline mt-5">
+          <div class="col-lg-6 hero-tagline  ">
             <h1>Hitung, Kelola dan Prediksi Cadangan Karbon Jadi <span>Mudah dan Efisien</span></h1>
             <p>Solusi terintegrasi untuk perhitungan dan pengelolaan cadangan karbon yang akurat dan efisien. Mengoptimalan carbon trading di Indonesia dengan teknologi machine learning.</p>
             <a href="login.html" class="btn btn-success button-hero">Mulai sekarang</a>
           </div>
-          <div class="col-md-6">
+          <div class="col-lg-6">
             <img src="{{ asset('/images/imagehero.png') }}" alt="Hero Image" class="position-absolute end-0 bottom-0 img-hero" />
           </div>
         </div>

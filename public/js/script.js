@@ -24,7 +24,19 @@ function toggleAnswer(element) {
   // Set height section ke total tinggi yang dihitung atau auto jika tidak ada yang aktif
   section.style.height = totalHeight ? `${totalHeight}px` : "auto";
 }
+ // Pilih semua tombol
+ const buttons = document.querySelectorAll('.nav-link');
 
+ // Tambahkan event listener ke setiap tombol
+ buttons.forEach(button => {
+     button.addEventListener('click', () => {
+         // Hapus kelas 'active' dari semua tombol
+         buttons.forEach(btn => btn.classList.remove('active'));
+         
+         // Tambahkan kelas 'active' ke tombol yang diklik
+         button.classList.add('active');
+     });
+ });
 const navbar = document.getElementsByTagName("nav")[0];
 window.addEventListener("scroll", function () {
   if (this.window.scrollY > 1) {
