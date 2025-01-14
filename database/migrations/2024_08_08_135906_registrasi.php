@@ -18,6 +18,9 @@ return new class extends Migration
             $table->string('username');
             $table->string('email')->unique();
             $table->string('password');
+            $table->string('nip')->nullable();
+            $table->string('no_hp')->nullable();
+            $table->string('nik')->nullable();
             $table->timestamps();
         });
     }
