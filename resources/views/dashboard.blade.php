@@ -24,7 +24,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
 
     <!-- Favicon -->
-    <link rel="icon" href="{{ $profil->image ? asset($profil->image) : asset('/images/PersonFill.svg') }}" type="image/x-icon" />
+    <link rel="icon" href="{{ $user->image ? asset($user->image) : asset('/images/PersonFill.svg') }}" type="image/x-icon" />
     <title>CarbonStockID</title>
   </head>
   <body>
@@ -46,10 +46,10 @@
             <img src="{{ asset('/images/iconSearch.png') }}" alt="Search Icon" class="search-icon" />
           </form>
           <a href="{{ url('/tambahData') }}" class="btn btn-light btn-tambahData">Tambah data</a>
-          <img src="{{ $profil->image ? asset($profil->image) : asset('/images/PersonFill.svg') }}" alt="User Avatar" id="userIcon" class="ms-3 user-avatar" />
+          <img src="{{ $user->image ? asset($user->image) : asset('/images/PersonFill.svg') }}" alt="User Avatar" id="userIcon" class="ms-3 user-avatar" />
           <div class="user-profile-dropdown" id="userProfileDropdown" style="display: none">
             <div class="user-info">
-              <img src="{{ $profil->image ? asset($profil->image) : asset('/images/PersonFill.svg') }}" alt="User Avatar" id="userIcon" class="ms-3 user-avatar" />
+              <img src="{{ $user->image ? asset($user->image) : asset('/images/PersonFill.svg') }}" alt="User Avatar" id="userIcon" class="ms-3 user-avatar" />
               <div class="user-details">
                 <h4>{{ $user->username }}</h4>
                 <p>{{ $user->email }}</p>

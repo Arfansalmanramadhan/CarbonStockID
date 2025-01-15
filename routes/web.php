@@ -5,7 +5,7 @@ use App\Models\Semai;
 use App\Models\Tanah;
 use App\Models\Tiang;
 use App\Models\Pancang;
-use App\Models\Profil;
+// use App\Models\Profil;
 use App\Models\Serasah;
 use App\Models\PoltArea;
 use App\Models\Necromass;
@@ -59,10 +59,10 @@ Route::middleware('auth')->group(function (){
 
     Route::get('/dashboard', function () {
         $user = Auth::user();
-        $profil = Profil::where('id', $user->id)->first();
-        $poltArea = PoltArea::where('profil_id', $profil->id)->first();
-        // $plotAreas = PlotArea::where('profil_id', $profil->id)->get();
-        return view('dashboard', compact('user', 'profil', 'poltArea')); // Kirim $profil ke view
+        // $profil = Profil::where('id', $user->id)->first();
+        $poltArea = PoltArea::where('id', $user->id)->first();
+        // $plotAreas = PlotArea::where('id', $profil->id)->get();
+        return view('dashboard', compact('user',  'poltArea')); // Kirim $profil ke view
     })->name('dashboard');
     
     // Route::get('/profile', [ProfilController::class, 'index'])->name('profile');
@@ -74,8 +74,8 @@ Route::middleware('auth')->group(function (){
     // Route untuk halaman tambah data
     Route::get('/tambahData', function () {
         $user = Auth::user();
-        $profil = Profil::where('id', $user->id)->first();
-        $poltArea = PoltArea::where('profil_id', $profil->id)->first();
+        // $profil = Profil::where('id', $user->id)->first();
+        $poltArea = PoltArea::where('id', $user->id)->first();
         $serasah = Serasah::where('polt-area_id', $poltArea->id)->first();
         $semai = Semai::where('polt-area_id', $poltArea->id)->first();
         $tanah = Tanah::where('polt-area_id', $poltArea->id)->first();
@@ -85,13 +85,13 @@ Route::middleware('auth')->group(function (){
         $tiang = Tiang::where('polt-area_id', $poltArea->id)->first();
         $nekromas = Necromass::where('polt-area_id', $poltArea->id)->first();
         // dd($user, $profil, $poltArea);   
-        return view('tambahData', compact('user', 'profil', 'poltArea', 'serasah', 'semai', 'tanah', 'pancang', 'tiang', 'nekromas', 'pohon', 'tumbuhanbawah'));
+        return view('tambahData', compact('user',  'poltArea', 'serasah', 'semai', 'tanah', 'pancang', 'tiang', 'nekromas', 'pohon', 'tumbuhanbawah'));
     });
     
     Route::get('/percobaan', function () {
         $user = Auth::user();
-        $profil = Profil::where('id', $user->id)->first();
-        $poltArea = PoltArea::where('profil_id', $profil->id)->first();
+        // $profil = Profil::where('id', $user->id)->first();
+        $poltArea = PoltArea::where('id', $user->id)->first();
         $serasah = Serasah::where('polt-area_id', $poltArea->id)->first();
         $semai = Semai::where('polt-area_id', $poltArea->id)->first();
         $tanah = Tanah::where('polt-area_id', $poltArea->id)->first();
@@ -101,7 +101,7 @@ Route::middleware('auth')->group(function (){
         $tiang = Tiang::where('polt-area_id', $poltArea->id)->first();
         $nekromas = Necromass::where('polt-area_id', $poltArea->id)->first();
         // dd($user, $profil, $poltArea);   
-        return view('percobaan', compact('user', 'profil', 'poltArea', 'serasah', 'semai', 'pancang', 'tiang', 'nekromas', 'pohon', 'tanah'));
+        return view('percobaan', compact('user', 'poltArea', 'serasah', 'semai', 'pancang', 'tiang', 'nekromas', 'pohon', 'tanah'));
     });
     
     

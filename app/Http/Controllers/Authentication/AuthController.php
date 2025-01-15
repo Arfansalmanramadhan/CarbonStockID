@@ -27,17 +27,11 @@ class AuthController extends Controller
     {
         return view('register');
     }
-    public function registasi(Request $request)
+    public function registasi(RegisterRequests $request)
     {
         try {
             $request["password"] = Hash::make($request->password);
             $user = User::create($request->all());
-            $profil = Profil::create([
-                'nama_lengkap' => $request->input('nama_lengkap', ''),
-                'registrasi_id' => $user->id,
-                'no_hp' => $request->input('no_hp', null),
-                'image' => $request->input('image', '')
-            ]);
             // PoltArea::create([
             //     'profil_id' => $profil->id,
             //     'daerah' => $request->input('daerah', ''),
@@ -56,50 +50,54 @@ class AuthController extends Controller
                 "mesage" => $error->getMessage(),
             ], 500); */
             DB::rollBack();
-            return redirect()->back()->with('error', $error->getMessage());
+            return redirect()->back()->with('error', "anda gagal regestasi ");
         }
     }
 
 
-    public function login(LoginRequests $request)
+    public function login(Request $request)
     {
         // Mengambil password dari request
-        $credentials = $request->only('password');
+        // $credentials = $request->only('password');
 
-        // Menambahkan email atau username ke credentials
-        if ($request->has('username')) {
-            $credentials['username'] = $request->username;
-        } elseif ($request->has('email')) {
-            $credentials['email'] = $request->email;
-        }
+        // // Menambahkan email atau username ke credentials
+        // if ($request->has('username')) {
+        //     $credentials['username'] = $request->username;
+        // } elseif ($request->has('email')) {
+        //     $credentials['email'] = $request->email;
+        // }
 
         // Mengambil data pengguna dari database berdasarkan email atau username
-        $user = User::where('email', $credentials['email'] ?? null)
-            ->orWhere('username', $credentials['username'] ?? null)
-            ->first();
+        // $user = User::where('email', $credentials['email'] ?? null)
+        //     ->orWhere('username', $credentials['username'] ?? null)
+        //     ->first();
 
         // Jika pengguna tidak ditemukan atau password salah
-        if (!$user || !Hash::check($credentials['password'], $user->password)) {
-            return response()->json([
-                "message" => "invalid credentials",
-            ], 500);
-        }
+        // if (!$user || !Hash::check($credentials['password'], $user->password)) {
+        //     return response()->json([
+        //         "message" => "invalid credentials",
+        //     ], 500);
+        //}
 
         // Autentikasi sukses, buat token baru
-        $user->tokens()->delete();
-        $token = $user->createToken("token")->plainTextToken;
+        // $user->tokens()->delete();
+        // $token = $user->createToken("token")->plainTextToken;
 
         $credentials = $request->validate([
-            'email' => ['required', 'email'],
-            'password' => ['required'],
+           'login' => ['required'], // Bisa email atau username
+           'password' => ['required', 'min:8'],
         ]);
-
-        if (Auth::attempt($credentials)) {
+        // apakah input adalah email atau ysername
+        // Tentukan apakah input adalah email atau username
+        $loginField = filter_var($credentials['login'], FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
+        if (Auth::attempt([$loginField => $credentials['login'], 'password' => $credentials['password']])) {
             $request->session()->regenerate();
 
             return redirect()->intended('dashboard');
         }
-
+        return back()->withErrors([
+            'login' => 'Email/Username atau Password salah.',
+        ])->onlyInput('login');
         // return redirect()->route('dashboard');
 
         /* return response()->json([
