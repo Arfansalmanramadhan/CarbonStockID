@@ -13,12 +13,12 @@ use Illuminate\Http\Request;
 // use App\Models\PoltArea;
 // use App\Models\Necromass;
 // use App\Models\TumbuhanBawah;
-// use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Auth;
 
 class PanduanController extends Controller
 {
     public function index() {
-        // $user = Auth::user();
+        $user = Auth::user();
         // $profil = Profil::where('id', $user->id)->first();
         // $poltArea = PoltArea::where('profil_id', $profil->id)->first();
         // $serasah = Serasah::where('polt-area_id', $poltArea->id)->first();
@@ -30,6 +30,6 @@ class PanduanController extends Controller
         // $tiang = Tiang::where('polt-area_id', $poltArea->id)->first();
         // $nekromas = Necromass::where('polt-area_id', $poltArea->id)->first();
         // return view('panduan',compact('user', 'profil', 'poltArea', 'serasah', 'semai', 'tanah', 'pancang', 'tiang', 'nekromas', 'pohon', 'tumbuhanbawah'));
-        return view('panduan');
+        return view('panduan', compact('user'));
     }
 }
