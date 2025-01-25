@@ -9,6 +9,7 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log; // Tambahkan ini di bagian atas file controller
+use Illuminate\Support\Facades\Storage;
 
 class ProfilController extends Controller
 {
@@ -177,24 +178,39 @@ class ProfilController extends Controller
                 'foto.max' => 'Gambar tidak boleh lebih dari 2MB.',
                 'foto.dimensions' => 'Gambar harus memiliki rasio 1:1.',
             ]);
-            dd($validatedData);
-            $User = User::where('slug', $slug)->firstOrFail();
-            // dd($User);
-            // Jika ada file gambar baru
+            // Cari pengguna berdasarkan slug
+            $user = User::where('slug', $slug)->firstOrFail();
+
+            // Mengupdate gambar profil jika ada file gambar baru
             if ($request->hasFile('foto')) {
+                // Hapus gambar lama jika ada
+                if ($user->foto) {
+                    Storage::delete($user->foto); // Menghapus file lama
+                }
+
+                // Simpan gambar baru
                 $image = $request->file('foto');
                 $imageName = time() . '.' . $image->getClientOriginalExtension();
-                $image->move(public_path('images/profils'), $imageName); // Simpan gambar ke folder public/images/profils
-
-                // Update data profil dengan path gambar baru
-                $User->update(array_merge(
-                    $request->all(),
-                    ['foto' => 'images/profils/' . $imageName]
-                ));
-            } else {
-                // Update data profil tanpa gambar
-                $User->update($request->all());
+                $image->move(public_path('images/profils'), $imageName);
+                $validatedData['foto'] = 'images/profils/' . $imageName;
             }
+
+            // Mengupdate foto KTP jika ada file baru
+            if ($request->hasFile('foto_ktp')) {
+                // Hapus foto KTP lama jika ada
+                if ($user->foto_ktp) {
+                    Storage::delete($user->foto_ktp); // Menghapus file lama
+                }
+
+                // Simpan foto KTP baru
+                $ktpImage = $request->file('foto_ktp');
+                $ktpImageName = time() . '.' . $ktpImage->getClientOriginalExtension();
+                $ktpImage->move(public_path('images/profils'), $ktpImageName);
+                $validatedData['foto_ktp'] = 'images/profils/' . $ktpImageName;
+            }
+
+            // Update data pengguna
+            $user->update($validatedData);
             // return response()->json([
             //     "success" => true,
             //     "message" => "Data updated successfully",

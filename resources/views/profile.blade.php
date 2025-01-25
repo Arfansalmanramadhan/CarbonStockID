@@ -54,10 +54,12 @@
         </div>
         <div class="card p-4 shadow-sm">
             <div class="card-body">
-                <form class="form" id="profileForm" method="PUT" action="{{ route('profile.update', $user->slug) }}">
+                <form class="form" id="profileForm" action="{{ route('profile.update', $user->slug) }}"
+                    method="POST">
                     @csrf
                     @method('PUT')
-                    <input type="hidden" id="registrasi_id" name="registrasi_id" value="{{ $user->id }}"  enctype="multipart/form-data">
+                    <input type="hidden" id="registrasi_id" name="registrasi_id" value="{{ $user->id }}"
+                        enctype="multipart/form-data">
                     <div class="profile-container d-flex align-items-center">
                         <img src="{{ $user->foto ? asset($user->foto) : asset('/images/profileImage.svg') }}"
                             alt="User Photo" width="168" />
@@ -71,38 +73,40 @@
                     </div>
                     <div class="mb-2">
                         <label for="nama" class="form-label ms-1">Nama Lengkap</label>
-                        <input type="text" class="form-control" id="nama" name="nama" placeholder="Masukan nama lengkap"
-                            value="{{ $user->nama }}" />
+                        <input type="text" class="form-control" id="nama" name="nama"
+                            placeholder="Masukan nama lengkap" value="{{ old('nama', $user->nama) }}"/>
                     </div>
                     {{-- {{ Auth::user() }} --}}
                     <div class="mb-2">
                         <label for="username" class="form-label ms-1">Username</label>
-                        <input type="text" class="form-control" id="username" name="username" placeholder="Masukan Username"
-                            value="{{ $user->username }}" />
+                        <input type="text" class="form-control" id="username" name="username"
+                            placeholder="Masukan Username" value="{{ old('username', $user->username) }}" />
                     </div>
                     <div class="mb-2">
                         <label for="email" class="form-label ">Email</label>
-                        <input type="email" class="form-control" id="email" name="email" placeholder="Masukan Email"
-                            value="{{ $user->email }}" />
+                        <input type="email" class="form-control" id="email" name="email"
+                            placeholder="Masukan Email" value="{{ old('email', $user->email) }}"" />
                     </div>
                     <div class="mb-2">
                         <label for="nip" class="form-label ">NIP</label>
-                        <input type="text" class="form-control" id="nip" name="nip" placeholder="Masukan NIP"
-                            value="{{ $user->nip }}" />
+                        <input type="text" class="form-control" id="nip" name="nip"
+                            placeholder="Masukan NIP" value="{{ old('nip', $user->nip) }}" />
                     </div>
                     <div class="mb-2">
                         <label for="no_hp" class="form-label ">Nomor Telepon</label>
-                        <input type="text" class="form-control" name="no_hp" id="no_hp" placeholder="Masukan no Telepon"
-                            value="{{ $user->no_hp }}" />
+                        <input type="text" class="form-control" name="no_hp" id="no_hp"
+                            placeholder="Masukan no Telepon" value="{{ old('no_hp', $user->no_hp) }}" />
                     </div>
                     <div class="mb-2">
                         <label for="nik" class="form-label ">NIK</label>
-                        <input type="text" class="form-control" name="nik" id="nik" placeholder="masukan NIK"
-                            value="{{ $user->nik }}" />
+                        <input type="text" class="form-control" name="nik" id="nik"
+                            placeholder="masukan NIK" value="{{ old('nik', $user->nik) }}" />
                     </div>
                     <div class="mb-3">
                         <label for="formFile" class="form-label">Foto KTP</label>
-                        <input class="form-control" type="file" id="formFile"accept="image/jpeg,image/png,image/jpg,application/pdf" name="foto_ktp" value="{{ $user->fot_ktp }}">
+                        <input class="form-control" type="file"
+                            id="formFile"accept="image/jpeg,image/png,image/jpg,application/pdf" name="foto_ktp"
+                            value="{{ old('foto_ktp', $user->foto_ktp) }}">
                     </div>
 
                     <button type="submit" class="btn btn-simpan-perubahan">Simpan Perubahan</button>
