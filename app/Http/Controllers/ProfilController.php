@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfilRequest;
 use App\Http\Resources\ProfilResources;
-use App\Models\Profil;
+use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -27,9 +27,20 @@ class ProfilController extends Controller
         // // Menampilkan halaman profil dengan data pengguna
         // return view('profile', ['user' => $user]);
         $user = Auth::user(); // Ambil pengguna yang sedang login
-        $profil = Profil::where('registrasi_id', $user->id)->first(); // Ambil profil berdasarkan user
 
-        return view('profile', compact('user', 'profil'));
+        return view('profile', compact('user'));
+        // try {
+        //     Log::info('Mencari pengguna dengan slug: ' . $slug);
+
+        //     $user = User::where('slug', $slug)->firstOrFail();
+
+        //     Log::info('Data pengguna ditemukan:', $user->toArray());
+
+        //     return view('profile.index', compact('user'));
+        // } catch (Exception $e) {
+        //     Log::error('Error saat menampilkan profil: ' . $e->getMessage());
+        //     return redirect()->back()->with('error', 'Profil tidak ditemukan.');
+        // }
     }
 
     /**
@@ -48,7 +59,7 @@ class ProfilController extends Controller
         // dd("Haniiifff ");
         // dd(Profil::findOrFail($id));
         // dd($request->all());
-        if (Profil::find($id)) {
+        if (User::find($id)) {
 
             try {
                 // dd("Hanif");
@@ -62,7 +73,7 @@ class ProfilController extends Controller
                 ]);
 
                 // dd($id);
-                $profil = Profil::findOrFail($id);
+                $User = User::findOrFail($id);
 
                 // Jika ada file gambar baru
                 if ($request->hasFile('image')) {
@@ -71,13 +82,13 @@ class ProfilController extends Controller
                     $image->move(public_path('images/profils'), $imageName); // Simpan gambar ke folder public/images/profils
 
                     // Update data profil dengan path gambar baru
-                    $profil->update(array_merge(
+                    $User->update(array_merge(
                         $request->all(),
-                        ['image' => 'images/profils/' . $imageName]
+                        ['image' => 'images/users/' . $imageName]
                     ));
                 } else {
-                    // Update data profil tanpa gambar
-                    $profil->update($request->all());
+                    // Update data User tanpa gambar
+                    $User->update($request->all());
                 }
                 // return response()->json([
                 //     "success" => true,
@@ -130,10 +141,10 @@ class ProfilController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $slug)
     {
-        $profil = Profil::with('user:id,username,email')->findOrFail($id);
-        return new ProfilResources($profil);
+        $user = User::where('slug', $slug)->firstOrFail();
+        return view('profile', ['user' => $user]);
     }
 
     /**
@@ -141,7 +152,7 @@ class ProfilController extends Controller
      */
     public function edit(string $id)
     {
-        $supplier = Profil::findOrFail($id);
+        $supplier = User::findOrFail($id);
         return response()->json([
             "data" => $supplier
         ]);
@@ -150,48 +161,53 @@ class ProfilController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $slug)
     {
         // dd($request->all());
         try {
             // dd("Hanif");
             $validatedData = $request->validate([
-                'nama_lengkap' => 'required|string|max:255',
-                'no_hp' => 'required|string|max:15', // Sesuaikan max sesuai dengan batas panjang no_hp
-                'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048|dimensions:ratio=1/1', // Validasi gambar
+                'nama' => 'required|string|max:255',
+                'foto' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048|dimensions:ratio=1/1', // Validasi gambar
+                'nip' => 'nullable|string|max:15',
+                'no_hp' => 'nullable|string|max:15', // Sesuaikan max sesuai dengan batas panjang no_hp
+                'nik' => 'nullable|string|max:15',
+                'foto_ktp' => 'nullable|mimes:jpeg,png,jpg,pdf|max:2048',
             ], [
-                'image.max' => 'Gambar tidak boleh lebih dari 2MB.',
-                'image.dimensions' => 'Gambar harus memiliki rasio 1:1.',
+                'foto.max' => 'Gambar tidak boleh lebih dari 2MB.',
+                'foto.dimensions' => 'Gambar harus memiliki rasio 1:1.',
             ]);
-            // dd($id);
-            $profil = Profil::findOrFail($id);
-
+            dd($validatedData);
+            $User = User::where('slug', $slug)->firstOrFail();
+            // dd($User);
             // Jika ada file gambar baru
-            if ($request->hasFile('image')) {
-                $image = $request->file('image');
+            if ($request->hasFile('foto')) {
+                $image = $request->file('foto');
                 $imageName = time() . '.' . $image->getClientOriginalExtension();
                 $image->move(public_path('images/profils'), $imageName); // Simpan gambar ke folder public/images/profils
 
                 // Update data profil dengan path gambar baru
-                $profil->update(array_merge(
+                $User->update(array_merge(
                     $request->all(),
-                    ['image' => 'images/profils/' . $imageName]
+                    ['foto' => 'images/profils/' . $imageName]
                 ));
             } else {
                 // Update data profil tanpa gambar
-                $profil->update($request->all());
+                $User->update($request->all());
             }
             // return response()->json([
             //     "success" => true,
             //     "message" => "Data updated successfully",
-            //     "data" => $profil
+            //     "data" => $User
             // ], 200);
             return redirect()->back()->with('success', 'Profil berhasil diperbarui.');
+            // return redirect()->route('profile.index', ['slug' => $User->slug])->with('success', 'Profil berhasil diperbarui.');
         } catch (Exception $e) {
             // return response()->json([
             //     "message" => $e->getMessage()
             // ], 500);
-            return redirect()->back()->with('error', $e->getMessage());
+            Log::error($e->getMessage());
+            return redirect()->back()->with('error', 'Gagal memperbarui profil.');
         }
     }
 
@@ -202,7 +218,7 @@ class ProfilController extends Controller
     {
         try {
             // Cari data Profil berdasarkan ID
-            $Profil = Profil::findOrFail($id);
+            $Profil = User::findOrFail($id);
 
             // Hapus data
             $Profil->delete();

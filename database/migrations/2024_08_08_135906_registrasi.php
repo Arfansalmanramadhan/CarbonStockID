@@ -15,12 +15,16 @@ return new class extends Migration
             $table->id();
             $table->foreignId('role_id');
             $table->foreign('role_id')->on('roles')->references('id')->onDelete('cascade')->onUpdate('cascade');
+            $table->string('nama')->nullable();
             $table->string('username');
+            $table->string("slug", 255);
             $table->string('email')->unique();
             $table->string('password');
+            $table->binary('foto')->nullable();
             $table->string('nip')->nullable();
             $table->string('no_hp')->nullable();
             $table->string('nik')->nullable();
+            $table->binary('foto_ktp')->nullable();
             $table->timestamps();
         });
     }

@@ -92,7 +92,7 @@ class PoltAreaController extends Controller
     {
         // cari poltArea berdasarkan slug
         $poltArea = PoltArea::where("slug", $slug)->first();
-        // jika tidak ditemukan, kemabali erro 
+        // jika tidak ditemukan, kemabali erro
         if (!$poltArea) {
             return response()->json([
                 "pesan" => "PoltArea tidak ditemukan"

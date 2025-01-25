@@ -38,8 +38,8 @@
                 </a>
             </div>
             <div class="d-flex align-items-center">
-                <img src="{{ $profil->image ? asset($profil->image) : asset('/images/PersonFill.svg') }}" alt="User Avatar" id="userIcon"
-                    class="ms-3 user-avatar" />
+                <img src="{{ $user->foto ? asset($user->foto) : asset('/images/PersonFill.svg') }}" alt="User Avatar"
+                    id="userIcon" class="ms-3 user-avatar" />
             </div>
         </div>
     </nav>
@@ -54,43 +54,57 @@
         </div>
         <div class="card p-4 shadow-sm">
             <div class="card-body">
-                <form class="form" id="profileForm" method="POST" action="{{ route('profile.update', $user->id) }}"
-                    {{-- {{ route('profile.update', $user->id) }} --}} enctype="multipart/form-data">
+                <form class="form" id="profileForm" method="PUT" action="{{ route('profile.update', $user->slug) }}">
                     @csrf
                     @method('PUT')
-                    <input type="hidden" id="registrasi_id" name="registrasi_id" value="{{ $user->id }}">
+                    <input type="hidden" id="registrasi_id" name="registrasi_id" value="{{ $user->id }}"  enctype="multipart/form-data">
                     <div class="profile-container d-flex align-items-center">
-                        <img src="{{ $profil->image ? asset($profil->image) : asset('/images/profileImage.svg') }}" alt="User Photo"
-                            width="168" />
+                        <img src="{{ $user->foto ? asset($user->foto) : asset('/images/profileImage.svg') }}"
+                            alt="User Photo" width="168" />
                         <div>
                             <button type="button" class="btn btn-success mb-2" id="uploadButton">Pilih Foto</button>
-                            <input type="file" class="foto-image" name="image" id="fileInput" accept="image/*"
+                            <input type="file" class="foto-image" name="foto" id="fileInput" accept="image/*"
                                 style="display: none" />
                             <p class="text-muted">Gambar Profile Anda sebaiknya memiliki rasio 1:1 dan berukuran tidak
                                 lebih dari 2MB.</p>
                         </div>
                     </div>
                     <div class="mb-2">
-                        <label for="nama_lengkap" class="form-label ms-1">Nama Lengkap</label>
-                        <input type="text" class="form-control" id="nama_lengkap" name="nama_lengkap"
-                            value="{{ $profil->nama_lengkap }}" />
+                        <label for="nama" class="form-label ms-1">Nama Lengkap</label>
+                        <input type="text" class="form-control" id="nama" name="nama" placeholder="Masukan nama lengkap"
+                            value="{{ $user->nama }}" />
                     </div>
                     {{-- {{ Auth::user() }} --}}
                     <div class="mb-2">
                         <label for="username" class="form-label ms-1">Username</label>
-                        <input type="text" class="form-control" id="username" name="username"
+                        <input type="text" class="form-control" id="username" name="username" placeholder="Masukan Username"
                             value="{{ $user->username }}" />
                     </div>
                     <div class="mb-2">
-                        <label for="email" class="form-label ms-1">Email</label>
-                        <input type="email" class="form-control" id="email" name="email"
+                        <label for="email" class="form-label ">Email</label>
+                        <input type="email" class="form-control" id="email" name="email" placeholder="Masukan Email"
                             value="{{ $user->email }}" />
                     </div>
                     <div class="mb-2">
-                        <label for="no_hp" class="form-label ms-1">Nomor Telepon</label>
-                        <input type="text" class="form-control" name="no_hp" id="no_hp"
-                            value="{{ $profil->no_hp }}" />
+                        <label for="nip" class="form-label ">NIP</label>
+                        <input type="text" class="form-control" id="nip" name="nip" placeholder="Masukan NIP"
+                            value="{{ $user->nip }}" />
                     </div>
+                    <div class="mb-2">
+                        <label for="no_hp" class="form-label ">Nomor Telepon</label>
+                        <input type="text" class="form-control" name="no_hp" id="no_hp" placeholder="Masukan no Telepon"
+                            value="{{ $user->no_hp }}" />
+                    </div>
+                    <div class="mb-2">
+                        <label for="nik" class="form-label ">NIK</label>
+                        <input type="text" class="form-control" name="nik" id="nik" placeholder="masukan NIK"
+                            value="{{ $user->nik }}" />
+                    </div>
+                    <div class="mb-3">
+                        <label for="formFile" class="form-label">Foto KTP</label>
+                        <input class="form-control" type="file" id="formFile"accept="image/jpeg,image/png,image/jpg,application/pdf" name="foto_ktp" value="{{ $user->fot_ktp }}">
+                    </div>
+
                     <button type="submit" class="btn btn-simpan-perubahan">Simpan Perubahan</button>
                 </form>
 

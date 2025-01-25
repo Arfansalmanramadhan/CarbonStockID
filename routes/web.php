@@ -66,10 +66,12 @@ Route::middleware('auth')->group(function () {
         return view('dashboard', compact('user',  'poltArea')); // Kirim $profil ke view
     })->name('dashboard');
 
-    // Route::get('/profile', [ProfilController::class, 'index'])->name('profile');
+    Route::get('/profile', [ProfilController::class, 'index'])->name('profile.index');
     // Route::post('/profile/{id}', [ProfilController::class, 'store'])->name('profile.store');
-    // Route::put('/profile/{id}', [ProfilController::class, 'update'])->name('profile.update');
-    // Route::get('/profile/{id}', [ProfilController::class, 'show'])->name('profile.show');
+    Route::get('/profile/{slug}', [ProfilController::class, 'show'])->name('profile.show');
+    Route::put('/profile/{slug}', [ProfilController::class, 'update'])->name('profile.update');
+
+
     Route::get('/panduan', [PanduanController::class, 'index']);
     Route::get('/dataPlot', [DataPlotController::class, 'index']);
     Route::get('/manajermenUser', [ManajermenUserController::class, 'index']);
