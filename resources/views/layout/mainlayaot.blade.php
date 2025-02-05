@@ -53,7 +53,7 @@
                             aria-label="Search" />
                         <img src="{{ asset('/images/iconSearch.png') }}" alt="Search Icon" class="search-icon" />
                     </form>
-                    <a href="{{ url('/tambahData') }}" class="btn btn-light btn-tambahData">Tambah data</a>
+                    <a href="{{ url('/PlotArea') }}" class="btn btn-light btn-tambahData">Tambah data</a>
                     <img src="{{ $user->image ? asset($user->image) : asset('/images/PersonFill.svg') }}"
                         alt="User Avatar" id="userIcon" class="ms-3 user-avatar" />
                     <div class="user-usere-dropdown parent-container " id="userProfileDropdown" style="display: none">

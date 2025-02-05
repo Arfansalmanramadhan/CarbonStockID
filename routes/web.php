@@ -27,6 +27,7 @@ use App\Http\Controllers\Authentication\AuthController;
 use App\Http\Controllers\DataPlotController;
 use App\Http\Controllers\ManajermenUserController;
 use App\Http\Controllers\SampahController;
+use App\Http\Controllers\zonaController;
 use App\Models\Role;
 use Illuminate\Routing\Route as RoutingRoute;
 
@@ -108,8 +109,8 @@ Route::middleware('auth')->group(function () {
         // dd($user, $profil, $poltArea);
         return view('percobaan', compact('user', 'poltArea', 'serasah', 'semai', 'pancang', 'tiang', 'nekromas', 'pohon', 'tanah'));
     });
-
-
+    Route::get('/zona', [zonaController::class, 'index'])->name('zona.index');
+    Route::get('/PlotArea', [PoltAreaController::class, 'index']);
     Route::post('/plotarea/store', [PoltAreaController::class, 'store'])->name('plotarea.store');
 
     // Route::post('/Serasah/store', [SerasahController::class, 'store'])->name('Serasah.store');

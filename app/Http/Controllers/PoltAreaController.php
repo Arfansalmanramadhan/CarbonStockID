@@ -7,6 +7,7 @@ use App\Models\PoltArea;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Resources\PoltAreaResorce;
+use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpKernel\Profiler\Profile;
 
 class PoltAreaController extends Controller
@@ -23,8 +24,11 @@ class PoltAreaController extends Controller
      */
     public function index()
     {
-        $poltArea = PoltArea::get();
-        return PoltAreaResorce::collection($poltArea);
+        // $poltArea = PoltArea::get();
+        // return PoltAreaResorce::collection($poltArea);
+        $user = Auth::user();
+        $poltArea = PoltArea::where('id', $user->id)->first();
+        return view('tambah.PlotArea', compact('user', 'poltArea'));
     }
 
     /**
@@ -41,48 +45,48 @@ class PoltAreaController extends Controller
     public function store(Request $request)
     {
         // Ambil profil berdasarkan ID yang dikirimkan dalam request
-        $profileId = $request->input('profil_id'); // Pastikan profil_id dikirim dari frontend
-        $profile = Profil::find($profileId);
+        // $profileId = $request->input('profil_id'); // Pastikan profil_id dikirim dari frontend
+        // $profile = Profil::find($profileId);
 
-        // $profile = $user->profil;
-        if (!$profileId) {
-            // Untuk debugging, periksa user dan profil
-            return response()->json([
-                'message' => 'Profil tidak terkirim',
-                // 'profil' => $profile,
-                'profil' => $profileId
-            ], 404);
-        }
+        // // $profile = $user->profil;
+        // if (!$profileId) {
+        //     // Untuk debugging, periksa user dan profil
+        //     return response()->json([
+        //         'message' => 'Profil tidak terkirim',
+        //         // 'profil' => $profile,
+        //         'profil' => $profileId
+        //     ], 404);
+        // }
 
-        // Validasi request
-        $validatedData = $request->validate([
-            'daerah' => 'required|string|max:255',
-            'latitude' => 'required|numeric',
-            'longitude' => 'required|numeric',
-        ]);
+        // // Validasi request
+        // $validatedData = $request->validate([
+        //     'daerah' => 'required|string|max:255',
+        //     'latitude' => 'required|numeric',
+        //     'longitude' => 'required|numeric',
+        // ]);
 
-        try {
-            // Membuat instance PoltArea baru
-            $poltArea = PoltArea::create([
-                "profil_id" => $profile->id,
-                "daerah" => $validatedData['daerah'],
-                "latitude" => $validatedData['latitude'],
-                "longitude" => $validatedData['longitude']
-            ]);
+        // try {
+        //     // Membuat instance PoltArea baru
+        //     $poltArea = PoltArea::create([
+        //         "profil_id" => $profile->id,
+        //         "daerah" => $validatedData['daerah'],
+        //         "latitude" => $validatedData['latitude'],
+        //         "longitude" => $validatedData['longitude']
+        //     ]);
 
-            // Response berhasil
-            // return response()->json([
-            //     'message' => 'PoltArea berhasil di buat',
-            //     'data' => $poltArea
-            // ], 201);
-            return redirect()->back()->with('success', 'Plot area berhasil ditambahkan!');
-        } catch (\Exception $e) {
-            // Response error
-            return response()->json([
-                'message' => 'Gagal membuat PoltArea',
-                'error' => $e->getMessage()
-            ], 500);
-        }
+        //     // Response berhasil
+        //     // return response()->json([
+        //     //     'message' => 'PoltArea berhasil di buat',
+        //     //     'data' => $poltArea
+        //     // ], 201);
+        //     return redirect()->back()->with('success', 'Plot area berhasil ditambahkan!');
+        // } catch (\Exception $e) {
+        //     // Response error
+        //     return response()->json([
+        //         'message' => 'Gagal membuat PoltArea',
+        //         'error' => $e->getMessage()
+        //     ], 500);
+        // }
     }
 
     /**

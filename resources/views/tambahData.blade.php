@@ -1,91 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-    <link href="https://api.mapbox.com/mapbox-gl-js/v2.13.0/mapbox-gl.css" rel="stylesheet" />
-
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" />
-
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&family=Inter:wght@400;700&display=swap"
-        rel="stylesheet" />
-
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="{{ asset('css/tambahData.css') }}" />
-
-    <!-- Chart.js -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
-
-    <!-- Favicon -->
-    <link rel="icon" href="{{ asset('/images/logoCarbonStockID-LightMode.png') }}" type="image/x-icon" />
-    <title>CarbonStockID</title>
-</head>
-
-<body>
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg bg-transparent w-100">
-        <div class="container d-flex justify-content-between align-items-center">
-            <div class="d-flex align-items-center">
-                <a href="{{ route('dashboard') }}" class="burger-button">
-                    <img src="{{ asset('/images/leftProfile.svg') }}" alt="Burger Menu" class="burger-icon" />
-                </a>
-                <a class="navbar-brand d-flex align-items-center ms-3" href="#">
-                    <img src="{{ asset('/images/logoCarbonStockID-DarkMode.png') }}" alt="Logo" width="30"
-                        class="d-inline-block align-middle me-2" />
-                    <span>CarbonStockID</span>
-                </a>
-            </div>
-            <div class="d-flex align-items-center">
-                <button class="btn btn-light btn-plot-area d-flex justify-content-between align-items-center">
-                    <span>Plot Area</span>
-                    <img src="{{ asset('/images/CaretUpFill.svg') }}" alt="Caret Icon" />
-                </button>
-                <div class="dropdown-plot-area" id="dropdownPlotArea" style="display: none">
-                    <ul>
-                        <li class="header-dropdown">Plot Area</li>
-                        <li id="plotA">Sub Plot A</li>
-                        <li id="plotB">Sub Plot B</li>
-                        <li id="plotC">Sub Plot C</li>
-                        <li id="plotD">Sub Plot D</li>
-                        <li id="hasilHitung" class="akhir">Hasil Hitung</li>
-                    </ul>
-                </div>
-                <img src="{{ asset('/images/userIcon.png') }}" alt="User Avatar" id="userIcon"
-                    class="ms-3 user-avatar" />
-                <div class="user-profile-dropdown" id="userProfileDropdown" style="display: none">
-                    <div class="user-info">
-                        <img src="{{ asset('/images/userIcon.png') }}" alt="User Avatar" class="user-avatar" />
-                        <div class="user-details">
-                            <h4>Chistoper Govert</h4>
-                            <p>chistoper@gmail.com</p>
-                        </div>
-                    </div>
-                    <hr />
-                    <div class="user-options">
-                        <div class="option">
-                            <img class="me-1" src="{{ asset('/images/PersonFill.svg') }}" alt="" />
-                            <a href="{{ url('/profile') }}"><span>Profil Saya</span></a>
-                        </div>
-                        <div class="option">
-                            <img class="ms-1 me-1" src="{{ asset('/images/majesticons_logout.svg') }}"
-                                alt="" />
-                            <a href="{{ url('') }}"><span>Keluar</span></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </nav>
 
 
 
@@ -108,61 +20,7 @@
 
     <!-- Konten Tambah Data -->
     <div>
-        <div class="container-tambah-data mt-5" id="currentContent">
-            <div class="container-isi">
-                <div class="card plot-info-card">
-                    <div class="card-header d-flex align-items-center">
-                        <h5 class="ms-3 mt-2">Informasi Plot Area</h5>
-                        @session('success')
-                            {{-- <h5 class="ms-3 mt-2">sdsadsa</h5> --}}
-                            <div class="toast position-fixed left-0 bottom-0 z-3 ms-4 p-2 mb-3" role="alert"
-                                aria-live="assertive" aria-atomic="true" id="myToast">
-                                <div class="toast-header border-0">
-                                    {{-- <img src="..." class="rounded me-2" alt="..."> --}}
-                                    <strong class="me-auto">Data berhasil dikirim!</strong>
-                                    {{-- <small>11 mins ago</small> --}}
-                                    <button type="button" class="btn-close" data-bs-dismiss="toast"
-                                        aria-label="Close"></button>
-                                </div>
-                                {{-- <div class="toast-body">
-                                  Data berhasil dikirim!
-                              </div> --}}
-                            </div>
-                        @endsession
-                    </div>
-                    <div class="card-body">
-                        <!-- Map Section -->
-                        <div id="map"></div>
 
-                        <!-- Form -->
-                        <dd></dd>
-                        <form method="POST" action="{{ route('plotarea.store') }}" id="plotAreaForm">
-                            @csrf
-                            <div class="mb-4">
-                                <label for="plotName" class="form-label">Daerah Plot Area</label>
-                                <input type="text" class="form-control" name="daerah" id="plotName"
-                                    placeholder="Masukkan nama daerah pengamatan" />
-                            </div>
-                            <div class="mb-4">
-                                <label for="latitude" class="form-label">Latitude</label>
-                                <input type="text" class="form-control-non" name="latitude" id="latitude" />
-                            </div>
-                            <div class="mb-4">
-                                <label for="longitude" class="form-label">Longitude</label>
-                                <input type="text" class="form-control-non" name="longitude" id="longitude" />
-                            </div>
-                            <input type="hidden" name="profil_id" value="{{ auth()->user()->profil->id }}" />
-                            <!-- pastikan user sudah login -->
-                        </form>
-                    </div>
-                </div>
-                <button type="button" class="btn btn-success d-flex align-items-center justify-content-center"
-                    id="submitButton">
-                    <span>Berikutnya</span>
-                    <img src="{{ asset('/images/ArrowRight.svg') }}" alt="Arrow Icon" class="ms-2" />
-                </button>
-            </div>
-        </div>
         <!-- Konten baru yang akan ditampilkan -->
         <div class="container-tambah-data hidden mt-5" id="newContent">
             <div class="container-isi">
@@ -195,11 +53,12 @@
                             <div class="mb-3">
                                 <label for="plotName" class="form-label">Total Berat Kering</label>
                                 <input type="text" class="form-control-non" name="total_berat_kering"
-                                    id="TotalBeratKering " value="{{ $serasah ? $serasah->total_berat_kering : '' }} "
-                                    readonly />
+                                    id="TotalBeratKering "
+                                    value="{{ $serasah ? $serasah->total_berat_kering : '' }} " readonly />
                             </div>
                             <p class="form-label">Kandungan Karbon
-                                <span>{{ $serasah ? $serasah->kandungan_karbon : '' }} Kg</span></p>
+                                <span>{{ $serasah ? $serasah->kandungan_karbon : '' }} Kg</span>
+                            </p>
                             <p class="form-label">Serapan CO2 <span>{{ $serasah ? $serasah->co2 : '' }} Kg</span></p>
                             <button type="submit"
                                 class="btn btn-submit-plotA d-flex align-items-center justify-content-center"
@@ -292,7 +151,8 @@
                                     value="{{ $tumbuhanbawah ? $tumbuhanbawah->total_berat_kering : '' }}" readonly />
                             </div>
                             <p class="form-label">Kandungan Karbon
-                                <span>{{ $tumbuhanbawah ? $tumbuhanbawah->kandungan_karbon : '' }} Kg</span></p>
+                                <span>{{ $tumbuhanbawah ? $tumbuhanbawah->kandungan_karbon : '' }} Kg</span>
+                            </p>
                             <p class="form-label">Serapan CO2 <span>{{ $tumbuhanbawah ? $tumbuhanbawah->co2 : '' }}
                                     Kg</span></p>
                             <button type="submit"
@@ -1117,23 +977,3 @@
             </div>
         </div>
     </div>
-
-    <!-- Custom JS -->
-    <script src="https://api.mapbox.com/mapbox-gl-js/v2.13.0/mapbox-gl.js"></script>
-    <script src="{{ asset('/js/tambahData.js') }}"></script>
-
-    <!-- Bootstrap JS Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            var toastEl = document.getElementById('myToast');
-            var toast = new bootstrap.Toast(toastEl, {
-                delay: 3000 // Menghilang setelah 1 detik
-            });
-
-            toast.show(); // Menampilkan toast saat halaman dimuat
-        });
-    </script>
-</body>
-
-</html>

@@ -487,9 +487,9 @@ h3 {
 }
 
 /* Hidden state */
-.hidden {
+/* .hidden {
   display: none;
-}
+} */
 
 .card-body-sup-plot {
   display: flex;
@@ -1152,7 +1152,7 @@ h3 {
 }
 
 /* .custom-table-pancang tbody tr {
-  border: 1px solid #4caf4f; 
+  border: 1px solid #4caf4f;
 } */
 
 .custom-table-pancang tfoot td {
