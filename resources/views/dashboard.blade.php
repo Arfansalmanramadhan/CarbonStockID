@@ -2,22 +2,23 @@
 
 @section('title', 'Buku')
 @section('content')
-    <div class="">
+    {{-- <div class=" "> --}}
         <!-- Content for Beranda (default visible) -->
-        <div id="beranda-content" class="page-content w-100 col-lg-10 ">
+        <div id="beranda-content" class="page-content">
             <h4 class="judul-beranda">Data Plot Area</h4>
-            <table class="custom-table-hasil">
-                <thead class="me-4">
+            {{-- <table class="custom-table-hasil"> --}}
+            <table class="custom-table-hasil ">
+                <thead >
                     <tr>
-                        <th>NOMOR</th>
-                        <th>DAERAH</th>
-                        <th>LATITUDE</th>
-                        <th>LONGITUDE</th>
+                        <th scope="col">NOMOR</th>
+                        <th scope="col">DAERAH</th>
+                        <th scope="col">LATITUDE</th>
+                        <th scope="col">LONGITUDE</th>
                     </tr>
                 </thead>
-                <tbody class="me-4">
+                <tbody >
                     <tr>
-                        <td>00001</td>
+                        <td scope="row">00001</td>
                         <td>Mekar Jaya, Me...</td>
                         <td>-6.937154839...</td>
                         <td>6.937178839...</td>
@@ -40,7 +41,7 @@
             <div id="carbon-prediction-chart-2"></div>
         </div>
         <!-- Content for Data Plot (initially hidden) -->
-    </div>
+    {{-- </div> --}}
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {

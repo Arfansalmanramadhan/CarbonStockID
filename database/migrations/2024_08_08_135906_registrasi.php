@@ -20,11 +20,12 @@ return new class extends Migration
             $table->string("slug", 255);
             $table->string('email')->unique();
             $table->string('password');
-            $table->binary('foto')->nullable();
+            $table->string('foto')->nullable();
             $table->string('nip')->nullable();
             $table->string('no_hp')->nullable();
             $table->string('nik')->nullable();
-            $table->binary('foto_ktp')->nullable();
+            $table->string('foto_ktp')->nullable();
+            $table->string('foto_tandatangan')->nullable();
             $table->timestamps();
         });
     }

@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreign("polt-area_id")->references("id")->on("polt-area");
             $table->string("zona", 250);
             $table->string("jenis_hutan", 250);
+            $table->string('foto_area');
             $table->timestamps();
         });
     }

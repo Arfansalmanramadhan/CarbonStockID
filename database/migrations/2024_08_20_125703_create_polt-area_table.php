@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string("slug", 255);
             $table->decimal('latitude', 10, 8)->nullable();
             $table->decimal('longitude', 11, 8)->nullable();
-            $table->string("status");
+            $table->string("status")->default("tidakaktif");
             $table->timestamps();
             $table->softDeletes();
         });

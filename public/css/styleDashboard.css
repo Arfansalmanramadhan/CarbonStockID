@@ -160,7 +160,7 @@ html, body {
 .sidebar {
   width: auto ;
   background-color: #ffffff !important;
-  height: 80vh  ;
+  height: 100vh  ;
   padding-bottom: 50px;
   padding-top: 50px;
   padding-right:20px ;
@@ -259,7 +259,9 @@ html, body {
   opacity: 1;
   transition: opacity 0.3s ease;
 }
-
+.body {
+    max-height: 100vh;
+}
 /* Table Styles */
 .table-container {
   width: 100%;
@@ -632,24 +634,23 @@ html, body {
 }
 
 .custom-table-hasil tbody td {
-  border-bottom: 1px solid #4caf4f; /* Border hijau di bawah */
+  border-bottom: 1px solid #4caf4f;
   color: #202224;
-  /* Desktop/Label/Regular */
   font-family: "DM Sans";
   font-size: 18px;
   font-style: normal;
   font-weight: 400;
-  line-height: 125%; /* 22.5px */
+  line-height: 125%;
   width: 63px;
   text-align: center;
 }
 
 .custom-table-hasil tbody tr {
-  border: 1px solid #4caf4f; /* Border hijau di baris */
+  border: 1px solid #4caf4f;
 }
 
 .custom-table-hasil tfoot td {
-  background-color: #4caf4f; /* Warna hijau untuk footer */
+  background-color: #4caf4f;
   color: white;
   font-weight: bold;
   padding: 12px;

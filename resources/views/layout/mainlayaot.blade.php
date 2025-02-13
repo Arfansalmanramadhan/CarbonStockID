@@ -32,64 +32,64 @@
 </head>
 
 <body>
-    <main class="main d-flex flex-column justify-content-between">
-        <!-- Navbar -->
-        <nav class="navbar navbar-expand-lg bg-body-tertiary">
-            <div class="container-fluid">
-                <div class="d-flex align-items-center">
-                    <button class="burger-button" type="button" data-bs-target="#sidebar" aria-controls="sidebar"
-                        aria-expanded="false">
-                        <img src="{{ asset('/images/burgerIcon.png') }}" alt="Burger Menu" class="burger-icon" />
-                    </button>
-                    <a class="navbar-brand d-flex align-items-center ms-3" href="#">
-                        <img src="{{ asset('/images/logoCarbonStockID-DarkMode.png') }}" alt="Logo" width="30"
-                            class="d-inline-block align-middle me-2" />
-                        <span>CarbonStockID</span>
-                    </a>
-                </div>
-                <div class="d-flex align-items-center">
-                    <form class="d-flex me-2 position-relative" role="search">
-                        <input class="form-control search-input" type="search" placeholder="Cari..."
-                            aria-label="Search" />
-                        <img src="{{ asset('/images/iconSearch.png') }}" alt="Search Icon" class="search-icon" />
-                    </form>
-                    <a href="{{ url('/PlotArea') }}" class="btn btn-light btn-tambahData">Tambah data</a>
-                    <img src="{{ $user->image ? asset($user->image) : asset('/images/PersonFill.svg') }}"
-                        alt="User Avatar" id="userIcon" class="ms-3 user-avatar" />
-                    <div class="user-usere-dropdown parent-container " id="userProfileDropdown" style="display: none">
-                        <div class="user-info">
-                            <img src="{{ $user->image ? asset($user->image) : asset('/images/PersonFill.svg') }}"
-                                alt="User Avatar" id="userIcon" class="ms-3 user-avatar" />
-                            <div class="user-details">
-                                <h4>{{ $user->username }}</h4>
-                                <p>{{ $user->email }}</p>
-                            </div>
+
+    {{-- <main class="main d-flex flex-column justify-content-between"> --}}
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+            <div class="d-flex align-items-center">
+                <button class="burger-button" type="button" data-bs-target="#sidebar" aria-controls="sidebar"
+                    aria-expanded="false">
+                    <img src="{{ asset('/images/burgerIcon.png') }}" alt="Burger Menu" class="burger-icon" />
+                </button>
+                <a class="navbar-brand d-flex align-items-center ms-3" href="#">
+                    <img src="{{ asset('/images/logoCarbonStockID-DarkMode.png') }}" alt="Logo" width="30"
+                        class="d-inline-block align-middle me-2" />
+                    <span>CarbonStockID</span>
+                </a>
+            </div>
+            <div class="d-flex align-items-center">
+                <form class="d-flex me-2 position-relative" role="search">
+                    <input class="form-control search-input" type="search" placeholder="Cari..." aria-label="Search" />
+                    <img src="{{ asset('/images/iconSearch.png') }}" alt="Search Icon" class="search-icon" />
+                </form>
+                <a href="{{ url('/PlotArea') }}" class="btn btn-light btn-tambahData">Tambah data</a>
+                <img src="{{ $user->image ? asset($user->image) : asset('/images/PersonFill.svg') }}" alt="User Avatar"
+                    id="userIcon" class="ms-3 user-avatar" />
+                <div class="user-usere-dropdown parent-container " id="userProfileDropdown" style="display: none">
+                    <div class="user-info">
+                        <img src="{{ $user->image ? asset($user->image) : asset('/images/PersonFill.svg') }}"
+                            alt="User Avatar" id="userIcon" class="ms-3 user-avatar" />
+                        <div class="user-details">
+                            <h4>{{ $user->username }}</h4>
+                            <p>{{ $user->email }}</p>
                         </div>
-                        <hr />
-                        <div class="user-options">
-                            <div class="option">
-                                <img class="me-1" src="{{ asset('/images/PersonFill.svg') }}" alt="" />
-                                <a href="/profile/{{ $user->slug }}"><span>Profil Saya</span></a>
-                                {{-- <a href="{{ route('profile.index',Auth::user()->slug]) }}"><span>Profil Saya</span></a> --}}
-                            </div>
-                            <div class="option">
-                                <img class="ms-1 me-1" src="{{ asset('/images/majesticons_logout.svg') }}"
-                                    alt="" />
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                                    style="display: inline;">
-                                    @csrf
-                                    <button type="submit"
-                                        style="border: none; background: none; padding: 0; cursor: pointer;">
-                                        <span>Keluar</span>
-                                    </button>
-                                </form>
-                            </div>
+                    </div>
+                    <hr />
+                    <div class="user-options">
+                        <div class="option">
+                            <img class="me-1" src="{{ asset('/images/PersonFill.svg') }}" alt="" />
+                            <a href="/profile/{{ $user->slug }}"><span>Profil Saya</span></a>
+                            {{-- <a href="{{ route('profile.index',Auth::user()->slug]) }}"><span>Profil Saya</span></a> --}}
+                        </div>
+                        <div class="option">
+                            <img class="ms-1 me-1" src="{{ asset('/images/majesticons_logout.svg') }}"
+                                alt="" />
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                style="display: inline;">
+                                @csrf
+                                <button type="submit"
+                                    style="border: none; background: none; padding: 0; cursor: pointer;">
+                                    <span>Keluar</span>
+                                </button>
+                            </form>
                         </div>
                     </div>
                 </div>
             </div>
-        </nav>
-
+        </div>
+    </nav>
+    <main class="container-fluid main d-flex flex-column justify-content-between">
         <section class="d-flex main ">
             <div class="row  h-100 ">
                 <div class="sidebar bg-light  col-lg-2" id="sidebar">
@@ -127,7 +127,7 @@
                     </ul>
                 </div>
             </div>
-            <div class="container">
+            <div class="container  w-100 col-md-10  body">
                 @yield('content')
             </div>
         </section>
