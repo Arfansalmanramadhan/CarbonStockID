@@ -105,7 +105,7 @@ class AuthController extends Controller
             "data" => [
                 "user" => $user,
                 "token" => $token,
-                'redirect_url' => route('dashboard') 
+                'redirect_url' => route('dashboard')
             ]
         ], 200); */
     }

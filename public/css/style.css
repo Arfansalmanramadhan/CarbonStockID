@@ -35,7 +35,12 @@ h3 {
 }
 
 /* Navbar Color */
-
+.me {
+    padding-top: 6rem;
+}
+section {
+    padding-top: 6rem ;
+}
 .nav-color {
   background-color: var(--pr-color2);
   box-shadow: 0px 8px 12px 0px rgba(0, 0, 0, 0.05);

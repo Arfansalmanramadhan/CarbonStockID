@@ -65,7 +65,7 @@
 
     <!-- Hero Section -->
     <section id="hero">
-        <div class="container h-100 position-relative">
+        <div class="container  me h-100 position-relative">
             <div class="row">
                 <div class="col-lg-6 hero-tagline  ">
                     <h1>Hitung, Kelola dan Prediksi Cadangan Karbon Jadi <span>Mudah dan Efisien</span></h1>
@@ -83,8 +83,12 @@
 
     <!-- Fitur Section -->
     <section id="Fitur">
-        <div class="container">
-            <h2 id="fitur">FITUR ANDALAN</h2>
+        <div class="container me">
+            <div class="row text-center">
+                <div class="col">
+                    <h2 id="fitur">FITUR ANDALAN</h2>
+                </div>
+            </div>
             <div class="row align-items-center">
                 <div class="col-lg-6">
                     <h3>Fitur Terbaik untuk Pengelolaan Cadangan Karbon yang Efisien</h3>
@@ -121,8 +125,12 @@
 
     <!-- Pertanyaan Section -->
     <section id="Pertanyaan">
-        <div class="container text-center">
-            <h2>PERTANYAAN & JAWABAN</h2>
+        <div class="container me ">
+            <div class="row text-center">
+                <div class="col">
+                    <h2>PERTANYAAN & JAWABAN</h2>
+                </div>
+            </div>
             <p>Pelajari tentang platform CarbonStockID melalui pertanyaan berikut</p>
             <div class="row mt-5">
                 <div class="col-lg-6">
@@ -223,7 +231,7 @@
 
     <!-- Tentang Kami Section -->
     <section id="TentangKami">
-        <div class="container">
+        <div class="container me">
             <h2>TENTANG KAMI</h2>
             <p>Mengenal platform CarbonStockID lebih dalam lagi</p>
             <div class="row mt-5 align-items-center">
