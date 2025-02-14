@@ -53,10 +53,10 @@ Route::get('/', function () {
 
 // Rute untuk halaman login
 Route::controller(AuthController::class)->group(function () {
-    Route::get('/login', 'index')->name('login');
-    Route::post('/login', 'login');
-    Route::get('/register', 'registasii')->name('register');
-    Route::post('/register', 'registasi')->name('daftar');
+    Route::get('/login', 'index')->name('login')->middleware('only_guest');
+    Route::post('/login', 'login')->middleware('only_guest');
+    Route::get('/register', 'registasii')->name('register')->middleware('only_guest');
+    Route::post('/register', 'registasi')->name('daftar')->middleware('only_guest');
     Route::post('/logout', 'logout')->name('logout');
 });
 Route::middleware('auth')->group(function () {
