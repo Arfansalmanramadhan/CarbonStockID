@@ -110,7 +110,7 @@ Route::middleware('auth')->group(function () {
         return view('percobaan', compact('user', 'poltArea', 'serasah', 'semai', 'pancang', 'tiang', 'nekromas', 'pohon', 'tanah'));
     });
     Route::get('/zona', [zonaController::class, 'index'])->name('zona.index');
-    Route::get('/PlotArea', [PoltAreaController::class, 'index']);
+    Route::get('/PlotArea', [PoltAreaController::class, 'index'])->name('PlotArea.index');
     Route::post('/plotarea/store', [PoltAreaController::class, 'store'])->name('plotarea.store');
 
     // Route::post('/Serasah/store', [SerasahController::class, 'store'])->name('Serasah.store');
