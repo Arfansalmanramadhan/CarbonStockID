@@ -286,39 +286,6 @@ document.getElementById('submitButton').addEventListener('click', function() {
 //   dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
 // });
 
-// document.addEventListener("DOMContentLoaded", function () {
-//   const nekromasBtn = document.getElementById("nekromasBtn");
-//   const pohonBtn = document.getElementById("pohonBtn");
-//   const nekromasContent = document.getElementById("nekromasContent");
-//   const pohonContent = document.getElementById("pohonContent");
-
-//   // Fungsi untuk menampilkan konten Nekromas
-//   nekromasBtn.addEventListener("click", function () {
-//     nekromasContent.classList.add("activeD");
-//     pohonContent.classList.remove("activeD");
-//   });
-
-//   // Fungsi untuk menampilkan konten Pohon
-//   pohonBtn.addEventListener("click", function () {
-//     pohonContent.classList.add("activeD");
-//     nekromasContent.classList.remove("activeD");
-//   });
-
-//   // Tampilkan konten Pohon secara default
-//   pohonContent.classList.add("activeD");
-// });
-
-// // ----------------------
-
-// document.getElementById("nekromasBtn").addEventListener("click", function () {
-//   this.classList.add("active");
-//   document.getElementById("pohonBtn").classList.remove("active");
-// });
-
-// document.getElementById("pohonBtn").addEventListener("click", function () {
-//   this.classList.add("active");
-//   document.getElementById("nekromasBtn").classList.remove("active");
-// });
 
 // ----------------API MAP-------------------
 
@@ -330,13 +297,18 @@ navigator.geolocation.getCurrentPosition(successLocation, errorLocation, {
 });
 
 function successLocation(position) {
-  console.log(position);
-  setupMap([position.coords.longitude, position.coords.latitude]);
+    console.log(position);
+    setupMap([position.coords.longitude, position.coords.latitude]);
 
-  // Mengisi field latitude dan longitude secara otomatis
-  document.getElementById("latitude").value = position.coords.latitude;
-  document.getElementById("longitude").value = position.coords.longitude;
-}
+    // Mengisi field latitude dan longitude secara otomatis
+    document.getElementById("latitude").value = position.coords.latitude;
+    document.getElementById("longitude").value = position.coords.longitude;
+
+    // Memperbarui marker dengan koordinat terbaru
+    if (marker) {
+      marker.setLngLat([position.coords.longitude, position.coords.latitude]);
+    }
+  }
 
 function errorLocation() {
   setupMap([106.8456, -6.2088]); // Default ke Jakarta jika gagal

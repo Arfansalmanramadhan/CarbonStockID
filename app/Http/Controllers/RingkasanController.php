@@ -57,13 +57,13 @@ class RingkasanController extends Controller
             "bioma" => $beratMasa,
         ], 202);
     }
-    public function ringkasan($polt_area)
+    public function ringkasan()
     {
         // Mendapatkan rata-rata dari kolom tertentu (misal: 'co2') berdasarkan polt-area_id
-        $pancangco2 = Pancang::where("polt-area_id", $polt_area)->avg('co2');
-        $pancangkarbon = Pancang::where("polt-area_id", $polt_area)->avg('kandungan_karbon');
+        $pancangco2 = Pancang::where("polt-area_id", )->avg('co2');
+        $pancangkarbon = Pancang::where("polt-area_id", )->avg('kandungan_karbon');
         // Menghitung jumlah baris yang ada berdasarkan polt-area_id
-        $totalRows = Pancang::where('polt-area_id', $polt_area)->count();
+        $totalRows = Pancang::where('polt-area_id', )->count();
 
         // Nilai konstan dari $C$2 (misalnya 25)
         $constantValue = 25;
@@ -72,10 +72,10 @@ class RingkasanController extends Controller
         $TotalPancangco2 = (($pancangco2) * ($totalRows / $constantValue) * 10000) / 1000;
         $TotalPancangkarbon = (($pancangkarbon) * ($totalRows / $constantValue) * 10000) / 1000;
         // Mendapatkan rata-rata dari kolom tertentu (misal: 'co2') berdasarkan polt-area_id
-        $Tiangco2 = Tiang::where("polt-area_id", $polt_area)->avg('co2');
-        $Tiangkarbon = Tiang::where("polt-area_id", $polt_area)->avg('kandungan_karbon');
+        $Tiangco2 = Tiang::where("polt-area_id", )->avg('co2');
+        $Tiangkarbon = Tiang::where("polt-area_id", )->avg('kandungan_karbon');
         // Menghitung jumlah baris yang ada berdasarkan polt-area_id
-        $totalRows = Tiang::where('polt-area_id', $polt_area)->count();
+        $totalRows = Tiang::where('polt-area_id', )->count();
 
         // Nilai konstan dari $C$2 (misalnya 25)
         $constantValue = 100;
@@ -84,10 +84,10 @@ class RingkasanController extends Controller
         $TotalTiangco2 = (($Tiangco2) * ($totalRows / $constantValue) * 10000) / 1000;
         $TotalTiangkarbon = (($Tiangkarbon) * ($totalRows / $constantValue) * 10000) / 1000;
         // Mendapatkan rata-rata dari kolom tertentu (misal: 'co2') berdasarkan polt-area_id
-        $Pohonco2 = Pohon::where("polt-area_id", $polt_area)->avg('co2');
-        $Pohonkarbon = Pohon::where("polt-area_id", $polt_area)->avg('kandungan_karbon');
+        $Pohonco2 = Pohon::where("polt-area_id", )->avg('co2');
+        $Pohonkarbon = Pohon::where("polt-area_id", )->avg('kandungan_karbon');
         // Menghitung jumlah baris yang ada berdasarkan polt-area_id
-        $totalRows = Pohon::where('polt-area_id', $polt_area)->count();
+        $totalRows = Pohon::where('polt-area_id', )->count();
 
         // Nilai konstan dari $C$2 (misalnya 25)
         $constantValue = 400;
@@ -102,8 +102,8 @@ class RingkasanController extends Controller
 
 
         // Menghitung total dari kolom 'co2'
-        $SerasahTotalco2 = Serasah::where("polt-area_id", $polt_area)->sum('co2');
-        $SerasahTotalKarbon = Serasah::where("polt-area_id", $polt_area)->sum('kandungan_karbon');
+        $SerasahTotalco2 = Serasah::where("polt-area_id", )->sum('co2');
+        $SerasahTotalKarbon = Serasah::where("polt-area_id", )->sum('kandungan_karbon');
 
         // Menghitung jumlah nilai unik dari kolom 'total_berat_basah'
         $uniqueBeratBasah = Serasah::distinct('total_berat_basah')->count('total_berat_basah');
@@ -122,8 +122,8 @@ class RingkasanController extends Controller
         }
         $Serasahkarbon = ($hasilkarbon / 1000000) * 10000;
         // Menghitung total dari kolom 'co2'
-        $SemaiTotalCo2 = Semai::where("polt-area_id", $polt_area)->sum('co2');
-        $SemaiTotalKarbon = Semai::where("polt-area_id", $polt_area)->sum('kandungan_karbon');
+        $SemaiTotalCo2 = Semai::where("polt-area_id", )->sum('co2');
+        $SemaiTotalKarbon = Semai::where("polt-area_id", )->sum('kandungan_karbon');
 
         // Menghitung jumlah nilai unik dari kolom 'total_berat_basah'
         $uniqueBeratBasah = Semai::distinct('total_berat_basah')->count('total_berat_basah');
@@ -143,8 +143,8 @@ class RingkasanController extends Controller
         $SemaiKarbon = ($hasilkarbon / 1000000) * 10000;
 
         // Menghitung total dari kolom 'co2'
-        $TumbuhanTotalCo2 = TumbuhanBawah::where("polt-area_id", $polt_area)->sum('co2');
-        $TumbuhanTotalKarbon = TumbuhanBawah::where("polt-area_id", $polt_area)->sum('co2');
+        $TumbuhanTotalCo2 = TumbuhanBawah::where("polt-area_id", )->sum('co2');
+        $TumbuhanTotalKarbon = TumbuhanBawah::where("polt-area_id", )->sum('co2');
 
         // Menghitung jumlah nilai unik dari kolom 'total_berat_basah'
         $uniqueBeratBasah = TumbuhanBawah::distinct('total_berat_basah')->count('total_berat_basah');
@@ -163,8 +163,8 @@ class RingkasanController extends Controller
         }
         $TumbuhanKarbon = ($hasilKarbon / 1000000) * 10000;
         // Menghitung total dari kolom 'co2'
-        $NecromassTotalCo2 = Necromass::where("polt-area_id", $polt_area)->sum('co2');
-        $NecromassTotalKarbon = Necromass::where("polt-area_id", $polt_area)->sum('carbon');
+        $NecromassTotalCo2 = Necromass::where("polt-area_id", )->sum('co2');
+        $NecromassTotalKarbon = Necromass::where("polt-area_id", )->sum('carbon');
 
         // Menghitung jumlah nilai unik dari kolom 'berat_jenis_kayu'
         $uniqueBeratBasah = Necromass::distinct('berat_jenis_kayu')->count('berat_jenis_kayu');
@@ -184,9 +184,9 @@ class RingkasanController extends Controller
         $NecromasnKarbon = ($hasilKarbon / 1000000) * 10000 / 400;
 
         // Menghitung total dari kolom 'co2'
-        $totalco2tanah = Tanah::where("polt-area_id", $polt_area)->sum('co2kg');
+        $totalco2tanah = Tanah::where("polt-area_id", )->sum('co2kg');
 
-        // Total ringkasan 
+        // Total ringkasan
         $Co2Tanaman = $Semaico2 + $TotalPancangco2 + $TotalTiangco2 + $TotalPohonco2;
         $Serasa = $Serasahco2 * 11.5;
         $Necromass = $Necromasnco2 * 11.5;
@@ -207,7 +207,7 @@ class RingkasanController extends Controller
         //     "Baseline Lahan Kosongh" => number_format($BaselineLahanKosong, 2, '.', ''),
 
         // ], 200);
-        return view('ringkasan', [
+        return view('tamba.ringkasan', [
             'Serasah' => number_format($Serasa, 2, '.', ''),
             'Necromass' => number_format($Necromass, 2, '.', ''),
             'Co2Tanaman' => number_format($co2tanaman, 2, '.', ''),
@@ -220,5 +220,11 @@ class RingkasanController extends Controller
         //     "TOTAL BERAT MASA" => $totalBerat,
         //     "bioma" => $beratMasa,
         // ], 202);
+    }
+    public function index(){
+            return view("tambah.hitung");
+    }
+    public function indexx(){
+            return view("tambah.ringkasan");
     }
 }

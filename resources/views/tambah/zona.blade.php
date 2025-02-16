@@ -66,11 +66,10 @@
                     </a>
                 </div>
                 <div class="option">
-                    <a href="{{ route('zona.index') }}" class=" btn btn-success " id="submitButton"><span>Berikutnya</span>
+                    <a href="{{ route('PlotA.index') }}" class=" btn btn-success " id="submitButton"><span>Berikutnya</span>
                         <img src="{{ asset('/images/ArrowRight.svg') }}" alt="Arrow Icon" class="ms-2" />
                     </a>
                 </div>
-
             </div>
         </div>
     </div>

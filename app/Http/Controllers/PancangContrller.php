@@ -6,18 +6,25 @@ use App\Models\Pancang;
 use App\Models\PoltArea;
 use Illuminate\Http\Request;
 use App\Http\Resources\PancangResouce;
+use App\Models\Zona;
+use Illuminate\Support\Facades\Auth;
 
 class PancangContrller extends Controller
 {
     public function index()
     {
-        $pancang = Pancang::get();
-        return PancangResouce::collection($pancang);
+        // $pancang = Pancang::get();
+        // return PancangResouce::collection($pancang);
+        $user = Auth::user();
+        $poltArea = PoltArea::where('id', $user->id);
+        $zona = Zona::where('polt-area_id', $user->id );
+        $PlotB = Pancang::where('zona_id' );
+        return view('tambah.PlotB', compact('user', 'poltArea', 'zona', 'PlotB'));
     }
     public function store(Request $request)
     {
         // ambil poltArea berdasarkan id
-        $poltareaID = $request->input("polt-area_id"); // pastikan polt-area_id dikirim dari FE 
+        $poltareaID = $request->input("polt-area_id"); // pastikan polt-area_id dikirim dari FE
         $polt = PoltArea::find($poltareaID);
         if (!$poltareaID) {
             return response()->json([
@@ -120,7 +127,7 @@ class PancangContrller extends Controller
             $kandunganKarbon = $biomassa * 0.47;
             // Perhitungan CO2 (Ton)
             $co2 = $kandunganKarbon * (44 / 12);
-            // update data ke database, termaksud hasil pergitungan 
+            // update data ke database, termaksud hasil pergitungan
             $pancnag->update([
                 'keliling' => $keliling,  // Simpan keliling dari input
                 'diameter' => $diameter,  // Simpan hasil perhitungan diameter

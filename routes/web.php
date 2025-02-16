@@ -26,6 +26,7 @@ use App\Http\Controllers\PanduanController;
 use App\Http\Controllers\Authentication\AuthController;
 use App\Http\Controllers\DataPlotController;
 use App\Http\Controllers\ManajermenUserController;
+use App\Http\Controllers\RingkasanController;
 use App\Http\Controllers\SampahController;
 use App\Http\Controllers\zonaController;
 use App\Models\Role;
@@ -116,10 +117,10 @@ Route::middleware('auth')->group(function () {
     // Route::post('/Serasah/store', [SerasahController::class, 'store'])->name('Serasah.store');
 
     Route::controller(SerasahController::class)->group(function () {
-        Route::post("/Serasah/store", "store")->name('Serasah.store');
-        Route::get("/Serasah", "index")->name('tambahData.index');
-        Route::post("/Serasah/update/{id}", "update");
-        Route::delete("/Serasah/{id}", "destroy");
+        Route::post("/PlotA/store", "store")->name('Serasah.store');
+        Route::get("/PlotA", "index")->name('PlotA.index');
+        Route::post("/PlotA/update/{id}", "update");
+        Route::delete("/PlotA/{id}", "destroy");
     });;
 
     Route::controller(SemaiController::class)->group(function () {
@@ -142,10 +143,10 @@ Route::middleware('auth')->group(function () {
     });
 
     Route::controller(PancangContrller::class)->group(function () {
-        Route::post("/Pancang/store", "store")->name('pancang.store');
-        Route::get("/Pancang", "index");
-        Route::post("/Pancang/update/{id}", "update");
-        Route::delete("/Pancang/{id}", "destroy");
+        Route::post("/PlotB/store", "store")->name('pancang.store');
+        Route::get("/PlotB", "index")->name('PlotB.index');
+        Route::post("/PlotB/update/{id}", "update");
+        Route::delete("/PlotB/{id}", "destroy");
     });
 
     Route::controller(NekromasController::class)->group(function () {
@@ -156,14 +157,18 @@ Route::middleware('auth')->group(function () {
     });
     Route::controller(TiangController::class)->group(function () {
         Route::post("/Tiang/buat", "store")->name('tiang.store');
-        Route::get("/Tiang", "index");
+        Route::get("/PlotC", "index")->name('PlotC.index');
         Route::post("/Tiang/update/{id}", "update");
         Route::delete("/Tiang/{id}", "destroy");
     });
     Route::controller(PohonController::class)->group(function () {
         Route::post("/Pohon/buat", "store")->name('pohon.store');
-        Route::get("/Pohon", "index");
+        Route::get("/PlotD", "index")->name('PlotD.index');
         Route::post("/Pohon/update/{id}", "update");
         Route::delete("/Pohon/{id}", "destroy");
+    });
+    Route::controller(RingkasanController::class)->group(function (){
+        Route::get("/hitung",'index' )->name('hitung.index');
+        Route::get("/ringkasan",'indexx' )->name('ringkasan.indexx');
     });
 });

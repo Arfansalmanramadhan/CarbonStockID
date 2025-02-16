@@ -7,6 +7,8 @@ use App\Models\Profil;
 use App\Models\PoltArea;
 use App\Models\Serasah;
 use Illuminate\Http\Request;
+use App\Models\Zona;
+use Illuminate\Support\Facades\Auth;
 use Symfony\Component\Console\Input\Input;
 
 class SerasahController extends Controller
@@ -18,9 +20,11 @@ class SerasahController extends Controller
     {
         // $serasah = Serasah::get();
         // return SerasahResource::collection($serasah);
-        $profile = Profil::all();
-        $poltArea = PoltArea::where('profil_id', $profile->id)->first();
-        return view("tambahData", compact("profil", "poltarea"));
+        $user = Auth::user();
+        $poltArea = PoltArea::where('id', $user->id);
+        $zona = Zona::where('polt-area_id', $user->id );
+        $PlotAser = Serasah::where('zona_id' );
+        return view('tambah.PlotA', compact('user', 'poltArea', 'zona', 'PlotAser'));
     }
 
     /**
@@ -35,13 +39,13 @@ class SerasahController extends Controller
      * Store a newly created resource in storage.
      */
 
-    
-    // public function store(Request $request) 
+
+    // public function store(Request $request)
     // {
     //     // $poltareaID = $request->input("polt-area_id");
     //     // dd($poltareaID);
     //     // ambil poltArea berdasarkan id
-    //     $poltareaID = $request->input("polt-area_id"); // pastikan polt-area_id dikirim dari FE 
+    //     $poltareaID = $request->input("polt-area_id"); // pastikan polt-area_id dikirim dari FE
     //     $polt = PoltArea::find($poltareaID);
     //     if (!$poltareaID) {
     //         return response()->json([
@@ -51,7 +55,7 @@ class SerasahController extends Controller
     //     }
 
     //     try {
-    //         // validasi reques 
+    //         // validasi reques
     //         $validatedData = $request->validate([
     //             'polt-area_id' => 'required|integer|exists:polt-area,id',
     //             'total_berat_basah' => 'required|numeric|min:0',
@@ -65,11 +69,11 @@ class SerasahController extends Controller
     //                 'message' => 'Sample berat basah tidak boleh nol.'
     //             ], 400);
     //         }
-    //         // lakuan perhitungan 
+    //         // lakuan perhitungan
     //         $TotalBeratKering = ($request->sample_berat_kering / $request->sample_berat_basah) * $request->total_berat_basah;
     //         $kandunganKarbon =  $TotalBeratKering * 0.47;
     //         $co2 = $kandunganKarbon * (44 / 12);
-    //         // menyimpan data ke database, termaksud hasil pergitungan 
+    //         // menyimpan data ke database, termaksud hasil pergitungan
     //         $Serasah = Serasah::create([
     //             'polt_area_id' => $poltareaID,
     //             'total_berat_basah' => $request->total_berat_basah,
@@ -97,7 +101,7 @@ class SerasahController extends Controller
     public function store(Request $request)
     {
         // ambil poltArea berdasarkan id
-        $poltareaID = $request->input("polt-area_id"); // pastikan polt-area_id dikirim dari FE 
+        $poltareaID = $request->input("polt-area_id"); // pastikan polt-area_id dikirim dari FE
         $polt = PoltArea::find($poltareaID);
         if (!$poltareaID) {
             return response()->json([
@@ -107,7 +111,7 @@ class SerasahController extends Controller
         }
 
         try {
-            // validasi reques 
+            // validasi reques
             $validatedData = $request->validate([
                 'polt-area_id' => 'required|integer|exists:polt-area,id',
                 'total_berat_basah' => 'required|numeric|min:0',
@@ -121,11 +125,11 @@ class SerasahController extends Controller
                     'message' => 'Sample berat basah tidak boleh nol.'
                 ], 400);
             }
-            // lakuan perhitungan 
+            // lakuan perhitungan
             $TotalBeratKering = ($request->sample_berat_kering / $request->sample_berat_basah) * $request->total_berat_basah;
             $kandunganKarbon =  $TotalBeratKering * 0.47;
             $co2 = $kandunganKarbon * (44 / 12);
-            // menyimpan data ke database, termaksud hasil pergitungan 
+            // menyimpan data ke database, termaksud hasil pergitungan
             $Serasah = Serasah::create([
                 'polt-area_id' => $polt->id,
                 'total_berat_basah' => $request->total_berat_basah,
@@ -175,7 +179,7 @@ class SerasahController extends Controller
     public function update(Request $request, string $id)
     {
         try {
-            // validasi reques 
+            // validasi reques
             $validatedData = $request->validate([
                 'total_berat_basah' => 'required|numeric|min:0',
                 'sample_berat_basah' => 'required|numeric|min:0',
@@ -189,11 +193,11 @@ class SerasahController extends Controller
                     'message' => 'Sample berat basah tidak boleh nol.'
                 ], 400);
             }
-            // lakuan perhitungan 
+            // lakuan perhitungan
             $TotalBeratKering = ($request->sample_berat_kering / $request->sample_berat_basah) * $request->total_berat_basah;
             $kandunganKarbon =  $TotalBeratKering * 0.47;
             $co2 = $kandunganKarbon * (44 / 12);
-            // update data ke database, termaksud hasil pergitungan 
+            // update data ke database, termaksud hasil pergitungan
             $serasah->update([
                 'total_berat_basah' => $request->total_berat_basah,
                 'sample_berat_basah' => $request->sample_berat_basah,
