@@ -51,7 +51,7 @@ class PancangContrller extends Controller
             $diameter = $keliling / pi();  // pi() memberikan nilai π (3.1416)
 
             // Tentukan rentang diameter (2-9 atau 10-19)
-            if ($diameter < 2.00 || $diameter > 9.00) {
+            if ($diameter < 2.00 || $diameter > 9.99) {
                 // return response()->json([
                 //     "pesan" => "Diameter harus diantara 2 hingga 9 cm.",
                 // ], 404);

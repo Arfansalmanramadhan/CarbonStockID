@@ -55,7 +55,7 @@ class PohonController extends Controller
                 // return response()->json([
                 //     "pesan" => "Diameter harus diantara 20 cm.",
                 // ], 404);
-                return redirect()->back()->with('pesan', 'Diameter harus diantara 20 cm.');
+                return redirect()->back()->with('pesan', 'Diameter harus Lebih dari 20 cm.');
             }
 
 

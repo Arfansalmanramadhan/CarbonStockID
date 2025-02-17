@@ -1,7 +1,7 @@
 @extends('layout.mainlayaot')
 
 @section('title', "Buku")
-    
+
 @section('content')
    <div id="panduan-content" class=" page-content  content p-4 w-100 col-lg-10">
     <div class=" image-container mt-4 ">

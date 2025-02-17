@@ -129,26 +129,26 @@
                             </thead>
                             <tbody>
                                 {{-- @foreach ($pohon as $item)
-                    <tr>
-                      <td>{{$loop->iteration}}</td>
-                      <td>{{$loop->keliling}} cm</td>
-                      <td>{{$loop->diameter}} cm</td>
-                      <td>{{$loop->nama_lokal}}</td>
-                      <td>{{$loop->nama_ilmiah}}</td>
-                      <td class="hidden-column">{{$loop->kerapatan_jenis_kayu}} gr/cm3</td>
-                      <td class="hidden-column">{{$loop->bio_di_atas_tanah}} kg</td>
-                      <td class="hidden-column">{{$loop->kandungan_karbon}} kg</td>
-                      <td class="hidden-column">{{$loop->co2}} kg</td>
-                      <td class="hidden-column aksi-button">
-                        <button class="edit-btn">
-                          <img src="{{ asset('/images/PencilSquare.svg') }}" alt="" />
-                        </button>
-                        <button class="delete-btn">
-                          <img src="{{ asset('/images/Trash.svg') }}" alt="" />
-                        </button>
-                      </td>
-                    </tr>
-                    @endforeach --}}
+                                    <tr>
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td>{{ $loop->keliling }} cm</td>
+                                        <td>{{ $loop->diameter }} cm</td>
+                                        <td>{{ $loop->nama_lokal }}</td>
+                                        <td>{{ $loop->nama_ilmiah }}</td>
+                                        <td class="hidden-column">{{ $loop->kerapatan_jenis_kayu }} gr/cm3</td>
+                                        <td class="hidden-column">{{ $loop->bio_di_atas_tanah }} kg</td>
+                                        <td class="hidden-column">{{ $loop->kandungan_karbon }} kg</td>
+                                        <td class="hidden-column">{{ $loop->co2 }} kg</td>
+                                        <td class="hidden-column aksi-button">
+                                            <button class="edit-btn">
+                                                <img src="{{ asset('/images/PencilSquare.svg') }}" alt="" />
+                                            </button>
+                                            <button class="delete-btn">
+                                                <img src="{{ asset('/images/Trash.svg') }}" alt="" />
+                                            </button>
+                                        </td>
+                                    </tr>
+                                @endforeach --}}
                             </tbody>
                         </table>
                     </div>
@@ -188,7 +188,8 @@
                                         <h5 class="ms-3 modal-title" id="dataModalLabel">Sub Plot D - Nekromas
                                         </h5>
                                         <div class="modal-body">
-                                            <form method="POST" action="{{ route('nekromas.store') }}" id="nekromasForm">
+                                            <form method="POST" action="{{ route('nekromas.store') }}"
+                                                id="nekromasForm">
                                                 @csrf
                                                 {{-- <input type="hidden" id="zona_id" name="zona_id" value="{{ $zona->id }}" /> --}}
                                                 </button>

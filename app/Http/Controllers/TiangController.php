@@ -50,7 +50,7 @@ class TiangController extends Controller
             $diameter = $keliling / pi();  // pi() memberikan nilai π (3.1416)
 
             // Tentukan rentang diameter (2-9 atau 10-19)
-            if ($diameter < 10.00 || $diameter > 19.00) {
+            if ($diameter < 10.00 || $diameter > 19.99) {
                 // return response()->json([
                 //     "pesan" => "Diameter harus diantara 10 hingga 19 cm.",
                 // ], 404);
