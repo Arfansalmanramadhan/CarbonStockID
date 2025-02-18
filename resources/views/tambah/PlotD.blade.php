@@ -7,8 +7,8 @@
         <div class="container-isi">
             <div class="table-container-plotD">
                 <div class="h2-plotD-container">
-                    <h2 class="me-3 active" id="pohonBtn">Pohon</h2>
-                    <h2 id="nekromasBtn">Nekromas</h2>
+                    <h2 class="me-3 active" id="utama">Pohon</h2>
+                    <h2 id="kedua">Nekromas</h2>
                 </div>
                 <!-- Konten Nekromas -->
                 <div id="nekromasContent" class="content-plotD">
@@ -275,26 +275,26 @@
                             </thead>
                             <tbody>
                                 {{-- $@foreach ($nekromas as $item)
-                    <tr>
-                      <td>{{$loop->iteration}}</td>
-                      <td>{{$loop->diameter_pangkal}} cm</td>
-                      <td>{{$loop->diameter_ujung}} cm</td>
-                      <td>{{$loop->panjang}}</td>
-                      <td>{{$loop->berat_jenis_kayu}}</td>
-                      <td class="hidden-column">{{$loop->volume}} gr/cm3</td>
-                      <td class="hidden-column">{{$loop->biomasa}}kg</td>
-                      <td class="hidden-column">{{$loop->carbon}} kg</td>
-                      <td class="hidden-column">{{$loop->co2}} kg</td>
-                      <td class="hidden-column aksi-button">
-                        <button class="edit-btn">
-                          <img src="{{ asset('/images/PencilSquare.svg') }}" alt="" />
-                        </button>
-                        <button class="delete-btn">
-                          <img src="{{ asset('/images/Trash.svg') }}" alt="" />
-                        </button>
-                      </td>
-                    </tr>
-                    @endforeach --}}
+                                    <tr>
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td>{{ $loop->diameter_pangkal }} cm</td>
+                                        <td>{{ $loop->diameter_ujung }} cm</td>
+                                        <td>{{ $loop->panjang }}</td>
+                                        <td>{{ $loop->berat_jenis_kayu }}</td>
+                                        <td class="hidden-column">{{ $loop->volume }} gr/cm3</td>
+                                        <td class="hidden-column">{{ $loop->biomasa }}kg</td>
+                                        <td class="hidden-column">{{ $loop->carbon }} kg</td>
+                                        <td class="hidden-column">{{ $loop->co2 }} kg</td>
+                                        <td class="hidden-column aksi-button">
+                                            <button class="edit-btn">
+                                                <img src="{{ asset('/images/PencilSquare.svg') }}" alt="" />
+                                            </button>
+                                            <button class="delete-btn">
+                                                <img src="{{ asset('/images/Trash.svg') }}" alt="" />
+                                            </button>
+                                        </td>
+                                    </tr>
+                                @endforeach --}}
                             </tbody>
                         </table>
                     </div>
@@ -329,19 +329,19 @@
     </div>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            const nekromasBtn = document.getElementById("nekromasBtn");
-            const pohonBtn = document.getElementById("pohonBtn");
+            const kedua = document.getElementById("kedua");
+            const utama = document.getElementById("utama");
             const nekromasContent = document.getElementById("nekromasContent");
             const pohonContent = document.getElementById("pohonContent");
 
             // Fungsi untuk menampilkan konten Nekromas
-            nekromasBtn.addEventListener("click", function() {
+            kedua.addEventListener("click", function() {
                 nekromasContent.classList.add("activeD");
                 pohonContent.classList.remove("activeD");
             });
 
             // Fungsi untuk menampilkan konten Pohon
-            pohonBtn.addEventListener("click", function() {
+            utama.addEventListener("click", function() {
                 pohonContent.classList.add("activeD");
                 nekromasContent.classList.remove("activeD");
             });
@@ -352,14 +352,14 @@
 
         // // ----------------------
 
-        document.getElementById("nekromasBtn").addEventListener("click", function() {
+        document.getElementById("kedua").addEventListener("click", function() {
             this.classList.add("active");
-            document.getElementById("pohonBtn").classList.remove("active");
+            document.getElementById("utama").classList.remove("active");
         });
 
-        document.getElementById("pohonBtn").addEventListener("click", function() {
+        document.getElementById("utama").addEventListener("click", function() {
             this.classList.add("active");
-            document.getElementById("nekromasBtn").classList.remove("active");
+            document.getElementById("kedua").classList.remove("active");
         });
     </script>
 @endsection
