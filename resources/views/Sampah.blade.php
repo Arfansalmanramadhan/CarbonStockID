@@ -1,6 +1,6 @@
 @extends('layout.mainlayaot')
 
-@section('title', 'Buku')
+@section('title', 'Sanpah')
 
 @section('content')
     <div id="sampah-content" class="page-content content p-4 w-100">

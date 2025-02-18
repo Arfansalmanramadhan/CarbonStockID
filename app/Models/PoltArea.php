@@ -36,8 +36,8 @@ class PoltArea extends Model
         static::saving(function ($model) {
             $model->slug = Str::slug($model->daerah);
         });
-        static::deleting(function ($poltArea){
-            if($poltArea->isForceDeleying()){
+        static::deleting(function ($poltArea) {
+            if ($poltArea->isForceDeleying()) {
                 $poltArea->zona()->forceDelete();
                 $poltArea->semai()->forceDelete();
                 $poltArea->serasah()->forceDelete();
@@ -48,7 +48,6 @@ class PoltArea extends Model
                 $poltArea->pohon()->forceDelete();
                 $poltArea->necromas()->forceDelete();
                 $poltArea->mangrove()->forceDelete();
-
             } else {
                 $poltArea->zona()->delete();
                 $poltArea->semai()->delete();
@@ -60,9 +59,19 @@ class PoltArea extends Model
                 $poltArea->pohon()->delete();
                 $poltArea->necromas()->delete();
                 $poltArea->mangrove()->delete();
-
             }
-
+        });
+        static::restoring(function ($poltArea) {
+            $poltArea->zona()->withTrashed()->restore();
+            $poltArea->semai()->withTrashed()->restore();
+            $poltArea->serasah()->withTrashed()->restore();
+            $poltArea->tumbuhanbawah()->withTrashed()->restore();
+            $poltArea->tanah()->withTrashed()->restore();
+            $poltArea->pancang()->withTrashed()->restore();
+            $poltArea->tiang()->withTrashed()->restore();
+            $poltArea->pohon()->withTrashed()->restore();
+            $poltArea->necromas()->withTrashed()->restore();
+            $poltArea->mangrove()->withTrashed()->restore();
         });
     }
     /**

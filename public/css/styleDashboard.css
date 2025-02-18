@@ -1081,3 +1081,80 @@ html, body {
   margin-top: 20px;
   background-color: #FFFFFF; /* Sesuaikan background */
 }
+/* surveyor */
+.bg-putih {
+    background-color: #ffffff !important;
+}
+.btn-success {
+    padding: 12px;
+    width: 245px;
+    height: 62px;
+    display: flex;
+    padding: 16px 40px;
+    justify-content: center;
+    align-items: center;
+    gap: 14px;
+    border-radius: 8px;
+    background: var(--Primary-0, #4caf4f);
+    color: var(--Warning, #fff);
+    font-family: "DM Sans";
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 125%; /* 30px */
+    bottom: 35px;
+    right: 35px;
+    border: none;
+    justify-content: center;
+    margin-top: 35px;
+}
+.custom-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+    border-radius: 8px;
+    overflow: hidden;
+    text-align: center !important;
+  }
+
+  .custom-table th,
+  .custom-table td {
+    text-align: center !important;
+    padding: 15px;
+    border-bottom: 2px solid #4caf4f;
+    text-align: left;
+    font-family: "DM Sans";
+    font-size: 16px;
+    color: #4caf4f;
+  }
+
+  .custom-table th {
+    background-color: #4caf4f;
+    color: white;
+  }
+
+  .custom-table thead {
+    text-align: center !important;
+  }
+
+  .custom-table tbody td {
+    border-top: 1px solid #4caf4f; /* Border hijau di atas */
+    border-bottom: 2px solid #4caf4f; /* Border hijau di bawah */
+    padding: 12px;
+    font-weight: 700;
+    color: #6c7581; /* Warna teks */
+    font-size: 16px;
+    text-align: left;
+  }
+
+  .custom-table tbody tr {
+    border: 1px solid #4caf4f; /* Border hijau di baris */
+  }
+
+  .custom-table tfoot td {
+    background-color: #4caf4f; /* Warna hijau untuk footer */
+    color: white;
+    font-weight: bold;
+    padding: 12px;
+    text-align: left;
+  }

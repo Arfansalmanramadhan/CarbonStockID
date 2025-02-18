@@ -28,6 +28,7 @@ use App\Http\Controllers\DataPlotController;
 use App\Http\Controllers\ManajermenUserController;
 use App\Http\Controllers\RingkasanController;
 use App\Http\Controllers\SampahController;
+use App\Http\Controllers\SUrveyorController;
 use App\Http\Controllers\zonaController;
 use App\Models\Role;
 use Illuminate\Routing\Route as RoutingRoute;
@@ -170,5 +171,8 @@ Route::middleware('auth')->group(function () {
     Route::controller(RingkasanController::class)->group(function (){
         Route::get("/hitung",'index' )->name('hitung.index');
         Route::get("/ringkasan",'indexx' )->name('ringkasan.indexx');
+    });
+    Route::controller(SUrveyorController::class)->group(function(){
+        Route::get('/Surveyor', 'index');
     });
 });

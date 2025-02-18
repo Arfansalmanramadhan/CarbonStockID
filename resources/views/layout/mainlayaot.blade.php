@@ -115,7 +115,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="d-flex align-items-center ms-3 nav-link   " href="manajermenUser">
+                            <a class="d-flex align-items-center ms-3 nav-link   " href="Surveyor">
                                 <img src="{{ asset('/images/prediksiLogo.svg') }}" alt="Guide Icon" />
                                 <span class="ms-2">Surveyor</span>
                             </a>
