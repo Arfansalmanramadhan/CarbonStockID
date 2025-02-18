@@ -63,5 +63,9 @@ class Zona extends Model
     {
         return $this->belongsTo(Necromass::class, 'zona_id');
     }
-    
+    public function mangrove(): BelongsTo
+    {
+        return $this->belongsTo(Mangrove::class, 'zona_id');
+    }
+
 }

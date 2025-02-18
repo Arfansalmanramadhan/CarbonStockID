@@ -47,6 +47,7 @@ class PoltArea extends Model
                 $poltArea->tiang()->forceDelete();
                 $poltArea->pohon()->forceDelete();
                 $poltArea->necromas()->forceDelete();
+                $poltArea->mangrove()->forceDelete();
 
             } else {
                 $poltArea->zona()->delete();
@@ -58,9 +59,10 @@ class PoltArea extends Model
                 $poltArea->tiang()->delete();
                 $poltArea->pohon()->delete();
                 $poltArea->necromas()->delete();
+                $poltArea->mangrove()->delete();
 
             }
-            
+
         });
     }
     /**

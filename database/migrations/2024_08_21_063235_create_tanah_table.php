@@ -16,10 +16,10 @@ return new class extends Migration
             $table->unsignedBigInteger("zona_id");
             $table->foreign("zona_id")->references("id")->on("zona");
             $table->decimal('kedalaman_sample', 8, 2)->default(0);
-            $table->decimal('berat_jenis_tanah', 8, 3)->default(0);
+            $table->decimal('berat_jenis_tanah', 8, 2)->default(0);
             $table->decimal('C_organic_tanah', 5, 2)->default(0);
             $table->decimal('carbongr', 8, 4)->default(0);
-            $table->decimal('carbonton', 10, 3)->default(0);
+            $table->decimal('carbonton', 10, 2)->default(0);
             $table->decimal('carbonkg', 10, 2)->default(0);
             $table->decimal('co2kg', 10, 2)->default(0);
             $table->timestamps();

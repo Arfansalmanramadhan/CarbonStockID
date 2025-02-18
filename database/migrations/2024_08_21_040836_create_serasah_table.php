@@ -15,10 +15,10 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger("zona_id");
             $table->foreign("zona_id")->references("id")->on("zona");
-            $table->decimal('total_berat_basah', 8, 3)->default(0);
-            $table->decimal('sample_berat_basah', 8, 3)->default(0);
-            $table->decimal('sample_berat_kering', 8, 3)->default(0);
-            $table->decimal('total_berat_kering', 8, 3)->default(0);
+            $table->decimal('total_berat_basah', 8, 2)->default(0);
+            $table->decimal('sample_berat_basah', 8, 2)->default(0);
+            $table->decimal('sample_berat_kering', 8, 2)->default(0);
+            $table->decimal('total_berat_kering', 8, 2)->default(0);
             $table->decimal('kandungan_karbon', 10, 2)->default(0);
             $table->decimal('co2', 10, 2)->default(0);
             $table->timestamps();

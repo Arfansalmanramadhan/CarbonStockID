@@ -10,7 +10,7 @@
                     <h2 class="active m-3" id="utama">Pancang</h2>
                     <h2 class=" " id="kedua">Mangrove</h2>
                 </div>
-                <div id="pancang" >
+                <div id="pancang">
                     <div class="table-header d-flex justify-content-between">
                         <div class="tampilkan">
                             <label for="show-entries">Tampilkan</label>
@@ -163,7 +163,7 @@
                         </div>
                     </div>
                 </div>
-                <div id="mangrove" >
+                <div id="mangrove">
                     <div class="table-header d-flex justify-content-between">
                         <div class="tampilkan">
                             <label for="show-entries">Tampilkan</label>
@@ -190,38 +190,22 @@
                                                 {{-- <input type="hidden" id="zona_id" name="zona_id" value="{{ $zona->id }}" /> --}}
                                                 <!-- Keliling -->
                                                 <div class="mb-3">
-                                                    <label for="keliling" class="form-label">Jenis Tanah</label>
+                                                    <label for="keliling" class="form-label">Jenis Tanaman</label>
                                                     <input type="text" class="form-control form-control-plot-b"
-                                                        id="keliling" value="" name="keliling" />
+                                                        id="keliling" value="" name="Jenis_tanaman" />
                                                 </div>
 
                                                 <!-- Diameter -->
                                                 <div class="mb-3">
                                                     <label for="diameter" class="form-label">Diameter</label>
                                                     <input type="text" class="form-control form-control-plot-b"
-                                                        id="diameter" value="" />
+                                                        id="diameter" value="" name="diameteer" />
                                                 </div>
-
-                                                <!-- Nama Lokal with Datalist -->
                                                 <div class="mb-3">
-                                                    <label for="namaLokal" class="form-label">Jumlah Tanaman</label>
-                                                    <div class="input-container">
-                                                        <input type="text" class="form-control form-control-plot-b"
-                                                            id="namaLokal" value="" autocomplete="off"
-                                                            name="nama_lokal" readonly />
-                                                        <img src="assets/img/ChevronUp.svg" alt=""
-                                                            class="chevron-icon" id="toggleDropdown"
-                                                            onclick="toggleImage()" />
-                                                        <ul class="dropdown" id="dropdownList">
-                                                            <li>Damar</li>
-                                                            <li>Jati</li>
-                                                            <li>Mahoni</li>
-                                                        </ul>
-                                                    </div>
+                                                    <label for="diameter" class="form-label">Jumlah Tanaman</label>
+                                                    <input type="text" class="form-control form-control-plot-b"
+                                                        id="diameter" value="" name="jumlah_tanaman" />
                                                 </div>
-
-
-
                                                 <!-- Biomassa, Karbon, CO2 -->
                                                 <div class="mb-3">
                                                     <p class="form-label">Biomassa diatas Permukaan

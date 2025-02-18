@@ -19,7 +19,7 @@ return new class extends Migration
             $table->decimal('diameter', 8, 2)->default(0);
             $table->string("nama_lokal",255);
             $table->string("nama_ilmiah",255);
-            $table->decimal('kerapatan_jenis_kayu', 8, 4)->default(0);
+            $table->decimal('kerapatan_jenis_kayu', 8, 2)->default(0);
             $table->decimal('bio_di_atas_tanah', 10, 2)->default(0);
             $table->decimal('kandungan_karbon', 10, 2)->default(0);
             $table->decimal('co2', 10, 2)->default(0);

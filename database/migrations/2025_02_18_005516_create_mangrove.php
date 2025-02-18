@@ -11,20 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tiang', function (Blueprint $table) {
+        Schema::create('mangrove', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger("zona_id");
             $table->foreign("zona_id")->references("id")->on("zona");
-            $table->decimal('keliling', 8, 2)->default(0);
-            $table->decimal('diameter', 8, 2)->default(0);
-            $table->string("nama_lokal",255);
-            $table->string("nama_ilmiah",255);
-            $table->decimal('kerapatan_jenis_kayu', 8, 2)->default(0);
-            $table->decimal('bio_di_atas_tanah', 10, 2)->default(0);
+            $table->string('jenis_tanaman', 255);
+            $table->string('diameter', 10)->default(0);
+            $table->string('jumlah_tanaman', 8, 2)->default(0);
+            $table->decimal('biomasa', 10, 2)->default(0);
             $table->decimal('kandungan_karbon', 10, 2)->default(0);
-            $table->decimal('co2', 10, 2)->default(0);
-            $table->timestamps();
+            $table->decimal('karbondioksida', 10, 2)->default(0);
             $table->softDeletes();
+            $table->timestamps();
         });
     }
 
@@ -33,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('tiang');
+        Schema::dropIfExists('mangrove');
     }
 };
