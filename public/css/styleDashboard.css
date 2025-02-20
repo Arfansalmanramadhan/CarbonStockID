@@ -625,12 +625,12 @@ html, body {
   color: white;
 }
 
-.custom-table-hasil thead {
+/* .custom-table-hasil thead {
   text-align: left !important;
-}
+} */
 
 .custom-table-hasil tbody td {
-  border-bottom: 1px solid #4caf4f; /* Border hijau di bawah */
+  /* border-bottom: 1px solid #4caf4f; Border hijau di bawah */
   color: #202224;
   /* Desktop/Label/Regular */
   font-family: "DM Sans";
@@ -638,7 +638,7 @@ html, body {
   font-style: normal;
   font-weight: 400;
   line-height: 125%; /* 22.5px */
-  width: 63px;
+  /* width: 63px; */
   text-align: left;
 } */
 
@@ -654,6 +654,9 @@ html, body {
   text-align: left;
 }
 
+.custom-table-hasil .text-center{
+    text-align: center !important;
+}
 #carbonEmissionsChart {
   margin-top: 20px;
 }
@@ -814,9 +817,16 @@ html, body {
   background: var(--Primary-Tint-80, #dbefdc);
 }
 
-.aksi-dataplot {
-  display: flex;
-  text-decoration: none;
+.custom-table-hasil  .aksi-dataplot {
+    display: flex;
+    align-items: center;
+    /* Ratakan vertikal */
+    justify-content: space-evenly;
+    /* Biarkan tombol bersebelahan di sisi kiri */
+    padding: 0;
+    /* Pastikan padding tidak menambah ketinggian */
+    border: none;
+    /* Jika ada garis bawah yang tidak diinginkan */
 }
 
 
@@ -1083,7 +1093,17 @@ html, body {
 }
 /* surveyor */
 .bg-putih {
-    background-color: #ffffff !important;
+    display: flex;
+    /* width: 1100px;
+    height: 630px; */
+  padding: 35px 0px;
+  flex-direction: column;
+  align-items: center;
+  gap: 35px;
+  flex-shrink: 0;
+  border-radius: 8px;
+  background: var(--Neutral-7, #fff);
+  box-shadow: -1px 5px 20px 0px rgba(0, 0, 0, 0.05);
 }
 .btn-success {
     padding: 12px;
@@ -1108,53 +1128,119 @@ html, body {
     justify-content: center;
     margin-top: 35px;
 }
-.custom-table {
+.table-wrapper {
+    overflow-x: auto;
+    white-space: nowrap;
+    width: 100%;
+    padding-bottom: 20px;
+    /* Tambahkan padding untuk jarak di bawah */
+}
+
+.table-wrapper::-webkit-scrollbar {
+    height: 8px;
+}
+
+.table-wrapper::-webkit-scrollbar-thumb {
+    background-color: #6c7581;
+    border-radius: 8px;
+}
+
+@media (min-width: 768px) {
+    .table-wrapper {
+        overflow-x: scroll;
+    }
+
+    .hidden-column {
+        display: table-cell;
+    }
+}
+
+.custom-table-pancang {
     width: 100%;
     border-collapse: collapse;
     background-color: white;
-    border-radius: 8px;
     overflow: hidden;
     text-align: center !important;
-  }
+    border-bottom: 1px solid #4caf4f;
+}
 
-  .custom-table th,
-  .custom-table td {
-    text-align: center !important;
+.custom-table-pancang th,
+.custom-table-pancang td {
+    /* text-align: center !important; */
     padding: 15px;
-    border-bottom: 2px solid #4caf4f;
     text-align: left;
     font-family: "DM Sans";
     font-size: 16px;
     color: #4caf4f;
-  }
+}
 
-  .custom-table th {
+.custom-table-pancang th {
     background-color: #4caf4f;
     color: white;
-  }
+}
 
-  .custom-table thead {
+.kananPancang {
+    background-color: #4caf4f;
+    color: white;
+    border-radius: 0 8px 0 0;
+    text-align: center;
+}
+
+.kiriPancang {
+    background-color: #4caf4f;
+    color: white;
+    border-radius: 8px 0 0 0;
+    text-align: center;
+}
+
+.custom-table-pancang thead {
     text-align: center !important;
-  }
+    border-radius: 8px;
+}
 
-  .custom-table tbody td {
-    border-top: 1px solid #4caf4f; /* Border hijau di atas */
-    border-bottom: 2px solid #4caf4f; /* Border hijau di bawah */
+.custom-table-pancang tbody td {
     padding: 12px;
     font-weight: 700;
-    color: #6c7581; /* Warna teks */
+    color: #6c7581;
+    /* Warna teks */
     font-size: 16px;
     text-align: left;
-  }
+}
 
-  .custom-table tbody tr {
-    border: 1px solid #4caf4f; /* Border hijau di baris */
-  }
+/* .custom-table-pancang tbody tr {
+              border: 1px solid #4caf4f;
+            } */
 
-  .custom-table tfoot td {
-    background-color: #4caf4f; /* Warna hijau untuk footer */
+.custom-table-pancang tfoot td {
+    background-color: #4caf4f;
+    /* Warna hijau untuk footer */
     color: white;
     font-weight: bold;
     padding: 12px;
     text-align: left;
-  }
+}
+
+.aksi-button {
+    display: flex;
+    align-items: center;
+    /* Ratakan vertikal */
+    justify-content: flex-start;
+    /* Biarkan tombol bersebelahan di sisi kiri */
+    padding: 0;
+    /* Pastikan padding tidak menambah ketinggian */
+    border: none;
+    /* Jika ada garis bawah yang tidak diinginkan */
+}
+
+.table-wrapper select {
+    margin: 0 5px;
+    padding: 5px;
+    border: 1px solid #d4d4d4;
+    border-radius: 4px;
+    background-color: #ffffff;
+    color: #666;
+    background-color: transparent;
+    /* Atur warna background jika ingin transparan */
+    border: none;
+    margin-bottom: 2em;
+}

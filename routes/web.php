@@ -77,7 +77,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/panduan', [PanduanController::class, 'index']);
     Route::get('/dataPlot', [DataPlotController::class, 'index']);
-    Route::get('/manajermenUser', [ManajermenUserController::class, 'index']);
+    Route::get('/Verifikasi', [ManajermenUserController::class, 'index']);
     Route::get('/Sampah', [SampahController::class, 'index']);
     // Route untuk halaman tambah data
     Route::get('/tambahData', function () {
@@ -173,6 +173,7 @@ Route::middleware('auth')->group(function () {
         Route::get("/ringkasan",'indexx' )->name('ringkasan.indexx');
     });
     Route::controller(SUrveyorController::class)->group(function(){
-        Route::get('/Surveyor', 'index');
+        Route::get('/Surveyor', 'index')->name('Surveyor.index');
+        Route::get('/Surveyor/Tambah-Surveyor', 'indexx')->name('Tambah-Surveyor.indexx');
     });
 });

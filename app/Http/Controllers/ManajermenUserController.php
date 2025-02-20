@@ -9,6 +9,6 @@ class ManajermenUserController extends Controller
 {
     public function index(){
         $user = Auth::user();
-        return view("manajermenUser",compact('user'));
+        return view("Verifikasi",compact('user'));
     }
 }

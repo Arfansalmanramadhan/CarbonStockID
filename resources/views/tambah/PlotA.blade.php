@@ -39,7 +39,8 @@
                             {{-- <span>{{ $PlotA ? $PlotA->kandungan_karbon : '' }} Kg</span> --}}
                         </p>
                         {{-- <p class="form-label">Serapan CO2 <span>{{ $PlotA ? $PlotA->co2 : '' }} Kg</span></p> --}}
-                        <button type="submit" class="btn btn-submit-serasah d-flex align-items-center justify-content-center"
+                        <button type="submit"
+                            class="btn btn-success d-flex align-items-center justify-content-center"
                             id="submitSerasah">
                             <span>Submit</span>
                         </button>
@@ -109,7 +110,7 @@
                         <div class="mb-3">
                             <label for="plotName" class="form-label">Sample Berat Kering</label>
                             <input type="text" class="form-control" name="sample_berat_kering" id="SampleBeratKering"
-                               {{-- value="{{ $tumbuhanbawah ? $tumbuhanbawah->sample_berat_kering : '' }}" --}} placeholder="Masukkan sample berat kering (gr)" />
+                                {{-- value="{{ $tumbuhanbawah ? $tumbuhanbawah->sample_berat_kering : '' }}" --}} placeholder="Masukkan sample berat kering (gr)" />
                         </div>
                         <div class="mb-3">
                             <label for="plotName" class="form-label">Total Berat Kering</label>
@@ -123,7 +124,7 @@
                         {{-- <p class="form-label">Serapan CO2 <span>{{ $tumbuhanbawah ? $tumbuhanbawah->co2 : '' }}
                                 Kg</span></p> --}}
                         <button type="submit" class="btn btn-success d-flex align-items-center justify-content-center"
-                            id="submitTumbuhanBawah">
+                            id="submitButton">
                             <span>Submit</span>
                         </button>
                     </form>
@@ -138,7 +139,7 @@
                     <!-- Form -->
                     <form method="POST" action="{{ route('tanah.store') }}" id="tanahForm">
                         @csrf
-                        {{-- {{-- <input type="hidden" id="zona_id" name="zona_id" value="{{ $zona->id }}" /> --}} --}}
+                        {{-- <input type="hidden" id="zona_id" name="zona_id" value="{{ $zona->id }}" /> --}}
                         <div class="mb-3">
                             <label for="plotName" class="form-label">Kedalaman Sample</label>
                             <input type="text" class="form-control" name="kedalaman_sample" id="KedalamanSample"
