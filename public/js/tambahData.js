@@ -290,25 +290,66 @@ document.getElementById('submitButton').addEventListener('click', function() {
 // ----------------API MAP-------------------
 
 // Masukkan token API dari Mapbox
+// mapboxgl.accessToken = "pk.eyJ1IjoicGVuZG9zYXRhdWJhdCIsImEiOiJjbTEzZzhiOGYxZDExMmtzZm1pNG01NDlvIn0.c_7si8BDiAd8JOwgfgKMkQ";
+
+// navigator.geolocation.getCurrentPosition(successLocation, errorLocation, {
+//   enableHighAccuracy: true,
+// });
+
+// function successLocation(position) {
+//     console.log(position);
+//     setupMap([position.coords.longitude, position.coords.latitude]);
+
+//     // Mengisi field latitude dan longitude secara otomatis
+//     document.getElementById("latitude").value = position.coords.latitude;
+//     document.getElementById("longitude").value = position.coords.longitude;
+
+//     // Memperbarui marker dengan koordinat terbaru
+//     if (marker) {
+//       marker.setLngLat([position.coords.longitude, position.coords.latitude]);
+//     }
+//   }
+
+// function errorLocation() {
+//   setupMap([106.8456, -6.2088]); // Default ke Jakarta jika gagal
+// }
+
+// function setupMap(center) {
+//   const map = new mapboxgl.Map({
+//     container: "map",
+//     style: "mapbox://styles/mapbox/streets-v11",
+//     center: center,
+//     zoom: 12,
+//   });
+
+//   // Menambahkan marker pada lokasi
+//   new mapboxgl.Marker().setLngLat(center).addTo(map);
+// }
 mapboxgl.accessToken = "pk.eyJ1IjoicGVuZG9zYXRhdWJhdCIsImEiOiJjbTEzZzhiOGYxZDExMmtzZm1pNG01NDlvIn0.c_7si8BDiAd8JOwgfgKMkQ";
+
+let marker; // Deklarasi variabel global untuk marker
 
 navigator.geolocation.getCurrentPosition(successLocation, errorLocation, {
   enableHighAccuracy: true,
 });
 
 function successLocation(position) {
-    console.log(position);
-    setupMap([position.coords.longitude, position.coords.latitude]);
+  console.log(position);
+  setupMap([position.coords.longitude, position.coords.latitude]);
 
-    // Mengisi field latitude dan longitude secara otomatis
-    document.getElementById("latitude").value = position.coords.latitude;
-    document.getElementById("longitude").value = position.coords.longitude;
+  // Mengisi field latitude dan longitude secara otomatis
+  document.getElementById("latitude").value = position.coords.latitude;
+  document.getElementById("longitude").value = position.coords.longitude;
 
-    // Memperbarui marker dengan koordinat terbaru
-    if (marker) {
-      marker.setLngLat([position.coords.longitude, position.coords.latitude]);
-    }
+  // Memperbarui marker dengan koordinat terbaru
+  if (marker) {
+    marker.setLngLat([position.coords.longitude, position.coords.latitude]);
+  } else {
+    marker = new mapboxgl.Marker()
+      .setLngLat([position.coords.longitude, position.coords.latitude])
+      .addTo(map);
   }
+}
 
 function errorLocation() {
   setupMap([106.8456, -6.2088]); // Default ke Jakarta jika gagal
@@ -322,8 +363,8 @@ function setupMap(center) {
     zoom: 12,
   });
 
-  // Menambahkan marker pada lokasi
-  new mapboxgl.Marker().setLngLat(center).addTo(map);
+  // Menyimpan marker ke variabel global
+  marker = new mapboxgl.Marker().setLngLat(center).addTo(map);
 }
 
 // ---------- NO data -----------
