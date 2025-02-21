@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('tiang', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger("zona_id");
-            $table->foreign("zona_id")->references("id")->on("zona");
+            $table->unsignedBigInteger("subplot_id");
+            $table->foreign("subplot_id")->references("id")->on("subplot")->onDelete('cascade');
             $table->decimal('keliling', 8, 2)->default(0);
             $table->decimal('diameter', 8, 2)->default(0);
             $table->string("nama_lokal",255);

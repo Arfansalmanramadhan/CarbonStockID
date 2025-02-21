@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('necromass', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger("zona_id");
-            $table->foreign("zona_id")->references("id")->on("zona");
+            $table->unsignedBigInteger("subplot_id");
+            $table->foreign("subplot_id")->references("id")->on("subplot")->onDelete('cascade');
             $table->decimal('diameter_pangkal', 8, 2)->default(0);
             $table->decimal('diameter_ujung', 8, 2)->default(0);
             $table->decimal('panjang', 8, 2)->default(0);

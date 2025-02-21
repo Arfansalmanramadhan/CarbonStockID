@@ -11,14 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('zona', function (Blueprint $table) {
+        Schema::create('hamparan', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger("polt-area_id");
-            $table->foreign("polt-area_id")->references("id")->on("polt-area")->onDelete('cascade');
-            $table->string("zona", 250);
-            $table->string("jenis_hutan", 250);
-            $table->string('foto_area');
+            $table->unsignedBigInteger("zona_id");
+            $table->foreign("zona_id")->references("id")->on("zona")->onDelete('cascade');
+            $table->string("nama")->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -27,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('zona');
+        Schema::dropIfExists('hamparan');
     }
 };

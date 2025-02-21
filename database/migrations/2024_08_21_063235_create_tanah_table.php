@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('tanah', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger("zona_id");
-            $table->foreign("zona_id")->references("id")->on("zona");
+            $table->unsignedBigInteger("subplot_id");
+            $table->foreign("subplot_id")->references("id")->on("subplot")->onDelete('cascade');
             $table->decimal('kedalaman_sample', 8, 2)->default(0);
             $table->decimal('berat_jenis_tanah', 8, 2)->default(0);
             $table->decimal('C_organic_tanah', 5, 2)->default(0);
