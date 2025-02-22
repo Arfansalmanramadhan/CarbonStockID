@@ -33,6 +33,7 @@ class User extends Authenticatable
         'no_hp',
         'nik',
         'foto_ktp',
+        'foto_tandangan',
         // 'password_konfimasi',
     ];
     protected static function boot ()
