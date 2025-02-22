@@ -27,10 +27,6 @@ html, body {
     padding: 0;
 }
 
-.main {
-    min-height: 100vh;
-    display: flex;
-}
 /* Navbar Style */
 .navbar {
   /* padding: 16px 48px; */
@@ -71,7 +67,7 @@ html, body {
 }
 
 .form-control {
-  width: 389px;
+  /* width: 389px; */
   height: 62px;
   border-radius: 8px;
 }
@@ -103,7 +99,7 @@ html, body {
   width: 344px;
   height: 232px;
   padding: 15px;
-  /* z-index: 1000; */
+  z-index: 1000;
 }
 
 .user-info {
@@ -246,6 +242,7 @@ html, body {
 
 .content {
   padding: 20px;
+  width: 100%;
   flex: 1;
 }
 
@@ -295,7 +292,7 @@ html, body {
 }
 
 .custom-table thead {
-  background-color: #4caf50;
+  background-color: #1c9320;
   color: white;
   text-align: left;
 }
@@ -330,6 +327,7 @@ html, body {
 
 .custom-table td .view-btn,
 .custom-table td .edit-btn,
+.custom-table td .add-btn,
 .custom-table td .delete-btn {
   margin-right: 8px;
   border: none;
@@ -339,12 +337,17 @@ html, body {
 }
 
 .view-btn {
-  background-color: #4caf50;
+  background-color: #00a3cc;
   color: white;
 }
 
+.add-btn {
+    background-color: #03f46b;
+    color: white;
+  }
+
 .edit-btn {
-  background-color: #03a9f4;
+  background-color: #03f46b;
   color: white;
 }
 
@@ -667,10 +670,21 @@ html, body {
   align-items: flex-start;
   gap: 10px;
   border-radius: 8px;
-  background: #198754;
+  /* background: #198754; */
   border: none;
-  margin-right: 8px;
+  /* margin-right: 8px; */
 }
+
+.add-btn {
+    display: flex;
+    padding: 8px;
+    align-items: flex-start;
+    gap: 10px;
+    border-radius: 8px;
+    /* background: #198754; */
+    border: none;
+    /* margin-right: 8px; */
+  }
 
 .edit-btn {
   display: flex;
@@ -678,9 +692,9 @@ html, body {
   align-items: flex-start;
   gap: 10px;
   border-radius: 8px;
-  background: var(--Info-0, #0dcaf0);
+  /* background: var(--Info-0, #0dcaf0); */
   border: none;
-  margin-right: 8px;
+  /* margin-right: 8px; */
 }
 
 .delete-btn {
@@ -823,7 +837,7 @@ html, body {
     /* Ratakan vertikal */
     justify-content: space-evenly;
     /* Biarkan tombol bersebelahan di sisi kiri */
-    padding: 0;
+    /* padding: 0; */
     /* Pastikan padding tidak menambah ketinggian */
     border: none;
     /* Jika ada garis bawah yang tidak diinginkan */
@@ -1126,7 +1140,8 @@ html, body {
     right: 35px;
     border: none;
     justify-content: center;
-    margin-top: 35px;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 .table-wrapper {
     overflow-x: auto;
@@ -1159,7 +1174,7 @@ html, body {
     width: 100%;
     border-collapse: collapse;
     background-color: white;
-    overflow: hidden;
+    /* overflow: hidden; */
     text-align: center !important;
     border-bottom: 1px solid #4caf4f;
 }

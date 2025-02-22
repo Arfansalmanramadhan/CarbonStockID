@@ -25,6 +25,8 @@
                 <thead>
                     <tr>
                         <th>NOMOR</th>
+                        <th>TIPE PLOT</th>
+                        <th>KOORDINAT</th>
                         <th>DAERAH</th>
                         <th>AKSI</th>
                     </tr>
@@ -32,8 +34,10 @@
                 <tbody>
                     <tr>
                         <td>00001</td>
+                        <td>Bujursangkar</td>
+                        <td>-6.9705, 107.6304</td>
                         <td>Mekarjaya, Kec. Banjaran, Kabupaten Bandung</td>
-                        <td class="aksi-dataplot">
+                        <td class="hidden-column aksi-button">
                             <button class="view-btn">
                                 <img src="{{ asset('/images/Eye.svg') }}" alt="" />
                             </button>
@@ -66,8 +70,10 @@
                     </tr>
                     <tr>
                         <td>00002</td>
+                        <td>Bujursangkar</td>
+                        <td>-6.9705, 107.6304</td>
                         <td>Haurpanggung, Kec. Tarogong Kidul, Kabupaten ...</td>
-                        <td class="aksi-dataplot">
+                        <td class="hidden-column aksi-button">
                             <button class="view-btn">
                                 <img src="{{ asset('/images/Eye.svg') }}" alt="" />
                             </button>
@@ -100,8 +106,10 @@
                     </tr>
                     <tr>
                         <td>00003</td>
+                        <td>Persegi panjang</td>
+                        <td>-6.9705, 107.6304</td>
                         <td>Haurpanggung, Kec. Tarogong Kidul, Kabupaten ...</td>
-                        <td class="aksi-dataplot">
+                        <td class="hidden-column aksi-button">
                             <button class="view-btn">
                                 <img src="{{ asset('/images/Eye.svg') }}" alt="" />
                             </button>
@@ -134,8 +142,10 @@
                     </tr>
                     <tr>
                         <td>00004</td>
+                        <td>Persegi panjang</td>
+                        <td>-6.9705, 107.6304</td>
                         <td>Haurpanggung, Kec. Tarogong Kidul, Kabupaten ...</td>
-                        <td class="aksi-dataplot">
+                        <td class="hidden-column aksi-button">
                             <button class="view-btn">
                                 <img src="{{ asset('/images/Eye.svg') }}" alt="" />
                             </button>
@@ -168,8 +178,10 @@
                     </tr>
                     <tr>
                         <td>00005</td>
+                        <td>Bujursangkar</td>
+                        <td>-6.9705, 107.6304</td>
                         <td>Haurpanggung, Kec. Tarogong Kidul, Kabupaten ...</td>
-                        <td class="aksi-dataplot">
+                        <td class="hidden-column aksi-button">
                             <button class="view-btn">
                                 <img src="{{ asset('/images/Eye.svg') }}" alt="" />
                             </button>

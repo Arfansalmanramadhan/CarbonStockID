@@ -29,6 +29,9 @@
     <link rel="icon" href="{{ $user->image ? asset($user->image) : asset('/images/PersonFill.svg') }}"
         type="image/x-icon" />
     <title>@yield('title')</title>
+
+    <!-- LineIcons -->
+    <link rel="stylesheet" href="https://cdn.lineicons.com/5.0/lineicons.css" />
 </head>
 
 <body>
@@ -92,8 +95,45 @@
             </div>
         </nav>
 
-        <section class="d-flex main ">
-            <div class="row  h-100 ">
+        {{-- <section class="d-flex main "> --}}
+            <div class="wrapper">
+                <aside id="sidebar">
+                    <div class="d-flex">
+                        <button id="toogle-btn" type="button">
+                            <i class="lni lni-home-2"></i>
+                        </button>
+                        <div class="sidebar-logo">
+                            <a href="#">CarbonStockID</a>
+                        </div>
+                    </div>
+                    <ul class="sidebar-nav">
+                        <li class="sidebar-item">
+                            <a href="#" class="sidebar-link">
+                                <i class="lni lni-home-2"></i>
+                                <span>Dashboard</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="#" class="sidebar-link">
+                                <i class="lni lni-home-2"></i>
+                                <span>Profile</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="#" class="sidebar-link">
+                                <i class="lni lni-home-2"></i>
+                                <span>Logout</span>
+                            </a>
+                        </li>
+                    </ul>
+                </aside>
+                <div class="main p-3">
+                    {{-- <div class="text-center"> --}}
+                        @yield('content')
+                    {{-- </div> --}}
+                </div>
+            </div>
+            {{-- <div class="row  h-100 ">
                 <div class="sidebar col-lg-2 collapse d-lg-block bg-dark" id="sidebar">
                     <ul class="nav flex-column">
                         <li class="nav-item">
@@ -106,6 +146,24 @@
                             <a class="d-flex align-items-center ms-3 nav-link   " href="panduan">
                                 <img src="{{ asset('/images/FileEarmarkPdfFill.svg') }}" alt="Guide Icon" />
                                 <span class="ms-2">Panduan</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="d-flex align-items-center ms-3 nav-link   " href="dataPlot">
+                                <img src="{{ asset('/images/FolderFill.svg') }}" alt="Data Plot Icon" />
+                                <span class="ms-2">Lokasi</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="d-flex align-items-center ms-3 nav-link   " href="dataPlot">
+                                <img src="{{ asset('/images/FolderFill.svg') }}" alt="Data Plot Icon" />
+                                <span class="ms-2">Hamparan</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="d-flex align-items-center ms-3 nav-link   " href="dataPlot">
+                                <img src="{{ asset('/images/FolderFill.svg') }}" alt="Data Plot Icon" />
+                                <span class="ms-2">Zona</span>
                             </a>
                         </li>
                         <li class="nav-item">
@@ -134,11 +192,8 @@
                         </li>
                     </ul>
                 </div>
-            </div>
-            <div class="container  w-100 col-lg-10  body">
-                @yield('content')
-            </div>
-        </section>
+            </div> --}}
+        {{-- </section> --}}
     </main>
     <!-- Bootstrap JS Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>

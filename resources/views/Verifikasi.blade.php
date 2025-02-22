@@ -5,7 +5,7 @@
 @section('content')
     <div id="prediksi-content" class="page-content content p-4 w-10">
         <div class="image-container mt-4">
-            <img src="{{ asset('/images/dataPlot-Image.svg') }}" alt="" class="mb-4 img-normal" />
+            <img src="{{ asset('/images/dataPlot-Image.svg') }}" alt="" class="img-normal" />
             <p class="large-text text-overlay">Verifikasi Data Surveyor</p>
         </div>
         <div id="carbon-prediction-chart">
