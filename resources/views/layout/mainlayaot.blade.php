@@ -37,15 +37,15 @@
 <body>
 
     {{-- <main class="main d-flex flex-column justify-content-between"> --}}
-    <main class="main d-flex flex-column justify-content-between">
+    <main class="d-flex flex-column justify-content-between">
         <!-- Navbar -->
         <nav class="navbar navbar-expand-lg bg-body-tertiary bg-light">
             <div class="container-fluid">
                 <div class="d-flex align-items-center">
-                    <button class="burger-button" type="button" data-bs-target="#sidebar" aria-controls="sidebar"
+                    {{-- <button class="burger-button" type="button" data-bs-target="#sidebar" aria-controls="sidebar"
                         aria-expanded="false">
                         <img src="{{ asset('/images/burgerIcon.png') }}" alt="Burger Menu" class="burger-icon" />
-                    </button>
+                    </button> --}}
                     <a class="navbar-brand d-flex align-items-center ms-3" href="#">
                         <img src="{{ asset('/images/logoCarbonStockID-DarkMode.png') }}" alt="Logo" width="30"
                             class="d-inline-block align-middle me-2" />
@@ -100,7 +100,7 @@
                 <aside id="sidebar">
                     <div class="d-flex">
                         <button id="toogle-btn" type="button">
-                            <i class="lni lni-home-2"></i>
+                            <i class="lni lni-dashboard-square-1"></i>
                         </button>
                         <div class="sidebar-logo">
                             <a href="#">CarbonStockID</a>
@@ -108,21 +108,51 @@
                     </div>
                     <ul class="sidebar-nav">
                         <li class="sidebar-item">
-                            <a href="#" class="sidebar-link">
+                            <a href="dashboard" class="sidebar-link">
                                 <i class="lni lni-home-2"></i>
                                 <span>Dashboard</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a href="#" class="sidebar-link">
-                                <i class="lni lni-home-2"></i>
-                                <span>Profile</span>
+                            <a href="panduan" class="sidebar-link">
+                                <i class="lni lni-file-multiple"></i>
+                                <span>Panduan</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="Surveyor" class="sidebar-link">
+                                <i class="lni lni-user-multiple-4"></i>
+                                <span>Manajemen Tim</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
                             <a href="#" class="sidebar-link">
-                                <i class="lni lni-home-2"></i>
-                                <span>Logout</span>
+                                <i class="lni lni-map-marker-1"></i>
+                                <span>Lokasi</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="#" class="sidebar-link">
+                                <i class="lni lni-map-marker-5"></i>
+                                <span>Zona</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="dataPlot" class="sidebar-link">
+                                <i class="lni lni-notebook-1"></i>
+                                <span>Data Plot</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="Verifikasi" class="sidebar-link">
+                                <i class="lni lni-shield-2-check"></i>
+                                <span>Verifikasi</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="Sampah" class="sidebar-link">
+                                <i class="lni lni-trash-3"></i>
+                                <span>Sampah</span>
                             </a>
                         </li>
                     </ul>
@@ -191,6 +221,11 @@
                             </a>
                         </li>
                     </ul>
+                </div>
+            </div>
+            <div class="main p-3">
+                <div class="text-center">
+                    @yield('content')
                 </div>
             </div> --}}
         {{-- </section> --}}

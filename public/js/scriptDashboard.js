@@ -10,6 +10,12 @@ const navItems = document.querySelectorAll(".nav-item");
 // const tableBody = document.querySelector(".custom-table tbody");
 const showEntriesSelect = document.getElementById("show-entries");
 
+const hamburger = document.querySelector("#toogle-btn");
+
+hamburger.addEventListener("click",function(){
+    document.querySelector("#sidebar").classList.toggle("expand")
+});
+
 // // MODAL
 // // Get modal element
 // var modal = document.getElementById("deleteModal");

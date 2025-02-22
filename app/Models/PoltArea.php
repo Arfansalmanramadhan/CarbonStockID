@@ -15,7 +15,7 @@ class PoltArea extends Model
     use HasFactory;
     use Sluggable;
     use SoftDeletes;
-    protected $table = 'plot-area';
+    protected $table = 'polt-area';
     protected $fillable = [
         'profil_id',
         'daerah',

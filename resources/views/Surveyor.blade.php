@@ -7,7 +7,7 @@
         <div class="image-container mt-4">
             <div class="col page-title">
                 <img src="{{ asset('/images/dataPlot-Image.svg') }}" alt="" class="img-normal" />
-                <p class="large-text text-overlay">Manajermen Surveyor</p>
+                <p class="large-text text-overlay">Manajemen Tim</p>
             </div>
         </div>
         <div class="table-container">
@@ -17,7 +17,7 @@
                         <label for="keliling" class="form-label">Input lokasi</label>
                         <input type="text" class="form-control" id="keliling" value="" name="Jenis_tanaman" />
                     </div>
-                    <div class="col-12 col-md-4">
+                    {{-- <div class="col-12 col-md-4">
                         <label for="keliling" class="form-label">Nama Surveyor</label>
                         <select class="form-select form-control" aria-label="Default select example" name="zona">
                             <option selected>Zona</option>
@@ -27,10 +27,15 @@
                             <option value="Zona 4">Zona 4</option>
                             <option value="Zona 5">Zona 5</option>
                         </select>
+                    </div> --}}
+                    <div class="col-12 col-md-4">
+                        <label for="keliling" class="form-label">Tanggal Mulai</label>
+                        <input type="date" class="form-control form-control-plot-b" id="keliling" value=""
+                            name="Jenis_tanaman" />
                     </div>
                     <div class="col-12 col-md-4">
-                        <label for="keliling" class="form-label">Tanggal</label>
-                        <input type="text" class="form-control form-control-plot-b" id="keliling" value=""
+                        <label for="keliling" class="form-label">Tanggal Berakhir</label>
+                        <input type="date" class="form-control form-control-plot-b" id="keliling" value=""
                             name="Jenis_tanaman" />
                     </div>
                 </div>
