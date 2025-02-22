@@ -11,13 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('zona', function (Blueprint $table) {
+        Schema::create('periode', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger("polt-area_id");
-            $table->foreign("polt-area_id")->references("id")->on("polt-area")->onDelete('cascade');
-            $table->string("zona", 250);
-            $table->string("jenis_hutan", 250);
-            $table->string('foto_area');
+            $table->unsignedBigInteger("anggota_tim_id");
+            $table->foreign("anggota_tim_id")->references("id")->on("anggota_tim")->onDelete('cascade')->onUpdate('cascade');
+            $table->date("tanggal_mulai");
+            $table->date("tanggal_beakhir");
             $table->timestamps();
         });
     }
@@ -27,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('zona');
+        Schema::dropIfExists('periode');
     }
 };

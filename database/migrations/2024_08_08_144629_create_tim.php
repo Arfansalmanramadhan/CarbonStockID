@@ -11,13 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('zona', function (Blueprint $table) {
+        Schema::create('tim', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger("polt-area_id");
-            $table->foreign("polt-area_id")->references("id")->on("polt-area")->onDelete('cascade');
-            $table->string("zona", 250);
-            $table->string("jenis_hutan", 250);
-            $table->string('foto_area');
+            $table->unsignedBigInteger("registrasi_id");
+            $table->foreign("registrasi_id")->references("id")->on("registrasi")->onDelete('cascade')->onUpdate('cascade');
+            $table->string("nama")->nullable();
             $table->timestamps();
         });
     }
@@ -27,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('zona');
+        Schema::dropIfExists('tim');
     }
 };

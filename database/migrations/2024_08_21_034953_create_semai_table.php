@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('semai', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger("zona_id");
-            $table->foreign("zona_id")->references("id")->on("zona")->onDelete('cascade');
+            $table->unsignedBigInteger("subplot_id");
+            $table->foreign("subplot_id")->references("id")->on("subplot")->onDelete('cascade');
             $table->decimal('total_berat_basah', 8, 2)->default(0);
             $table->decimal('sample_berat_basah', 8, 2)->default(0);
             $table->decimal('sample_berat_kering', 8, 2)->default(0);

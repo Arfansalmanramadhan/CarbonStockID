@@ -11,18 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create("polt-area", function (Blueprint $table) {
+        Schema::create('subplot', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger("periode_id");
-            $table->foreign("periode_id")->references("id")->on("periode")->onDelete('cascade')->onUpdate('cascade');
-            $table->string("daerah")->nullable();
-            $table->string("slug", 255);
+            $table->unsignedBigInteger("plot_id");
+            $table->foreign("plot_id")->references("id")->on("plot")->onDelete('cascade')->onUpdate('cascade');
+            $table->string("nama_suplort", 255)->nullable();
             $table->decimal('latitude', 10, 8);
             $table->decimal('longitude', 11, 8);
-            $table->date('periode_pengamatan');
-            $table->string("status")->default("tidakaktif");
             $table->timestamps();
             $table->softDeletes();
+
         });
     }
 
@@ -31,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists("polt-area");
+        Schema::dropIfExists('subplot');
     }
 };
