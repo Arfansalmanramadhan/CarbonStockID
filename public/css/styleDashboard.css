@@ -1247,6 +1247,7 @@ html, body {
 .activeD {
     display: none; /* Tampilkan konten yang aktif */
   }
+
 .h2-pancang-container {
     position: relative;
     display: inline-block;
@@ -1256,8 +1257,9 @@ html, body {
 }
 .h2-pancang-container .jarak{
     margin: 0 10px;
+    font-size: 1.5em;
 }
-#pertama #kedua #ketiga .keempat .kelima .keenam .ketujuh .kedelapan .kesebelan {
+#pertama #kedua #ketiga #keempat #kelima #keenam #ketujuh #kedelapan #kesebilan {
     cursor: pointer;
     user-select: none;
 }
@@ -1290,7 +1292,7 @@ html, body {
     color: var(--pr-color1); /* Warna teks hijau untuk pohon */
     position: relative; /* Untuk memungkinkan penempatan garis hijau */
 }
-.keempat.activee {
+#keempat.activee {
     color: var(--pr-color1); /* Warna teks hijau untuk pohon */
     position: relative; /* Untuk memungkinkan penempatan garis hijau */
 }
@@ -1303,7 +1305,7 @@ html, body {
     border-bottom: 2px solid var(--pr-color1); /* Garis hijau */
 }
 
-.keempat.activee::after {
+#keempat.activee::after {
     content: "";
     position: absolute;
     bottom: -2px;
@@ -1311,11 +1313,11 @@ html, body {
     width: 100%;
     border-bottom: 2px solid var(--pr-color1); /* Garis hijau untuk Nekromas saat aktif */
 }
-.kelima.activee {
+#kelima.activee {
     color: var(--pr-color1); /* Warna teks hijau untuk pohon */
     position: relative; /* Untuk memungkinkan penempatan garis hijau */
 }
-.kelima.activee::after {
+#kelima.activee::after {
     content: "";
     position: absolute;
     bottom: -2px;
@@ -1323,11 +1325,11 @@ html, body {
     width: 100%;
     border-bottom: 2px solid var(--pr-color1); /* Garis hijau untuk Nekromas saat aktif */
 }
-.keenam.activee {
+#keenam.activee {
     color: var(--pr-color1); /* Warna teks hijau untuk pohon */
     position: relative; /* Untuk memungkinkan penempatan garis hijau */
 }
-.keenam.activee::after {
+#keenam.activee::after {
     content: "";
     position: absolute;
     bottom: -2px;
@@ -1335,11 +1337,11 @@ html, body {
     width: 100%;
     border-bottom: 2px solid var(--pr-color1); /* Garis hijau untuk Nekromas saat aktif */
 }
-.ketujuh.activee {
+#ketujuh.activee {
     color: var(--pr-color1); /* Warna teks hijau untuk pohon */
     position: relative; /* Untuk memungkinkan penempatan garis hijau */
 }
-.ketujuh.activee::after {
+#ketujuh.activee::after {
     content: "";
     position: absolute;
     bottom: -2px;
@@ -1347,11 +1349,11 @@ html, body {
     width: 100%;
     border-bottom: 2px solid var(--pr-color1); /* Garis hijau untuk Nekromas saat aktif */
 }
-.kedelapan.activee {
+#kedelapan.activee {
     color: var(--pr-color1); /* Warna teks hijau untuk pohon */
     position: relative; /* Untuk memungkinkan penempatan garis hijau */
 }
-.kedelapan.activee::after {
+#kedelapan.activee::after {
     content: "";
     position: absolute;
     bottom: -2px;
@@ -1359,11 +1361,11 @@ html, body {
     width: 100%;
     border-bottom: 2px solid var(--pr-color1); /* Garis hijau untuk Nekromas saat aktif */
 }
-.kesebelan.activee {
+#kesebilan.activee {
     color: var(--pr-color1); /* Warna teks hijau untuk pohon */
     position: relative; /* Untuk memungkinkan penempatan garis hijau */
 }
-.kesebelan.activee::after {
+#kesebilan.activee::after {
     content: "";
     position: absolute;
     bottom: -2px;
