@@ -17,7 +17,8 @@ class Zona extends Model
     protected $fillable = [
         'polt-area_id',
         "zona",
-        "jenis_hutan"
+        "jenis_hutan",
+        "foto_area",
     ];
     // Jika ada atribut yang ingin di-guard (tidak bisa diisi langsung)
     protected $guarded = [];
@@ -31,41 +32,10 @@ class Zona extends Model
     {
         return $this->belongsTo(PoltArea::class, 'polt-area_id');
     }
-    public function semai(): BelongsTo
+    public function hamparan(): BelongsTo
     {
-        return $this->belongsTo(Semai::class, 'zona_id');
+        return $this->belongsTo(Hamparan::class, 'zona_id');
     }
-    public function serasah(): BelongsTo
-    {
-        return $this->belongsTo(Serasah::class, 'zona_id');
-    }
-    public function tumbuhanbawah(): BelongsTo
-    {
-        return $this->belongsTo(TumbuhanBawah::class, 'zona_id');
-    }
-    public function tanah(): BelongsTo
-    {
-        return $this->belongsTo(Tanah::class, 'zona_id');
-    }
-    public function pancang(): BelongsTo
-    {
-        return $this->belongsTo(Pancang::class, 'zona_id');
-    }
-    public function tiang(): BelongsTo
-    {
-        return $this->belongsTo(Tiang::class, 'zona_id');
-    }
-    public function pohon(): BelongsTo
-    {
-        return $this->belongsTo(Pohon::class, 'zona_id');
-    }
-    public function necromass(): BelongsTo
-    {
-        return $this->belongsTo(Necromass::class, 'zona_id');
-    }
-    public function mangrove(): BelongsTo
-    {
-        return $this->belongsTo(Mangrove::class, 'zona_id');
-    }
+    
 
 }

@@ -17,6 +17,8 @@ return new class extends Migration
             $table->foreign("hamparan_id")->references("id")->on("hamparan")->onDelete('cascade');
             $table->string('nama_plot', 255)->nullable();
             $table->string('type_plot', 255);
+            $table->decimal('latitude', 10, 8);
+            $table->decimal('longitude', 11, 8);
             $table->timestamps();
             $table->softDeletes();
         });

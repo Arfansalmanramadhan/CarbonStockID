@@ -12,7 +12,7 @@ class Necromass extends Model
     use HasFactory, SoftDeletes;
     protected $table = 'necromass';
     protected $fillable = [
-        'zona_id',
+        'subplot_id',
         'diameter_pangkal',
         'diameter_ujung',
         'panjang',
@@ -29,8 +29,8 @@ class Necromass extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function zona(): BelongsTo
+    public function subplot(): BelongsTo
     {
-        return $this->belongsTo(Zona::class, 'zona_id');
+        return $this->belongsTo(SubPlot::class, 'subplot_id');
     }
 }

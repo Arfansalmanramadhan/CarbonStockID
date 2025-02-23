@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger("plot_id");
-            $table->foreign("plot_id")->references("id")->on("plot")->onDelete('cascade')->onUpdate('cascade');
+            $table->unsignedBigInteger("registrasi_id");
+            $table->foreign("registrasi_id")->references("id")->on("registrasi")->onDelete('cascade')->onUpdate('cascade');
             $table->string("title", 255)->nullable();
             $table->string("body_text", 255)->nullable();
             $table->timestamps();

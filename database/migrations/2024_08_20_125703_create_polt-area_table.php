@@ -13,8 +13,6 @@ return new class extends Migration
     {
         Schema::create("polt-area", function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger("periode_id");
-            $table->foreign("periode_id")->references("id")->on("periode")->onDelete('cascade')->onUpdate('cascade');
             $table->string("daerah")->nullable();
             $table->string("slug", 255);
             $table->decimal('latitude', 10, 8);

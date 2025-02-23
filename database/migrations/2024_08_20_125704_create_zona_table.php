@@ -17,8 +17,11 @@ return new class extends Migration
             $table->foreign("polt-area_id")->references("id")->on("polt-area")->onDelete('cascade');
             $table->string("zona", 250);
             $table->string("jenis_hutan", 250);
+            $table->decimal('latitude', 10, 8);
+            $table->decimal('longitude', 11, 8);
             $table->string('foto_area');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

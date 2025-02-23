@@ -12,7 +12,7 @@ class Tiang extends Model
     use HasFactory, SoftDeletes;
     protected $table = 'tiang';
     protected $fillable = [
-        'zona_id',
+        'subplot_id',
         'keliling',
         'diameter',
         'nama_lokal',
@@ -29,8 +29,8 @@ class Tiang extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function zona(): BelongsTo
+    public function subplot(): BelongsTo
     {
-        return $this->belongsTo(Zona::class, 'zona_id');
+        return $this->belongsTo(SubPlot::class, 'subplot_id');
     }
 }

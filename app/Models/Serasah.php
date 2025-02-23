@@ -13,7 +13,7 @@ class Serasah extends Model
     use SoftDeletes;
     protected $table = "serasah";
     protected $fillable = [
-        "zona_id",
+        "subplot_id",
         'total_berat_basah',
         'sample_berat_basah',
         'sample_berat_kering',
@@ -28,8 +28,8 @@ class Serasah extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function zona(): BelongsTo
+    public function subplot(): BelongsTo
     {
-        return $this->belongsTo(Zona::class, 'zona_id');
+        return $this->belongsTo(SubPlot::class, 'subplot_id');
     }
 }

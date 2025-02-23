@@ -12,7 +12,7 @@ class Tanah extends Model
     use HasFactory, SoftDeletes;
     protected $table = 'tanah';
     protected $fillable = [
-        'polt-area_id',
+        'subplot_id',
         'kedalaman_sample',
         'berat_jenis_tanah',
         'C_organic_tanah',
@@ -28,8 +28,8 @@ class Tanah extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function poltarea(): BelongsTo
+    public function subplot(): BelongsTo
     {
-        return $this->belongsTo(Zona::class, 'polt-area_id');
+        return $this->belongsTo(SubPlot::class, 'subplot_id');
     }
 }

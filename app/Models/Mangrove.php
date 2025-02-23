@@ -13,7 +13,7 @@ class Mangrove extends Model
     use HasFactory, SoftDeletes;
     protected $table = 'mangrove';
     protected $fillable = [
-        'zona_id',
+        'subplot_id',
         'jenis_tanaman',
         'diameter',
         'jumlah_tanaman',
@@ -28,8 +28,8 @@ class Mangrove extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function zona(): BelongsTo
+    public function subplot(): BelongsTo
     {
-        return $this->belongsTo(Zona::class, 'zona_id');
+        return $this->belongsTo(SubPlot::class, 'subplot_id');
     }
 }

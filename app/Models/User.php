@@ -75,9 +75,9 @@ class User extends Authenticatable
     //     'email_verified_at' => 'datetime',
     //     'password' => 'hashed',
     // ];
-    public function poltarea()
+    public function tim()
     {
-        return $this->hasOne(PoltArea::class, 'registrasi_id');
+        return $this->hasOne(Tim::class, 'registrasi_id');
     }
     public function sluggable(): array
     {

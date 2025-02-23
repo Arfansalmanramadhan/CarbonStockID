@@ -17,11 +17,11 @@ class PoltArea extends Model
     use SoftDeletes;
     protected $table = 'polt-area';
     protected $fillable = [
-        'profil_id',
         'daerah',
         "slug",
         'latitude',
         'longitude',
+        'periode_pengamatan',
         "status"
     ];
     // Jika ada atribut yang ingin di-guard (tidak bisa diisi langsung)
@@ -79,13 +79,13 @@ class PoltArea extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function user(): BelongsTo
-    {
-        return $this->belongsTo(User::class, 'registrasi_id');
-    }
     public function zona(): BelongsTo
     {
-        return $this->belongsTo(Zona::class, 'zona_id');
+        return $this->belongsTo(Zona::class, 'polt-area_id');
+    }
+    public function PlotAreaTim(): BelongsTo
+    {
+        return $this->belongsTo(PlotAreaTim::class, 'polt-area_id');
     }
     public function sluggable(): array
     {
