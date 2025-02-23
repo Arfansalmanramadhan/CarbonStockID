@@ -57,12 +57,12 @@
                     <div class="judul mb-3">
                         <h1>Buat Akun Anda</h1>
                     </div>
-                    <form id="FormLogin" action="{{ route('daftar') }}" method="POST">
+                    <form id="FormLogin" action="{{ route('daftar') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="mb-2">
-                            <label for="name" class="form-label">Nama</label>
+                            <label for="name" class="form-label">Username</label>
                             <input type="text" class="form-control" id="name" name="username"
-                                placeholder="Masukkan Nama" />
+                                placeholder="Masukkan username" />
                         </div>
                         <div class="mb-2">
                             <label for="email" class="form-label">Email</label>
@@ -74,10 +74,30 @@
                             <input type="password" class="form-control" id="password" name="password"
                                 placeholder="Masukkan Sandi" />
                         </div>
-                        <div class="mb-3">
-                            <label for="confirm-password" class="form-label">Konfirmasi Sandi</label>
-                            <input type="password" class="form-control" id="confirm-password"
-                                name="password_confirmation" placeholder="Masukkan Sandi" />
+                        <div class="mb-2">
+                            <label for="password_confirmation" class="form-label">Konfirmasi Sandi</label>
+                            <input type="password" class="form-control" id="password_confirmation" name="password_confirmation"
+                                placeholder="Masukkan Sandi" />
+                        </div>
+                        <div class="mb-2">
+                            <label for="nip" class="form-label">NIP</label>
+                            <input type="text" class="form-control" id="nip" name="nip"
+                                placeholder="Masukkan nip" />
+                        </div>
+                        <div class="mb-2">
+                            <label for="no_hp" class="form-label ">Nomor Telepon</label>
+                            <input type="text" class="form-control" name="no_hp" id="no_hp"
+                                placeholder="Masukan no Telepon" />
+                        </div>
+                        <div class="mb-2">
+                            <label for="formFile" class="form-label">Foto Pribadi</label>
+                            <input class="form-control" type="file"
+                                id="formFile"accept="image/jpeg,image/png,image/jpg" name="foto">
+                        </div>
+                        <div class="mb-2">
+                            <label for="formFile" class="form-label">Foto KTP</label>
+                            <input class="form-control" type="file"
+                                id="formFile"accept="image/jpeg,image/png,image/jpg" name="foto_ktp">
                         </div>
                         <button type="submit" class="btn btn-success w-100 mb-2">Daftar</button>
                         <div class="teks text-center">
