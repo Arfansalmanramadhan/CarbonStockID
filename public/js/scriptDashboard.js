@@ -159,7 +159,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 document.addEventListener('DOMContentLoaded', () => {
-  const buttons = document.querySelectorAll('.nav-link');
+  const buttons = document.querySelectorAll('.sidebar-link');
 
   // Pastikan tombol yang sesuai URL memiliki kelas 'active'
   buttons.forEach(button => {
