@@ -15,9 +15,8 @@ class zonaController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $poltArea = PoltArea::where('id', $user->id);
-        $zona = Zona::where('polt-area_id', $user->id );
-        return view('tambah.zona', compact('user', 'poltArea', 'zona'));
+        // $zona = Zona::where('polt-area_id', $user->id );
+        return view('zona', compact('user'));
     }
 
     /**
@@ -25,7 +24,10 @@ class zonaController extends Controller
      */
     public function create()
     {
-        //
+        $user = Auth::user();
+        $poltArea = PoltArea::where('id', $user->id);
+        $zona = Zona::where('polt-area_id', $user->id );
+        return view('tambah.zona', compact('user', 'poltArea', 'zona'));
     }
 
     /**

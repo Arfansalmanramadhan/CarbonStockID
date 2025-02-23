@@ -108,49 +108,55 @@
                     </div>
                     <ul class="sidebar-nav">
                         <li class="sidebar-item">
-                            <a href="dashboard" class="sidebar-link">
+                            <a href="{{ route('dashboard') }}" class="sidebar-link">
                                 <i class="lni lni-home-2"></i>
                                 <span>Dashboard</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a href="panduan" class="sidebar-link">
+                            <a href="{{ route('panduan.index') }}" class="sidebar-link">
                                 <i class="lni lni-file-multiple"></i>
                                 <span>Panduan</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a href="Surveyor" class="sidebar-link">
+                            <a href="{{ route('Surveyor.index') }}" class="sidebar-link">
                                 <i class="lni lni-user-multiple-4"></i>
                                 <span>Manajemen Tim</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a href="#" class="sidebar-link">
+                            <a href="{{ route('Lokasi.lokasi') }}" class="sidebar-link">
                                 <i class="lni lni-map-marker-1"></i>
                                 <span>Lokasi</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a href="#" class="sidebar-link">
+                            <a href="{{ route('zona.index') }}" class="sidebar-link">
                                 <i class="lni lni-map-marker-5"></i>
                                 <span>Zona</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a href="dataPlot" class="sidebar-link">
+                            <a href="{{ route('Hamparan.index') }}" class="sidebar-link">
+                                <i class="lni lni-map-marker-5"></i>
+                                <span>Hamparan</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="{{ route('dataPlot.index') }}" class="sidebar-link">
                                 <i class="lni lni-notebook-1"></i>
                                 <span>Data Plot</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a href="Verifikasi" class="sidebar-link">
+                            <a href="{{ route('Verifikasi.index') }}" class="sidebar-link">
                                 <i class="lni lni-shield-2-check"></i>
                                 <span>Verifikasi</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a href="Sampah" class="sidebar-link">
+                            <a href="{{ route('Sampah.index') }}" class="sidebar-link">
                                 <i class="lni lni-trash-3"></i>
                                 <span>Sampah</span>
                             </a>

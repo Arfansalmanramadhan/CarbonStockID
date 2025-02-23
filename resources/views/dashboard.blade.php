@@ -943,6 +943,29 @@
             },
             labels: ['  Karbon A', 'Serapan Karbon B'],
             colors: ['#198754', '#DC3545'], // Warna khusus
+            dataLabels: {
+                enabled: true,
+                formatter: function(val, opts) {
+                    let total = opts.w.config.series.reduce((a, b) => a + b, 0); // Hitung total semua data
+                    let percentage = ((opts.w.config.series[opts.seriesIndex] / total) * 100).toFixed(
+                        1); // Hitung persentase
+                    return `${opts.w.config.series[opts.seriesIndex]} Ton (${percentage}%)`; // Tampilkan data + persentase
+                }
+            },
+            tooltip: {
+                // y: {
+                //     formatter: function(val) {
+                // let total = pieOptions.series.reduce((a, b) => a + b, 0);
+                // let percentage = ((val / total) * 100).toFixed(1);
+                // return `${val} Ton (${percentage}%)`; // Tooltip juga menampilkan data + persentase
+                //     }
+                // }
+                y: {
+                    formatter: function(val) {
+                        return val + " data";
+                    }
+                }
+            },
             responsive: [{
                 breakpoint: 480,
                 options: {

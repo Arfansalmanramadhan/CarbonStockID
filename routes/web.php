@@ -25,6 +25,7 @@ use App\Http\Controllers\TunmbuhanBawahController;
 use App\Http\Controllers\PanduanController;
 use App\Http\Controllers\Authentication\AuthController;
 use App\Http\Controllers\DataPlotController;
+use App\Http\Controllers\HamparanController;
 use App\Http\Controllers\ManajermenUserController;
 use App\Http\Controllers\RingkasanController;
 use App\Http\Controllers\SampahController;
@@ -69,16 +70,7 @@ Route::middleware('auth')->group(function () {
         return view('dashboard', compact('user',  'poltArea')); // Kirim $profil ke view
     })->name('dashboard');
 
-    Route::get('/profile', [ProfilController::class, 'index'])->name('profile.index');
-    // Route::post('/profile/{id}', [ProfilController::class, 'store'])->name('profile.store');
-    Route::get('/profile/{slug}', [ProfilController::class, 'show'])->name('profile.show');
-    Route::put('/profile/{slug}', [ProfilController::class, 'update'])->name('profile.update');
 
-
-    Route::get('/panduan', [PanduanController::class, 'index']);
-    Route::get('/dataPlot', [DataPlotController::class, 'index']);
-    Route::get('/Verifikasi', [ManajermenUserController::class, 'index']);
-    Route::get('/Sampah', [SampahController::class, 'index']);
     // Route untuk halaman tambah data
     Route::get('/tambahData', function () {
         $user = Auth::user();
@@ -111,12 +103,14 @@ Route::middleware('auth')->group(function () {
         // dd($user, $profil, $poltArea);
         return view('percobaan', compact('user', 'poltArea', 'serasah', 'semai', 'pancang', 'tiang', 'nekromas', 'pohon', 'tanah'));
     });
-    Route::get('/zona', [zonaController::class, 'index'])->name('zona.index');
     Route::get('/PlotArea', [PoltAreaController::class, 'index'])->name('PlotArea.index');
     Route::post('/plotarea/store', [PoltAreaController::class, 'store'])->name('plotarea.store');
 
     // Route::post('/Serasah/store', [SerasahController::class, 'store'])->name('Serasah.store');
 
+    Route::controller(zonaController::class)->group(function () {
+        Route::get("/zona", "index")->name('zona.index');
+    });;
     Route::controller(SerasahController::class)->group(function () {
         Route::post("/PlotA/store", "store")->name('Serasah.store');
         Route::get("/PlotA", "index")->name('PlotA.index');
@@ -168,12 +162,34 @@ Route::middleware('auth')->group(function () {
         Route::post("/Pohon/update/{id}", "update");
         Route::delete("/Pohon/{id}", "destroy");
     });
-    Route::controller(RingkasanController::class)->group(function (){
-        Route::get("/hitung",'index' )->name('hitung.index');
-        Route::get("/ringkasan",'indexx' )->name('ringkasan.indexx');
+    Route::controller(RingkasanController::class)->group(function () {
+        Route::get("/hitung", 'index')->name('hitung.index');
+        Route::get("/ringkasan", 'indexx')->name('ringkasan.indexx');
     });
-    Route::controller(SUrveyorController::class)->group(function(){
+    Route::controller(SUrveyorController::class)->group(function () {
         Route::get('/Surveyor', 'index')->name('Surveyor.index');
         Route::get('/Surveyor/Tambah-Surveyor', 'indexx')->name('Tambah-Surveyor.indexx');
+    });
+    Route::get('/profile', [ProfilController::class, 'index'])->name('profile.index');
+    // Route::post('/profile/{id}', [ProfilController::class, 'store'])->name('profile.store');
+    Route::get('/profile/{slug}', [ProfilController::class, 'show'])->name('profile.show');
+    Route::put('/profile/{slug}', [ProfilController::class, 'update'])->name('profile.update');
+
+
+    Route::controller(PanduanController::class)->group(function () {
+        Route::get('/panduan', 'index')->name('panduan.index');
+    });
+    Route::controller(DataPlotController::class)->group(function () {
+        Route::get('/dataPlot', 'index')->name('dataPlot.index');
+        Route::get('/Lokasi', 'lokasi')->name('Lokasi.lokasi');
+    });
+    Route::controller(ManajermenUserController::class)->group(function () {
+        Route::get('/Verifikasi', 'index')->name('Verifikasi.index');
+    });
+    Route::controller(SampahController::class)->group(function () {
+        Route::get('/Sampah', 'index')->name('Sampah.index');
+    });
+    Route::controller(HamparanController::class)->group(function () {
+        Route::get('/Hamparan', 'index')->name('Hamparan.index');
     });
 });

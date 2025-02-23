@@ -11,4 +11,8 @@ class DataPlotController extends Controller
         $user = Auth::user();
         return view("dataPlot",compact('user'));
     }
+    public function Lokasi(){
+        $user = Auth::user();
+        return view("Lokasi",compact('user'));
+    }
 }

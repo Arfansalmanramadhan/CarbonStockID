@@ -7,7 +7,7 @@
         <div class="image-container mt-4">
             <img src="{{ asset('/images/dataPlot-Image.svg') }}" alt="" class="mb-4 img-normal" />
             <div class="text-overlay">
-                <p class="small-text">Data Plot</p>
+                {{-- <p class="small-text">Data Plot</p> --}}
                 <p class="large-text">Data Plot Area</p>
             </div>
         </div>
