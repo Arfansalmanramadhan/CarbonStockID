@@ -120,7 +120,32 @@
             </div>
         </div>
         <div class="custom-table-pancang">
-            <div id="chart"></div>
+            <div class="row">
+                <div class="col p-2 col-lg-6">
+                    <div class="row">
+                        <div class="col">
+                            <h3>Data Carbon Stock dari tiap AREA</h3>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div id="bar"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col p-2 col-lg-6">
+                    <div class="row">
+                        <div class="col">
+                            <h3>Total Pendataan</h3>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div id="pie"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
         </div>
         <div class="table-container">
@@ -857,7 +882,7 @@
 
     <script src="{{ asset('apexchart/dist/apexcharts.js') }}"></script>
     <script>
-        const options = {
+        const baroptions = {
             series: [{
                     name: 'Karbon',
                     data: [76, 85, 101, 98, 87, 105, 91, 114, 94]
@@ -907,8 +932,33 @@
             }
         };
 
-        const chart = new ApexCharts(document.querySelector("#chart"), options);
-        chart.render();
+        const bar = new ApexCharts(document.querySelector("#bar"), baroptions);
+        bar.render();
+
+        const pieoptions = {
+            series: [44, 55],
+            chart: {
+                width: '50%',
+                type: 'pie',
+            },
+            labels: ['  Karbon A', 'Serapan Karbon B'],
+            colors: ['#198754', '#DC3545'], // Warna khusus
+            responsive: [{
+                breakpoint: 480,
+                options: {
+                    chart: {
+                        width: 300
+                    },
+                    legend: {
+                        position: 'bottom'
+                    }
+                }
+            }]
+        };
+
+        const pie = new ApexCharts(document.querySelector("#pie"), pieoptions);
+        pie.render();
+
         document.addEventListener("DOMContentLoaded", function() {
             // Ambil elemen tombol
             const pertama = document.getElementById("pertama");
