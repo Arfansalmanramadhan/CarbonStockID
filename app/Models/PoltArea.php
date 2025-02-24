@@ -22,7 +22,8 @@ class PoltArea extends Model
         'latitude',
         'longitude',
         'periode_pengamatan',
-        "status"
+        "status",
+        'periode_id'
     ];
     // Jika ada atribut yang ingin di-guard (tidak bisa diisi langsung)
     protected $guarded = [];
@@ -79,6 +80,10 @@ class PoltArea extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
+    public function periode(): BelongsTo
+    {
+        return $this->belongsTo(Periode::class, 'periode_id');
+    }
     public function zona(): BelongsTo
     {
         return $this->belongsTo(Zona::class, 'polt-area_id');

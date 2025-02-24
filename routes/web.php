@@ -27,6 +27,7 @@ use App\Http\Controllers\Authentication\AuthController;
 use App\Http\Controllers\DataPlotController;
 use App\Http\Controllers\HamparanController;
 use App\Http\Controllers\ManajermenUserController;
+use App\Http\Controllers\PeriodeController;
 use App\Http\Controllers\RingkasanController;
 use App\Http\Controllers\SampahController;
 use App\Http\Controllers\SUrveyorController;
@@ -166,8 +167,10 @@ Route::middleware('auth')->group(function () {
         Route::get("/hitung", 'index')->name('hitung.index');
         Route::get("/ringkasan", 'indexx')->name('ringkasan.indexx');
     });
+    Route::controller(PeriodeController::class)->group(function () {
+        Route::get('/Manajemen-Tim', 'index')->name('Manajemen-Tim.index');
+    });
     Route::controller(SUrveyorController::class)->group(function () {
-        Route::get('/Surveyor', 'index')->name('Surveyor.index');
         Route::get('/Surveyor/Tambah-Surveyor', 'indexx')->name('Tambah-Surveyor.indexx');
     });
     Route::get('/profile', [ProfilController::class, 'index'])->name('profile.index');

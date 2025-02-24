@@ -21,6 +21,8 @@ return new class extends Migration
             $table->string("status")->default("tidakaktif");
             $table->timestamps();
             $table->softDeletes();
+            $table->unsignedBigInteger("periode_id");
+            $table->foreign("periode_id")->references("id")->on("periode")->onDelete('cascade');
         });
     }
 
