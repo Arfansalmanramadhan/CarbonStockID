@@ -169,6 +169,7 @@ Route::middleware('auth')->group(function () {
     });
     Route::controller(PeriodeController::class)->group(function () {
         Route::get('/Manajemen-Tim', 'index')->name('Manajemen-Tim.index');
+        Route::post('/Manajemen-Tim', 'store')->name('Manajemen-Tim.store');
     });
     Route::controller(SUrveyorController::class)->group(function () {
         Route::get('/Surveyor/Tambah-Surveyor', 'indexx')->name('Tambah-Surveyor.indexx');

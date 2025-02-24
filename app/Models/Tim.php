@@ -27,4 +27,8 @@ class Tim extends Model
     {
         return $this->belongsTo(PlotAreaTim::class, 'tim_id');
     }
+    public function periode()
+    {
+        return $this->hasMany(Periode::class, 'anggota_tim_id', 'id');
+    }
 }

@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger("anggota_tim_id");
             $table->foreign("anggota_tim_id")->references("id")->on("anggota_tim")->onDelete('cascade')->onUpdate('cascade');
-            $table->string("nama_periode",255);
+            $table->string("nama_periode",255)->nullable();
             $table->date("tanggal_mulai");
             $table->date("tanggal_berakhir");
             $table->timestamps();
