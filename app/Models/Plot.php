@@ -11,21 +11,21 @@ class Plot extends Model
     use HasFactory, SoftDeletes;
     protected $table = 'hamparan';
     protected $fillable = [
-        'hamparan_id',
+        'zona_id',
         'nama_plot',
         'type_plot',
         'latitude',
         'longitude',
     ];
-    protected $guarded = []; 
+    protected $guarded = [];
     /**
      * Get the profil that owns the Profil
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function hamparan(): BelongsTo
+    public function zona(): BelongsTo
     {
-        return $this->belongsTo(Hamparan::class, 'hamparan_id');
+        return $this->belongsTo(Zona::class, 'zona_id');
     }
     public function subplot(): BelongsTo
     {

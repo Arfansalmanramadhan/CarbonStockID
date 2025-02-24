@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('plot', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger("hamparan_id");
-            $table->foreign("hamparan_id")->references("id")->on("hamparan")->onDelete('cascade');
+            $table->unsignedBigInteger("zona_id");
+            $table->foreign("zona_id")->references("id")->on("zona")->onDelete('cascade');
             $table->string('nama_plot', 255)->nullable();
             $table->string('type_plot', 255);
             $table->decimal('latitude', 10, 8);
