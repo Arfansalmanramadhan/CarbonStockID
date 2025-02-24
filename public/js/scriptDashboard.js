@@ -11,9 +11,35 @@ const navItems = document.querySelectorAll(".nav-item");
 const showEntriesSelect = document.getElementById("show-entries");
 
 const hamburger = document.querySelector("#toogle-btn");
+const sidebarCondition = document.querySelector("#sidebar");
 
-hamburger.addEventListener("click",function(){
-    document.querySelector("#sidebar").classList.toggle("expand")
+// Tambahkan class 'no-transition' saat pertama kali dimuat
+document.addEventListener("DOMContentLoaded", function () {
+    sidebarCondition.classList.add("no-transition"); // Nonaktifkan transisi saat halaman dimuat
+
+    // Cek status sidebar dari localStorage
+    if (localStorage.getItem("sidebarExpanded") === "true") {
+        sidebarCondition.classList.add("expand");
+    } else {
+        sidebarCondition.classList.remove("expand");
+    }
+
+    // Hapus class 'no-transition' setelah halaman selesai dimuat
+    setTimeout(() => {
+        sidebarCondition.classList.remove("no-transition");
+    }, 100);
+});
+
+// Toggle sidebar dan simpan status
+hamburger.addEventListener("click", function () {
+    sidebarCondition.classList.toggle("expand");
+
+    // Simpan status ke localStorage
+    if (sidebarCondition.classList.contains("expand")) {
+        localStorage.setItem("sidebarExpanded", "true");
+    } else {
+        localStorage.setItem("sidebarExpanded", "false");
+    }
 });
 
 // // MODAL

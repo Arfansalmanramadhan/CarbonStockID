@@ -66,6 +66,10 @@ html, body {
   height: 62px; */
 }
 
+.form-control-space {
+    margin-right: 10px;
+  }
+
 .form-control {
   /* width: 389px; */
   height: 62px;
@@ -974,6 +978,7 @@ html, body {
   justify-content: flex-end;
   align-items: center;
   gap: 10px;
+  margin-right: 10px;
 }
 
 .tampilkan label {
@@ -1415,6 +1420,10 @@ html, body {
     background-color: #ffffff;
 }
 
+.no-transition {
+    transition: none !important;
+}
+
 .nav-item {
     padding: 7px 0;
     color: var(--Text-Tint-20, #6c7581);
@@ -1452,7 +1461,7 @@ html, body {
     background-color: transparent;
     cursor: pointer;
     border: 0;
-    padding: 1rem 1.5rem;
+    padding: 1.5rem 1.3rem;
 }
 
 #toogle-btn i {
@@ -1468,6 +1477,7 @@ html, body {
     color: #000000;
     font-size: 1.15rem;
     font-weight: 600;
+    text-decoration: none;
 }
 
 #sidebar:not(.expand) .sidebar-logo,
@@ -1480,23 +1490,36 @@ html, body {
     flex: 1 1 auto;
 }
 
+/* Link default */
 a.sidebar-link {
-    padding: 1rem 1.625rem;
-    color: #000000;
-    display: block; /* Align icon and text horizontally */
+    display: flex;
+    align-items: center;
+    padding: 1rem 1.3rem;
+    color: #000000; /* Warna hitam secara default */
     font-size: 1rem;
     white-space: nowrap;
     border-left: 1px solid transparent;
+    text-decoration: none;
+    transition: all 0.3s ease;
 }
 
+/* Ketika link dalam keadaan aktif */
+a.sidebar-link.active {
+    background-color: var(--pr-color1); /* Warna latar belakang saat aktif */
+    color: #ffffff; /* Warna teks putih saat aktif */
+    /* border-radius: 8px; */
+}
+
+/* Ikon dalam link */
 .sidebar-link i {
     font-size: 1.6rem;
-    margin-right: .75rem;
+    margin-right: 1rem;
 }
 
 a.sidebar-link:hover {
     background-color: #e4e4e4;
     border-left: 3px solid rgb(2, 121, 0);
+    text-decoration: none;
 }
 
 .sidebar-item {

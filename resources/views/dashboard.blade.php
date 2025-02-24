@@ -5,7 +5,7 @@
     <style>
 
     </style>
-    <div id="beranda-content" class="page-content">
+    <div id="beranda-content" class="page-content content p-4">
         <h4 class="judul-beranda">Data Plot Area</h4>
         {{-- <table class="custom-table-hasil"> --}}
         <table class="custom-table-hasil ">

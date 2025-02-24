@@ -24,7 +24,7 @@
                             <span>data</span>
                         </div>
                         <div class="d-flex align-items-center">
-                            <div>
+                            <div class="form-control-space">
                                 <input type="text" id="search-box" placeholder="Cari..." class="form-control"
                                     onkeyup="searchTable()">
                             </div>

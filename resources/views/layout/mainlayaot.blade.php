@@ -46,7 +46,7 @@
                         aria-expanded="false">
                         <img src="{{ asset('/images/burgerIcon.png') }}" alt="Burger Menu" class="burger-icon" />
                     </button> --}}
-                    <a class="navbar-brand d-flex align-items-center ms-3" href="#">
+                    <a class="navbar-brand d-flex align-items-center ms-3" href="{{ route('dashboard') }}">
                         <img src="{{ asset('/images/logoCarbonStockID-DarkMode.png') }}" alt="Logo" width="30"
                             class="d-inline-block align-middle me-2" />
                         <span>CarbonStockID</span>
@@ -103,7 +103,7 @@
                             <i class="lni lni-dashboard-square-1"></i>
                         </button>
                         <div class="sidebar-logo">
-                            <a href="#">CarbonStockID</a>
+                            <a href="#">Menu</a>
                         </div>
                     </div>
                     <ul class="sidebar-nav">
