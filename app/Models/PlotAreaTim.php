@@ -5,13 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\SoftDeletes;
 class PlotAreaTim extends Model
 {
+    use HasFactory, SoftDeletes;
     protected $table = 'polt_area_tim';
     protected $fillable = [
         'tim_id',
         'polt-area_id',
     ];
+    protected $guarded = [];
     /**
      * Get the profil that owns the Profil
      *

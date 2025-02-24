@@ -120,7 +120,7 @@
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a href="{{ route('Surveyor.index') }}" class="sidebar-link">
+                            <a href="{{ route('Manajemen-Tim.index') }}" class="sidebar-link">
                                 <i class="lni lni-user-multiple-4"></i>
                                 <span>Manajemen Tim</span>
                             </a>

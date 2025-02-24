@@ -5,10 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Hamparan extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
     protected $table = 'hamparan';
     protected $fillable = [
         'zona_id',
@@ -16,6 +17,7 @@ class Hamparan extends Model
         'latitude',
         'longitude',
     ];
+    protected $guarded = [];
     /**
      * Get the profil that owns the Profil
      *

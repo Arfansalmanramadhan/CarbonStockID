@@ -43,9 +43,9 @@
                     <div class="col-6 col-md-4 align-self-center">
                         <button type="submit" class="  text-center btn btn-success p-3">Simpan</button>
                     </div>
-                    {{-- <div class="col-6 col-md-4">
-                        <button type="submit" class="  text-center btn btn-success p-3">Detail</button>
-                    </div> --}}
+                    <div class="col-6 col-md-4">
+                        <button    type="submit" class="  text-center btn btn-success p-3">Tambah Tim </button>
+                    </div>
                     {{-- <div class="col-6 col-md-4 align-self-center">
                         <a href="{{ route('Tambah-Surveyor.indexx') }}"class="  text-center btn btn-success p-3">Tambah
                             Surveyor</a>
