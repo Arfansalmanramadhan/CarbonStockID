@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\TambahZonaController;
 use App\Models\Pohon;
 use App\Models\Semai;
 use App\Models\Tanah;
@@ -105,13 +106,16 @@ Route::middleware('auth')->group(function () {
         return view('percobaan', compact('user', 'poltArea', 'serasah', 'semai', 'pancang', 'tiang', 'nekromas', 'pohon', 'tanah'));
     });
     Route::get('/PlotArea', [PoltAreaController::class, 'index'])->name('PlotArea.index');
+    Route::get('/TambahPlot', [PoltAreaController::class, 'tambah'])->name('TambahPlot.tambah');
     Route::post('/plotarea/store', [PoltAreaController::class, 'store'])->name('plotarea.store');
 
     // Route::post('/Serasah/store', [SerasahController::class, 'store'])->name('Serasah.store');
 
     Route::controller(zonaController::class)->group(function () {
         Route::get("/zona", "index")->name('zona.index');
+        Route::get("/TambahZona", "tambah")->name('TambahZona.tambah');
     });;
+
     Route::controller(SerasahController::class)->group(function () {
         Route::post("/PlotA/store", "store")->name('Serasah.store');
         Route::get("/PlotA", "index")->name('PlotA.index');

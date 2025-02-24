@@ -19,6 +19,14 @@ class zonaController extends Controller
         return view('zona', compact('user'));
     }
 
+    public function tambah()
+    {
+        $user = Auth::user();
+        $poltArea = PoltArea::where('id', $user->id)->first();
+        // $zona = Zona::where('polt-area_id', $user->id );
+        return view('tambah.TambahZona', compact('user', 'poltArea'));
+    }
+
     /**
      * Show the form for creating a new resource.
      */

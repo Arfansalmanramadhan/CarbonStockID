@@ -938,7 +938,7 @@
         const pieoptions = {
             series: [44, 55],
             chart: {
-                width: '50%',
+                width: '100%',
                 type: 'pie',
             },
             labels: ['  Karbon A', 'Serapan Karbon B'],
