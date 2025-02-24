@@ -31,6 +31,14 @@ class PoltAreaController extends Controller
         return view('tambah.PlotArea', compact('user', 'poltArea'));
     }
 
+    public function tambah()
+    {
+        $user = Auth::user();
+        $poltArea = PoltArea::where('id', $user->id)->first();
+        // $zona = Zona::where('polt-area_id', $user->id );
+        return view('tambah.TambahPlot', compact('user', 'poltArea'));
+    }
+
     /**
      * Show the form for creating a new resource.
      */
