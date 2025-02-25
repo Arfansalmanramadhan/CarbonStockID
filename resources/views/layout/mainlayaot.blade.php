@@ -150,10 +150,19 @@
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a href="{{ route('Verifikasi.index') }}" class="sidebar-link">
+                            <a href="#" class="sidebar-link has-dropdown collapsed" data-bs-toggle="collapse"
+                            data-bs-target="#auth" aria-expanded="false" aria-controls="auth">
                                 <i class="lni lni-shield-2-check"></i>
-                                <span>Verifikasi</span>
+                                <span>Surveyor</span>
                             </a>
+                            <ul id="auth" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+                                <li class="sidebar-item">
+                                    <a href="#" class="sidebar-link">Verikasi Surveyor</a>
+                                </li>
+                                <li class="sidebar-item">
+                                    <a href="#" class="sidebar-link">List Surveyor</a>
+                                </li>
+                            </ul>
                         </li>
                         <li class="sidebar-item">
                             <a href="{{ route('Sampah.index') }}" class="sidebar-link">
