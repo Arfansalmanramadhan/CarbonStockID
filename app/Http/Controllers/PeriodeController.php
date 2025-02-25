@@ -74,7 +74,7 @@ class PeriodeController extends Controller
                 'tanggal_berakhir' => $validatedData['tanggal_berakhir']
             ]);
             DB::commit();
-            return redirect()->back()->with('success', 'Plot area berhasil ditambahkan!');
+            return redirect()->back()->with('success', 'Periode berhasil ditambahkan!');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Gagal membuat data: ' . $e->getMessage());
         }

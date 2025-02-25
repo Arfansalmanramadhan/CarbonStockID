@@ -19,10 +19,10 @@ class Tim extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function anggotaTim(): BelongsTo
-    {
-        return $this->belongsTo(AnggotaTim::class, 'tim_id');
-    }
+    // public function anggotaTim(): BelongsTo
+    // {
+    //     return $this->belongsTo(AnggotaTim::class, 'tim_id');
+    // }
     public function PlotAreaTim(): BelongsTo
     {
         return $this->belongsTo(PlotAreaTim::class, 'tim_id');
@@ -31,4 +31,9 @@ class Tim extends Model
     {
         return $this->hasMany(Periode::class, 'anggota_tim_id', 'id');
     }
+    public function anggotaTim()
+    {
+        return $this->hasMany(Periode::class, 'tim_id');
+    }
+
 }

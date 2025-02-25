@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+
 class AnggotaTim extends Model
 {
     use HasFactory, SoftDeletes;
@@ -28,8 +30,8 @@ class AnggotaTim extends Model
     {
         return $this->belongsTo(Tim::class, 'tim_id');
     }
-    public function periode(): BelongsTo
+    public function periode(): HasMany
     {
-        return $this->belongsTo(Periode::class, 'anggota_tim_id');
+        return $this->hasMany(Periode::class, 'anggota_tim_id');
     }
 }

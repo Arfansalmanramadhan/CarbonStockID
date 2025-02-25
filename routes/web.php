@@ -105,9 +105,9 @@ Route::middleware('auth')->group(function () {
         // dd($user, $profil, $poltArea);
         return view('percobaan', compact('user', 'poltArea', 'serasah', 'semai', 'pancang', 'tiang', 'nekromas', 'pohon', 'tanah'));
     });
-    Route::get('/PlotArea', [PoltAreaController::class, 'index'])->name('PlotArea.index');
+    Route::get('/Lokasi/tambah', [PoltAreaController::class, 'index'])->name('Lokasi.index');
     Route::get('/TambahPlot', [PoltAreaController::class, 'tambah'])->name('TambahPlot.tambah');
-    Route::post('/plotarea/store', [PoltAreaController::class, 'store'])->name('plotarea.store');
+    Route::post('/Lokasi/tambah', [PoltAreaController::class, 'store'])->name('plotarea.store');
 
     // Route::post('/Serasah/store', [SerasahController::class, 'store'])->name('Serasah.store');
 

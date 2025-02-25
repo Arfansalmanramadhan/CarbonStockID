@@ -7,7 +7,9 @@ use App\Models\PoltArea;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Resources\PoltAreaResorce;
+use App\Models\Periode;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Symfony\Component\HttpKernel\Profiler\Profile;
 
 class PoltAreaController extends Controller
@@ -31,13 +33,7 @@ class PoltAreaController extends Controller
         return view('tambah.PlotArea', compact('user', 'poltArea'));
     }
 
-    public function tambah()
-    {
-        $user = Auth::user();
-        $poltArea = PoltArea::where('id', $user->id)->first();
-        // $zona = Zona::where('polt-area_id', $user->id );
-        return view('tambah.TambahPlot', compact('user', 'poltArea'));
-    }
+    public function tambah() {}
 
     /**
      * Show the form for creating a new resource.
@@ -53,33 +49,36 @@ class PoltAreaController extends Controller
     public function store(Request $request)
     {
         // Ambil profil berdasarkan ID yang dikirimkan dalam request
-        $profileId = $request->input('profil_id'); // Pastikan profil_id dikirim dari frontend
-        $profile = Profil::find($profileId);
+        $periodeid = $request->input('periode_id'); // Pastikan profil_id dikirim dari frontend
+        $profile = Periode::find($periodeid);
 
         // $profile = $user->profil;
-        if (!$profileId) {
-            // Untuk debugging, periksa user dan profil
-            return response()->json([
-                'message' => 'Profil tidak terkirim',
-                // 'profil' => $profile,
-                'profil' => $profileId
-            ], 404);
-        }
+        // if (!$profileId) {
+        //     // Untuk debugging, periksa user dan profil
+        //     return response()->json([
+        //         'message' => 'Profil tidak terkirim',
+        //         // 'profil' => $profile,
+        //         'profil' => $profileId
+        //     ], 404);
+        // }
 
         // Validasi request
         $validatedData = $request->validate([
             'daerah' => 'required|string|max:255',
             'latitude' => 'required|numeric',
             'longitude' => 'required|numeric',
+            'periode_pengamatan' => 'required|date',
+            'periode_id' => 'required|exists:periode,id',
         ]);
 
         try {
             // Membuat instance PoltArea baru
             $poltArea = PoltArea::create([
-                "profil_id" => $profile->id,
                 "daerah" => $validatedData['daerah'],
                 "latitude" => $validatedData['latitude'],
-                "longitude" => $validatedData['longitude']
+                "longitude" => $validatedData['longitude'],
+                "periode_pengamatan" => $validatedData['periode_pengamatan'],
+                "periode_id" => $profile->id,
             ]);
 
             // Response berhasil
@@ -87,13 +86,10 @@ class PoltAreaController extends Controller
             //     'message' => 'PoltArea berhasil di buat',
             //     'data' => $poltArea
             // ], 201);
-            return redirect()->back()->with('success', 'Plot area berhasil ditambahkan!');
+            DB::commit();
+            return redirect()->back()->with('success', 'Lokasi berhasil ditambahkan!');
         } catch (\Exception $e) {
-            // Response error
-            return response()->json([
-                'message' => 'Gagal membuat PoltArea',
-                'error' => $e->getMessage()
-            ], 500);
+            return redirect()->back()->with('error', 'Gagal membuat data: ' . $e->getMessage());
         }
     }
 
