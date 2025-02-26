@@ -32,10 +32,9 @@ class Zona extends Model
     {
         return $this->belongsTo(PoltArea::class, 'polt-area_id');
     }
-    public function PLO(): BelongsTo
+    public function hamparan(): BelongsTo
     {
-        return $this->belongsTo(Plot::class, 'zona_id');
+        return $this->belongsTo(Hamparan::class, 'zona_id');
     }
-
 
 }

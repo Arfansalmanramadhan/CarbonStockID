@@ -13,7 +13,7 @@ class Hamparan extends Model
     protected $table = 'hamparan';
     protected $fillable = [
         'zona_id',
-        'nama',
+        'nama_hamparan',
         'latitude',
         'longitude',
     ];

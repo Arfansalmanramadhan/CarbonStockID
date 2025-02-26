@@ -11,12 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('plot', function (Blueprint $table) {
+        Schema::create('hamparan', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger("hamparan_id");
-            $table->foreign("hamparan_id")->references("id")->on("hamparan")->onDelete('cascade');
-            $table->string('nama_plot', 255)->nullable();
-            $table->string('type_plot', 255);
+            $table->unsignedBigInteger("zona_id");
+            $table->foreign("zona_id")->references("id")->on("zona")->onDelete('cascade');
+            $table->string('nama_hamparan', 255)->nullable();
             $table->decimal('latitude', 10, 8);
             $table->decimal('longitude', 11, 8);
             $table->timestamps();
@@ -29,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('plot');
+        Schema::dropIfExists('hamparan');
     }
 };

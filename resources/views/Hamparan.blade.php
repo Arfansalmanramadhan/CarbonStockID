@@ -39,7 +39,7 @@
                                 <th>Nama Hamparan</th>
                                 <th>Nama Zona</th>
                                 <th>Koordinat</th>
-                                <th>Daerah</th>>
+                                <th>Daerah</th> 
                                 <th class="hidden-column kananPancang">Aksi</th>
                             </tr>
                         </thead>

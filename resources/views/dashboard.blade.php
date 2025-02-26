@@ -194,7 +194,7 @@
                                 <td>1011. kg</td>
                                 <td>333</td>
                                 <td class="hidden-column">1234</td>
-                                <td class="hidden-column">2345kg</td>>
+                                <td class="hidden-column">2345kg</td>
                                 <td class="hidden-column aksi-button">
                                     <button class="edit-btn">
                                         <img src="{{ asset('/images/PencilSquare.svg') }}" alt="" />
