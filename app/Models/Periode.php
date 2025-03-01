@@ -30,4 +30,5 @@ class Periode extends Model
     {
         return $this->belongsTo(AnggotaTim::class, 'anggota_tim_id');
     }
+    
 }

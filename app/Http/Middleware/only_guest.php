@@ -16,17 +16,9 @@ class only_guest
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $user = Auth::user();
-
-        // Pastikan user tidak login
-        if ($user) {
-            // Pastikan ID user adalah string (UUID)
-            if (!is_string($user->id)) {
-                abort(400, 'Invalid user ID format');
-            }
-            return redirect('dashboard');
+        if (Auth::user()) {
+            return redirect("dashboard");
         }
-
         return $next($request);
     }
 }

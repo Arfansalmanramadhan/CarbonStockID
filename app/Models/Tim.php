@@ -29,11 +29,11 @@ class Tim extends Model
     }
     public function periode()
     {
-        return $this->hasMany(Periode::class, 'anggota_tim_id', 'id');
+        return $this->hasMany(Periode::class, 'anggota_tim_id', );
     }
     public function anggotaTim()
     {
-        return $this->hasMany(Periode::class, 'tim_id');
+        return $this->hasMany(AnggotaTim::class, 'tim_id');
     }
 
 }

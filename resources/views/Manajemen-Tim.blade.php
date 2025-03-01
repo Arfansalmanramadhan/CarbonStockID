@@ -20,22 +20,12 @@
             <form method="post" action="{{ route('Manajemen-Tim.store') }}">
                 <div class="row">
                     @csrf
-                    <input type="hidden" name="registrasi_id" value="{{ auth()->user()->id }}">
+                    {{-- <input type="hidden" name="registrasi_id" value="{{ auth()->user()->id }}"> --}}
                     <div class="col-12 col-md-4">
                         <label for="keliling" class="form-label">Nama Tim</label>
                         <input type="text" class="form-control" id="keliling" value="" name="nama" />
                     </div>
-                    {{-- <div class="col-12 col-md-4">
-                        <label for="keliling" class="form-label">Nama Surveyor</label>
-                        <select class="form-select form-control" aria-label="Default select example" name="zona">
-                            <option selected>Zona</option>
-                            <option value="Zona 1">Zona 1</option>
-                            <option value="Zona 2">Zona 2</option>
-                            <option value="Zona 3">Zona 3</option>
-                            <option value="Zona 4">Zona 4</option>
-                            <option value="Zona 5">Zona 5</option>
-                        </select>
-                    </div> --}}
+
                     <div class="col-12 col-md-4">
                         <label for="keliling" class="form-label">Tanggal Mulai</label>
                         <input type="date" class="form-control form-control-plot-b" id="keliling" value=""
@@ -79,30 +69,60 @@
                                 <th>Nama TIM</th>
                                 <th>Tanggal Mulai </th>
                                 <th>Tanggal berakhir </th>
+                                <th>Jumlah anggota </th>
                                 <th class="hidden-column kananPancang">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @forelse($tim as $index => $tim)
-                                @foreach ($tim->periode as $periode)
-                                    <tr>
-                                        <td>{{ $index + 1}}</td>
-                                        <td>{{ $tim->nama }}</td>
-                                        <td>{{ $periode->tanggal_mulai }}</td>
-                                        <td>{{ $periode->tanggal_berakhir }}</td>
-                                        <td class="hidden-column aksi-button">
-                                            <button class="view-btn">
-                                                <img src="{{ asset('/images/Eye.svg') }}" alt="" />
-                                            </button>
-                                            <button onclick="window.location.href='{{ route('Tambah-Surveyor.indexx') }}'"
-                                                class="add-btn">
-                                                <img src="{{ asset('/images/AddIcon.svg') }}" alt="" />
-                                            </button>
-                                            <button class="delete-btn">
-                                                <img src="{{ asset('/images/Trash.svg') }}" alt="" />
-                                            </button>
-                                        </td>
-                                    </tr>
+                            {{-- @forelse($tim as $index => $t)
+                                <tr>
+                                    <td>{{ $index + 1 }}</td>
+                                    <td>{{ $t->nama }}</td>
+                                    <td>{{ $t->periode->tanggal_mulai }}</td>
+                                    <td>{{ $t->periode->tanggal_berakhir}}</td>
+                                    <td>{{ $t->anggotaTim->count() }}</td>
+                                    <td class="hidden-column aksi-button">
+                                        <button class="view-btn">
+                                            <img src="{{ asset('/images/Eye.svg') }}" alt="" />
+                                        </button>
+                                        <button onclick="window.location.href='{{ route('Tambah-Surveyor.indexx') }}'"
+                                            class="add-btn">
+                                            <img src="{{ asset('/images/AddIcon.svg') }}" alt="" />
+                                        </button>
+                                        <button class="delete-btn">
+                                            <img src="{{ asset('/images/Trash.svg') }}" alt="" />
+                                        </button>
+                                    </td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="5" class="text-center">Belum ada data</td>
+                                </tr> --}}
+                            {{-- @endforelse --}}
+                            @forelse($tim as $index => $t)
+                                @foreach ($t->anggotaTim as $anggota)
+                                    @foreach ($anggota->periode as $periode)
+                                        <tr>
+                                            <td>{{ $index + 1 }}</td>
+                                            <td>{{ $t->nama }}</td>
+                                            <td>{{ $periode->tanggal_mulai }}</td>
+                                            <td>{{ $periode->tanggal_berakhir }}</td>
+                                            <td>{{ $t->anggotaTim->count() }}</td>
+                                            <td class="hidden-column aksi-button">
+                                                <button class="view-btn">
+                                                    <img src="{{ asset('/images/Eye.svg') }}" alt="" />
+                                                </button>
+                                                <button
+                                                    onclick="window.location.href='{{ route('Tambah-Surveyor.indexx') }}'"
+                                                    class="add-btn">
+                                                    <img src="{{ asset('/images/AddIcon.svg') }}" alt="" />
+                                                </button>
+                                                <button class="delete-btn">
+                                                    <img src="{{ asset('/images/Trash.svg') }}" alt="" />
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    @endforeach
                                 @endforeach
                             @empty
                                 <tr>

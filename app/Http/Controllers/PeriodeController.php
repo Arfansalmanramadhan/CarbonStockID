@@ -18,8 +18,9 @@ class PeriodeController extends Controller
     public function index()
     {
         $user = Auth::user();
-        // Ambil data Tim beserta relasi periode
-        $tim = Tim::with('periode')->get();
+        $tim =  Tim::with(['anggotaTim.periode'])
+        ->withCount('anggotaTim') // Menghitung jumlah anggota langsung dari database
+        ->get();
 
         return view("Manajemen-Tim", compact('user', 'tim'));
     }

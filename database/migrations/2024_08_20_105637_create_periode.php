@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('periode', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger("anggota_tim_id");
-            $table->foreign("anggota_tim_id")->references("id")->on("anggota_tim")->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign("anggota_tim_id")->references("id")->on("anggota_tim")->onDelete('cascade')->nullable()->change();
             $table->string("nama_periode",255)->nullable();
             $table->date("tanggal_mulai");
             $table->date("tanggal_berakhir");
