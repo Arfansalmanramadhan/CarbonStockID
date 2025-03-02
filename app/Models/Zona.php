@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Cviebrock\EloquentSluggable\Sluggable;
 use Symfony\Component\HttpFoundation\ServerBag;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -12,17 +13,27 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Zona extends Model
 {
     use HasFactory;
+    use Sluggable;
     use SoftDeletes;
     protected $table = 'zona';
     protected $fillable = [
         'polt-area_id',
         "zona",
+        "slug",
         "jenis_hutan",
         "foto_area",
     ];
     // Jika ada atribut yang ingin di-guard (tidak bisa diisi langsung)
     protected $guarded = [];
+    protected static function boot()
+    {
+        parent::boot();
 
+        // Generate slug setiap kali model diperbarui atau disimpan
+        static::saving(function ($model) {
+            $model->slug = Str::slug($model->zona);
+        });
+    }
     /**
      * Get the profil that owns the Profil
      *
@@ -36,5 +47,12 @@ class Zona extends Model
     {
         return $this->belongsTo(Hamparan::class, 'zona_id');
     }
-
+    public function sluggable(): array
+    {
+        return [
+            'slug' => [
+                'source' => 'zona'
+            ]
+        ];
+    }
 }

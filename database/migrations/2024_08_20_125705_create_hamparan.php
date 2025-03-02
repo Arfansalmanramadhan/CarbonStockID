@@ -16,6 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger("zona_id");
             $table->foreign("zona_id")->references("id")->on("zona")->onDelete('cascade');
             $table->string('nama_hamparan', 255)->nullable();
+            $table->string("slug", 255);
             $table->decimal('latitude', 10, 8);
             $table->decimal('longitude', 11, 8);
             $table->timestamps();

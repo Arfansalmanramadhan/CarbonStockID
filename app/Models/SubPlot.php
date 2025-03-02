@@ -2,21 +2,33 @@
 
 namespace App\Models;
 
+use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Str;
 class SubPlot extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory, SoftDeletes, Sluggable;
     protected $table = 'hamparan';
     protected $fillable = [
         'plot_id',
         'nama_suplort',
+        'slug',
         'latitude',
         'longitude',
     ];
     protected $guarded = [];
+    protected static function boot()
+    {
+        parent::boot();
+
+        // Generate slug setiap kali model diperbarui atau disimpan
+        static::saving(function ($model) {
+            $model->slug = Str::slug($model->nama_suplort);
+        });
+    }
     /**
      * Get the profil that owns the Profil
      *
@@ -61,5 +73,13 @@ class SubPlot extends Model
     public function mangrove(): BelongsTo
     {
         return $this->belongsTo(Mangrove::class, 'zona_id');
+    }
+    public function sluggable(): array
+    {
+        return [
+            'slug' => [
+                'source' => 'nama_suplort'
+            ]
+        ];
     }
 }
