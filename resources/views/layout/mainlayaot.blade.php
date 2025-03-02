@@ -53,12 +53,12 @@
                     </a>
                 </div>
                 <div class="d-flex align-items-center">
-                    <form class="d-flex me-2 position-relative" role="search">
+                    {{-- <form class="d-flex me-2 position-relative" role="search">
                         <input class="form-control search-input" type="search" placeholder="Cari..."
                             aria-label="Search" />
                         <img src="{{ asset('/images/iconSearch.png') }}" alt="Search Icon" class="search-icon" />
                     </form>
-                    <a href="{{ url('/PlotArea') }}" class="btn btn-light btn-tambahData">Tambah data</a>
+                    <a href="{{ url('/PlotArea') }}" class="btn btn-light btn-tambahData">Tambah data</a> --}}
                     <img src="{{ $user->image ? asset($user->image) : asset('/images/PersonFill.svg') }}"
                         alt="User Avatar" id="userIcon" class="ms-3 user-avatar" />
                     <div class="user-usere-dropdown parent-container " id="userProfileDropdown" style="display: none">
@@ -157,7 +157,7 @@
                             </a>
                             <ul id="auth" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
                                 <li class="sidebar-item">
-                                    <a href="#" class="sidebar-link">Verikasi Surveyor</a>
+                                    <a href="{{ route('Verifikasi.index') }}" class="sidebar-link">Verikasi Surveyor</a>
                                 </li>
                                 <li class="sidebar-item">
                                     <a href="#" class="sidebar-link">List Surveyor</a>

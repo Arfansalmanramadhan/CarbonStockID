@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string("slug", 255);
             $table->decimal('latitude', 10, 8);
             $table->decimal('longitude', 11, 8);
-            $table->date('periode_pengamatan');
+            $table->string('periode_pengamatan');
             $table->string("status")->default("tidakaktif");
             $table->timestamps();
             $table->softDeletes();

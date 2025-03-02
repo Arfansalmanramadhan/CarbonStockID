@@ -40,7 +40,8 @@ class PoltAreaController extends Controller
      */
     public function create()
     {
-        //
+        $periodes = Periode::all(); // Ambil semua periode dari database
+        return view('tambah.PlotArea', compact('periodes'));
     }
 
     /**
@@ -48,39 +49,31 @@ class PoltAreaController extends Controller
      */
     public function store(Request $request)
     {
-        // Ambil profil berdasarkan ID yang dikirimkan dalam request
-        $periodeid = $request->input('periode_id'); // Pastikan profil_id dikirim dari frontend
-        $profile = Periode::find($periodeid);
 
-        // $profile = $user->profil;
-        // if (!$profileId) {
-        //     // Untuk debugging, periksa user dan profil
-        //     return response()->json([
-        //         'message' => 'Profil tidak terkirim',
-        //         // 'profil' => $profile,
-        //         'profil' => $profileId
-        //     ], 404);
-        // }
-
+        // dd($request->all());
         // Validasi request
         $validatedData = $request->validate([
             'daerah' => 'required|string|max:255',
             'latitude' => 'required|numeric',
             'longitude' => 'required|numeric',
-            'periode_pengamatan' => 'required|date',
+            'periode_pengamatan' => 'required|string',
             'periode_id' => 'required|exists:periode,id',
         ]);
-
+        DB::beginTransaction();
         try {
-            // Membuat instance PoltArea baru
+            $periode = Periode::findOrFail($validatedData['periode_id']);
+
+            $periode_pengamatan = $periode->tanggal_mulai . ' s/d ' . $periode->tanggal_berakhir;
+
             $poltArea = PoltArea::create([
                 "daerah" => $validatedData['daerah'],
                 "latitude" => $validatedData['latitude'],
                 "longitude" => $validatedData['longitude'],
-                "periode_pengamatan" => $validatedData['periode_pengamatan'],
-                "periode_id" => $profile->id,
+                "periode_pengamatan" => $periode_pengamatan, // Gabungan tanggal mulai dan berakhir
+                "periode_id" => $periode->id,
+                "slug" => Str::slug($validatedData['daerah']),
             ]);
-
+            // dd($poltArea);
             // Response berhasil
             // return response()->json([
             //     'message' => 'PoltArea berhasil di buat',

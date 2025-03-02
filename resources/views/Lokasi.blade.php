@@ -29,7 +29,7 @@
                                     onkeyup="searchTable()">
                             </div>
                             <!-- Button to trigger modal -->
-                            {{-- <button onclick="window.location.href='{{ route('Lokasi.tambah') }}'" class="btn btn-tambah-data p-3">Tambah</button> --}}
+                            <button onclick="window.location.href='{{ route('Lokasi.index') }}'" class="btn btn-tambah-data p-3">Tambah</button>
                         </div>
                     </div>
                     <table class="custom-table-pancang">

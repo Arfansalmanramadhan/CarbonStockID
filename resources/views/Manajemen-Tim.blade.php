@@ -20,7 +20,7 @@
             <form method="post" action="{{ route('Manajemen-Tim.store') }}">
                 <div class="row">
                     @csrf
-                    {{-- <input type="hidden" name="registrasi_id" value="{{ auth()->user()->id }}"> --}}
+                    <input type="hidden" name="registrasi_id" value="{{ auth()->user()->id }}">
                     <div class="col-12 col-md-4">
                         <label for="keliling" class="form-label">Nama Tim</label>
                         <input type="text" class="form-control" id="keliling" value="" name="nama" />

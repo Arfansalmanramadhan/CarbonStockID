@@ -7,7 +7,7 @@
         <div class="container-isi">
             <div class="card plot-info-card">
                 <div class="card-header d-flex align-items-center">
-                    <h5 class="ms-3 mt-2">Informasi Plot Area</h5>
+                    <h5 class="ms-3 mt-2">Informasi Lokasi</h5>
                     @session('success')
                         {{-- <h5 class="ms-3 mt-2">sdsadsa</h5> --}}
                         <div class="toast position-fixed left-0 bottom-0 z-3 ms-4 p-2 mb-3" role="alert" aria-live="assertive"
@@ -30,23 +30,45 @@
 
                     <!-- Form -->
                     <dd></dd>
-                    <form method="POST" action="{{ route('plotarea.store') }}" id="plotAreaForm">
+                    <form method="POST" action="{{ route('Lokasi.store') }}" id="plotAreaForm">
                         @csrf
+
+                        <!-- Input Daerah -->
                         <div class="mb-4">
                             <label for="plotName" class="form-label">Daerah Plot Area</label>
                             <input type="text" class="form-control" name="daerah" id="plotName"
-                                placeholder="Masukkan nama daerah pengamatan" />
+                                placeholder="Masukkan nama daerah pengamatan" required />
                         </div>
+
+                        <!-- Input Latitude -->
                         <div class="mb-4">
                             <label for="latitude" class="form-label">Latitude</label>
-                            <input type="text" class="form-control-non" name="latitude" id="latitude" />
+                            <input type="text" class="form-control" name="latitude" id="latitude" required />
                         </div>
+
+                        <!-- Input Longitude -->
                         <div class="mb-4">
                             <label for="longitude" class="form-label">Longitude</label>
-                            <input type="text" class="form-control-non" name="longitude" id="longitude" />
+                            <input type="text" class="form-control" name="longitude" id="longitude" required />
                         </div>
-                        {{-- <input type="hidden" name="profil_id" value="{{ auth()->user()->user->id }}" /> --}}
-                        <!-- pastikan user sudah login -->
+
+                        <!-- Pilih Periode -->
+                        <div class="mb-4">
+                            <label for="periode_id">Pilih Periode:</label>
+                            <select name="periode_id" id="periode_id" class="form-control" required>
+                                <option value="">-- Pilih Periode --</option>
+                                @foreach ($periodes as $periode)
+                                    <option value="{{ $periode->id }}" data-mulai="{{ $periode->tanggal_mulai }}"
+                                        data-berakhir="{{ $periode->tanggal_berakhir }}">
+                                        {{ $periode->tanggal_mulai }} s/d {{ $periode->tanggal_berakhir }}
+                                    </option>
+                                @endforeach
+                            </select>
+                            <!-- Input hidden untuk menyimpan periode_pengamatan -->
+                            <input type="hidden" name="periode_pengamatan" id="periode_pengamatan">
+                        </div>
+
+                        <!-- Tombol Submit -->
                         <button type="submit" class="btn btn-success">Submit</button>
                     </form>
                 </div>
@@ -58,5 +80,18 @@
             </div>
         </div>
     </div>
+    <script>
+        document.getElementById('periode_id').addEventListener('change', function() {
+            let selectedOption = this.options[this.selectedIndex];
+            let mulai = selectedOption.getAttribute('data-mulai');
+            let berakhir = selectedOption.getAttribute('data-berakhir');
+
+            if (mulai && berakhir) {
+                document.getElementById('periode_pengamatan').value = mulai + " s/d " + berakhir;
+            } else {
+                document.getElementById('periode_pengamatan').value = "";
+            }
+        });
+    </script>
     <script src="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js"></script>
 @endsection

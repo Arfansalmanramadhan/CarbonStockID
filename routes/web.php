@@ -105,10 +105,16 @@ Route::middleware('auth')->group(function () {
         // dd($user, $profil, $poltArea);
         return view('percobaan', compact('user', 'poltArea', 'serasah', 'semai', 'pancang', 'tiang', 'nekromas', 'pohon', 'tanah'));
     });
-    Route::get('/Lokasi/tambah', [PoltAreaController::class, 'index'])->name('Lokasi.index');
-    Route::get('/TambahPlot', [PoltAreaController::class, 'tambah'])->name('TambahPlot.tambah');
-    Route::post('/Lokasi/tambah', [PoltAreaController::class, 'store'])->name('plotarea.store');
+    // Route::get('/Lokasi/tambah', [PoltAreaController::class, 'index'])->name('Lokasi.index');
+    // Route::get('/TambahPlot', [PoltAreaController::class, 'tambah'])->name('TambahPlot.tambah');
+    // Route::post('/Lokasi/tambah', [PoltAreaController::class, 'store'])->name('plotarea.store');
+    Route::controller(PoltAreaController::class)->group(function(){
+        Route::get("/Lokasi/tambah", "index")->name('Lokasi.index');
+        Route::post("/Lokasi/tambah", "store")->name('Lokasi.store');
+        Route::get("/Lokasi/tambah", "create")->name('Lokasi.index');
+        Route::get("/TambahPlot", "tambah")->name('TambahPlot.tambah');
 
+    });
     // Route::post('/Serasah/store', [SerasahController::class, 'store'])->name('Serasah.store');
 
     Route::controller(zonaController::class)->group(function () {
