@@ -26,7 +26,9 @@
                 </div>
                 <div class="card-body">
                     <!-- Map Section -->
-                    <div id="map"></div>
+
+
+                    <div id="map" style="width: 100%; height: 400px;"></div>
 
                     <!-- Form -->
                     <dd></dd>
@@ -43,13 +45,15 @@
                         <!-- Input Latitude -->
                         <div class="mb-4">
                             <label for="latitude" class="form-label">Latitude</label>
-                            <input type="text" class="form-control" name="latitude" id="latitude" required />
+                            <input type="text" class="form-control" placeholder="Latitude" name="latitude" id="latitude"
+                                required />
                         </div>
 
                         <!-- Input Longitude -->
                         <div class="mb-4">
                             <label for="longitude" class="form-label">Longitude</label>
-                            <input type="text" class="form-control" name="longitude" id="longitude" required />
+                            <input type="text" class="form-control" placeholder="Longitude" name="longitude"
+                                id="longitude" required />
                         </div>
 
                         <!-- Pilih Periode -->

@@ -327,45 +327,93 @@ document.getElementById('submitButton').addEventListener('click', function() {
 // }
 mapboxgl.accessToken = "pk.eyJ1IjoicGVuZG9zYXRhdWJhdCIsImEiOiJjbTEzZzhiOGYxZDExMmtzZm1pNG01NDlvIn0.c_7si8BDiAd8JOwgfgKMkQ";
 
-let marker; // Deklarasi variabel global untuk marker
+let map;
+let marker;
 
+// Ambil lokasi saat ini
 navigator.geolocation.getCurrentPosition(successLocation, errorLocation, {
-  enableHighAccuracy: true,
-});
+    enableHighAccuracy: true,
+    timeout: 10000, // 10 detik sebelum gagal
+    maximumAge: 0, // Tidak gunakan lokasi cache
+  });
 
-function successLocation(position) {
-  console.log(position);
-  setupMap([position.coords.longitude, position.coords.latitude]);
+  function successLocation(position) {
+    console.log("Lokasi ditemukan:", position);
 
-  // Mengisi field latitude dan longitude secara otomatis
-  document.getElementById("latitude").value = position.coords.latitude;
-  document.getElementById("longitude").value = position.coords.longitude;
+    const coords = [position.coords.longitude, position.coords.latitude];
 
-  // Memperbarui marker dengan koordinat terbaru
-  if (marker) {
-    marker.setLngLat([position.coords.longitude, position.coords.latitude]);
-  } else {
-    marker = new mapboxgl.Marker()
-      .setLngLat([position.coords.longitude, position.coords.latitude])
-      .addTo(map);
+    document.getElementById("latitude").value = position.coords.latitude;
+    document.getElementById("longitude").value = position.coords.longitude;
+
+    setupMap(coords);
   }
-}
 
-function errorLocation() {
-  setupMap([106.8456, -6.2088]); // Default ke Jakarta jika gagal
-}
+  function errorLocation(error) {
+    console.warn("Gagal mendapatkan lokasi:", error.message);
+
+    alert("Gagal mendapatkan lokasi, menggunakan lokasi default (Jakarta).");
+    setupMap([106.8456, -6.2088]); // Default ke Jakarta jika gagal
+  } 
 
 function setupMap(center) {
-  const map = new mapboxgl.Map({
+  map = new mapboxgl.Map({
     container: "map",
     style: "mapbox://styles/mapbox/streets-v11",
     center: center,
     zoom: 12,
   });
 
-  // Menyimpan marker ke variabel global
-  marker = new mapboxgl.Marker().setLngLat(center).addTo(map);
+  // Tambahkan marker awal
+  marker = new mapboxgl.Marker({ draggable: true })
+    .setLngLat(center)
+    .addTo(map);
+
+  // Event: Klik pada peta untuk menetapkan titik koordinat
+  map.on("click", (e) => {
+    const clickedCoords = [e.lngLat.lng, e.lngLat.lat];
+
+    // Pindahkan marker ke lokasi baru
+    marker.setLngLat(clickedCoords);
+
+    // Perbarui input latitude dan longitude
+    updateInput(e.lngLat.lat, e.lngLat.lng);
+  });
+
+  // Event: Marker bisa dipindahkan dengan drag
+  marker.on("dragend", () => {
+    const lngLat = marker.getLngLat();
+    updateInput(lngLat.lat, lngLat.lng);
+  });
+
+  // Tambahkan fitur pencarian lokasi
+  const geocoder = new MapboxGeocoder({
+    accessToken: mapboxgl.accessToken,
+    mapboxgl: mapboxgl,
+    marker: false,
+    placeholder: "Cari lokasi...",
+  });
+
+  map.addControl(geocoder);
+
+  // Event: Pilih lokasi dari search bar
+  geocoder.on("result", (e) => {
+    const resultCoords = e.result.center;
+
+    // Pindahkan marker ke lokasi hasil pencarian
+    marker.setLngLat(resultCoords);
+    map.flyTo({ center: resultCoords, zoom: 14 });
+
+    // Perbarui input latitude dan longitude
+    updateInput(resultCoords[1], resultCoords[0]);
+  });
 }
+
+// Fungsi memperbarui input latitude & longitude
+function updateInput(lat, lng) {
+  document.getElementById("latitude").value = lat;
+  document.getElementById("longitude").value = lng;
+}
+
 
 // ---------- NO data -----------
 
