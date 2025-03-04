@@ -41,9 +41,9 @@ class Hamparan extends Model
     {
         return $this->belongsTo(Zona::class, 'zona_id');
     }
-    public function plot(): BelongsTo
+    public function beadbs(): BelongsTo
     {
-        return $this->belongsTo(Plot::class, 'hamparan_id');
+        return $this->belongsTo(Beadbs::class, 'hamparan_id');
     }
     public function sluggable(): array
     {

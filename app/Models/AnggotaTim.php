@@ -13,6 +13,7 @@ class AnggotaTim extends Model
     use HasFactory, SoftDeletes;
     protected $table = 'anggota_tim';
     protected $fillable = [
+        'nama',
         'registrasi_id',
         'tim_id',
     ];

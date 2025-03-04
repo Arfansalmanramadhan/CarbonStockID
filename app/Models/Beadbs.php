@@ -2,23 +2,25 @@
 
 namespace App\Models;
 
-use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Str;
-class Plot extends Model
+use Cviebrock\EloquentSluggable\Sluggable;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+class Beadbs extends Model
 {
     use HasFactory, SoftDeletes, Sluggable;
-    protected $table = 'plot';
+    protected $table = 'beabbs';
     protected $fillable = [
-        'beabbs_id',
-        'nama_plot',
+        'hamparan_id',
+        'lokasi',
         'slug',
-        'type_plot',
-        'latitude',
-        'longitude',
+        'zona',
+        'hamparan',
+        'jenis_hutan',
+        'tanggal',
+        'foto',
     ];
     protected $guarded = [];
     protected static function boot()
@@ -27,7 +29,7 @@ class Plot extends Model
 
         // Generate slug setiap kali model diperbarui atau disimpan
         static::saving(function ($model) {
-            $model->slug = Str::slug($model->nama_plot);
+            $model->slug = Str::slug($model->lokasi);
         });
     }
     /**
@@ -35,19 +37,19 @@ class Plot extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function beadbs(): BelongsTo
+    public function hamparan(): BelongsTo
     {
-        return $this->belongsTo(Beadbs::class, 'beabbs_id');
+        return $this->belongsTo(Hamparan::class, 'hamparan_id');
     }
-    public function subplot(): BelongsTo
+    public function plot(): BelongsTo
     {
-        return $this->belongsTo(SubPlot::class, 'plot_id');
+        return $this->belongsTo(Plot::class, 'beabbs_id');
     }
     public function sluggable(): array
     {
         return [
             'slug' => [
-                'source' => 'nama_plot'
+                'source' => 'lokasi'
             ]
         ];
     }
