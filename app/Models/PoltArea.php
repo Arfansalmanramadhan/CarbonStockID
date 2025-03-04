@@ -19,6 +19,7 @@ class PoltArea extends Model
     protected $fillable = [
         'daerah',
         "slug",
+        "jenis_hutan",
         'latitude',
         'longitude',
         'periode_pengamatan',

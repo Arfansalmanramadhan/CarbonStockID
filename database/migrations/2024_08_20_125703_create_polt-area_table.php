@@ -15,10 +15,10 @@ return new class extends Migration
             $table->id();
             $table->string("daerah")->nullable();
             $table->string("slug", 255);
+            $table->string("jenis_hutan", 250);
             $table->decimal('latitude', 10, 8);
             $table->decimal('longitude', 11, 8);
             $table->string('periode_pengamatan');
-            $table->string("status")->default("tidakaktif");
             $table->timestamps();
             $table->softDeletes();
             $table->unsignedBigInteger("periode_id");

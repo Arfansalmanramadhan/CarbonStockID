@@ -1,20 +1,20 @@
 @extends('layout.mainlayaot')
 
-@section('title', 'Lokasi')
+@section('title', 'Zona')
 
 @section('content')
     <div id="prediksi-content" class="page-content content p-4">
         <div class="image-container mt-4">
             <div class="col page-title">
                 <img src="{{ asset('/images/dataPlot-Image.svg') }}" alt="" class="img-normal" />
-                <p class="large-text text-overlay">Lokasi</p>
+                <p class="large-text text-overlay">Zona</p>
             </div>
         </div>
         <div class="table-container">
             <div class="table-container">
                 <div class="table-wrapper">
                     <div class="table-header d-flex justify-content-between">
-                        <form method="GET" action="{{ route('Lokasi.lokasi') }}">
+                        {{-- <form method="GET" action="{{ route('Lokasi.lokasi') }}"> --}}
                             <div class="tampilkan">
                                 <label for="show-entries">Tampilkan</label>
                                 <select id="show-entries perPageSelect" class="number-selection" name="perPage"
@@ -27,29 +27,24 @@
                             </div>
                         </form>
                         <div class="d-flex align-items-center">
-                            {{-- <form method="GET" action="{{ route('Lokasi.lokasi') }}">
-                                <input type="text"class="form-control" id="search" name="search"
-                                    value="{{ request('search') }}" placeholder="Cari daerah atau status..."
-                                    onkeyup="searchTable()">
-                                <button type="submit">Cari</button>
-                            </form> --}}
+
                             <div class="form-control-space">
-                                <input type="text" id="searchInput" placeholder="Cari..." class="form-control mb-3"
-                                    value="{{ $search }}" onkeyup="searchTable()">
+                                {{-- <input type="text" id="searchInput" placeholder="Cari..." class="form-control mb-3"
+                                    value="{{ $search }}" onkeyup="searchTable()"> --}}
                             </div>
                             <!-- Button to trigger modal -->
-                            <button onclick="window.location.href='{{ route('Lokasi.index') }}'"
-                                class="btn btn-tambah-data p-3">Tambah</button>
+                            {{-- <button onclick="window.location.href='{{ route('Lokasi.index') }}'"
+                                class="btn btn-tambah-data p-3">Tambah</button> --}}
                         </div>
                     </div>
                     <table class="custom-table-pancang">
                         <thead>
                             <tr>
                                 <th class="kiriPancang">No</th>
-                                <th>Nama Lokasi</th>
+                                <th>Nama Zona</th>
+                                <th>Daftar Tim</th>
                                 <th>Jenis Hutan</th>
                                 <th>Koordinat</th>
-                                <th>Tanggal Pengamatan </th>
                                 <th class="hidden-column kananPancang">Aksi</th>
                             </tr>
                         </thead>
@@ -77,7 +72,7 @@
                             </tr> --}}
                         </tbody>
                         <tbody id="data-table ">
-                            @foreach ($lokasi as $index => $item)
+                            {{-- @foreach ($lokasi as $index => $item)
                                 <tr>
                                     <td>{{ $lokasi->firstItem() + $index }}</td>
                                     <td>{{ $item->daerah }}</td>
@@ -95,25 +90,24 @@
                                         <button class="delete-btn">
                                             <img src="{{ asset('/images/Trash.svg') }}" alt="" />
                                         </button>
-                                        {{-- <button>👁️</button>
+                                        <button>👁️</button>
                                         <button>➕</button>
-                                        <button>🗑️</button> --}}
+                                        <button>🗑️</button>
                                     </td>
                                 </tr>
-                            @endforeach
+                            @endforeach --}}
 
 
                         </tbody>
 
                     </table>
-                    <div class="table-footer mt-5">
+                    {{-- <div class="table-footer mt-5">
                         <strong>
                             Menampilkan {{ $lokasi->firstItem() }} sampai {{ $lokasi->lastItem() }} dari
                             {{ $lokasi->total() }} data
                         </strong>
                         <nav>
                             <ul class="pagination">
-                                {{-- Tombol Kembali --}}
                                 @if ($lokasi->onFirstPage())
                                     <li class="page-item disabled"><span class="page-link">Kembali</span></li>
                                 @else
@@ -121,14 +115,12 @@
                                             href="{{ $lokasi->previousPageUrl() }}">Kembali</a></li>
                                 @endif
 
-                                {{-- Nomor Halaman --}}
                                 @foreach ($lokasi->getUrlRange(1, $lokasi->lastPage()) as $page => $url)
                                     <li class="page-item {{ $lokasi->currentPage() == $page ? 'active' : '' }}">
                                         <a class="page-link" href="{{ $url }}">{{ $page }}</a>
                                     </li>
                                 @endforeach
 
-                                {{-- Tombol Lanjut --}}
                                 @if ($lokasi->hasMorePages())
                                     <li class="page-item"><a class="page-link"
                                             href="{{ $lokasi->nextPageUrl() }}">Lanjut</a></li>
@@ -138,10 +130,9 @@
                             </ul>
                         </nav>
                     </div>
-                    <!-- Pagination -->
                     <div class="d-flex justify-content-between">
                         {{ $lokasi->links() }}
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>
@@ -156,19 +147,19 @@
         //         row.style.display = text.includes(input) ? "" : "none";
         //     });
         // }
-        document.getElementById('perPageSelect').addEventListener('change', function() {
-            let perPage = this.value;
-            let search = document.getElementById('searchInput').value;
-            window.location.href = "{{ route('Lokasi.lokasi') }}" + "?per_page=" + perPage + "&search=" + search;
-        });
+        // document.getElementById('perPageSelect').addEventListener('change', function() {
+        //     let perPage = this.value;
+        //     let search = document.getElementById('searchInput').value;
+        //     window.location.href = "{{ route('Lokasi.lokasi') }}" + "?per_page=" + perPage + "&search=" + search;
+        // });
 
-        document.getElementById('searchInput').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                let perPage = document.getElementById('perPageSelect').value;
-                let search = this.value;
-                window.location.href = "{{ route('Lokasi.lokasi') }}" + "?per_page=" + perPage + "&search=" +
-                    search;
-            }
-        });
+        // document.getElementById('searchInput').addEventListener('keypress', function(e) {
+        //     if (e.key === 'Enter') {
+      .  //         let perPage = document.getElementById('perPageSelect').value;
+        //         let search = this.value;
+        //         window.location.href = "{{ route('Lokasi.lokasi') }}" + "?per_page=" + perPage + "&search=" +
+        //             search;
+        //     }
+        // });
     </script>
 @endsection

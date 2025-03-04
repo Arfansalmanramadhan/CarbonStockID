@@ -44,6 +44,7 @@ class PoltAreaController extends Controller
         return view('tambah.PlotArea', compact('periodes'));
     }
 
+
     /**
      * Store a newly created resource in storage.
      */
@@ -56,6 +57,7 @@ class PoltAreaController extends Controller
             'daerah' => 'required|string|max:255',
             'latitude' => 'required|numeric',
             'longitude' => 'required|numeric',
+            'jenis_hutan' => 'required|string|max:255',
             'periode_pengamatan' => 'required|string',
             'periode_id' => 'required|exists:periode,id',
         ]);
@@ -69,6 +71,7 @@ class PoltAreaController extends Controller
                 "daerah" => $validatedData['daerah'],
                 "latitude" => $validatedData['latitude'],
                 "longitude" => $validatedData['longitude'],
+                "jenis_hutan" => $validatedData['jenis_hutan'],
                 "periode_pengamatan" => $periode_pengamatan, // Gabungan tanggal mulai dan berakhir
                 "periode_id" => $periode->id,
                 "slug" => Str::slug($validatedData['daerah']),
@@ -92,18 +95,20 @@ class PoltAreaController extends Controller
     public function show($slug)
     {
         // cari poltArea berdasarkan slug
-        $poltArea = PoltArea::where("slug", $slug)->first();
+        $user = Auth::user();
+        $lokasi = PoltArea::where("slug", $slug)->first();
         // jika tidak ditemukan, kemabali erro
-        if (!$poltArea) {
-            return response()->json([
-                "pesan" => "PoltArea tidak ditemukan"
-            ]);
-        }
+        // if (!$poltArea) {
+        //     return response()->json([
+        //         "pesan" => "PoltArea tidak ditemukan"
+        //     ]);
+        // }
         // Kembalikan respons JSON dengan data PoltArea
-        return response()->json([
-            'pesan' => 'PoltArea berhasil ditemukan ',
-            'data' => $poltArea
-        ], 200);
+        return view('show.Lokasi', 'lokasi', "user");
+        // return response()->json([
+        //     'pesan' => 'PoltArea berhasil ditemukan ',
+        //     'data' => $poltArea
+        // ], 200);
     }
 
     /**

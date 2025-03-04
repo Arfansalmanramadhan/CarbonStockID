@@ -55,7 +55,22 @@
                             <input type="text" class="form-control" placeholder="Longitude" name="longitude"
                                 id="longitude" required />
                         </div>
-
+                        <div class="mb-4">
+                            <label for="plotName" class="form-label">Jenis hutan</label>
+                            <select class="form-select  form-control" aria-label="Default select example" name="jenis_hutan">
+                                <option selected>Jenis hutan</option>
+                                <option value="Hutan Tropis">Hutan  Tropis</option>
+                                <option value="Hutan Bakau">Hutan Bakau</option>
+                                <option value="Hutan Sabana">Hutan Sabana</option>
+                                <option value="Hutan Rawa Gambut">Hutan Rawa Gambut</option>
+                                <option value="Hutan Musim ">Hutan Musim </option>
+                                <option value="Hutan Homongen ">Hutan Homongen </option>
+                                <option value="Hutan Heterogen ">Hutan Heterogen </option>
+                                <option value="Hutan Lindung ">Hutan Lindung </option>
+                                <option value="Hutan Suaka Alam ">Hutan Suaka Alam </option>
+                                <option value="Hutan Produksi ">Hutan Produksi </option>
+                            </select>
+                        </div>
                         <!-- Pilih Periode -->
                         <div class="mb-4">
                             <label for="periode_id">Pilih Periode:</label>
