@@ -118,6 +118,7 @@ Route::middleware('auth')->group(function () {
 
     Route::controller(zonaController::class)->group(function () {
         Route::get("/zona", "index")->name('zona.index');
+        Route::get('/Lokasi/zona/{slug}', 'getZona')->name('zona.getZona');
         Route::get("/TambahZona", "tambah")->name('TambahZona.tambah');
     });;
 
@@ -198,6 +199,7 @@ Route::middleware('auth')->group(function () {
     Route::controller(DataPlotController::class)->group(function () {
         Route::get('/dataPlot', 'index')->name('dataPlot.index');
         Route::get('/Lokasi', 'lokasi')->name('Lokasi.lokasi');
+
         // Route::get('/Lokasi', 'data')->name('Lokasi.data');
     });
     Route::controller(ManajermenUserController::class)->group(function () {

@@ -48,7 +48,8 @@
                                 <th class="kiriPancang">No</th>
                                 <th>Nama Lokasi</th>
                                 <th>Jenis Hutan</th>
-                                <th>Koordinat</th>
+                                <th>Latitude</th>
+                                <th>Longitude</th>
                                 <th>Tanggal Pengamatan </th>
                                 <th class="hidden-column kananPancang">Aksi</th>
                             </tr>
@@ -82,9 +83,12 @@
                                     <td>{{ $lokasi->firstItem() + $index }}</td>
                                     <td>{{ $item->daerah }}</td>
                                     <td>{{ $item->jenis_hutan }}</td>
-                                    <td>{{ $item->latitude }}, {{ $item->longitude }}</td>
+                                    <td>{{ $item->latitude }}</td>
+                                    <td>{{ $item->longitude }}</td>
                                     <td>{{ $item->periode_pengamatan }}</td>
                                     <td class="hidden-column aksi-button">
+                                        <a href="{{ route('zona.getZona', ['slug' => $item->slug]) }}"
+                                            class="btn btn-info btn-sm">Detail</a>
                                         <button class="view-btn">
                                             <img src="{{ asset('/images/Eye.svg') }}" alt="" />
                                         </button>

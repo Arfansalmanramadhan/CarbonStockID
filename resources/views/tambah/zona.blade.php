@@ -14,9 +14,9 @@
                 </div>
                 <div class="card-body-sup-plot">
                     <!-- Form -->
-                    {{-- <form method="POST" action="{{ route('zona.store') }}" id="SerasahForm"> --}}
+                    <form method="POST" action="{{ route('zona.store') }}" id="SerasahForm">
                     @csrf
-                    {{-- <input type="hidden" id="polt-area_id" name="polt-area_id" value="{{ $poltArea->id }}" /> --}}
+                    <input type="hidden" id="polt-area_id" name="polt-area_id" value="{{ $poltArea->id }}" />
                     <div class="mb-3">
                         <label for="plotName" class="form-label">Zona Area</label>
                         <select class="form-select  form-control" aria-label="Default select example" name="zona">
@@ -44,13 +44,6 @@
                             <option value="Hutan Produksi ">Hutan Produksi </option>
                         </select>
                     </div>
-                    <div class="mb-3">
-                        <label for="formFile" class="form-label">Foto Area</label>
-                        <input class="form-control" type="file"
-                            id="formFile"accept="image/jpeg,image/png,image/jpg,application/pdf" name="foto_area"
-                            value="{{ old('foto_ktp', $user->foto_ktp) }}">
-                    </div>
-
                     <button type="submit" class="btn btn-submit-plotA d-flex align-items-center justify-content-center"
                         id="submitSerasah">
                         <span>Submit</span>
