@@ -26,9 +26,9 @@ class Periode extends Model
     {
         return $this->belongsTo(PoltArea::class, 'periode_id');
     }
-    public function anggotaTim(): BelongsTo
-    {
-        return $this->belongsTo(AnggotaTim::class, 'anggota_tim_id');
-    }
-    
+    // public function anggotaTim(): BelongsTo
+    // {
+    //     return $this->belongsTo(AnggotaTim::class, 'anggota_tim_id');
+    // }
+
 }

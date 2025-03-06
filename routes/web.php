@@ -108,12 +108,11 @@ Route::middleware('auth')->group(function () {
     // Route::get('/Lokasi/tambah', [PoltAreaController::class, 'index'])->name('Lokasi.index');
     // Route::get('/TambahPlot', [PoltAreaController::class, 'tambah'])->name('TambahPlot.tambah');
     // Route::post('/Lokasi/tambah', [PoltAreaController::class, 'store'])->name('plotarea.store');
-    Route::controller(PoltAreaController::class)->group(function(){
+    Route::controller(PoltAreaController::class)->group(function () {
         Route::get("/Lokasi/tambah", "index")->name('Lokasi.index');
         Route::post("/Lokasi/tambah", "store")->name('Lokasi.store');
         Route::get("/Lokasi/tambah", "create")->name('Lokasi.index');
         Route::get("/TambahPlot", "tambah")->name('TambahPlot.tambah');
-
     });
     // Route::post('/Serasah/store', [SerasahController::class, 'store'])->name('Serasah.store');
 
@@ -180,6 +179,9 @@ Route::middleware('auth')->group(function () {
     Route::controller(PeriodeController::class)->group(function () {
         Route::get('/Manajemen-Tim', 'index')->name('Manajemen-Tim.index');
         Route::post('/Manajemen-Tim', 'store')->name('Manajemen-Tim.store');
+        Route::get('/Manajemen-Tim/anggota/{id}', 'indexx')->name('anggota.indexx');
+        Route::post('/Manajemen-Tim/anggota/{id}', 'storee')->name('anggota.storee'); // Perbaiki
+        // Route::get('/Manajemen-Tim/anggota/{id}', 'create')->name('anggota.create');
     });
     Route::controller(SUrveyorController::class)->group(function () {
         Route::get('/Surveyor/Tambah-Surveyor', 'indexx')->name('Tambah-Surveyor.indexx');

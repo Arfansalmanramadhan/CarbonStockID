@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
+
 class Tim extends Model
 {
     use HasFactory, SoftDeletes;
@@ -29,11 +30,14 @@ class Tim extends Model
     }
     public function periode()
     {
-        return $this->hasMany(Periode::class, 'anggota_tim_id', );
+        return $this->hasMany(Periode::class, 'anggota_tim_id',);
     }
     public function anggotaTim()
     {
         return $this->hasMany(AnggotaTim::class, 'tim_id');
     }
-
+    public function getJumlahAnggotaAttribute()
+    {
+        return $this->anggotaTim->whereNotNull('nama')->unique('nama')->count();
+    }
 }
