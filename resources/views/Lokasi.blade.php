@@ -42,53 +42,29 @@
                                 class="btn btn-tambah-data p-3">Tambah</button>
                         </div>
                     </div>
-                    <table class="custom-table-pancang">
-                        <thead>
-                            <tr>
-                                <th class="kiriPancang">No</th>
-                                <th>Nama Lokasi</th>
-                                <th>Jenis Hutan</th>
-                                <th>Latitude</th>
-                                <th>Longitude</th>
-                                <th>Tanggal Pengamatan </th>
-                                <th class="hidden-column kananPancang">Aksi</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {{-- <tr>
-                                <td>1</td>
-                                <td>Telkom University</td>
-                                <td>Detail</td>
-                                <td>Hutan hujan tropis</td>
-                                <td>-6.9744, 107.6303</td>
-                                <td>2024-04-21</td>
-                                <td>2024-04-24</td>
-                                <td class="hidden-column aksi-button">
-                                    <button class="view-btn">
-                                        <img src="{{ asset('/images/Eye.svg') }}" alt="" />
-                                    </button>
-                                    <button onclick="window.location.href='{{ route('Tambah-Surveyor.indexx') }}'"
-                                        class="add-btn">
-                                        <img src="{{ asset('/images/AddIcon.svg') }}" alt="" />
-                                    </button>
-                                    <button class="delete-btn">
-                                        <img src="{{ asset('/images/Trash.svg') }}" alt="" />
-                                    </button>
-                                </td>
-                            </tr> --}}
-                        </tbody>
-                        <tbody id="data-table ">
-                            @foreach ($lokasi as $index => $item)
+                    <div class="table-wrapper">
+                        <table class="custom-table-pancang">
+                            <thead>
                                 <tr>
-                                    <td>{{ $lokasi->firstItem() + $index }}</td>
-                                    <td>{{ $item->daerah }}</td>
-                                    <td>{{ $item->jenis_hutan }}</td>
-                                    <td>{{ $item->latitude }}</td>
-                                    <td>{{ $item->longitude }}</td>
-                                    <td>{{ $item->periode_pengamatan }}</td>
+                                    <th class="kiriPancang">No</th>
+                                    <th>Nama Lokasi</th>
+                                    <th>Jenis Hutan</th>
+                                    <th>Latitude</th>
+                                    <th>Longitude</th>
+                                    <th>Tanggal Pengamatan </th>
+                                    <th class="hidden-column kananPancang">Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {{-- <tr>
+                                    <td>1</td>
+                                    <td>Telkom University</td>
+                                    <td>Detail</td>
+                                    <td>Hutan hujan tropis</td>
+                                    <td>-6.9744, 107.6303</td>
+                                    <td>2024-04-21</td>
+                                    <td>2024-04-24</td>
                                     <td class="hidden-column aksi-button">
-                                        <a href="{{ route('zona.getZona', ['slug' => $item->slug]) }}"
-                                            class="btn btn-info btn-sm">Detail</a>
                                         <button class="view-btn">
                                             <img src="{{ asset('/images/Eye.svg') }}" alt="" />
                                         </button>
@@ -99,17 +75,40 @@
                                         <button class="delete-btn">
                                             <img src="{{ asset('/images/Trash.svg') }}" alt="" />
                                         </button>
-                                        {{-- <button>👁️</button>
-                                        <button>➕</button>
-                                        <button>🗑️</button> --}}
                                     </td>
-                                </tr>
-                            @endforeach
-
-
-                        </tbody>
-
-                    </table>
+                                </tr> --}}
+                            </tbody>
+                            <tbody id="data-table ">
+                                @foreach ($lokasi as $index => $item)
+                                    <tr>
+                                        <td>{{ $lokasi->firstItem() + $index }}</td>
+                                        <td>{{ $item->daerah }}</td>
+                                        <td>{{ $item->jenis_hutan }}</td>
+                                        <td>{{ $item->latitude }}</td>
+                                        <td>{{ $item->longitude }}</td>
+                                        <td>{{ $item->periode_pengamatan }}</td>
+                                        <td class="hidden-column aksi-button">
+                                            <a href="{{ route('zona.getZona', ['slug' => $item->slug]) }}"
+                                                class="btn btn-info btn-sm">Detail</a>
+                                            <button class="view-btn">
+                                                <img src="{{ asset('/images/Eye.svg') }}" alt="" />
+                                            </button>
+                                            <button onclick="window.location.href='{{ route('Tambah-Surveyor.indexx') }}'"
+                                                class="add-btn">
+                                                <img src="{{ asset('/images/AddIcon.svg') }}" alt="" />
+                                            </button>
+                                            <button class="delete-btn">
+                                                <img src="{{ asset('/images/Trash.svg') }}" alt="" />
+                                            </button>
+                                            {{-- <button>👁️</button>
+                                            <button>➕</button>
+                                            <button>🗑️</button> --}}
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
                     <div class="table-footer mt-5">
                         <strong>
                             Menampilkan {{ $lokasi->firstItem() }} sampai {{ $lokasi->lastItem() }} dari
