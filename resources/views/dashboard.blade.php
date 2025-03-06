@@ -41,71 +41,75 @@
         <h4 class="judul-beranda mt-5">Dashboard Monitoring </h4>
         {{-- <div id="carbon-prediction-chart-2"></div> --}}
         <div class="table-container">
-            <div class="table-wrapper">
-                <div>
-                    <label for="show-entries">Tampilkan</label>
-                    <select id="show-entries">
-                        <option value="5">5</option>
-                        <option value="10">10</option>
-                        <option value="20">20</option>
-                    </select>
-                    <span>data</span>
+            {{-- <div class="table-wrapper"> --}}
+                <div class="table-header d-flex justify-content-between">
+                    <div class="tampilkan">
+                        <label for="show-entries">Tampilkan</label>
+                        <select id="show-entries">
+                            <option value="5">5</option>
+                            <option value="10">10</option>
+                            <option value="20">20</option>
+                        </select>
+                        <span>data</span>
+                    </div>
                 </div>
-                <table class="custom-table-pancang">
-                    <thead>
-                        <tr>
-                            <th class="kiriPancang" rowspan="2">No</th>
-                            <th rowspan="2">Zona</th>
-                            <th colspan="2">Serasah</th>
-                            <th colspan="2">Pancanh</th>
-                            <th colspan="2">Tiang</th>
-                            <th class="hidden-column" colspan="2">pohon</th>
-                            <th class="hidden-column kananPancang" rowspan="2">Aksi</th>
-                        </tr>
-                        <tr>
-                            {{-- <th class="kiriPancang">No</th> --}}
-                            {{-- <th>Zona</th> --}}
-                            <th>Karbon</th>
-                            <th>Serapan karbon</th>
-                            <th>Karbon</th>
-                            <th class="hidden-column">Serapan Karobn</th>
-                            <th class="hidden-column">Karbon</th>
-                            <th class="hidden-column">serapan karbon</th>
-                            <th class="hidden-column">Karbon</th>
-                            <th class="hidden-column">Serapan serapan</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>11</td>
-                            <td>15 cm</td>
-                            <td>15cm</td>
-                            <td>15</td>
-                            <td>15</td>
-                            <td class="hidden-column">15 gr/cm3</td>
-                            <td class="hidden-column">15 kg</td>
-                            <td class="hidden-column">15 kg</td>
-                            <td class="hidden-column">15 kg</td>
-                            <td class="hidden-column">15 kg</td>
-                            <td class="hidden-column aksi-button">
-                                <button class="edit-btn">
-                                    <img src="{{ asset('/images/PencilSquare.svg') }}" alt="" />
-                                </button>
-                                <button class="delete-btn">
-                                    <img src="{{ asset('/images/Trash.svg') }}" alt="" />
-                                </button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="2">Total karbon</td>
-                            <td colspan="9">15 cm</td>
-                        </tr>
-                        <tr>
-                            <td colspan="2">Total Serapan Karbon</td>
-                            <td colspan="9">15 cm</td>
-                        </tr>
-                    </tbody>
-                </table>
+                <div class="table-wrapper">
+                    <table class="custom-table-pancang">
+                        <thead>
+                            <tr>
+                                <th class="kiriPancang" rowspan="2">No</th>
+                                <th rowspan="2">Zona</th>
+                                <th colspan="2">Serasah</th>
+                                <th colspan="2">Pancanh</th>
+                                <th colspan="2">Tiang</th>
+                                <th class="hidden-column" colspan="2">pohon</th>
+                                <th class="hidden-column kananPancang" rowspan="2">Aksi</th>
+                            </tr>
+                            <tr>
+                                {{-- <th class="kiriPancang">No</th> --}}
+                                {{-- <th>Zona</th> --}}
+                                <th>Karbon</th>
+                                <th>Serapan karbon</th>
+                                <th>Karbon</th>
+                                <th class="hidden-column">Serapan Karobn</th>
+                                <th class="hidden-column">Karbon</th>
+                                <th class="hidden-column">serapan karbon</th>
+                                <th class="hidden-column">Karbon</th>
+                                <th class="hidden-column">Serapan serapan</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>11</td>
+                                <td>15 cm</td>
+                                <td>15cm</td>
+                                <td>15</td>
+                                <td>15</td>
+                                <td class="hidden-column">15 gr/cm3</td>
+                                <td class="hidden-column">15 kg</td>
+                                <td class="hidden-column">15 kg</td>
+                                <td class="hidden-column">15 kg</td>
+                                <td class="hidden-column">15 kg</td>
+                                <td class="hidden-column aksi-button">
+                                    <button class="edit-btn">
+                                        <img src="{{ asset('/images/PencilSquare.svg') }}" alt="" />
+                                    </button>
+                                    <button class="delete-btn">
+                                        <img src="{{ asset('/images/Trash.svg') }}" alt="" />
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">Total karbon</td>
+                                <td colspan="9">15 cm</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">Total Serapan Karbon</td>
+                                <td colspan="9">15 cm</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
                 <div class="table-footer mt-5">
                     <span>Menampilkan 1 sampai 5 dari 40 data</span>
                     <div class="pagination">
@@ -117,7 +121,7 @@
                         <button class="page-btn">Lanjut</button>
                     </div>
                 </div>
-            </div>
+            {{-- </div> --}}
         </div>
         <div class="custom-table-pancang">
             <div class="row">

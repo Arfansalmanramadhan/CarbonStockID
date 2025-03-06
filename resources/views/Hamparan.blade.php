@@ -12,7 +12,7 @@
         </div>
         <div class="table-container">
             <div class="table-container">
-                <div class="table-wrapper">
+                {{-- <div class="table-wrapper"> --}}
                     <div class="table-header d-flex justify-content-between">
                         <div class="tampilkan">
                             <label for="show-entries">Tampilkan</label>
@@ -32,102 +32,104 @@
                             {{-- <button class="btn btn-tambah-data p-3">Tambah</button> --}}
                         </div>
                     </div>
-                    <table class="custom-table-pancang">
-                        <thead>
-                            <tr>
-                                <th class="kiriPancang">No</th>
-                                <th>Nama Hamparan</th>
-                                <th>Nama Zona</th>
-                                <th>Koordinat</th>
-                                <th>Daerah</th> 
-                                <th class="hidden-column kananPancang">Aksi</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Hamparan 1</td>
-                                <td>Zona 1</td>
-                                <td>-6.9744, 107.6303</td>
-                                <td>Bandung</td>
-                                <td class="hidden-column aksi-button">
-                                    <button class="view-btn">
-                                        <img src="{{ asset('/images/Eye.svg') }}" alt="" />
-                                    </button>
-                                    <button onclick="window.location.href='{{ route('Tambah-Surveyor.indexx') }}'"
-                                        class="add-btn">
-                                        <img src="{{ asset('/images/AddIcon.svg') }}" alt="" />
-                                    </button>
-                                    <button class="delete-btn">
-                                        <img src="{{ asset('/images/Trash.svg') }}" alt="" />
-                                    </button>
-                                </td>
-                            </tr>
-                        </tbody>
-                        <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Hamparan 1</td>
-                                <td>Zona 1</td>
-                                <td>-6.9744, 107.6303</td>
-                                <td>Bandung</td>
-                                <td class="hidden-column aksi-button">
-                                    <button class="view-btn">
-                                        <img src="{{ asset('/images/Eye.svg') }}" alt="" />
-                                    </button>
-                                    <button onclick="window.location.href='{{ route('Tambah-Surveyor.indexx') }}'"
-                                        class="add-btn">
-                                        <img src="{{ asset('/images/AddIcon.svg') }}" alt="" />
-                                    </button>
-                                    <button class="delete-btn">
-                                        <img src="{{ asset('/images/Trash.svg') }}" alt="" />
-                                    </button>
-                                </td>
-                            </tr>
-                        </tbody>
-                        <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Hamparan 1</td>
-                                <td>Zona 1</td>
-                                <td>-6.9744, 107.6303</td>
-                                <td>Bandung</td>
-                                <td class="hidden-column aksi-button">
-                                    <button class="view-btn">
-                                        <img src="{{ asset('/images/Eye.svg') }}" alt="" />
-                                    </button>
-                                    <button onclick="window.location.href='{{ route('Tambah-Surveyor.indexx') }}'"
-                                        class="add-btn">
-                                        <img src="{{ asset('/images/AddIcon.svg') }}" alt="" />
-                                    </button>
-                                    <button class="delete-btn">
-                                        <img src="{{ asset('/images/Trash.svg') }}" alt="" />
-                                    </button>
-                                </td>
-                            </tr>
-                        </tbody>
-                        <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Hamparan 1</td>
-                                <td>Zona 1</td>
-                                <td>-6.9744, 107.6303</td>
-                                <td>Bandung</td>
-                                <td class="hidden-column aksi-button">
-                                    <button class="view-btn">
-                                        <img src="{{ asset('/images/Eye.svg') }}" alt="" />
-                                    </button>
-                                    <button onclick="window.location.href='{{ route('Tambah-Surveyor.indexx') }}'"
-                                        class="add-btn">
-                                        <img src="{{ asset('/images/AddIcon.svg') }}" alt="" />
-                                    </button>
-                                    <button class="delete-btn">
-                                        <img src="{{ asset('/images/Trash.svg') }}" alt="" />
-                                    </button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <div class="table-wrapper">
+                        <table class="custom-table-pancang">
+                            <thead>
+                                <tr>
+                                    <th class="kiriPancang">No</th>
+                                    <th>Nama Hamparan</th>
+                                    <th>Nama Zona</th>
+                                    <th>Koordinat</th>
+                                    <th>Daerah</th>
+                                    <th class="hidden-column kananPancang">Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>Hamparan 1</td>
+                                    <td>Zona 1</td>
+                                    <td>-6.9744, 107.6303</td>
+                                    <td>Bandung</td>
+                                    <td class="hidden-column aksi-button">
+                                        <button class="view-btn">
+                                            <img src="{{ asset('/images/Eye.svg') }}" alt="" />
+                                        </button>
+                                        <button onclick="window.location.href='{{ route('Tambah-Surveyor.indexx') }}'"
+                                            class="add-btn">
+                                            <img src="{{ asset('/images/AddIcon.svg') }}" alt="" />
+                                        </button>
+                                        <button class="delete-btn">
+                                            <img src="{{ asset('/images/Trash.svg') }}" alt="" />
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>Hamparan 1</td>
+                                    <td>Zona 1</td>
+                                    <td>-6.9744, 107.6303</td>
+                                    <td>Bandung</td>
+                                    <td class="hidden-column aksi-button">
+                                        <button class="view-btn">
+                                            <img src="{{ asset('/images/Eye.svg') }}" alt="" />
+                                        </button>
+                                        <button onclick="window.location.href='{{ route('Tambah-Surveyor.indexx') }}'"
+                                            class="add-btn">
+                                            <img src="{{ asset('/images/AddIcon.svg') }}" alt="" />
+                                        </button>
+                                        <button class="delete-btn">
+                                            <img src="{{ asset('/images/Trash.svg') }}" alt="" />
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>Hamparan 1</td>
+                                    <td>Zona 1</td>
+                                    <td>-6.9744, 107.6303</td>
+                                    <td>Bandung</td>
+                                    <td class="hidden-column aksi-button">
+                                        <button class="view-btn">
+                                            <img src="{{ asset('/images/Eye.svg') }}" alt="" />
+                                        </button>
+                                        <button onclick="window.location.href='{{ route('Tambah-Surveyor.indexx') }}'"
+                                            class="add-btn">
+                                            <img src="{{ asset('/images/AddIcon.svg') }}" alt="" />
+                                        </button>
+                                        <button class="delete-btn">
+                                            <img src="{{ asset('/images/Trash.svg') }}" alt="" />
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>Hamparan 1</td>
+                                    <td>Zona 1</td>
+                                    <td>-6.9744, 107.6303</td>
+                                    <td>Bandung</td>
+                                    <td class="hidden-column aksi-button">
+                                        <button class="view-btn">
+                                            <img src="{{ asset('/images/Eye.svg') }}" alt="" />
+                                        </button>
+                                        <button onclick="window.location.href='{{ route('Tambah-Surveyor.indexx') }}'"
+                                            class="add-btn">
+                                            <img src="{{ asset('/images/AddIcon.svg') }}" alt="" />
+                                        </button>
+                                        <button class="delete-btn">
+                                            <img src="{{ asset('/images/Trash.svg') }}" alt="" />
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                     <div class="table-footer mt-5">
                         <span>Menampilkan 1 sampai 5 dari 40 data</span>
                         <div class="pagination">
@@ -139,7 +141,7 @@
                             <button class="page-btn">Lanjut</button>
                         </div>
                     </div>
-                </div>
+                {{-- </div> --}}
             </div>
         </div>
     </div>

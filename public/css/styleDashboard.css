@@ -611,6 +611,7 @@ html, body {
   background-color: white;
   overflow: hidden;
   text-align: left !important;
+  padding-right: 100px;
 }
 
 .custom-table-hasil th,
@@ -1150,7 +1151,7 @@ html, body {
 }
 .table-wrapper {
     overflow-x: auto;
-    white-space: nowrap;
+    /* white-space: nowrap; */
     width: 100%;
     padding-bottom: 20px;
     /* Tambahkan padding untuk jarak di bawah */
