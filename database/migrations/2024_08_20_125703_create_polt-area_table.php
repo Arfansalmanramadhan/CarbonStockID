@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string("jenis_hutan", 250);
             $table->decimal('latitude', 10, 8);
             $table->decimal('longitude', 11, 8);
+            $table->decimal('luas_lokasi',10,2)->default(0);
             $table->string('periode_pengamatan');
             $table->timestamps();
             $table->softDeletes();

@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger("subplot_id");
             $table->foreign("subplot_id")->references("id")->on("subplot")->onDelete('cascade');
+            $table->decimal('no_pohon', 8, 2)->default(0);
             $table->decimal('keliling', 8, 2)->default(0);
             $table->decimal('diameter', 8, 2)->default(0);
             $table->string("nama_lokal",255);

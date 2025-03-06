@@ -13,7 +13,7 @@ class Plot extends Model
     use HasFactory, SoftDeletes, Sluggable;
     protected $table = 'plot';
     protected $fillable = [
-        'beabbs_id',
+        'hamparan_id',
         'nama_plot',
         'slug',
         'type_plot',
@@ -35,9 +35,9 @@ class Plot extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function beadbs(): BelongsTo
+    public function hamparan(): BelongsTo
     {
-        return $this->belongsTo(Beadbs::class, 'beabbs_id');
+        return $this->belongsTo(Hamparan::class, 'hamparan_id');
     }
     public function subplot(): BelongsTo
     {

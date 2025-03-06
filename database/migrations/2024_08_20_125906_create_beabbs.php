@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('beabbs', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger("hamparan_id");
-            $table->foreign("hamparan_id")->references("id")->on("hamparan")->onDelete('cascade');
+            $table->unsignedBigInteger("plot_id");
+            $table->foreign("plot_id")->references("id")->on("plot")->onDelete('cascade');
             $table->string('lokasi', 255)->nullable();
             $table->string("slug", 255);
             $table->string('zona', 255)->nullable();

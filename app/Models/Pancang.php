@@ -13,6 +13,7 @@ class Pancang extends Model
     protected $table = 'pancang';
     protected $fillable = [
         'subplot_id',
+        'no_pohon',
         'keliling',
         'diameter',
         'nama_lokal',

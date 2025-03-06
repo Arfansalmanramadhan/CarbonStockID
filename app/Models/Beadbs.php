@@ -13,7 +13,7 @@ class Beadbs extends Model
     use HasFactory, SoftDeletes, Sluggable;
     protected $table = 'beabbs';
     protected $fillable = [
-        'hamparan_id',
+        'plot_id',
         'lokasi',
         'slug',
         'zona',
@@ -43,7 +43,7 @@ class Beadbs extends Model
     }
     public function plot(): BelongsTo
     {
-        return $this->belongsTo(Plot::class, 'beabbs_id');
+        return $this->belongsTo(Plot::class, 'plot_id');
     }
     public function sluggable(): array
     {

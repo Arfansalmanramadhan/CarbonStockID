@@ -15,11 +15,12 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger("subplot_id");
             $table->foreign("subplot_id")->references("id")->on("subplot")->onDelete('cascade');
-            $table->decimal('keliling', 8, 2)->defaul(0);
-            $table->decimal('diameter', 8, 2)->defaul(0);
+            $table->decimal('no_pohon', 8, 2)->default(0);
+            $table->decimal('keliling', 8, 2)->default(0);
+            $table->decimal('diameter', 8, 2)->default(0);
             $table->string("nama_lokal", 255);
             $table->string("nama_ilmiah", 255);
-            $table->decimal('kerapatan_jenis_kayu', 8, 2)->defaul(0);
+            $table->decimal('kerapatan_jenis_kayu', 8, 2)->default(0);
             $table->decimal('bio_di_atas_tanah', 10, 2)->default(0);
             $table->decimal('kandungan_karbon', 10, 2)->default(0);
             $table->decimal('co2', 10, 2)->default(0);

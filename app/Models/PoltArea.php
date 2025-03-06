@@ -22,6 +22,7 @@ class PoltArea extends Model
         "jenis_hutan",
         'latitude',
         'longitude',
+        'jenis_hutan',
         'periode_pengamatan',
         "status",
         'periode_id'

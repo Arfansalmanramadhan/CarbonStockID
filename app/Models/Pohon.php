@@ -13,6 +13,7 @@ class Pohon extends Model
     protected $table = 'pohon';
     protected $fillable = [
         'subplot_id',
+        'no_pohon',
         'keliling',
         'diameter',
         'nama_lokal',

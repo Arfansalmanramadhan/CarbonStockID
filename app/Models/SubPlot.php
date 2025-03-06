@@ -13,7 +13,7 @@ class SubPlot extends Model
     use HasFactory, SoftDeletes, Sluggable;
     protected $table = 'hamparan';
     protected $fillable = [
-        'plot_id',
+        'beabbs_id',
         'nama_suplort',
         'slug',
         'latitude',
@@ -34,9 +34,9 @@ class SubPlot extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function plot(): BelongsTo
+    public function beadbs(): BelongsTo
     {
-        return $this->belongsTo(Plot::class, 'plot_id');
+        return $this->belongsTo(Beadbs::class, 'beabbs_id');
     }
     public function semai(): BelongsTo
     {

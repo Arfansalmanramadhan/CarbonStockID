@@ -13,6 +13,7 @@ class Tiang extends Model
     protected $table = 'tiang';
     protected $fillable = [
         'subplot_id',
+        'no_pohon',
         'keliling',
         'diameter',
         'nama_lokal',

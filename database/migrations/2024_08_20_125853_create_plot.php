@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('plot', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger("beabbs_id");
-            $table->foreign("beabbs_id")->references("id")->on("beabbs")->onDelete('cascade');
+            $table->unsignedBigInteger("hamparan_id");
+            $table->foreign("hamparan_id")->references("id")->on("hamparan")->onDelete('cascade');
             $table->string('nama_plot', 255)->nullable();
             $table->string("slug", 255);
             $table->string('type_plot', 255);
