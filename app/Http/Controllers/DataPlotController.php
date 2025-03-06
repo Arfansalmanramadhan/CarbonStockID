@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\PoltArea;
+use App\Models\Zona;
 use Illuminate\Support\Facades\Auth;
 
 class DataPlotController extends Controller
@@ -36,20 +37,5 @@ class DataPlotController extends Controller
         ]);
         return view("Lokasi", compact('user', 'lokasi', 'search', 'perPage'));
     }
-    // public function data(Request $request)
-    // {
-    //     $search = $request->query('search');
-    //     $perPage = $request->query('perPage', 5); // Default 5 item per halaman
-
-    //     $query = PoltArea::query();
-
-    //     if (!empty($search)) {
-    //         $query->where('daerah', 'ILIKE', "%{$search}%")
-    //               ->orWhere('status', 'ILIKE', "%{$search}%");
-    //     }
-
-    //     $lokasi = $query->paginate($perPage);
-
-    //     return view('Lokasi', compact('lokasi'));
-    // }
+   
 }

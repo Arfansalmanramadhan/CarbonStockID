@@ -15,23 +15,39 @@ class PeriodeController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         $user = Auth::user();
-        $tim =  Tim::with(['anggotaTim.periode'])
-        ->withCount('anggotaTim') // Menghitung jumlah anggota langsung dari database
-        ->get();
+        $search = $request->query('search');
+        $perPage = $request->query('per_page', 5);
+        $query =  Tim::with(['anggotaTim.user'])
+            ->withCount(['anggotaTim as jumlah_anggota' => function ($query) {
+                $query->whereNotNull('nama')->selectRaw('count(distinct nama)');
+            }]);
+        if (!empty($search)) {
+            $query->where('nama', 'ILIKE', "%{$search}%");
+        }
 
-        return view("Manajemen-Tim", compact('user', 'tim'));
+        // Ambil data dengan pagination
+        $tim = $query->paginate($perPage)->appends([
+            'search' => $search,
+            'per_page' => $perPage
+        ]);
+
+        return view("Manajemen-Tim", compact('user', 'tim', 'search', 'perPage'));
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create($id)
     {
-        //
+        $tim = Tim::findOrFail($id);
+        $users = User::all();
+        $anggota = AnggotaTim::where('tim_id', $id)->get(); // Ambil semua user
+        return view('Anggota', compact('tim', 'users', 'anggota'));
     }
+
 
     /**
      * Store a newly created resource in storage.
@@ -80,7 +96,45 @@ class PeriodeController extends Controller
             return redirect()->back()->with('error', 'Gagal membuat data: ' . $e->getMessage());
         }
     }
+    public function indexx($id)
+    {
+        $user = Auth::user();
+        $tim = Tim::find($id);
+        $anggota = AnggotaTim::with('user', 'tim')->where("tim_id", $id)->get();
+        // dd($anggota);
+        return view("Anggota", compact('user', 'anggota', 'tim'));
+    }
+    public function storee(Request $request, $id)
+    {
+        // Validasi input
+        $validatedData = $request->validate([
+            'registrasi_id' => 'required|exists:users,id',
+        ]);
 
+        DB::beginTransaction();
+        try {
+            // Cek apakah user sudah menjadi anggota tim
+            $existingMember = AnggotaTim::where('tim_id', $id->id)
+                ->where('registrasi_id', $validatedData['registrasi_id'])
+                ->exists();
+
+            if ($existingMember) {
+                return redirect()->back()->with('error', 'User sudah menjadi anggota tim.');
+            }
+
+            // Tambahkan anggota tim
+            AnggotaTim::create([
+                'tim_id' => $id->id,
+                'registrasi_id' => $validatedData['registrasi_id'],
+            ]);
+
+            DB::commit();
+            return redirect()->back()->with('success', 'Anggota tim berhasil ditambahkan!');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->back()->with('error', 'Gagal menambah anggota: ' . $e->getMessage());
+        }
+    }
     /**
      * Display the specified resource.
      */
