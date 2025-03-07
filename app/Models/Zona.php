@@ -20,6 +20,8 @@ class Zona extends Model
         'polt-area_id',
         "zona",
         "slug",
+        'latitude',
+        'longitude',
         "jenis_hutan",
         "foto_area",
     ];

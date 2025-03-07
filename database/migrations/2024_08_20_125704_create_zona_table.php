@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string("jenis_hutan", 250);
             $table->decimal('latitude', 10, 8);
             $table->decimal('longitude', 11, 8);
-            $table->string('foto_area');
+            $table->string('foto_area')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

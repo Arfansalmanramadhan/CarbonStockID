@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Periode;
 use App\Models\PoltArea;
 use App\Models\Zona;
 use Illuminate\Http\Request;
@@ -20,7 +21,8 @@ class zonaController extends Controller
         // $zona = Zona::where('polt-area_id', $user->id );
         return view('zona', compact('user'));
     }
-    public function getZona(Request $request, $slug){
+    public function getZona(Request $request, $slug)
+    {
         $user = Auth::user();
         $search = $request->query('search');
         $perPage = $request->query('per_page', 5);
@@ -38,63 +40,48 @@ class zonaController extends Controller
             'search' => $search,
             'per_page' => $perPage
         ]);
-        return view('show.zona', compact('zona', "user" , 'search', 'perPage', 'lokasi'));
+        return view('show.zona', compact('zona', "user", 'search', 'perPage', 'lokasi'));
     }
-    public function tambah()
+    public function tambah($slug)
     {
         $user = Auth::user();
-        $poltArea = PoltArea::where('id', $user->id)->first();
-        // $zona = Zona::where('polt-area_id', $user->id );
+        $poltArea = PoltArea::where('slug', $slug)->firstOrFail();
         return view('tambah.TambahZona', compact('user', 'poltArea'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function create($slug)
     {
         $user = Auth::user();
-        $poltArea = PoltArea::where('id', $user->id);
-        $zona = Zona::where('polt-area_id', $user->id );
-        return view('tambah.zona', compact('user', 'poltArea', 'zona'));
+        $poltArea = PoltArea::where('slug', $slug)->firstOrFail();
+        return view('tambah.TambahZona', compact('poltArea'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function store(Request $request, $slug)
     {
-        $poltareaID = $request->input("polt-area_id"); // pastikan polt-area_id dikirim dari FE
-        $polt = PoltArea::find($poltareaID);
-        // dd($request->all());
-        // Validasi request
         $validatedData = $request->validate([
-            'polt-area_id' => 'required|integer|exists:polt-area,id',
             'zona' => 'required|string|max:255',
             'latitude' => 'required|numeric',
             'longitude' => 'required|numeric',
             'jenis_hutan' => 'required|string|max:255',
         ]);
+
         DB::beginTransaction();
         try {
+            $poltArea = PoltArea::where('slug', $slug)->firstOrFail();
 
-            $poltArea = Zona::create([
-                'polt-area_id' => $polt->id,
-                "zona" => $validatedData['zona'],
-                "jenis_hutan" => $validatedData['jenis_hutan'],
-                "latitude" => $validatedData['latitude'],
-                "longitude" => $validatedData['longitude'],
-                "slug" => Str::slug($validatedData['zona']),
+            $zona = Zona::create([
+                'polt-area_id' => $poltArea->id,
+                'zona' => $validatedData['zona'],
+                'latitude' => $validatedData['latitude'],
+                'longitude' => $validatedData['longitude'],
+                'jenis_hutan' => $validatedData['jenis_hutan'],
+                'slug' => Str::slug($validatedData['zona']),
             ]);
-            // dd($poltArea);
-            // Response berhasil
-            // return response()->json([
-            //     'message' => 'PoltArea berhasil di buat',
-            //     'data' => $poltArea
-            // ], 201);
+
             DB::commit();
-            return redirect()->back()->with('success', 'Zona berhasil ditambahkan!');
+            return redirect()->route('zona.getZona', ['slug' => $slug])->with('success', 'Zona berhasil ditambahkan!');
         } catch (\Exception $e) {
+            DB::rollBack();
             return redirect()->back()->with('error', 'Gagal membuat data: ' . $e->getMessage());
         }
     }

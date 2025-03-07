@@ -13,50 +13,50 @@
         <div class="table-container">
             <div class="table-container">
                 {{-- <div class="table-wrapper"> --}}
-                    <div class="table-header d-flex justify-content-between">
-                        <form method="GET" action="{{ route('Lokasi.lokasi') }}">
-                            <div class="tampilkan">
-                                <label for="show-entries">Tampilkan</label>
-                                <select id="show-entries perPageSelect" class="number-selection" name="perPage"
-                                    onchange="this.form.submit()">
-                                    <option value="5" {{ request('perPage') == 5 ? 'selected' : '' }}>5</option>
-                                    <option value="10" {{ request('perPage') == 10 ? 'selected' : '' }}>10</option>
-                                    <option value="20" {{ request('perPage') == 20 ? 'selected' : '' }}>20</option>
-                                </select>
-                                <span class="ms-2">data</span>
-                            </div>
-                        </form>
-                        <div class="d-flex align-items-center">
-                            {{-- <form method="GET" action="{{ route('Lokasi.lokasi') }}">
+                <div class="table-header d-flex justify-content-between">
+                    <form method="GET" action="{{ route('Lokasi.lokasi') }}">
+                        <div class="tampilkan">
+                            <label for="show-entries">Tampilkan</label>
+                            <select id="show-entries perPageSelect" class="number-selection" name="perPage"
+                                onchange="this.form.submit()">
+                                <option value="5" {{ request('perPage') == 5 ? 'selected' : '' }}>5</option>
+                                <option value="10" {{ request('perPage') == 10 ? 'selected' : '' }}>10</option>
+                                <option value="20" {{ request('perPage') == 20 ? 'selected' : '' }}>20</option>
+                            </select>
+                            <span class="ms-2">data</span>
+                        </div>
+                    </form>
+                    <div class="d-flex align-items-center">
+                        {{-- <form method="GET" action="{{ route('Lokasi.lokasi') }}">
                                 <input type="text"class="form-control" id="search" name="search"
                                     value="{{ request('search') }}" placeholder="Cari daerah atau status..."
                                     onkeyup="searchTable()">
                                 <button type="submit">Cari</button>
                             </form> --}}
-                            <div class="form-control-space">
-                                <input type="text" id="searchInput" placeholder="Cari..." class="form-control mb-3"
-                                    value="{{ $search }}" onkeyup="searchTable()">
-                            </div>
-                            <!-- Button to trigger modal -->
-                            <button onclick="window.location.href='{{ route('Lokasi.index') }}'"
-                                class="btn btn-tambah-data p-3">Tambah</button>
+                        <div class="form-control-space">
+                            <input type="text" id="searchInput" placeholder="Cari..." class="form-control mb-3"
+                                value="{{ $search }}" onkeyup="searchTable()">
                         </div>
+                        <!-- Button to trigger modal -->
+                        <button onclick="window.location.href='{{ route('Lokasi.index') }}'"
+                            class="btn btn-tambah-data p-3">Tambah</button>
                     </div>
-                    <div class="table-wrapper">
-                        <table class="custom-table-pancang">
-                            <thead>
-                                <tr>
-                                    <th class="kiriPancang">No</th>
-                                    <th>Nama Lokasi</th>
-                                    <th>Jenis Hutan</th>
-                                    <th>Latitude</th>
-                                    <th>Longitude</th>
-                                    <th>Tanggal Pengamatan </th>
-                                    <th class="hidden-column kananPancang">Aksi</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {{-- <tr>
+                </div>
+                <div class="table-wrapper">
+                    <table class="custom-table-pancang">
+                        <thead>
+                            <tr>
+                                <th class="kiriPancang">No</th>
+                                <th>Nama Lokasi</th>
+                                <th>Jenis Hutan</th>
+                                <th>Latitude</th>
+                                <th>Longitude</th>
+                                <th>Tanggal Pengamatan </th>
+                                <th class="hidden-column kananPancang">Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{-- <tr>
                                     <td>1</td>
                                     <td>Telkom University</td>
                                     <td>Detail</td>
@@ -77,74 +77,78 @@
                                         </button>
                                     </td>
                                 </tr> --}}
-                            </tbody>
-                            <tbody id="data-table ">
-                                @foreach ($lokasi as $index => $item)
-                                    <tr>
-                                        <td>{{ $lokasi->firstItem() + $index }}</td>
-                                        <td>{{ $item->daerah }}</td>
-                                        <td>{{ $item->jenis_hutan }}</td>
-                                        <td>{{ $item->latitude }}</td>
-                                        <td>{{ $item->longitude }}</td>
-                                        <td>{{ $item->periode_pengamatan }}</td>
-                                        <td class="hidden-column aksi-button">
-                                            <a href="{{ route('zona.getZona', ['slug' => $item->slug]) }}"
-                                                class="btn btn-info btn-sm">Detail</a>
-                                            <button class="view-btn">
-                                                <img src="{{ asset('/images/Eye.svg') }}" alt="" />
-                                            </button>
-                                            <button onclick="window.location.href='{{ route('Tambah-Surveyor.indexx') }}'"
-                                                class="add-btn">
-                                                <img src="{{ asset('/images/AddIcon.svg') }}" alt="" />
-                                            </button>
-                                            <button class="delete-btn">
-                                                <img src="{{ asset('/images/Trash.svg') }}" alt="" />
-                                            </button>
-                                            {{-- <button>👁️</button>
+                        </tbody>
+                        <tbody id="data-table ">
+                            @forelse ($lokasi as $index => $item)
+                                <tr>
+                                    <td>{{ $lokasi->firstItem() + $index }}</td>
+                                    <td>{{ $item->daerah }}</td>
+                                    <td>{{ $item->jenis_hutan }}</td>
+                                    <td>{{ $item->latitude }}</td>
+                                    <td>{{ $item->longitude }}</td>
+                                    <td>{{ $item->periode_pengamatan }}</td>
+                                    <td class="hidden-column aksi-button">
+                                        <a href="{{ route('zona.getZona', ['slug' => $item->slug]) }}"
+                                            class="btn btn-info btn-sm">Detail</a>
+                                        <button class="view-btn">
+                                            <img src="{{ asset('/images/Eye.svg') }}" alt="" />
+                                        </button>
+                                        <button onclick="window.location.href='{{ route('Tambah-Surveyor.indexx') }}'"
+                                            class="add-btn">
+                                            <img src="{{ asset('/images/AddIcon.svg') }}" alt="" />
+                                        </button>
+                                        <button class="delete-btn">
+                                            <img src="{{ asset('/images/Trash.svg') }}" alt="" />
+                                        </button>
+                                        {{-- <button>👁️</button>
                                             <button>➕</button>
                                             <button>🗑️</button> --}}
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="table-footer mt-5">
-                        <strong>
-                            Menampilkan {{ $lokasi->firstItem() }} sampai {{ $lokasi->lastItem() }} dari
-                            {{ $lokasi->total() }} data
-                        </strong>
-                        <nav>
-                            <ul class="pagination">
-                                {{-- Tombol Kembali --}}
-                                @if ($lokasi->onFirstPage())
-                                    <li class="page-item disabled"><span class="page-link">Kembali</span></li>
-                                @else
-                                    <li class="page-item"><a class="page-link"
-                                            href="{{ $lokasi->previousPageUrl() }}">Kembali</a></li>
-                                @endif
+                                    </td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="6" class="text-center">Belum ada data</td>
+                                </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
+                </div>
+                <div class="table-footer mt-5">
+                    <strong>
+                        Menampilkan {{ $lokasi->firstItem() }} sampai {{ $lokasi->lastItem() }} dari
+                        {{ $lokasi->total() }} data
+                    </strong>
+                    <nav>
+                        <ul class="pagination">
+                            {{-- Tombol Kembali --}}
+                            @if ($lokasi->onFirstPage())
+                                <li class="page-item disabled"><span class="page-link">Kembali</span></li>
+                            @else
+                                <li class="page-item"><a class="page-link"
+                                        href="{{ $lokasi->previousPageUrl() }}">Kembali</a></li>
+                            @endif
 
-                                {{-- Nomor Halaman --}}
-                                @foreach ($lokasi->getUrlRange(1, $lokasi->lastPage()) as $page => $url)
-                                    <li class="page-item {{ $lokasi->currentPage() == $page ? 'active' : '' }}">
-                                        <a class="page-link" href="{{ $url }}">{{ $page }}</a>
-                                    </li>
-                                @endforeach
+                            {{-- Nomor Halaman --}}
+                            @foreach ($lokasi->getUrlRange(1, $lokasi->lastPage()) as $page => $url)
+                                <li class="page-item {{ $lokasi->currentPage() == $page ? 'active' : '' }}">
+                                    <a class="page-link" href="{{ $url }}">{{ $page }}</a>
+                                </li>
+                            @endforeach
 
-                                {{-- Tombol Lanjut --}}
-                                @if ($lokasi->hasMorePages())
-                                    <li class="page-item"><a class="page-link"
-                                            href="{{ $lokasi->nextPageUrl() }}">Lanjut</a></li>
-                                @else
-                                    <li class="page-item disabled"><span class="page-link">Lanjut</span></li>
-                                @endif
-                            </ul>
-                        </nav>
-                    </div>
-                    <!-- Pagination -->
-                    <div class="d-flex justify-content-between">
-                        {{ $lokasi->links() }}
-                    </div>
+                            {{-- Tombol Lanjut --}}
+                            @if ($lokasi->hasMorePages())
+                                <li class="page-item"><a class="page-link" href="{{ $lokasi->nextPageUrl() }}">Lanjut</a>
+                                </li>
+                            @else
+                                <li class="page-item disabled"><span class="page-link">Lanjut</span></li>
+                            @endif
+                        </ul>
+                    </nav>
+                </div>
+                <!-- Pagination -->
+                <div class="d-flex justify-content-between">
+                    {{ $lokasi->links() }}
+                </div>
                 {{-- </div> --}}
             </div>
         </div>

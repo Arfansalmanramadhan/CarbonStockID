@@ -1,13 +1,13 @@
 @extends('layout.mainlayaot')
 
-@section('title', 'Zona')
+@section('title', 'Hamparan')
 
 @section('content')
     <div id="prediksi-content" class="page-content content p-4">
         <div class="image-container mt-4">
             <div class="col page-title">
                 <img src="{{ asset('/images/dataPlot-Image.svg') }}" alt="" class="img-normal" />
-                <p class="large-text text-overlay">Zona</p>
+                <p class="large-text text-overlay">Hamparan</p>
             </div>
         </div>
         <div class="table-container">
@@ -15,7 +15,7 @@
                 <div class="table-wrapper">
                     <div class="table-header d-flex justify-content-between">
                         <form method="GET"
-                            action="{{ route('zona.getZona', ['slug' => $zona->first()->slug ?? 'default-slug']) }}">
+                            action="{{ route('hamparan.getHamparan', ['slug' => $hamparan->first()->slug ?? 'default-slug']) }}">
                             <div class="tampilkan">
                                 <label for="show-entries">Tampilkan</label>
                                 <select id="show-entries perPageSelect" class="number-selection" name="perPage"
@@ -34,7 +34,7 @@
                                     value="{{ $search }}" onkeyup="searchTable()">
                             </div>
                             <!-- Button to trigger modal -->
-                            <button onclick="window.location.href='{{ route('TambahZona.tambah',['slug' => $lokasi->slug]) }}'"
+                            <button onclick="window.location.href='{{ route('TambahHamparan.tambah',['slug' => $zona->slug]) }}'"
                                 class="btn btn-tambah-data p-3">Tambah</button>
                         </div>
                     </div>
@@ -42,10 +42,9 @@
                         <thead>
                             <tr>
                                 <th class="kiriPancang">No</th>
-                                <th>Nama Zona</th>
+                                <th>Nama Hamparan</th>
                                 <th>Latitude</th>
                                 <th>Longitude</th>
-                                <th>Jenis Hutan</th>
                                 <th class="hidden-column kananPancang">Aksi</th>
                             </tr>
                         </thead>
@@ -73,16 +72,13 @@
                             </tr> --}}
                         </tbody>
                         <tbody id="data-table ">
-                            @forelse ($zona as $index => $item)
+                            @forelse ($hamparan as $index => $item)
                                 <tr>
-                                    <td>{{ $zona->firstItem() + $index }}</td>
-                                    <td>{{ $item->zona }}</td>
+                                    <td>{{ $hamparan->firstItem() + $index }}</td>
+                                    <td>{{ $item->nama_hamparan }}</td>
                                     <td>{{ $item->latitude }}</td>
                                     <td>{{ $item->longitude }}</td>
-                                    <td>{{ $item->jenis_hutan }}</td>
                                     <td class="hidden-column aksi-button">
-                                        <a href="{{ route('hamparan.getHamparan', ['slug' => $item->slug]) }}"
-                                            class="btn btn-info btn-sm">Detail</a>
                                         <button class="view-btn">
                                             <img src="{{ asset('/images/Eye.svg') }}" alt="View" />
                                         </button>
@@ -106,26 +102,26 @@
                     </table>
                     <div class="table-footer mt-5">
                         <strong>
-                            Menampilkan {{ $zona->firstItem() }} sampai {{ $zona->lastItem() }} dari
-                            {{ $zona->total() }} data
+                            Menampilkan {{ $hamparan->firstItem() }} sampai {{ $hamparan->lastItem() }} dari
+                            {{ $hamparan->total() }} data
                         </strong>
                         <nav>
                             <ul class="pagination">
-                                @if ($zona->onFirstPage())
+                                @if ($hamparan->onFirstPage())
                                     <li class="page-item disabled"><span class="page-link">Kembali</span></li>
                                 @else
                                     <li class="page-item"><a class="page-link"
-                                            href="{{ $zona->previousPageUrl() }}">Kembali</a></li>
+                                            href="{{ $hamparan->previousPageUrl() }}">Kembali</a></li>
                                 @endif
 
-                                @foreach ($zona->getUrlRange(1, $zona->lastPage()) as $page => $url)
-                                    <li class="page-item {{ $zona->currentPage() == $page ? 'active' : '' }}">
+                                @foreach ($hamparan->getUrlRange(1, $hamparan->lastPage()) as $page => $url)
+                                    <li class="page-item {{ $hamparan->currentPage() == $page ? 'active' : '' }}">
                                         <a class="page-link" href="{{ $url }}">{{ $page }}</a>
                                     </li>
                                 @endforeach
 
-                                @if ($zona->hasMorePages())
-                                    <li class="page-item"><a class="page-link" href="{{ $zona->nextPageUrl() }}">Lanjut</a>
+                                @if ($hamparan->hasMorePages())
+                                    <li class="page-item"><a class="page-link" href="{{ $hamparan->nextPageUrl() }}">Lanjut</a>
                                     </li>
                                 @else
                                     <li class="page-item disabled"><span class="page-link">Lanjut</span></li>
@@ -134,7 +130,7 @@
                         </nav>
                     </div>
                     <div class="d-flex justify-content-between">
-                        {{ $zona->links() }}
+                        {{ $hamparan->links() }}
                     </div>
                 </div>
             </div>
@@ -145,7 +141,7 @@
             let perPage = this.value;
             let search = document.getElementById('searchInput').value;
             window.location.href =
-                "{{ route('zona.getZona', ['slug' => $zona->first()->slug ?? 'default-slug']) }}" + "?per_page=" +
+                "{{ route('hamparan.getHamparan', ['slug' => $hamparan->first()->slug ?? 'default-slug']) }}" + "?per_page=" +
                 perPage + "&search=" + search;
         });
 
@@ -154,7 +150,7 @@
                 let perPage = document.getElementById('perPageSelect').value;
                 let search = this.value;
                 window.location.href =
-                    "{{ route('zona.getZona', ['slug' => $zona->first()->slug ?? 'default-slug']) }}" +
+                    "{{ route('hamparan.getHamparan', ['slug' => $hamparan->first()->slug ?? 'default-slug']) }}" +
                     "?per_page=" + perPage + "&search=" +
                     search;
             }
