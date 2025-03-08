@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger("tim_id");
             $table->foreign("tim_id")->references("id")->on("tim")->onDelete('cascade')->onUpdate('cascade');
-            $table->unsignedBigInteger("polt-area_id");
-            $table->foreign("polt-area_id")->references("id")->on("polt-area")->onDelete('cascade');
+            $table->unsignedBigInteger("polt_area_id");
+            $table->foreign("polt_area_id")->references("id")->on("polt_area")->onDelete('cascade');
             $table->timestamps();
             $table->softDeletes();
         });

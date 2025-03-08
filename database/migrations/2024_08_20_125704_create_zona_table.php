@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('zona', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger("polt-area_id");
-            $table->foreign("polt-area_id")->references("id")->on("polt-area")->onDelete('cascade');
+            $table->unsignedBigInteger("polt_area_id");
+            $table->foreign("polt_area_id")->references("id")->on("polt_area")->onDelete('cascade');
             $table->string("zona", 250);
             $table->string("slug", 255);
             $table->string("jenis_hutan", 250);

@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create("polt-area", function (Blueprint $table) {
+        Schema::create("polt_area", function (Blueprint $table) {
             $table->id();
             $table->string("daerah")->nullable();
             $table->string("slug", 255);
@@ -32,6 +32,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists("polt-area");
+        Schema::dropIfExists("polt_area");
     }
 };

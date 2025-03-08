@@ -331,11 +331,19 @@ let map;
 let marker;
 
 // Ambil lokasi saat ini
+// Ambil data koordinat dari database (Blade)
+// let dbLatitude = "{{$hamparan->latitude ?? $zona->latitude ?? $poltArea->latitude ?? '' }}";
+// let dbLongitude = "{{$hamparan->longitude ?? $zona->longitude ?? $poltArea->longitude ?? '' }}";
+// if (dbLatitude && dbLongitude) {
+//     setupMap([parseFloat(dbLongitude), parseFloat(dbLatitude)]);
+// } else {
+
+// }
 navigator.geolocation.getCurrentPosition(successLocation, errorLocation, {
     enableHighAccuracy: true,
     timeout: 10000, // 10 detik sebelum gagal
     maximumAge: 0, // Tidak gunakan lokasi cache
-  });
+});
 
   function successLocation(position) {
     console.log("Lokasi ditemukan:", position);
@@ -353,7 +361,7 @@ navigator.geolocation.getCurrentPosition(successLocation, errorLocation, {
 
     alert("Gagal mendapatkan lokasi, menggunakan lokasi default (Jakarta).");
     setupMap([106.8456, -6.2088]); // Default ke Jakarta jika gagal
-  } 
+  }
 
 function setupMap(center) {
   map = new mapboxgl.Map({

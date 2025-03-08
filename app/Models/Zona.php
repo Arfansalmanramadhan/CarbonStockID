@@ -17,7 +17,7 @@ class Zona extends Model
     use SoftDeletes;
     protected $table = 'zona';
     protected $fillable = [
-        'polt-area_id',
+        'polt_area_id',
         "zona",
         "slug",
         'latitude',
@@ -43,7 +43,7 @@ class Zona extends Model
      */
     public function poltArea(): BelongsTo
     {
-        return $this->belongsTo(PoltArea::class, 'polt-area_id');
+        return $this->belongsTo(PoltArea::class, 'polt_area_id');
     }
     public function hamparan(): BelongsTo
     {

@@ -112,6 +112,8 @@ Route::middleware('auth')->group(function () {
         Route::get("/Lokasi/tambah", "index")->name('Lokasi.index');
         Route::post("/Lokasi/tambah", "store")->name('Lokasi.store');
         Route::get("/Lokasi/tambah", "create")->name('Lokasi.index');
+        Route::get("/Lokasi/edit/{slug}", "edit")->name('Lokasi.edit');
+        Route::put("/Lokasi/edit/{slug}", "update")->name('Lokasi.update');
         Route::get("/TambahPlot", "tambah")->name('TambahPlot.tambah');
     });
     // Route::post('/Serasah/store', [SerasahController::class, 'store'])->name('Serasah.store');
@@ -211,6 +213,8 @@ Route::middleware('auth')->group(function () {
         Route::get("/zona/{slug}/tambah", "tambah")->name('TambahZona.tambah');
         Route::post("/zona/{slug}/tambah", "store")->name('zona.store');
         Route::get("/zona/{slug}/tambah", "create")->name('TambahZona.tambah');
+        Route::get("/zona/{slugP}/edit/{slugZ}", "edit")->name('zona.edit');
+        Route::put("/zona/{slugP}/edit/{slugZ}", "update")->name('zona.update');
     });
     Route::controller(HamparanController::class)->group(function () {
         Route::get('/Hamparan', 'index')->name('Hamparan.index');
@@ -218,5 +222,7 @@ Route::middleware('auth')->group(function () {
         Route::get("/Hamparan/{slug}/tambah", "tambah")->name('TambahHamparan.tambah');
         Route::post("/Hamparan/{slug}/tambah", "store")->name('Hamparan.store');
         Route::get("/Hamparan/{slug}/tambah", "create")->name('TambahHamparan.tambah');
+        Route::get("/Hamparan/{slugZ}/edit/{slugH}", "edit")->name('Hamparan.edit');
+        Route::put("/Hamparan/{slugZ}/edit/{slugH}", "update")->name('Hamparan.update');
     });
 });

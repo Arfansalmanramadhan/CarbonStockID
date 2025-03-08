@@ -116,7 +116,14 @@ class PoltAreaController extends Controller
      */
     public function edit(string $slug)
     {
-        //
+        $user = Auth::user();
+        // Cari PoltArea berdasarkan slug
+        $poltArea = PoltArea::where('slug', $slug)->firstOrFail();
+
+        // Ambil daftar periode untuk dropdown
+        $periodes = Periode::all();
+
+        return view('edit.PlotArea', compact('poltArea', 'periodes'));
     }
 
     /**
@@ -124,30 +131,52 @@ class PoltAreaController extends Controller
      */
     public function update(Request $request, string $slug)
     {
-        // Validasi data
+        // Validasi request
         $validatedData = $request->validate([
             'daerah' => 'required|string|max:255',
             'latitude' => 'required|numeric',
             'longitude' => 'required|numeric',
+            'jenis_hutan' => 'required|string|max:255',
+            'periode_pengamatan' => 'required|string',
+            'periode_id' => 'required|exists:periode,id',
         ]);
-        // cari poltarean berdasarkan slug
-        $poltArea = PoltArea::where("slug", $slug)->first();
-        // jika tidak ditemukan, kembalikan respon error
-        if (!$poltArea) {
-            return response()->json([
-                "pesan" => "PoltArea tidak ditemukan"
-            ], 404);
-        }
-        // Generate slug baru berdasarkan daerah yang diperbarui
-        $validatedData['slug'] = Str::slug($validatedData['daerah']);
-        // Update data poltArea
-        $poltArea->update($validatedData);
 
-        // Kembalikan respons sukses
-        return response()->json([
-            'pesan' => 'PoltArea berhasil diperbarui',
-            'data' => $poltArea
-        ], 200);
+        DB::beginTransaction();
+        try {
+            // Cari PoltArea berdasarkan slug
+            $poltArea = PoltArea::where('slug', $slug)->firstOrFail();
+
+            // Cari Periode berdasarkan periode_id
+            $periode = Periode::findOrFail($validatedData['periode_id']);
+
+            // Gabungkan tanggal mulai dan berakhir untuk periode_pengamatan
+            $periode_pengamatan = $periode->tanggal_mulai . ' s/d ' . $periode->tanggal_berakhir;
+
+            // Pastikan slug tetap unik
+            $newSlug = Str::slug($validatedData['daerah']);
+
+            // Cek apakah slug baru sudah digunakan oleh PoltArea lain
+            if (PoltArea::where('slug', $newSlug)->where('id', '!=', $poltArea->id)->exists()) {
+                return redirect()->back()->with('error', 'Slug sudah digunakan, coba nama daerah lain.');
+            }
+
+            // Update data PoltArea
+            $poltArea->update([
+                "daerah" => $validatedData['daerah'],
+                "latitude" => $validatedData['latitude'],
+                "longitude" => $validatedData['longitude'],
+                "jenis_hutan" => $validatedData['jenis_hutan'],
+                "periode_pengamatan" => $periode_pengamatan,
+                "periode_id" => $periode->id,
+                "slug" => $newSlug, // Update slug dengan yang baru
+            ]);
+
+            DB::commit();
+            return redirect()->route('Lokasi.lokasi', ['slug' => $slug])->with('success', 'Lokasi berhasil diperbarui!');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->back()->with('error', 'Gagal memperbarui data: ' . $e->getMessage());
+        }
     }
 
     /**

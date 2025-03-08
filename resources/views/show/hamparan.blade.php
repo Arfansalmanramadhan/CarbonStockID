@@ -82,10 +82,10 @@
                                         <button class="view-btn">
                                             <img src="{{ asset('/images/Eye.svg') }}" alt="View" />
                                         </button>
-                                        {{-- <button onclick="window.location.href='{{ route('Tambah-Surveyor.index') }}'"
+                                        <button onclick="window.location.href='{{ route('Hamparan.edit',['slugZ' => $zona->slug,'slugH' => $item->slug]) }}'"
                                             class="add-btn">
-                                            <img src="{{ asset('/images/AddIcon.svg') }}" alt="Add" />
-                                        </button> --}}
+                                            <img src="{{ asset('/images/PencilSquare.svg') }}" alt="Add" />
+                                        </button>
                                         <button class="delete-btn">
                                             <img src="{{ asset('/images/Trash.svg') }}" alt="Delete" />
                                         </button>

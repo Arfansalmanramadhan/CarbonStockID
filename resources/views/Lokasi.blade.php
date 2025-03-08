@@ -93,9 +93,9 @@
                                         <button class="view-btn">
                                             <img src="{{ asset('/images/Eye.svg') }}" alt="" />
                                         </button>
-                                        <button onclick="window.location.href='{{ route('Tambah-Surveyor.indexx') }}'"
+                                        <button onclick="window.location.href='{{ route('Lokasi.edit', $item->slug) }}'"
                                             class="add-btn">
-                                            <img src="{{ asset('/images/AddIcon.svg') }}" alt="" />
+                                            <img src="{{ asset('/images/PencilSquare.svg') }}" alt="Add" />
                                         </button>
                                         <button class="delete-btn">
                                             <img src="{{ asset('/images/Trash.svg') }}" alt="" />

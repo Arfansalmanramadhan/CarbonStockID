@@ -34,7 +34,7 @@
                                     value="{{ $search }}" onkeyup="searchTable()">
                             </div>
                             <!-- Button to trigger modal -->
-                            <button onclick="window.location.href='{{ route('TambahZona.tambah',['slug' => $lokasi->slug]) }}'"
+                            <button onclick="window.location.href='{{ route('TambahZona.tambah',['slug' => $poltArea->slug]) }}'"
                                 class="btn btn-tambah-data p-3">Tambah</button>
                         </div>
                     </div>
@@ -86,10 +86,10 @@
                                         <button class="view-btn">
                                             <img src="{{ asset('/images/Eye.svg') }}" alt="View" />
                                         </button>
-                                        {{-- <button onclick="window.location.href='{{ route('Tambah-Surveyor.index') }}'"
+                                        <button onclick="window.location.href='{{ route('zona.edit', ['slugP' => $poltArea->slug, 'slugZ' => $item->slug]) }}'"
                                             class="add-btn">
-                                            <img src="{{ asset('/images/AddIcon.svg') }}" alt="Add" />
-                                        </button> --}}
+                                            <img src="{{ asset('/images/PencilSquare.svg') }}" alt="Add" />
+                                        </button>
                                         <button class="delete-btn">
                                             <img src="{{ asset('/images/Trash.svg') }}" alt="Delete" />
                                         </button>

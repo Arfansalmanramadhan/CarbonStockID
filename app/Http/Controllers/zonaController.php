@@ -26,21 +26,21 @@ class zonaController extends Controller
         $user = Auth::user();
         $search = $request->query('search');
         $perPage = $request->query('per_page', 5);
-        $lokasi = PoltArea::where("slug", $slug)->first();
+        $poltArea = PoltArea::where("slug", $slug)->first();
         $query = Zona::query();
         if (!empty($search)) {
             $query->where('zona', 'ILIKE', "%{$search}%")
                 ->orWhere('jenis_hutan', 'ILIKE', "%{$search}%");
         }
 
-        // $lokasi = $query->paginate($perPage);
+        // $poltArea = $query->paginate($perPage);
 
         /// Ambil data dengan pagination
         $zona = $query->paginate($perPage)->appends([
             'search' => $search,
             'per_page' => $perPage
         ]);
-        return view('show.zona', compact('zona', "user", 'search', 'perPage', 'lokasi'));
+        return view('show.zona', compact('zona', "user", 'search', 'perPage', 'poltArea'));
     }
     public function tambah($slug)
     {
@@ -70,7 +70,7 @@ class zonaController extends Controller
             $poltArea = PoltArea::where('slug', $slug)->firstOrFail();
 
             $zona = Zona::create([
-                'polt-area_id' => $poltArea->id,
+                'polt_area_id' => $poltArea->id,
                 'zona' => $validatedData['zona'],
                 'latitude' => $validatedData['latitude'],
                 'longitude' => $validatedData['longitude'],
@@ -97,19 +97,46 @@ class zonaController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit($slugP, $slugZ)
     {
-        //
+        // $user = Auth::user();
+        $poltArea = PoltArea::where('slug', $slugP)->firstOrFail();
+        $zona = Zona::where('slug', $slugZ)->where('polt_area_id', $poltArea->id)->firstOrFail();
+
+        return view('edit.zona', compact('poltArea', 'zona'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $slugP, $slugZ)
     {
-        //
-    }
+        $validatedData = $request->validate([
+            'zona' => 'required|string|max:255|unique:zona,zona,'.$slugZ. ',slug',
+            'latitude' => 'required|numeric',
+            'longitude' => 'required|numeric',
+            'jenis_hutan' => 'required|string|max:255',
+        ]);
+        DB::beginTransaction();
+        try {
+            $poltArea = PoltArea::where('slug', $slugP)->firstOrFail();
+            $zona = Zona::where('slug', $slugZ)->where('polt_area_id', $poltArea->id)->firstOrFail();
 
+            $zona->update([
+                'zona' => $validatedData['zona'],
+                'latitude' => $validatedData['latitude'],
+                'longitude' => $validatedData['longitude'],
+                'jenis_hutan' => $validatedData['jenis_hutan'],
+                'slug' => Str::slug($validatedData['zona']),
+            ]);
+
+            DB::commit();
+            return redirect()->route('zona.getZona', ['slug' => $slugP])->with('success', 'Zona berhasil diperbarui!');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->back()->with('error', 'Gagal memperbarui data: ' . $e->getMessage());
+        }
+    }
     /**
      * Remove the specified resource from storage.
      */
