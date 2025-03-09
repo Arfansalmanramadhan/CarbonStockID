@@ -27,19 +27,19 @@
                         </div>
                     </form>
                     <div class="d-flex align-items-center">
-                        {{-- <form method="GET" action="{{ route('Lokasi.lokasi') }}">
-                                <input type="text"class="form-control" id="search" name="search"
-                                    value="{{ request('search') }}" placeholder="Cari daerah atau status..."
-                                    onkeyup="searchTable()">
-                                <button type="submit">Cari</button>
-                            </form> --}}
-                        <div class="form-control-space">
-                            <input type="text" id="searchInput" placeholder="Cari..." class="form-control mb-3"
-                                value="{{ $search }}" onkeyup="searchTable()">
-                        </div>
-                        <!-- Button to trigger modal -->
+                        <form method="GET" action="{{ route('Lokasi.lokasi') }}">
+                            <div class="d-flex align-items-center">
+                                <div class="form-control-space">
+                                    <input type="text"class="form-control" id="search" name="search"
+                                        value="{{ request('search') }}" placeholder="Cari daerah atau status..."
+                                        onkeyup="searchTable()">
+                                </div>
+                                <button type="submit" class="btn btn-tambah-data ">Cari</button>
+                            </div>
+                        </form>
+
                         <button onclick="window.location.href='{{ route('Lokasi.index') }}'"
-                            class="btn btn-tambah-data p-3">Tambah</button>
+                            class="btn btn-tambah-data m-3">Tambah</button>
                     </div>
                 </div>
                 <div class="table-wrapper">

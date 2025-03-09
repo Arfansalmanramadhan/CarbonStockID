@@ -15,11 +15,25 @@ class zonaController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         $user = Auth::user();
-        // $zona = Zona::where('polt-area_id', $user->id );
-        return view('zona', compact('user'));
+        $search = $request->query('search');
+        $perPage = $request->query('per_page', 5);
+        $query = Zona::query();
+        if (!empty($search)) {
+            $query->where('zona', 'ILIKE', "%{$search}%")
+                ->orWhere('jenis_hutan', 'ILIKE', "%{$search}%");
+        }
+
+        // $poltArea = $query->paginate($perPage);
+
+        /// Ambil data dengan pagination
+        $zona = $query->paginate($perPage)->appends([
+            'search' => $search,
+            'per_page' => $perPage
+        ]);
+        return view('zona', compact('zona', "user", 'search', 'perPage'));
     }
     public function getZona(Request $request, $slug)
     {
@@ -112,7 +126,7 @@ class zonaController extends Controller
     public function update(Request $request, $slugP, $slugZ)
     {
         $validatedData = $request->validate([
-            'zona' => 'required|string|max:255|unique:zona,zona,'.$slugZ. ',slug',
+            'zona' => 'required|string|max:255|unique:zona,zona,' . $slugZ . ',slug',
             'latitude' => 'required|numeric',
             'longitude' => 'required|numeric',
             'jenis_hutan' => 'required|string|max:255',

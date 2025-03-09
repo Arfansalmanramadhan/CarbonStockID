@@ -11,11 +11,25 @@ use Illuminate\Support\Str;
 
 class HamparanController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $user = Auth::user();
-        // $zona = Zona::where('polt-area_id', $user->id );
-        return view('Hamparan', compact('user'));
+        $search = $request->query("search");
+        $perPage = $request->query('per_page', 5);
+        $query = Hamparan::query();
+        if (!empty($search)) {
+            $query->where('nama_hamparan', 'ILIKE', "%{$search}%")
+                ->orWhere('jenis_hutan', 'ILIKE', "%{$search}%");
+        }
+
+        // $poltArea = $query->paginate($perPage);
+
+        /// Ambil data dengan pagination
+        $hamparan = $query->paginate($perPage)->appends([
+            'search' => $search,
+            'per_page' => $perPage
+        ]);
+        return view('Hamparan', compact('user', 'hamparan',  'search', 'perPage'));
     }
     public function getHamparan(Request $request, $slug)
     {

@@ -1,13 +1,13 @@
 /@extends('layout.mainlayaot')
 
-@section('title', 'Zona')
+@section('title', 'Plot')
 
 @section('content')
     <div id="prediksi-content" class="page-content content p-4">
         <div class="image-container mt-4">
             <div class="col page-title">
                 <img src="{{ asset('/images/dataPlot-Image.svg') }}" alt="" class="img-normal" />
-                <p class="large-text text-overlay">Zona</p>
+                <p class="large-text text-overlay">Plot</p>
             </div>
         </div>
         <div class="table-container">

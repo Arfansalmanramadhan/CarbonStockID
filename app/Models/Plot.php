@@ -19,6 +19,7 @@ class Plot extends Model
         'type_plot',
         'latitude',
         'longitude',
+        'status',
     ];
     protected $guarded = [];
     protected static function boot()

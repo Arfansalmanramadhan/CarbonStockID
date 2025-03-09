@@ -29,6 +29,7 @@ use App\Http\Controllers\DataPlotController;
 use App\Http\Controllers\HamparanController;
 use App\Http\Controllers\ManajermenUserController;
 use App\Http\Controllers\PeriodeController;
+use App\Http\Controllers\PLotCOntroller;
 use App\Http\Controllers\RingkasanController;
 use App\Http\Controllers\SampahController;
 use App\Http\Controllers\SUrveyorController;
@@ -224,5 +225,8 @@ Route::middleware('auth')->group(function () {
         Route::get("/Hamparan/{slug}/tambah", "create")->name('TambahHamparan.tambah');
         Route::get("/Hamparan/{slugZ}/edit/{slugH}", "edit")->name('Hamparan.edit');
         Route::put("/Hamparan/{slugZ}/edit/{slugH}", "update")->name('Hamparan.update');
+    });
+    Route::controller(PLotCOntroller::class)->group(function(){
+        Route::get('/dataPlot', 'index')->name('dataPlot.index');
     });
 });

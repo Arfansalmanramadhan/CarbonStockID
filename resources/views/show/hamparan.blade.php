@@ -28,14 +28,17 @@
                             </div>
                         </form>
                         <div class="d-flex align-items-center">
-
-                            <div class="form-control-space">
-                                <input type="text" id="searchInput" placeholder="Cari..." class="form-control mb-3"
-                                    value="{{ $search }}" onkeyup="searchTable()">
-                            </div>
-                            <!-- Button to trigger modal -->
-                            <button onclick="window.location.href='{{ route('TambahHamparan.tambah',['slug' => $zona->slug]) }}'"
-                                class="btn btn-tambah-data p-3">Tambah</button>
+                            <form method="GET" action="{{ route('hamparan.getHamparan', ['slug' => $hamparan->first()->slug ?? 'default-slug']) }}">
+                                <div class="d-flex align-items-center">
+                                    <div class="form-control-space">
+                                        <input type="text" id="searchInput" name="search" placeholder="Cari..." class="form-control "
+                                            value="{{ request('search') }}">
+                                        </div>
+                                        <button type="submit" class="btn btn-tambah-data m-3">Cari</button>
+                                    </div>
+                                </form>
+                                <button onclick="window.location.href='{{ route('TambahHamparan.tambah',['slug' => $zona->slug]) }}'"
+                                    class="btn btn-tambah-data p-3">Tambah</button>
                         </div>
                     </div>
                     <table class="custom-table-pancang">
