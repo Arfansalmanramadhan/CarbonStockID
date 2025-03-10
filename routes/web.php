@@ -25,6 +25,7 @@ use App\Http\Controllers\PoltAreaController;
 use App\Http\Controllers\TunmbuhanBawahController;
 use App\Http\Controllers\PanduanController;
 use App\Http\Controllers\Authentication\AuthController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DataPlotController;
 use App\Http\Controllers\HamparanController;
 use App\Http\Controllers\ManajermenUserController;
@@ -67,11 +68,15 @@ Route::controller(AuthController::class)->group(function () {
 });
 Route::middleware('auth')->group(function () {
 
-    Route::get('/dashboard', function () {
-        $user = Auth::user();
-        $poltArea = PoltArea::where('id', $user->id)->first();
-        return view('dashboard', compact('user',  'poltArea')); // Kirim $profil ke view
-    })->name('dashboard');
+    Route::controller(DashboardController::class)->group(function () {
+        Route::get('/dashboard', 'index')->name('dashboard');
+        Route::get('/dashboard', 'showChart')->name('dashboard');
+    });
+    // Route::get('/dashboard', function () {
+    //     $user = Auth::user();
+    //     $poltArea = PoltArea::where('id', $user->id)->first();
+    //     return view('dashboard', compact('user',  'poltArea')); // Kirim $profil ke view
+    // })->name('dashboard');
 
 
     // Route untuk halaman tambah data

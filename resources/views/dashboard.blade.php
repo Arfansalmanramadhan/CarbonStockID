@@ -42,114 +42,161 @@
         {{-- <div id="carbon-prediction-chart-2"></div> --}}
         <div class="table-container">
             {{-- <div class="table-wrapper"> --}}
-                <div class="table-header d-flex justify-content-between">
-                    <div class="tampilkan">
-                        <label for="show-entries">Tampilkan</label>
-                        <select id="show-entries">
-                            <option value="5">5</option>
-                            <option value="10">10</option>
-                            <option value="20">20</option>
-                        </select>
-                        <span>data</span>
-                    </div>
+            <div class="table-header d-flex justify-content-between">
+                <div class="tampilkan">
+                    <label for="show-entries">Tampilkan</label>
+                    <select id="show-entries">
+                        <option value="5">5</option>
+                        <option value="10">10</option>
+                        <option value="20">20</option>
+                    </select>
+                    <span>data</span>
                 </div>
-                <div class="table-wrapper">
-                    <table class="custom-table-pancang">
-                        <thead>
-                            <tr>
-                                <th class="kiriPancang" rowspan="2">No</th>
-                                <th rowspan="2">Zona</th>
-                                <th colspan="2">Serasah</th>
-                                <th colspan="2">Pancanh</th>
-                                <th colspan="2">Tiang</th>
-                                <th class="hidden-column" colspan="2">pohon</th>
-                                <th class="hidden-column kananPancang" rowspan="2">Aksi</th>
-                            </tr>
-                            <tr>
-                                {{-- <th class="kiriPancang">No</th> --}}
-                                {{-- <th>Zona</th> --}}
-                                <th>Karbon</th>
-                                <th>Serapan karbon</th>
-                                <th>Karbon</th>
-                                <th class="hidden-column">Serapan Karobn</th>
-                                <th class="hidden-column">Karbon</th>
-                                <th class="hidden-column">serapan karbon</th>
-                                <th class="hidden-column">Karbon</th>
-                                <th class="hidden-column">Serapan serapan</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>11</td>
-                                <td>15 cm</td>
-                                <td>15cm</td>
-                                <td>15</td>
-                                <td>15</td>
-                                <td class="hidden-column">15 gr/cm3</td>
-                                <td class="hidden-column">15 kg</td>
-                                <td class="hidden-column">15 kg</td>
-                                <td class="hidden-column">15 kg</td>
-                                <td class="hidden-column">15 kg</td>
-                                <td class="hidden-column aksi-button">
-                                    <button class="edit-btn">
-                                        <img src="{{ asset('/images/PencilSquare.svg') }}" alt="" />
-                                    </button>
-                                    <button class="delete-btn">
-                                        <img src="{{ asset('/images/Trash.svg') }}" alt="" />
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan="2">Total karbon</td>
-                                <td colspan="9">15 cm</td>
-                            </tr>
-                            <tr>
-                                <td colspan="2">Total Serapan Karbon</td>
-                                <td colspan="9">15 cm</td>
-                            </tr>
-                        </tbody>
-                    </table>
+            </div>
+            <div class="table-wrapper">
+                <table class="custom-table-pancang">
+                    <thead>
+                        <tr>
+                            <th class="kiriPancang" rowspan="2">No</th>
+                            <th rowspan="2">Zona</th>
+                            <th colspan="2">Serasah</th>
+                            <th colspan="2">Pancanh</th>
+                            <th colspan="2">Tiang</th>
+                            <th class="hidden-column" colspan="2">pohon</th>
+                            <th class="hidden-column kananPancang" rowspan="2">Aksi</th>
+                        </tr>
+                        <tr>
+                            {{-- <th class="kiriPancang">No</th> --}}
+                            {{-- <th>Zona</th> --}}
+                            <th>Karbon</th>
+                            <th>Serapan karbon</th>
+                            <th>Karbon</th>
+                            <th class="hidden-column">Serapan Karobn</th>
+                            <th class="hidden-column">Karbon</th>
+                            <th class="hidden-column">serapan karbon</th>
+                            <th class="hidden-column">Karbon</th>
+                            <th class="hidden-column">Serapan serapan</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>11</td>
+                            <td>15 cm</td>
+                            <td>15cm</td>
+                            <td>15</td>
+                            <td>15</td>
+                            <td class="hidden-column">15 gr/cm3</td>
+                            <td class="hidden-column">15 kg</td>
+                            <td class="hidden-column">15 kg</td>
+                            <td class="hidden-column">15 kg</td>
+                            <td class="hidden-column">15 kg</td>
+                            <td class="hidden-column aksi-button">
+                                <button class="edit-btn">
+                                    <img src="{{ asset('/images/PencilSquare.svg') }}" alt="" />
+                                </button>
+                                <button class="delete-btn">
+                                    <img src="{{ asset('/images/Trash.svg') }}" alt="" />
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">Total karbon</td>
+                            <td colspan="9">15 cm</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">Total Serapan Karbon</td>
+                            <td colspan="9">15 cm</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="table-footer mt-5">
+                <span>Menampilkan 1 sampai 5 dari 40 data</span>
+                <div class="pagination">
+                    <button class="page-btn">Kembali</button>
+                    <button class="page-btn active">1</button>
+                    <button class="page-btn">2</button>
+                    <button class="page-btn">3</button>
+                    <button class="page-btn">4</button>
+                    <button class="page-btn">Lanjut</button>
                 </div>
-                <div class="table-footer mt-5">
-                    <span>Menampilkan 1 sampai 5 dari 40 data</span>
-                    <div class="pagination">
-                        <button class="page-btn">Kembali</button>
-                        <button class="page-btn active">1</button>
-                        <button class="page-btn">2</button>
-                        <button class="page-btn">3</button>
-                        <button class="page-btn">4</button>
-                        <button class="page-btn">Lanjut</button>
-                    </div>
-                </div>
+            </div>
             {{-- </div> --}}
         </div>
         <div class="custom-table-pancang">
-            <div class="row">
-                <div class="col p-2 col-lg-6">
+            {{-- <div class="row">
+                <div class="col-lg-6">
+                    <h3 class="text-center">Data Carbon Stock dari tiap AREA</h3>
+                    <div class="d-flex justify-content-center">
+                        <div id="bar" style="width: 100%;"></div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <h3 class="text-center">Total Pendataan</h3>
+                    <div class="d-flex justify-content-center">
+                        <div id="pie" style="width: 80%;"></div>
+                    </div>
+                </div>
+            </div> --}}
+            {{-- <div class="row">
+                <div class="col col-lg-6">
                     <div class="row">
                         <div class="col">
                             <h3>Data Carbon Stock dari tiap AREA</h3>
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="row text-align-center">
                         <div class="col">
                             <div id="bar"></div>
                         </div>
                     </div>
                 </div>
-                <div class="col p-2 col-lg-6">
+                <div class="col col-lg-6">
                     <div class="row">
                         <div class="col">
                             <h3>Total Pendataan</h3>
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="row text-align-center">
                         <div class="col">
-                            <div id="pie"></div>
+                            <div id="pie" ></div>
+                        </div>
+                    </div>
+                </div>
+            </div> --}}
+            <div class="row">
+                <!-- Bar Chart -->
+                <div class="col-12 col-lg-6 mb-3">
+                    <div class="card bg-boxshadow full-height">
+                        <div class="card-header bg-transparent d-flex align-items-center justify-content-between">
+                            <h3 class="card-title mb-0">Data Carbon Stock dari tiap AREA</h3>
+                            {{-- <label for="tahun">Pilih Tahun:</label>
+                            <select id="tahun" onchange="redirectToYear(this.value)">
+                                @for ($i = date('Y'); $i >= 2020; $i--)
+                                    <option value="{{ $i }}" {{ $i == $tahun ? 'selected' : '' }}>
+                                        {{ $i }}</option>
+                                @endfor
+                            </select> --}}
+                        </div>
+                        <div class="card-body d-flex justify-content-center">
+                            <div id="bar" style="width: 100%; height: 400px;"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pie Chart -->
+                <div class="col-12 col-lg-6 mb-3">
+                    <div class="card bg-boxshadow full-height">
+                        <div class="card-header bg-transparent d-flex align-items-center justify-content-between">
+                            <h3 class="card-title mb-0">Total Pendataan</h3>
+                        </div>
+                        <div class="card-body d-flex justify-content-center">
+                            <div id="pie" style="width: 80%; height: 400px;"></div>
                         </div>
                     </div>
                 </div>
             </div>
+
 
         </div>
         <div class="table-container">
@@ -157,12 +204,12 @@
                 <h2 class="activee  jarak" id="pertama">Serasah</h2>
                 <h2 class=" jarak" id="kedua">Semai</h2>
                 <h2 class=" jarak" id="ketiga">Tumbuhan Bawah</h2>
-                <h2 class=" jarak" id="keempat">Tanah</h2>
-                <h2 class=" jarak" id="kelima">pancang</h2>
-                <h2 class=" jarak" id="keenam">Mangrove</h2>
-                <h2 class=" jarak" id="ketujuh">Tiang</h2>
-                <h2 class=" jarak" id="kedelapan">Pohon</h2>
-                <h2 class=" jarak" id="kesebilan">Nekromas</h2>
+                <h2 class=" jarak" id="keempat">Pancang</h2>
+                <h2 class=" jarak" id="kelima">Mangrove</h2>
+                <h2 class=" jarak" id="keenam">Tiang</h2>
+                <h2 class=" jarak" id="ketujuh">Pohon</h2>
+                <h2 class=" jarak" id="kedelapan">Nekromas</h2>
+                <h2 class=" jarak" id="kesebilan">Tanah</h2>
             </div>
             <div id="serasah">
                 <div class="table-header d-flex justify-content-between">
@@ -886,61 +933,55 @@
 
     <script src="{{ asset('apexchart/dist/apexcharts.js') }}"></script>
     <script>
-        const baroptions = {
-            series: [{
+        var options = {
+            series: [
+                {
                     name: 'Karbon',
-                    data: [76, 85, 101, 98, 87, 105, 91, 114, 94]
+                    data: [5]
+
                 },
                 {
                     name: 'Serapan Karbon',
-                    data: [35, 41, 36, 26, 45, 48, 52, 53, 41]
+                    data: [10]
                 }
             ],
             chart: {
                 type: 'bar',
-                height: 350
+                height: '100%',
             },
             colors: ['#198754', '#DC3545'],
             plotOptions: {
                 bar: {
-                    horizontal: false,
                     columnWidth: '55%',
                     borderRadius: 5
                 }
             },
-            dataLabels: {
-                enabled: false
-            },
-            stroke: {
-                show: true,
-                width: 2,
-                colors: ['transparent']
-            },
-            xaxis: {
-                categories: ['Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct']
-            },
-            yaxis: {
-                title: {
-                    text: 'Ton/Hr'
-                }
-            },
-            fill: {
-                opacity: 1
-            },
+            dataLabels: { enabled: false },
+            stroke: { show: true, width: 2, colors: ['transparent'] },
+
+            xaxis: { categories: @json($dataDaerah) },
+            yaxis: { title: { text: 'Ton/Hr' } },
+            fill: { opacity: 1 },
             tooltip: {
                 y: {
                     formatter: function(val) {
-                        return "$ " + val + " thousands";
+                        return val + " Ton";
                     }
                 }
             }
         };
 
-        const bar = new ApexCharts(document.querySelector("#bar"), baroptions);
+        const bar = new ApexCharts(document.querySelector("#bar"), options);
         bar.render();
 
+
+        function redirectToYear(year) {
+            window.location.href = "?tahun=" + year;
+        }
+
+
         const pieoptions = {
-            series: [44, 55],
+            series: [5, 10],
             chart: {
                 width: '100%',
                 type: 'pie',
@@ -957,18 +998,15 @@
                 }
             },
             tooltip: {
-                // y: {
-                //     formatter: function(val) {
-                // let total = pieOptions.series.reduce((a, b) => a + b, 0);
-                // let percentage = ((val / total) * 100).toFixed(1);
-                // return `${val} Ton (${percentage}%)`; // Tooltip juga menampilkan data + persentase
-                //     }
-                // }
                 y: {
-                    formatter: function(val) {
-                        return val + " data";
+                    formatter: function(val, opts) {
+                        let total = opts?.w?.config?.series?.reduce((a, b) => a + b, 0) ||
+                            100.0; // Jika undefined, gunakan 1 agar tidak error
+                        let percentage = ((val / total) * 100).toFixed(1); // Hitung persentase
+                        return `${val} Ton (${percentage}%)`; // Tooltip juga menampilkan data + persentase
                     }
-                }
+                },
+
             },
             responsive: [{
                 breakpoint: 480,
@@ -1056,27 +1094,27 @@
                 setActiveButton(ketiga);
             });
             keempat.addEventListener("click", function() {
-                tampilkanHanya(tanah);
+                tampilkanHanya(pancang);
                 setActiveButton(keempat);
             });
             kelima.addEventListener("click", function() {
-                tampilkanHanya(pancang);
+                tampilkanHanya(mangrove);
                 setActiveButton(kelima);
             });
             keenam.addEventListener("click", function() {
-                tampilkanHanya(mangrove);
+                tampilkanHanya(tiang);
                 setActiveButton(keenam);
             });
             ketujuh.addEventListener("click", function() {
-                tampilkanHanya(tiang);
+                tampilkanHanya(pohon);
                 setActiveButton(ketujuh);
             });
             kedelapan.addEventListener("click", function() {
-                tampilkanHanya(pohon);
+                tampilkanHanya(nekromas);
                 setActiveButton(kedelapan);
             });
             kesebilan.addEventListener("click", function() {
-                tampilkanHanya(nekromas);
+                tampilkanHanya(tanah);
                 setActiveButton(kesebilan);
             });
 
