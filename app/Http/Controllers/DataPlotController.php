@@ -17,10 +17,14 @@ class DataPlotController extends Controller
         $perPage = $request->query('per_page', 5);
         $query = Plot::where('status', '=', 'aktif');
         if (!empty($search)) {
-            $query->where('zona', 'ILIKE', "%{$search}%")
-                ->orWhere('jenis_hutan', 'ILIKE', "%{$search}%");
+            $query->where('nama_plot', 'ILIKE', "%{$search}%")
+                ->orWhere('type_plot', 'ILIKE', "%{$search}%");
         }
-        return view("dataPlot", compact('user'));
+        $lokasi = $query->paginate($perPage)->appends([
+            'search' => $search,
+            'per_page' => $perPage
+        ]);
+        return view("dataPlot", compact('user', 'lokasi', 'search', 'perPage'));
     }
     public function Lokasi(Request $request)
     {
@@ -32,7 +36,6 @@ class DataPlotController extends Controller
 
         if (!empty($search)) {
             $query->where('daerah', 'ILIKE', "%{$search}%")
-                ->orWhere('jenis_hutan', 'ILIKE', "%{$search}%")
                 ->orWhere('jenis_hutan', 'ILIKE', "%{$search}%");
         }
 

@@ -11,89 +11,140 @@
         <div id="carbon-prediction-chart">
             <div class="table-container">
                 <div class="table-wrapper">
-                    <div>
-                        <label for="show-entries">Tampilkan</label>
-                        <select id="show-entries">
-                            <option value="5">5</option>
-                            <option value="10">10</option>
-                            <option value="20">20</option>
-                        </select>
-                        <span>data</span>
+                    <div class="table-header d-flex justify-content-between">
+                        <form method="GET"
+                            action="{{ route('Verifikasi.index', ['slug' => $plot->slug ?? 'default-slug']) }}">
+                            <div class="tampilkan">
+                                <label for="show-entries">Tampilkan</label>
+                                <select id="show-entries perPageSelect" class="number-selection" name="perPage"
+                                    onchange="this.form.submit()">
+                                    <option value="5" {{ request('perPage') == 5 ? 'selected' : '' }}>5</option>
+                                    <option value="10" {{ request('perPage') == 10 ? 'selected' : '' }}>10</option>
+                                    <option value="20" {{ request('perPage') == 20 ? 'selected' : '' }}>20</option>
+                                </select>
+                                <span class="ms-2">data</span>
+                            </div>
+                        </form>
+                        <div class="d-flex align-items-center">
+                            <form method="GET"
+                                action="{{ route('Verifikasi.index', ['slug' => $plot->slug ?? 'default-slug']) }}">
+                                <div class="d-flex align-items-center">
+                                    <div class="form-control-space">
+                                        <input type="text" id="searchInput" name="search" placeholder="Cari..."
+                                            class="form-control " value="{{ request('search') }}">
+                                    </div>
+                                    <button type="submit" class="btn btn-tambah-data">Cari</button>
+                                </div>
+                            </form>
+                            {{--
+                            <button onclick="window.location.href='{{ route('TambahZona.tambah',['slug' => $poltArea->slug]) }}'"
+                            class="btn btn-tambah-data m-3">Tambah</button> --}}
+                        </div>
+
                     </div>
+
                     <table class="custom-table-pancang">
                         <thead>
                             <tr>
                                 <th class="kiriPancang">No</th>
-                                <th>Nama</th>
-                                <th >Daerah</th>
+                                <th>Nama Plot</th>
+                                <th>Tipe Plot</th>
+                                <th>Latitude</th>
+                                <th>Longitude</th>
                                 <th class="hidden-column kananPancang">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>11</td>
-                                <td>15 cm</td>
-                                <td>15cm</td>
+                            {{-- <tr>
+                                <td>1</td>
+                                <td>Telkom University</td>
+                                <td>Detail</td>
+                                <td>Hutan hujan tropis</td>
+                                <td>-6.9744, 107.6303</td>
+                                <td>2024-04-21</td>
+                                <td>2024-04-24</td>
                                 <td class="hidden-column aksi-button">
                                     <button class="view-btn">
-                                        Menyetujui
+                                        <img src="{{ asset('/images/Eye.svg') }}" alt="" />
+                                    </button>
+                                    <button onclick="window.location.href='{{ route('Tambah-Surveyor.indexx') }}'"
+                                        class="add-btn">
+                                        <img src="{{ asset('/images/AddIcon.svg') }}" alt="" />
                                     </button>
                                     <button class="delete-btn">
-                                        Buang
+                                        <img src="{{ asset('/images/Trash.svg') }}" alt="" />
                                     </button>
                                 </td>
-                            </tr>
+                            </tr> --}}
                         </tbody>
-                    </table>
-                    <div class="table-footer mt-5">
-                        <span>Menampilkan 1 sampai 5 dari 40 data</span>
-                        <div class="pagination">
-                            <button class="page-btn">Kembali</button>
-                            <button class="page-btn active">1</button>
-                            <button class="page-btn">2</button>
-                            <button class="page-btn">3</button>
-                            <button class="page-btn">4</button>
-                            <button class="page-btn">Lanjut</button>
-                        </div>
-                    </div>
-                </div>
+                        <tbody id="data-table ">
+                            @forelse ($plot as $index => $item)
+                                <tr>
+                                    <td>{{ $plot->firstItem() + $index }}</td>
+                                    <td>{{ $item->nama_plot }}</td>
+                                    <td>{{ $item->type_plot }}</td>
+                                    <td>{{ $item->latitude }}</td>
+                                    <td>{{ $item->longitude }}</td>
+                                    <td class="hidden-column aksi-button">
+                                        @if ($Plot->status == 'tidakaktif')
+                                            <a href="/veri/{{ $plot->slug }}" class="btn btn-info">Menyetujui
+                                                Pernggua</a>
+                                        @endif
+                                        {{-- <a href="{{ route('hamparan.getHamparan', ['slug' => $item->slug]) }}"
+                                            class="btn btn-info btn-sm">Detail</a> --}}
+                                        <button class="view-btn">
+                                            <img src="{{ asset('/images/Eye.svg') }}" alt="View" />
+                                        </button>
+                                        {{-- <button
+                                            onclick="window.location.href='{{ route('plot.edit', ['slugP' => $poltArea->slug, 'slugZ' => $item->slug]) }}'"
+                                            class="add-btn">
+                                            <img src="{{ asset('/images/PencilSquare.svg') }}" alt="Add" />
+                                        </button> --}}
+                                        <button class="delete-btn">
+                                            <img src="{{ asset('/images/Trash.svg') }}" alt="Delete" />
+                                        </button>
+                                    </td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="7" class="text-center">Belum ada data</td>
+                                </tr>
+                            @endforelse
 
-                <div class="table-wrapper">
-                    <div>
-                        <label for="show-entries">Tampilkan</label>
-                        <select id="show-entries">
-                            <option value="5">5</option>
-                            <option value="10">10</option>
-                            <option value="20">20</option>
-                        </select>
-                        <span>data</span>
-                    </div>
-                    <table class="custom-table-pancang">
-                        <thead>
-                            <tr>
-                                <th class="kiriPancang">No</th>
-                                <th>Nama</th>
-                                <th >Daerah</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>11</td>
-                                <td>15 cm</td>
-                                <td>15cm</td>
-                            </tr>
                         </tbody>
+
                     </table>
                     <div class="table-footer mt-5">
-                        <span>Menampilkan 1 sampai 5 dari 40 data</span>
-                        <div class="pagination">
-                            <button class="page-btn">Kembali</button>
-                            <button class="page-btn active">1</button>
-                            <button class="page-btn">2</button>
-                            <button class="page-btn">3</button>
-                            <button class="page-btn">4</button>
-                            <button class="page-btn">Lanjut</button>
-                        </div>
+                        <strong>
+                            Menampilkan {{ $plot->firstItem() }} sampai {{ $plot->lastItem() }} dari
+                            {{ $plot->total() }} data
+                        </strong>
+                        <nav>
+                            <ul class="pagination">
+                                @if ($plot->onFirstPage())
+                                    <li class="page-item disabled"><span class="page-link">Kembali</span></li>
+                                @else
+                                    <li class="page-item"><a class="page-link"
+                                            href="{{ $plot->previousPageUrl() }}">Kembali</a></li>
+                                @endif
+
+                                @foreach ($plot->getUrlRange(1, $plot->lastPage()) as $page => $url)
+                                    <li class="page-item {{ $plot->currentPage() == $page ? 'active' : '' }}">
+                                        <a class="page-link" href="{{ $url }}">{{ $page }}</a>
+                                    </li>
+                                @endforeach
+
+                                @if ($plot->hasMorePages())
+                                    <li class="page-item"><a class="page-link" href="{{ $plot->nextPageUrl() }}">Lanjut</a>
+                                    </li>
+                                @else
+                                    <li class="page-item disabled"><span class="page-link">Lanjut</span></li>
+                                @endif
+                            </ul>
+                        </nav>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        {{ $plot->links() }}
                     </div>
                 </div>
             </div>

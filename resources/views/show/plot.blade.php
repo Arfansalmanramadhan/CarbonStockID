@@ -15,7 +15,7 @@
                 <div class="table-wrapper">
                     <div class="table-header d-flex justify-content-between">
                         <form method="GET"
-                            action="{{ route('zona.getZona', ['slug' => $zona->first()->slug ?? 'default-slug']) }}">
+                            action="{{ route('Plot.getPlopt', ['slug' => $plot->first()->slug ?? 'default-slug']) }}">
                             <div class="tampilkan">
                                 <label for="show-entries">Tampilkan</label>
                                 <select id="show-entries perPageSelect" class="number-selection" name="perPage"
@@ -28,18 +28,19 @@
                             </div>
                         </form>
                         <div class="d-flex align-items-center">
-                            <form method="GET" action="{{ route('zona.getZona',  ['slug' => $zona->first()->slug ?? 'default-slug']) }}">
+                            <form method="GET"
+                                action="{{ route('Plot.getPlopt', ['slug' => $plot->first()->slug ?? 'default-slug']) }}">
                                 <div class="d-flex align-items-center">
                                     <div class="form-control-space">
-                                        <input type="text" id="searchInput" name="search" placeholder="Cari..." class="form-control "
-                                            value="{{ request('search') }}">
+                                        <input type="text" id="searchInput" name="search" placeholder="Cari..."
+                                            class="form-control " value="{{ request('search') }}">
                                     </div>
                                     <button type="submit" class="btn btn-tambah-data">Cari</button>
                                 </div>
                             </form>
-
-                            <button onclick="window.location.href='{{ route('TambahZona.tambah',['slug' => $poltArea->slug]) }}'"
-                            class="btn btn-tambah-data m-3">Tambah</button>
+                            {{--
+                            <button onclick="window.location.href='{{ route('Tambahplot.tambah',['slug' => $poltArea->slug]) }}'"
+                            class="btn btn-tambah-data m-3">Tambah</button> --}}
                         </div>
 
                     </div>
@@ -47,10 +48,10 @@
                         <thead>
                             <tr>
                                 <th class="kiriPancang">No</th>
-                                <th>Nama Zona</th>
+                                <th>Nama Plot</th>
+                                <th>Tipe Plot</th>
                                 <th>Latitude</th>
                                 <th>Longitude</th>
-                                <th>Jenis Hutan</th>
                                 <th class="hidden-column kananPancang">Aksi</th>
                             </tr>
                         </thead>
@@ -78,20 +79,21 @@
                             </tr> --}}
                         </tbody>
                         <tbody id="data-table ">
-                            @forelse ($zona as $index => $item)
+                            @forelse ($plot as $index => $item)
                                 <tr>
-                                    <td>{{ $zona->firstItem() + $index }}</td>
-                                    <td>{{ $item->zona }}</td>
+                                    <td>{{ $plot->firstItem() + $index }}</td>
+                                    <td>{{ $item->nama_plot }}</td>
+                                    <td>{{ $item->type_plot }}</td>
                                     <td>{{ $item->latitude }}</td>
                                     <td>{{ $item->longitude }}</td>
-                                    <td>{{ $item->jenis_hutan }}</td>
                                     <td class="hidden-column aksi-button">
                                         <a href="{{ route('hamparan.getHamparan', ['slug' => $item->slug]) }}"
                                             class="btn btn-info btn-sm">Detail</a>
                                         <button class="view-btn">
                                             <img src="{{ asset('/images/Eye.svg') }}" alt="View" />
                                         </button>
-                                        <button onclick="window.location.href='{{ route('zona.edit', ['slugP' => $poltArea->slug, 'slugZ' => $item->slug]) }}'"
+                                        <button
+                                            onclick="window.location.href='{{ route('plot.edit', ['slugP' => $poltArea->slug, 'slugZ' => $item->slug]) }}'"
                                             class="add-btn">
                                             <img src="{{ asset('/images/PencilSquare.svg') }}" alt="Add" />
                                         </button>
@@ -111,26 +113,26 @@
                     </table>
                     <div class="table-footer mt-5">
                         <strong>
-                            Menampilkan {{ $zona->firstItem() }} sampai {{ $zona->lastItem() }} dari
-                            {{ $zona->total() }} data
+                            Menampilkan {{ $plot->firstItem() }} sampai {{ $plot->lastItem() }} dari
+                            {{ $plot->total() }} data
                         </strong>
                         <nav>
                             <ul class="pagination">
-                                @if ($zona->onFirstPage())
+                                @if ($plot->onFirstPage())
                                     <li class="page-item disabled"><span class="page-link">Kembali</span></li>
                                 @else
                                     <li class="page-item"><a class="page-link"
-                                            href="{{ $zona->previousPageUrl() }}">Kembali</a></li>
+                                            href="{{ $plot->previousPageUrl() }}">Kembali</a></li>
                                 @endif
 
-                                @foreach ($zona->getUrlRange(1, $zona->lastPage()) as $page => $url)
-                                    <li class="page-item {{ $zona->currentPage() == $page ? 'active' : '' }}">
+                                @foreach ($plot->getUrlRange(1, $plot->lastPage()) as $page => $url)
+                                    <li class="page-item {{ $plot->currentPage() == $page ? 'active' : '' }}">
                                         <a class="page-link" href="{{ $url }}">{{ $page }}</a>
                                     </li>
                                 @endforeach
 
-                                @if ($zona->hasMorePages())
-                                    <li class="page-item"><a class="page-link" href="{{ $zona->nextPageUrl() }}">Lanjut</a>
+                                @if ($plot->hasMorePages())
+                                    <li class="page-item"><a class="page-link" href="{{ $plot->nextPageUrl() }}">Lanjut</a>
                                     </li>
                                 @else
                                     <li class="page-item disabled"><span class="page-link">Lanjut</span></li>
@@ -139,7 +141,7 @@
                         </nav>
                     </div>
                     <div class="d-flex justify-content-between">
-                        {{ $zona->links() }}
+                        {{ $plot->links() }}
                     </div>
                 </div>
             </div>
@@ -150,7 +152,7 @@
             let perPage = this.value;
             let search = document.getElementById('searchInput').value;
             window.location.href =
-                "{{ route('zona.getZona', ['slug' => $zona->first()->slug ?? 'default-slug']) }}" + "?per_page=" +
+                "{{ route('Plot.getPlopt', ['slug' => $plot->first()->slug ?? 'default-slug']) }}" + "?per_page=" +
                 perPage + "&search=" + search;
         });
 
@@ -159,7 +161,7 @@
                 let perPage = document.getElementById('perPageSelect').value;
                 let search = this.value;
                 window.location.href =
-                    "{{ route('zona.getZona', ['slug' => $zona->first()->slug ?? 'default-slug']) }}" +
+                    "{{ route('Plot.getPlopt', ['slug' => $plot->first()->slug ?? 'default-slug']) }}" +
                     "?per_page=" + perPage + "&search=" +
                     search;
             }

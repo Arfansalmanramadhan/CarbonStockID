@@ -200,18 +200,18 @@ Route::middleware('auth')->group(function () {
     Route::controller(PanduanController::class)->group(function () {
         Route::get('/panduan', 'index')->name('panduan.index');
     });
+    Route::controller(SampahController::class)->group(function () {
+        Route::get('/Sampah', 'index')->name('Sampah.index');
+    });
     Route::controller(DataPlotController::class)->group(function () {
         Route::get('/dataPlot', 'index')->name('dataPlot.index');
         Route::get('/Lokasi', 'lokasi')->name('Lokasi.lokasi');
-
-        // Route::get('/Lokasi', 'data')->name('Lokasi.data');
     });
     Route::controller(ManajermenUserController::class)->group(function () {
         Route::get('/Verifikasi', 'index')->name('Verifikasi.index');
         Route::get('/Verifikasi', 'view')->name('Verifikasi.index');
-    });
-    Route::controller(SampahController::class)->group(function () {
-        Route::get('/Sampah', 'index')->name('Sampah.index');
+        Route::get('/veri/{slug}', 'menyetujui')->name('Verifikasi.menyetujui');
+        Route::get('/Hamparan/Plot/{slug}', 'getPlopt')->name('Plot.index');
     });
     Route::controller(zonaController::class)->group(function () {
         Route::get("/zona", "index")->name('zona.index');
