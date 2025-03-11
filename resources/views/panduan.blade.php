@@ -10,7 +10,7 @@
         <p class="large-text">Panduan Perhitungan Cadangan Karbon</p>
       </div>
     </div>
-    <div class="pdf-container container content">
+    <div class="pdf-container content">
       <iframe src="File/SNI7724_Pengukuran Lapangan Cadangan Karbon.pdf" class="pdf-frame"></iframe>
     </div>
   </div>

@@ -11,40 +11,32 @@
             </div>
         </div>
         <div class="table-container">
-            <div class="table-container">
-                <div class="table-wrapper">
-                    <div class="table-header d-flex justify-content-between">
-                        <form method="GET"
-                            action="{{ route('zona.getZona', ['slug' => $zona->first()->slug ?? 'default-slug']) }}">
-                            <div class="tampilkan">
-                                <label for="show-entries">Tampilkan</label>
-                                <select id="show-entries perPageSelect" class="number-selection" name="perPage"
-                                    onchange="this.form.submit()">
-                                    <option value="5" {{ request('perPage') == 5 ? 'selected' : '' }}>5</option>
-                                    <option value="10" {{ request('perPage') == 10 ? 'selected' : '' }}>10</option>
-                                    <option value="20" {{ request('perPage') == 20 ? 'selected' : '' }}>20</option>
-                                </select>
-                                <span class="ms-2">data</span>
+            <div class="table-wrapper">
+                <div class="table-header d-flex justify-content-between">
+                    <form method="GET" action="{{ route('zona.getZona', ['slug' => $zona->first()->slug ?? 'default-slug']) }}">
+                        <div class="tampilkan">
+                            <label for="show-entries">Tampilkan</label>
+                            <select id="show-entries perPageSelect" class="number-selection" name="perPage" onchange="this.form.submit()">
+                                <option value="5" {{ request('perPage') == 5 ? 'selected' : '' }}>5</option>
+                                <option value="10" {{ request('perPage') == 10 ? 'selected' : '' }}>10</option>
+                                <option value="20" {{ request('perPage') == 20 ? 'selected' : '' }}>20</option>
+                            </select>
+                            <span class="ms-2">data</span>
+                        </div>
+                    </form>
+                    <div class="d-flex align-items-center">
+                        <form method="GET" action="{{ route('zona.getZona', ['slug' => $zona->first()->slug ?? 'default-slug']) }}">
+                            <div class="d-flex align-items-center">
+                                <div class="form-control-space">
+                                    <input type="text" id="searchInput" name="search" placeholder="Cari..." class="form-control" value="{{ request('search') }}">
+                                </div>
+                                <button type="submit" class="btn btn-tambah-data m-3">Cari</button>
                             </div>
                         </form>
-                        <div class="d-flex align-items-center">
-                            <form method="GET"
-                                action="{{ route('zona.getZona', ['slug' => $zona->first()->slug ?? 'default-slug']) }}">
-                                <div class="d-flex align-items-center">
-                                    <div class="form-control-space">
-                                        <input type="text" id="searchInput" name="search" placeholder="Cari..."
-                                            class="form-control " value="{{ request('search') }}">
-                                    </div>
-                                    <button type="submit" class="btn btn-tambah-data">Cari</button>
-                                </div>
-                            </form>
-
-                            <button
-                                onclick="window.location.href='{{ route('TambahZona.tambah', ['slug' => $poltArea->slug]) }}'"
-                                class="btn btn-tambah-data m-3">Tambah</button>
-                        </div>
-
+                        <button onclick="window.location.href='{{ route('TambahZona.tambah',['slug' => $poltArea->slug]) }}'" class="btn btn-tambah-data p-3">Tambah</button>
                     </div>
+                </div>
+                <div class="table-wrapper">
                     <table class="custom-table-pancang">
                         <thead>
                             <tr>
@@ -56,30 +48,7 @@
                                 <th class="hidden-column kananPancang">Aksi</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            {{-- <tr>
-                                <td>1</td>
-                                <td>Telkom University</td>
-                                <td>Detail</td>
-                                <td>Hutan hujan tropis</td>
-                                <td>-6.9744, 107.6303</td>
-                                <td>2024-04-21</td>
-                                <td>2024-04-24</td>
-                                <td class="hidden-column aksi-button">
-                                    <button class="view-btn">
-                                        <img src="{{ asset('/images/Eye.svg') }}" alt="" />
-                                    </button>
-                                    <button onclick="window.location.href='{{ route('Tambah-Surveyor.indexx') }}'"
-                                        class="add-btn">
-                                        <img src="{{ asset('/images/AddIcon.svg') }}" alt="" />
-                                    </button>
-                                    <button class="delete-btn">
-                                        <img src="{{ asset('/images/Trash.svg') }}" alt="" />
-                                    </button>
-                                </td>
-                            </tr> --}}
-                        </tbody>
-                        <tbody id="data-table ">
+                        <tbody id="data-table">
                             @forelse ($zona as $index => $item)
                                 <tr>
                                     <td>{{ $zona->firstItem() + $index }}</td>
@@ -88,14 +57,11 @@
                                     <td>{{ $item->longitude }}</td>
                                     <td>{{ $item->jenis_hutan }}</td>
                                     <td class="hidden-column aksi-button">
-                                        <a href="{{ route('hamparan.getHamparan', ['slug' => $item->slug]) }}"
-                                            class="btn btn-info btn-sm">Detail</a>
+                                        <a href="{{ route('hamparan.getHamparan', ['slug' => $item->slug]) }}" class="btn btn-info btn-sm">Detail</a>
                                         <button class="view-btn">
                                             <img src="{{ asset('/images/Eye.svg') }}" alt="View" />
                                         </button>
-                                        <button
-                                            onclick="window.location.href='{{ route('zona.edit', ['slugP' => $poltArea->slug, 'slugZ' => $item->slug]) }}'"
-                                            class="add-btn">
+                                        <button onclick="window.location.href='{{ route('zona.edit', ['slugP' => $poltArea->slug, 'slugZ' => $item->slug]) }}'" class="add-btn">
                                             <img src="{{ asset('/images/PencilSquare.svg') }}" alt="Add" />
                                         </button>
                                         <button class="delete-btn">
@@ -108,42 +74,37 @@
                                     <td colspan="7" class="text-center">Belum ada data</td>
                                 </tr>
                             @endforelse
-
                         </tbody>
-
                     </table>
-                    <div class="table-footer mt-5">
-                        <strong>
-                            Menampilkan {{ $zona->firstItem() }} sampai {{ $zona->lastItem() }} dari
-                            {{ $zona->total() }} data
-                        </strong>
-                        <nav>
-                            <ul class="pagination">
-                                @if ($zona->onFirstPage())
-                                    <li class="page-item disabled"><span class="page-link">Kembali</span></li>
-                                @else
-                                    <li class="page-item"><a class="page-link"
-                                            href="{{ $zona->previousPageUrl() }}">Kembali</a></li>
-                                @endif
+                </div>
+                <div class="table-footer mt-5">
+                    <strong>
+                        Menampilkan {{ $zona->firstItem() }} sampai {{ $zona->lastItem() }} dari {{ $zona->total() }} data
+                    </strong>
+                    <nav>
+                        <ul class="pagination">
+                            @if ($zona->onFirstPage())
+                                <li class="page-item disabled"><span class="page-link">Kembali</span></li>
+                            @else
+                                <li class="page-item"><a class="page-link" href="{{ $zona->previousPageUrl() }}">Kembali</a></li>
+                            @endif
 
-                                @foreach ($zona->getUrlRange(1, $zona->lastPage()) as $page => $url)
-                                    <li class="page-item {{ $zona->currentPage() == $page ? 'active' : '' }}">
-                                        <a class="page-link" href="{{ $url }}">{{ $page }}</a>
-                                    </li>
-                                @endforeach
+                            @foreach ($zona->getUrlRange(1, $zona->lastPage()) as $page => $url)
+                                <li class="page-item {{ $zona->currentPage() == $page ? 'active' : '' }}">
+                                    <a class="page-link" href="{{ $url }}">{{ $page }}</a>
+                                </li>
+                            @endforeach
 
-                                @if ($zona->hasMorePages())
-                                    <li class="page-item"><a class="page-link" href="{{ $zona->nextPageUrl() }}">Lanjut</a>
-                                    </li>
-                                @else
-                                    <li class="page-item disabled"><span class="page-link">Lanjut</span></li>
-                                @endif
-                            </ul>
-                        </nav>
-                    </div>
-                    <div class="d-flex justify-content-between">
-                        {{ $zona->links() }}
-                    </div>
+                            @if ($zona->hasMorePages())
+                                <li class="page-item"><a class="page-link" href="{{ $zona->nextPageUrl() }}">Lanjut</a></li>
+                            @else
+                                <li class="page-item disabled"><span class="page-link">Lanjut</span></li>
+                            @endif
+                        </ul>
+                    </nav>
+                </div>
+                <div class="d-flex justify-content-between">
+                    {{ $zona->links() }}
                 </div>
             </div>
         </div>
@@ -893,7 +854,7 @@
                                 <thead>
                                     <tr>
                                         <th>Subplot</th>
-                                        <th class="text-right">Karbon</th>
+                                        <th class="text-right text-center">Karbon</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -984,7 +945,7 @@
                                 <thead>
                                     <tr>
                                         <th>Subplot</th>
-                                        <th class="text-right">Karbon</th>
+                                        <th class="text-right text-center">Karbon</th>
                                     </tr>
                                 </thead>
                                 <tbody>
