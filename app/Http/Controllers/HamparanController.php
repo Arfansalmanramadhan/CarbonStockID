@@ -38,6 +38,9 @@ class HamparanController extends Controller
         $perPage = $request->query('per_page', 5);
         $zona = Zona::where("slug", $slug)->first();
         $query = Hamparan::where('zona_id', $zona->id);
+        // $poltArea = PoltArea::where("slug", $poltSlug)->firstOrFail();
+        // $zona = Zona::where("slug", $zonaSlug)
+        // ->where('polt_area_id', $poltArea->id);
         if (!empty($search)) {
             $query->where('nama_hamparan', 'ILIKE', "%{$search}%")
                 ->orWhere('jenis_hutan', 'ILIKE', "%{$search}%");

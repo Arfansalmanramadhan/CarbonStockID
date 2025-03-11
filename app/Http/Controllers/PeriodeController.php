@@ -98,23 +98,33 @@ class PeriodeController extends Controller
     }
     public function indexx($id)
     {
-        $user = Auth::user();
-        $tim = Tim::find($id);
-        $anggota = AnggotaTim::with('user', 'tim')->where("tim_id", $id)->get();
+        $tim = Tim::findOrFail($id);
+        $registrasi = User::all();
+        $anggota = DB::table('tim')
+            ->leftJoin('anggota_tim', 'tim.id', '=', 'anggota_tim.tim_id')
+            ->leftJoin('registrasi', 'anggota_tim.registrasi_id', '=', 'registrasi.id')
+            ->select(
+                'tim.id as tim_id',
+                'tim.nama as nama_tim',
+
+                DB::raw("COALESCE(registrasi.nama, 'Belum ada anggota') as nama_anggota"),
+                DB::raw("COALESCE(registrasi.username, 'Belum ada anggota') as username")
+            )
+            ->get();
         // dd($anggota);
-        return view("Anggota", compact('user', 'anggota', 'tim'));
+        return view("Anggota", compact('registrasi', 'anggota', 'tim'));
     }
     public function storee(Request $request, $id)
     {
         // Validasi input
         $validatedData = $request->validate([
-            'registrasi_id' => 'required|exists:users,id',
+            'registrasi_id' => 'required|exists:registrasi,id',
         ]);
 
         DB::beginTransaction();
         try {
             // Cek apakah user sudah menjadi anggota tim
-            $existingMember = AnggotaTim::where('tim_id', $id->id)
+            $existingMember = AnggotaTim::where('tim_id', $id)
                 ->where('registrasi_id', $validatedData['registrasi_id'])
                 ->exists();
 

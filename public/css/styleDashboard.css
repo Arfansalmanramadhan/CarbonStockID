@@ -1149,6 +1149,30 @@ html, body {
     margin-top: 20px;
     margin-bottom: 20px;
 }
+.btn-successs {
+    padding: 12px;
+    /* width: 245px;
+    height: 62px; */
+    display: flex;
+    padding: .5rem .5rem;
+    justify-content: center;
+    align-items: center;
+    gap: 14px;
+    border-radius: 8px;
+    background: var(--Primary-0, #4caf4f);
+    color: var(--Warning, #fff);
+    font-family: "DM Sans";
+    /* font-size: 24px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 125%;  */
+    /* bottom: 35px;
+    right: 35px; */
+    border: none;
+    justify-content: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
 .table-wrapper {
     overflow-x: auto;
     /* white-space: nowrap; */

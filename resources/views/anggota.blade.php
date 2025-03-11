@@ -17,13 +17,13 @@
             @if (session('error'))
                 <div class="alert alert-danger">{{ session('error') }}</div>
             @endif
-            <form method="post" action="{{ route('anggota.storee', $tim->id)}}">
+            <form method="post" action="{{ route('anggota.storee', $tim->id) }}">
                 <div class="row">
                     @csrf
                     <label for="registrasi_id">Pilih Anggota:</label>
                     <select name="registrasi_id" required>
-                        @foreach ($users as $user)
-                            <option value="{{ $user->id }}">{{ $user->username }}</option>
+                        @foreach ($registrasi as $user)
+                            <option value="{{ $user->id }}">{{ $user->nama }} ({{ $user->username }})</option>
                         @endforeach
                     </select>
                     <div class="row">
@@ -40,6 +40,8 @@
                             <tr>
                                 <th class="kiriPancang">No</th>
                                 <th>Nama Anggota</th>
+                                th>Username</th>
+                                <th>Nama Tim</th>
                                 <th class="hidden-column kananPancang">Aksi</th>
                             </tr>
                         </thead>
@@ -48,7 +50,9 @@
                                 @forelse($anggota as $index => $t)
                                     <tr>
                                         <td>{{ $index + 1 }}</td>
-                                        <td>{{ $t->user->nama}}</td>
+                                        <td>{{ $t->nama_anggota }}</td>
+                                        <td>{{ $t->nama_tim }}</td>
+                                        <td>{{ $t->username }}</td>
                                         {{-- <td class="hidden-column aksi-button">
                                             <button class="view-btn">
                                                 <img src="{{ asset('/images/Eye.svg') }}" alt="" />

@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger("beabbs_id");
             $table->foreign("beabbs_id")->references("id")->on("beabbs")->onDelete('cascade')->onUpdate('cascade');
             $table->string("nama_suplort", 255)->nullable();
-            $table->string("slug", 255);
+            $table->string("slug", 255)->nullable();
             $table->decimal('latitude', 10, 8)->nullable();
             $table->decimal('longitude', 11, 8)->nullable();
             $table->timestamps();

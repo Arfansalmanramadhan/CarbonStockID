@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger("plot_id");
             $table->foreign("plot_id")->references("id")->on("plot")->onDelete('cascade');
             $table->string('lokasi', 255)->nullable();
-            $table->string("slug", 255);
+            $table->string("slug", 255)->nullable();
             $table->string('zona', 255)->nullable();
             $table->decimal('hamparan',255)->nullable();
             $table->decimal('jenis_hutan',255)->nullable();

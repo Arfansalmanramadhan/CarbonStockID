@@ -213,8 +213,8 @@
                     <li class="nav-item jarak" id="kedelapan">Nekromas</li>
                     <li class="nav-item jarak" id="kesebilan">Tanah</li>
                 </ul>
-                <div class="tab-content p-1">
-                    <div class="tab-pane" id="serasah">
+                <div class="tab-content ">
+                    <div class="tab-pane p-1" id="serasah">
                         <div class="table-header d-flex justify-content-between">
                             <div class="tampilkan">
                                 <label for="show-entries">Tampilkan</label>
@@ -274,7 +274,7 @@
                         </div>
                     </div>
                 </div>
-                <div id="semai">
+                <div class="p-1" id="semai">
                     <div class="table-header d-flex justify-content-between">
                         <div class="tampilkan">
                             <label for="show-entries">Tampilkan</label>
@@ -286,8 +286,8 @@
                             <span>data</span>
                         </div>
                     </div>
-                    <div class="table-wrapper">
-                        <table class="custom-table-pancang">
+                    <div class="table-wrapper  table-responsive">
+                        <table class="custom-table-pancang table-striped">
                             <thead>
                                 <tr>
                                     <th class="kiriPancang">No</th>
@@ -354,7 +354,7 @@
                         </div>
                     </div>
                 </div>
-                <div id="tumbuhanBawah">
+                <div class="p-1" id="tumbuhanBawah">
                     <div class="table-header d-flex justify-content-between">
                         <div class="tampilkan">
                             <label for="show-entries">Tampilkan</label>
@@ -366,8 +366,8 @@
                             <span>data</span>
                         </div>
                     </div>
-                    <div class="table-wrapper">
-                        <table class="custom-table-pancang">
+                    <div class="table-wrapper table-responsive">
+                        <table class="custom-table-pancang table-striped">
                             <thead>
                                 <tr>
                                     <th class="kiriPancang">No</th>
@@ -434,7 +434,7 @@
                         </div>
                     </div>
                 </div>
-                <div id="tanah">
+                <div class="p-1" id="tanah">
                     <div class="table-header d-flex justify-content-between">
                         <div class="tampilkan">
                             <label for="show-entries">Tampilkan</label>
@@ -446,12 +446,12 @@
                             <span>data</span>
                         </div>
                     </div>
-                    <div class="table-wrapper">
-                        <table class="custom-table-pancang">
+                    <div class="table-wrapper table-responsive">
+                        <table class="custom-table-pancang  table-striped">
                             <thead>
                                 <tr>
                                     <th class="kiriPancang">No</th>
-                                    <th>>Kedalaman Sample</th>
+                                    <th>Kedalaman Sample</th>
                                     <th>Sample Berat Basah</th>
                                     <th>C organik Tanah</th>
                                     <th>karbon </th>
@@ -514,7 +514,7 @@
                         </div>
                     </div>
                 </div>
-                <div id="pancang">
+                <div class="p-1" id="pancang">
                     <div class="table-header d-flex justify-content-between">
                         <div class="tampilkan">
                             <label for="show-entries">Tampilkan</label>
@@ -526,8 +526,8 @@
                             <span>data</span>
                         </div>
                     </div>
-                    <div class="table-wrapper">
-                        <table class="custom-table-pancang">
+                    <div class="table-wrapper table-responsive">
+                        <table class="custom-table-pancang  table-striped">
                             <thead>
                                 <tr>
                                     <th class="kiriPancang">No</th>
@@ -598,7 +598,7 @@
                         </div>
                     </div>
                 </div>
-                <div id="mangrove">
+                <div class="p-1" id="mangrove">
                     <div class="table-header d-flex justify-content-between">
                         <div class="tampilkan">
                             <label for="show-entries">Tampilkan</label>
@@ -610,8 +610,8 @@
                             <span>data</span>
                         </div>
                     </div>
-                    <div class="table-wrapper">
-                        <table class="custom-table-pancang">
+                    <div class="table-wrapper table-responsive">
+                        <table class="custom-table-pancang table-striped">
                             <thead>
                                 <tr>
                                     <th class="kiriPancang">No</th>
@@ -678,7 +678,7 @@
                         </div>
                     </div>
                 </div>
-                <div id="tiang">
+                <div class="p-1" id="tiang">
                     <div class="table-header d-flex justify-content-between">
                         <div class="tampilkan">
                             <label for="show-entries">Tampilkan</label>
@@ -690,8 +690,8 @@
                             <span>data</span>
                         </div>
                     </div>
-                    <div class="table-wrapper">
-                        <table class="custom-table-pancang">
+                    <div class="table-wrapper table-responsive">
+                        <table class="custom-table-pancang table-striped">
                             <thead>
                                 <tr>
                                     <th class="kiriPancang">No</th>
@@ -762,7 +762,7 @@
                         </div>
                     </div>
                 </div>
-                <div id="pohon">
+                <div class="p-1" id="pohon">
                     <div class="table-header d-flex justify-content-between">
                         <div class="tampilkan">
                             <label for="show-entries">Tampilkan</label>
@@ -774,8 +774,8 @@
                             <span>data</span>
                         </div>
                     </div>
-                    <div class="table-wrapper">
-                        <table class="custom-table-pancang">
+                    <div class="table-wrapper table-responsive">
+                        <table class="custom-table-pancang table-striped">
                             <thead>
                                 <tr>
                                     <th class="kiriPancang">No</th>
@@ -846,7 +846,7 @@
                         </div>
                     </div>
                 </div>
-                <div id="nekromas">
+                <div class="p-1" id="nekromas">
                     <div class="table-header d-flex justify-content-between">
                         <div class="tampilkan">
                             <label for="show-entries">Tampilkan</label>
@@ -858,8 +858,8 @@
                             <span>data</span>
                         </div>
                     </div>
-                    <div class="table-wrapper">
-                        <table class="custom-table-pancang">
+                    <div class="table-wrapper table-responsive">
+                        <table class="custom-table-pancang table-striped">
                             <thead>
                                 <tr>
                                     <th class="kiriPancang">No</th>
@@ -1042,104 +1042,7 @@
         const pie = new ApexCharts(document.querySelector("#pie"), pieoptions);
         pie.render();
 
-        document.addEventListener("DOMContentLoaded", function() {
-            // Ambil elemen tombol
-            const pertama = document.getElementById("pertama");
-            const kedua = document.getElementById("kedua");
-            const ketiga = document.getElementById("ketiga");
-            const keempat = document.getElementById("keempat");
-            const kelima = document.getElementById("kelima");
-            const keenam = document.getElementById("keenam");
-            const ketujuh = document.getElementById("ketujuh");
-            const kedelapan = document.getElementById("kedelapan");
-            const kesebilan = document.getElementById("kesebilan");
-
-            // Ambil elemen div konten
-            const serasah = document.getElementById("serasah");
-            const semai = document.getElementById("semai");
-            const tumbuhanBawah = document.getElementById("tumbuhanBawah");
-            const tanah = document.getElementById("tanah");
-            const pancang = document.getElementById("pancang");
-            const mangrove = document.getElementById("mangrove");
-            const tiang = document.getElementById("tiang");
-            const pohon = document.getElementById("pohon");
-            const nekromas = document.getElementById("nekromas");
-
-            // Fungsi untuk menyembunyikan semua div dan hanya menampilkan satu
-            function tampilkanHanya(elemen) {
-                serasah.style.display = "none";
-                semai.style.display = "none";
-                tumbuhanBawah.style.display = "none";
-                tanah.style.display = "none";
-                pancang.style.display = "none";
-                mangrove.style.display = "none";
-                tiang.style.display = "none";
-                pohon.style.display = "none";
-                nekromas.style.display = "none";
-
-                // Tampilkan elemen yang dipilih
-                elemen.style.display = "block";
-            }
-
-            // Fungsi untuk mengaktifkan tombol yang dipilih
-            function setActiveButton(activeButton) {
-                pertama.classList.remove("activee");
-                kedua.classList.remove("activee");
-                ketiga.classList.remove("activee");
-                keempat.classList.remove("activee");
-                kelima.classList.remove("activee");
-                keenam.classList.remove("activee");
-                ketujuh.classList.remove("activee");
-                kedelapan.classList.remove("activee");
-                kesebilan.classList.remove("activee");
-
-                activeButton.classList.add("activee");
-            }
-
-            // Event listener untuk tombol
-            pertama.addEventListener("click", function() {
-                tampilkanHanya(serasah);
-                setActiveButton(pertama);
-            });
-
-            kedua.addEventListener("click", function() {
-                tampilkanHanya(semai);
-                setActiveButton(kedua);
-            });
-
-            ketiga.addEventListener("click", function() {
-                tampilkanHanya(tumbuhanBawah);
-                setActiveButton(ketiga);
-            });
-            keempat.addEventListener("click", function() {
-                tampilkanHanya(pancang);
-                setActiveButton(keempat);
-            });
-            kelima.addEventListener("click", function() {
-                tampilkanHanya(mangrove);
-                setActiveButton(kelima);
-            });
-            keenam.addEventListener("click", function() {
-                tampilkanHanya(tiang);
-                setActiveButton(keenam);
-            });
-            ketujuh.addEventListener("click", function() {
-                tampilkanHanya(pohon);
-                setActiveButton(ketujuh);
-            });
-            kedelapan.addEventListener("click", function() {
-                tampilkanHanya(nekromas);
-                setActiveButton(kedelapan);
-            });
-            kesebilan.addEventListener("click", function() {
-                tampilkanHanya(tanah);
-                setActiveButton(kesebilan);
-            });
-
-            // Atur tampilan awal (menampilkan serasah)
-            tampilkanHanya(serasah);
-            setActiveButton(pertama);
-        });
+       
     </script>
 
 @endsection

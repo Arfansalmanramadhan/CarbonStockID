@@ -41,7 +41,7 @@ class zonaController extends Controller
         $search = $request->query('search');
         $perPage = $request->query('per_page', 5);
         $poltArea = PoltArea::where("slug", $slug)->first();
-        $query = Zona::query();
+        $query = Zona::where("polt_area_id", $poltArea->id);
         if (!empty($search)) {
             $query->where('zona', 'ILIKE', "%{$search}%")
                 ->orWhere('jenis_hutan', 'ILIKE', "%{$search}%");

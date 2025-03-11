@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Beadbs;
+use App\Models\Hamparan;
 use App\Models\Plot;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -26,15 +27,16 @@ class PLotCOntroller extends Controller
             'search' => $search,
             'per_page' => $perPage
         ]);
-        return view("dataPlot", compact('user', 'plot','search', 'perPage'));
+        return view("dataPlot", compact('user', 'plot', 'search', 'perPage'));
     }
     public function getPlot(Request $request, $slug)
     {
         $user = Auth::user();
         $search = $request->query('search');
         $perPage = $request->query('per_page', 5);
-        $bebds = Beadbs::where('slug', $slug)->first();
-        $query = Plot::where('status', '=', 'aktif')->where('id', $user->id);
+        $hamparan = Hamparan::where('slug', $slug)->first();
+        $query = Plot::where('status', '=', 'aktif')
+            ->where('hamparan_id', $hamparan->id);
         if (!empty($search)) {
             $query->where('nama_plot', 'ILIKE', "%{$search}%")
                 ->orWhere('type_plot', 'ILIKE', "%{$search}%");
@@ -44,7 +46,7 @@ class PLotCOntroller extends Controller
             'per_page' => $perPage
         ]);
         // $zona = Zona::where('polt-area_id', $user->id );
-        return view('tambah.TambahPlot', compact('user', 'plot', 'search', 'perPage', 'bebds'));
+        return view('tambah.TambahPlot', compact('user', 'plot', 'search', 'perPage', 'hamparan'));
     }
 
     /**

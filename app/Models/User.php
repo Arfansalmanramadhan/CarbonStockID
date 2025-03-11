@@ -79,6 +79,10 @@ class User extends Authenticatable
     {
         return $this->hasOne(Tim::class, 'registrasi_id');
     }
+    public function anggota()
+    {
+        return $this->hasOne(AnggotaTim::class, 'registrasi_id');
+    }
     public function sluggable(): array
     {
         return [

@@ -28,18 +28,20 @@
                             </div>
                         </form>
                         <div class="d-flex align-items-center">
-                            <form method="GET" action="{{ route('zona.getZona',  ['slug' => $zona->first()->slug ?? 'default-slug']) }}">
+                            <form method="GET"
+                                action="{{ route('zona.getZona', ['slug' => $zona->first()->slug ?? 'default-slug']) }}">
                                 <div class="d-flex align-items-center">
                                     <div class="form-control-space">
-                                        <input type="text" id="searchInput" name="search" placeholder="Cari..." class="form-control "
-                                            value="{{ request('search') }}">
+                                        <input type="text" id="searchInput" name="search" placeholder="Cari..."
+                                            class="form-control " value="{{ request('search') }}">
                                     </div>
                                     <button type="submit" class="btn btn-tambah-data">Cari</button>
                                 </div>
                             </form>
 
-                            <button onclick="window.location.href='{{ route('TambahZona.tambah',['slug' => $poltArea->slug]) }}'"
-                            class="btn btn-tambah-data m-3">Tambah</button>
+                            <button
+                                onclick="window.location.href='{{ route('TambahZona.tambah', ['slug' => $poltArea->slug]) }}'"
+                                class="btn btn-tambah-data m-3">Tambah</button>
                         </div>
 
                     </div>
@@ -91,7 +93,8 @@
                                         <button class="view-btn">
                                             <img src="{{ asset('/images/Eye.svg') }}" alt="View" />
                                         </button>
-                                        <button onclick="window.location.href='{{ route('zona.edit', ['slugP' => $poltArea->slug, 'slugZ' => $item->slug]) }}'"
+                                        <button
+                                            onclick="window.location.href='{{ route('zona.edit', ['slugP' => $poltArea->slug, 'slugZ' => $item->slug]) }}'"
                                             class="add-btn">
                                             <img src="{{ asset('/images/PencilSquare.svg') }}" alt="Add" />
                                         </button>
@@ -144,25 +147,923 @@
                 </div>
             </div>
         </div>
-    </div>
-    <script>
-        document.getElementById('perPageSelect').addEventListener('change', function() {
-            let perPage = this.value;
-            let search = document.getElementById('searchInput').value;
-            window.location.href =
-                "{{ route('zona.getZona', ['slug' => $zona->first()->slug ?? 'default-slug']) }}" + "?per_page=" +
-                perPage + "&search=" + search;
-        });
+        <div class="table-container card">
+            <div class="card-body">
+                <h4 class="card-title mb-4">Data Subplot</h4>
+                <ul class=" nav nav-tabs nav-bordered nav-justified overflow-x-auto">
+                    <li class="activee nav-item jarak" id="pertama">Serasah</li>
+                    <li class="nav-item jarak" id="kedua">Semai</li>
+                    <li class="nav-item jarak" id="ketiga">Tumbuhan Bawah</li>
+                    <li class="nav-item jarak" id="keempat">Pancang</li>
+                    <li class="nav-item jarak" id="kelima">Mangrove</li>
+                    <li class="nav-item jarak" id="keenam">Tiang</li>
+                    <li class="nav-item jarak" id="ketujuh">Pohon</li>
+                    <li class="nav-item jarak" id="kedelapan">Nekromas</li>
+                    <li class="nav-item jarak" id="kesebilan">Tanah</li>
+                </ul>
+                <div class="tab-content ">
+                    <div class="tab-pane p-1" id="serasah">
+                        <div class="table-header d-flex justify-content-between">
+                            <div class="tampilkan">
+                                <label for="show-entries">Tampilkan</label>
+                                <select id="show-entries" class="number-selection">
+                                    <option value="5">5</option>
+                                    <option value="10">10</option>
+                                    <option value="20">20</option>
+                                </select>
+                                <span>data</span>
+                            </div>
+                        </div>
+                        <div class="table-wrapper table-responsive">
+                            <table class="custom-table-pancang  table-striped">
+                                <thead>
+                                    <tr>
+                                        <th class="kiriPancang">No</th>
+                                        <th>Sample Berat Basah</th>
+                                        <th>Total Berat Basah</th>
+                                        <th>Sample Berat Basah</th>
+                                        <th>Total Berat Kering</th>
+                                        <th>Kanduungan Karbn</th>
+                                        <th>Serapan CO2</th>
+                                        <th class="hidden-column kananPancang">Aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>No</td>
+                                        <td>202 kg </td>
+                                        <td>150 kg</td>
+                                        <td>1011. kg</td>
+                                        <td>333</td>
+                                        <td class="hidden-column">1234</td>
+                                        <td class="hidden-column">2345kg</td>
+                                        <td class="hidden-column aksi-button">
+                                            <button class="edit-btn">
+                                                <img src="{{ asset('/images/PencilSquare.svg') }}" alt="" />
+                                            </button>
+                                            <button class="delete-btn">
+                                                <img src="{{ asset('/images/Trash.svg') }}" alt="" />
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="table-footer mt-5">
+                            <span>Menampilkan 1 sampai 5 dari 40 data</span>
+                            <div class="pagination">
+                                <button class="page-btn">Kembali</button>
+                                <button class="page-btn ">1</button>
+                                <button class="page-btn">2</button>
+                                <button class="page-btn">3</button>
+                                <button class="page-btn">4</button>
+                                <button class="page-btn">Lanjut</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-1" id="semai">
+                    <div class="table-header d-flex justify-content-between">
+                        <div class="tampilkan">
+                            <label for="show-entries">Tampilkan</label>
+                            <select id="show-entries" class="number-selection">
+                                <option value="5">5</option>
+                                <option value="10">10</option>
+                                <option value="20">20</option>
+                            </select>
+                            <span>data</span>
+                        </div>
+                    </div>
+                    <div class="table-wrapper  table-responsive">
+                        <table class="custom-table-pancang table-striped">
+                            <thead>
+                                <tr>
+                                    <th class="kiriPancang">No</th>
+                                    <th>Total Berat Basah</th>
+                                    <th>Sample Berat Basah</th>
+                                    <th>Sample Berat Kering</th>
+                                    <th>Total Berat Keriing</th>
+                                    <th>Kandungan karbon</th>
+                                    <th>Serapan</th>
+                                    <th class="hidden-column kananPancang">Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="">No</td>
+                                    <td>Bakau</td>
+                                    <td>8 cmr</td>
+                                    <td>1</td>
+                                    <td>26.79 KG</td>
+                                    <td>12.59 KG</td>
+                                    <td>46,21</td>
+                                    <td class="hidden-column aksi-button">
+                                        <button class="edit-btn">
+                                            <img src="{{ asset('/images/PencilSquare.svg') }}" alt="" />
+                                        </button>
+                                        <button class="delete-btn">
+                                            <img src="{{ asset('/images/Trash.svg') }}" alt="" />
+                                        </button>
+                                    </td>
+                                </tr>
+                                {{-- @foreach ($pancang as $item)
+                                    <tr>
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td>{{ $item->keliling }} cm</td>
+                                        <td>{{ $item->diameter }} cm</td>
+                                        <td>{{ $item->nama_lokal }}</td>
+                                        <td>{{ $item->nama_ilmiah }}</td>
+                                        <td class="hidden-column">{{ $item->kerapatan_jenis_kayu }}gr/cm3</td>
+                                        <td class="hidden-column">{{ $item->bio_di_atas_tanah }} kg</td>
+                                        <td class="hidden-column">{{ $item->kandungan_karbon }}kg</td>
+                                        <td class="hidden-column">{{ $item->co2 }} kg</td>
+                                        <td class="hidden-column aksi-button">
+                                            <button class="edit-btn">
+                                                <img src="{{ asset('/images/PencilSquare.svg') }}" alt="" />
+                                            </button>
+                                            <button class="delete-btn">
+                                                <img src="{{ asset('/images/Trash.svg') }}" alt="" />
+                                            </button>
+                                        </td>
+                                    </tr>
+                                @endforeach --}}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="table-footer mt-5">
+                        <span>Menampilkan 1 sampai 5 dari 40 data</span>
+                        <div class="pagination">
+                            <button class="page-btn">Kembali</button>
+                            <button class="page-btn ">1</button>
+                            <button class="page-btn">2</button>
+                            <button class="page-btn">3</button>
+                            <button class="page-btn">4</button>
+                            <button class="page-btn">Lanjut</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-1" id="tumbuhanBawah">
+                    <div class="table-header d-flex justify-content-between">
+                        <div class="tampilkan">
+                            <label for="show-entries">Tampilkan</label>
+                            <select id="show-entries" class="number-selection">
+                                <option value="5">5</option>
+                                <option value="10">10</option>
+                                <option value="20">20</option>
+                            </select>
+                            <span>data</span>
+                        </div>
+                    </div>
+                    <div class="table-wrapper table-responsive">
+                        <table class="custom-table-pancang table-striped">
+                            <thead>
+                                <tr>
+                                    <th class="kiriPancang">No</th>
+                                    <th>Total Berat Basah</th>
+                                    <th>Sample Berat Basah</th>
+                                    <th>Sample Berat Kering</th>
+                                    <th>Total Berat Keriing</th>
+                                    <th>Kandungan karbon</th>
+                                    <th>Serapan</th>
+                                    <th class="hidden-column kananPancang">Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="">No</td>
+                                    <td>Bakau</td>
+                                    <td>8 cmr</td>
+                                    <td>2</td>
+                                    <td>26.79 KG</td>
+                                    <td>12.59 KG</td>
+                                    <td>46,21</td>
+                                    <td class="hidden-column aksi-button">
+                                        <button class="edit-btn">
+                                            <img src="{{ asset('/images/PencilSquare.svg') }}" alt="" />
+                                        </button>
+                                        <button class="delete-btn">
+                                            <img src="{{ asset('/images/Trash.svg') }}" alt="" />
+                                        </button>
+                                    </td>
+                                </tr>
+                                {{-- @foreach ($pancang as $item)
+                                    <tr>
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td>{{ $item->keliling }} cm</td>
+                                        <td>{{ $item->diameter }} cm</td>
+                                        <td>{{ $item->nama_lokal }}</td>
+                                        <td>{{ $item->nama_ilmiah }}</td>
+                                        <td class="hidden-column">{{ $item->kerapatan_jenis_kayu }}gr/cm3</td>
+                                        <td class="hidden-column">{{ $item->bio_di_atas_tanah }} kg</td>
+                                        <td class="hidden-column">{{ $item->kandungan_karbon }}kg</td>
+                                        <td class="hidden-column">{{ $item->co2 }} kg</td>
+                                        <td class="hidden-column aksi-button">
+                                            <button class="edit-btn">
+                                                <img src="{{ asset('/images/PencilSquare.svg') }}" alt="" />
+                                            </button>
+                                            <button class="delete-btn">
+                                                <img src="{{ asset('/images/Trash.svg') }}" alt="" />
+                                            </button>
+                                        </td>
+                                    </tr>
+                                @endforeach --}}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="table-footer mt-5">
+                        <span>Menampilkan 1 sampai 5 dari 40 data</span>
+                        <div class="pagination">
+                            <button class="page-btn">Kembali</button>
+                            <button class="page-btn ">1</button>
+                            <button class="page-btn">2</button>
+                            <button class="page-btn">3</button>
+                            <button class="page-btn">4</button>
+                            <button class="page-btn">Lanjut</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-1" id="tanah">
+                    <div class="table-header d-flex justify-content-between">
+                        <div class="tampilkan">
+                            <label for="show-entries">Tampilkan</label>
+                            <select id="show-entries" class="number-selection">
+                                <option value="5">5</option>
+                                <option value="10">10</option>
+                                <option value="20">20</option>
+                            </select>
+                            <span>data</span>
+                        </div>
+                    </div>
+                    <div class="table-wrapper table-responsive">
+                        <table class="custom-table-pancang  table-striped">
+                            <thead>
+                                <tr>
+                                    <th class="kiriPancang">No</th>
+                                    <th>Kedalaman Sample</th>
+                                    <th>Sample Berat Basah</th>
+                                    <th>C organik Tanah</th>
+                                    <th>karbon </th>
+                                    <th>karbon</th>
+                                    <th>Karbon</th>
+                                    <th class="hidden-column kananPancang">Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="">No</td>
+                                    <td>Bakau</td>
+                                    <td>8 cmr</td>
+                                    <td>2</td>
+                                    <td>26.79 KG</td>
+                                    <td>12.59 KG</td>
+                                    <td>46,21</td>
+                                    <td class="hidden-column aksi-button">
+                                        <button class="edit-btn">
+                                            <img src="{{ asset('/images/PencilSquare.svg') }}" alt="" />
+                                        </button>
+                                        <button class="delete-btn">
+                                            <img src="{{ asset('/images/Trash.svg') }}" alt="" />
+                                        </button>
+                                    </td>
+                                </tr>
+                                {{-- @foreach ($pancang as $item)
+                                    <tr>
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td>{{ $item->keliling }} cm</td>
+                                        <td>{{ $item->diameter }} cm</td>
+                                        <td>{{ $item->nama_lokal }}</td>
+                                        <td>{{ $item->nama_ilmiah }}</td>
+                                        <td class="hidden-column">{{ $item->kerapatan_jenis_kayu }}gr/cm3</td>
+                                        <td class="hidden-column">{{ $item->bio_di_atas_tanah }} kg</td>
+                                        <td class="hidden-column">{{ $item->kandungan_karbon }}kg</td>
+                                        <td class="hidden-column">{{ $item->co2 }} kg</td>
+                                        <td class="hidden-column aksi-button">
+                                            <button class="edit-btn">
+                                                <img src="{{ asset('/images/PencilSquare.svg') }}" alt="" />
+                                            </button>
+                                            <button class="delete-btn">
+                                                <img src="{{ asset('/images/Trash.svg') }}" alt="" />
+                                            </button>
+                                        </td>
+                                    </tr>
+                                @endforeach --}}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="table-footer mt-5">
+                        <span>Menampilkan 1 sampai 5 dari 40 data</span>
+                        <div class="pagination">
+                            <button class="page-btn">Kembali</button>
+                            <button class="page-btn ">1</button>
+                            <button class="page-btn">2</button>
+                            <button class="page-btn">3</button>
+                            <button class="page-btn">4</button>
+                            <button class="page-btn">Lanjut</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-1" id="pancang">
+                    <div class="table-header d-flex justify-content-between">
+                        <div class="tampilkan">
+                            <label for="show-entries">Tampilkan</label>
+                            <select id="show-entries" class="number-selection">
+                                <option value="5">5</option>
+                                <option value="10">10</option>
+                                <option value="20">20</option>
+                            </select>
+                            <span>data</span>
+                        </div>
+                    </div>
+                    <div class="table-wrapper table-responsive">
+                        <table class="custom-table-pancang  table-striped">
+                            <thead>
+                                <tr>
+                                    <th class="kiriPancang">No</th>
+                                    <th>Keliling</th>
+                                    <th>Diameter</th>
+                                    <th>Nama Lokal</th>
+                                    <th>Nama Ilmiah</th>
+                                    <th>Kerapatan Jenis Kayu</th>
+                                    <th>Bio diatas tanah</th>
+                                    <th>Kandungan karbon</th>
+                                    <th>Serapan CO2 : ''</th>
+                                    <th class="hidden-column kananPancang">Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="">No</td>
+                                    <td>35</td>
+                                    <td>11.1 cmr</td>
+                                    <td>jati</td>
+                                    <td>Tectona KG</td>
+                                    <td>61 KG</td>
+                                    <td>46,21</td>
+                                    <td>61 KG</td>
+                                    <td>46,21</td>
+                                    <td class="hidden-column aksi-button">
+                                        <button class="edit-btn">
+                                            <img src="{{ asset('/images/PencilSquare.svg') }}" alt="" />
+                                        </button>
+                                        <button class="delete-btn">
+                                            <img src="{{ asset('/images/Trash.svg') }}" alt="" />
+                                        </button>
+                                    </td>
+                                </tr>
+                                {{-- @foreach ($pancang as $item)
+                                    <tr>
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td>{{ $item->keliling }} cm</td>
+                                        <td>{{ $item->diameter }} cm</td>
+                                        <td>{{ $item->nama_lokal }}</td>
+                                        <td>{{ $item->nama_ilmiah }}</td>
+                                        <td class="hidden-column">{{ $item->kerapatan_jenis_kayu }}gr/cm3</td>
+                                        <td class="hidden-column">{{ $item->bio_di_atas_tanah }} kg</td>
+                                        <td class="hidden-column">{{ $item->kandungan_karbon }}kg</td>
+                                        <td class="hidden-column">{{ $item->co2 }} kg</td>
+                                        <td class="hidden-column aksi-button">
+                                            <button class="edit-btn">
+                                                <img src="{{ asset('/images/PencilSquare.svg') }}" alt="" />
+                                            </button>
+                                            <button class="delete-btn">
+                                                <img src="{{ asset('/images/Trash.svg') }}" alt="" />
+                                            </button>
+                                        </td>
+                                    </tr>
+                                @endforeach --}}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="table-footer mt-5">
+                        <span>Menampilkan 1 sampai 5 dari 40 data</span>
+                        <div class="pagination">
+                            <button class="page-btn">Kembali</button>
+                            <button class="page-btn ">1</button>
+                            <button class="page-btn">2</button>
+                            <button class="page-btn">3</button>
+                            <button class="page-btn">4</button>
+                            <button class="page-btn">Lanjut</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-1" id="mangrove">
+                    <div class="table-header d-flex justify-content-between">
+                        <div class="tampilkan">
+                            <label for="show-entries">Tampilkan</label>
+                            <select id="show-entries" class="number-selection">
+                                <option value="5">5</option>
+                                <option value="10">10</option>
+                                <option value="20">20</option>
+                            </select>
+                            <span>data</span>
+                        </div>
+                    </div>
+                    <div class="table-wrapper table-responsive">
+                        <table class="custom-table-pancang table-striped">
+                            <thead>
+                                <tr>
+                                    <th class="kiriPancang">No</th>
+                                    <th>Jernis Tanaman</th>
+                                    <th>Diameter</th>
+                                    <th>Jumlah Tanaman</th>
+                                    <th>Biomasa</th>
+                                    <th>Kandungan Karbon</th>
+                                    <th>Karbondioksida</th>
+                                    <th class="hidden-column kananPancang">Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="">No</td>
+                                    <td>Bakau</td>
+                                    <td>8 cmr</td>
+                                    <td>1</td>
+                                    <td>26.79 KG</td>
+                                    <td>12.59 KG</td>
+                                    <td>46,21</td>
+                                    <td class="hidden-column aksi-button">
+                                        <button class="edit-btn">
+                                            <img src="{{ asset('/images/PencilSquare.svg') }}" alt="" />
+                                        </button>
+                                        <button class="delete-btn">
+                                            <img src="{{ asset('/images/Trash.svg') }}" alt="" />
+                                        </button>
+                                    </td>
+                                </tr>
+                                {{-- @foreach ($pancang as $item)
+                                    <tr>
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td>{{ $item->keliling }} cm</td>
+                                        <td>{{ $item->diameter }} cm</td>
+                                        <td>{{ $item->nama_lokal }}</td>
+                                        <td>{{ $item->nama_ilmiah }}</td>
+                                        <td class="hidden-column">{{ $item->kerapatan_jenis_kayu }}gr/cm3</td>
+                                        <td class="hidden-column">{{ $item->bio_di_atas_tanah }} kg</td>
+                                        <td class="hidden-column">{{ $item->kandungan_karbon }}kg</td>
+                                        <td class="hidden-column">{{ $item->co2 }} kg</td>
+                                        <td class="hidden-column aksi-button">
+                                            <button class="edit-btn">
+                                                <img src="{{ asset('/images/PencilSquare.svg') }}" alt="" />
+                                            </button>
+                                            <button class="delete-btn">
+                                                <img src="{{ asset('/images/Trash.svg') }}" alt="" />
+                                            </button>
+                                        </td>
+                                    </tr>
+                                @endforeach --}}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="table-footer mt-5">
+                        <span>Menampilkan 1 sampai 5 dari 40 data</span>
+                        <div class="pagination">
+                            <button class="page-btn">Kembali</button>
+                            <button class="page-btn ">1</button>
+                            <button class="page-btn">2</button>
+                            <button class="page-btn">3</button>
+                            <button class="page-btn">4</button>
+                            <button class="page-btn">Lanjut</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-1" id="tiang">
+                    <div class="table-header d-flex justify-content-between">
+                        <div class="tampilkan">
+                            <label for="show-entries">Tampilkan</label>
+                            <select id="show-entries" class="number-selection">
+                                <option value="5">5</option>
+                                <option value="10">10</option>
+                                <option value="20">20</option>
+                            </select>
+                            <span>data</span>
+                        </div>
+                    </div>
+                    <div class="table-wrapper table-responsive">
+                        <table class="custom-table-pancang table-striped">
+                            <thead>
+                                <tr>
+                                    <th class="kiriPancang">No</th>
+                                    <th>Keliling</th>
+                                    <th>Diameter</th>
+                                    <th>Nama Lokal</th>
+                                    <th>Nama Ilmiah</th>
+                                    <th>Kerapatan Jenis Kayu</th>
+                                    <th>Bio diatas tanah</th>
+                                    <th>Kandungan karbon</th>
+                                    <th>Serapan CO2 : ''</th>
+                                    <th class="hidden-column kananPancang">Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="">No</td>
+                                    <td>Bakau</td>
+                                    <td>8 cmr</td>
+                                    <td>1</td>
+                                    <td>26.79 KG</td>
+                                    <td>12.59 KG</td>
+                                    <td>46,21</td>
+                                    <td>46,21</td>
+                                    <td>46,21</td>
+                                    <td class="hidden-column aksi-button">
+                                        <button class="edit-btn">
+                                            <img src="{{ asset('/images/PencilSquare.svg') }}" alt="" />
+                                        </button>
+                                        <button class="delete-btn">
+                                            <img src="{{ asset('/images/Trash.svg') }}" alt="" />
+                                        </button>
+                                    </td>
+                                </tr>
+                                {{-- @foreach ($pancang as $item)
+                                    <tr>
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td>{{ $item->keliling }} cm</td>
+                                        <td>{{ $item->diameter }} cm</td>
+                                        <td>{{ $item->nama_lokal }}</td>
+                                        <td>{{ $item->nama_ilmiah }}</td>
+                                        <td class="hidden-column">{{ $item->kerapatan_jenis_kayu }}gr/cm3</td>
+                                        <td class="hidden-column">{{ $item->bio_di_atas_tanah }} kg</td>
+                                        <td class="hidden-column">{{ $item->kandungan_karbon }}kg</td>
+                                        <td class="hidden-column">{{ $item->co2 }} kg</td>
+                                        <td class="hidden-column aksi-button">
+                                            <button class="edit-btn">
+                                                <img src="{{ asset('/images/PencilSquare.svg') }}" alt="" />
+                                            </button>
+                                            <button class="delete-btn">
+                                                <img src="{{ asset('/images/Trash.svg') }}" alt="" />
+                                            </button>
+                                        </td>
+                                    </tr>
+                                @endforeach --}}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="table-footer mt-5">
+                        <span>Menampilkan 1 sampai 5 dari 40 data</span>
+                        <div class="pagination">
+                            <button class="page-btn">Kembali</button>
+                            <button class="page-btn ">1</button>
+                            <button class="page-btn">2</button>
+                            <button class="page-btn">3</button>
+                            <button class="page-btn">4</button>
+                            <button class="page-btn">Lanjut</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-1" id="pohon">
+                    <div class="table-header d-flex justify-content-between">
+                        <div class="tampilkan">
+                            <label for="show-entries">Tampilkan</label>
+                            <select id="show-entries" class="number-selection">
+                                <option value="5">5</option>
+                                <option value="10">10</option>
+                                <option value="20">20</option>
+                            </select>
+                            <span>data</span>
+                        </div>
+                    </div>
+                    <div class="table-wrapper table-responsive">
+                        <table class="custom-table-pancang table-striped">
+                            <thead>
+                                <tr>
+                                    <th class="kiriPancang">No</th>
+                                    <th>Diameter Pangkal</th>
+                                    <th>Diameter Ujung</th>
+                                    <th>Panjang</th>
+                                    <th>Berat Jenis Kayu</th>
+                                    <th class="hidden-column">Volume</th>
+                                    <th class="hidden-column">Biomasa</th>
+                                    <th class="hidden-column">Kandungan karbon</th>
+                                    <th class="hidden-column">Serapan CO2</th>
+                                    <th class="hidden-column kananPancang">Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>12345 cm</td>
+                                    <td>123456ucm</td>
+                                    <td>12345</td>
+                                    <td>12345678</td>
+                                    <td class="hidden-column">123456789 gr/cm3</td>
+                                    <td class="hidden-column">212345kg</td>
+                                    <td class="hidden-column">234567kg</td>
+                                    <td class="hidden-column">23456789 kg</td>
+                                    <td class="hidden-column aksi-button">
+                                        <button class="edit-btn">
+                                            <img src="{{ asset('/images/PencilSquare.svg') }}" alt="" />
+                                        </button>
+                                        <button class="delete-btn">
+                                            <img src="{{ asset('/images/Trash.svg') }}" alt="" />
+                                        </button>
+                                    </td>
+                                </tr>
+                                {{-- @foreach ($pancang as $item)
+                                    <tr>
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td>{{ $item->keliling }} cm</td>
+                                        <td>{{ $item->diameter }} cm</td>
+                                        <td>{{ $item->nama_lokal }}</td>
+                                        <td>{{ $item->nama_ilmiah }}</td>
+                                        <td class="hidden-column">{{ $item->kerapatan_jenis_kayu }}gr/cm3</td>
+                                        <td class="hidden-column">{{ $item->bio_di_atas_tanah }} kg</td>
+                                        <td class="hidden-column">{{ $item->kandungan_karbon }}kg</td>
+                                        <td class="hidden-column">{{ $item->co2 }} kg</td>
+                                        <td class="hidden-column aksi-button">
+                                            <button class="edit-btn">
+                                                <img src="{{ asset('/images/PencilSquare.svg') }}" alt="" />
+                                            </button>
+                                            <button class="delete-btn">
+                                                <img src="{{ asset('/images/Trash.svg') }}" alt="" />
+                                            </button>
+                                        </td>
+                                    </tr>
+                                @endforeach --}}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="table-footer mt-5">
+                        <span>Menampilkan 1 sampai 5 dari 40 data</span>
+                        <div class="pagination">
+                            <button class="page-btn">Kembali</button>
+                            <button class="page-btn ">1</button>
+                            <button class="page-btn">2</button>
+                            <button class="page-btn">3</button>
+                            <button class="page-btn">4</button>
+                            <button class="page-btn">Lanjut</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-1" id="nekromas">
+                    <div class="table-header d-flex justify-content-between">
+                        <div class="tampilkan">
+                            <label for="show-entries">Tampilkan</label>
+                            <select id="show-entries" class="number-selection">
+                                <option value="5">5</option>
+                                <option value="10">10</option>
+                                <option value="20">20</option>
+                            </select>
+                            <span>data</span>
+                        </div>
+                    </div>
+                    <div class="table-wrapper table-responsive">
+                        <table class="custom-table-pancang table-striped">
+                            <thead>
+                                <tr>
+                                    <th class="kiriPancang">No</th>
+                                    <th>Keliling</th>
+                                    <th>Diameter</th>
+                                    <th>Nama Lokal</th>
+                                    <th>Nama Ilmiah</th>
+                                    <th class="hidden-column">Kerapatan Jenis Kayu</th>
+                                    <th class="hidden-column">Bio diatas tanah</th>
+                                    <th class="hidden-column">Kandungan karbon</th>
+                                    <th class="hidden-column">Serapan CO2</th>
+                                    <th class="hidden-column kananPancang">Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>0</td>
+                                    <td>12 cm</td>
+                                    <td>13 cm</td>
+                                    <td>djxhher</td>
+                                    <td>sfedfhngh</td>
+                                    <td>123456 gr/cm3</td>
+                                    <td>12345678 kg</td>
+                                    <td>12345678 kg</td>
+                                    <td>2345678 kg</td>
+                                    <td class="hidden-column aksi-button">
+                                        <button class="edit-btn">
+                                            <img src="{{ asset('/images/PencilSquare.svg') }}" alt="" />
+                                        </button>
+                                        <button class="delete-btn">
+                                            <img src="{{ asset('/images/Trash.svg') }}" alt="" />
+                                        </button>
+                                    </td>
+                                </tr>
+                                {{-- @foreach ($pancang as $item)
+                                    <tr>
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td>{{ $item->keliling }} cm</td>
+                                        <td>{{ $item->diameter }} cm</td>
+                                        <td>{{ $item->nama_lokal }}</td>
+                                        <td>{{ $item->nama_ilmiah }}</td>
+                                        <td class="hidden-column">{{ $item->kerapatan_jenis_kayu }}gr/cm3</td>
+                                        <td class="hidden-column">{{ $item->bio_di_atas_tanah }} kg</td>
+                                        <td class="hidden-column">{{ $item->kandungan_karbon }}kg</td>
+                                        <td class="hidden-column">{{ $item->co2 }} kg</td>
+                                        <td class="hidden-column aksi-button">
+                                            <button class="edit-btn">
+                                                <img src="{{ asset('/images/PencilSquare.svg') }}" alt="" />
+                                            </button>
+                                            <button class="delete-btn">
+                                                <img src="{{ asset('/images/Trash.svg') }}" alt="" />
+                                            </button>
+                                        </td>
+                                    </tr>
+                                @endforeach --}}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="table-footer mt-5">
+                        <span>Menampilkan 1 sampai 5 dari 40 data</span>
+                        <div class="pagination">
+                            <button class="page-btn">Kembali</button>
+                            <button class="page-btn ">1</button>
+                            <button class="page-btn">2</button>
+                            <button class="page-btn">3</button>
+                            <button class="page-btn">4</button>
+                            <button class="page-btn">Lanjut</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6  height-card box-margin">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title mb-0">Summary Kandungan Karbon</h4>
+                        <p class="mb-3">Bagian ini untuk menampilkan hitungan total kandungan karbon untuk lokasi
+                            Telkom University</p>
 
-        document.getElementById('searchInput').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                let perPage = document.getElementById('perPageSelect').value;
-                let search = this.value;
-                window.location.href =
-                    "{{ route('zona.getZona', ['slug' => $zona->first()->slug ?? 'default-slug']) }}" +
-                    "?per_page=" + perPage + "&search=" +
-                    search;
-            }
-        });
-    </script>
+                        <div class="table-wrapper ">
+                            <table class=" custom-table-pancang table mb-0">
+                                <thead>
+                                    <tr>
+                                        <th>Subplot</th>
+                                        <th class="text-right">Karbon</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Seresah</td>
+                                        <td class="text-right">
+                                            <div class="badge btn-successs ">1.40</div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Semai</td>
+                                        <td class="text-right">
+                                            <div class="badge btn-successs">2.09</div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Tumbuhan Bawah</td>
+                                        <td class="text-right">
+                                            <div class="badge btn-successs">3.25</div>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>Pancang</td>
+                                        <td class="text-right">
+                                            <div class="badge btn-successs">16.53</div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Mangrove</td>
+                                        <td class="text-right">
+                                            <div class="badge btn-successs">16.53</div>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>Tiang</td>
+                                        <td class="text-right">
+                                            <div class="badge btn-successs">21.01</div>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>Nekromas</td>
+                                        <td class="text-right">
+                                            <div class="badge btn-successs">2.52</div>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>Pohon</td>
+                                        <td class="text-right">
+                                            <div class="badge btn-successs">119.67</div>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>Tanah</td>
+                                        <td class="text-right">
+                                            <div class="badge btn-successs">143.75</div>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>Total</td>
+                                        <td class="text-right">
+                                            <div class="badge btn-successs">306.97</div>
+                                        </td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-md-6  height-card box-margin">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title mb-0">Summary Serapan CO2</h4>
+                        <p class="mb-3">Bagian ini untuk menampilkan hitungan total serapa CO2 untuk lokasi Telkom
+                            University</p>
+
+                        <div class="table-wrapper ">
+                            <table class=" custom-table-pancang table mb-0">
+                                <thead>
+                                    <tr>
+                                        <th>Subplot</th>
+                                        <th class="text-right">Karbon</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Seresah</td>
+                                        <td class="text-right">
+                                            <div class="badge btn-successs ">1.40</div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Semai</td>
+                                        <td class="text-right">
+                                            <div class="badge btn-successs">2.09</div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Tumbuhan Bawah</td>
+                                        <td class="text-right">
+                                            <div class="badge btn-successs">3.25</div>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>Pancang</td>
+                                        <td class="text-right">
+                                            <div class="badge btn-successs">16.53</div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Mangrove</td>
+                                        <td class="text-right">
+                                            <div class="badge btn-successs">16.53</div>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>Tiang</td>
+                                        <td class="text-right">
+                                            <div class="badge btn-successs">21.01</div>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>Nekromas</td>
+                                        <td class="text-right">
+                                            <div class="badge btn-successs">2.52</div>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>Pohon</td>
+                                        <td class="text-right">
+                                            <div class="badge btn-successs">119.67</div>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>Tanah</td>
+                                        <td class="text-right">
+                                            <div class="badge btn-successs">143.75</div>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>Total</td>
+                                        <td class="text-right">
+                                            <div class="badge btn-successs">306.97</div>
+                                        </td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+    <script></script>
 @endsection
