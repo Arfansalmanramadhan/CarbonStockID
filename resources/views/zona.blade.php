@@ -193,9 +193,9 @@
                         </ul>
                     </nav>
                 </div>
-                <div class="d-flex justify-content-between">
+                {{-- <div class="d-flex justify-content-between">
                     {{ $zona->links() }}
-                </div>
+                </div> --}}
                 {{-- <div class="table-footer mt-5">
                     <span>Menampilkan 1 sampai 5 dari 40 data</span>
                     <div class="pagination">

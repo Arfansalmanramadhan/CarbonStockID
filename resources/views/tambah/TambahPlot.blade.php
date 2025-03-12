@@ -27,11 +27,36 @@
                 <div class="card-body">
                     <!-- Map Section -->
                     <div id="map"></div>
-
+                    @if (session('success'))
+                        <div class="alert alert-success">{{ session('success') }}</div>
+                    @endif
+                    @if (session('error'))
+                        <div class="alert alert-danger">{{ session('error') }}</div>
+                    @endif
                     <!-- Form -->
                     <dd></dd>
-                    <form method="POST" action="{{ route('plotarea.store') }}" id="plotAreaForm">
+                    <form method="POST" action="{{ route('Plot.store', ['slug' => $hamparan->slug]) }}" id="plotAreaForm">
                         @csrf
+                        <div class="mb-4">
+                            <label for="plotName" class="form-label">Plot</label>
+                            <select class="form-select  form-control" aria-label="Default select example" name="nama_plot">
+                                <option selected>Plot</option>
+                                <option value="Plot 1">Plot 1</option>
+                                <option value="Plot 2">Plot 2</option>
+                                <option value="Plot 3">Plot 3</option>
+                                <option value="Plot 4">Plot 4</option>
+                                <option value="Plot 5">Plot 5</option>
+                            </select>
+                        </div>
+                        <div class="mb-4">
+                            <label for="plotName" class="form-label">Plot Area</label>
+                            <select class="form-select  form-control" aria-label="Default select example" name="type_plot">
+                                <option selected>Pilih tipe ploy</option>
+                                <option value="Bujursangka">Bujursangka</option>
+                                <option value="Persegi Panjang">Persegi Panjang</option>
+                                <option value="Lingkaran">Lingkaran</option>
+                            </select>
+                        </div>
                         <div class="mb-4">
                             <label for="latitude" class="form-label">Latitude</label>
                             <input type="text" class="form-control-non" name="latitude" id="latitude" />
@@ -40,23 +65,7 @@
                             <label for="longitude" class="form-label">Longitude</label>
                             <input type="text" class="form-control-non" name="longitude" id="longitude" />
                         </div>
-                        <div class="mb-4">
-                            <label for="plotName" class="form-label">Nama Zona</label>
-                            <input type="text" class="form-control" name="daerah" id="plotName"
-                                placeholder="Masukkan nama daerah pengamatan" />
-                        </div>
-                        <div class="mb-4">
-                            <label for="plotName" class="form-label">Pilih Tipe Plot</label>
-                            <input type="text" class="form-control" name="daerah" id="plotName"
-                                placeholder="Masukkan nama daerah pengamatan" />
-                        </div>
-                        <div class="mb-4">
-                            <label for="fileUpload" class="form-label">Upload Foto Zona</label>
-                            <input type="file" class="form-control" name="foto_zona" id="fileUpload" />
-                        </div>
-                        {{-- <input type="hidden" name="profil_id" value="{{ auth()->user()->user->id }}" /> --}}
-                        <!-- pastikan user sudah login -->
-                        <a href="{{ route('zona.index') }}" class=" btn btn-success " id="submitButton"><span>Submit</span>
+                        <button type="submit" class="btn btn-success" id="submitButton">Submit</button>
                         </a>
                     </form>
                 </div>

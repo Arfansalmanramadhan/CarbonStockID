@@ -130,9 +130,9 @@
                             </ul>
                         </nav>
                     </div>
-                    <div class="d-flex justify-content-between">
+                    {{-- <div class="d-flex justify-content-between">
                         {{ $hamparan->links() }}
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>

@@ -37,8 +37,8 @@
                         </div>
                     </form>
 
-                    <button onclick="window.location.href='{{ route('Lokasi.index') }}'"
-                        class="btn btn-tambah-data m-3">Tambah</button>
+                    {{-- <button onclick="window.location.href='{{ route('Lokasi.index') }}'"
+                        class="btn btn-tambah-data m-3">Tambah</button> --}}
                 </div>
             </div>
             <div class="table-wrapper">

@@ -1,4 +1,4 @@
-/@extends('layout.mainlayaot')
+@extends('layout.mainlayaot')
 
 @section('title', 'Zona')
 
@@ -845,6 +845,22 @@
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="row  mb-3">
+            @foreach ($zona as $item)
+
+                <div class="col-lg-3 col-md-4 col-sm-6 md-3">
+                    <div class="card h-100" >
+                        <div class="card-body">
+                            <h5 class="card-title">Pendekatan Kerapatan</h5>
+                            <p class="card-text fw-bold">{{$item->zona}}</p>
+                            <p class="card-text text-start fw-bold ">Biomassa diatas permukaan tanah (ton/ha)</p>
+                            <p class="card-text text-start fw-bold ">Kandungan karbon (ton/ha)</p>
+                            <p class="card-text text-start fw-bold ">Serapan CO2 (ton/ha)</p>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
         </div>
         <div class="row">
             <div class="col-md-6  height-card box-margin">

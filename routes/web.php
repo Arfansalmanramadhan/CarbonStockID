@@ -211,7 +211,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/Verifikasi', 'index')->name('Verifikasi.index');
         Route::get('/Verifikasi', 'view')->name('Verifikasi.index');
         Route::get('/veri/{slug}', 'menyetujui')->name('Verifikasi.menyetujui');
-        Route::get('/Hamparan/Plot/{slug}', 'getPlopt')->name('Plot.getPlopt');
+
     });
     Route::controller(zonaController::class)->group(function () {
         Route::get("/zona", "index")->name('zona.index');
@@ -233,5 +233,9 @@ Route::middleware('auth')->group(function () {
     });
     Route::controller(PLotCOntroller::class)->group(function(){
         Route::get('/dataPlot', 'index')->name('dataPlot.index');
+        Route::get('/Hamparan/Plot/{slug}', 'getPlopt')->name('Plot.getPlopt');
+        Route::get('/Plot/{slug}/tambah', 'tambah')->name('Plot.tambah');
+        Route::get('/Plot/{slug}/tambah', 'create')->name('Plot.tambah');
+        Route::post('/Plot/{slug}/tambah', 'store')->name('Plot.store');
     });
 });

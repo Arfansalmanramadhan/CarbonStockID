@@ -1,26 +1,46 @@
 @extends('layout.layaout')
 
-@section('title', 'Buku')
+@section('title', 'TambahZona')
 
 @section('content')
-
-    <!-- Konten baru yang akan ditampilkan -->
-    <div class="container-tambah-data hidden mt-5" id="newContent">
+    <div class="container-tambah-data mt-5" id="currentContent">
         <div class="container-isi">
-            <div class="card plot-info-card batas">
+            <div class="card plot-info-card">
                 <div class="card-header d-flex align-items-center">
-                    <img class="ms-3 toggle-chevron" src="assets/img/ChevronDown.svg" alt="" />
-                    <h5 class="ms-3 mt-2">Zona Area</h5>
+                    <h5 class="ms-3 mt-2">Tambah data zona</h5>
+                    @session('success')
+                        {{-- <h5 class="ms-3 mt-2">sdsadsa</h5> --}}
+                        <div class="toast position-fixed left-0 bottom-0 z-3 ms-4 p-2 mb-3" role="alert" aria-live="assertive"
+                            aria-atomic="true" id="myToast">
+                            <div class="toast-header border-0">
+                                {{-- <img src="..." class="rounded me-2" alt="..."> --}}
+                                <strong class="me-auto">Data berhasil dikirim!</strong>
+                                {{-- <small>11 mins ago</small> --}}
+                                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                            </div>
+                            <div class="toast-body">
+                                Data berhasil dikirim!
+                            </div>
+                        </div>
+                    @endsession
                 </div>
-                <div class="card-body-sup-plot">
-                    <div id="map" style="width: 100%; height: 400px;"></div>
+                <div class="card-body">
+                    <!-- Map Section -->
+                    <div id="map"></div>
+                    @if (session('success'))
+                        <div class="alert alert-success">{{ session('success') }}</div>
+                    @endif
+                    @if (session('error'))
+                        <div class="alert alert-danger">{{ session('error') }}</div>
+                    @endif
                     <!-- Form -->
-                    <form method="POST" action="{{ route('zona.store') }}" id="SerasahForm">
+                    <dd></dd>
+                    <form method="POST" action="{{ route('zona.store', ['slug' => $poltArea->slug]) }}" id="plotAreaForm">
                         @csrf
-                        <input type="hidden" id="polt-area_id" name="polt-area_id" value="{{ $poltArea->id }}" />
-                        <div class="mb-3">
+                        {{-- <input type="hidden" id="polt-area_id" name="polt-area_id" value="{{ $poltArea->id }}" /> --}}
+                        <div class="mb-4">
                             <label for="plotName" class="form-label">Zona Area</label>
-                            <select class="form-select  form-control" aria-label="Default select example" name="zona">
+                            <select class="form-select  form-control" aria-label="Default select example" name="nama_plot">
                                 <option selected>Zona</option>
                                 <option value="Zona 1">Zona 1</option>
                                 <option value="Zona 2">Zona 2</option>
@@ -30,54 +50,28 @@
                             </select>
                         </div>
                         <div class="mb-4">
-                            <label for="latitude" class="form-label">Latitude</label>
-                            <input type="text" class="form-control" placeholder="Latitude" name="latitude" id="latitude"
-                                required />
-                        </div>
-
-                        <!-- Input Longitude -->
-                        <div class="mb-4">
-                            <label for="longitude" class="form-label">Longitude</label>
-                            <input type="text" class="form-control" placeholder="Longitude" name="longitude"
-                                id="longitude" required />
-                        </div>
-                        <div class="mb-3">
-                            <label for="plotName" class="form-label">Jenis hutan</label>
-                            <select class="form-select  form-control" aria-label="Default select example"
-                                name="jenis_hutan">
-                                <option selected>Jenis hutan</option>
-                                <option value="Hutan Tropis">Hutan Tropis</option>
-                                <option value="Hutan Bakau">Hutan Bakau</option>
-                                <option value="Hutan Sabana">Hutan Sabana</option>
-                                <option value="Hutan Rawa Gambut">Hutan Rawa Gambut</option>
-                                <option value="Hutan Musim ">Hutan Musim </option>
-                                <option value="Hutan Homongen ">Hutan Homongen </option>
-                                <option value="Hutan Heterogen ">Hutan Heterogen </option>
-                                <option value="Hutan Lindung ">Hutan Lindung </option>
-                                <option value="Hutan Suaka Alam ">Hutan Suaka Alam </option>
-                                <option value="Hutan Produksi ">Hutan Produksi </option>
+                            <label for="plotName" class="form-label">Zona Area</label>
+                            <select class="form-select  form-control" aria-label="Default select example" name="type_plot">
+                                <option selected>Pilih tipe ploy</option>
+                                <option value="Bujursangka">Bujursangka</option>
+                                <option value="Persegi Panjang">Persegi Panjang</option>
+                                <option value="Lingkaran">Lingkaran</option>
                             </select>
                         </div>
-                        <button type="submit" class="btn btn-submit-plotA d-flex align-items-center justify-content-center"
-                            id="submitSerasah">
-                            <span>Submit</span>
-                        </button>
+                        <div class="mb-4">
+                            <label for="latitude" class="form-label">Latitude</label>
+                            <input type="text" class="form-control-non" name="latitude" id="latitude" />
+                        </div>
+                        <div class="mb-4">
+                            <label for="longitude" class="form-label">Longitude</label>
+                            <input type="text" class="form-control-non" name="longitude" id="longitude" />
+                        </div>
+                        <button type="submit" class="btn btn-success" id="submitButton">Submit</button>
+                        </a>
                     </form>
                 </div>
             </div>
-            {{-- <div class="d-flex jarak">
-                <div class="option">
-                    <a href="{{ route('PlotArea.index') }}" class=" btn btn-back  " id="submitButton">
-                        <img src="{{ asset('/images/ArrowLeft.svg') }}" alt="Arrow Icon" class="ms-2" />
-                        <span>Sebelumnya</span>
-                    </a>
-                </div>
-                <div class="option">
-                    <a href="{{ route('PlotA.index') }}" class=" btn btn-success " id="submitButton"><span>Berikutnya</span>
-                        <img src="{{ asset('/images/ArrowRight.svg') }}" alt="Arrow Icon" class="ms-2" />
-                    </a>
-                </div>
-            </div> --}}
         </div>
     </div>
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js"></script>
 @endsection

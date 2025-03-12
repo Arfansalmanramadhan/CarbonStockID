@@ -1,4 +1,4 @@
-/@extends('layout.mainlayaot')
+@extends('layout.mainlayaot')
 
 @section('title', 'Plot')
 
@@ -38,9 +38,8 @@
                                     <button type="submit" class="btn btn-tambah-data">Cari</button>
                                 </div>
                             </form>
-                            {{--
-                            <button onclick="window.location.href='{{ route('Tambahplot.tambah',['slug' => $poltArea->slug]) }}'"
-                            class="btn btn-tambah-data m-3">Tambah</button> --}}
+
+                            <button onclick="window.location.href='{{ route('Plot.tambah',['slug' => $hamparan->slug]) }}'" class="btn btn-tambah-data mb-3">Tambah</button>
                         </div>
 
                     </div>

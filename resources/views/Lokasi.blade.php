@@ -146,9 +146,9 @@
                     </nav>
                 </div>
                 <!-- Pagination -->
-                <div class="d-flex justify-content-between">
+                {{-- <div class="d-flex justify-content-between">
                     {{ $lokasi->links() }}
-                </div>
+                </div> --}}
                 {{-- </div> --}}
             </div>
         </div>
