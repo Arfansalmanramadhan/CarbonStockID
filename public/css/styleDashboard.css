@@ -407,7 +407,7 @@ html, body {
 .table th {
   background-color: var(--pr-color1);
   color: var(--pr-color2);
-  border-radius: 8px;
+  /* border-radius: 8px; */
 }
 
 .table tbody tr:nth-child(even) {
@@ -467,7 +467,7 @@ html, body {
   display: flex;
     /* width: 1100px;
     height: 630px; */
-  padding: 35px 0px;
+  padding: 35px 35px;
   flex-direction: column;
   align-items: center;
   gap: 35px;
@@ -478,8 +478,8 @@ html, body {
 }
 
 .pdf-frame {
-  width: 90%; /* Sesuaikan dengan container */
-  height: 600px; /* Atur tinggi sesuai kebutuhan */
+  width: 100%; /* Sesuaikan dengan container */
+  height: 1220px; /* Atur tinggi sesuai kebutuhan */
   border: none; /* Hapus border dari iframe */
 }
 
@@ -1154,15 +1154,16 @@ html, body {
     /* width: 245px;
     height: 62px; */
     display: flex;
-    padding: .5rem .5rem;
+    padding: .1rem .1rem;
     justify-content: center;
     align-items: center;
     gap: 14px;
     border-radius: 8px;
-    background: var(--Primary-0, #4caf4f);
-    color: var(--Warning, #fff);
+    /* background: var(--Primary-0, #4caf4f); */
+    color: var(--Warning, #4caf4f);
     font-family: "DM Sans";
-    /* font-size: 24px;
+    font-size: 16px;
+    /*
     font-style: normal;
     font-weight: 700;
     line-height: 125%;  */
@@ -1567,7 +1568,7 @@ a.sidebar-link:hover {
     font-weight: 700;
     line-height: 125%; /* 22.5px */
 }
-.btn-tambah-data {
+.btn-tambah-data{
     background-color: #28a745;
     color: white;
 }
