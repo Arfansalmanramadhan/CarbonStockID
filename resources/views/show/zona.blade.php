@@ -149,7 +149,12 @@
         </div>
         <div class="table-container card">
             <div class="card-body">
-                <h4 class="card-title mb-4">Data Subplot</h4>
+                <div class="d-flex justify-content-between">
+
+                    <h4 class="card-title mb-4">Data Subplot</h4>
+                    <button onclick="window.location.href='{{ route('hitung.index',) }}'"
+                        class="btn btn-tambah-data mb-4">Kalklasi perhitungan</button>
+                </div>
                 <ul class=" nav nav-tabs nav-bordered nav-justified overflow-x-auto">
                     <li class="activee nav-item jarak" id="pertama">Serasah</li>
                     <li class="nav-item jarak" id="kedua">Semai</li>
@@ -956,6 +961,12 @@
                                             <div class="badge btn-successs">143.75</div>
                                         </td>
                                     </tr>
+                                    <tr>
+                                        <td>Akar</td>
+                                        <td class="text-right">
+                                            <div class="badge btn-successs">143.75</div>
+                                        </td>
+                                    </tr>
 
                                     <tr>
                                         <td>Total</td>
@@ -1043,6 +1054,12 @@
 
                                     <tr>
                                         <td>Tanah</td>
+                                        <td class="text-right">
+                                            <div class="badge btn-successs">143.75</div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Akar</td>
                                         <td class="text-right">
                                             <div class="badge btn-successs">143.75</div>
                                         </td>

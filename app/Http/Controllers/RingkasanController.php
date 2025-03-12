@@ -222,7 +222,7 @@ class RingkasanController extends Controller
         // ], 202);
     }
     public function index(){
-            return view("tambah.hitung");
+            return view("kakulasi");
     }
     public function indexx(){
             return view("tambah.ringkasan");
