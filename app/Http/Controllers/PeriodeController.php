@@ -79,6 +79,7 @@ class PeriodeController extends Controller
             }
 
             // Membuat anggota tim
+            //  dd($registrasi);
             $anggotaTim = AnggotaTim::create([
                 'registrasi_id' => $registrasi->id,
                 'tim_id' => $tim->id
@@ -101,8 +102,8 @@ class PeriodeController extends Controller
         $tim = Tim::findOrFail($id);
         $registrasi = User::all();
         $anggota = DB::table('tim')
-            ->leftJoin('anggota_tim', 'tim.id', '=', 'anggota_tim.tim_id')
-            ->leftJoin('registrasi', 'anggota_tim.registrasi_id', '=', 'registrasi.id')
+        ->leftJoin('anggota_tim', 'tim.id', '=', 'anggota_tim.tim_id')
+        ->leftJoin('registrasi', 'anggota_tim.registrasi_id', '=', 'registrasi.id')
             ->select(
                 'tim.id as tim_id',
                 'tim.nama as nama_tim',
@@ -110,8 +111,10 @@ class PeriodeController extends Controller
                 DB::raw("COALESCE(registrasi.nama, 'Belum ada anggota') as nama_anggota"),
                 DB::raw("COALESCE(registrasi.username, 'Belum ada anggota') as username")
             )
+            ->where('tim.id',$id)
             ->get();
-        // dd($anggota);
+            // dd($anggota);
+            // dd($anggota);
         return view("Anggota", compact('registrasi', 'anggota', 'tim'));
     }
     public function storee(Request $request, $id)
@@ -131,10 +134,10 @@ class PeriodeController extends Controller
             if ($existingMember) {
                 return redirect()->back()->with('error', 'User sudah menjadi anggota tim.');
             }
-
+            // dd($id)  ;
             // Tambahkan anggota tim
             AnggotaTim::create([
-                'tim_id' => $id->id,
+                'tim_id' => (int) $id,
                 'registrasi_id' => $validatedData['registrasi_id'],
             ]);
 

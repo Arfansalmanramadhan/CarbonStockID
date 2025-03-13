@@ -1307,8 +1307,11 @@ html, body {
 .h2-pancang-container .jarak {
     margin: 0 10px;
     font-size: 1.5em;
-}
 
+}
+.nav-justified .nav-item {
+    cursor: pointer;
+}
 #pertama #kedua #ketiga #keempat #kelima #keenam #ketujuh #kedelapan #kesebilan {
     cursor: pointer;
     user-select: none;
