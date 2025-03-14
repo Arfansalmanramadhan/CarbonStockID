@@ -28,7 +28,7 @@ class Periode extends Model
     }
     public function tim(): BelongsTo
     {
-        return $this->belongsTo(Tim::class, 'tim_id');
+        return $this->belongsTo(Tim::class, 'tim_id', 'id');
     }
 
 }

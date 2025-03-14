@@ -20,7 +20,7 @@
             <form method="post" action="{{ route('Manajemen-Tim.store') }}">
                 <div class="row">
                     @csrf
-                    <input type="hidden" name="registrasi_id" value="{{ auth()->user()->id }}">
+                    {{-- <input type="hidden" name="registrasi_id" value="{{ auth()->user()->id }}"> --}}
                     <div class="col-12 col-md-4">
                         <label for="keliling" class="form-label">Nama Tim</label>
                         <input type="text" class="form-control" id="keliling" value="" name="nama" />
@@ -53,46 +53,48 @@
             </form>
             <div class="table-container">
                 {{-- <div class="table-wrapper"> --}}
-                    <div class="table-header  d-flex justify-content-between">
-                        <form method="GET" action="{{ route('Manajemen-Tim.index') }}">
-                            <div class="tampilkan">
-                                <label for="show-entries">Tampilkan</label>
-                                <select id="show-entries perPageSelect" class="number-selection" name="perPage"
-                                    onchange="this.form.submit()">
-                                    <option value="5" {{ request('perPage') == 5 ? 'selected' : '' }}>5</option>
-                                    <option value="10" {{ request('perPage') == 10 ? 'selected' : '' }}>10</option>
-                                    <option value="20" {{ request('perPage') == 20 ? 'selected' : '' }}>20</option>
-                                </select>
-                                <span class="ms-2">data</span>
-                            </div>
-                        </form>
-                        <div class="form-control-space">
-                            <input type="text" id="searchInput" placeholder="Cari..." class="form-control mb-3"
-                                value="{{ $search }}" onkeyup="searchTable()">
+                <div class="table-header  d-flex justify-content-between">
+                    <form method="GET" action="{{ route('Manajemen-Tim.index') }}">
+                        <div class="tampilkan">
+                            <label for="show-entries">Tampilkan</label>
+                            <select id="show-entries perPageSelect" class="number-selection" name="perPage"
+                                onchange="this.form.submit()">
+                                <option value="5" {{ request('perPage') == 5 ? 'selected' : '' }}>5</option>
+                                <option value="10" {{ request('perPage') == 10 ? 'selected' : '' }}>10</option>
+                                <option value="20" {{ request('perPage') == 20 ? 'selected' : '' }}>20</option>
+                            </select>
+                            <span class="ms-2">data</span>
                         </div>
+                    </form>
+                    <div class="form-control-space">
+                        <input type="text" id="searchInput" placeholder="Cari..." class="form-control mb-3"
+                            value="{{ $search }}" onkeyup="searchTable()">
                     </div>
-                    <div class="table-wrapper">
-                        <table class="custom-table-pancang">
-                            <thead>
+                </div>
+                <div class="table-wrapper">
+                    <table class="custom-table-pancang">
+                        <thead>
+                            <tr>
+                                <th class="kiriPancang">No</th>
+                                <th>Nama TIM</th>
+                                <th>Tanggal Mulai </th>
+                                <th>Tanggal berakhir </th>
+                                <th>Jumlah anggota </th>
+                                <th class="hidden-column kananPancang">Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @forelse($tim as $index => $t)
                                 <tr>
-                                    <th class="kiriPancang">No</th>
-                                    <th>Nama TIM</th>
-                                    <th>Tanggal Mulai </th>
-                                    <th>Tanggal berakhir </th>
-                                    <th>Jumlah anggota </th>
-                                    <th class="hidden-column kananPancang">Aksi</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {{-- @forelse($tim as $index => $t)
-                                    <tr>
-                                        <td>{{ $index + 1 }}</td>
-                                        <td>{{ $t->nama }}</td>
-                                        <td>{{ $t->periode->tanggal_mulai }}</td>
-                                        <td>{{ $t->periode->tanggal_berakhir}}</td>
-                                        <td>{{ $t->anggotaTim->count() }}</td>
-                                        <td class="hidden-column aksi-button">
-                                            <button class="view-btn">
+                                    <td>{{ $index + 1 }}</td>
+                                    <td>{{ $t->nama }}</td>
+                                    <td>{{ optional($t->periode)->tanggal_mulai  }}</td>
+                                    <td>{{ optional($t->periode)->tanggal_berakhir  }}</td>
+                                    <td>{{ $t->anggota_tim_count }}</td>
+                                    <td class="hidden-column aksi-button">
+                                        <a href="{{ route('anggota.indexx', $t->id) }}"
+                                            class="btn btn-info btn-sm">Detail</a>
+                                            {{-- <button class="view-btn">
                                                 <img src="{{ asset('/images/Eye.svg') }}" alt="" />
                                             </button>
                                             <button onclick="window.location.href='{{ route('Tambah-Surveyor.indexx') }}'"
@@ -101,15 +103,15 @@
                                             </button>
                                             <button class="delete-btn">
                                                 <img src="{{ asset('/images/Trash.svg') }}" alt="" />
-                                            </button>
+                                            </button> --}}
                                         </td>
-                                    </tr>
-                                @empty
-                                    <tr>
-                                        <td colspan="5" class="text-center">Belum ada data</td>
-                                    </tr> --}}
-                                {{-- @endforelse --}}
-                                @forelse($tim as $index => $t)
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="5" class="text-center">Belum ada data</td>
+                                </tr>
+                            @endforelse
+                            {{-- @forelse($tim as $index => $t)
                                     @if ($t->anggotaTim->isNotEmpty())
                                         @foreach ($t->anggotaTim as $anggota)
                                             @foreach ($anggota->periode as $periode)
@@ -122,7 +124,7 @@
                                                     <td>
                                                         <a href="{{ route('anggota.indexx', $t->id) }}"
                                                             class="btn btn-info btn-sm">Detail</a>
-                                                        {{-- <a href="{{ route('tim.edit', $t->id) }}"
+                                                        <a href="{{ route('tim.edit', $t->id) }}"
                                                             class="btn btn-warning btn-sm">Edit</a>
                                                         <form action="{{ route('tim.destroy', $t->id) }}" method="POST"
                                                             class="d-inline">
@@ -130,7 +132,7 @@
                                                             @method('DELETE')
                                                             <button type="submit" class="btn btn-danger btn-sm"
                                                                 onclick="return confirm('Yakin ingin menghapus?')">Hapus</button>
-                                                        </form> --}}
+                                                        </form>
                                                     </td>
                                                 </tr>
                                             @endforeach
@@ -160,11 +162,11 @@
                                     <tr>
                                         <td colspan="6" class="text-center">Belum ada data</td>
                                     </tr>
-                                @endforelse
-                            </tbody>
-                        </table>
-                    </div>
-                    {{-- <div class="table-footer mt-5">
+                                @endforelse --}}
+                        </tbody>
+                    </table>
+                </div>
+                {{-- <div class="table-footer mt-5">
                         <span>Menampilkan 1 sampai 5 dari 40 data</span>
                         <div class="pagination">
                             <button class="page-btn">Kembali</button>
@@ -175,43 +177,42 @@
                             <button class="page-btn">Lanjut</button>
                         </div>
                     </div> --}}
-                    <div class="table-footer mt-5">
-                        <strong>
-                            Menampilkan {{ $tim->firstItem() }} sampai {{ $tim->lastItem() }} dari
-                            {{ $tim->total() }} data
-                        </strong>
-                        <nav>
-                            <ul class="pagination">
-                                {{-- Tombol Kembali --}}
-                                @if ($tim->onFirstPage())
-                                    <li class="page-item disabled"><span class="page-link">Kembali</span></li>
-                                @else
-                                    <li class="page-item"><a class="page-link"
-                                            href="{{ $tim->previousPageUrl() }}">Kembali</a></li>
-                                @endif
+                <div class="table-footer mt-5">
+                    <strong>
+                        Menampilkan {{ $tim->firstItem() }} sampai {{ $tim->lastItem() }} dari
+                        {{ $tim->total() }} data
+                    </strong>
+                    <nav>
+                        <ul class="pagination">
+                            {{-- Tombol Kembali --}}
+                            @if ($tim->onFirstPage())
+                                <li class="page-item disabled"><span class="page-link">Kembali</span></li>
+                            @else
+                                <li class="page-item"><a class="page-link" href="{{ $tim->previousPageUrl() }}">Kembali</a>
+                                </li>
+                            @endif
 
-                                {{-- Nomor Halaman --}}
-                                @foreach ($tim->getUrlRange(1, $tim->lastPage()) as $page => $url)
-                                    <li class="page-item {{ $tim->currentPage() == $page ? 'active' : '' }}">
-                                        <a class="page-link" href="{{ $url }}">{{ $page }}</a>
-                                    </li>
-                                @endforeach
+                            {{-- Nomor Halaman --}}
+                            @foreach ($tim->getUrlRange(1, $tim->lastPage()) as $page => $url)
+                                <li class="page-item {{ $tim->currentPage() == $page ? 'active' : '' }}">
+                                    <a class="page-link" href="{{ $url }}">{{ $page }}</a>
+                                </li>
+                            @endforeach
 
-                                {{-- Tombol Lanjut --}}
-                                @if ($tim->hasMorePages())
-                                    <li class="page-item"><a class="page-link"
-                                            href="{{ $tim->nextPageUrl() }}">Lanjut</a>
-                                    </li>
-                                @else
-                                    <li class="page-item disabled"><span class="page-link">Lanjut</span></li>
-                                @endif
-                            </ul>
-                        </nav>
-                    </div>
-                    <!-- 🔄 Pagination -->
-                    <div class="d-flex justify-content-center">
-                        {{ $tim->links() }}
-                    </div>
+                            {{-- Tombol Lanjut --}}
+                            @if ($tim->hasMorePages())
+                                <li class="page-item"><a class="page-link" href="{{ $tim->nextPageUrl() }}">Lanjut</a>
+                                </li>
+                            @else
+                                <li class="page-item disabled"><span class="page-link">Lanjut</span></li>
+                            @endif
+                        </ul>
+                    </nav>
+                </div>
+                <!-- 🔄 Pagination -->
+                <div class="d-flex justify-content-center">
+                    {{ $tim->links() }}
+                </div>
                 {{-- </div> --}}
             </div>
         </div>

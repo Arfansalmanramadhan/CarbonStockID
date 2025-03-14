@@ -6,15 +6,25 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
-
+use Cviebrock\EloquentSluggable\Sluggable;
+use Illuminate\Support\Str;
 class Tim extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory, SoftDeletes, Sluggable;
     protected $table = 'tim';
     protected $fillable = [
         'nama',
     ];
     protected $guarded = [];
+    protected static function boot()
+    {
+        parent::boot();
+
+        // Generate slug setiap kali model diperbarui atau disimpan
+        static::saving(function ($model) {
+            $model->slug = Str::slug($model->nama);
+        });
+    }
     /**
      * Get the profil that owns the Profil
      *
@@ -30,7 +40,7 @@ class Tim extends Model
     }
     public function periode()
     {
-        return $this->hasMany(Periode::class, 'tim_id',);
+        return $this->hasOne(Periode::class, 'tim_id', 'id');
     }
     public function anggotaTim()
     {
@@ -40,5 +50,12 @@ class Tim extends Model
     {
         return $this->anggotaTim->whereNotNull('nama')->unique('nama')->count();
     }
-
+    public function sluggable(): array
+    {
+        return [
+            'slug' => [
+                'source' => 'nama'
+            ]
+        ];
+    }
 }

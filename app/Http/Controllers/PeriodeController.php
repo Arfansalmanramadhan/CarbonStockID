@@ -9,6 +9,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class PeriodeController extends Controller
 {
@@ -20,10 +21,7 @@ class PeriodeController extends Controller
         $user = Auth::user();
         $search = $request->query('search');
         $perPage = $request->query('per_page', 5);
-        $query =  Tim::with(['anggotaTim.user'])
-            ->withCount(['anggotaTim as jumlah_anggota' => function ($query) {
-                $query->whereNotNull('nama')->selectRaw('count(distinct nama)');
-            }]);
+        $query = Tim::withCount('anggotaTim')->with('periode');
         if (!empty($search)) {
             $query->where('nama', 'ILIKE', "%{$search}%");
         }
@@ -58,7 +56,7 @@ class PeriodeController extends Controller
         // Validasi request
         $validatedData = $request->validate([
             'nama' => 'required|string|max:255',
-            'registrasi_id' => 'required|exists:registrasi,id',
+            // 'tim_id' => 'required|exists:tim,id',
             'tanggal_mulai' => 'required|date',
             'tanggal_berakhir' => 'required|date|after_or_equal:tanggal_mulai',
         ]);
@@ -68,29 +66,30 @@ class PeriodeController extends Controller
         try {
             // Membuat Tim
             $tim = Tim::create([
-                "nama" => $validatedData['nama']
+                "nama" => $validatedData['nama'],
+                'slug' => Str::slug($validatedData['nama']),
             ]);
 
             // Mengambil data user registrasi
             // Mengambil data user registrasi
-            $registrasi = User::find($validatedData['registrasi_id']);
-            if (!$registrasi) {
-                return redirect()->back()->with('error', 'Registrasi tidak ditemukan');
-            }
+            // $registrasi = User::find($validatedData['registrasi_id']);
+            // if (!$registrasi) {
+            //     return redirect()->back()->with('error', 'Registrasi tidak ditemukan');
+            // }
 
             // Membuat anggota tim
             //  dd($registrasi);
-            $anggotaTim = AnggotaTim::create([
-                'registrasi_id' => $registrasi->id,
-                'tim_id' => $tim->id
-            ]);
+            // $anggotaTim = AnggotaTim::create([
+            //     'tim_id' => $tim->id
+            // ]);
 
             // Membuat Periode jika anggota tim berhasil dibuat
             $periode = Periode::create([
-                'anggota_tim_id' => $anggotaTim->id,
+                'tim_id' => $tim->id,
                 'tanggal_mulai' => $validatedData['tanggal_mulai'],
                 'tanggal_berakhir' => $validatedData['tanggal_berakhir']
             ]);
+            // dd( $periode);
             DB::commit();
             return redirect()->back()->with('success', 'Periode berhasil ditambahkan!');
         } catch (\Exception $e) {
