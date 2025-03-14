@@ -1042,7 +1042,7 @@
         const pie = new ApexCharts(document.querySelector("#pie"), pieoptions);
         pie.render();
 
-       
+
     </script>
 
 @endsection

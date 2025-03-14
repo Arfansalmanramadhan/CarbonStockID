@@ -13,10 +13,12 @@
         <div class="table-container">
             <div class="table-wrapper">
                 <div class="table-header d-flex justify-content-between">
-                    <form method="GET" action="{{ route('zona.getZona', ['slug' => $zona->first()->slug ?? 'default-slug']) }}">
+                    <form method="GET"
+                        action="{{ route('zona.getZona', ['slug' => $zona->first()->slug ?? 'default-slug']) }}">
                         <div class="tampilkan">
                             <label for="show-entries">Tampilkan</label>
-                            <select id="show-entries perPageSelect" class="number-selection" name="perPage" onchange="this.form.submit()">
+                            <select id="show-entries perPageSelect" class="number-selection" name="perPage"
+                                onchange="this.form.submit()">
                                 <option value="5" {{ request('perPage') == 5 ? 'selected' : '' }}>5</option>
                                 <option value="10" {{ request('perPage') == 10 ? 'selected' : '' }}>10</option>
                                 <option value="20" {{ request('perPage') == 20 ? 'selected' : '' }}>20</option>
@@ -25,15 +27,19 @@
                         </div>
                     </form>
                     <div class="d-flex align-items-center">
-                        <form method="GET" action="{{ route('zona.getZona', ['slug' => $zona->first()->slug ?? 'default-slug']) }}">
+                        <form method="GET"
+                            action="{{ route('zona.getZona', ['slug' => $zona->first()->slug ?? 'default-slug']) }}">
                             <div class="d-flex align-items-center">
                                 <div class="form-control-space">
-                                    <input type="text" id="searchInput" name="search" placeholder="Cari..." class="form-control" value="{{ request('search') }}">
+                                    <input type="text" id="searchInput" name="search" placeholder="Cari..."
+                                        class="form-control" value="{{ request('search') }}">
                                 </div>
                                 <button type="submit" class="btn btn-tambah-data m-3">Cari</button>
                             </div>
                         </form>
-                        <button onclick="window.location.href='{{ route('TambahZona.tambah',['slug' => $poltArea->slug]) }}'" class="btn btn-tambah-data p-3">Tambah</button>
+                        <button
+                            onclick="window.location.href='{{ route('TambahZona.tambah', ['slug' => $poltArea->slug]) }}'"
+                            class="btn btn-tambah-data p-3">Tambah</button>
                     </div>
                 </div>
                 <div class="table-wrapper">
@@ -57,11 +63,14 @@
                                     <td>{{ $item->longitude }}</td>
                                     <td>{{ $item->jenis_hutan }}</td>
                                     <td class="hidden-column aksi-button">
-                                        <a href="{{ route('hamparan.getHamparan', ['slug' => $item->slug]) }}" class="btn btn-info btn-sm">Detail</a>
+                                        <a href="{{ route('hamparan.getHamparan', ['slug' => $item->slug]) }}"
+                                            class="btn btn-info btn-sm">Detail</a>
                                         <button class="view-btn">
                                             <img src="{{ asset('/images/Eye.svg') }}" alt="View" />
                                         </button>
-                                        <button onclick="window.location.href='{{ route('zona.edit', ['slugP' => $poltArea->slug, 'slugZ' => $item->slug]) }}'" class="add-btn">
+                                        <button
+                                            onclick="window.location.href='{{ route('zona.edit', ['slugP' => $poltArea->slug, 'slugZ' => $item->slug]) }}'"
+                                            class="add-btn">
                                             <img src="{{ asset('/images/PencilSquare.svg') }}" alt="Add" />
                                         </button>
                                         <button class="delete-btn">
@@ -79,14 +88,16 @@
                 </div>
                 <div class="table-footer mt-5">
                     <strong>
-                        Menampilkan {{ $zona->firstItem() }} sampai {{ $zona->lastItem() }} dari {{ $zona->total() }} data
+                        Menampilkan {{ $zona->firstItem() }} sampai {{ $zona->lastItem() }} dari {{ $zona->total() }}
+                        data
                     </strong>
                     <nav>
                         <ul class="pagination">
                             @if ($zona->onFirstPage())
                                 <li class="page-item disabled"><span class="page-link">Kembali</span></li>
                             @else
-                                <li class="page-item"><a class="page-link" href="{{ $zona->previousPageUrl() }}">Kembali</a></li>
+                                <li class="page-item"><a class="page-link"
+                                        href="{{ $zona->previousPageUrl() }}">Kembali</a></li>
                             @endif
 
                             @foreach ($zona->getUrlRange(1, $zona->lastPage()) as $page => $url)
@@ -96,7 +107,8 @@
                             @endforeach
 
                             @if ($zona->hasMorePages())
-                                <li class="page-item"><a class="page-link" href="{{ $zona->nextPageUrl() }}">Lanjut</a></li>
+                                <li class="page-item"><a class="page-link" href="{{ $zona->nextPageUrl() }}">Lanjut</a>
+                                </li>
                             @else
                                 <li class="page-item disabled"><span class="page-link">Lanjut</span></li>
                             @endif
@@ -113,7 +125,7 @@
                 <div class="d-flex justify-content-between">
 
                     <h4 class="card-title mb-4">Data Subplot</h4>
-                    <button onclick="window.location.href='{{ route('hitung.index',) }}'"
+                    <button onclick="window.location.href='{{ route('hitung.index') }}'"
                         class="btn btn-tambah-data mb-4">Kalklasi perhitungan</button>
                 </div>
                 <ul class=" nav nav-tabs nav-bordered nav-justified overflow-x-auto">
@@ -848,12 +860,11 @@
         </div>
         <div class="row  mb-3">
             @foreach ($zona as $item)
-
                 <div class="col-lg-3 col-md-4 col-sm-6 md-3">
-                    <div class="card h-100" >
+                    <div class="card h-100">
                         <div class="card-body">
                             <h5 class="card-title">Pendekatan Kerapatan</h5>
-                            <p class="card-text fw-bold">{{$item->zona}}</p>
+                            <p class="card-text fw-bold">{{ $item->zona }}</p>
                             <p class="card-text text-start fw-bold ">Biomassa diatas permukaan tanah (ton/ha)</p>
                             <p class="card-text text-start fw-bold ">Kandungan karbon (ton/ha)</p>
                             <p class="card-text text-start fw-bold ">Serapan CO2 (ton/ha)</p>
@@ -1057,6 +1068,108 @@
 
             </div>
 
+        </div>
+        <div class="row mt-4">
+            <div class="card">
+
+                <div class="card-body">
+                    <h4 class="card-title mb-0">Rekapan Perhitungan Carbon 5 Poll Di TelU</h4>
+
+
+                    <div class="table-wrapper table-responsive">
+                        <table class="custom-table-pancang table-striped">
+                            <thead>
+                                <tr>
+                                    <th class="kiriPancang">No</th>
+                                    <th>Nama Penghitungan</th>
+                                    <th>Total CO2</th>
+                                    <th>Luas Tanah (ha)</th>
+                                    <th>Total</th>
+                                    <th class="hidden-column kananPancang">Persen</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="">1</td>
+                                    <td>Serasah</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>26.79</td>
+                                    <td>12.59 KG</td>
+
+                                </tr>
+                                <tr>
+                                    <td class="">2</td>
+                                    <td>Necromass</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>26.79</td>
+                                    <td>12.59 KG</td>
+
+                                </tr>
+                                <tr>
+                                    <td class="">3</td>
+                                    <td>Co2 Tanaman</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>26.79</td>
+                                    <td>12.59 KG</td>
+
+                                </tr>
+                                <tr>
+                                    <td class="">4</td>
+                                    <td>Tanah</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>26.79</td>
+                                    <td>12.59 KG</td>
+
+                                </tr>
+                                <tr>
+                                    <td class="">5</td>
+                                    <td>Berat bioomasa akar</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>26.79</td>
+                                    <td>12.59 KG</td>
+
+                                </tr>
+                                <tr>
+                                    <td colspan="5">Total Carbon 5 Poll</td>
+                                    <td>Total r</td>
+
+                                </tr>
+                                <tr>
+                                    <td colspan="5">Baseline Lahan Kosong</td>
+                                    <td>Total</td>
+
+                                </tr>
+                                {{-- @foreach ($pancang as $item)
+                            <tr>
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $item->keliling }} cm</td>
+                                <td>{{ $item->diameter }} cm</td>
+                                <td>{{ $item->nama_lokal }}</td>
+                                <td>{{ $item->nama_ilmiah }}</td>
+                                <td class="hidden-column">{{ $item->kerapatan_jenis_kayu }}gr/cm3</td>
+                                <td class="hidden-column">{{ $item->bio_di_atas_tanah }} kg</td>
+                                <td class="hidden-column">{{ $item->kandungan_karbon }}kg</td>
+                                <td class="hidden-column">{{ $item->co2 }} kg</td>
+                                <td class="hidden-column aksi-button">
+                                    <button class="edit-btn">
+                                        <img src="{{ asset('/images/PencilSquare.svg') }}" alt="" />
+                                    </button>
+                                    <button class="delete-btn">
+                                        <img src="{{ asset('/images/Trash.svg') }}" alt="" />
+                                    </button>
+                                </td>
+                            </tr>
+                        @endforeach --}}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <script></script>
