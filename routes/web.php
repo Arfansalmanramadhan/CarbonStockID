@@ -233,7 +233,7 @@ Route::middleware('auth')->group(function () {
     });
     Route::controller(PLotCOntroller::class)->group(function(){
         Route::get('/dataPlot', 'index')->name('dataPlot.index');
-        Route::get('/Hamparan/Plot/{slug}', 'getPlopt')->name('Plot.getPlopt');
+        Route::get('/Hamparan/Plot/{slug}', 'getPlot')->name('plot.getPlot');
         Route::get('/Plot/{slug}/tambah', 'tambah')->name('Plot.tambah');
         Route::get('/Plot/{slug}/tambah', 'create')->name('Plot.tambah');
         Route::post('/Plot/{slug}/tambah', 'store')->name('Plot.store');

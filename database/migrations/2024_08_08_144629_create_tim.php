@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('tim', function (Blueprint $table) {
             $table->id();
             $table->string("nama")->nullable();
+            $table->string("slug");
             $table->timestamps();
             $table->softDeletes();
         });

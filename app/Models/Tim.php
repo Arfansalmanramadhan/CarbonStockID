@@ -30,7 +30,7 @@ class Tim extends Model
     }
     public function periode()
     {
-        return $this->hasMany(Periode::class, 'anggota_tim_id',);
+        return $this->hasMany(Periode::class, 'tim_id',);
     }
     public function anggotaTim()
     {
@@ -40,4 +40,5 @@ class Tim extends Model
     {
         return $this->anggotaTim->whereNotNull('nama')->unique('nama')->count();
     }
+
 }

@@ -15,7 +15,7 @@
                 <div class="table-wrapper">
                     <div class="table-header d-flex justify-content-between">
                         <form method="GET"
-                            action="{{ route('Plot.getPlopt', ['slug' => $plot->first()->slug ?? 'default-slug']) }}">
+                            action="{{ route('plot.getPlot', ['slug' => $plot->first()->slug ?? 'default-slug']) }}">
                             <div class="tampilkan">
                                 <label for="show-entries">Tampilkan</label>
                                 <select id="show-entries perPageSelect" class="number-selection" name="perPage"
@@ -29,7 +29,7 @@
                         </form>
                         <div class="d-flex align-items-center">
                             <form method="GET"
-                                action="{{ route('Plot.getPlopt', ['slug' => $plot->first()->slug ?? 'default-slug']) }}">
+                                action="{{ route('plot.getPlot', ['slug' => $plot->first()->slug ?? 'default-slug']) }}">
                                 <div class="d-flex align-items-center">
                                     <div class="form-control-space">
                                         <input type="text" id="searchInput" name="search" placeholder="Cari..."
@@ -39,7 +39,8 @@
                                 </div>
                             </form>
 
-                            <button onclick="window.location.href='{{ route('Plot.tambah',['slug' => $hamparan->slug]) }}'" class="btn btn-tambah-data mb-3">Tambah</button>
+                            <button onclick="window.location.href='{{ route('Plot.tambah',['slug' => $hamparan->slug]) }}'" class="btn btn-tambah-data m-3
+                                ">Tambah</button>
                         </div>
 
                     </div>
@@ -151,7 +152,7 @@
             let perPage = this.value;
             let search = document.getElementById('searchInput').value;
             window.location.href =
-                "{{ route('Plot.getPlopt', ['slug' => $plot->first()->slug ?? 'default-slug']) }}" + "?per_page=" +
+                "{{ route('plot.getPlot', ['slug' => $plot->first()->slug ?? 'default-slug']) }}" + "?per_page=" +
                 perPage + "&search=" + search;
         });
 
@@ -160,7 +161,7 @@
                 let perPage = document.getElementById('perPageSelect').value;
                 let search = this.value;
                 window.location.href =
-                    "{{ route('Plot.getPlopt', ['slug' => $plot->first()->slug ?? 'default-slug']) }}" +
+                    "{{ route('plot.getPlot', ['slug' => $plot->first()->slug ?? 'default-slug']) }}" +
                     "?per_page=" + perPage + "&search=" +
                     search;
             }

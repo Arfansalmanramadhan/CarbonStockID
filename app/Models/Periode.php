@@ -11,7 +11,7 @@ class Periode extends Model
     use HasFactory, SoftDeletes;
     protected $table = 'periode';
     protected $fillable = [
-        'anggota_tim_id',
+        'tim_id',
         'nama_periode',
         'tanggal_mulai',
         'tanggal_berakhir',
@@ -26,9 +26,9 @@ class Periode extends Model
     {
         return $this->belongsTo(PoltArea::class, 'periode_id');
     }
-    // public function anggotaTim(): BelongsTo
-    // {
-    //     return $this->belongsTo(AnggotaTim::class, 'anggota_tim_id');
-    // }
+    public function tim(): BelongsTo
+    {
+        return $this->belongsTo(Tim::class, 'tim_id');
+    }
 
 }

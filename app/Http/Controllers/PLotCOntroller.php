@@ -46,7 +46,7 @@ class PLotCOntroller extends Controller
             'per_page' => $perPage
         ]);
         // $zona = Zona::where('polt-area_id', $user->id );
-        return view('tambah.TambahPlot', compact('user', 'plot', 'search', 'perPage', 'hamparan'));
+        return view('show.plot', compact('user', 'plot', 'search', 'perPage', 'hamparan'));
     }
 
     /**

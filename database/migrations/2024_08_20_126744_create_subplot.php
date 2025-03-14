@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('subplot', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger("beabbs_id");
-            $table->foreign("beabbs_id")->references("id")->on("beabbs")->onDelete('cascade')->onUpdate('cascade');
+            $table->unsignedBigInteger("plot_id");
+            $table->foreign("plot_id")->references("id")->on("plot")->onDelete('cascade');
             $table->string("nama_suplort", 255)->nullable();
             $table->string("slug", 255)->nullable();
             $table->decimal('latitude', 10, 8)->nullable();
