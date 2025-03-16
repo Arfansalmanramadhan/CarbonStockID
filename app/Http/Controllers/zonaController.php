@@ -64,8 +64,8 @@ class zonaController extends Controller
             'search' => $search,
             'per_page' => $perPage
         ]);
-        $ringkasan = $this->ringkasan($slug)->getData()['ringkasan'];
-        return view('show.zona', compact('zona', "user", 'search', 'perPage', 'poltArea', 'ringkasan'));
+        $result = $this->ringkasan($slug)->getData()['result'];
+        return view('show.zona', compact('zona', "user", 'search', 'perPage', 'poltArea', 'result'));
     }
     public function tambah($slug)
     {
@@ -176,7 +176,8 @@ class zonaController extends Controller
         //     abort(404, 'Polt Area tidak ditemukan.');
         // }
 
-        $ringkasan = Zona::where('zona.polt_area_id', $poltArea->id)
+        $result = DB::table('zona')
+            ->where('zona.polt_area_id', $poltArea->id)
             ->leftJoin('polt_area', 'zona.polt_area_id', '=', 'polt_area.id')
             ->leftJoin('hamparan', 'hamparan.zona_id', '=', 'zona.id') // Hamparan ke Zona
             ->leftJoin('plot', 'plot.hamparan_id', '=', 'hamparan.id') // Plot ke Hamparan
@@ -201,7 +202,7 @@ class zonaController extends Controller
                 DB::raw('AVG(pancang.bio_di_atas_tanah) as pancang_avg_bio_di_atas_tanah'),
                 DB::raw('AVG(pancang.kandungan_karbon) as pancang_avg_kandungan_karbon'),
                 DB::raw('AVG(pancang.co2) as pancang_avg_co2'),
-                DB::raw('COUNT(pancang.no_pohon) as total_pohonPancang'),
+                DB::raw('COUNT(pancang.no_pohon) as total_pohon_pancang'),
                 // Tiang
                 DB::raw('AVG(tiang.bio_di_atas_tanah) as tiang_avg_bio_di_atas_tanah'),
                 DB::raw('AVG(tiang.kandungan_karbon) as tiang_avg_kandungan_karbon'),
@@ -217,42 +218,27 @@ class zonaController extends Controller
                 DB::raw('SUM(mangrove.karbondioksida) as mangrove_avg_karbondioksida'),
                 DB::raw('SUM(mangrove.kandungan_karbon) as mangrove_avg_kandungan_karbon'),
                 DB::raw('COUNT(mangrove.no_pohon) as total_mangrove'),
-                // Serasah
-                DB::raw('SUM(serasah.total_berat_kering) as serasah_total_berat_kering'),
-                DB::raw('SUM(serasah.kandungan_karbon) as serasah_kandungan_karbon'),
-                DB::raw('SUM(serasah.co2) as serasah_co2'),
-                // semai
-                DB::raw('SUM(semai.total_berat_kering) as semai_total_berat_kering'),
-                DB::raw('SUM(semai.kandungan_karbon) as semai_kandungan_karbon'),
-                DB::raw('SUM(semai.co2) as semai_co2'),
-                // tumbuhan_bawah
-                DB::raw('SUM(tumbuhan_bawah.total_berat_kering) as tumbuhan_bawah_total_berat_kering'),
-                DB::raw('SUM(tumbuhan_bawah.kandungan_karbon) as tumbuhan_bawah_kandungan_karbon'),
-                DB::raw('SUM(tumbuhan_bawah.co2) as tumbuhan_bawah_co2'),
-                // Necromass
-                DB::raw('SUM(necromass.co2) as necromass_total_co2'),
-                DB::raw('SUM(necromass.biomasa) as necromass_total_biomasa'),
-                DB::raw('SUM(necromass.carbon) as necromass_total_carbon'),
                 // Tanah
                 DB::raw('SUM(tanah.carbonkg) as total_carbon_tanah'),
                 DB::raw('SUM(tanah.co2kg) as total_co2_tanah')
             )
             // ->where('slug',$slug)
             ->groupBy('zona.id', 'zona.zona', 'zona.polt_area_id', 'polt_area.luas_lokasi')
-            ->get();
+            ->get()
+            ->map(fn($item) => (object) $item);
         // Lakukan perhitungan tambahan untuk masing-masing zona
-        $result = $ringkasan->map(function ($zona) {
-            $faktor = ((float) $zona->luas_lokasi) > 0 ? (float) $zona->luas_lokasi : 11.5;
+        $result = $result->map(function ($zona) {
+            $faktor =  max((float) $zona->luas_lokasi, 11.5);
             // Perhitungan Pancang
             $constantPancang = 25;
-            $TotalPancangco2 = ($zona->pancang_avg_co2 * ($zona->total_pohonPancang / $constantPancang) * 10000) / 1000;
-            $TotalPancangkarbon = ($zona->pancang_avg_kandungan_karbon * ($zona->total_pohonPancang / $constantPancang) * 10000) / 1000;
-            $TotalPancangbiomimasa = ($zona->pancang_avg_bio_di_atas_tanah * ($zona->total_pohonPancang / $constantPancang) * 10000) / 1000;
+            $TotalPancangco2 = ($zona->pancang_avg_co2 * ($zona->total_pohon_pancang / $constantPancang) * 10000) / 1000;
+            $TotalPancangkarbon = ($zona->pancang_avg_kandungan_karbon * ($zona->total_pohon_pancang / $constantPancang) * 10000) / 1000;
+            $TotalPancangbiomimasa = ($zona->pancang_avg_bio_di_atas_tanah * ($zona->total_pohon_pancang / $constantPancang) * 10000) / 1000;
             // Perhitungan Mangrove
             $constantMangrove = 25;
-            $TotalMangroveKarbondioksida = ($zona->mangrove_avg_karbondioksida * ($zona->total_pohonMangrove / $constantMangrove) * 10000) / 1000;
-            $TotalMangrovekarbon = ($zona->mangrove_avg_kandungan_karbon * ($zona->total_pohonMangrove / $constantMangrove) * 10000) / 1000;
-            $TotalMangrovebiomimasa = ($zona->mangrove_avg_biomasa * ($zona->total_pohonMangrove / $constantMangrove) * 10000) / 1000;
+            $TotalMangroveKarbondioksida = ($zona->mangrove_avg_karbondioksida * ($zona->total_mangrove / $constantMangrove) * 10000) / 1000;
+            $TotalMangrovekarbon = ($zona->mangrove_avg_kandungan_karbon * ($zona->total_mangrove / $constantMangrove) * 10000) / 1000;
+            $TotalMangrovebiomimasa = ($zona->mangrove_avg_biomasa * ($zona->total_mangrove / $constantMangrove) * 10000) / 1000;
 
             // Perhitungan Tiang
             $constantTiang = 100;
@@ -267,34 +253,34 @@ class zonaController extends Controller
             $TotalPohonbiomasa = ($zona->pohon_avg_bio_di_atas_tanah * ($zona->total_pohon / $constantPohon) * 10000) / 1000;
             // Perhitungan CO2 dari Serasah (dibagi berdasarkan jumlah nilai unik)
             $uniqueSerasah = DB::table('serasah')
-                ->join('subplot', 'serasah.subplot_id', '=', 'subplot.id')
-                ->join('plot', 'subplot.plot_id', '=', 'plot.id')
-                ->join('hamparan', 'plot.hamparan_id', '=', 'hamparan.id')
-                ->join('zona', 'hamparan.zona_id', '=', 'zona.id')
+                ->leftJoin('subplot', 'serasah.subplot_id', '=', 'subplot.id')
+                ->leftJoin('plot', 'subplot.plot_id', '=', 'plot.id')
+                ->leftJoin('hamparan', 'plot.hamparan_id', '=', 'hamparan.id')
+                ->leftJoin('zona', 'hamparan.zona_id', '=', 'zona.id')
                 ->where('zona.id', $zona->zona_id)
                 ->distinct()
                 ->count(); // Ambil jumlah unik zona_id
             $uniqueSemai = DB::table('semai')
-                ->join('subplot', 'semai.subplot_id', '=', 'subplot.id')
-                ->join('plot', 'subplot.plot_id', '=', 'plot.id')
-                ->join('hamparan', 'plot.hamparan_id', '=', 'hamparan.id')
-                ->join('zona', 'hamparan.zona_id', '=', 'zona.id')
+                ->leftJoin('subplot', 'semai.subplot_id', '=', 'subplot.id')
+                ->leftJoin('plot', 'subplot.plot_id', '=', 'plot.id')
+                ->leftJoin('hamparan', 'plot.hamparan_id', '=', 'hamparan.id')
+                ->leftJoin('zona', 'hamparan.zona_id', '=', 'zona.id')
                 ->where('zona.id', $zona->zona_id)
                 ->distinct()
                 ->count();
             $uniqueTumbuhanBawah = DB::table('tumbuhan_bawah')
-                ->join('subplot', 'tumbuhan_bawah.subplot_id', '=', 'subplot.id')
-                ->join('plot', 'subplot.plot_id', '=', 'plot.id')
-                ->join('hamparan', 'plot.hamparan_id', '=', 'hamparan.id')
-                ->join('zona', 'hamparan.zona_id', '=', 'zona.id')
+                ->leftJoin('subplot', 'tumbuhan_bawah.subplot_id', '=', 'subplot.id')
+                ->leftJoin('plot', 'subplot.plot_id', '=', 'plot.id')
+                ->leftJoin('hamparan', 'plot.hamparan_id', '=', 'hamparan.id')
+                ->leftJoin('zona', 'hamparan.zona_id', '=', 'zona.id')
                 ->where('zona.id', $zona->zona_id)
                 ->distinct()
                 ->count();
             $uniqueNecromas = DB::table('necromass')
-                ->join('subplot', 'necromass.subplot_id', '=', 'subplot.id')
-                ->join('plot', 'subplot.plot_id', '=', 'plot.id')
-                ->join('hamparan', 'plot.hamparan_id', '=', 'hamparan.id')
-                ->join('zona', 'hamparan.zona_id', '=', 'zona.id')
+                ->leftJoin('subplot', 'necromass.subplot_id', '=', 'subplot.id')
+                ->leftJoin('plot', 'subplot.plot_id', '=', 'plot.id')
+                ->leftJoin('hamparan', 'plot.hamparan_id', '=', 'hamparan.id')
+                ->leftJoin('zona', 'hamparan.zona_id', '=', 'zona.id')
                 ->where('zona.id', $zona->zona_id)
                 ->distinct()
                 ->count();
@@ -396,7 +382,7 @@ class zonaController extends Controller
             $hasiltanahPersen = ($tanah != 0) ? ($TotalKarbon5POL / $tanah) * 100 : 0;
             // Perhitungan Baseline Lahan Kosong
             $BaselineLahanKosong = $TotalKarbon5POL - (((10 + 4) / 2) * $faktor);
-
+            
             return [
                 'zona' => $zona->zona_nama,
                 'TotalPancangco2' => number_format($TotalPancangco2 ?? 0, 2, '.', ''),
@@ -437,9 +423,9 @@ class zonaController extends Controller
             ];
             // dd($zon  a, $TotalPancangco2, $TotalPancangkarbon, $TotalMangroveKarbondioksida);
         });
-        $ringkasan = $ringkasan->toArray();
-        dd($ringkasan);
+        $result = $result->toArray();
+        dd($result);
         // dd( $result);
-        return view('show.zona', compact('ringkasan', 'poltArea', ), );
+        return view('show.zona', compact('result', 'poltArea',),);
     }
 }
