@@ -78,7 +78,7 @@
                                     <td>{{ $item->latitude }}</td>
                                     <td>{{ $item->longitude }}</td>
                                     <td class="hidden-column aksi-button">
-                                        <a href="{{ route('Plot.getPlopt', ['slug' => $item->slug]) }}"
+                                        <a href="{{ route('plot.getPlot', ['slug' => $item->slug]) }}"
                                             class="btn btn-info btn-sm">Detail</a>
                                         <button class="view-btn">
                                             <img src="{{ asset('/images/Eye.svg') }}" alt="View" />

@@ -858,13 +858,15 @@
                 </div>
             </div>
         </div>
+        {{-- <form method="GET" action="{{ route('Lokasi.lokasi') }}"></form> --}}
+
         <div class="row  mb-3">
-            @foreach ($zona as $item)
+            @foreach ($ringkasan as $item)
                 <div class="col-lg-3 col-md-4 col-sm-6 md-3">
                     <div class="card h-100">
                         <div class="card-body">
                             <h5 class="card-title">Pendekatan Kerapatan</h5>
-                            <p class="card-text fw-bold">{{ $item->zona }}</p>
+                            <p class="card-text fw-bold">{{ $item['zona'] ?? 'Data tidak tersedia'}}</p>
                             <p class="card-text text-start fw-bold ">Biomassa diatas permukaan tanah (ton/ha)</p>
                             <p class="card-text text-start fw-bold ">Kandungan karbon (ton/ha)</p>
                             <p class="card-text text-start fw-bold ">Serapan CO2 (ton/ha)</p>
@@ -872,305 +874,309 @@
                     </div>
                 </div>
             @endforeach
+            {{-- {{ $item['TotalPancangco2'] ?? 'Data tidak tersedia' }} --}}
         </div>
-        <div class="row">
-            <div class="col-md-6  height-card box-margin">
-                <div class="card">
-                    <div class="card-body">
-                        <h4 class="card-title mb-0">Summary Kandungan Karbon</h4>
-                        <p class="mb-3">Bagian ini untuk menampilkan hitungan total kandungan karbon untuk lokasi
-                            Telkom University</p>
+        @foreach ($ringkasan as $item)
+            <div class="row">
+                <div class="col-md-6  height-card box-margin">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title mb-0">Summary Kandungan Karbon</h4>
+                            <p class="mb-3">Bagian ini untuk menampilkan hitungan total kandungan karbon untuk lokasi
+                                {{ $poltArea->daerah }}</p>
 
-                        <div class="table-wrapper ">
-                            <table class=" custom-table-pancang table mb-0">
+                            <div class="table-wrapper ">
+                                <table class=" custom-table-pancang table mb-0">
+                                    <thead>
+                                        <tr>
+                                            <th>Subplot</th>
+                                            <th class="text-right text-center">Karbon</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Seresah</td>
+                                            <td class="text-right">
+                                                <div class="badge btn-successs ">{{ $item['SerasahKarbon'] ?? 0 }}
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Semai</td>
+                                            <td class="text-right">
+                                                <div class="badge btn-successs">{{ $item['semaiKarbon'] ?? 0 }}
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Tumbuhan Bawah</td>
+                                            <td class="text-right">
+                                                <div class="badge btn-successs">{{ $item['tumbuhanbawahkarbon'] ?? 0 }}</div>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>Pancang</td>
+                                            <td class="text-right">
+                                                <div class="badge btn-successs">{{ $item['TotalPancangkarbon'] ?? 0 }}</div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Mangrove</td>
+                                            <td class="text-right">
+                                                <div class="badge btn-successs">{{ $item['TotalMangrovekarbon'] ?? 0 }}</div>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>Tiang</td>
+                                            <td class="text-right">
+                                                <div class="badge btn-successs">{{ $item['TotalTiangKarbon'] ?? 0 }}</div>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>Nekromas</td>
+                                            <td class="text-right">
+                                                <div class="badge btn-successs">{{ $item['NecromassCarbon'] ?? 0 }}</div>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>Pohon</td>
+                                            <td class="text-right">
+                                                <div class="badge btn-successs">{{ $item['TotalPohonkarbon'] ?? 0 }}</div>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>Tanah</td>
+                                            <td class="text-right">
+                                                <div class="badge btn-successs">{{ $item['TanahCarbon'] ?? 0 }}</div>
+                                            </td>
+                                        </tr>
+                                        {{-- <tr>
+                                            <td>Akar</td>
+                                            <td class="text-right">
+                                                <div class="badge btn-successs">143.75</div>
+                                            </td>
+                                        </tr> --}}
+
+                                        <tr>
+                                            <td>Total</td>
+                                            <td class="text-right">
+                                                <div class="badge btn-successs">{{ $item['TotalKandunganKarbon'] ?? 0 }}</div>
+                                            </td>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="col-md-6  height-card box-margin">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title mb-0">Summary Serapan CO2</h4>
+                            <p class="mb-3">Bagian ini untuk menampilkan hitungan total serapa CO2 untuk lokasi {{ $poltArea->daerah }}</p>
+
+                            <div class="table-wrapper ">
+                                <table class=" custom-table-pancang table mb-0">
+                                    <thead>
+                                        <tr>
+                                            <th>Subplot</th>
+                                            <th class="text-right text-center">Karbon</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Seresah</td>
+                                            <td class="text-right">
+                                                <div class="badge btn-successs ">{{ $item['Serasahco2'] ?? 0 }}</div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Semai</td>
+                                            <td class="text-right">
+                                                <div class="badge btn-successs">{{ $item['semaico2'] ?? 0 }}</div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Tumbuhan Bawah</td>
+                                            <td class="text-right">
+                                                <div class="badge btn-successs">{{ $item['tumbuhanbawahco2'] ?? 0 }}</div>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>Pancang</td>
+                                            <td class="text-right">
+                                                <div class="badge btn-successs">{{ $item['TotalPancangco2'] ?? 0 }}</div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Mangrove</td>
+                                            <td class="text-right">
+                                                <div class="badge btn-successs">{{ $item['TotalMangroveKarbondioksida'] ?? 0 }}</div>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>Tiang</td>
+                                            <td class="text-right">
+                                                <div class="badge btn-successs">{{ $item['TotalTiangco2'] ?? 0 }}</div>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>Nekromas</td>
+                                            <td class="text-right">
+                                                <div class="badge btn-successs">{{ $item['Necromassco2'] ?? 0 }}</div>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>Pohon</td>
+                                            <td class="text-right">
+                                                <div class="badge btn-successs">{{ $item['TotalPohonco2'] ?? 0 }}</div>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>Tanah</td>
+                                            <td class="text-right">
+                                                <div class="badge btn-successs">{{ $item['TanahCo2'] ?? 0 }}</div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Akar</td>
+                                            <td class="text-right">
+                                                <div class="badge btn-successs">{{ $item['BeratBiomassaAkar'] ?? 0 }}</div>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>Total</td>
+                                            <td class="text-right">
+                                                <div class="badge btn-successs">{{ $item['KarbonCo2'] ?? 0 }}</div>
+                                            </td>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="row mt-4">
+                <div class="card">
+
+                    <div class="card-body">
+                        <h4 class="card-title mb-0">Rekapan Perhitungan Carbon 5 Poll Di {{ $poltArea->daerah }}</h4>
+
+
+                        <div class="table-wrapper table-responsive">
+                            <table class="custom-table-pancang table-striped">
                                 <thead>
                                     <tr>
-                                        <th>Subplot</th>
-                                        <th class="text-right text-center">Karbon</th>
+                                        <th class="kiriPancang">No</th>
+                                        <th>Nama Penghitungan</th>
+                                        <th>Total CO2</th>
+                                        <th>Luas Tanah (ha)</th>
+                                        <th>Total</th>
+                                        <th class="hidden-column kananPancang">Persen</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td>Seresah</td>
-                                        <td class="text-right">
-                                            <div class="badge btn-successs ">1.40</div>
-                                        </td>
+                                        <td class="">1</td>
+                                        <td>Serasah</td>
+                                        <td>{{ $item['Serasahco2'] ?? 0 }}</td>
+                                        <td>{{ $item['faktor'] ?? 0 }}</td>
+                                        <td>{{ $item['Serasah'] ?? 0 }}</td>
+                                        <td>{{ $item['hasilSerasahPersen'] ?? 0 }}</td>
+                                        {{-- {{ dd($item) }} --}}
                                     </tr>
                                     <tr>
-                                        <td>Semai</td>
-                                        <td class="text-right">
-                                            <div class="badge btn-successs">2.09</div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Tumbuhan Bawah</td>
-                                        <td class="text-right">
-                                            <div class="badge btn-successs">3.25</div>
-                                        </td>
-                                    </tr>
+                                        <td class="">2</td>
+                                        <td>Necromass</td>
+                                        <td>{{ $item['Necromassco2'] ?? 0 }}</td>
+                                        <td>{{ $item['faktor'] ?? 0 }}</td>
+                                        <td>{{ $item['Necromass'] ?? 0 }}</td>
+                                        <td>{{ $item['hasilNecromassPersen'] ?? 0 }}</td>
 
-                                    <tr>
-                                        <td>Pancang</td>
-                                        <td class="text-right">
-                                            <div class="badge btn-successs">16.53</div>
-                                        </td>
                                     </tr>
                                     <tr>
-                                        <td>Mangrove</td>
-                                        <td class="text-right">
-                                            <div class="badge btn-successs">16.53</div>
-                                        </td>
-                                    </tr>
+                                        <td class="">3</td>
+                                        <td>Co2 Tanaman</td>
+                                        <td>{{ $item['TotalCarbonn'] ?? 0 }}</td>
+                                        <td>{{ $item['faktor'] ?? 0 }}</td>
+                                        <td>{{ $item['Co2Tanaman'] ?? 0 }}</td>
+                                        <td>{{ $item['hasilco2tanamanPersen'] ?? 0 }}</td>
 
-                                    <tr>
-                                        <td>Tiang</td>
-                                        <td class="text-right">
-                                            <div class="badge btn-successs">21.01</div>
-                                        </td>
                                     </tr>
-
                                     <tr>
-                                        <td>Nekromas</td>
-                                        <td class="text-right">
-                                            <div class="badge btn-successs">2.52</div>
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>Pohon</td>
-                                        <td class="text-right">
-                                            <div class="badge btn-successs">119.67</div>
-                                        </td>
-                                    </tr>
-
-                                    <tr>
+                                        <td class="">4</td>
                                         <td>Tanah</td>
-                                        <td class="text-right">
-                                            <div class="badge btn-successs">143.75</div>
-                                        </td>
+                                        <td>{{ $item['TotalCarbonn'] ?? 0 }}</td>
+                                        <td>{{ $item['faktor'] ?? 0 }}</td>
+                                        <td>{{ $item['tanah'] ?? 0 }}</td>
+                                        <td>{{ $item['hasiltanahPersen'] ?? 0 }}</td>
+
                                     </tr>
                                     <tr>
-                                        <td>Akar</td>
-                                        <td class="text-right">
-                                            <div class="badge btn-successs">143.75</div>
-                                        </td>
-                                    </tr>
+                                        <td class="">5</td>
+                                        <td>Berat bioomasa akar</td>
+                                        <<td>{{ $item['beratMasaAkar'] ?? 0 }}</td>
+                                        <td>{{ $item['faktor'] ?? 0 }}</td>
+                                        <td>{{ $item['BeratBiomassaAkar'] ?? 0 }}</td>
+                                        <td>{{ $item['hasilakarPersen'] ?? 0 }}</td>
 
+                                    </tr>
                                     <tr>
-                                        <td>Total</td>
-                                        <td class="text-right">
-                                            <div class="badge btn-successs">306.97</div>
-                                        </td>
-                                    </tr>
+                                        <td colspan="5">Total Carbon 5 Poll</td>
+                                        <td>{{ $item['TotalKaoobon'] ?? 0 }}</td>
 
+                                    </tr>
+                                    <tr>
+                                        <td colspan="5">Baseline Lahan Kosong</td>
+                                        <td>{{ $item['BaselineLahanKosong'] ?? 0 }}</td>
+
+                                    </tr>
+                                    {{-- @foreach ($pancang as $item)
+                                <tr>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $item->keliling }} cm</td>
+                                    <td>{{ $item->diameter }} cm</td>
+                                    <td>{{ $item->nama_lokal }}</td>
+                                    <td>{{ $item->nama_ilmiah }}</td>
+                                    <td class="hidden-column">{{ $item->kerapatan_jenis_kayu }}gr/cm3</td>
+                                    <td class="hidden-column">{{ $item->bio_di_atas_tanah }} kg</td>
+                                    <td class="hidden-column">{{ $item->kandungan_karbon }}kg</td>
+                                    <td class="hidden-column">{{ $item->co2 }} kg</td>
+                                    <td class="hidden-column aksi-button">
+                                        <button class="edit-btn">
+                                            <img src="{{ asset('/images/PencilSquare.svg') }}" alt="" />
+                                        </button>
+                                        <button class="delete-btn">
+                                            <img src="{{ asset('/images/Trash.svg') }}" alt="" />
+                                        </button>
+                                    </td>
+                                </tr>
+                            @endforeach --}}
                                 </tbody>
                             </table>
                         </div>
                     </div>
                 </div>
-
             </div>
-
-            <div class="col-md-6  height-card box-margin">
-                <div class="card">
-                    <div class="card-body">
-                        <h4 class="card-title mb-0">Summary Serapan CO2</h4>
-                        <p class="mb-3">Bagian ini untuk menampilkan hitungan total serapa CO2 untuk lokasi Telkom
-                            University</p>
-
-                        <div class="table-wrapper ">
-                            <table class=" custom-table-pancang table mb-0">
-                                <thead>
-                                    <tr>
-                                        <th>Subplot</th>
-                                        <th class="text-right text-center">Karbon</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>Seresah</td>
-                                        <td class="text-right">
-                                            <div class="badge btn-successs ">1.40</div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Semai</td>
-                                        <td class="text-right">
-                                            <div class="badge btn-successs">2.09</div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Tumbuhan Bawah</td>
-                                        <td class="text-right">
-                                            <div class="badge btn-successs">3.25</div>
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>Pancang</td>
-                                        <td class="text-right">
-                                            <div class="badge btn-successs">16.53</div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Mangrove</td>
-                                        <td class="text-right">
-                                            <div class="badge btn-successs">16.53</div>
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>Tiang</td>
-                                        <td class="text-right">
-                                            <div class="badge btn-successs">21.01</div>
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>Nekromas</td>
-                                        <td class="text-right">
-                                            <div class="badge btn-successs">2.52</div>
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>Pohon</td>
-                                        <td class="text-right">
-                                            <div class="badge btn-successs">119.67</div>
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>Tanah</td>
-                                        <td class="text-right">
-                                            <div class="badge btn-successs">143.75</div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Akar</td>
-                                        <td class="text-right">
-                                            <div class="badge btn-successs">143.75</div>
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>Total</td>
-                                        <td class="text-right">
-                                            <div class="badge btn-successs">306.97</div>
-                                        </td>
-                                    </tr>
-
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-        </div>
-        <div class="row mt-4">
-            <div class="card">
-
-                <div class="card-body">
-                    <h4 class="card-title mb-0">Rekapan Perhitungan Carbon 5 Poll Di TelU</h4>
-
-
-                    <div class="table-wrapper table-responsive">
-                        <table class="custom-table-pancang table-striped">
-                            <thead>
-                                <tr>
-                                    <th class="kiriPancang">No</th>
-                                    <th>Nama Penghitungan</th>
-                                    <th>Total CO2</th>
-                                    <th>Luas Tanah (ha)</th>
-                                    <th>Total</th>
-                                    <th class="hidden-column kananPancang">Persen</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td class="">1</td>
-                                    <td>Serasah</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>26.79</td>
-                                    <td>12.59 KG</td>
-
-                                </tr>
-                                <tr>
-                                    <td class="">2</td>
-                                    <td>Necromass</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>26.79</td>
-                                    <td>12.59 KG</td>
-
-                                </tr>
-                                <tr>
-                                    <td class="">3</td>
-                                    <td>Co2 Tanaman</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>26.79</td>
-                                    <td>12.59 KG</td>
-
-                                </tr>
-                                <tr>
-                                    <td class="">4</td>
-                                    <td>Tanah</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>26.79</td>
-                                    <td>12.59 KG</td>
-
-                                </tr>
-                                <tr>
-                                    <td class="">5</td>
-                                    <td>Berat bioomasa akar</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>26.79</td>
-                                    <td>12.59 KG</td>
-
-                                </tr>
-                                <tr>
-                                    <td colspan="5">Total Carbon 5 Poll</td>
-                                    <td>Total r</td>
-
-                                </tr>
-                                <tr>
-                                    <td colspan="5">Baseline Lahan Kosong</td>
-                                    <td>Total</td>
-
-                                </tr>
-                                {{-- @foreach ($pancang as $item)
-                            <tr>
-                                <td>{{ $loop->iteration }}</td>
-                                <td>{{ $item->keliling }} cm</td>
-                                <td>{{ $item->diameter }} cm</td>
-                                <td>{{ $item->nama_lokal }}</td>
-                                <td>{{ $item->nama_ilmiah }}</td>
-                                <td class="hidden-column">{{ $item->kerapatan_jenis_kayu }}gr/cm3</td>
-                                <td class="hidden-column">{{ $item->bio_di_atas_tanah }} kg</td>
-                                <td class="hidden-column">{{ $item->kandungan_karbon }}kg</td>
-                                <td class="hidden-column">{{ $item->co2 }} kg</td>
-                                <td class="hidden-column aksi-button">
-                                    <button class="edit-btn">
-                                        <img src="{{ asset('/images/PencilSquare.svg') }}" alt="" />
-                                    </button>
-                                    <button class="delete-btn">
-                                        <img src="{{ asset('/images/Trash.svg') }}" alt="" />
-                                    </button>
-                                </td>
-                            </tr>
-                        @endforeach --}}
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
+        @endforeach
     </div>
     <script></script>
 @endsection

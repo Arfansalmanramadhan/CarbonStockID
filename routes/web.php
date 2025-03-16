@@ -215,6 +215,7 @@ Route::middleware('auth')->group(function () {
     });
     Route::controller(zonaController::class)->group(function () {
         Route::get("/zona", "index")->name('zona.index');
+        Route::get("/Lokasi/zona/{slug}", "ringkasan")->name('zona.ringkasan');
         Route::get('/Lokasi/zona/{slug}', 'getZona')->name('zona.getZona');
         Route::get("/zona/{slug}/tambah", "tambah")->name('TambahZona.tambah');
         Route::post("/zona/{slug}/tambah", "store")->name('zona.store');

@@ -14,6 +14,7 @@ class Mangrove extends Model
     protected $table = 'mangrove';
     protected $fillable = [
         'subplot_id',
+        'no_pohon',
         'jenis_tanaman',
         'diameter',
         'jumlah_tanaman',
