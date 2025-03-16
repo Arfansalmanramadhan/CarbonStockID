@@ -861,7 +861,7 @@
         {{-- <form method="GET" action="{{ route('Lokasi.lokasi') }}"></form> --}}
 
         <div class="row  mb-3">
-            @foreach ($result as $item)
+            @foreach ($ringkasan as $item)
                 <div class="col-lg-3 col-md-4 col-sm-6 md-3">
                     <div class="card h-100">
                         <div class="card-body">
@@ -876,7 +876,7 @@
             @endforeach
             {{-- {{ $item['TotalPancangco2'] ?? 'Data tidak tersedia' }} --}}
         </div>
-        @foreach ($result as $item)
+        @foreach ($ringkasan as $item)
             <div class="row">
                 <div class="col-md-6  height-card box-margin">
                     <div class="card">

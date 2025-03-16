@@ -43,5 +43,4 @@ class ManajermenUserController extends Controller
         $Plot->save();
         return redirect("veri/" . $slug)->with("status", "Menetujui perngguna sukses");
     }
-   
 }
