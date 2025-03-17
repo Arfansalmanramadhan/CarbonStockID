@@ -1078,11 +1078,11 @@
                 <div class="card">
 
                     <div class="card-body">
-                        <h4 class="card-title mb-0">Rekapan Perhitungan Carbon 5 Poll Di {{ $poltArea->daerah }}</h4>
+                        <h4 class="card-title mb-4">Rekapan Perhitungan Carbon 5 Poll Di {{ $poltArea->daerah }}</h4>
 
 
                         <div class="table-wrapper table-responsive">
-                            <table class="custom-table-pancang table-striped">
+                            <table class="custom-table-pancang table-striped table">
                                 <thead>
                                     <tr>
                                         <th class="kiriPancang">No</th>
@@ -1124,7 +1124,7 @@
                                     <tr>
                                         <td class="">4</td>
                                         <td>Tanah</td>
-                                        <td>{{ $item['TotalCarbonn'] ?? 0 }}</td>
+                                        <td>{{ $item['TanahCo2'] ?? 0 }}</td>
                                         <td>{{ $item['faktor'] ?? 0 }}</td>
                                         <td>{{ $item['tanah'] ?? 0 }}</td>
                                         <td>{{ $item['hasiltanahPersen'] ?? 0 }}</td>
@@ -1133,7 +1133,7 @@
                                     <tr>
                                         <td class="">5</td>
                                         <td>Berat bioomasa akar</td>
-                                        <<td>{{ $item['beratMasaAkar'] ?? 0 }}</td>
+                                        <td>{{ $item['beratMasaAkar'] ?? 0 }}</td>
                                         <td>{{ $item['faktor'] ?? 0 }}</td>
                                         <td>{{ $item['BeratBiomassaAkar'] ?? 0 }}</td>
                                         <td>{{ $item['hasilakarPersen'] ?? 0 }}</td>
