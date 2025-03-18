@@ -49,9 +49,11 @@ class zonaController extends Controller
         $search = $request->query('search');
         $perPage = $request->query('per_page', 5);
         $poltArea = PoltArea::where("slug", $slug)->first();
+        // $poltAreaa = PoltArea::find($id);
         // dd($poltArea);
 
         $query = Zona::where("polt_area_id", $poltArea->id);
+        // $query = Zona::query();
         if (!empty($search)) {
             $query->where('zona', 'ILIKE', "%{$search}%")
                 ->orWhere('jenis_hutan', 'ILIKE', "%{$search}%");
@@ -100,9 +102,9 @@ class zonaController extends Controller
                 'latitude' => $validatedData['latitude'],
                 'longitude' => $validatedData['longitude'],
                 'jenis_hutan' => $validatedData['jenis_hutan'],
-                'slug' => Str::slug($validatedData['zona']),
+                'slug' => Str::slug($validatedData['zona'] . '-' . $poltArea->id),
             ]);
-
+            // dd($zona);
             DB::commit();
             return redirect()->route('zona.getZona', ['slug' => $slug])->with('success', 'Zona berhasil ditambahkan!');
         } catch (\Exception $e) {
@@ -176,6 +178,7 @@ class zonaController extends Controller
         //     abort(404, 'Polt Area tidak ditemukan.');
         // }
 
+        // $ringkasan = Zona::where('zona.polt_area_id', $poltArea->id)
         $ringkasan = Zona::where('zona.polt_area_id', $poltArea->id)
             ->leftJoin('polt_area', 'zona.polt_area_id', '=', 'polt_area.id')
             ->leftJoin('hamparan', 'hamparan.zona_id', '=', 'zona.id') // Hamparan ke Zona
@@ -351,7 +354,7 @@ class zonaController extends Controller
             $NecromassCarbon = ((float) $hasilNecromascarbon / 1000000) * 10000 / 400;
             // klandungan karbon
             // TootaL Karbon
-            $TotalKandunganKarbon =  $zona->total_carbon_tanah + $NecromassCarbon + $SerasahKarbon + $semaiKarbon  + $tumbuhan_bawahKarbon + $TotalPohonkarbon + $TotalPancangkarbon + $TotalTiangKarbon + $TotalMangrovekarbon;
+            $TotalKandunganKarbon =  $zona->total_carbon_tanah + $NecromassCarbon + $SerasahKarbon + $semaiKarbon  + $tumbuhan_bawahKarbon + $TotalPohonkarbon + $TotalPancangkarbon + $TotalTiangKarbon ;
             // Total carbon tanama kandungan karbon
             $TotalCarbon =  $semaico2   + $TotalPohonco2 + $TotalPancangco2 + $TotalTiangco2 + $tumbuhan_bawahco2;
             // serapan co2
@@ -359,10 +362,11 @@ class zonaController extends Controller
             $totalBerat = $TotalPancangco2 + $TotalTiangco2 + $TotalPohonco2;
             $beratMasaAkar = $totalBerat * 0.37;
             // total karbon ]
-            $KarbonCo2 = $TotalPancangco2 + $beratMasaAkar + $TotalTiangco2 + $TotalPohonco2 + $TotalMangroveKarbondioksida + $Serasahco2 + $semaico2 + $tumbuhan_bawahco2;
+            $KarbonCo2 = $TotalPancangco2 + $beratMasaAkar + $TotalTiangco2 + $TotalPohonco2  + $Serasahco2 + $semaico2 + $tumbuhan_bawahco2;
+            // Pendekatan Kerapatan
 
             // Total CO2 dari tanaman
-            $Co2Tanamannn = $TotalPancangco2 + $TotalTiangco2 + $TotalPohonco2 + $TotalMangroveKarbondioksida;
+            $Co2Tanamannn = $TotalPancangco2 + $TotalTiangco2 + $TotalPohonco2 ;
             $totalCo2Lokasi = $Co2Tanamannn * $faktor;
 
             // Faktor konversi CO2
@@ -374,39 +378,44 @@ class zonaController extends Controller
             $tanah = $zona->total_co2_tanah * $faktor;
             // Total Karbon
             $TotalKarbon5POL = $Serasa + $Necromass + $co2tanaman + $tanah + $akar;
-            // persen
-            $hasilSerasahPersen = ($Serasa != 0) ? ($TotalKarbon5POL / $Serasa) * 100 : 0;
-            $hasilNecromassPersen = ($Necromass != 0) ? ($TotalKarbon5POL / $Necromass) * 100 : 0;
-            $hasilco2tanamanPersen = ($co2tanaman != 0) ? ($TotalKarbon5POL / $co2tanaman) * 100 : 0;
-            $hasilakarPersen = ($akar != 0) ? ($TotalKarbon5POL / $akar) * 100 : 0;
-            $hasiltanahPersen = ($tanah != 0) ? ($TotalKarbon5POL / $tanah) * 100 : 0;
             // Perhitungan Baseline Lahan Kosong
             $BaselineLahanKosong = $TotalKarbon5POL - (((10 + 4) / 2) * $faktor);
+            // persen
+            // $hasilSerasahPersen = ($Serasa != 0) ? ($TotalKarbon5POL / $Serasa) * 100 : 0;
+            // $hasilNecromassPersen = ($Necromass != 0) ? ($TotalKarbon5POL / $Necromass) * 100 : 0;
+            // $hasilco2tanamanPersen = ($co2tanaman != 0) ? ($TotalKarbon5POL / $co2tanaman) * 100 : 0;
+            // $hasilakarPersen = ($akar != 0) ? ($TotalKarbon5POL / $akar) * 100 : 0;
+            // $hasiltanahPersen = ($tanah != 0) ? ($TotalKarbon5POL / $tanah) * 100 : 0;
+            $hasilSerasahPersen = ($BaselineLahanKosong != 0) ? ($Serasa / $BaselineLahanKosong) * 100 : 0;
+            $hasilNecromassPersen = ($BaselineLahanKosong != 0) ? ($Necromass / $BaselineLahanKosong) * 100 : 0;
+            $hasilco2tanamanPersen = ($BaselineLahanKosong != 0) ? ($co2tanaman / $BaselineLahanKosong) * 100 : 0;
+            $hasilakarPersen = ($BaselineLahanKosong != 0) ? ($akar / $BaselineLahanKosong) * 100 : 0;
+            $hasiltanahPersen = ($BaselineLahanKosong != 0) ? ($tanah / $BaselineLahanKosong) * 100 : 0;
 
             return [
                 'zona' => $zona->zona_nama,
-                'TotalPancangco2' => number_format($TotalPancangco2 ?? 0, 4, '.', ''),
-                'TotalPancangkarbon' => number_format($TotalPancangkarbon ?? 0, 4, '.', ''),
-                'TotalMangroveKarbondioksida' => number_format($TotalMangroveKarbondioksida ?? 0, 4, '.', ''),
-                'TotalMangrovekarbon' => number_format($TotalMangrovekarbon ?? 0, 4, '.', ''),
-                'TotalTiangco2' => number_format($TotalTiangco2 ?? 0, 4, '.', ''),
-                'TotalTiangKarbon' => number_format($TotalTiangKarbon ?? 0, 4, '.', ''),
-                'TotalPohonco2' => number_format($TotalPohonco2 ?? 0, 4, '.', ''),
-                'TotalPohonkarbon' => number_format($TotalPohonkarbon ?? 0, 4, '.', ''),
-                'Serasahco2' => number_format($Serasahco2 ?? 0, 4, '.', ''),
-                'SerasahKarbon' => number_format($SerasahKarbon ?? 0, 4, '.', ''),
-                'semaico2' => number_format($semaico2 ?? 0, 4, '.', ''),
-                'semaiKarbon' => number_format($semaiKarbon ?? 0, 4, '.', ''),
-                'tumbuhanbawahco2' => number_format($tumbuhan_bawahco2 ?? 0, 4, '.', ''),
-                'tumbuhanbawahkarbon' => number_format($tumbuhan_bawahKarbon ?? 0, 4, '.', ''),
-                'Necromassco2' => number_format($Necromassco2 ?? 0, 4, '.', ''),
-                'NecromassCarbon' => number_format($NecromassCarbon ?? 0, 4, '.', ''),
-                'TotalKandunganKarbon' => number_format($TotalKandunganKarbon ?? 0, 4, '.', ''),
-                'KarbonCo2' => number_format($KarbonCo2 ?? 0, 4, '.', ''),
-                'TotalCarbonn' => number_format($TotalCarbon ?? 0, 4, '.', ''),
-                'Serasah' => number_format($Serasa ?? 0, 4, '.', ''),
-                'Necromass' => number_format($Necromass ?? 0, 4, '.', ''),
-                'Co2Tanaman' => number_format($co2tanaman ?? 0, 4, '.', ''),
+                'TotalPancangco2' => number_format($TotalPancangco2 ?? 0, 3, '.', ''),
+                'TotalPancangkarbon' => number_format($TotalPancangkarbon ?? 0, 3, '.', ''),
+                'TotalMangroveKarbondioksida' => number_format($TotalMangroveKarbondioksida ?? 0, 3, '.', ''),
+                'TotalMangrovekarbon' => number_format($TotalMangrovekarbon ?? 0, 3, '.', ''),
+                'TotalTiangco2' => number_format($TotalTiangco2 ?? 0, 3, '.', ''),
+                'TotalTiangKarbon' => number_format($TotalTiangKarbon ?? 0, 3, '.', ''),
+                'TotalPohonco2' => number_format($TotalPohonco2 ?? 0, 3, '.', ''),
+                'TotalPohonkarbon' => number_format($TotalPohonkarbon ?? 0, 3, '.', ''),
+                'Serasahco2' => number_format($Serasahco2 ?? 0, 3, '.', ''),
+                'SerasahKarbon' => number_format($SerasahKarbon ?? 0, 3, '.', ''),
+                'semaico2' => number_format($semaico2 ?? 0, 3, '.', ''),
+                'semaiKarbon' => number_format($semaiKarbon ?? 0, 3, '.', ''),
+                'tumbuhanbawahco2' => number_format($tumbuhan_bawahco2 ?? 0, 3, '.', ''),
+                'tumbuhanbawahkarbon' => number_format($tumbuhan_bawahKarbon ?? 0, 3, '.', ''),
+                'Necromassco2' => number_format($Necromassco2 ?? 0, 3, '.', ''),
+                'NecromassCarbon' => number_format($NecromassCarbon ?? 0, 3, '.', ''),
+                'TotalKandunganKarbon' => number_format($TotalKandunganKarbon ?? 0, 3, '.', ''),
+                'KarbonCo2' => number_format($KarbonCo2 ?? 0, 3, '.', ''),
+                'TotalCarbonn' => number_format($TotalCarbon ?? 0, 3, '.', ''),
+                'Serasah' => number_format($Serasa ?? 0, 3, '.', ''),
+                'Necromass' => number_format($Necromass ?? 0, 3, '.', ''),
+                'Co2Tanaman' => number_format($co2tanaman ?? 0, 3, '.', ''),
                 'TanahCo2' => number_format($zona->total_co2_tanah ?? 0, 4, '.', ''),
                 'TanahCarbon' => number_format($zona->total_carbon_tanah ?? 0, 4, '.', ''),
                 'BeratBiomassaAkar' => number_format($akar ?? 0, 4, '.', ''),

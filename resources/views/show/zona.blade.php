@@ -1140,13 +1140,13 @@
 
                                     </tr>
                                     <tr>
-                                        <td colspan="5">Total Carbon 5 Poll</td>
-                                        <td>{{ $item['TotalKaoobon'] ?? 0 }}</td>
+                                        <td colspan="4">Total Carbon 5 Poll</td>
+                                        <td colspan="2">{{ $item['TotalKaoobon'] ?? 0 }}</td>
 
                                     </tr>
                                     <tr>
-                                        <td colspan="5">Baseline Lahan Kosong</td>
-                                        <td>{{ $item['BaselineLahanKosong'] ?? 0 }}</td>
+                                        <td colspan="4">Baseline Lahan Kosong</td>
+                                        <td colspan="2">{{ $item['BaselineLahanKosong'] ?? 0 }}</td>
 
                                     </tr>
                                     {{-- @foreach ($pancang as $item)
