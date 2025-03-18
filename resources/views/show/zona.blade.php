@@ -865,21 +865,31 @@
         </div>
         {{-- <form method="GET" action="{{ route('Lokasi.lokasi') }}"></form> --}}
 
-        <div class="row  mb-3">
+        <div class="row mb-3">
             @foreach ($ringkasan as $item)
-                <div class="col-lg-3 col-md-4 col-sm-6 md-3">
-                    <div class="card h-100">
+                <div class="col-lg-3 col-md-4 col-sm-6 mb-3">
+                    <div class="card h-100 border-light shadow-sm">
                         <div class="card-body">
-                            <h5 class="card-title">Pendekatan Kerapatan</h5>
-                            <p class="card-text fw-bold">{{ $item['zona'] ?? 'Data tidak tersedia'}}</p>
-                            <p class="card-text text-start fw-bold ">Biomassa diatas permukaan tanah (ton/ha) {{ $item['Biomassadiataspermukaantanah'] ?? 0}}</p>
-                            <p class="card-text text-start fw-bold ">Kandungan karbon (ton/ha) {{ $item['Kandungankarbon'] ?? 0}}</p>
-                            <p class="card-text text-start fw-bold ">Serapan CO2 (ton/ha)  {{ $item['SerapanCO2'] ?? 0}}</p>
+                            <h5 class="card-title text-center text-success">Pendekatan Kerapatan</h5>
+                            <p class="card-text text-center text-muted">
+                                <strong>{{ $item['zona'] ?? 'Data tidak tersedia' }}</strong>
+                            </p>
+                            <div class="mt-3">
+                                <p class="text-dark">Biomassa di atas permukaan tanah (ton/ha):</p>
+                                <p class="card-text text-start text-success fw-bold">{{ $item['Biomassadiataspermukaantanah'] ?? 0 }}</p>
+                            </div>
+                            <div class="mt-3">
+                                <p class="text-dark">Kandungan karbon (ton/ha):</p>
+                                <p class="card-text text-start text-success fw-bold">{{ $item['Kandungankarbon'] ?? 0 }}</p>
+                            </div>
+                            <div class="mt-3">
+                                <p class="text-dark">Serapan CO2 (ton/ha):</p>
+                                <p class="card-text text-start text-success fw-bold">{{ $item['SerapanCO2'] ?? 0 }}</p>
+                            </div>
                         </div>
                     </div>
                 </div>
             @endforeach
-            {{-- {{ $item['TotalPancangco2'] ?? 'Data tidak tersedia' }} --}}
         </div>
         @foreach ($ringkasan as $item)
             <div class="row">
