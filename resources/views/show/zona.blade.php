@@ -872,9 +872,9 @@
                         <div class="card-body">
                             <h5 class="card-title">Pendekatan Kerapatan</h5>
                             <p class="card-text fw-bold">{{ $item['zona'] ?? 'Data tidak tersedia'}}</p>
-                            <p class="card-text text-start fw-bold ">Biomassa diatas permukaan tanah (ton/ha)</p>
-                            <p class="card-text text-start fw-bold ">Kandungan karbon (ton/ha)</p>
-                            <p class="card-text text-start fw-bold ">Serapan CO2 (ton/ha)</p>
+                            <p class="card-text text-start fw-bold ">Biomassa diatas permukaan tanah (ton/ha) {{ $item['Biomassadiataspermukaantanah'] ?? 0}}</p>
+                            <p class="card-text text-start fw-bold ">Kandungan karbon (ton/ha) {{ $item['Kandungankarbon'] ?? 0}}</p>
+                            <p class="card-text text-start fw-bold ">Serapan CO2 (ton/ha)  {{ $item['SerapanCO2'] ?? 0}}</p>
                         </div>
                     </div>
                 </div>

@@ -353,6 +353,9 @@ class zonaController extends Controller
             $hasilNecromascarbon = ($uniqueNecromas > 0) ? ($zonaa->necromass_total_carbon / $uniqueNecromas) : 0;
             $NecromassCarbon = ((float) $hasilNecromascarbon / 1000000) * 10000 / 400;
             // klandungan karbon
+            $Biomassadiataspermukaantanah = $TotalPancangbiomimasa +  $TotalTiangbiomasa+ $TotalPohonbiomasa + $Serasahberatkering+  $semaiberatkering +  $tumbuhan_bawahberatkering+   $Necromassbiomasa;
+            $Kandungankarbon = $TotalPancangkarbon +  $TotalTiangKarbon + $TotalPohonkarbon+ $SerasahKarbon +  $semaiKarbon+ $tumbuhan_bawahKarbon+ $NecromassCarbon;
+            $SerapanCO2  = $TotalPancangco2 + $TotalTiangco2+   $TotalPohonco2+  $Serasahco2 +  $semaico2+  $tumbuhan_bawahco2 +  $Necromassco2;
             // TootaL Karbon
             $TotalKandunganKarbon =  $zona->total_carbon_tanah + $NecromassCarbon + $SerasahKarbon + $semaiKarbon  + $tumbuhan_bawahKarbon + $TotalPohonkarbon + $TotalPancangkarbon + $TotalTiangKarbon ;
             // Total carbon tanama kandungan karbon
@@ -394,6 +397,9 @@ class zonaController extends Controller
 
             return [
                 'zona' => $zona->zona_nama,
+                'Biomassadiataspermukaantanah' => number_format($Biomassadiataspermukaantanah ?? 0, 3, '.', ''),
+                'Kandungankarbon' => number_format($Kandungankarbon ?? 0, 3, '.', ''),
+                'SerapanCO2' => number_format($SerapanCO2 ?? 0, 3, '.', ''),
                 'TotalPancangco2' => number_format($TotalPancangco2 ?? 0, 3, '.', ''),
                 'TotalPancangkarbon' => number_format($TotalPancangkarbon ?? 0, 3, '.', ''),
                 'TotalMangroveKarbondioksida' => number_format($TotalMangroveKarbondioksida ?? 0, 3, '.', ''),
