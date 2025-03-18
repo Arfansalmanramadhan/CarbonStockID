@@ -881,7 +881,7 @@
             @endforeach
             {{-- {{ $item['TotalPancangco2'] ?? 'Data tidak tersedia' }} --}}
         </div>
-        @foreach ($ringkasan as $item)
+        @foreach ($ringkasann as $item)
             <div class="row">
                 <div class="col-md-6  height-card box-margin">
                     <div class="card">
