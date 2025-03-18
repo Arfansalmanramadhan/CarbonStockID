@@ -82,11 +82,13 @@
                                         <td>{{ $item->latitude }}</td>
                                         <td>{{ $item->longitude }}</td>
                                         <td class="hidden-column aksi-button">
-                                            <a href="{{ route('plot.getPlot', ['slug' => $item->slug]) }}"
-                                                class="btn btn-info btn-sm">Detail</a>
-                                            <button class="view-btn">
-                                                <img src="{{ asset('/images/Eye.svg') }}" alt="View" />
-                                            </button>
+                                            {{-- <a href="{{ route('plot.getPlot', ['slug' => $item->slug]) }}"
+                                                class="btn btn-info btn-sm">Detail</a> --}}
+                                            <form action="{{ route('plot.getPlot', ['slug' => $item->slug]) }}" method="get">
+                                                <button type="submit" class="view-btn">
+                                                    <img src="{{ asset('/images/Eye.svg') }}" alt="" />
+                                                </button>
+                                            </form>
                                             <button onclick="window.location.href='{{ route('Hamparan.edit',['slugZ' => $zona->slug,'slugH' => $item->slug]) }}'"
                                                 class="add-btn">
                                                 <img src="{{ asset('/images/PencilSquare.svg') }}" alt="Add" />

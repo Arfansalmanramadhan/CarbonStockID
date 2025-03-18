@@ -63,11 +63,16 @@
                                     <td>{{ $item->longitude }}</td>
                                     <td>{{ $item->jenis_hutan }}</td>
                                     <td class="hidden-column aksi-button">
-                                        <a href="{{ route('hamparan.getHamparan', ['slug' => $item->slug]) }}"
-                                            class="btn btn-info btn-sm">Detail</a>
-                                        <button class="view-btn">
+                                        {{-- <a href="{{ route('hamparan.getHamparan', ['slug' => $item->slug]) }}"
+                                            class="btn btn-info btn-sm">Detail</a> --}}
+                                        <form action="{{ route('hamparan.getHamparan', ['slug' => $item->slug]) }}" method="get">
+                                            <button type="submit" class="view-btn">
+                                                <img src="{{ asset('/images/Eye.svg') }}" alt="" />
+                                            </button>
+                                        </form>
+                                        {{-- <button class="view-btn">
                                             <img src="{{ asset('/images/Eye.svg') }}" alt="View" />
-                                        </button>
+                                        </button> --}}
                                         <button
                                             onclick="window.location.href='{{ route('zona.edit', ['slugP' => $poltArea->slug, 'slugZ' => $item->slug]) }}'"
                                             class="add-btn">

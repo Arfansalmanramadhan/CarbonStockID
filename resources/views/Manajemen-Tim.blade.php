@@ -92,8 +92,13 @@
                                     <td>{{ optional($t->periode)->tanggal_berakhir  }}</td>
                                     <td>{{ $t->anggota_tim_count }}</td>
                                     <td class="hidden-column aksi-button">
-                                        <a href="{{ route('anggota.indexx', $t->id) }}"
-                                            class="btn btn-info btn-sm">Detail</a>
+                                        {{-- <a href="{{ route('anggota.indexx', $t->id) }}"
+                                            class="btn btn-info btn-sm">Detail</a> --}}
+                                        <form action="{{ route('anggota.indexx', $t->id) }}" method="get">
+                                            <button type="submit" class="view-btn">
+                                                <img src="{{ asset('/images/Eye.svg') }}" alt="" />
+                                            </button>
+                                        </form>
                                             {{-- <button class="view-btn">
                                                 <img src="{{ asset('/images/Eye.svg') }}" alt="" />
                                             </button>
