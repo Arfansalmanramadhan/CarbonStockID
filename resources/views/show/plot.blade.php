@@ -15,7 +15,7 @@
                 <div class="table-wrapper">
                     <div class="table-header d-flex justify-content-between">
                         <form method="GET"
-                            action="{{ route('plot.getPlot', ['slug' => $plot->first()->slug ?? 'default-slug']) }}">
+                            action="{{ route('plot.getPlot', ['id' => $plot->first()->id ?? 'default-id']) }}">
                             <div class="tampilkan">
                                 <label for="show-entries">Tampilkan</label>
                                 <select id="show-entries perPageSelect" class="number-selection" name="perPage"
@@ -29,7 +29,7 @@
                         </form>
                         <div class="d-flex align-items-center">
                             <form method="GET"
-                                action="{{ route('plot.getPlot', ['slug' => $plot->first()->slug ?? 'default-slug']) }}">
+                                action="{{ route('plot.getPlot', ['id' => $plot->first()->id ?? 'default-slug']) }}">
                                 <div class="d-flex align-items-center">
                                     <div class="form-control-space">
                                         <input type="text" id="searchInput" name="search" placeholder="Cari..."
@@ -87,13 +87,13 @@
                                     <td>{{ $item->latitude }}</td>
                                     <td>{{ $item->longitude }}</td>
                                     <td class="hidden-column aksi-button">
-                                        <a href="{{ route('hamparan.getHamparan', ['slug' => $item->slug]) }}"
-                                            class="btn btn-info btn-sm">Detail</a>
-                                        <button class="view-btn">
-                                            <img src="{{ asset('/images/Eye.svg') }}" alt="View" />
-                                        </button>
+                                        <form action="{{ route('DetailPlot.getsubPlot', ['id' => $item->id]) }}" method="get">
+                                            <button type="submit" class="view-btn">
+                                                <img src="{{ asset('/images/Eye.svg') }}" alt="" />
+                                            </button>
+                                        </form>
                                         <button
-                                            onclick="window.location.href='{{ route('plot.edit', ['slugP' => $poltArea->slug, 'slugZ' => $item->slug]) }}'"
+                                            {{-- onclick="window.location.href='{{ route('plot.edit', ['slugP' => $poltArea->slug, 'slugZ' => $item->slug]) }}'" --}}
                                             class="add-btn">
                                             <img src="{{ asset('/images/PencilSquare.svg') }}" alt="Add" />
                                         </button>
@@ -140,31 +140,10 @@
                             </ul>
                         </nav>
                     </div>
-                    <div class="d-flex justify-content-between">
-                        {{ $plot->links() }}
-                    </div>
+
                 </div>
             </div>
         </div>
     </div>
-    <script>
-        document.getElementById('perPageSelect').addEventListener('change', function() {
-            let perPage = this.value;
-            let search = document.getElementById('searchInput').value;
-            window.location.href =
-                "{{ route('plot.getPlot', ['slug' => $plot->first()->slug ?? 'default-slug']) }}" + "?per_page=" +
-                perPage + "&search=" + search;
-        });
 
-        document.getElementById('searchInput').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                let perPage = document.getElementById('perPageSelect').value;
-                let search = this.value;
-                window.location.href =
-                    "{{ route('plot.getPlot', ['slug' => $plot->first()->slug ?? 'default-slug']) }}" +
-                    "?per_page=" + perPage + "&search=" +
-                    search;
-            }
-        });
-    </script>
 @endsection

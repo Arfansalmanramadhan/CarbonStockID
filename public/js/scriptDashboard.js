@@ -289,7 +289,6 @@ document.addEventListener("DOMContentLoaded", function() {
         tumbuhanBawah.style.display = "none";
         tanah.style.display = "none";
         pancang.style.display = "none";
-        mangrove.style.display = "none";
         tiang.style.display = "none";
         pohon.style.display = "none";
         nekromas.style.display = "none";
@@ -308,7 +307,6 @@ document.addEventListener("DOMContentLoaded", function() {
         keenam.classList.remove("activee");
         ketujuh.classList.remove("activee");
         kedelapan.classList.remove("activee");
-        kesebilan.classList.remove("activee");
 
         activeButton.classList.add("activee");
     }
@@ -333,24 +331,20 @@ document.addEventListener("DOMContentLoaded", function() {
         setActiveButton(keempat);
     });
     kelima.addEventListener("click", function() {
-        tampilkanHanya(mangrove);
+        tampilkanHanya(tiang);
         setActiveButton(kelima);
     });
     keenam.addEventListener("click", function() {
-        tampilkanHanya(tiang);
+        tampilkanHanya(pohon);
         setActiveButton(keenam);
     });
     ketujuh.addEventListener("click", function() {
-        tampilkanHanya(pohon);
+        tampilkanHanya(nekromas);
         setActiveButton(ketujuh);
     });
     kedelapan.addEventListener("click", function() {
-        tampilkanHanya(nekromas);
-        setActiveButton(kedelapan);
-    });
-    kesebilan.addEventListener("click", function() {
         tampilkanHanya(tanah);
-        setActiveButton(kesebilan);
+        setActiveButton(kedelapan);
     });
 
     // Atur tampilan awal (menampilkan serasah)

@@ -216,6 +216,7 @@ Route::middleware('auth')->group(function () {
     });
     Route::controller(zonaController::class)->group(function () {
         Route::get("/zona", "index")->name('zona.index');
+        // Route::get("/Lokasi/zona/{slug}", "subplot")->name('zona.subplot');
         Route::get("/Lokasi/zona/{slug}", "ringkasan")->name('zona.ringkasan');
         Route::get("/Lokasi/zona/{slug}", "ringkasann")->name('zona.ringkasann');
         Route::get('/Lokasi/zona/{slug}', 'getZona')->name('zona.getZona');
@@ -227,7 +228,7 @@ Route::middleware('auth')->group(function () {
     });
     Route::controller(HamparanController::class)->group(function () {
         Route::get('/Hamparan', 'index')->name('Hamparan.index');
-        Route::get('/Zona/hamparan/{slug}', 'getHamparan')->name('hamparan.getHamparan');
+        Route::get('/Zona/hamparan/{id}', 'getHamparan')->name('hamparan.getHamparan');
         Route::get("/Hamparan/{slug}/tambah", "tambah")->name('TambahHamparan.tambah');
         Route::post("/Hamparan/{slug}/tambah", "store")->name('Hamparan.store');
         Route::get("/Hamparan/{slug}/tambah", "create")->name('TambahHamparan.tambah');
@@ -236,7 +237,8 @@ Route::middleware('auth')->group(function () {
     });
     Route::controller(PLotCOntroller::class)->group(function(){
         Route::get('/dataPlot', 'index')->name('dataPlot.index');
-        Route::get('/Hamparan/Plot/{slug}', 'getPlot')->name('plot.getPlot');
+        Route::get('/Hamparan/Plot/{id}', 'getPlot')->name('plot.getPlot');
+        Route::get('/Plot/SubPlot/{id}', 'getsubPlot')->name('DetailPlot.getsubPlot');
         Route::get('/Plot/{slug}/tambah', 'tambah')->name('Plot.tambah');
         Route::get('/Plot/{slug}/tambah', 'create')->name('Plot.tambah');
         Route::post('/Plot/{slug}/tambah', 'store')->name('Plot.store');

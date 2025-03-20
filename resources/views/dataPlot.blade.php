@@ -265,9 +265,7 @@
                 </nav>
             </div>
             <!-- Pagination -->
-            <div class="d-flex justify-content-between">
-                {{ $plot->links() }}
-            </div>
+            
             {{-- <div class="table-footer">
                 <span>Menampilkan 1 sampai 5 dari 40 data</span>
                 <div class="pagination">

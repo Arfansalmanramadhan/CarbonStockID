@@ -14,7 +14,7 @@
             <div class="table-container">
                     <div class="table-header d-flex justify-content-between">
                         <form method="GET"
-                            action="{{ route('hamparan.getHamparan', ['slug' =>$hamparan->slug ?? 'default-slug']) }}">
+                            action="{{ route('hamparan.getHamparan', ['id' =>$hamparan->id ?? 'default-slug']) }}">
                             <div class="tampilkan">
                                 <label for="show-entries">Tampilkan</label>
                                 <select id="show-entries perPageSelect" class="number-selection" name="perPage"
@@ -27,7 +27,7 @@
                             </div>
                         </form>
                         <div class="d-flex align-items-center">
-                            <form method="GET" action="{{ route('hamparan.getHamparan', ['slug' =>$zona->slug ?? 'default-slug']) }}">
+                            <form method="GET" action="{{ route('hamparan.getHamparan', ['id' =>$zona->id ?? 'default-slug']) }}">
                                 <div class="d-flex align-items-center">
                                     <div class="form-control-space">
                                         <input type="text" id="searchInput" name="search" placeholder="Cari..." class="form-control "
@@ -84,7 +84,7 @@
                                         <td class="hidden-column aksi-button">
                                             {{-- <a href="{{ route('plot.getPlot', ['slug' => $index->slug]) }}"
                                                 class="btn btn-info btn-sm">Detail</a> --}}
-                                            <form action="{{ route('plot.getPlot', ['slug' => $index->slug]) }}" method="get">
+                                            <form action="{{ route('plot.getPlot', ['id' => $index->id]) }}" method="get">
                                                 <button type="submit" class="view-btn">
                                                     <img src="{{ asset('/images/Eye.svg') }}" alt="" />
                                                 </button>
@@ -142,24 +142,5 @@
             </div>
         </div>
     </div>
-    <script>
-        document.getElementById('perPageSelect').addEventListener('change', function() {
-            let perPage = this.value;
-            let search = document.getElementById('searchInput').value;
-            window.location.href =
-                "{{ route('hamparan.getHamparan', ['slug' => $hamparan->first()->slug ?? 'default-slug']) }}" + "?per_page=" +
-                perPage + "&search=" + search;
-        });
 
-        document.getElementById('searchInput').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                let perPage = document.getElementById('perPageSelect').value;
-                let search = this.value;
-                window.location.href =
-                    "{{ route('hamparan.getHamparan', ['slug' => $hamparan->first()->slug ?? 'default-slug']) }}" +
-                    "?per_page=" + perPage + "&search=" +
-                    search;
-            }
-        });
-    </script>
 @endsection

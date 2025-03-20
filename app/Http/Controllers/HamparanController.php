@@ -31,12 +31,12 @@ class HamparanController extends Controller
         ]);
         return view('Hamparan', compact('user', 'hamparan',  'search', 'perPage'));
     }
-    public function getHamparan(Request $request, $slug)
+    public function getHamparan(Request $request, $id)
     {
         $user = Auth::user();
         $search = $request->query('search');
         $perPage = $request->query('per_page', 5);
-        $zona = Zona::where("slug", $slug)->firstOrFail();
+        $zona = Zona::findOrFail($id);
         $query = Hamparan::where('zona_id', $zona->id);
         // $poltArea = PoltArea::where("slug", $poltSlug)->firstOrFail();
         // $zona = Zona::where("slug", $zonaSlug)
@@ -50,7 +50,7 @@ class HamparanController extends Controller
             'search' => $search,
             'per_page' => $perPage
         ]);
-        
+
         return view('show.Hamparan', compact('hamparan','user', 'search', 'perPage', 'zona'));
     }
     public function tambah($slug)

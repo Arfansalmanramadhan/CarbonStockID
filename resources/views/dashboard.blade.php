@@ -998,14 +998,7 @@
         }
 
         let piee =@json($ringkasan->pluck('pieData'));
-        let sumSeries = piee.reduce((acc, cur, index) => {
-  // Inisialisasi acc sebagai array nol berdasarkan panjang array pertama
-  if (index === 0) {
-    return cur;
-  } else {
-    return acc.map((val, i) => val + cur[i]);
-  }
-}, []);
+        
         const pieoptions = {
             series: piee[0],
             chart: {

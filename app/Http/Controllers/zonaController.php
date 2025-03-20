@@ -71,7 +71,82 @@ class zonaController extends Controller
         // dd($zona->toArray());
         $ringkasan = $this->ringkasan($slug)->getData()['ringkasan'];
         $ringkasann = $this->ringkasann($slug)->getData()['ringkasann'];
-        return view('show.zona', compact('zona', "user", 'search', 'perPage', 'poltArea', 'ringkasan', 'ringkasann'));
+        $Serasah = DB::table('serasah')
+            ->leftJoin('subplot', 'serasah.subplot_id', '=', 'subplot.id')
+            ->leftJoin('plot', 'subplot.plot_id', '=', 'plot.id')
+            ->leftJoin('hamparan', 'plot.hamparan_id', '=', 'hamparan.id')
+            ->leftJoin('zona', 'hamparan.zona_id', '=', 'zona.id')
+            ->paginate($perPage)
+            ->appends(['per_page' => $perPage]);
+        // dd( $Serasah);
+        $Semai = DB::table('semai')
+            ->leftJoin('subplot', 'semai.subplot_id', '=', 'subplot.id')
+            ->leftJoin('plot', 'subplot.plot_id', '=', 'plot.id')
+            ->leftJoin('hamparan', 'plot.hamparan_id', '=', 'hamparan.id')
+            ->leftJoin('zona', 'hamparan.zona_id', '=', 'zona.id')
+            ->paginate($perPage)
+            ->appends(['per_page' => $perPage]);
+
+        $TumbuhanBawah = DB::table('tumbuhan_bawah')
+            ->leftJoin('subplot', 'tumbuhan_bawah.subplot_id', '=', 'subplot.id')
+            ->leftJoin('plot', 'subplot.plot_id', '=', 'plot.id')
+            ->leftJoin('hamparan', 'plot.hamparan_id', '=', 'hamparan.id')
+            ->leftJoin('zona', 'hamparan.zona_id', '=', 'zona.id')
+            ->paginate($perPage)
+            ->appends(['per_page' => $perPage]);
+
+        $pancang = DB::table('pancang')
+            ->leftJoin('subplot', 'pancang.subplot_id', '=', 'subplot.id')
+            ->leftJoin('plot', 'subplot.plot_id', '=', 'plot.id')
+            ->leftJoin('hamparan', 'plot.hamparan_id', '=', 'hamparan.id')
+            ->leftJoin('zona', 'hamparan.zona_id', '=', 'zona.id')
+            ->paginate($perPage)
+            ->appends(['per_page' => $perPage]);
+        $tiang = DB::table('tiang')
+            ->leftJoin('subplot', 'tiang.subplot_id', '=', 'subplot.id')
+            ->leftJoin('plot', 'subplot.plot_id', '=', 'plot.id')
+            ->leftJoin('hamparan', 'plot.hamparan_id', '=', 'hamparan.id')
+            ->leftJoin('zona', 'hamparan.zona_id', '=', 'zona.id')
+            ->paginate($perPage)
+            ->appends(['per_page' => $perPage]);
+        $pohon = DB::table('pohon')
+            ->leftJoin('subplot', 'pohon.subplot_id', '=', 'subplot.id')
+            ->leftJoin('plot', 'subplot.plot_id', '=', 'plot.id')
+            ->leftJoin('hamparan', 'plot.hamparan_id', '=', 'hamparan.id')
+            ->leftJoin('zona', 'hamparan.zona_id', '=', 'zona.id')
+            ->paginate($perPage)
+            ->appends(['per_page' => $perPage]);
+        $Necromas = DB::table('necromass')
+            ->leftJoin('subplot', 'necromass.subplot_id', '=', 'subplot.id')
+            ->leftJoin('plot', 'subplot.plot_id', '=', 'plot.id')
+            ->leftJoin('hamparan', 'plot.hamparan_id', '=', 'hamparan.id')
+            ->leftJoin('zona', 'hamparan.zona_id', '=', 'zona.id')
+            ->paginate($perPage)
+            ->appends(['per_page' => $perPage]);
+        $tanah = DB::table('tanah')
+            ->leftJoin('subplot', 'tanah.subplot_id', '=', 'subplot.id')
+            ->leftJoin('plot', 'subplot.plot_id', '=', 'plot.id')
+            ->leftJoin('hamparan', 'plot.hamparan_id', '=', 'hamparan.id')
+            ->leftJoin('zona', 'hamparan.zona_id', '=', 'zona.id')
+            ->paginate($perPage)
+            ->appends(['per_page' => $perPage]);
+        return view('show.zona', compact(
+            'zona',
+            "user",
+            'search',
+            'perPage',
+            'poltArea',
+            'ringkasan',
+            'ringkasann',
+            'Serasah',
+            'Semai',
+            'TumbuhanBawah',
+            'Necromas',
+            'pancang',
+            'tiang',
+            'pohon',
+            'tanah'
+        ));
     }
     public function tambah($slug)
     {
@@ -174,6 +249,12 @@ class zonaController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+    public function subplot($slug)
+    {
+
+        return view('show.zona', compact('Serasah', 'Semai', 'TumbuhanBawah', 'Necromas'));
+        dd($uniqueSerasah);
     }
     public function ringkasan($slug)
     {
