@@ -71,6 +71,7 @@ Route::middleware('auth')->group(function () {
     Route::controller(DashboardController::class)->group(function () {
         Route::get('/dashboard', 'index')->name('dashboard');
         Route::get('/dashboard', 'showChart')->name('dashboard');
+        // Route::get('/dashboard/showChartPie', 'showChartPie')->name('dashboard.showChartPie');
     });
     // Route::get('/dashboard', function () {
     //     $user = Auth::user();

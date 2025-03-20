@@ -43,22 +43,23 @@ class zonaController extends Controller
         ]);
         return view('zona', compact('zona', "user", 'search', 'perPage'));
     }
-    public function getZona(Request $request, $slug)
+    public function getZona(Request $request, $slug,)
     {
         $user = Auth::user();
         $search = $request->query('search');
         $perPage = $request->query('per_page', 5);
-        $poltArea = PoltArea::where("slug", $slug)->first();
+        $poltArea = PoltArea::where("slug", $slug)->firstOrFail();
         // $poltAreaa = PoltArea::find($id);
         // dd($poltArea);
 
         $query = Zona::where("polt_area_id", $poltArea->id);
+        // dd($query);/
         // $query = Zona::query();
         if (!empty($search)) {
             $query->where('zona', 'ILIKE', "%{$search}%")
                 ->orWhere('jenis_hutan', 'ILIKE', "%{$search}%");
         }
-
+        // dd($poltArea);
         // $poltArea = $query->paginate($perPage);
 
         /// Ambil data dengan pagination
@@ -66,6 +67,8 @@ class zonaController extends Controller
             'search' => $search,
             'per_page' => $perPage
         ]);
+        // dd($poltArea->id, $zona);
+        // dd($zona->toArray());
         $ringkasan = $this->ringkasan($slug)->getData()['ringkasan'];
         $ringkasann = $this->ringkasann($slug)->getData()['ringkasann'];
         return view('show.zona', compact('zona', "user", 'search', 'perPage', 'poltArea', 'ringkasan', 'ringkasann'));

@@ -14,7 +14,7 @@
             <div class="table-wrapper">
                 <div class="table-header d-flex justify-content-between">
                     <form method="GET"
-                        action="{{ route('zona.getZona', ['slug' => $zona->first()->slug ?? 'default-slug']) }}">
+                        action="{{ route('zona.getZona', ['slug' => $poltArea->slug ?? 'default-slug']) }}">
                         <div class="tampilkan">
                             <label for="show-entries">Tampilkan</label>
                             <select id="show-entries perPageSelect" class="number-selection" name="perPage"
@@ -28,7 +28,7 @@
                     </form>
                     <div class="d-flex align-items-center">
                         <form method="GET"
-                            action="{{ route('zona.getZona', ['slug' => $zona->first()->slug ?? 'default-slug']) }}">
+                            action="{{ route('zona.getZona', ['slug' =>$poltArea->slug?? 'default-slug']) }}">
                             <div class="d-flex align-items-center">
                                 <div class="form-control-space">
                                     <input type="text" id="searchInput" name="search" placeholder="Cari..."
@@ -55,17 +55,17 @@
                             </tr>
                         </thead>
                         <tbody id="data-table">
-                            @forelse ($zona as $index => $item)
+                            @forelse ($zona as $index)
                                 <tr>
-                                    <td>{{ $zona->firstItem() + $index }}</td>
-                                    <td>{{ $item->zona }}</td>
-                                    <td>{{ $item->latitude }}</td>
-                                    <td>{{ $item->longitude }}</td>
-                                    <td>{{ $item->jenis_hutan }}</td>
+                                    <td>{{ $loop->iteration  }}</td>
+                                    <td>{{ $index->zona }}</td>
+                                    <td>{{ $index->latitude }}</td>
+                                    <td>{{ $index->longitude }}</td>
+                                    <td>{{ $index->jenis_hutan }}</td>
                                     <td class="hidden-column aksi-button">
                                         {{-- <a href="{{ route('hamparan.getHamparan', ['slug' => $item->slug]) }}"
                                             class="btn btn-info btn-sm">Detail</a> --}}
-                                        <form action="{{ route('hamparan.getHamparan', ['slug' => $item->slug]) }}" method="get">
+                                        <form action="{{ route('hamparan.getHamparan', ['slug' => $index->slug]) }}" method="get">
                                             <button type="submit" class="view-btn">
                                                 <img src="{{ asset('/images/Eye.svg') }}" alt="" />
                                             </button>
@@ -74,7 +74,7 @@
                                             <img src="{{ asset('/images/Eye.svg') }}" alt="View" />
                                         </button> --}}
                                         <button
-                                            onclick="window.location.href='{{ route('zona.edit', ['slugP' => $poltArea->slug, 'slugZ' => $item->slug]) }}'"
+                                            onclick="window.location.href='{{ route('zona.edit', ['slugP' => $poltArea->slug, 'slugZ' => $index->slug]) }}'"
                                             class="add-btn">
                                             <img src="{{ asset('/images/PencilSquare.svg') }}" alt="Add" />
                                         </button>

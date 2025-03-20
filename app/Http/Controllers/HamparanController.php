@@ -36,7 +36,7 @@ class HamparanController extends Controller
         $user = Auth::user();
         $search = $request->query('search');
         $perPage = $request->query('per_page', 5);
-        $zona = Zona::where("slug", $slug)->first();
+        $zona = Zona::where("slug", $slug)->firstOrFail();
         $query = Hamparan::where('zona_id', $zona->id);
         // $poltArea = PoltArea::where("slug", $poltSlug)->firstOrFail();
         // $zona = Zona::where("slug", $zonaSlug)
@@ -45,10 +45,12 @@ class HamparanController extends Controller
             $query->where('nama_hamparan', 'ILIKE', "%{$search}%")
                 ->orWhere('jenis_hutan', 'ILIKE', "%{$search}%");
         }
+        // dd($zona );
         $hamparan = $query->paginate($perPage)->appends([
             'search' => $search,
             'per_page' => $perPage
         ]);
+        
         return view('show.Hamparan', compact('hamparan','user', 'search', 'perPage', 'zona'));
     }
     public function tambah($slug)

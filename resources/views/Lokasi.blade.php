@@ -52,6 +52,7 @@
                                 <th>Latitude</th>
                                 <th>Longitude</th>
                                 <th>Tanggal Pengamatan </th>
+                                <th>Tanggal Surver </th>
                                 <th class="hidden-column kananPancang">Aksi</th>
                             </tr>
                         </thead>
@@ -79,23 +80,24 @@
                                 </tr> --}}
                         </tbody>
                         <tbody id="data-table ">
-                            @forelse ($lokasi as $index => $item)
+                            @forelse ($lokasi as $index)
                                 <tr>
-                                    <td>{{ $lokasi->firstItem() + $index }}</td>
-                                    <td>{{ $item->daerah }}</td>
-                                    <td>{{ $item->jenis_hutan }}</td>
-                                    <td>{{ $item->latitude }}</td>
-                                    <td>{{ $item->longitude }}</td>
-                                    <td>{{ $item->periode_pengamatan }}</td>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $index->daerah }}</td>
+                                    <td>{{ $index->jenis_hutan }}</td>
+                                    <td>{{ $index->latitude }}</td>
+                                    <td>{{ $index->longitude }}</td>
+                                    <td>{{ $index->periode_pengamatan }}</td>
+                                    <td>{{ $index->created_at }}</td>
                                     <td class="hidden-column aksi-button">
-                                        {{-- <a href="{{ route('zona.getZona', ['slug' => $item->slug]) }}"
+                                        {{-- <a href="{{ route('zona.getZona', ['slug' => $index->slug]) }}"
                                             class="btn btn-info btn-sm">Detail</a> --}}
-                                        <form action="{{ route('zona.getZona', ['slug' => $item->slug]) }}" method="get">
+                                        <form action="{{ route('zona.getZona', ['slug' => $index->slug]) }}" method="get">
                                             <button type="submit" class="view-btn">
                                                 <img src="{{ asset('/images/Eye.svg') }}" alt="" />
                                             </button>
                                         </form>
-                                        <button onclick="window.location.href='{{ route('Lokasi.edit', $item->slug) }}'"
+                                        <button onclick="window.location.href='{{ route('Lokasi.edit', $index->slug) }}'"
                                             class="add-btn">
                                             <img src="{{ asset('/images/PencilSquare.svg') }}" alt="Add" />
                                         </button>

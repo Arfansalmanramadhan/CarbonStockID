@@ -941,12 +941,12 @@
         var options = {
             series: [{
                     name: 'Karbon',
-                    data: [5]
+                    data: @json($ringkasann->pluck('TotalKandunganKarbon'))
 
                 },
                 {
                     name: 'Serapan Karbon',
-                    data: [10]
+                    data: @json($ringkasann->pluck('KarbonCo2'))
                 }
             ],
             chart: {
@@ -997,9 +997,17 @@
             window.location.href = "?tahun=" + year;
         }
 
-
+        let piee =@json($ringkasan->pluck('pieData'));
+        let sumSeries = piee.reduce((acc, cur, index) => {
+  // Inisialisasi acc sebagai array nol berdasarkan panjang array pertama
+  if (index === 0) {
+    return cur;
+  } else {
+    return acc.map((val, i) => val + cur[i]);
+  }
+}, []);
         const pieoptions = {
-            series: [5, 10],
+            series: piee[0],
             chart: {
                 width: '100%',
                 type: 'pie',
@@ -1039,8 +1047,8 @@
             }]
         };
 
-        const pie = new ApexCharts(document.querySelector("#pie"), pieoptions);
-        pie.render();
+        const pieChart = new ApexCharts(document.querySelector("#pie"), pieoptions);
+        pieChart.render();
 
 
     </script>
