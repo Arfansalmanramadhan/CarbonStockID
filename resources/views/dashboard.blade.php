@@ -17,25 +17,18 @@
                     <th scope="col">LONGITUDE</th>
                 </tr>
             </thead>
-            <tbody>
-                <tr>
-                    <td scope="row">00001</td>
-                    <td>Mekar Jaya, Me...</td>
-                    <td>-6.937154839...</td>
-                    <td>6.937178839...</td>
-                </tr>
-                <tr>
-                    <td>00001</td>
-                    <td>Mekar Jaya, Me...</td>
-                    <td>-6.937154839...</td>
-                    <td>6.937178839...</td>
-                </tr>
-                <tr>
-                    <td>00001</td>
-                    <td>Mekar Jaya, Me...</td>
-                    <td>-6.937154839...</td>
-                    <td>6.937178839...</td>
-                </tr>
+            @forelse ($ringkasann as $item)
+                <tbody>
+
+                    <td>{{ $loop->iteration }}</td>
+                    <td>{{ $item['dareah'] ?? 'Data tidak tersedia' }}</td>
+                    <td>{{ $item['latitude'] ?? 'Data tidak tersedia' }} </td>
+                    <td>{{ $item['longitude'] ?? 'Data tidak tersedia' }} </td>
+                @empty
+                    <tr>
+                        <td colspan="3" class="text-center">Belum ada data</td>
+                    </tr>
+            @endforelse
             </tbody>
         </table>
         <h4 class="judul-beranda mt-5">Dashboard Monitoring </h4>
@@ -58,55 +51,64 @@
                     <thead>
                         <tr>
                             <th class="kiriPancang" rowspan="2">No</th>
-                            <th rowspan="2">Zona</th>
+                            <th rowspan="2">Daerah</th>
+                            <th rowspan="2">Tanah <br> (kandungan Kabon)</th>
+                            <th rowspan="2">Necromash <br> (kandungan Kabon)</th>
                             <th colspan="2">Serasah</th>
-                            <th colspan="2">Pancanh</th>
+                            <th colspan="2">Tumbuhan Bawah</th>
+                            <th colspan="2">Pancang</th>
                             <th colspan="2">Tiang</th>
                             <th class="hidden-column" colspan="2">pohon</th>
+                            <th class="hidden-column"rowspan="2">Total karbon </th>
+                            <th class="hidden-column"rowspan="2">Total Serapan Karbon </th>
                             <th class="hidden-column kananPancang" rowspan="2">Aksi</th>
                         </tr>
                         <tr>
                             {{-- <th class="kiriPancang">No</th> --}}
                             {{-- <th>Zona</th> --}}
                             <th>Karbon</th>
-                            <th>Serapan karbon</th>
+                            <th>Serapan <br>karbon</th>
                             <th>Karbon</th>
-                            <th class="hidden-column">Serapan Karobn</th>
+                            <th class="hidden-column">Serapan <br> Karobn</th>
+                            <th>Karbon</th>
+                            <th class="hidden-column">Serapan <br> Karobn</th>
                             <th class="hidden-column">Karbon</th>
-                            <th class="hidden-column">serapan karbon</th>
+                            <th class="hidden-column">serapan <br> karbon</th>
                             <th class="hidden-column">Karbon</th>
-                            <th class="hidden-column">Serapan serapan</th>
+                            <th class="hidden-column">Serapan <br> serapan</th>
+
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td>11</td>
-                            <td>15 cm</td>
-                            <td>15cm</td>
-                            <td>15</td>
-                            <td>15</td>
-                            <td class="hidden-column">15 gr/cm3</td>
-                            <td class="hidden-column">15 kg</td>
-                            <td class="hidden-column">15 kg</td>
-                            <td class="hidden-column">15 kg</td>
-                            <td class="hidden-column">15 kg</td>
-                            <td class="hidden-column aksi-button">
-                                <button class="edit-btn">
-                                    <img src="{{ asset('/images/PencilSquare.svg') }}" alt="" />
-                                </button>
-                                <button class="delete-btn">
-                                    <img src="{{ asset('/images/Trash.svg') }}" alt="" />
-                                </button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="2">Total karbon</td>
-                            <td colspan="9">15 cm</td>
-                        </tr>
-                        <tr>
-                            <td colspan="2">Total Serapan Karbon</td>
-                            <td colspan="9">15 cm</td>
-                        </tr>
+                    @forelse ($ringkasann as $item)
+                        <tbody>
+                            <tr>
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $item['dareah'] ?? 'Data tidak tersedia' }}</td>
+                                <td>{{ $item['TanahCarbon'] ?? 0}}</td>
+                                <td>{{ $item['NecromassCarbon'] ?? 0}}</td>
+                                <td>{{ $item['Serasahco2'] ?? 0}}</td>
+                                <td>{{ $item['SerasahKarbon'] ?? 0}}</td>
+                                <td>{{ $item['tumbuhanbawahco2'] ?? 0}}</td>
+                                <td class="hidden-column">{{ $item['tumbuhanbawahkarbon'] ?? 0}}</td>
+                                <td class="hidden-column">{{ $item['TotalPancangco2'] ?? 0}}</td>
+                                <td class="hidden-column">{{ $item['TotalPancangkarbon'] ?? 0}}</td>
+                                <td class="hidden-column">{{ $item['TotalTiangco2'] ?? 0}}</td>
+                                <td class="hidden-column">{{ $item['TotalTiangKarbon'] ?? 0}}</td>
+                                <td class="hidden-column">{{ $item['TotalPohonco2'] ?? 0}}</td>
+                                <td class="hidden-column">{{ $item['TotalPohonkarbon'] ?? 0}}</td>
+                                <td class="hidden-column">{{ $item['KarbonCo2'] ?? 0}}</td>
+                                <td class="hidden-column">{{ $item['TotalKandunganKarbon'] ?? 0}}</td>
+                                <td class="hidden-column aksi-button">
+                                    <button class="delete-btn">
+                                        <img src="{{ asset('/images/Trash.svg') }}" alt="" />
+                                    </button>
+                                </td>
+                            @empty
+                            <tr>
+                                <td colspan="3" class="text-center">Belum ada data</td>
+                            </tr>
+                    @endforelse
+                    </tr>
                     </tbody>
                 </table>
             </div>
@@ -201,30 +203,40 @@
         </div>
         <div class="table-container card">
             <div class="card-body">
-                <h4 class="card-title mb-4">Data Subplot</h4>
+                <div class="d-flex justify-content-between">
+
+                    <h4 class="card-title mb-4">Data Subplot</h4>
+                    {{-- <button onclick="window.location.href='{{ route('hitung.plot') }}'"
+                        class="btn btn-tambah-data mb-4">Kalklasi perhitungan</button> --}}
+                </div>
                 <ul class=" nav nav-tabs nav-bordered nav-justified overflow-x-auto">
                     <li class="activee nav-item jarak" id="pertama">Serasah</li>
                     <li class="nav-item jarak" id="kedua">Semai</li>
                     <li class="nav-item jarak" id="ketiga">Tumbuhan Bawah</li>
                     <li class="nav-item jarak" id="keempat">Pancang</li>
-                    <li class="nav-item jarak" id="kelima">Mangrove</li>
-                    <li class="nav-item jarak" id="keenam">Tiang</li>
-                    <li class="nav-item jarak" id="ketujuh">Pohon</li>
-                    <li class="nav-item jarak" id="kedelapan">Nekromas</li>
-                    <li class="nav-item jarak" id="kesebilan">Tanah</li>
+                    <li class="nav-item jarak" id="kelima">Tiang</li>
+                    <li class="nav-item jarak" id="keenam">Pohon</li>
+                    <li class="nav-item jarak" id="ketujuh">Nekromas</li>
+                    <li class="nav-item jarak" id="kedelapan">Tanah</li>
                 </ul>
                 <div class="tab-content ">
                     <div class="tab-pane p-1" id="serasah">
                         <div class="table-header d-flex justify-content-between">
-                            <div class="tampilkan">
-                                <label for="show-entries">Tampilkan</label>
-                                <select id="show-entries" class="number-selection">
-                                    <option value="5">5</option>
-                                    <option value="10">10</option>
-                                    <option value="20">20</option>
-                                </select>
-                                <span>data</span>
-                            </div>
+                            {{-- <form method="GET"
+                                action="{{ route('DetailPlot.getsubPlot', ['id' => $plot->id ?? 'default-slug']) }}">
+                                <div class="tampilkan">
+                                    <label for="show-entries">Tampilkan</label>
+                                    <select id="show-entries perPageSelect" class="number-selection" name="perPage"
+                                        onchange="this.form.submit()">
+                                        <option value="5" {{ request('perPage') == 5 ? 'selected' : '' }}>5</option>
+                                        <option value="10" {{ request('perPage') == 10 ? 'selected' : '' }}>10
+                                        </option>
+                                        <option value="20" {{ request('perPage') == 20 ? 'selected' : '' }}>20
+                                        </option>
+                                    </select>
+                                    <span class="ms-2">data</span>
+                                </div>
+                            </form> --}}
                         </div>
                         <div class="table-wrapper table-responsive">
                             <table class="custom-table-pancang  table-striped">
@@ -241,50 +253,80 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>No</td>
-                                        <td>202 kg </td>
-                                        <td>150 kg</td>
-                                        <td>1011. kg</td>
-                                        <td>333</td>
-                                        <td class="hidden-column">1234</td>
-                                        <td class="hidden-column">2345kg</td>
-                                        <td class="hidden-column aksi-button">
-                                            <button class="edit-btn">
-                                                <img src="{{ asset('/images/PencilSquare.svg') }}" alt="" />
-                                            </button>
-                                            <button class="delete-btn">
-                                                <img src="{{ asset('/images/Trash.svg') }}" alt="" />
-                                            </button>
-                                        </td>
-                                    </tr>
+                                    @forelse ($Serasah as $item)
+                                        <tr>
+                                            <td>{{ $loop->iteration }}</td>
+                                            <td>{{ $item->total_berat_basah }} Gr</td>
+                                            <td>{{ $item->sample_berat_basah }} Gr</td>
+                                            <td>{{ $item->sample_berat_kering }} Gr</td>
+                                            <td>{{ $item->total_berat_kering }} Gr</td>
+                                            <td class="hidden-column">{{ $item->kandungan_karbon }}gr/cm3</td>
+                                            <td class="hidden-column">{{ $item->co2 }} kg</td>
+                                            <td class="hidden-column aksi-button">
+                                                <button class="edit-btn">
+                                                    <img src="{{ asset('/images/PencilSquare.svg') }}" alt="" />
+                                                </button>
+                                                <button class="delete-btn">
+                                                    <img src="{{ asset('/images/Trash.svg') }}" alt="" />
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    @empty
+                                        <tr>
+                                            <td colspan="7" class="text-center">Belum ada data</td>
+                                        </tr>
+                                    @endforelse
                                 </tbody>
                             </table>
                         </div>
-                        <div class="table-footer mt-5">
-                            <span>Menampilkan 1 sampai 5 dari 40 data</span>
-                            <div class="pagination">
-                                <button class="page-btn">Kembali</button>
-                                <button class="page-btn ">1</button>
-                                <button class="page-btn">2</button>
-                                <button class="page-btn">3</button>
-                                <button class="page-btn">4</button>
-                                <button class="page-btn">Lanjut</button>
-                            </div>
-                        </div>
+                        {{-- <div class="table-footer mt-5">
+                            <strong>
+                                Menampilkan {{ $Serasah->firstItem() }} sampai {{ $Serasah->lastItem() }} dari
+                                {{ $Serasah->total() }}
+                                data
+                            </strong>
+                            <nav>
+                                <ul class="pagination">
+                                    @if ($Serasah->onFirstPage())
+                                        <li class="page-item disabled"><span class="page-link">Kembali</span></li>
+                                    @else
+                                        <li class="page-item"><a class="page-link"
+                                                href="{{ $Serasah->previousPageUrl() }}">Kembali</a></li>
+                                    @endif
+
+                                    @foreach ($Serasah->getUrlRange(1, $Serasah->lastPage()) as $page => $url)
+                                        <li class="page-item {{ $Serasah->currentPage() == $page ? 'active' : '' }}">
+                                            <a class="page-link" href="{{ $url }}">{{ $page }}</a>
+                                        </li>
+                                    @endforeach
+
+                                    @if ($Serasah->hasMorePages())
+                                        <li class="page-item"><a class="page-link"
+                                                href="{{ $Serasah->nextPageUrl() }}">Lanjut</a>
+                                        </li>
+                                    @else
+                                        <li class="page-item disabled"><span class="page-link">Lanjut</span></li>
+                                    @endif
+                                </ul>
+                            </nav>
+                        </div> --}}
                     </div>
                 </div>
                 <div class="p-1" id="semai">
                     <div class="table-header d-flex justify-content-between">
-                        <div class="tampilkan">
-                            <label for="show-entries">Tampilkan</label>
-                            <select id="show-entries" class="number-selection">
-                                <option value="5">5</option>
-                                <option value="10">10</option>
-                                <option value="20">20</option>
-                            </select>
-                            <span>data</span>
-                        </div>
+                        {{-- <form method="GET"
+                            action="{{ route('DetailPlot.getsubPlot', ['id' => $plot->id ?? 'default-slug']) }}">
+                            <div class="tampilkan">
+                                <label for="show-entries">Tampilkan</label>
+                                <select id="show-entries perPageSelect" class="number-selection" name="perPage"
+                                    onchange="this.form.submit()">
+                                    <option value="5" {{ request('perPage') == 5 ? 'selected' : '' }}>5</option>
+                                    <option value="10" {{ request('perPage') == 10 ? 'selected' : '' }}>10</option>
+                                    <option value="20" {{ request('perPage') == 20 ? 'selected' : '' }}>20</option>
+                                </select>
+                                <span class="ms-2">data</span>
+                            </div>
+                        </form> --}}
                     </div>
                     <div class="table-wrapper  table-responsive">
                         <table class="custom-table-pancang table-striped">
@@ -301,33 +343,14 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td class="">No</td>
-                                    <td>Bakau</td>
-                                    <td>8 cmr</td>
-                                    <td>1</td>
-                                    <td>26.79 KG</td>
-                                    <td>12.59 KG</td>
-                                    <td>46,21</td>
-                                    <td class="hidden-column aksi-button">
-                                        <button class="edit-btn">
-                                            <img src="{{ asset('/images/PencilSquare.svg') }}" alt="" />
-                                        </button>
-                                        <button class="delete-btn">
-                                            <img src="{{ asset('/images/Trash.svg') }}" alt="" />
-                                        </button>
-                                    </td>
-                                </tr>
-                                {{-- @foreach ($pancang as $item)
+                                @forelse ($Semai as $item)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $item->keliling }} cm</td>
-                                        <td>{{ $item->diameter }} cm</td>
-                                        <td>{{ $item->nama_lokal }}</td>
-                                        <td>{{ $item->nama_ilmiah }}</td>
-                                        <td class="hidden-column">{{ $item->kerapatan_jenis_kayu }}gr/cm3</td>
-                                        <td class="hidden-column">{{ $item->bio_di_atas_tanah }} kg</td>
-                                        <td class="hidden-column">{{ $item->kandungan_karbon }}kg</td>
+                                        <td>{{ $item->total_berat_basah }} Gr</td>
+                                        <td>{{ $item->sample_berat_basah }} Gr</td>
+                                        <td>{{ $item->sample_berat_kering }} Gr</td>
+                                        <td>{{ $item->total_berat_kering }} Gr</td>
+                                        <td class="hidden-column">{{ $item->kandungan_karbon }}Kg</td>
                                         <td class="hidden-column">{{ $item->co2 }} kg</td>
                                         <td class="hidden-column aksi-button">
                                             <button class="edit-btn">
@@ -338,33 +361,61 @@
                                             </button>
                                         </td>
                                     </tr>
-                                @endforeach --}}
+                                @empty
+                                    <tr>
+                                        <td colspan="7" class="text-center">Belum ada data</td>
+                                    </tr>
+                                @endforelse
                             </tbody>
                         </table>
                     </div>
-                    <div class="table-footer mt-5">
-                        <span>Menampilkan 1 sampai 5 dari 40 data</span>
-                        <div class="pagination">
-                            <button class="page-btn">Kembali</button>
-                            <button class="page-btn ">1</button>
-                            <button class="page-btn">2</button>
-                            <button class="page-btn">3</button>
-                            <button class="page-btn">4</button>
-                            <button class="page-btn">Lanjut</button>
-                        </div>
-                    </div>
+                    {{-- <div class="table-footer mt-5">
+                        <strong>
+                            Menampilkan {{ $Semai->firstItem() }} sampai {{ $Semai->lastItem() }} dari
+                            {{ $Semai->total() }}
+                            data
+                        </strong>
+                        <nav>
+                            <ul class="pagination">
+                                @if ($Semai->onFirstPage())
+                                    <li class="page-item disabled"><span class="page-link">Kembali</span></li>
+                                @else
+                                    <li class="page-item"><a class="page-link"
+                                            href="{{ $Semai->previousPageUrl() }}">Kembali</a></li>
+                                @endif
+
+                                @foreach ($Semai->getUrlRange(1, $Semai->lastPage()) as $page => $url)
+                                    <li class="page-item {{ $Semai->currentPage() == $page ? 'active' : '' }}">
+                                        <a class="page-link" href="{{ $url }}">{{ $page }}</a>
+                                    </li>
+                                @endforeach
+
+                                @if ($Semai->hasMorePages())
+                                    <li class="page-item"><a class="page-link"
+                                            href="{{ $Semai->nextPageUrl() }}">Lanjut</a>
+                                    </li>
+                                @else
+                                    <li class="page-item disabled"><span class="page-link">Lanjut</span></li>
+                                @endif
+                            </ul>
+                        </nav>
+                    </div> --}}
                 </div>
                 <div class="p-1" id="tumbuhanBawah">
                     <div class="table-header d-flex justify-content-between">
-                        <div class="tampilkan">
-                            <label for="show-entries">Tampilkan</label>
-                            <select id="show-entries" class="number-selection">
-                                <option value="5">5</option>
-                                <option value="10">10</option>
-                                <option value="20">20</option>
-                            </select>
-                            <span>data</span>
-                        </div>
+                        {{-- <form method="GET"
+                            action="{{ route('DetailPlot.getsubPlot', ['id' => $plot->id ?? 'default-slug']) }}">
+                            <div class="tampilkan">
+                                <label for="show-entries">Tampilkan</label>
+                                <select id="show-entries perPageSelect" class="number-selection" name="perPage"
+                                    onchange="this.form.submit()">
+                                    <option value="5" {{ request('perPage') == 5 ? 'selected' : '' }}>5</option>
+                                    <option value="10" {{ request('perPage') == 10 ? 'selected' : '' }}>10</option>
+                                    <option value="20" {{ request('perPage') == 20 ? 'selected' : '' }}>20</option>
+                                </select>
+                                <span class="ms-2">data</span>
+                            </div>
+                        </form> --}}
                     </div>
                     <div class="table-wrapper table-responsive">
                         <table class="custom-table-pancang table-striped">
@@ -381,33 +432,14 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td class="">No</td>
-                                    <td>Bakau</td>
-                                    <td>8 cmr</td>
-                                    <td>2</td>
-                                    <td>26.79 KG</td>
-                                    <td>12.59 KG</td>
-                                    <td>46,21</td>
-                                    <td class="hidden-column aksi-button">
-                                        <button class="edit-btn">
-                                            <img src="{{ asset('/images/PencilSquare.svg') }}" alt="" />
-                                        </button>
-                                        <button class="delete-btn">
-                                            <img src="{{ asset('/images/Trash.svg') }}" alt="" />
-                                        </button>
-                                    </td>
-                                </tr>
-                                {{-- @foreach ($pancang as $item)
+                                @forelse  ($TumbuhanBawah as $item)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $item->keliling }} cm</td>
-                                        <td>{{ $item->diameter }} cm</td>
-                                        <td>{{ $item->nama_lokal }}</td>
-                                        <td>{{ $item->nama_ilmiah }}</td>
-                                        <td class="hidden-column">{{ $item->kerapatan_jenis_kayu }}gr/cm3</td>
-                                        <td class="hidden-column">{{ $item->bio_di_atas_tanah }} kg</td>
-                                        <td class="hidden-column">{{ $item->kandungan_karbon }}kg</td>
+                                        <td>{{ $item->total_berat_basah }} Gr</td>
+                                        <td>{{ $item->sample_berat_basah }} Gr</td>
+                                        <td>{{ $item->sample_berat_kering }} Gr</td>
+                                        <td>{{ $item->total_berat_kering }} Gr</td>
+                                        <td class="hidden-column">{{ $item->kandungan_karbon }}Kg</td>
                                         <td class="hidden-column">{{ $item->co2 }} kg</td>
                                         <td class="hidden-column aksi-button">
                                             <button class="edit-btn">
@@ -418,33 +450,60 @@
                                             </button>
                                         </td>
                                     </tr>
-                                @endforeach --}}
-                            </tbody>
+                                @empty
+                                    <tr>
+                                        <td colspan="7" class="text-center">Belum ada data</td>
+                                    </tr>
+                                @endforelse
                         </table>
                     </div>
-                    <div class="table-footer mt-5">
-                        <span>Menampilkan 1 sampai 5 dari 40 data</span>
-                        <div class="pagination">
-                            <button class="page-btn">Kembali</button>
-                            <button class="page-btn ">1</button>
-                            <button class="page-btn">2</button>
-                            <button class="page-btn">3</button>
-                            <button class="page-btn">4</button>
-                            <button class="page-btn">Lanjut</button>
-                        </div>
-                    </div>
+                    {{-- <div class="table-footer mt-5">
+                        <strong>
+                            Menampilkan {{ $TumbuhanBawah->firstItem() }} sampai {{ $TumbuhanBawah->lastItem() }} dari
+                            {{ $TumbuhanBawah->total() }}
+                            data
+                        </strong>
+                        <nav>
+                            <ul class="pagination">
+                                @if ($TumbuhanBawah->onFirstPage())
+                                    <li class="page-item disabled"><span class="page-link">Kembali</span></li>
+                                @else
+                                    <li class="page-item"><a class="page-link"
+                                            href="{{ $TumbuhanBawah->previousPageUrl() }}">Kembali</a></li>
+                                @endif
+
+                                @foreach ($TumbuhanBawah->getUrlRange(1, $TumbuhanBawah->lastPage()) as $page => $url)
+                                    <li class="page-item {{ $TumbuhanBawah->currentPage() == $page ? 'active' : '' }}">
+                                        <a class="page-link" href="{{ $url }}">{{ $page }}</a>
+                                    </li>
+                                @endforeach
+
+                                @if ($TumbuhanBawah->hasMorePages())
+                                    <li class="page-item"><a class="page-link"
+                                            href="{{ $TumbuhanBawah->nextPageUrl() }}">Lanjut</a>
+                                    </li>
+                                @else
+                                    <li class="page-item disabled"><span class="page-link">Lanjut</span></li>
+                                @endif
+                            </ul>
+                        </nav>
+                    </div> --}}
                 </div>
                 <div class="p-1" id="tanah">
                     <div class="table-header d-flex justify-content-between">
-                        <div class="tampilkan">
-                            <label for="show-entries">Tampilkan</label>
-                            <select id="show-entries" class="number-selection">
-                                <option value="5">5</option>
-                                <option value="10">10</option>
-                                <option value="20">20</option>
-                            </select>
-                            <span>data</span>
-                        </div>
+                        {{-- <form method="GET"
+                            action="{{ route('DetailPlot.getsubPlot', ['id' => $plot->id ?? 'default-slug']) }}">
+                            <div class="tampilkan">
+                                <label for="show-entries">Tampilkan</label>
+                                <select id="show-entries perPageSelect" class="number-selection" name="perPage"
+                                    onchange="this.form.submit()">
+                                    <option value="5" {{ request('perPage') == 5 ? 'selected' : '' }}>5</option>
+                                    <option value="10" {{ request('perPage') == 10 ? 'selected' : '' }}>10</option>
+                                    <option value="20" {{ request('perPage') == 20 ? 'selected' : '' }}>20</option>
+                                </select>
+                                <span class="ms-2">data</span>
+                            </div>
+                            </form> --}}
                     </div>
                     <div class="table-wrapper table-responsive">
                         <table class="custom-table-pancang  table-striped">
@@ -454,41 +513,23 @@
                                     <th>Kedalaman Sample</th>
                                     <th>Sample Berat Basah</th>
                                     <th>C organik Tanah</th>
-                                    <th>karbon </th>
-                                    <th>karbon</th>
-                                    <th>Karbon</th>
+                                    <th>karbon Gr</th>
+                                    <th>karbon Ton/Ha</th>
+                                    <th>Karbon Ton</th>
                                     <th class="hidden-column kananPancang">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td class="">No</td>
-                                    <td>Bakau</td>
-                                    <td>8 cmr</td>
-                                    <td>2</td>
-                                    <td>26.79 KG</td>
-                                    <td>12.59 KG</td>
-                                    <td>46,21</td>
-                                    <td class="hidden-column aksi-button">
-                                        <button class="edit-btn">
-                                            <img src="{{ asset('/images/PencilSquare.svg') }}" alt="" />
-                                        </button>
-                                        <button class="delete-btn">
-                                            <img src="{{ asset('/images/Trash.svg') }}" alt="" />
-                                        </button>
-                                    </td>
-                                </tr>
-                                {{-- @foreach ($pancang as $item)
+                                @forelse ($tanah as $item)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $item->keliling }} cm</td>
-                                        <td>{{ $item->diameter }} cm</td>
-                                        <td>{{ $item->nama_lokal }}</td>
-                                        <td>{{ $item->nama_ilmiah }}</td>
-                                        <td class="hidden-column">{{ $item->kerapatan_jenis_kayu }}gr/cm3</td>
-                                        <td class="hidden-column">{{ $item->bio_di_atas_tanah }} kg</td>
-                                        <td class="hidden-column">{{ $item->kandungan_karbon }}kg</td>
-                                        <td class="hidden-column">{{ $item->co2 }} kg</td>
+                                        <td>{{ $item->kedalaman_sample }} cm</td>
+                                        <td>{{ $item->berat_jenis_tanah }} Gr/cm3</td>
+                                        <td>{{ $item->C_organic_tanah }} %</td>
+                                        <td>{{ $item->carbongr }} Gr/m2</td>
+                                        <td class="hidden-column">{{ $item->carbonton }}Ton/Ha</td>
+                                        <td class="hidden-column">{{ $item->carbonkg }} Ton</td>
+                                        <td class="hidden-column">{{ $item->co2kg }}kg</td>
                                         <td class="hidden-column aksi-button">
                                             <button class="edit-btn">
                                                 <img src="{{ asset('/images/PencilSquare.svg') }}" alt="" />
@@ -498,39 +539,69 @@
                                             </button>
                                         </td>
                                     </tr>
-                                @endforeach --}}
+                                @empty
+                                    <tr>
+                                        <td colspan="7" class="text-center">Belum ada data</td>
+                                    </tr>
+                                @endforelse
                             </tbody>
                         </table>
                     </div>
-                    <div class="table-footer mt-5">
-                        <span>Menampilkan 1 sampai 5 dari 40 data</span>
-                        <div class="pagination">
-                            <button class="page-btn">Kembali</button>
-                            <button class="page-btn ">1</button>
-                            <button class="page-btn">2</button>
-                            <button class="page-btn">3</button>
-                            <button class="page-btn">4</button>
-                            <button class="page-btn">Lanjut</button>
-                        </div>
-                    </div>
+                    {{-- <div class="table-footer mt-5">
+                        <strong>
+                            Menampilkan {{ $tanah->firstItem() }} sampai {{ $tanah->lastItem() }} dari
+                            {{ $tanah->total() }}
+                            data
+                        </strong>
+                        <nav>
+                            <ul class="pagination">
+                                @if ($tanah->onFirstPage())
+                                    <li class="page-item disabled"><span class="page-link">Kembali</span></li>
+                                @else
+                                    <li class="page-item"><a class="page-link"
+                                            href="{{ $tanah->previousPageUrl() }}">Kembali</a></li>
+                                @endif
+
+                                @foreach ($tanah->getUrlRange(1, $tanah->lastPage()) as $page => $url)
+                                    <li class="page-item {{ $tanah->currentPage() == $page ? 'active' : '' }}">
+                                        <a class="page-link" href="{{ $url }}">{{ $page }}</a>
+                                    </li>
+                                @endforeach
+
+                                @if ($tanah->hasMorePages())
+                                    <li class="page-item"><a class="page-link"
+                                            href="{{ $tanah->nextPageUrl() }}">Lanjut</a>
+                                    </li>
+                                @else
+                                    <li class="page-item disabled"><span class="page-link">Lanjut</span></li>
+                                @endif
+                            </ul>
+                        </nav>
+                    </div> --}}
+
                 </div>
                 <div class="p-1" id="pancang">
                     <div class="table-header d-flex justify-content-between">
-                        <div class="tampilkan">
-                            <label for="show-entries">Tampilkan</label>
-                            <select id="show-entries" class="number-selection">
-                                <option value="5">5</option>
-                                <option value="10">10</option>
-                                <option value="20">20</option>
-                            </select>
-                            <span>data</span>
-                        </div>
+                        {{-- <form method="GET"
+                            action="{{ route('DetailPlot.getsubPlot', ['id' => $plot->id ?? 'default-slug']) }}">
+                            <div class="tampilkan">
+                                <label for="show-entries">Tampilkan</label>
+                                <select id="show-entries perPageSelect" class="number-selection" name="perPage"
+                                    onchange="this.form.submit()">
+                                    <option value="5" {{ request('perPage') == 5 ? 'selected' : '' }}>5</option>
+                                    <option value="10" {{ request('perPage') == 10 ? 'selected' : '' }}>10</option>
+                                    <option value="20" {{ request('perPage') == 20 ? 'selected' : '' }}>20</option>
+                                </select>
+                                <span class="ms-2">data</span>
+                            </div>
+                        </form> --}}
                     </div>
                     <div class="table-wrapper table-responsive">
                         <table class="custom-table-pancang  table-striped">
                             <thead>
                                 <tr>
                                     <th class="kiriPancang">No</th>
+                                    <th>No Pohon</th>
                                     <th>Keliling</th>
                                     <th>Diameter</th>
                                     <th>Nama Lokal</th>
@@ -543,28 +614,10 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td class="">No</td>
-                                    <td>35</td>
-                                    <td>11.1 cmr</td>
-                                    <td>jati</td>
-                                    <td>Tectona KG</td>
-                                    <td>61 KG</td>
-                                    <td>46,21</td>
-                                    <td>61 KG</td>
-                                    <td>46,21</td>
-                                    <td class="hidden-column aksi-button">
-                                        <button class="edit-btn">
-                                            <img src="{{ asset('/images/PencilSquare.svg') }}" alt="" />
-                                        </button>
-                                        <button class="delete-btn">
-                                            <img src="{{ asset('/images/Trash.svg') }}" alt="" />
-                                        </button>
-                                    </td>
-                                </tr>
-                                {{-- @foreach ($pancang as $item)
+                                @forelse($pancang as $item)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
+                                        <td>{{ $item->no_pohon }} cm</td>
                                         <td>{{ $item->keliling }} cm</td>
                                         <td>{{ $item->diameter }} cm</td>
                                         <td>{{ $item->nama_lokal }}</td>
@@ -582,119 +635,69 @@
                                             </button>
                                         </td>
                                     </tr>
-                                @endforeach --}}
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="table-footer mt-5">
-                        <span>Menampilkan 1 sampai 5 dari 40 data</span>
-                        <div class="pagination">
-                            <button class="page-btn">Kembali</button>
-                            <button class="page-btn ">1</button>
-                            <button class="page-btn">2</button>
-                            <button class="page-btn">3</button>
-                            <button class="page-btn">4</button>
-                            <button class="page-btn">Lanjut</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="p-1" id="mangrove">
-                    <div class="table-header d-flex justify-content-between">
-                        <div class="tampilkan">
-                            <label for="show-entries">Tampilkan</label>
-                            <select id="show-entries" class="number-selection">
-                                <option value="5">5</option>
-                                <option value="10">10</option>
-                                <option value="20">20</option>
-                            </select>
-                            <span>data</span>
-                        </div>
-                    </div>
-                    <div class="table-wrapper table-responsive">
-                        <table class="custom-table-pancang table-striped">
-                            <thead>
-                                <tr>
-                                    <th class="kiriPancang">No</th>
-                                    <th>Jernis Tanaman</th>
-                                    <th>Diameter</th>
-                                    <th>Jumlah Tanaman</th>
-                                    <th>Biomasa</th>
-                                    <th>Kandungan Karbon</th>
-                                    <th>Karbondioksida</th>
-                                    <th class="hidden-column kananPancang">Aksi</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td class="">No</td>
-                                    <td>Bakau</td>
-                                    <td>8 cmr</td>
-                                    <td>1</td>
-                                    <td>26.79 KG</td>
-                                    <td>12.59 KG</td>
-                                    <td>46,21</td>
-                                    <td class="hidden-column aksi-button">
-                                        <button class="edit-btn">
-                                            <img src="{{ asset('/images/PencilSquare.svg') }}" alt="" />
-                                        </button>
-                                        <button class="delete-btn">
-                                            <img src="{{ asset('/images/Trash.svg') }}" alt="" />
-                                        </button>
-                                    </td>
-                                </tr>
-                                {{-- @foreach ($pancang as $item)
+                                @empty
                                     <tr>
-                                        <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $item->keliling }} cm</td>
-                                        <td>{{ $item->diameter }} cm</td>
-                                        <td>{{ $item->nama_lokal }}</td>
-                                        <td>{{ $item->nama_ilmiah }}</td>
-                                        <td class="hidden-column">{{ $item->kerapatan_jenis_kayu }}gr/cm3</td>
-                                        <td class="hidden-column">{{ $item->bio_di_atas_tanah }} kg</td>
-                                        <td class="hidden-column">{{ $item->kandungan_karbon }}kg</td>
-                                        <td class="hidden-column">{{ $item->co2 }} kg</td>
-                                        <td class="hidden-column aksi-button">
-                                            <button class="edit-btn">
-                                                <img src="{{ asset('/images/PencilSquare.svg') }}" alt="" />
-                                            </button>
-                                            <button class="delete-btn">
-                                                <img src="{{ asset('/images/Trash.svg') }}" alt="" />
-                                            </button>
-                                        </td>
+                                        <td colspan="7" class="text-center">Belum ada data</td>
                                     </tr>
-                                @endforeach --}}
+                                @endforelse
                             </tbody>
                         </table>
                     </div>
-                    <div class="table-footer mt-5">
-                        <span>Menampilkan 1 sampai 5 dari 40 data</span>
-                        <div class="pagination">
-                            <button class="page-btn">Kembali</button>
-                            <button class="page-btn ">1</button>
-                            <button class="page-btn">2</button>
-                            <button class="page-btn">3</button>
-                            <button class="page-btn">4</button>
-                            <button class="page-btn">Lanjut</button>
-                        </div>
-                    </div>
+                    {{-- <div class="table-footer mt-5">
+                        <strong>
+                            Menampilkan {{ $pancang->firstItem() }} sampai {{ $pancang->lastItem() }} dari
+                            {{ $pancang->total() }}
+                            data
+                        </strong>
+                        <nav>
+                            <ul class="pagination">
+                                @if ($pancang->onFirstPage())
+                                    <li class="page-item disabled"><span class="page-link">Kembali</span></li>
+                                @else
+                                    <li class="page-item"><a class="page-link"
+                                            href="{{ $pancang->previousPageUrl() }}">Kembali</a></li>
+                                @endif
+
+                                @foreach ($pancang->getUrlRange(1, $pancang->lastPage()) as $page => $url)
+                                    <li class="page-item {{ $pancang->currentPage() == $page ? 'active' : '' }}">
+                                        <a class="page-link" href="{{ $url }}">{{ $page }}</a>
+                                    </li>
+                                @endforeach
+
+                                @if ($pancang->hasMorePages())
+                                    <li class="page-item"><a class="page-link"
+                                            href="{{ $pancang->nextPageUrl() }}">Lanjut</a>
+                                    </li>
+                                @else
+                                    <li class="page-item disabled"><span class="page-link">Lanjut</span></li>
+                                @endif
+                            </ul>
+                        </nav>
+                    </div> --}}
                 </div>
+
                 <div class="p-1" id="tiang">
                     <div class="table-header d-flex justify-content-between">
-                        <div class="tampilkan">
-                            <label for="show-entries">Tampilkan</label>
-                            <select id="show-entries" class="number-selection">
-                                <option value="5">5</option>
-                                <option value="10">10</option>
-                                <option value="20">20</option>
-                            </select>
-                            <span>data</span>
-                        </div>
+                        {{-- <form method="GET"
+                            action="{{ route('DetailPlot.getsubPlot', ['id' => $plot->id ?? 'default-slug']) }}">
+                            <div class="tampilkan">
+                                <label for="show-entries">Tampilkan</label>
+                                <select id="show-entries perPageSelect" class="number-selection" name="perPage"
+                                    onchange="this.form.submit()">
+                                    <option value="5" {{ request('perPage') == 5 ? 'selected' : '' }}>5</option>
+                                    <option value="10" {{ request('perPage') == 10 ? 'selected' : '' }}>10</option>
+                                    <option value="20" {{ request('perPage') == 20 ? 'selected' : '' }}>20</option>
+                                </select>
+                                <span class="ms-2">data</span>
+                            </div>
+                        </form> --}}
                     </div>
                     <div class="table-wrapper table-responsive">
                         <table class="custom-table-pancang table-striped">
                             <thead>
                                 <tr>
                                     <th class="kiriPancang">No</th>
+                                    <th>No Pohon</th>
                                     <th>Keliling</th>
                                     <th>Diameter</th>
                                     <th>Nama Lokal</th>
@@ -707,28 +710,10 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td class="">No</td>
-                                    <td>Bakau</td>
-                                    <td>8 cmr</td>
-                                    <td>1</td>
-                                    <td>26.79 KG</td>
-                                    <td>12.59 KG</td>
-                                    <td>46,21</td>
-                                    <td>46,21</td>
-                                    <td>46,21</td>
-                                    <td class="hidden-column aksi-button">
-                                        <button class="edit-btn">
-                                            <img src="{{ asset('/images/PencilSquare.svg') }}" alt="" />
-                                        </button>
-                                        <button class="delete-btn">
-                                            <img src="{{ asset('/images/Trash.svg') }}" alt="" />
-                                        </button>
-                                    </td>
-                                </tr>
-                                {{-- @foreach ($pancang as $item)
+                                @forelse ($tiang as $item)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
+                                        <td>{{ $item->no_pohon }} cm</td>
                                         <td>{{ $item->keliling }} cm</td>
                                         <td>{{ $item->diameter }} cm</td>
                                         <td>{{ $item->nama_lokal }}</td>
@@ -746,33 +731,157 @@
                                             </button>
                                         </td>
                                     </tr>
-                                @endforeach --}}
+                                @empty
+                                    <tr>
+                                        <td colspan="7" class="text-center">Belum ada data</td>
+                                    </tr>
+                                @endforelse
                             </tbody>
                         </table>
                     </div>
-                    <div class="table-footer mt-5">
-                        <span>Menampilkan 1 sampai 5 dari 40 data</span>
-                        <div class="pagination">
-                            <button class="page-btn">Kembali</button>
-                            <button class="page-btn ">1</button>
-                            <button class="page-btn">2</button>
-                            <button class="page-btn">3</button>
-                            <button class="page-btn">4</button>
-                            <button class="page-btn">Lanjut</button>
-                        </div>
-                    </div>
+                    {{-- <div class="table-footer mt-5">
+                        <strong>
+                            Menampilkan {{ $tiang->firstItem() }} sampai {{ $tiang->lastItem() }} dari
+                            {{ $tiang->total() }}
+                            data
+                        </strong>
+                        <nav>
+                            <ul class="pagination">
+                                @if ($tiang->onFirstPage())
+                                    <li class="page-item disabled"><span class="page-link">Kembali</span></li>
+                                @else
+                                    <li class="page-item"><a class="page-link"
+                                            href="{{ $tiang->previousPageUrl() }}">Kembali</a></li>
+                                @endif
+
+                                @foreach ($tiang->getUrlRange(1, $tiang->lastPage()) as $page => $url)
+                                    <li class="page-item {{ $tiang->currentPage() == $page ? 'active' : '' }}">
+                                        <a class="page-link" href="{{ $url }}">{{ $page }}</a>
+                                    </li>
+                                @endforeach
+
+                                @if ($tiang->hasMorePages())
+                                    <li class="page-item"><a class="page-link"
+                                            href="{{ $tiang->nextPageUrl() }}">Lanjut</a>
+                                    </li>
+                                @else
+                                    <li class="page-item disabled"><span class="page-link">Lanjut</span></li>
+                                @endif
+                            </ul>
+                        </nav>
+                    </div> --}}
                 </div>
                 <div class="p-1" id="pohon">
                     <div class="table-header d-flex justify-content-between">
-                        <div class="tampilkan">
-                            <label for="show-entries">Tampilkan</label>
-                            <select id="show-entries" class="number-selection">
-                                <option value="5">5</option>
-                                <option value="10">10</option>
-                                <option value="20">20</option>
-                            </select>
-                            <span>data</span>
-                        </div>
+                        {{-- <form method="GET"
+                            action="{{ route('DetailPlot.getsubPlot', ['id' => $plot->id ?? 'default-slug']) }}">
+                            <div class="tampilkan">
+                                <label for="show-entries">Tampilkan</label>
+                                <select id="show-entries perPageSelect" class="number-selection" name="perPage"
+                                    onchange="this.form.submit()">
+                                    <option value="5" {{ request('perPage') == 5 ? 'selected' : '' }}>5</option>
+                                    <option value="10" {{ request('perPage') == 10 ? 'selected' : '' }}>10</option>
+                                    <option value="20" {{ request('perPage') == 20 ? 'selected' : '' }}>20</option>
+                                </select>
+                                <span class="ms-2">data</span>
+                            </div>
+                        </form> --}}
+                    </div>
+                    <div class="table-wrapper table-responsive">
+                        <table class="custom-table-pancang table-striped">
+                            <thead>
+                                <tr>
+                                    <th class="kiriPancang">No</th>
+                                    <th>No Pohon</th>
+                                    <th>Keliling</th>
+                                    <th>Diameter</th>
+                                    <th>Nama Lokal</th>
+                                    <th>Nama Ilmiah</th>
+                                    <th>Kerapatan Jenis Kayu</th>
+                                    <th>Bio diatas tanah</th>
+                                    <th>Kandungan karbon</th>
+                                    <th>Serapan CO2 : ''</th>
+                                    <th class="hidden-column kananPancang">Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                @forelse ($pohon as $item)
+                                    <tr>
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td>{{ $item->no_pohon }} cm</td>
+                                        <td>{{ $item->keliling }} cm</td>
+                                        <td>{{ $item->diameter }} cm</td>
+                                        <td>{{ $item->nama_lokal }}</td>
+                                        <td>{{ $item->nama_ilmiah }}</td>
+                                        <td class="hidden-column">{{ $item->kerapatan_jenis_kayu }}gr/cm3</td>
+                                        <td class="hidden-column">{{ $item->bio_di_atas_tanah }} kg</td>
+                                        <td class="hidden-column">{{ $item->kandungan_karbon }}kg</td>
+                                        <td class="hidden-column">{{ $item->co2 }} kg</td>
+                                        <td class="hidden-column aksi-button">
+                                            <button class="edit-btn">
+                                                <img src="{{ asset('/images/PencilSquare.svg') }}" alt="" />
+                                            </button>
+                                            <button class="delete-btn">
+                                                <img src="{{ asset('/images/Trash.svg') }}" alt="" />
+                                            </button>
+                                        </td>
+                                    </tr>
+                                @empty
+                                    <tr>
+                                        <td colspan="7" class="text-center">Belum ada data</td>
+                                    </tr>
+                                @endforelse
+                            </tbody>
+                        </table>
+                    </div>
+                    {{-- <div class="table-footer mt-5">
+                        <strong>
+                            Menampilkan {{ $pohon->firstItem() }} sampai {{ $pohon->lastItem() }} dari
+                            {{ $pohon->total() }}
+                            data
+                        </strong>
+                        <nav>
+                            <ul class="pagination">
+                                @if ($pohon->onFirstPage())
+                                    <li class="page-item disabled"><span class="page-link">Kembali</span></li>
+                                @else
+                                    <li class="page-item"><a class="page-link"
+                                            href="{{ $pohon->previousPageUrl() }}">Kembali</a></li>
+                                @endif
+
+                                @foreach ($pohon->getUrlRange(1, $pohon->lastPage()) as $page => $url)
+                                    <li class="page-item {{ $pohon->currentPage() == $page ? 'active' : '' }}">
+                                        <a class="page-link" href="{{ $url }}">{{ $page }}</a>
+                                    </li>
+                                @endforeach
+
+                                @if ($pohon->hasMorePages())
+                                    <li class="page-item"><a class="page-link"
+                                            href="{{ $pohon->nextPageUrl() }}">Lanjut</a>
+                                    </li>
+                                @else
+                                    <li class="page-item disabled"><span class="page-link">Lanjut</span></li>
+                                @endif
+                            </ul>
+                        </nav>
+                    </div> --}}
+                </div>
+                <div class="p-1" id="nekromas">
+                    <div class="table-header d-flex justify-content-between">
+                        {{-- <form method="GET"
+                            action="{{ route('DetailPlot.getsubPlot', ['id' => $plot->id ?? 'default-slug']) }}">
+                            <div class="tampilkan">
+                                <label for="show-entries">Tampilkan</label>
+                                <select id="show-entries perPageSelect" class="number-selection" name="perPage"
+                                    onchange="this.form.submit()">
+                                    <option value="5" {{ request('perPage') == 5 ? 'selected' : '' }}>5</option>
+                                    <option value="10" {{ request('perPage') == 10 ? 'selected' : '' }}>10</option>
+                                    <option value="20" {{ request('perPage') == 20 ? 'selected' : '' }}>20</option>
+                                </select>
+                                <span class="ms-2">data</span>
+                            </div>
+                        </form> --}}
                     </div>
                     <div class="table-wrapper table-responsive">
                         <table class="custom-table-pancang table-striped">
@@ -781,93 +890,9 @@
                                     <th class="kiriPancang">No</th>
                                     <th>Diameter Pangkal</th>
                                     <th>Diameter Ujung</th>
-                                    <th>Panjang</th>
-                                    <th>Berat Jenis Kayu</th>
-                                    <th class="hidden-column">Volume</th>
-                                    <th class="hidden-column">Biomasa</th>
-                                    <th class="hidden-column">Kandungan karbon</th>
-                                    <th class="hidden-column">Serapan CO2</th>
-                                    <th class="hidden-column kananPancang">Aksi</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>12345 cm</td>
-                                    <td>123456ucm</td>
-                                    <td>12345</td>
-                                    <td>12345678</td>
-                                    <td class="hidden-column">123456789 gr/cm3</td>
-                                    <td class="hidden-column">212345kg</td>
-                                    <td class="hidden-column">234567kg</td>
-                                    <td class="hidden-column">23456789 kg</td>
-                                    <td class="hidden-column aksi-button">
-                                        <button class="edit-btn">
-                                            <img src="{{ asset('/images/PencilSquare.svg') }}" alt="" />
-                                        </button>
-                                        <button class="delete-btn">
-                                            <img src="{{ asset('/images/Trash.svg') }}" alt="" />
-                                        </button>
-                                    </td>
-                                </tr>
-                                {{-- @foreach ($pancang as $item)
-                                    <tr>
-                                        <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $item->keliling }} cm</td>
-                                        <td>{{ $item->diameter }} cm</td>
-                                        <td>{{ $item->nama_lokal }}</td>
-                                        <td>{{ $item->nama_ilmiah }}</td>
-                                        <td class="hidden-column">{{ $item->kerapatan_jenis_kayu }}gr/cm3</td>
-                                        <td class="hidden-column">{{ $item->bio_di_atas_tanah }} kg</td>
-                                        <td class="hidden-column">{{ $item->kandungan_karbon }}kg</td>
-                                        <td class="hidden-column">{{ $item->co2 }} kg</td>
-                                        <td class="hidden-column aksi-button">
-                                            <button class="edit-btn">
-                                                <img src="{{ asset('/images/PencilSquare.svg') }}" alt="" />
-                                            </button>
-                                            <button class="delete-btn">
-                                                <img src="{{ asset('/images/Trash.svg') }}" alt="" />
-                                            </button>
-                                        </td>
-                                    </tr>
-                                @endforeach --}}
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="table-footer mt-5">
-                        <span>Menampilkan 1 sampai 5 dari 40 data</span>
-                        <div class="pagination">
-                            <button class="page-btn">Kembali</button>
-                            <button class="page-btn ">1</button>
-                            <button class="page-btn">2</button>
-                            <button class="page-btn">3</button>
-                            <button class="page-btn">4</button>
-                            <button class="page-btn">Lanjut</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="p-1" id="nekromas">
-                    <div class="table-header d-flex justify-content-between">
-                        <div class="tampilkan">
-                            <label for="show-entries">Tampilkan</label>
-                            <select id="show-entries" class="number-selection">
-                                <option value="5">5</option>
-                                <option value="10">10</option>
-                                <option value="20">20</option>
-                            </select>
-                            <span>data</span>
-                        </div>
-                    </div>
-                    <div class="table-wrapper table-responsive">
-                        <table class="custom-table-pancang table-striped">
-                            <thead>
-                                <tr>
-                                    <th class="kiriPancang">No</th>
-                                    <th>Keliling</th>
-                                    <th>Diameter</th>
-                                    <th>Nama Lokal</th>
-                                    <th>Nama Ilmiah</th>
-                                    <th class="hidden-column">Kerapatan Jenis Kayu</th>
+                                    <th>panjang</th>
+                                    <th>Valume</th>
+                                    <th class="hidden-column">Berat Jenis Kayur</th>
                                     <th class="hidden-column">Bio diatas tanah</th>
                                     <th class="hidden-column">Kandungan karbon</th>
                                     <th class="hidden-column">Serapan CO2</th>
@@ -875,35 +900,16 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>0</td>
-                                    <td>12 cm</td>
-                                    <td>13 cm</td>
-                                    <td>djxhher</td>
-                                    <td>sfedfhngh</td>
-                                    <td>123456 gr/cm3</td>
-                                    <td>12345678 kg</td>
-                                    <td>12345678 kg</td>
-                                    <td>2345678 kg</td>
-                                    <td class="hidden-column aksi-button">
-                                        <button class="edit-btn">
-                                            <img src="{{ asset('/images/PencilSquare.svg') }}" alt="" />
-                                        </button>
-                                        <button class="delete-btn">
-                                            <img src="{{ asset('/images/Trash.svg') }}" alt="" />
-                                        </button>
-                                    </td>
-                                </tr>
-                                {{-- @foreach ($pancang as $item)
+                                @forelse($Necromas as $item)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $item->keliling }} cm</td>
-                                        <td>{{ $item->diameter }} cm</td>
-                                        <td>{{ $item->nama_lokal }}</td>
-                                        <td>{{ $item->nama_ilmiah }}</td>
-                                        <td class="hidden-column">{{ $item->kerapatan_jenis_kayu }}gr/cm3</td>
-                                        <td class="hidden-column">{{ $item->bio_di_atas_tanah }} kg</td>
-                                        <td class="hidden-column">{{ $item->kandungan_karbon }}kg</td>
+                                        <td>{{ $item->diameter_pangkal }} cm</td>
+                                        <td>{{ $item->diameter_ujung }} cm</td>
+                                        <td>{{ $item->panjang }}</td>
+                                        <td>{{ $item->volume }}</td>
+                                        <td class="hidden-column">{{ $item->berat_jenis_kayu }}gr/cm3</td>
+                                        <td class="hidden-column">{{ $item->biomasa }} kg</td>
+                                        <td class="hidden-column">{{ $item->carbon }}kg</td>
                                         <td class="hidden-column">{{ $item->co2 }} kg</td>
                                         <td class="hidden-column aksi-button">
                                             <button class="edit-btn">
@@ -914,21 +920,45 @@
                                             </button>
                                         </td>
                                     </tr>
-                                @endforeach --}}
+                                @empty
+                                    <tr>
+                                        <td colspan="7" class="text-center">Belum ada data</td>
+                                    </tr>
+                                @endforelse
                             </tbody>
                         </table>
                     </div>
-                    <div class="table-footer mt-5">
-                        <span>Menampilkan 1 sampai 5 dari 40 data</span>
-                        <div class="pagination">
-                            <button class="page-btn">Kembali</button>
-                            <button class="page-btn ">1</button>
-                            <button class="page-btn">2</button>
-                            <button class="page-btn">3</button>
-                            <button class="page-btn">4</button>
-                            <button class="page-btn">Lanjut</button>
-                        </div>
-                    </div>
+                    {{-- <div class="table-footer mt-5">
+                        <strong>
+                            Menampilkan {{ $Necromas->firstItem() }} sampai {{ $Necromas->lastItem() }} dari
+                            {{ $Necromas->total() }}
+                            data
+                        </strong>
+                        <nav>
+                            <ul class="pagination">
+                                @if ($Necromas->onFirstPage())
+                                    <li class="page-item disabled"><span class="page-link">Kembali</span></li>
+                                @else
+                                    <li class="page-item"><a class="page-link"
+                                            href="{{ $Necromas->previousPageUrl() }}">Kembali</a></li>
+                                @endif
+
+                                @foreach ($Necromas->getUrlRange(1, $Necromas->lastPage()) as $page => $url)
+                                    <li class="page-item {{ $Necromas->currentPage() == $page ? 'active' : '' }}">
+                                        <a class="page-link" href="{{ $url }}">{{ $page }}</a>
+                                    </li>
+                                @endforeach
+
+                                @if ($Necromas->hasMorePages())
+                                    <li class="page-item"><a class="page-link"
+                                            href="{{ $Necromas->nextPageUrl() }}">Lanjut</a>
+                                    </li>
+                                @else
+                                    <li class="page-item disabled"><span class="page-link">Lanjut</span></li>
+                                @endif
+                            </ul>
+                        </nav>
+                    </div> --}}
                 </div>
             </div>
         </div>
@@ -970,7 +1000,7 @@
             },
 
             xaxis: {
-                categories: @json($dataDaerah)
+                categories: @json($ringkasann->pluck('dareah'))
             },
             yaxis: {
                 title: {
@@ -997,10 +1027,19 @@
             window.location.href = "?tahun=" + year;
         }
 
-        let piee =@json($ringkasan->pluck('pieData'));
-        
+        let pieeKarbon = @json($ringkasann->pluck('TotalKandunganKarbon'));
+        let flatPieekarbon = pieeKarbon.flat().map(Number);
+
+        // 2. Hitung total jumlah
+        let Karbon = flatPieekarbon.reduce((sum, num) => sum + num, 0);
+        let pieeSerapan = @json($ringkasann->pluck('KarbonCo2'));
+        let flatPieeSerapa = pieeSerapan.flat().map(Number);
+
+        // 2. Hitung total jumlah
+        let Serapan = flatPieeSerapa.reduce((sum, num) => sum + num, 0);
+
         const pieoptions = {
-            series: piee[0],
+            series: [Karbon, Serapan],
             chart: {
                 width: '100%',
                 type: 'pie',
@@ -1042,8 +1081,6 @@
 
         const pieChart = new ApexCharts(document.querySelector("#pie"), pieoptions);
         pieChart.render();
-
-
     </script>
 
 @endsection

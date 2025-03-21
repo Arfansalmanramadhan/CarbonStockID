@@ -55,35 +55,39 @@
                     </thead>
                     <tbody>
                         @forelse ($plot as $index => $item)
-                                <tr>
-                                    <td>{{ $plot->firstItem() + $index }}</td>
-                                    <td>{{ $item->nama_plot }}</td>
-                                    <td>{{ $item->type_plot }}</td>
-                                    <td>{{ $item->latitude }}</td>
-                                    <td>{{ $item->longitude }}</td>
-                                    <td class="hidden-column aksi-button">
-                                        {{-- <a href="{{ route('zona.getZona', ['slug' => $item->slug]) }}"
-                                            class="btn btn-info btn-sm">Detail</a> --}}
-                                        <button class="view-btn">
+                            <tr>
+                                <td>{{ $plot->firstItem() + $index }}</td>
+                                <td>{{ $item->nama_plot }}</td>
+                                <td>{{ $item->type_plot }}</td>
+                                <td>{{ $item->latitude }}</td>
+                                <td>{{ $item->longitude }}</td>
+                                <td class="hidden-column aksi-button">
+                                    <form action="{{ route('DetailPlot.getsubPlot', ['id' => $item->id]) }}"
+                                        method="get">
+                                        <button type="submit" class="view-btn">
                                             <img src="{{ asset('/images/Eye.svg') }}" alt="" />
                                         </button>
-                                        <button onclick="window.location.href='{{ route('Lokasi.edit', $item->slug) }}'"
-                                            class="add-btn">
-                                            <img src="{{ asset('/images/PencilSquare.svg') }}" alt="Add" />
-                                        </button>
-                                        <button class="delete-btn">
-                                            <img src="{{ asset('/images/Trash.svg') }}" alt="" />
-                                        </button>
-                                        {{-- <button>👁️</button>
+                                    </form>
+                                    {{-- <button class="view-btn">
+                                        <img src="{{ asset('/images/Eye.svg') }}" alt="" />
+                                    </button> --}}
+                                    <button onclick="window.location.href='{{ route('Lokasi.edit', $item->slug) }}'"
+                                        class="add-btn">
+                                        <img src="{{ asset('/images/PencilSquare.svg') }}" alt="Add" />
+                                    </button>
+                                    <button class="delete-btn">
+                                        <img src="{{ asset('/images/Trash.svg') }}" alt="" />
+                                    </button>
+                                    {{-- <button>👁️</button>
                                             <button>➕</button>
                                             <button>🗑️</button> --}}
-                                    </td>
-                                </tr>
-                            @empty
-                                <tr>
-                                    <td colspan="5" class="text-center">Belum ada data</td>
-                                </tr>
-                            @endforelse
+                                </td>
+                            </tr>
+                        @empty
+                            <tr>
+                                <td colspan="5" class="text-center">Belum ada data</td>
+                            </tr>
+                        @endforelse
                         {{-- <tr>
                             <td>00002</td>
                             <td>Bujursangkar</td>
@@ -243,8 +247,8 @@
                         @if ($plot->onFirstPage())
                             <li class="page-item disabled"><span class="page-link">Kembali</span></li>
                         @else
-                            <li class="page-item"><a class="page-link"
-                                    href="{{ $plot->previousPageUrl() }}">Kembali</a></li>
+                            <li class="page-item"><a class="page-link" href="{{ $plot->previousPageUrl() }}">Kembali</a>
+                            </li>
                         @endif
 
                         {{-- Nomor Halaman --}}
@@ -265,7 +269,7 @@
                 </nav>
             </div>
             <!-- Pagination -->
-            
+
             {{-- <div class="table-footer">
                 <span>Menampilkan 1 sampai 5 dari 40 data</span>
                 <div class="pagination">

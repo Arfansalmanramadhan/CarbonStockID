@@ -65,7 +65,7 @@
                                     <td class="hidden-column aksi-button">
                                         {{-- <a href="{{ route('hamparan.getHamparan', ['slug' => $item->slug]) }}"
                                             class="btn btn-info btn-sm">Detail</a> --}}
-                                        <form action="{{ route('suibplot.getHamparan', ['id' => $index->id]) }}"
+                                        <form action="{{ route('hamparan.getHamparan', ['id' => $index->id]) }}"
                                             method="get">
                                             <button type="submit" class="view-btn">
                                                 <img src="{{ asset('/images/Eye.svg') }}" alt="" />
