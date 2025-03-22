@@ -8,12 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Str;
+
 class SubPlot extends Model
 {
     use HasFactory, SoftDeletes, Sluggable;
     protected $table = 'subplot';
-    protected $primaryKey = 'id';
-    public $timestamps = true;
+    // protected $primaryKey = 'id';
+    // public $timestamps = true;
     protected $fillable = [
         'plot_id',
         'nama_suplort',
@@ -38,7 +39,7 @@ class SubPlot extends Model
      */
     public function plot()
     {
-        return $this->belongsTo(Plot::class, 'plot_id');
+        return $this->belongsTo(Plot::class, 'plot_id', 'id');
     }
     public function semai(): BelongsTo
     {

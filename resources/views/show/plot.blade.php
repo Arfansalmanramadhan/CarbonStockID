@@ -15,7 +15,7 @@
                 <div class="table-wrapper">
                     <div class="table-header d-flex justify-content-between">
                         <form method="GET"
-                            action="{{ route('plot.getPlot', ['id' => $plot->first()->id ?? 'default-id']) }}">
+                            action="{{ route('plot.getPlot', ['id' => $plot->id ?? 'default-id']) }}">
                             <div class="tampilkan">
                                 <label for="show-entries">Tampilkan</label>
                                 <select id="show-entries perPageSelect" class="number-selection" name="perPage"
@@ -29,7 +29,7 @@
                         </form>
                         <div class="d-flex align-items-center">
                             <form method="GET"
-                                action="{{ route('plot.getPlot', ['id' => $plot->first()->id ?? 'default-slug']) }}">
+                                action="{{ route('plot.getPlot', ['id' => $plot->id ?? 'default-slug']) }}">
                                 <div class="d-flex align-items-center">
                                     <div class="form-control-space">
                                         <input type="text" id="searchInput" name="search" placeholder="Cari..."
@@ -83,23 +83,24 @@
                             </tr> --}}
                         </tbody>
                         <tbody id="data-table ">
-                            @forelse ($plot as $index => $item)
+                            @forelse ($plot as $index )
                                 <tr>
-                                    <td>{{ $plot->firstItem() + $index }}</td>
+                                    <td>{{ $loop->iteration }}</td>
                                     <td>{{ $poltArea->daerah }}</td>
                                     <td>{{ $zona->zona }}</td>
                                     <td>{{ $hamparan->nama_hamparan }}</td>
-                                    <td>{{ $item->nama_plot }}</td>
-                                    <td>{{ $item->type_plot }}</td>
-                                    <td>{{ $item->latitude }}</td>
-                                    <td>{{ $item->longitude }}</td>
+                                    <td>{{ $index->nama_plot }}</td>
+                                    <td>{{ $index->type_plot }}</td>
+                                    <td>{{ $index->latitude }}</td>
+                                    <td>{{ $index->longitude }}</td>
                                     <td class="hidden-column aksi-button">
-                                        <form action="{{ route('DetailPlot.getsubPlot', ['id' => $item->id]) }}"
-                                            method="get">
+                                        @foreach ($index->subplot as $subplost)
+                                        <form action="{{ route('DetailPlot.getsubPlot', ['id' => $subplost->id]) }}" method="get">
                                             <button type="submit" class="view-btn">
-                                                <img src="{{ asset('/images/Eye.svg') }}" alt="" />
+                                                <img src="{{ asset('/images/Eye.svg') }}" alt="View" />
                                             </button>
                                         </form>
+                                    @endforeach
                                         <button {{-- onclick="window.location.href='{{ route('plot.edit', ['slugP' => $poltArea->slug, 'slugZ' => $item->slug]) }}'" --}} class="add-btn">
                                             <img src="{{ asset('/images/PencilSquare.svg') }}" alt="Add" />
                                         </button>

@@ -39,11 +39,11 @@ class Plot extends Model
      */
     public function hamparan(): BelongsTo
     {
-        return $this->belongsTo(Hamparan::class, 'hamparan_id');
+        return $this->belongsTo(Hamparan::class, 'hamparan_id',  'id');
     }
-    public function subplots()
+    public function subplot()
     {
-        return $this->hasMany(SubPlot::class, 'plot_id');
+        return $this->hasMany(SubPlot::class, 'plot_id', 'id');
     }
     public function sluggable(): array
     {

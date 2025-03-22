@@ -45,7 +45,10 @@ class Hamparan extends Model
     {
         return $this->hasMany(Zona::class, 'hamparan_id', 'id');
     }
-
+    public function plots() // Pakai jamak karena hasMany
+{
+    return $this->hasMany(Plot::class, 'hamparan_id', 'id');
+}
     public function poltArea()
     {
         return $this->hasMany(PoltArea::class, 'hamparan_id', 'id');
