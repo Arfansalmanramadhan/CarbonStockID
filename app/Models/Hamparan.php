@@ -41,9 +41,14 @@ class Hamparan extends Model
     {
         return $this->belongsTo(Zona::class, 'zona_id');
     }
-    public function beadbs(): BelongsTo
+    public function zonaa()
     {
-        return $this->belongsTo(Beadbs::class, 'hamparan_id');
+        return $this->hasMany(Zona::class, 'hamparan_id', 'id');
+    }
+
+    public function poltArea()
+    {
+        return $this->hasMany(PoltArea::class, 'hamparan_id', 'id');
     }
     public function sluggable(): array
     {

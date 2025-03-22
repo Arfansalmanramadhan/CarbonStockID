@@ -35,7 +35,7 @@
                     @endif
                     <!-- Form -->
                     <dd></dd>
-                    <form method="POST" action="{{ route('Plot.store', ['slug' => $hamparan->slug]) }}" id="plotAreaForm">
+                    <form method="POST" action="{{ route('Plot.store', ['id' => $hamparan->id]) }}" id="plotAreaForm">
                         @csrf
                         <div class="mb-4">
                             <label for="plotName" class="form-label">Plot</label>

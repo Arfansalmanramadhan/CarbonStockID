@@ -163,14 +163,14 @@ class zonaController extends Controller
         return view('tambah.TambahZona', compact('user', 'poltArea'));
     }
 
-    public function create($slug)
+    public function create($id)
     {
         $user = Auth::user();
-        $poltArea = PoltArea::where('slug', $slug)->firstOrFail();
+        $poltArea = PoltArea::findOrFail($id);
         return view('tambah.TambahZona', compact('poltArea'));
     }
 
-    public function store(Request $request, $slug)
+    public function store(Request $request, $id)
     {
         $validatedData = $request->validate([
             'zona' => 'required|string|max:255',
@@ -181,7 +181,7 @@ class zonaController extends Controller
 
         DB::beginTransaction();
         try {
-            $poltArea = PoltArea::where('slug', $slug)->firstOrFail();
+            $poltArea = PoltArea::findOrFail($id);
 
             $zona = Zona::create([
                 'polt_area_id' => $poltArea->id,
@@ -189,11 +189,11 @@ class zonaController extends Controller
                 'latitude' => $validatedData['latitude'],
                 'longitude' => $validatedData['longitude'],
                 'jenis_hutan' => $validatedData['jenis_hutan'],
-                'slug' => Str::slug($validatedData['zona'] . '-' . $poltArea->id),
+                'slug' => Str::slug($validatedData['zona']),
             ]);
             // dd($zona);
             DB::commit();
-            return redirect()->route('zona.getZona', ['slug' => $slug])->with('success', 'Zona berhasil ditambahkan!');
+            return redirect()->route('zona.getZona', ['id' => $id])->with('success', 'Zona berhasil ditambahkan!');
         } catch (\Exception $e) {
             DB::rollBack();
             return redirect()->back()->with('error', 'Gagal membuat data: ' . $e->getMessage());

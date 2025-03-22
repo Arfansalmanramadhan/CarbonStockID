@@ -37,8 +37,12 @@ class HamparanController extends Controller
         $user = Auth::user();
         $search = $request->query('search');
         $perPage = $request->query('per_page', 5);
-        $zona = Zona::findOrFail($id);
-        $poltArea = PoltArea::findOrFail($id);
+        $zona = Zona::find($id);
+        if (!$zona) {
+            return abort(404, "Zona tidak ditemukan");
+        }
+        $poltArea = $zona->poltArea;
+        // dd($id, $poltArea);
         $query = Hamparan::where('zona_id', $zona->id);
         // $poltArea = PoltArea::where("slug", $poltSlug)->firstOrFail();
         // $zona = Zona::where("slug", $zonaSlug)
@@ -55,19 +59,13 @@ class HamparanController extends Controller
 
         return view('show.Hamparan', compact('hamparan','user', 'search', 'perPage', 'zona', 'poltArea'));
     }
-    public function tambah($slug)
+    public function tambah($id)
     {
         $user = Auth::user();
-        $zona = Zona::where('slug', $slug)->firstOrFail();
+        $zona = Zona::where('id', $id)->firstOrFail();
         return view('tambah.TambahHamparan', compact('user', 'zona'));
     }
-    public function create($slug)
-    {
-        $user = Auth::user();
-        $zona = Zona::where('slug', $slug)->firstOrFail();
-        return view('tambah.TambahHamparan', compact( 'zona'));
-    }
-    public function store(Request $request, $slug)
+    public function store(Request $request, $id)
     {
         $validatedData = $request->validate([
             'nama_hamparan' => 'required|string|max:255',
@@ -77,7 +75,7 @@ class HamparanController extends Controller
 
         DB::beginTransaction();
         try {
-            $zona = Zona::where('slug', $slug)->firstOrFail();
+            $zona = Zona::where('id', $id)->firstOrFail();
 
             $hamparan = Hamparan::create([
                 'zona_id' => $zona->id,
@@ -88,7 +86,7 @@ class HamparanController extends Controller
             ]);
 
             DB::commit();
-            return redirect()->route('hamparan.getHamparan', ['slug' => $slug])->with('success', 'Hamparan berhasil ditambahkan!');
+            return redirect()->route('hamparan.getHamparan', ['id' => $id])->with('success', 'Hamparan berhasil ditambahkan!');
         } catch (\Exception $e) {
             DB::rollBack();
             return redirect()->back()->with('error', 'Gagal membuat data: ' . $e->getMessage());

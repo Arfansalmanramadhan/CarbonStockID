@@ -38,7 +38,7 @@
                             </div>
                         </form>
                         <button
-                            onclick="window.location.href='{{ route('TambahZona.tambah', ['slug' => $poltArea->slug]) }}'"
+                            onclick="window.location.href='{{ route('TambahZona.tambah', ['id' => $poltArea->id]) }}'"
                             class="btn btn-tambah-data p-3">Tambah</button>
                     </div>
                 </div>

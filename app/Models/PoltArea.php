@@ -88,7 +88,7 @@ class PoltArea extends Model
     }
     public function zona(): BelongsTo
     {
-        return $this->belongsTo(Zona::class, 'polt_area_id');
+        return $this->belongsTo(Zona::class, 'polt_area_id', 'id');
     }
     public function PlotAreaTim(): BelongsTo
     {

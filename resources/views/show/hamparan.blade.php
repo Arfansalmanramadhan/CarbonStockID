@@ -36,7 +36,7 @@
                                         <button type="submit" class="btn btn-tambah-data m-3">Cari</button>
                                     </div>
                                 </form>
-                                <button onclick="window.location.href='{{ route('TambahHamparan.tambah',['slug' => $zona->slug]) }}'"
+                                <button onclick="window.location.href='{{ route('TambahHamparan.tambah',['id' => $zona->id]) }}'"
                                     class="btn btn-tambah-data p-3">Tambah</button>
                         </div>
                     </div>

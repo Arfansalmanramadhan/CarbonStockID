@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Str;
+
 class Plot extends Model
 {
     use HasFactory, SoftDeletes, Sluggable;
@@ -40,9 +41,9 @@ class Plot extends Model
     {
         return $this->belongsTo(Hamparan::class, 'hamparan_id');
     }
-    public function subplot(): BelongsTo
+    public function subplots()
     {
-        return $this->belongsTo(SubPlot::class, 'plot_id');
+        return $this->hasMany(SubPlot::class, 'plot_id');
     }
     public function sluggable(): array
     {

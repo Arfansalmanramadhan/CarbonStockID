@@ -60,7 +60,7 @@
                                     <td class="hidden-column aksi-button">
                                         {{-- <a href="{{ route('hamparan.getHamparan', ['slug' => $item->slug]) }}"
                                             class="btn btn-info btn-sm">Detail</a> --}}
-                                        <form action="{{ route('hamparan.getHamparan', ['slug' => $item->slug]) }}" method="get">
+                                        <form action="{{ route('hamparan.getHamparan', ['id' => $item->id]) }}" method="get">
                                             <button type="submit" class="view-btn">
                                                 <img src="{{ asset('/images/Eye.svg') }}" alt="" />
                                             </button>

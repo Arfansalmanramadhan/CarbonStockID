@@ -220,18 +220,17 @@ Route::middleware('auth')->group(function () {
         Route::get("/Lokasi/zona/{slug}", "ringkasan")->name('zona.ringkasan');
         Route::get("/Lokasi/zona/{slug}", "ringkasann")->name('zona.ringkasann');
         Route::get('/Lokasi/zona/{slug}', 'getZona')->name('zona.getZona');
-        Route::get("/zona/{slug}/tambah", "tambah")->name('TambahZona.tambah');
-        Route::post("/zona/{slug}/tambah", "store")->name('zona.store');
-        Route::get("/zona/{slug}/tambah", "create")->name('TambahZona.tambah');
+        // Route::get("/zona/{id}/tambah", "tambah")->name('TambahZona.tambah');
+        Route::get("/zona/{id}/tambah", "create")->name('TambahZona.tambah');
+        Route::post("/zona/{id}/tambah", "store")->name('zona.store');
         Route::get("/zona/{slugP}/edit/{slugZ}", "edit")->name('zona.edit');
         Route::put("/zona/{slugP}/edit/{slugZ}", "update")->name('zona.update');
     });
     Route::controller(HamparanController::class)->group(function () {
         Route::get('/Hamparan', 'index')->name('Hamparan.index');
         Route::get('/Zona/hamparan/{id}', 'getHamparan')->name('hamparan.getHamparan');
-        Route::get("/Hamparan/{slug}/tambah", "tambah")->name('TambahHamparan.tambah');
-        Route::post("/Hamparan/{slug}/tambah", "store")->name('Hamparan.store');
-        Route::get("/Hamparan/{slug}/tambah", "create")->name('TambahHamparan.tambah');
+        Route::get("/Hamparan/{id}/tambah", "tambah")->name('TambahHamparan.tambah');
+        Route::post("/Hamparan/{id}/tambah", "store")->name('Hamparan.store');
         Route::get("/Hamparan/{slugZ}/edit/{slugH}", "edit")->name('Hamparan.edit');
         Route::put("/Hamparan/{slugZ}/edit/{slugH}", "update")->name('Hamparan.update');
     });

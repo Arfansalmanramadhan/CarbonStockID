@@ -12,6 +12,8 @@ class SubPlot extends Model
 {
     use HasFactory, SoftDeletes, Sluggable;
     protected $table = 'subplot';
+    protected $primaryKey = 'id';
+    public $timestamps = true;
     protected $fillable = [
         'plot_id',
         'nama_suplort',
@@ -34,7 +36,7 @@ class SubPlot extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function plot(): BelongsTo
+    public function plot()
     {
         return $this->belongsTo(Plot::class, 'plot_id');
     }
