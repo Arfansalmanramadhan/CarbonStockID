@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Hamparan;
+use App\Models\PoltArea;
 use App\Models\Zona;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -37,6 +38,7 @@ class HamparanController extends Controller
         $search = $request->query('search');
         $perPage = $request->query('per_page', 5);
         $zona = Zona::findOrFail($id);
+        $poltArea = PoltArea::findOrFail($id);
         $query = Hamparan::where('zona_id', $zona->id);
         // $poltArea = PoltArea::where("slug", $poltSlug)->firstOrFail();
         // $zona = Zona::where("slug", $zonaSlug)
@@ -51,7 +53,7 @@ class HamparanController extends Controller
             'per_page' => $perPage
         ]);
 
-        return view('show.Hamparan', compact('hamparan','user', 'search', 'perPage', 'zona'));
+        return view('show.Hamparan', compact('hamparan','user', 'search', 'perPage', 'zona', 'poltArea'));
     }
     public function tambah($slug)
     {

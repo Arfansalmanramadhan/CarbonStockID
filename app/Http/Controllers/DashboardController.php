@@ -20,7 +20,7 @@ class DashboardController extends Controller
     {
         $user = Auth::user();
         $dataDaerah = PoltArea::pluck('daerah')->toArray();
-        $ringkasann = Zona::leftJoin('polt_area', 'zona.polt_area_id', '=', 'polt_area.id')
+        $ringkasann = PoltArea::leftJoin('zona', 'zona.polt_area_id', '=', 'polt_area.id')
             ->leftJoin('hamparan', 'hamparan.zona_id', '=', 'zona.id')
             ->leftJoin('plot', 'plot.hamparan_id', '=', 'hamparan.id')
             ->leftJoin('subplot', 'subplot.plot_id', '=', 'plot.id')
@@ -94,11 +94,13 @@ class DashboardController extends Controller
             $TotalPohonkarbon = ($zona->pohon_avg_kandungan_karbon * ($zona->total_pohon / $constantPohon) * 10000) / 1000;
             $TotalPohonbiomasa = ($zona->pohon_avg_bio_di_atas_tanah * ($zona->total_pohon / $constantPohon) * 10000) / 1000;
             // Perhitungan CO2 dari Serasah (dibagi berdasarkan jumlah nilai unik)
+            $zonaid = $zona->id;
             $uniqueSerasah = DB::table('serasah')
                 ->leftJoin('subplot', 'serasah.subplot_id', '=', 'subplot.id')
                 ->leftJoin('plot', 'subplot.plot_id', '=', 'plot.id')
                 ->leftJoin('hamparan', 'plot.hamparan_id', '=', 'hamparan.id')
                 ->leftJoin('zona', 'hamparan.zona_id', '=', 'zona.id')
+                ->where('zona.polt_area_id', $zonaid)
                 ->select('zona.zona as nama_zona', DB::raw('COUNT(DISTINCT serasah.id) as total_serasah'))
                 ->groupBy('zona.zona')
                 ->get();
@@ -107,6 +109,7 @@ class DashboardController extends Controller
                 ->leftJoin('plot', 'subplot.plot_id', '=', 'plot.id')
                 ->leftJoin('hamparan', 'plot.hamparan_id', '=', 'hamparan.id')
                 ->leftJoin('zona', 'hamparan.zona_id', '=', 'zona.id')
+                ->where('zona.polt_area_id', $zonaid)
                 ->select('zona.zona as nama_zona', DB::raw('COUNT(DISTINCT semai.id) as total_semai'))
                 ->groupBy('zona.zona') // Mengelompokkan berdasarkan nama zona
                 ->get();
@@ -115,6 +118,7 @@ class DashboardController extends Controller
                 ->leftJoin('plot', 'subplot.plot_id', '=', 'plot.id')
                 ->leftJoin('hamparan', 'plot.hamparan_id', '=', 'hamparan.id')
                 ->leftJoin('zona', 'hamparan.zona_id', '=', 'zona.id')
+                ->where('zona.polt_area_id', $zonaid)
                 ->select('zona.zona as nama_zona', DB::raw('COUNT(DISTINCT tumbuhan_bawah.id) as total_tumbuhan_bawah'))
                 ->groupBy('zona.zona') // Mengelompokkan berdasarkan nama zona
                 ->get();
@@ -123,6 +127,7 @@ class DashboardController extends Controller
                 ->leftJoin('plot', 'subplot.plot_id', '=', 'plot.id')
                 ->leftJoin('hamparan', 'plot.hamparan_id', '=', 'hamparan.id')
                 ->leftJoin('zona', 'hamparan.zona_id', '=', 'zona.id')
+                ->where('zona.polt_area_id', $zonaid)
                 ->select('zona.zona as nama_zona', DB::raw('COUNT(DISTINCT necromass.id) as total_necromass'))
                 ->groupBy('zona.zona') // Mengelompokkan berdasarkan nama zona
                 ->get();
@@ -152,6 +157,7 @@ class DashboardController extends Controller
                 ->leftJoin('semai', 'semai.subplot_id', '=', 'subplot.id')
                 ->leftJoin('tumbuhan_bawah', 'tumbuhan_bawah.subplot_id', '=', 'subplot.id')
                 ->leftJoin('necromass', 'necromass.subplot_id', '=', 'subplot.id')
+                ->where('zona.polt_area_id', $zonaid)
                 ->whereNull('zona.deleted_at')
                 ->first(); //Ambil satu objek, bukan Collection
             // dd($zonaa);

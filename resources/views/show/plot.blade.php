@@ -39,7 +39,8 @@
                                 </div>
                             </form>
 
-                            <button onclick="window.location.href='{{ route('Plot.tambah',['slug' => $hamparan->slug]) }}'" class="btn btn-tambah-data m-3
+                            <button onclick="window.location.href='{{ route('Plot.tambah', ['slug' => $hamparan->slug]) }}'"
+                                class="btn btn-tambah-data m-3
                                 ">Tambah</button>
                         </div>
 
@@ -48,6 +49,9 @@
                         <thead>
                             <tr>
                                 <th class="kiriPancang">No</th>
+                                <th>Nama Lokasi</th>
+                                <th>Nama zona</th>
+                                <th>Nama Hamparan</th>
                                 <th>Nama Plot</th>
                                 <th>Tipe Plot</th>
                                 <th>Latitude</th>
@@ -82,19 +86,21 @@
                             @forelse ($plot as $index => $item)
                                 <tr>
                                     <td>{{ $plot->firstItem() + $index }}</td>
+                                    <td>{{ $poltArea->daerah }}</td>
+                                    <td>{{ $zona->zona }}</td>
+                                    <td>{{ $hamparan->nama_hamparan }}</td>
                                     <td>{{ $item->nama_plot }}</td>
                                     <td>{{ $item->type_plot }}</td>
                                     <td>{{ $item->latitude }}</td>
                                     <td>{{ $item->longitude }}</td>
                                     <td class="hidden-column aksi-button">
-                                        <form action="{{ route('DetailPlot.getsubPlot', ['id' => $item->id]) }}" method="get">
+                                        <form action="{{ route('DetailPlot.getsubPlot', ['id' => $item->id]) }}"
+                                            method="get">
                                             <button type="submit" class="view-btn">
                                                 <img src="{{ asset('/images/Eye.svg') }}" alt="" />
                                             </button>
                                         </form>
-                                        <button
-                                            {{-- onclick="window.location.href='{{ route('plot.edit', ['slugP' => $poltArea->slug, 'slugZ' => $item->slug]) }}'" --}}
-                                            class="add-btn">
+                                        <button {{-- onclick="window.location.href='{{ route('plot.edit', ['slugP' => $poltArea->slug, 'slugZ' => $item->slug]) }}'" --}} class="add-btn">
                                             <img src="{{ asset('/images/PencilSquare.svg') }}" alt="Add" />
                                         </button>
                                         <button class="delete-btn">

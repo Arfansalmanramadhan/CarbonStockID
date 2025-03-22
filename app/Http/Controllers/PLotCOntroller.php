@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Beadbs;
+use App\Models\Zona;
+use App\Models\PoltArea;
 use App\Models\Hamparan;
 use App\Models\Plot;
 use App\Models\SubPlot;
@@ -37,6 +39,8 @@ class PLotCOntroller extends Controller
         $search = $request->query('search');
         $perPage = $request->query('per_page', 5);
         $hamparan = Hamparan::findOrFail($id);
+        $zona = Zona::findOrFail($id);
+        $poltArea = PoltArea::findOrFail($id);
         $query = Plot::query()
             ->where('hamparan_id', $hamparan->id);
         if (!empty($search)) {
@@ -48,47 +52,56 @@ class PLotCOntroller extends Controller
             'per_page' => $perPage
         ]);
         // $zona = Zona::where('polt-area_id', $user->id );
-        return view('show.plot', compact('user', 'plot', 'search', 'perPage', 'hamparan'));
+        return view('show.plot', compact('user', 'plot', 'search', 'perPage', 'hamparan', 'zona', 'poltArea'));
     }
     public function getsubPlot(Request $request, $id)
     {
         $user = Auth::user();
         $search = $request->query('search');
         $perPage = $request->query('per_page', 5);
+        // $poltArea = PoltArea::findOrFail($id);
         $plot = SubPlot::find($id);
         $Serasah = DB::table('serasah')
             ->leftJoin('subplot', 'serasah.subplot_id', '=', 'subplot.id')
+            ->where('subplot.plot_id', $plot)
             ->paginate($perPage)
             ->appends(['per_page' => $perPage]);
         // dd( $Serasah);
         $Semai = DB::table('semai')
             ->leftJoin('subplot', 'semai.subplot_id', '=', 'subplot.id')
+            ->where('subplot.plot_id', $plot)
             ->paginate($perPage)
             ->appends(['per_page' => $perPage]);
 
         $TumbuhanBawah = DB::table('tumbuhan_bawah')
             ->leftJoin('subplot', 'tumbuhan_bawah.subplot_id', '=', 'subplot.id')
+            ->where('subplot.plot_id', $plot)
             ->paginate($perPage)
             ->appends(['per_page' => $perPage]);
 
         $pancang = DB::table('pancang')
             ->leftJoin('subplot', 'pancang.subplot_id', '=', 'subplot.id')
+            ->where('subplot.plot_id', $plot)
             ->paginate($perPage)
             ->appends(['per_page' => $perPage]);
         $tiang = DB::table('tiang')
             ->leftJoin('subplot', 'tiang.subplot_id', '=', 'subplot.id')
+            ->where('subplot.plot_id', $plot)
             ->paginate($perPage)
             ->appends(['per_page' => $perPage]);
         $pohon = DB::table('pohon')
             ->leftJoin('subplot', 'pohon.subplot_id', '=', 'subplot.id')
+            ->where('subplot.plot_id', $plot)
             ->paginate($perPage)
             ->appends(['per_page' => $perPage]);
         $Necromas = DB::table('necromass')
             ->leftJoin('subplot', 'necromass.subplot_id', '=', 'subplot.id')
+            ->where('subplot.plot_id', $plot)
             ->paginate($perPage)
             ->appends(['per_page' => $perPage]);
         $tanah = DB::table('tanah')
             ->leftJoin('subplot', 'tanah.subplot_id', '=', 'subplot.id')
+            ->where('subplot.plot_id', $plot)
             ->paginate($perPage)
             ->appends(['per_page' => $perPage]);
         // $zona = Zona::where('polt-area_id', $user->id );

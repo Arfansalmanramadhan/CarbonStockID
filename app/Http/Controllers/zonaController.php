@@ -76,6 +76,7 @@ class zonaController extends Controller
             ->leftJoin('plot', 'subplot.plot_id', '=', 'plot.id')
             ->leftJoin('hamparan', 'plot.hamparan_id', '=', 'hamparan.id')
             ->leftJoin('zona', 'hamparan.zona_id', '=', 'zona.id')
+            ->where('polt_area_id', $poltArea->id)
             ->paginate($perPage)
             ->appends(['per_page' => $perPage]);
         // dd( $Serasah);
@@ -84,6 +85,7 @@ class zonaController extends Controller
             ->leftJoin('plot', 'subplot.plot_id', '=', 'plot.id')
             ->leftJoin('hamparan', 'plot.hamparan_id', '=', 'hamparan.id')
             ->leftJoin('zona', 'hamparan.zona_id', '=', 'zona.id')
+            ->where('polt_area_id', $poltArea->id)
             ->paginate($perPage)
             ->appends(['per_page' => $perPage]);
 
@@ -92,6 +94,7 @@ class zonaController extends Controller
             ->leftJoin('plot', 'subplot.plot_id', '=', 'plot.id')
             ->leftJoin('hamparan', 'plot.hamparan_id', '=', 'hamparan.id')
             ->leftJoin('zona', 'hamparan.zona_id', '=', 'zona.id')
+            ->where('polt_area_id', $poltArea->id)
             ->paginate($perPage)
             ->appends(['per_page' => $perPage]);
 
@@ -100,6 +103,7 @@ class zonaController extends Controller
             ->leftJoin('plot', 'subplot.plot_id', '=', 'plot.id')
             ->leftJoin('hamparan', 'plot.hamparan_id', '=', 'hamparan.id')
             ->leftJoin('zona', 'hamparan.zona_id', '=', 'zona.id')
+            ->where('polt_area_id', $poltArea->id)
             ->paginate($perPage)
             ->appends(['per_page' => $perPage]);
         $tiang = DB::table('tiang')
@@ -107,6 +111,7 @@ class zonaController extends Controller
             ->leftJoin('plot', 'subplot.plot_id', '=', 'plot.id')
             ->leftJoin('hamparan', 'plot.hamparan_id', '=', 'hamparan.id')
             ->leftJoin('zona', 'hamparan.zona_id', '=', 'zona.id')
+            ->where('polt_area_id', $poltArea->id)
             ->paginate($perPage)
             ->appends(['per_page' => $perPage]);
         $pohon = DB::table('pohon')
@@ -114,6 +119,7 @@ class zonaController extends Controller
             ->leftJoin('plot', 'subplot.plot_id', '=', 'plot.id')
             ->leftJoin('hamparan', 'plot.hamparan_id', '=', 'hamparan.id')
             ->leftJoin('zona', 'hamparan.zona_id', '=', 'zona.id')
+            ->where('polt_area_id', $poltArea->id)
             ->paginate($perPage)
             ->appends(['per_page' => $perPage]);
         $Necromas = DB::table('necromass')
@@ -121,6 +127,7 @@ class zonaController extends Controller
             ->leftJoin('plot', 'subplot.plot_id', '=', 'plot.id')
             ->leftJoin('hamparan', 'plot.hamparan_id', '=', 'hamparan.id')
             ->leftJoin('zona', 'hamparan.zona_id', '=', 'zona.id')
+            ->where('polt_area_id', $poltArea->id)
             ->paginate($perPage)
             ->appends(['per_page' => $perPage]);
         $tanah = DB::table('tanah')
@@ -128,6 +135,7 @@ class zonaController extends Controller
             ->leftJoin('plot', 'subplot.plot_id', '=', 'plot.id')
             ->leftJoin('hamparan', 'plot.hamparan_id', '=', 'hamparan.id')
             ->leftJoin('zona', 'hamparan.zona_id', '=', 'zona.id')
+            ->where('polt_area_id', $poltArea->id)
             ->paginate($perPage)
             ->appends(['per_page' => $perPage]);
         return view('show.zona', compact(
@@ -262,8 +270,8 @@ class zonaController extends Controller
         // if (!$poltArea) {
         //     abort(404, 'Polt Area tidak ditemukan.');
         // }
-        // $ringkasan = Zona::where('zona.polt_area_id', $poltArea->id)
-        $ringkasan = Zona::where('zona.polt_area_id', $poltArea->id)
+        // $ringkasan = Zona::where('polt_area_id', $poltArea->id)
+        $ringkasan = Zona::where('polt_area_id', $poltArea->id)
             ->leftJoin('polt_area', 'zona.polt_area_id', '=', 'polt_area.id')
             ->leftJoin('hamparan', 'hamparan.zona_id', '=', 'zona.id') // Hamparan ke Zona
             ->leftJoin('plot', 'plot.hamparan_id', '=', 'hamparan.id') // Plot ke Hamparan
@@ -534,8 +542,8 @@ class zonaController extends Controller
         //     abort(404, 'Polt Area tidak ditemukan.');
         // }
 
-        // $ringkasan = Zona::where('zona.polt_area_id', $poltArea->id)
-        $ringkasann = Zona::where('zona.polt_area_id', $poltArea->id)
+        // $ringkasan = Zona::where('polt_area_id', $poltArea->id)
+        $ringkasann = Zona::where('polt_area_id', $poltArea->id)
             ->leftJoin('polt_area', 'zona.polt_area_id', '=', 'polt_area.id')
             ->leftJoin('hamparan', 'hamparan.zona_id', '=', 'zona.id')
             ->leftJoin('plot', 'plot.hamparan_id', '=', 'hamparan.id')
@@ -608,11 +616,13 @@ class zonaController extends Controller
             $TotalPohonkarbon = ($zona->pohon_avg_kandungan_karbon * ($zona->total_pohon / $constantPohon) * 10000) / 1000;
             $TotalPohonbiomasa = ($zona->pohon_avg_bio_di_atas_tanah * ($zona->total_pohon / $constantPohon) * 10000) / 1000;
             // Perhitungan CO2 dari Serasah (dibagi berdasarkan jumlah nilai unik)
+            $zonaid = $zona->id;
             $uniqueSerasah = DB::table('serasah')
                 ->leftJoin('subplot', 'serasah.subplot_id', '=', 'subplot.id')
                 ->leftJoin('plot', 'subplot.plot_id', '=', 'plot.id')
                 ->leftJoin('hamparan', 'plot.hamparan_id', '=', 'hamparan.id')
                 ->leftJoin('zona', 'hamparan.zona_id', '=', 'zona.id')
+                ->where('zona.polt_area_id', $zonaid)
                 ->select('zona.zona as nama_zona', DB::raw('COUNT(DISTINCT serasah.id) as total_serasah'))
                 ->groupBy('zona.zona')
                 ->get();
@@ -621,6 +631,7 @@ class zonaController extends Controller
                 ->leftJoin('plot', 'subplot.plot_id', '=', 'plot.id')
                 ->leftJoin('hamparan', 'plot.hamparan_id', '=', 'hamparan.id')
                 ->leftJoin('zona', 'hamparan.zona_id', '=', 'zona.id')
+                ->where('zona.polt_area_id', $zonaid)
                 ->select('zona.zona as nama_zona', DB::raw('COUNT(DISTINCT semai.id) as total_semai'))
                 ->groupBy('zona.zona') // Mengelompokkan berdasarkan nama zona
                 ->get();
@@ -629,6 +640,7 @@ class zonaController extends Controller
                 ->leftJoin('plot', 'subplot.plot_id', '=', 'plot.id')
                 ->leftJoin('hamparan', 'plot.hamparan_id', '=', 'hamparan.id')
                 ->leftJoin('zona', 'hamparan.zona_id', '=', 'zona.id')
+                ->where('zona.polt_area_id', $zonaid)
                 ->select('zona.zona as nama_zona', DB::raw('COUNT(DISTINCT tumbuhan_bawah.id) as total_tumbuhan_bawah'))
                 ->groupBy('zona.zona') // Mengelompokkan berdasarkan nama zona
                 ->get();
@@ -637,6 +649,7 @@ class zonaController extends Controller
                 ->leftJoin('plot', 'subplot.plot_id', '=', 'plot.id')
                 ->leftJoin('hamparan', 'plot.hamparan_id', '=', 'hamparan.id')
                 ->leftJoin('zona', 'hamparan.zona_id', '=', 'zona.id')
+                ->where('zona.polt_area_id', $zonaid)
                 ->select('zona.zona as nama_zona', DB::raw('COUNT(DISTINCT necromass.id) as total_necromass'))
                 ->groupBy('zona.zona') // Mengelompokkan berdasarkan nama zona
                 ->get();
@@ -666,6 +679,7 @@ class zonaController extends Controller
                 ->leftJoin('semai', 'semai.subplot_id', '=', 'subplot.id')
                 ->leftJoin('tumbuhan_bawah', 'tumbuhan_bawah.subplot_id', '=', 'subplot.id')
                 ->leftJoin('necromass', 'necromass.subplot_id', '=', 'subplot.id')
+                ->where('zona.polt_area_id', $zonaid)
                 ->whereNull('zona.deleted_at')
                 ->first(); //Ambil satu objek, bukan Collection
             // dd($zonaa);
@@ -757,7 +771,7 @@ class zonaController extends Controller
             $hasiltanahPersen = ($BaselineLahanKosong != 0) ? ($tanah / $BaselineLahanKosong) * 100 : 0;
 
             return [
-                // 'zona' => $zona->zona    _nama,
+                'zona' => $zona->zona_nama,
                 'Biomassadiataspermukaantanah' => number_format($Biomassadiataspermukaantanah ?? 0, 3, '.', ''),
                 'Kandungankarbon' => number_format($Kandungankarbon ?? 0, 3, '.', ''),
                 'SerapanCO2' => number_format($SerapanCO2 ?? 0, 3, '.', ''),

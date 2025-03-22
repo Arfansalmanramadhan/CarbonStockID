@@ -47,6 +47,7 @@
                         <thead>
                             <tr>
                                 <th class="kiriPancang">No</th>
+                                <th>Nama lokasi</th>
                                 <th>Nama Zona</th>
                                 <th>Latitude</th>
                                 <th>Longitude</th>
@@ -58,6 +59,7 @@
                             @forelse ($zona as $index)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $poltArea->daerah }}</td>
                                     <td>{{ $index->zona }}</td>
                                     <td>{{ $index->latitude }}</td>
                                     <td>{{ $index->longitude }}</td>
