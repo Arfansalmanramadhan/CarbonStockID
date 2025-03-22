@@ -426,7 +426,7 @@
                                 @forelse($pancang as $item)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $item->no_pohon }} cm</td>
+                                        <td>{{ $item->no_pohon }} </td>
                                         <td>{{ $item->keliling }} cm</td>
                                         <td>{{ $item->diameter }} cm</td>
                                         <td>{{ $item->nama_lokal }}</td>
@@ -522,7 +522,7 @@
                                 @forelse ($tiang as $item)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $item->no_pohon }} cm</td>
+                                        <td>{{ $item->no_pohon }} </td>
                                         <td>{{ $item->keliling }} cm</td>
                                         <td>{{ $item->diameter }} cm</td>
                                         <td>{{ $item->nama_lokal }}</td>
@@ -618,7 +618,7 @@
                                 @forelse ($pohon as $item)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $item->no_pohon }} cm</td>
+                                        <td>{{ $item->no_pohon }} </td>
                                         <td>{{ $item->keliling }} cm</td>
                                         <td>{{ $item->diameter }} cm</td>
                                         <td>{{ $item->nama_lokal }}</td>
@@ -712,10 +712,10 @@
                                 @forelse($Necromas as $item)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $item->diameter_pangkal }} cm</td>
-                                        <td>{{ $item->diameter_ujung }} cm</td>
-                                        <td>{{ $item->panjang }}</td>
-                                        <td>{{ $item->volume }}</td>
+                                        <td>{{ $item->diameter_pangkal }} m</td>
+                                        <td>{{ $item->diameter_ujung }} m</td>
+                                        <td>{{ $item->panjang }} m</td>
+                                        <td>{{ $item->volume }} m3</td>
                                         <td class="hidden-column">{{ $item->berat_jenis_kayu }}gr/cm3</td>
                                         <td class="hidden-column">{{ $item->biomasa }} kg</td>
                                         <td class="hidden-column">{{ $item->carbon }}kg</td>

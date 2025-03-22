@@ -80,24 +80,24 @@
                         </tr>
                     </thead>
                     @forelse ($ringkasann as $item)
-                        <tbody>
+                        <tbody id="tableBody">
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $item['dareah'] ?? 'Data tidak tersedia' }}</td>
-                                <td>{{ $item['TanahCarbon'] ?? 0}}</td>
-                                <td>{{ $item['NecromassCarbon'] ?? 0}}</td>
-                                <td>{{ $item['Serasahco2'] ?? 0}}</td>
-                                <td>{{ $item['SerasahKarbon'] ?? 0}}</td>
-                                <td>{{ $item['tumbuhanbawahco2'] ?? 0}}</td>
-                                <td class="hidden-column">{{ $item['tumbuhanbawahkarbon'] ?? 0}}</td>
-                                <td class="hidden-column">{{ $item['TotalPancangco2'] ?? 0}}</td>
-                                <td class="hidden-column">{{ $item['TotalPancangkarbon'] ?? 0}}</td>
-                                <td class="hidden-column">{{ $item['TotalTiangco2'] ?? 0}}</td>
-                                <td class="hidden-column">{{ $item['TotalTiangKarbon'] ?? 0}}</td>
-                                <td class="hidden-column">{{ $item['TotalPohonco2'] ?? 0}}</td>
-                                <td class="hidden-column">{{ $item['TotalPohonkarbon'] ?? 0}}</td>
-                                <td class="hidden-column">{{ $item['KarbonCo2'] ?? 0}}</td>
-                                <td class="hidden-column">{{ $item['TotalKandunganKarbon'] ?? 0}}</td>
+                                <td>{{ $item['TanahCarbon'] ?? 0 }}</td>
+                                <td>{{ $item['NecromassCarbon'] ?? 0 }}</td>
+                                <td>{{ $item['Serasahco2'] ?? 0 }}</td>
+                                <td>{{ $item['SerasahKarbon'] ?? 0 }}</td>
+                                <td>{{ $item['tumbuhanbawahco2'] ?? 0 }}</td>
+                                <td class="hidden-column">{{ $item['tumbuhanbawahkarbon'] ?? 0 }}</td>
+                                <td class="hidden-column">{{ $item['TotalPancangco2'] ?? 0 }}</td>
+                                <td class="hidden-column">{{ $item['TotalPancangkarbon'] ?? 0 }}</td>
+                                <td class="hidden-column">{{ $item['TotalTiangco2'] ?? 0 }}</td>
+                                <td class="hidden-column">{{ $item['TotalTiangKarbon'] ?? 0 }}</td>
+                                <td class="hidden-column">{{ $item['TotalPohonco2'] ?? 0 }}</td>
+                                <td class="hidden-column">{{ $item['TotalPohonkarbon'] ?? 0 }}</td>
+                                <td class="hidden-column">{{ $item['TotalKandunganKarbon'] ?? 0 }}</td>
+                                <td class="hidden-column">{{ $item['KarbonCo2'] ?? 0 }}</td>
                                 <td class="hidden-column aksi-button">
                                     <button class="delete-btn">
                                         <img src="{{ asset('/images/Trash.svg') }}" alt="" />
@@ -113,14 +113,15 @@
                 </table>
             </div>
             <div class="table-footer mt-5">
-                <span>Menampilkan 1 sampai 5 dari 40 data</span>
-                <div class="pagination">
-                    <button class="page-btn">Kembali</button>
-                    <button class="page-btn active">1</button>
-                    <button class="page-btn">2</button>
-                    <button class="page-btn">3</button>
-                    <button class="page-btn">4</button>
-                    <button class="page-btn">Lanjut</button>
+                <!-- Informasi Rentang Data -->
+                <p>Menampilkan data <span id="fromNumber">1</span> sampai <span id="toNumber">5</span> dari <span
+                        id="totalData">0</span> data</p>
+
+                <!-- Tombol Pagination -->
+                <div id="pagination">
+                    <button onclick="prevPage()">Sebelumnya</button>
+                    <span id="pageNumber">1</span>
+                    <button onclick="nextPage()">Berikutnya</button>
                 </div>
             </div>
             {{-- </div> --}}
@@ -1081,6 +1082,44 @@
 
         const pieChart = new ApexCharts(document.querySelector("#pie"), pieoptions);
         pieChart.render();
+            document.addEventListener("DOMContentLoaded", function() {
+                let currentPage = 1;
+                let rowsPerPage = 5;
+                let tableRows = document.querySelectorAll("#tableBody tr");
+                let totalData = tableRows.length;
+
+                document.getElementById("totalData").innerText = totalData;
+
+                function displayRows() {
+                    let start = (currentPage - 1) * rowsPerPage;
+                    let end = start + rowsPerPage;
+
+                    tableRows.forEach((row, index) => {
+                        row.style.display = (index >= start && index < end) ? "table-row" : "none";
+                    });
+
+                    document.getElementById("pageNumber").innerText = currentPage;
+                    document.getElementById("fromNumber").innerText = start + 1;
+                    document.getElementById("toNumber").innerText = Math.min(end, totalData);
+                }
+
+                window.nextPage = function() {
+                    if (currentPage * rowsPerPage < totalData) {
+                        currentPage++;
+                        displayRows();
+                    }
+                };
+
+                window.prevPage = function() {
+                    if (currentPage > 1) {
+                        currentPage--;
+                        displayRows();
+                    }
+                };
+
+                displayRows();
+            });
+
     </script>
 
 @endsection

@@ -262,7 +262,6 @@ class zonaController extends Controller
         // if (!$poltArea) {
         //     abort(404, 'Polt Area tidak ditemukan.');
         // }
-
         // $ringkasan = Zona::where('zona.polt_area_id', $poltArea->id)
         $ringkasan = Zona::where('zona.polt_area_id', $poltArea->id)
             ->leftJoin('polt_area', 'zona.polt_area_id', '=', 'polt_area.id')
@@ -442,7 +441,7 @@ class zonaController extends Controller
             $Kandungankarbon = $TotalPancangkarbon +  $TotalTiangKarbon + $TotalPohonkarbon + $SerasahKarbon +  $semaiKarbon + $tumbuhan_bawahKarbon + $NecromassCarbon;
             $SerapanCO2  = $TotalPancangco2 + $TotalTiangco2 +   $TotalPohonco2 +  $Serasahco2 +  $semaico2 +  $tumbuhan_bawahco2 +  $Necromassco2;
             // TootaL Karbon
-            $TotalKandunganKarbon =  $zona->total_carbon_tanah + $NecromassCarbon + $SerasahKarbon + $semaiKarbon  + $tumbuhan_bawahKarbon + $TotalPohonkarbon + $TotalPancangkarbon + $TotalTiangKarbon;
+            $TotalKandunganKarbon =  $zona->total_carbon_tanah + $hasilNecromascarbon + $SerasahKarbon + $semaiKarbon  + $tumbuhan_bawahKarbon + $TotalPohonkarbon + $TotalPancangkarbon + $TotalTiangKarbon;
             // Total carbon tanama kandungan karbon
             $TotalCarbon =  $semaico2   + $TotalPohonco2 + $TotalPancangco2 + $TotalTiangco2 + $tumbuhan_bawahco2;
             // serapan co2
@@ -450,7 +449,7 @@ class zonaController extends Controller
             $totalBerat = $TotalPancangco2 + $TotalTiangco2 + $TotalPohonco2;
             $beratMasaAkar = $totalBerat * 0.37;
             // total karbon ]
-            $KarbonCo2 = $TotalPancangco2 + $beratMasaAkar + $TotalTiangco2 + $TotalPohonco2  + $Serasahco2 + $semaico2 + $tumbuhan_bawahco2;
+            $KarbonCo2 = $TotalPancangco2 + $beratMasaAkar + $TotalTiangco2 + $TotalPohonco2  + $Serasahco2 + $semaico2 + $tumbuhan_bawahco2 + $hasilNecromashCo2;
             // Pendekatan Kerapatan
 
             // Total CO2 dari tanaman
@@ -719,7 +718,7 @@ class zonaController extends Controller
             $Kandungankarbon = $TotalPancangkarbon +  $TotalTiangKarbon + $TotalPohonkarbon + $SerasahKarbon +  $semaiKarbon + $tumbuhan_bawahKarbon + $NecromassCarbon;
             $SerapanCO2  = $TotalPancangco2 + $TotalTiangco2 +   $TotalPohonco2 +  $Serasahco2 +  $semaico2 +  $tumbuhan_bawahco2 +  $Necromassco2;
             // TootaL Karbon
-            $TotalKandunganKarbon =  $zona->total_carbon_tanah + $NecromassCarbon + $SerasahKarbon + $semaiKarbon  + $tumbuhan_bawahKarbon + $TotalPohonkarbon + $TotalPancangkarbon + $TotalTiangKarbon;
+            $TotalKandunganKarbon =  $zona->total_carbon_tanah + $hasilNecromascarbon + $SerasahKarbon + $semaiKarbon  + $tumbuhan_bawahKarbon + $TotalPohonkarbon + $TotalPancangkarbon + $TotalTiangKarbon;
             // Total carbon tanama kandungan karbon
             $TotalCarbon =  $semaico2   + $TotalPohonco2 + $TotalPancangco2 + $TotalTiangco2 + $tumbuhan_bawahco2;
             // serapan co2
@@ -727,7 +726,7 @@ class zonaController extends Controller
             $totalBerat = $TotalPancangco2 + $TotalTiangco2 + $TotalPohonco2;
             $beratMasaAkar = $totalBerat * 0.37;
             // total karbon ]
-            $KarbonCo2 = $TotalPancangco2 + $beratMasaAkar + $TotalTiangco2 + $TotalPohonco2  + $Serasahco2 + $semaico2 + $tumbuhan_bawahco2;
+            $KarbonCo2 = $TotalPancangco2 + $beratMasaAkar + $TotalTiangco2 + $TotalPohonco2  + $Serasahco2 + $semaico2 + $tumbuhan_bawahco2 + $hasilNecromashCo2;
             // Pendekatan Kerapatan
 
             // Total CO2 dari tanaman
@@ -758,10 +757,10 @@ class zonaController extends Controller
             $hasiltanahPersen = ($BaselineLahanKosong != 0) ? ($tanah / $BaselineLahanKosong) * 100 : 0;
 
             return [
-                // 'zona' => $zona->zona_nama,
-                // 'Biomassadiataspermukaantanah' => number_format($Biomassadiataspermukaantanah ?? 0, 3, '.', ''),
-                // 'Kandungankarbon' => number_format($Kandungankarbon ?? 0, 3, '.', ''),
-                // 'SerapanCO2' => number_format($SerapanCO2 ?? 0, 3, '.', ''),
+                // 'zona' => $zona->zona    _nama,
+                'Biomassadiataspermukaantanah' => number_format($Biomassadiataspermukaantanah ?? 0, 3, '.', ''),
+                'Kandungankarbon' => number_format($Kandungankarbon ?? 0, 3, '.', ''),
+                'SerapanCO2' => number_format($SerapanCO2 ?? 0, 3, '.', ''),
                 'TotalPancangco2' => number_format($TotalPancangco2 ?? 0, 3, '.', ''),
                 'TotalPancangkarbon' => number_format($TotalPancangkarbon ?? 0, 3, '.', ''),
                 'TotalMangroveKarbondioksida' => number_format($TotalMangroveKarbondioksida ?? 0, 3, '.', ''),

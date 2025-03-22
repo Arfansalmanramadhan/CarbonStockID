@@ -538,7 +538,7 @@
                                 @forelse($pancang as $item)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $item->no_pohon }} cm</td>
+                                        <td>{{ $item->no_pohon }} </td>
                                         <td>{{ $item->keliling }} cm</td>
                                         <td>{{ $item->diameter }} cm</td>
                                         <td>{{ $item->nama_lokal }}</td>
@@ -634,7 +634,7 @@
                                 @forelse ($tiang as $item)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $item->no_pohon }} cm</td>
+                                        <td>{{ $item->no_pohon }} </td>
                                         <td>{{ $item->keliling }} cm</td>
                                         <td>{{ $item->diameter }} cm</td>
                                         <td>{{ $item->nama_lokal }}</td>
@@ -730,7 +730,7 @@
                                 @forelse ($pohon as $item)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $item->no_pohon }} cm</td>
+                                        <td>{{ $item->no_pohon }} </td>
                                         <td>{{ $item->keliling }} cm</td>
                                         <td>{{ $item->diameter }} cm</td>
                                         <td>{{ $item->nama_lokal }}</td>
@@ -824,13 +824,13 @@
                                 @forelse($Necromas as $item)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $item->diameter_pangkal }} cm</td>
-                                        <td>{{ $item->diameter_ujung }} cm</td>
-                                        <td>{{ $item->panjang }}</td>
-                                        <td>{{ $item->volume }}</td>
-                                        <td class="hidden-column">{{ $item->berat_jenis_kayu }}gr/cm3</td>
+                                        <td>{{ $item->diameter_pangkal }} m</td>
+                                        <td>{{ $item->diameter_ujung }} m</td>
+                                        <td>{{ $item->panjang }} m</td>
+                                        <td>{{ $item->volume }} m3</td>
+                                        <td class="hidden-column">{{ $item->berat_jenis_kayu }} gr/cm3</td>
                                         <td class="hidden-column">{{ $item->biomasa }} kg</td>
-                                        <td class="hidden-column">{{ $item->carbon }}kg</td>
+                                        <td class="hidden-column">{{ $item->carbon }} kg</td>
                                         <td class="hidden-column">{{ $item->co2 }} kg</td>
                                         <td class="hidden-column aksi-button">
                                             <button class="edit-btn">
@@ -932,21 +932,21 @@
                                         <tr>
                                             <td>Seresah</td>
                                             <td class="text-right">
-                                                <div class="badge btn-successs ">{{ $item['SerasahKarbon'] ?? 0 }}
+                                                <div class="badge btn-successs ">{{ $item['SerasahKarbon'] ?? 0 }} Ton C/Ha
                                                 </div>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>Semai</td>
                                             <td class="text-right">
-                                                <div class="badge btn-successs">{{ $item['semaiKarbon'] ?? 0 }}
+                                                <div class="badge btn-successs">{{ $item['semaiKarbon'] ?? 0 }} Ton C/Ha
                                                 </div>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>Tumbuhan Bawah</td>
                                             <td class="text-right">
-                                                <div class="badge btn-successs">{{ $item['tumbuhanbawahkarbon'] ?? 0 }}
+                                                <div class="badge btn-successs">{{ $item['tumbuhanbawahkarbon'] ?? 0 }} Ton C/Ha
                                                 </div>
                                             </td>
                                         </tr>
@@ -954,14 +954,7 @@
                                         <tr>
                                             <td>Pancang</td>
                                             <td class="text-right">
-                                                <div class="badge btn-successs">{{ $item['TotalPancangkarbon'] ?? 0 }}
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Mangrove</td>
-                                            <td class="text-right">
-                                                <div class="badge btn-successs">{{ $item['TotalMangrovekarbon'] ?? 0 }}
+                                                <div class="badge btn-successs">{{ $item['TotalPancangkarbon'] ?? 0 }} Ton C/Ha
                                                 </div>
                                             </td>
                                         </tr>
@@ -969,7 +962,7 @@
                                         <tr>
                                             <td>Tiang</td>
                                             <td class="text-right">
-                                                <div class="badge btn-successs">{{ $item['TotalTiangKarbon'] ?? 0 }}
+                                                <div class="badge btn-successs">{{ $item['TotalTiangKarbon'] ?? 0 }} Ton C/Ha
                                                 </div>
                                             </td>
                                         </tr>
@@ -977,14 +970,14 @@
                                         <tr>
                                             <td>Nekromas</td>
                                             <td class="text-right">
-                                                <div class="badge btn-successs">{{ $item['NecromassCarbon'] ?? 0 }}</div>
+                                                <div class="badge btn-successs">{{ $item['NecromassCarbon'] ?? 0 }} Ton C/Ha</div>
                                             </td>
                                         </tr>
 
                                         <tr>
                                             <td>Pohon</td>
                                             <td class="text-right">
-                                                <div class="badge btn-successs">{{ $item['TotalPohonkarbon'] ?? 0 }}
+                                                <div class="badge btn-successs">{{ $item['TotalPohonkarbon'] ?? 0 }} Ton C/Ha
                                                 </div>
                                             </td>
                                         </tr>
@@ -992,20 +985,15 @@
                                         <tr>
                                             <td>Tanah</td>
                                             <td class="text-right">
-                                                <div class="badge btn-successs">{{ $item['TanahCarbon'] ?? 0 }}</div>
+                                                <div class="badge btn-successs">{{ $item['TanahCarbon'] ?? 0 }} Ton C/Ha</div>
                                             </td>
                                         </tr>
-                                        {{-- <tr>
-                                            <td>Akar</td>
-                                            <td class="text-right">
-                                                <div class="badge btn-successs">143.75</div>
-                                            </td>
-                                        </tr> --}}
+
 
                                         <tr>
                                             <td>Total</td>
                                             <td class="text-right">
-                                                <div class="badge btn-successs">{{ $item['TotalKandunganKarbon'] ?? 0 }}
+                                                <div class="badge btn-successs">{{ $item['TotalKandunganKarbon'] ?? 0 }} Ton C/Ha
                                                 </div>
                                             </td>
                                         </tr>
@@ -1037,19 +1025,19 @@
                                         <tr>
                                             <td>Seresah</td>
                                             <td class="text-right">
-                                                <div class="badge btn-successs ">{{ $item['Serasahco2'] ?? 0 }}</div>
+                                                <div class="badge btn-successs ">{{ $item['Serasahco2'] ?? 0 }} Ton C/Ha</div>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>Semai</td>
                                             <td class="text-right">
-                                                <div class="badge btn-successs">{{ $item['semaico2'] ?? 0 }}</div>
+                                                <div class="badge btn-successs">{{ $item['semaico2'] ?? 0 }} Ton C/Ha</div>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>Tumbuhan Bawah</td>
                                             <td class="text-right">
-                                                <div class="badge btn-successs">{{ $item['tumbuhanbawahco2'] ?? 0 }}
+                                                <div class="badge btn-successs">{{ $item['tumbuhanbawahco2'] ?? 0 }} Ton C/Ha
                                                 </div>
                                             </td>
                                         </tr>
@@ -1057,48 +1045,41 @@
                                         <tr>
                                             <td>Pancang</td>
                                             <td class="text-right">
-                                                <div class="badge btn-successs">{{ $item['TotalPancangco2'] ?? 0 }}</div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Mangrove</td>
-                                            <td class="text-right">
-                                                <div class="badge btn-successs">
-                                                    {{ $item['TotalMangroveKarbondioksida'] ?? 0 }}</div>
+                                                <div class="badge btn-successs">{{ $item['TotalPancangco2'] ?? 0 }} Ton C/Ha</div>
                                             </td>
                                         </tr>
 
                                         <tr>
                                             <td>Tiang</td>
                                             <td class="text-right">
-                                                <div class="badge btn-successs">{{ $item['TotalTiangco2'] ?? 0 }}</div>
+                                                <div class="badge btn-successs">{{ $item['TotalTiangco2'] ?? 0 }} Ton C/Ha</div>
                                             </td>
                                         </tr>
 
                                         <tr>
                                             <td>Nekromas</td>
                                             <td class="text-right">
-                                                <div class="badge btn-successs">{{ $item['Necromassco2'] ?? 0 }}</div>
+                                                <div class="badge btn-successs">{{ $item['Necromassco2'] ?? 0 }} Ton C/Ha</div>
                                             </td>
                                         </tr>
 
                                         <tr>
                                             <td>Pohon</td>
                                             <td class="text-right">
-                                                <div class="badge btn-successs">{{ $item['TotalPohonco2'] ?? 0 }}</div>
+                                                <div class="badge btn-successs">{{ $item['TotalPohonco2'] ?? 0 }} Ton C/Ha</div>
                                             </td>
                                         </tr>
 
                                         <tr>
                                             <td>Tanah</td>
                                             <td class="text-right">
-                                                <div class="badge btn-successs">{{ $item['TanahCo2'] ?? 0 }}</div>
+                                                <div class="badge btn-successs">{{ $item['TanahCo2'] ?? 0 }} Ton C/Ha</div>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>Akar</td>
                                             <td class="text-right">
-                                                <div class="badge btn-successs">{{ $item['BeratBiomassaAkar'] ?? 0 }}
+                                                <div class="badge btn-successs">{{ $item['beratMasaAkar'] ?? 0 }} Ton C/Ha
                                                 </div>
                                             </td>
                                         </tr>
@@ -1106,7 +1087,7 @@
                                         <tr>
                                             <td>Total</td>
                                             <td class="text-right">
-                                                <div class="badge btn-successs">{{ $item['KarbonCo2'] ?? 0 }}</div>
+                                                <div class="badge btn-successs">{{ $item['KarbonCo2'] ?? 0 }} Ton C/Ha</div>
                                             </td>
                                         </tr>
 
@@ -1142,56 +1123,56 @@
                                     <tr>
                                         <td class="">1</td>
                                         <td>Serasah</td>
-                                        <td>{{ $item['Serasahco2'] ?? 0 }}</td>
-                                        <td>{{ $item['faktor'] ?? 0 }}</td>
-                                        <td>{{ $item['Serasah'] ?? 0 }}</td>
-                                        <td>{{ $item['hasilSerasahPersen'] ?? 0 }}</td>
+                                        <td>{{ $item['Serasahco2'] ?? 0 }} Ton C/Ha</td>
+                                        <td>{{ $item['faktor'] ?? 0 }} Ha</td>
+                                        <td>{{ $item['Serasah'] ?? 0 }} Ton C/Ha</td>
+                                        <td>{{ $item['hasilSerasahPersen'] ?? 0 }} %</td>
                                         {{-- {{ dd($item) }} --}}
                                     </tr>
                                     <tr>
                                         <td class="">2</td>
                                         <td>Necromass</td>
-                                        <td>{{ $item['Necromassco2'] ?? 0 }}</td>
-                                        <td>{{ $item['faktor'] ?? 0 }}</td>
-                                        <td>{{ $item['Necromass'] ?? 0 }}</td>
-                                        <td>{{ $item['hasilNecromassPersen'] ?? 0 }}</td>
+                                        <td>{{ $item['Necromassco2'] ?? 0 }} Ton C/Ha</td>
+                                        <td>{{ $item['faktor'] ?? 0 }} Ha</td>
+                                        <td>{{ $item['Necromass'] ?? 0 }} Ton C/Ha</td>
+                                        <td>{{ $item['hasilNecromassPersen'] ?? 0 }} %</td>
 
                                     </tr>
                                     <tr>
                                         <td class="">3</td>
                                         <td>Co2 Tanaman</td>
-                                        <td>{{ $item['TotalCarbonn'] ?? 0 }}</td>
-                                        <td>{{ $item['faktor'] ?? 0 }}</td>
-                                        <td>{{ $item['Co2Tanaman'] ?? 0 }}</td>
-                                        <td>{{ $item['hasilco2tanamanPersen'] ?? 0 }}</td>
+                                        <td>{{ $item['TotalCarbonn'] ?? 0 }} Ton C/Ha</td>
+                                        <td>{{ $item['faktor'] ?? 0 }} Ha</td>
+                                        <td>{{ $item['Co2Tanaman'] ?? 0 }} Ton C/Ha</td>
+                                        <td>{{ $item['hasilco2tanamanPersen'] ?? 0 }} %</td>
 
                                     </tr>
                                     <tr>
                                         <td class="">4</td>
                                         <td>Tanah</td>
-                                        <td>{{ $item['TanahCo2'] ?? 0 }}</td>
-                                        <td>{{ $item['faktor'] ?? 0 }}</td>
-                                        <td>{{ $item['tanah'] ?? 0 }}</td>
-                                        <td>{{ $item['hasiltanahPersen'] ?? 0 }}</td>
+                                        <td>{{ $item['TanahCo2'] ?? 0 }} Ton C/Ha</td>
+                                        <td>{{ $item['faktor'] ?? 0 }} Ha</td>
+                                        <td>{{ $item['tanah'] ?? 0 }} Ton C/Ha</td>
+                                        <td>{{ $item['hasiltanahPersen'] ?? 0 }} %</td>
 
                                     </tr>
                                     <tr>
                                         <td class="">5</td>
                                         <td>Berat bioomasa akar</td>
-                                        <td>{{ $item['beratMasaAkar'] ?? 0 }}</td>
-                                        <td>{{ $item['faktor'] ?? 0 }}</td>
-                                        <td>{{ $item['BeratBiomassaAkar'] ?? 0 }}</td>
-                                        <td>{{ $item['hasilakarPersen'] ?? 0 }}</td>
+                                        <td>{{ $item['beratMasaAkar'] ?? 0 }} Ton C/Ha</td>
+                                        <td>{{ $item['faktor'] ?? 0 }} Ha</td>
+                                        <td>{{ $item['BeratBiomassaAkar'] ?? 0 }} Ton C/Ha</td>
+                                        <td>{{ $item['hasilakarPersen'] ?? 0 }} %</td>
 
                                     </tr>
                                     <tr>
                                         <td colspan="4">Total Carbon 5 Poll</td>
-                                        <td colspan="2">{{ $item['TotalKaoobon'] ?? 0 }}</td>
+                                        <td colspan="2">{{ $item['TotalKaoobon'] ?? 0 }} Ton </td>
 
                                     </tr>
                                     <tr>
                                         <td colspan="4">Baseline Lahan Kosong</td>
-                                        <td colspan="2">{{ $item['BaselineLahanKosong'] ?? 0 }}</td>
+                                        <td colspan="2">{{ $item['BaselineLahanKosong'] ?? 0 }} Ton C/Ha</td>
 
                                     </tr>
                                     {{-- @foreach ($pancang as $item)
