@@ -28,10 +28,15 @@ class zonaController extends Controller
         $user = Auth::user();
         $search = $request->query('search');
         $perPage = $request->query('per_page', 5);
+        $poltAreaId = $request->query('polt_area_id');
+        $poltArea = PoltArea::with('zona')->get();
         $query = Zona::query();
         if (!empty($search)) {
             $query->where('zona', 'ILIKE', "%{$search}%")
-                ->orWhere('jenis_hutan', 'ILIKE', "%{$search}%");
+                ->orWhere('jenis_hutan', 'ILIKE', "%{$search}%")
+                ->orWhereHas('poltArea', function ($q) use ($search) {
+                    $q->where('daerah', 'ILIKE', "%{$search}%");
+                });
         }
 
         // $poltArea = $query->paginate($perPage);
@@ -41,7 +46,7 @@ class zonaController extends Controller
             'search' => $search,
             'per_page' => $perPage
         ]);
-        return view('zona', compact('zona', "user", 'search', 'perPage'));
+        return view('zona', compact('zona', "user", 'search', 'perPage', 'poltArea'));
     }
     public function getZona(Request $request, $slug,)
     {

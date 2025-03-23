@@ -37,7 +37,7 @@ class Plot extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function hamparan(): BelongsTo
+    public function hamparan()
     {
         return $this->belongsTo(Hamparan::class, 'hamparan_id',  'id');
     }

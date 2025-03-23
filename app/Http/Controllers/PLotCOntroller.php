@@ -22,10 +22,19 @@ class PLotCOntroller extends Controller
         $user = Auth::user();
         $search = $request->query('search');
         $perPage = $request->query('per_page', 5);
-        $query = Plot::query();
+        $query = Plot::with(['hamparan.zona.poltArea']);
         if (!empty($search)) {
-            $query->where('zona', 'ILIKE', "%{$search}%")
-                ->orWhere('jenis_hutan', 'ILIKE', "%{$search}%");
+            $query->where('nama_plot', 'ILIKE', "%{$search}%")
+                ->orWhere('type_plot', 'ILIKE', "%{$search}%")
+                ->orWhereHas('hamparan', function ($q) use ($search) {
+                    $q->where('nama_hamparan', 'ILIKE', "%{$search}%");
+                })
+                ->orWhereHas('hamparan.zona', function ($q) use ($search) {
+                    $q->where('zona', 'ILIKE', "%{$search}%");
+                })
+                ->orWhereHas('hamparan.zona.poltArea', function ($q) use ($search) {
+                    $q->where('daerah', 'ILIKE', "%{$search}%");
+                });
         }
         $plot = $query->paginate($perPage)->appends([
             'search' => $search,
@@ -41,7 +50,7 @@ class PLotCOntroller extends Controller
         $hamparan = Hamparan::findOrFail($id);
         $zona = $hamparan->zona;
         $poltArea = $zona->poltArea;
-        $subplot =SubPlot::all();
+        $subplot = SubPlot::all();
         // dd($zona, $poltArea, $subplot );
         $query = Plot::query()
             ->where('hamparan_id', $hamparan->id);
@@ -54,7 +63,7 @@ class PLotCOntroller extends Controller
             'per_page' => $perPage
         ]);
         // $zona = Zona::where('polt-area_id', $user->id );
-        return view('show.plot', compact('user', 'plot', 'search', 'perPage', 'hamparan', 'zona', 'poltArea' ,'subplot'));
+        return view('show.plot', compact('user', 'plot', 'search', 'perPage', 'hamparan', 'zona', 'poltArea', 'subplot'));
     }
     public function getsubPlot(Request $request, $id)
     {

@@ -41,10 +41,11 @@
                         <thead>
                             <tr>
                                 <th class="kiriPancang">No</th>
+                                <th>Nama lokasi</th>
                                 <th>Nama Zona</th>
-                                <th>Latittude</th>
+                                <th>Latitude</th>
                                 <th>Longitude</th>
-                                <th>Jenis Hutan </th>
+                                <th>Jenis Hutan</th>
                                 <th class="hidden-column kananPancang">Aksi</th>
                             </tr>
                         </thead>
@@ -53,6 +54,7 @@
                             @forelse ($zona as $index => $item)
                                 <tr>
                                     <td>{{ $zona->firstItem() + $index }}</td>
+                                    <td>{{ $item->poltArea->daerah ?? '-' }}</td>
                                     <td>{{ $item->zona }}</td>
                                     <td>{{ $item->latitude }}</td>
                                     <td>{{ $item->longitude }}</td>

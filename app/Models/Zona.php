@@ -41,9 +41,9 @@ class Zona extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function poltArea(): BelongsTo
+    public function poltArea()
     {
-        return $this->belongsTo(PoltArea::class, 'polt_area_id', 'id');
+        return $this->belongsTo(PoltArea::class, 'polt_area_id');
     }
     public function hamparan(): BelongsTo
     {

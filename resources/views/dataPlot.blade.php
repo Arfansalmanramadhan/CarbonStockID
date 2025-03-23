@@ -46,6 +46,9 @@
                     <thead>
                         <tr>
                             <th>NOMOR</th>
+                            <th>Nama Lokasi</th>
+                            <th>Nama zona</th>
+                            <th>Nama Hamparan</th>
                             <th>nama plot</th>
                             <th>TIPE PLOT</th>
                             <th>latitude </th>
@@ -57,6 +60,9 @@
                         @forelse ($plot as $index => $item)
                             <tr>
                                 <td>{{ $plot->firstItem() + $index }}</td>
+                                <td>{{ optional($item->hamparan->zona->poltArea)->daerah ?? '-' }}</td>
+                                <td>{{ optional($item->hamparan->zona)->zona ?? '-' }}</td>
+                                <td>{{ optional($item->hamparan)->nama_hamparan ?? '-' }}</td>
                                 <td>{{ $item->nama_plot }}</td>
                                 <td>{{ $item->type_plot }}</td>
                                 <td>{{ $item->latitude }}</td>

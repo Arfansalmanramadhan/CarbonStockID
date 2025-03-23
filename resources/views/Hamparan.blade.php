@@ -14,8 +14,7 @@
             <div class="table-container">
                 <div class="table-wrapper">
                     <div class="table-header d-flex justify-content-between">
-                        <form method="GET"
-                            action="{{ route('Hamparan.index') }}">
+                        <form method="GET" action="{{ route('Hamparan.index') }}">
                             <div class="tampilkan">
                                 <label for="show-entries">Tampilkan</label>
                                 <select id="show-entries perPageSelect" class="number-selection" name="perPage"
@@ -30,8 +29,8 @@
                         <form method="GET" action="{{ route('Hamparan.index') }}">
                             <div class="d-flex align-items-center">
                                 <div class="form-control-space">
-                                    <input type="text" id="searchInput" name="search" placeholder="Cari..." class="form-control mb-3"
-                                        value="{{ request('search') }}">
+                                    <input type="text" id="searchInput" name="search" placeholder="Cari..."
+                                        class="form-control mb-3" value="{{ request('search') }}">
                                 </div>
                                 <button type="submit" class="btn btn-tambah-data">Cari</button>
                             </div>
@@ -41,6 +40,8 @@
                         <thead>
                             <tr>
                                 <th class="kiriPancang">No</th>
+                                <th>Nama Lokasi</th>
+                                <th>Nama zona</th>
                                 <th>Nama Hamparan</th>
                                 <th>Latitude</th>
                                 <th>Longitude</th>
@@ -71,24 +72,20 @@
                             </tr> --}}
                         </tbody>
                         <tbody id="data-table ">
-                            @forelse ($hamparan as $index => $item)
+                            @forelse ($hamparan as $index => $h)
                                 <tr>
                                     <td>{{ $hamparan->firstItem() + $index }}</td>
-                                    <td>{{ $item->nama_hamparan }}</td>
-                                    <td>{{ $item->latitude }}</td>
-                                    <td>{{ $item->longitude }}</td>
+                                    <td>{{ optional($h->zona)->poltArea->daerah ?? '-' }}</td>
+                                    <td>{{ optional($h->zona)->zona ?? '-' }}</td>
+                                    <td>{{ $h->nama_hamparan ?? '-' }}</td>
+                                    <td>{{ $h->latitude ?? '-' }}</td>
+                                    <td>{{ $h->longitude ?? '-' }}</td>
                                     <td class="hidden-column aksi-button">
-                                        {{-- <a href="{{ route('plot.getPlot', ['slug' => $item->slug]) }}"
-                                            class="btn btn-info btn-sm">Detail</a> --}}
-                                        <form action="{{ route('plot.getPlot', ['id' => $item->id]) }}" method="get">
+                                        <form action="{{ route('plot.getPlot', ['id' => $h->id]) }}" method="get">
                                             <button type="submit" class="view-btn">
                                                 <img src="{{ asset('/images/Eye.svg') }}" alt="" />
                                             </button>
                                         </form>
-                                        {{-- <button onclick="window.location.href='{{ route('Hamparan.edit',['slugZ' => $zona->slug,'slugH' => $item->slug]) }}'"
-                                            class="add-btn">
-                                            <img src="{{ asset('/images/PencilSquare.svg') }}" alt="Add" />
-                                        </button> --}}
                                         <button class="delete-btn">
                                             <img src="{{ asset('/images/Trash.svg') }}" alt="Delete" />
                                         </button>
@@ -96,9 +93,11 @@
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="7" class="text-center">Belum ada data</td>
+                                    <td colspan="6" class="text-center">Belum ada data</td>
                                 </tr>
                             @endforelse
+
+
 
                         </tbody>
 
@@ -124,7 +123,8 @@
                                 @endforeach
 
                                 @if ($hamparan->hasMorePages())
-                                    <li class="page-item"><a class="page-link" href="{{ $hamparan->nextPageUrl() }}">Lanjut</a>
+                                    <li class="page-item"><a class="page-link"
+                                            href="{{ $hamparan->nextPageUrl() }}">Lanjut</a>
                                     </li>
                                 @else
                                     <li class="page-item disabled"><span class="page-link">Lanjut</span></li>

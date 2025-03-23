@@ -17,15 +17,21 @@ class HamparanController extends Controller
         $user = Auth::user();
         $search = $request->query("search");
         $perPage = $request->query('per_page', 5);
-        $query = Hamparan::query();
+        $poltArea = PoltArea::with('zona')->get();
+        $zona = Zona::with('hamparan')->get();
+        $query = Hamparan::with(['zona.poltArea']);
+
+        // Pencarian
         if (!empty($search)) {
             $query->where('nama_hamparan', 'ILIKE', "%{$search}%")
-                ->orWhere('jenis_hutan', 'ILIKE', "%{$search}%");
+                ->orWhereHas('zona', function ($q) use ($search) {
+                    $q->where('zona', 'ILIKE', "%{$search}%");
+                })
+                ->orWhereHas('zona.poltArea', function ($q) use ($search) {
+                    $q->where('daerah', 'ILIKE', "%{$search}%");
+                });
         }
-
-        // $poltArea = $query->paginate($perPage);
-
-        /// Ambil data dengan pagination
+        // Ambil data dengan pagination
         $hamparan = $query->paginate($perPage)->appends([
             'search' => $search,
             'per_page' => $perPage
@@ -57,7 +63,7 @@ class HamparanController extends Controller
             'per_page' => $perPage
         ]);
 
-        return view('show.Hamparan', compact('hamparan','user', 'search', 'perPage', 'zona', 'poltArea'));
+        return view('show.Hamparan', compact('hamparan', 'user', 'search', 'perPage', 'zona', 'poltArea'));
     }
     public function tambah($id)
     {
@@ -97,13 +103,13 @@ class HamparanController extends Controller
         // $user = Auth::user();
         $zona = Zona::where('slug', $slugZ)->firstOrFail();
         $hamparan = Hamparan::where('slug', $slugH)->where('zona_id', $zona->id)->firstOrFail();
-        return view('edit.Hamparan', compact( 'zona', 'hamparan'));
+        return view('edit.Hamparan', compact('zona', 'hamparan'));
     }
 
     public function update(Request $request, $slugZ, $slugH)
     {
         $validatedData = $request->validate([
-            'nama_hamparan' => 'required|string|max:255|unique:hamparan,nama_hamparan,'.$slugH. ',slug',
+            'nama_hamparan' => 'required|string|max:255|unique:hamparan,nama_hamparan,' . $slugH . ',slug',
             'latitude' => 'required|numeric',
             'longitude' => 'required|numeric',
         ]);
