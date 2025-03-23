@@ -660,21 +660,36 @@ class zonaController extends Controller
                 ->get();
 
             $zonaa = Zona::select(
-                DB::raw('SUM(serasah.co2) as serasah_co2'),
-                DB::raw('SUM(serasah.kandungan_karbon) as serasah_kandungan_karbon'),
-                DB::raw('SUM(serasah.total_berat_kering) as serasah_total_berat_kering'),
+                DB::raw('COALESCE(SUM(serasah.co2), 0) as serasah_co2'),
+                DB::raw('COALESCE(SUM(serasah.kandungan_karbon), 0) as serasah_kandungan_karbon'),
+                DB::raw('COALESCE(SUM(serasah.total_berat_kering), 0) as serasah_total_berat_kering'),
 
-                DB::raw('SUM(semai.co2) as semai_co2'),
-                DB::raw('SUM(semai.kandungan_karbon) as semai_kandungan_karbon'),
-                DB::raw('SUM(semai.total_berat_kering) as semai_total_berat_kering'),
+                DB::raw('COALESCE(SUM(semai.co2), 0) as semai_co2'),
+                DB::raw('COALESCE(SUM(semai.kandungan_karbon), 0) as semai_kandungan_karbon'),
+                DB::raw('COALESCE(SUM(semai.total_berat_kering), 0) as semai_total_berat_kering'),
 
-                DB::raw('SUM(tumbuhan_bawah.co2) as tumbuhan_bawah_co2'),
-                DB::raw('SUM(tumbuhan_bawah.kandungan_karbon) as tumbuhan_bawah_kandungan_karbon'),
-                DB::raw('SUM(tumbuhan_bawah.total_berat_kering) as tumbuhan_bawah_total_berat_kering'),
+                DB::raw('COALESCE(SUM(tumbuhan_bawah.co2), 0) as tumbuhan_bawah_co2'),
+                DB::raw('COALESCE(SUM(tumbuhan_bawah.kandungan_karbon), 0) as tumbuhan_bawah_kandungan_karbon'),
+                DB::raw('COALESCE(SUM(tumbuhan_bawah.total_berat_kering), 0) as tumbuhan_bawah_total_berat_kering'),
 
-                DB::raw('SUM(necromass.co2) as necromass_co2'),
-                DB::raw('SUM(necromass.biomasa) as necromass_total_biomasa'),
-                DB::raw('SUM(necromass.carbon) as necromass_total_carbon')
+                DB::raw('COALESCE(SUM(necromass.co2), 0) as necromass_co2'),
+                DB::raw('COALESCE(SUM(necromass.biomasa), 0) as necromass_total_biomasa'),
+                DB::raw('COALESCE(SUM(necromass.carbon), 0) as necromass_total_carbon'),
+                // DB::raw('SUM(serasah.co2) as serasah_co2'),
+                // DB::raw('SUM(serasah.kandungan_karbon) as serasah_kandungan_karbon'),
+                // DB::raw('SUM(serasah.total_berat_kering) as serasah_total_berat_kering'),
+
+                // DB::raw('SUM(semai.co2) as semai_co2'),
+                // DB::raw('COALESCE(SUM(serasah.kandungan_karbon), 0) as serasah_kandungan_karbon'),
+                // DB::raw('SUM(semai.total_berat_kering) as semai_total_berat_kering'),
+
+                // DB::raw('SUM(tumbuhan_bawah.co2) as tumbuhan_bawah_co2'),
+                // DB::raw('SUM(tumbuhan_bawah.kandungan_karbon) as tumbuhan_bawah_kandungan_karbon'),
+                // DB::raw('SUM(tumbuhan_bawah.total_berat_kering) as tumbuhan_bawah_total_berat_kering'),
+
+                // DB::raw('SUM(necromass.co2) as necromass_co2'),
+                // DB::raw('SUM(necromass.biomasa) as necromass_total_biomasa'),
+                // DB::raw('SUM(necromass.carbon) as necromass_total_carbon')
             )
                 ->leftJoin('hamparan', 'hamparan.zona_id', '=', 'zona.id')
 
@@ -732,6 +747,8 @@ class zonaController extends Controller
 
             $hasilNecromascarbon = ($jumlahNecromas > 0) ? ($zonaa->necromass_total_carbon / $jumlahNecromas) : 0;
             $NecromassCarbon = ((float) $hasilNecromascarbon / 1000000) * 10000 / 400;
+            // dd($NecromassCarbon, $tumbuhan_bawahKarbon, $semaiKarbon, $SerasahKarbon);
+            // dd($zonaa);
             // klandungan karbon
             $Biomassadiataspermukaantanah = $TotalPancangbiomimasa +  $TotalTiangbiomasa + $TotalPohonbiomasa + $Serasahberatkering +  $semaiberatkering +  $tumbuhan_bawahberatkering +   $Necromassbiomasa;
             $Kandungankarbon = $TotalPancangkarbon +  $TotalTiangKarbon + $TotalPohonkarbon + $SerasahKarbon +  $semaiKarbon + $tumbuhan_bawahKarbon + $NecromassCarbon;

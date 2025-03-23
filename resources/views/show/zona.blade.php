@@ -129,8 +129,8 @@
                 <div class="d-flex justify-content-between">
 
                     <h4 class="card-title mb-4">Data Subplot</h4>
-                    <button onclick="window.location.href='{{ route('hitung.index') }}'"
-                        class="btn btn-tambah-data mb-4">Kalklasi perhitungan</button>
+                    <button onclick="window.location.href='{{ route('ringkasan.index',['slug' => $poltArea->slug ?? 'default-slug']) }}'"
+                        class="btn btn-tambah-data mb-4">Unduih</button>
                 </div>
                 <ul class=" nav nav-tabs nav-bordered nav-justified overflow-x-auto">
                     <li class="activee nav-item jarak" id="pertama">Serasah</li>

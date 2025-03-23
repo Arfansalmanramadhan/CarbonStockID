@@ -43,7 +43,7 @@
                     </div>
                 </div>
                 <div class="table-wrapper">
-                    <table class="custom-table-pancang">
+                    <table class="custom-table-pancang table">
                         <thead>
                             <tr>
                                 <th class="kiriPancang">No</th>
@@ -97,10 +97,10 @@
                                                 <img src="{{ asset('/images/Eye.svg') }}" alt="" />
                                             </button>
                                         </form>
-                                        <button onclick="window.location.href='{{ route('Lokasi.edit', $index->slug) }}'"
+                                        {{-- <button onclick="window.location.href='{{ route('Lokasi.edit', $index->slug) }}'"
                                             class="add-btn">
                                             <img src="{{ asset('/images/PencilSquare.svg') }}" alt="Add" />
-                                        </button>
+                                        </button> --}}
                                         <button class="delete-btn">
                                             <img src="{{ asset('/images/Trash.svg') }}" alt="" />
                                         </button>

@@ -178,10 +178,7 @@ Route::middleware('auth')->group(function () {
         Route::post("/Pohon/update/{id}", "update");
         Route::delete("/Pohon/{id}", "destroy");
     });
-    Route::controller(RingkasanController::class)->group(function () {
-        Route::get("/hitung", 'index')->name('hitung.index');
-        Route::get("/ringkasan", 'indexx')->name('ringkasan.indexx');
-    });
+
     Route::controller(PeriodeController::class)->group(function () {
         Route::get('/Manajemen-Tim', 'index')->name('Manajemen-Tim.index');
         Route::post('/Manajemen-Tim', 'store')->name('Manajemen-Tim.store');
@@ -213,6 +210,12 @@ Route::middleware('auth')->group(function () {
         Route::get('/Verifikasi', 'view')->name('Verifikasi.index');
         Route::get('/veri/{slug}', 'menyetujui')->name('Verifikasi.menyetujui');
 
+    });
+    Route::controller(RingkasanController::class)->group(function () {
+        Route::get("/Lokasi/zona/hitung/{slug}", 'index')->name('ringkasan.index');
+        Route::get("/Lokasi/zona/hitung/dowloan {slug}", "ringkasann")->name('ringkasann.ringkasan');
+        Route::get("/Lokasi/zona/hitung/pdf/{slug}", "downloadRingkasan")->name('downloadRingkasan.ringkasan');
+        Route::get("/ringkasan", 'indexx')->name('ringkasan.indexx');
     });
     Route::controller(zonaController::class)->group(function () {
         Route::get("/zona", "index")->name('zona.index');
