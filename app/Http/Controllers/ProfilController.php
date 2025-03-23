@@ -55,89 +55,89 @@ class ProfilController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request, $id)
-    {
-        // dd("Haniiifff ");
-        // dd(Profil::findOrFail($id));
-        // dd($request->all());
-        if (User::find($id)) {
+    // public function store(Request $request, $id)
+    // {
+    //     // dd("Haniiifff ");
+    //     // dd(Profil::findOrFail($id));
+    //     // dd($request->all());
+    //     if (User::find($id)) {
 
-            try {
-                // dd("Hanif");
-                $validatedData = $request->validate([
-                    'nama_lengkap' => 'required|string|max:255',
-                    'no_hp' => 'required|string|max:15', // Sesuaikan max sesuai dengan batas panjang no_hp
-                    'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048|dimensions:ratio=1/1', // Validasi gambar
-                ], [
-                    'image.max' => 'Gambar tidak boleh lebih dari 2MB.',
-                    'image.dimensions' => 'Gambar harus memiliki rasio 1:1.',
-                ]);
+    //         try {
+    //             // dd("Hanif");
+    //             $validatedData = $request->validate([
+    //                 'nama_lengkap' => 'required|string|max:255',
+    //                 'no_hp' => 'required|string|max:15', // Sesuaikan max sesuai dengan batas panjang no_hp
+    //                 'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048|dimensions:ratio=1/1', // Validasi gambar
+    //             ], [
+    //                 'image.max' => 'Gambar tidak boleh lebih dari 2MB.',
+    //                 'image.dimensions' => 'Gambar harus memiliki rasio 1:1.',
+    //             ]);
 
-                // dd($id);
-                $User = User::findOrFail($id);
+    //             // dd($id);
+    //             $User = User::findOrFail($id);
 
-                // Jika ada file gambar baru
-                if ($request->hasFile('image')) {
-                    $image = $request->file('image');
-                    $imageName = time() . '.' . $image->getClientOriginalExtension();
-                    $image->move(public_path('images/profils'), $imageName); // Simpan gambar ke folder public/images/profils
+    //             // Jika ada file gambar baru
+    //             if ($request->hasFile('image')) {
+    //                 $image = $request->file('image');
+    //                 $imageName = time() . '.' . $image->getClientOriginalExtension();
+    //                 $image->move(public_path('images/profils'), $imageName); // Simpan gambar ke folder public/images/profils
 
-                    // Update data profil dengan path gambar baru
-                    $User->update(array_merge(
-                        $request->all(),
-                        ['image' => 'images/users/' . $imageName]
-                    ));
-                } else {
-                    // Update data User tanpa gambar
-                    $User->update($request->all());
-                }
-                // return response()->json([
-                //     "success" => true,
-                //     "message" => "Data updated successfully",
-                //     "data" => $profil
-                // ], 200);
-                return redirect()->back()->with('success', 'Profil berhasil diperbarui.');
-            } catch (Exception $e) {
-                return redirect()->back()->with('error', $e->getMessage());
-                // return response()->json([
-                //     "message" => $e->getMessage()
-                // ], 500);
-            }
-        } else {
+    //                 // Update data profil dengan path gambar baru
+    //                 $User->update(array_merge(
+    //                     $request->all(),
+    //                     ['image' => 'images/users/' . $imageName]
+    //                 ));
+    //             } else {
+    //                 // Update data User tanpa gambar
+    //                 $User->update($request->all());
+    //             }
+    //             // return response()->json([
+    //             //     "success" => true,
+    //             //     "message" => "Data updated successfully",
+    //             //     "data" => $profil
+    //             // ], 200);
+    //             return redirect()->back()->with('success', 'Profil berhasil diperbarui.');
+    //         } catch (Exception $e) {
+    //             return redirect()->back()->with('error', $e->getMessage());
+    //             // return response()->json([
+    //             //     "message" => $e->getMessage()
+    //             // ], 500);
+    //         }
+    //     } else {
 
-            try {
-                // dd("Hanif");
-                // Jika request memiliki file gambar
-                if ($request->hasFile('image')) {
-                    $image = $request->file('image');
-                    $imageName = time() . '.' . $image->getClientOriginalExtension();
-                    $image->move(public_path('images/profils'), $imageName); // Simpan gambar ke folder public/images/profils
+    //         try {
+    //             // dd("Hanif");
+    //             // Jika request memiliki file gambar
+    //             if ($request->hasFile('image')) {
+    //                 $image = $request->file('image');
+    //                 $imageName = time() . '.' . $image->getClientOriginalExtension();
+    //                 $image->move(public_path('images/profils'), $imageName); // Simpan gambar ke folder public/images/profils
 
-                    // Simpan profil dengan path gambar
-                    $profil = Profil::create(array_merge(
-                        $request->all(),
-                        ['image' => 'images/profils/' . $imageName] // Simpan path gambar ke database
-                    ));
-                } else {
-                    // Jika tidak ada gambar
-                    $profil = Profil::create($request->all());
-                }
-                // return response()->json([
-                //     "sukses" => true,
-                //     "pesan" => "Data profil berhasil terkirim",
-                //     "data" => $profil
+    //                 // Simpan profil dengan path gambar
+    //                 $profil = Profil::create(array_merge(
+    //                     $request->all(),
+    //                     ['image' => 'images/profils/' . $imageName] // Simpan path gambar ke database
+    //                 ));
+    //             } else {
+    //                 // Jika tidak ada gambar
+    //                 $profil = Profil::create($request->all());
+    //             }
+    //             // return response()->json([
+    //             //     "sukses" => true,
+    //             //     "pesan" => "Data profil berhasil terkirim",
+    //             //     "data" => $profil
 
-                // ], 200);
+    //             // ], 200);
 
-                // dd($profil);
-            } catch (Exception $e) {
-                Log::error('Error saat menyimpan profil: ' . $e->getMessage(), ['exception' => $e]);
-                return response()->json([
-                    "pesan"  => $e->getMessage()
-                ], 500);
-            }
-        }
-    }
+    //             // dd($profil);
+    //         } catch (Exception $e) {
+    //             Log::error('Error saat menyimpan profil: ' . $e->getMessage(), ['exception' => $e]);
+    //             return response()->json([
+    //                 "pesan"  => $e->getMessage()
+    //             ], 500);
+    //         }
+    //     }
+    // }
 
     /**
      * Display the specified resource.
@@ -168,27 +168,28 @@ class ProfilController extends Controller
         try {
             // dd("Hanif");
             $validatedData = $request->validate([
-                'nama' => 'required|string|max:255',
+                'nama' => 'sometimes|string|max:255',
                 'foto' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048|dimensions:ratio=1/1', // Validasi gambar
                 'nip' => 'nullable|string|max:15',
                 'no_hp' => 'nullable|string|max:15', // Sesuaikan max sesuai dengan batas panjang no_hp
                 'nik' => 'nullable|string|max:15',
                 'foto_ktp' => 'nullable|mimes:jpeg,png,jpg,pdf|max:2048',
+                'foto_tandatangan' => 'nullable|mimes:jpeg,png,jpg,pdf|max:2048',
             ], [
                 'foto.max' => 'Gambar tidak boleh lebih dari 2MB.',
                 'foto.dimensions' => 'Gambar harus memiliki rasio 1:1.',
             ]);
             // Cari pengguna berdasarkan slug
             $user = User::where('slug', $slug)->firstOrFail();
-
+            dd($request->all());
             // Mengupdate gambar profil jika ada file gambar baru
             if ($request->hasFile('foto')) {
-                // Hapus gambar lama jika ada
+                // Hapus foto lama jika ada
                 if ($user->foto) {
-                    Storage::delete($user->foto); // Menghapus file lama
+                    Storage::delete($user->foto);
                 }
 
-                // Simpan gambar baru
+                // Simpan foto baru
                 $image = $request->file('foto');
                 $imageName = time() . '.' . $image->getClientOriginalExtension();
                 $image->move(public_path('images/profils'), $imageName);
@@ -205,12 +206,26 @@ class ProfilController extends Controller
                 // Simpan foto KTP baru
                 $ktpImage = $request->file('foto_ktp');
                 $ktpImageName = time() . '.' . $ktpImage->getClientOriginalExtension();
-                $ktpImage->move(public_path('images/profils'), $ktpImageName);
-                $validatedData['foto_ktp'] = 'images/profils/' . $ktpImageName;
+                $ktpImage->move(public_path('images/ktp'), $ktpImageName);
+                $validatedData['foto_ktp'] = 'images/ktp/' . $ktpImageName;
+            }
+            // Mengupdate foto KTP jika ada file baru
+            if ($request->hasFile('foto_tandatangan')) {
+                // Hapus foto KTP lama jika ada
+                if ($user->foto_tandatangan) {
+                    Storage::delete($user->foto_tandatangan); // Menghapus file lama
+                }
+
+                // Simpan foto KTP baru
+                $ktpImage = $request->file('foto_tandatangan');
+                $ktpImageName = time() . '.' . $ktpImage->getClientOriginalExtension();
+                $ktpImage->move(public_path('images/ktp'), $ktpImageName);
+                $validatedData['foto_tandatangan'] = 'images/ktp/' . $ktpImageName;
             }
 
             // Update data pengguna
             $user->update($validatedData);
+            // dd( $user);
             // return response()->json([
             //     "success" => true,
             //     "message" => "Data updated successfully",

@@ -1,21 +1,19 @@
 document.getElementById("uploadButton").addEventListener("click", function () {
-  // Trigger file input click when the button is pressed
-  document.getElementById("fileInput").click();
-});
+    // Trigger file input click when the button is pressed
+    document.getElementById("fileInput").click();
+  });
 
-document.getElementById("fileInput").addEventListener("change", function (event) {
-  const file = event.target.files[0]; // Get the selected file
-  if (file) {
-    if (file.size > 2 * 1024 * 1024) {
-      // Check if file size is more than 2MB
-      alert("File harus berukuran tidak lebih dari 2MB.");
-      return;
-    }
+  document.getElementById("fileInput").addEventListener("change", function (event) {
+    const file = event.target.files[0]; // Get the selected file
+    if (file) {
+      if (file.size > 2 * 1024 * 1024) {
+        alert("File harus berukuran tidak lebih dari 2MB.");
+        event.target.value = ""; // Reset input file
+        return;
+      }
 
-    const reader = new FileReader(); // Create a FileReader to read the image
-    reader.onload = function (e) {
       const img = new Image();
-      img.src = e.target.result;
+      img.src = URL.createObjectURL(file); // Lebih cepat daripada FileReader()
 
       img.onload = function () {
         const width = img.width;
@@ -24,16 +22,15 @@ document.getElementById("fileInput").addEventListener("change", function (event)
         // Check if the image ratio is 1:1
         if (width !== height) {
           alert("File harus memiliki rasio 1:1.");
+          event.target.value = ""; // Reset input file
         } else {
           // Update the image preview if the file is valid
           const profileImage = document.querySelector('img[alt="User Photo"]');
-          profileImage.src = e.target.result;
+          profileImage.src = img.src;
           profileImage.style.borderRadius = "8px"; // Add border-radius
         }
+
+        URL.revokeObjectURL(img.src); // Hapus URL setelah dipakai untuk menghemat memori
       };
-    };
-
-    reader.readAsDataURL(file); // Read the file as a data URL to display the image
-  }
-});
-
+    }
+  });

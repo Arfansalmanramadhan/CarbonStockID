@@ -54,19 +54,20 @@
         </div>
         <div class="card p-4 shadow-sm">
             <div class="card-body">
-                <form class="form" id="profileForm" action="{{ route('profile.update', $user->slug) }}"
-                    method="POST">
+                <form class="form" id="profileForm" action="{{ route('profile.update', $user->slug) }}" method="POST"
+                    enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
                     <input type="hidden" id="registrasi_id" name="registrasi_id" value="{{ $user->id }}"
                         enctype="multipart/form-data">
                     <div class="profile-container d-flex align-items-center">
-                        <img src="{{ $user->foto ? asset($user->foto) : asset('/images/profileImage.svg') }}"
+                        <img id="previewImage"
+                            src="{{ $user->foto ? asset($user->foto) : asset('/images/profileImage.svg') }}"
                             alt="User Photo" width="168" />
                         <div>
                             <button type="button" class="btn btn-success mb-2" id="uploadButton">Pilih Foto</button>
                             <input type="file" class="foto-image" name="foto" id="fileInput" accept="image/*"
-                                style="display: none" />
+                                style="display: none">
                             <p class="text-muted">Gambar Profile Anda sebaiknya memiliki rasio 1:1 dan berukuran tidak
                                 lebih dari 2MB.</p>
                         </div>
@@ -74,7 +75,7 @@
                     <div class="mb-2">
                         <label for="nama" class="form-label ms-1">Nama Lengkap</label>
                         <input type="text" class="form-control" id="nama" name="nama"
-                            placeholder="Masukan nama lengkap" value="{{ old('nama', $user->nama) }}"/>
+                            placeholder="Masukan nama lengkap" value="{{ old('nama', $user->nama) }}" />
                     </div>
                     {{-- {{ Auth::user() }} --}}
                     <div class="mb-2">
@@ -107,6 +108,12 @@
                         <input class="form-control" type="file"
                             id="formFile"accept="image/jpeg,image/png,image/jpg,application/pdf" name="foto_ktp"
                             value="{{ old('foto_ktp', $user->foto_ktp) }}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="formFile" class="form-label">Tanda tangan digital</label>
+                        <input class="form-control" type="file"
+                            id="formFile"accept="image/jpeg,image/png,image/jpg,application/pdf"
+                            name="foto_tandatangan" value="{{ old('foto_tandatangan', $user->foto_tandatangan) }}">
                     </div>
 
                     <button type="submit" class="btn btn-simpan-perubahan">Simpan Perubahan</button>

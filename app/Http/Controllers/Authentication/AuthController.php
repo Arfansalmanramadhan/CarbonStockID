@@ -88,7 +88,7 @@ class AuthController extends Controller
             return redirect()->route('login')->with('success', 'Pengguna berhasil registrasi, silakan login');
         } catch (Exception $error) {
             DB::rollBack();
-            return redirect()->back()->with('error', 'Registrasi gagal, silakan coba lagi');
+            return redirect()->back()->with('error', 'Registrasi gagal, silakan coba lagi' . $error->getMessage());
         }
         // try {
         //     $request["password"] = Hash::make($request->password);
