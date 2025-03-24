@@ -6,24 +6,18 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" />
 
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&family=Inter:wght@400;700&display=swap"
-        rel="stylesheet" />
+    <link rel="stylesheet" href="{{ asset('css/font.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/font-awesome.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}" />
+
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{{ asset('css/styleDashboard.css') }}" />
 
-    <!-- Chart.js -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chartjs-chart-financial"></script>
 
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" /> --}}
 
     <!-- Favicon -->
     <link rel="icon" href="{{ $user->image ? asset($user->image) : asset('/images/PersonFill.svg') }}"
@@ -246,16 +240,16 @@
         {{-- </section> --}}
     </main>
     <!-- Bootstrap JS Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    {{-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> --}}
     <script src="https://cdn.jsdelivr.net/npm/chartjs-chart-financial"></script>
 
     <script src="{{ asset('js/scriptDashboard.js') }}"></script>
+    <script src="{{ asset('/js/chart.js') }}"></script>
+    <script src="{{ asset('/js/chart-financial.js') }}"></script>
     <!-- Highcharts Library -->
-    <script src="https://code.highcharts.com/stock/highstock.js"></script>
-    <script src="https://code.highcharts.com/stock/highstock.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
-    </script>
+    <script src="{{ asset('/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('/js/highstock.js') }}"></script>
+    {{-- <script src="https://code.highcharts.com/stock/highstock.js"></script> --}}
 </body>
 
 </html>

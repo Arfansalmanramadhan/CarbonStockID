@@ -6,30 +6,25 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <link href="https://api.mapbox.com/mapbox-gl-js/v2.13.0/mapbox-gl.css" rel="stylesheet" />
+    {{-- <link href="https://api.mapbox.com/mapbox-gl-js/v2.13.0/mapbox-gl.css" rel="stylesheet" /> --}}
 
     <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" />
+    {{-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" /> --}}
 
     <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&family=Inter:wght@400;700&display=swap"
-        rel="stylesheet" />
+    <link rel="stylesheet" href="{{ asset('css/font.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/font-awesome.css') }}" />
 
     <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/mapbox.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/mapbox2.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/mapbox-gl.css') }}" />
     <link rel="stylesheet" href="{{ asset('css/tambahData.css') }}" />
-    <script src="https://api.mapbox.com/mapbox-gl-js/v2.10.0/mapbox-gl.js"></script>
-    <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/v2.10.0/mapbox-gl.css">
-    <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.0/mapbox-gl-geocoder.min.js"></script>
-    <link rel="stylesheet"
-        href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.0/mapbox-gl-geocoder.css"
-        type="text/css">
-    <!-- Chart.js -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" /> --}}
 
     <!-- Favicon -->
     <link rel="icon" href="{{ asset('/images/logoCarbonStockID-LightMode.png') }}" type="image/x-icon" />
@@ -96,12 +91,23 @@
         @yield('content')
     </div>
 
+
+    {{-- <script src="https://api.mapbox.com/mapbox-gl-js/v2.10.0/mapbox-gl.js"></script> --}}
+    {{-- <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.0/mapbox-gl-geocoder.min.js"></script> --}}
+    <!-- Chart.js -->
+    {{-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> --}}
     <!-- Custom JS -->
+    {{-- <script src="https://api.mapbox.com/mapbox-gl-js/v2.13.0/mapbox-gl.js"></script> --}}
+    <script src="{{ asset('/js/chart.js') }}"></script>
     <script src="https://api.mapbox.com/mapbox-gl-js/v2.13.0/mapbox-gl.js"></script>
+    <script src="{{ asset('/js/mapbox-gl-geocoder.js') }}"></script>
+    <script src="{{ asset('/js/mapbox-gl.js') }}"></script>
+    <script src="{{ asset('/js/mapbox-gll.js') }}"></script>
     <script src="{{ asset('/js/tambahData.js') }}"></script>
+    <script src="{{ asset('/js/bootstrap.min.js') }}"></script>
 
     <!-- Bootstrap JS Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    {{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script> --}}
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             var toastEl = document.getElementById('myToast');
