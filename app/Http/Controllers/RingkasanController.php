@@ -17,6 +17,7 @@ use App\Models\PoltArea;
 use App\Models\Zona;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
+
 class RingkasanController extends Controller
 {
     public function index($slug)
@@ -27,7 +28,7 @@ class RingkasanController extends Controller
         $formattedDate = Carbon::parse($poltArea->created_at)->format('d M Y');
         $ringkasan = $this->ringkasann($slug)->getData()['ringkasan'];
         $ringkasann = $this->ringkasann($slug)->getData()['ringkasann'];
-        return view("tambah.ringkasan2", compact("user",  'poltArea', 'zona', 'ringkasan', 'ringkasann', 'formattedDate'));
+        return view("tambah.ringkasan", compact("user",  'poltArea', 'zona', 'ringkasan', 'ringkasann', 'formattedDate'));
     }
     public function downloadRingkasan($slug)
     {
@@ -38,7 +39,18 @@ class RingkasanController extends Controller
         $ringkasann = $this->ringkasann($slug)->getData()['ringkasann'];
 
         // Load view untuk PDF
-        $pdf = PDF::loadView('tambah.ringkasan2', compact('poltArea', 'ringkasan', 'ringkasann', 'user', 'zona'));
+        // $pdf = PDF::loadView('tambah.ringkasan', compact('poltArea', 'ringkasan', 'ringkasann', 'user', 'zona'))
+        //     ->setPaper('a4', 'portrait');
+        $pdf = PDF::loadView('tambah.ringkasan', [
+            'poltArea' => $poltArea,
+            'ringkasan' => $ringkasan,
+            'ringkasann' => $ringkasann,
+            'user' => $user,
+            'zona' => $zona,
+            'pdf' => true // Tambahkan ini
+        ])->setPaper('portrait')
+            ->set_option('isHtml5ParserEnabled', true);
+
 
         // Unduh PDF
         return $pdf->download('ringkasan-' . $slug . '.pdf');
@@ -577,6 +589,6 @@ class RingkasanController extends Controller
         // dd($ringkasann);
         // dd( $ringkasan);
 
-        return view('tambah.ringkasan2', compact('ringkasan', 'poltArea', 'ringkasann'),);
+        return view('tambah.ringkasan', compact('ringkasan', 'poltArea', 'ringkasann'),);
     }
 }
