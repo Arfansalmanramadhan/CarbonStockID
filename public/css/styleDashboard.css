@@ -1089,9 +1089,10 @@ html, body {
 
 .aksi-button {
   display: flex;
-  width: 101px;
+  width: 100%;
   align-items: center;
-  gap: 14px;
+  gap: 14px 20px;
+
 }
 
 /* ---------------------------------- Sampah konten -----------------------------------*/
@@ -1246,24 +1247,28 @@ html, body {
 
 .custom-table-pancang tbody td {
     padding: 12px;
+    /* margin: 12px 0; */
     font-weight: 700;
     color: #6c7581;
     /* Warna teks */
     font-size: 16px;
     text-align: left;
+
 }
 
 /* .custom-table-pancang tbody tr {
               border: 1px solid #4caf4f;
             } */
 
-.custom-table-pancang tfoot td {
-    background-color: #4caf4f;
+.custom-table-pancang tr td {
+    /* background-color: #4caf4f; */
     /* Warna hijau untuk footer */
-    color: white;
+    /* color: white; */
     font-weight: bold;
-    padding: 12px;
+    padding: 19px ;
+    margin: 12px 0;
     text-align: left;
+    z-index: 66;
 }
 
 .aksi-button {

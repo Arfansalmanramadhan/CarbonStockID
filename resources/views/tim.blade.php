@@ -1,13 +1,13 @@
 @extends('layout.mainlayaot')
 
-@section('title', 'Anggota')
+@section('title', 'tim')
 
 @section('content')
     <div id="prediksi-content" class="page-content content p-4">
         <div class="image-container mt-4">
             <div class="col page-title">
                 <img src="{{ asset('/images/dataPlot-Image.svg') }}" alt="" class="img-normal" />
-                <p class="large-text text-overlay">Anggota Tim {{ $tim->nama }}</p>
+                <p class="large-text text-overlay">Lokasi {{ $lokasi->daerah }}</p>
             </div>
         </div>
         <div class="table-container">
@@ -17,13 +17,13 @@
             @if (session('error'))
                 <div class="alert alert-danger">{{ session('error') }}</div>
             @endif
-            <form method="post" action="{{ route('anggota.storee', $tim->id) }}">
+            <form method="post" action="{{ route('tim.storee', $lokasi->id) }}" >
                 <div class="row">
                     @csrf
-                    <label for="registrasi_id">Pilih Anggota:</label>
-                    <select name="registrasi_id" required>
-                        @foreach ($registrasi as $user)
-                            <option value="{{ $user->id }}">{{ $user->nama }} ({{ $user->username }})</option>
+                    <label for="tim_id">Pilih Tim:</label>
+                    <select name="tim_id" required>
+                        @foreach ($tim as $tims)
+                            <option value="{{ $tims->id }}">{{ $tims->nama }} </option>
                         @endforeach
                     </select>
                     <div class="row">
@@ -39,20 +39,19 @@
                         <thead>
                             <tr>
                                 <th class="kiriPancang">No</th>
-                                <th>Nama Anggota</th>
-                                <th>Username</th>
+                                <th>Nama Daerah</th>
                                 <th>Nama Tim</th>
-                                {{-- <th class="hidden-column kananPancang">Aksi</th> --}}
+                                <th class="hidden-column kananPancang">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
+                            {{-- {{dd($anggota);}} --}}
                             @if ($anggota->isNotEmpty())
                                 @forelse($anggota as $index => $t)
                                     <tr>
                                         <td>{{ $index + 1 }}</td>
-                                        <td>{{ $t->nama_anggota }}</td>
-                                        <td>{{ $t->username }}</td>
-                                        <td>{{ $t->nama_tim }}</td>
+                                        <td>{{ $t->nama_lokasi }}</td>
+                                        <td>{{ $t->tim }}</td>
                                         {{-- <td class="hidden-column aksi-button">
                                             <button class="view-btn">
                                                 <img src="{{ asset('/images/Eye.svg') }}" alt="" />

@@ -112,70 +112,158 @@ class RingkasanController extends Controller
             $faktor =   $zona->luas_lokasi ?? 11.5;
             // $faktor =  max((float) $zona->luas_lokasi, 11.5);
             // Perhitungan Pancang
-            $constantPancang = 25;
-            $TotalPancangco2 = ($zona->pancang_avg_co2 * ($zona->total_pohon_pancang / $constantPancang) * 10000) / 1000;
-            $TotalPancangkarbon = ($zona->pancang_avg_kandungan_karbon * ($zona->total_pohon_pancang / $constantPancang) * 10000) / 1000;
-            $TotalPancangbiomimasa = ($zona->pancang_avg_bio_di_atas_tanah * ($zona->total_pohon_pancang / $constantPancang) * 10000) / 1000;
-            // Perhitungan Mangrove
-            $constantMangrove = 25;
-            $TotalMangroveKarbondioksida = ($zona->mangrove_avg_karbondioksida * ($zona->total_mangrove / $constantMangrove) * 10000) / 1000;
-            $TotalMangrovekarbon = ($zona->mangrove_avg_kandungan_karbon * ($zona->total_mangrove / $constantMangrove) * 10000) / 1000;
-            $TotalMangrovebiomimasa = ($zona->mangrove_avg_biomasa * ($zona->total_mangrove / $constantMangrove) * 10000) / 1000;
+            $zonaid = $zona->polt_area_id;
+            // dd($zona->zona_nama);
+            $zonaData = DB::table('zona')
+                ->leftJoin('hamparan', 'hamparan.zona_id', '=', 'zona.id')
+                ->leftJoin('plot', 'plot.hamparan_id', '=', 'hamparan.id')
+                ->leftJoin('subplot', 'subplot.plot_id', '=', 'plot.id')
+                ->leftJoin('pancang', 'pancang.subplot_id', '=', 'subplot.id')
+                ->leftJoin('tiang', 'tiang.subplot_id', '=', 'subplot.id')
+                ->leftJoin('pohon', 'pohon.subplot_id', '=', 'subplot.id')
+                ->leftJoin('serasah', 'serasah.subplot_id', '=', 'subplot.id')
+                ->leftJoin('semai', 'semai.subplot_id', '=', 'subplot.id')
+                ->leftJoin('necromass', 'necromass.subplot_id', '=', 'subplot.id')
+                ->leftJoin('tanah', 'tanah.subplot_id', '=', 'subplot.id')
+                ->leftJoin('tumbuhan_bawah', 'tumbuhan_bawah.subplot_id', '=', 'subplot.id')
+                ->leftJoin('mangrove', 'mangrove.subplot_id', '=', 'subplot.id')
+                ->where('zona.id', '=', $zona->zona_id)
+                ->groupBy('zona.id') // Pastikan grouping dilakukan per zona
+                ->select(
+                    'zona.id as zona_id',
+                    DB::raw('AVG(pancang.bio_di_atas_tanah) as pancang_avg_bio_di_atas_tanah'),
+                    DB::raw('AVG(pancang.kandungan_karbon) as pancang_avg_kandungan_karbon'),
+                    DB::raw('AVG(pancang.co2) as pancang_avg_co2'),
+                    DB::raw('COUNT(pancang.no_pohon) as total_pohon_pancang'),
+                    // Tiang
+                    DB::raw('AVG(tiang.bio_di_atas_tanah) as tiang_avg_bio_di_atas_tanah'),
+                    DB::raw('AVG(tiang.kandungan_karbon) as tiang_avg_kandungan_karbon'),
+                    DB::raw('AVG(tiang.co2) as tiang_avg_co2'),
+                    DB::raw('COUNT(tiang.no_pohon) as total_tiang'),
+                    // Pohon
+                    DB::raw('AVG(pohon.bio_di_atas_tanah) as pohon_avg_bio_di_atas_tanah'),
+                    DB::raw('AVG(pohon.co2) as pohon_avg_co2'),
+                    DB::raw('AVG(pohon.kandungan_karbon) as pohon_avg_kandungan_karbon'),
+                    DB::raw('COUNT(pohon.no_pohon) as total_pohon'),
+                    // mangrove
+                    DB::raw('SUM(mangrove.biomasa) as mangrove_avg_biomasa'),
+                    DB::raw('SUM(mangrove.karbondioksida) as mangrove_avg_karbondioksida'),
+                    DB::raw('SUM(mangrove.kandungan_karbon) as mangrove_avg_kandungan_karbon'),
+                    DB::raw('COUNT(mangrove.no_pohon) as total_mangrove'),
+                    // Tanah
+                    DB::raw('SUM(tanah.carbonkg) as total_carbon_tanah'),
+                    DB::raw('SUM(tanah.co2kg) as total_co2_tanah'),
+                )
+                ->get();
+            //    dd( $zonaData);
+            // Perhitungan Pancang
 
-            // Perhitungan Tiang
-            $constantTiang = 100;
-            $TotalTiangco2 = ($zona->tiang_avg_co2 * ($zona->total_tiang / $constantTiang) * 10000) / 1000;
-            $TotalTiangKarbon = ($zona->tiang_avg_kandungan_karbon * ($zona->total_tiang / $constantTiang) * 10000) / 1000;
-            $TotalTiangbiomasa = ($zona->tiang_avg_bio_di_atas_tanah * ($zona->total_tiang / $constantTiang) * 10000) / 1000;
+            $totalZona = count($zonaData); // Jumlah total zona yang dihitung
+            // dd($zona);
+            // Inisialisasi total keseluruhan
+            $totalPancangCo2Keseluruhan = 0;
+            $totalPancangKarbonKeseluruhan = 0;
+            $totalPancangBiomassaKeseluruhan = 0;
 
-            // Perhitungan Pohon
-            $constantPohon = 400;
-            $TotalPohonco2 = ($zona->pohon_avg_co2 * ($zona->total_pohon / $constantPohon) * 10000) / 1000;
-            $TotalPohonkarbon = ($zona->pohon_avg_kandungan_karbon * ($zona->total_pohon / $constantPohon) * 10000) / 1000;
-            $TotalPohonbiomasa = ($zona->pohon_avg_bio_di_atas_tanah * ($zona->total_pohon / $constantPohon) * 10000) / 1000;
+            $totalMangroveCo2Keseluruhan = 0;
+            $totalMangroveKarbonKeseluruhan = 0;
+            $totalMangroveBiomassaKeseluruhan = 0;
+
+            $totalTiangCo2Keseluruhan = 0;
+            $totalTiangKarbonKeseluruhan = 0;
+            $totalTiangBiomassaKeseluruhan = 0;
+
+            $totalPohonCo2Keseluruhan = 0;
+            $totalPohonKarbonKeseluruhan = 0;
+            $totalPohonBiomassaKeseluruhan = 0;
+
+            foreach ($zonaData as $zonaa) {
+                $constantPancang = 25;
+                $TotalPancangco2 = ($zonaa->pancang_avg_co2 * ($zonaa->total_pohon_pancang / $constantPancang) * 10000) / 1000;
+                $TotalPancangkarbon = ($zonaa->pancang_avg_kandungan_karbon * ($zonaa->total_pohon_pancang / $constantPancang) * 10000) / 1000;
+                $TotalPancangbiomassa = ($zonaa->pancang_avg_bio_di_atas_tanah * ($zonaa->total_pohon_pancang / $constantPancang) * 10000) / 1000;
+
+                $constantMangrove = 25;
+                $TotalMangroveCo2 = ($zonaa->mangrove_avg_karbondioksida * ($zonaa->total_mangrove / $constantMangrove) * 10000) / 1000;
+                $TotalMangrovekarbon = ($zonaa->mangrove_avg_kandungan_karbon * ($zonaa->total_mangrove / $constantMangrove) * 10000) / 1000;
+                $TotalMangrovebiomassa = ($zonaa->mangrove_avg_biomasa * ($zonaa->total_mangrove / $constantMangrove) * 10000) / 1000;
+
+                $constantTiang = 100;
+                $TotalTiangCo2 = ($zonaa->tiang_avg_co2 * ($zonaa->total_tiang / $constantTiang) * 10000) / 1000;
+                $TotalTiangKarbon = ($zonaa->tiang_avg_kandungan_karbon * ($zonaa->total_tiang / $constantTiang) * 10000) / 1000;
+                $TotalTiangBiomassa = ($zonaa->tiang_avg_bio_di_atas_tanah * ($zonaa->total_tiang / $constantTiang) * 10000) / 1000;
+
+                $constantPohon = 400;
+                $TotalPohonCo2 = ($zonaa->pohon_avg_co2 * ($zonaa->total_pohon / $constantPohon) * 10000) / 1000;
+                $TotalPohonKarbon = ($zonaa->pohon_avg_kandungan_karbon * ($zonaa->total_pohon / $constantPohon) * 10000) / 1000;
+                $TotalPohonBiomassa = ($zonaa->pohon_avg_bio_di_atas_tanah * ($zonaa->total_pohon / $constantPohon) * 10000) / 1000;
+
+                // Tambahkan ke total keseluruhan
+                $totalPancangCo2Keseluruhan += $TotalPancangco2;
+                $totalPancangKarbonKeseluruhan += $TotalPancangkarbon;
+                $totalPancangBiomassaKeseluruhan += $TotalPancangbiomassa;
+
+                $totalMangroveCo2Keseluruhan += $TotalMangroveCo2;
+                $totalMangroveKarbonKeseluruhan += $TotalMangrovekarbon;
+                $totalMangroveBiomassaKeseluruhan += $TotalMangrovebiomassa;
+
+                $totalTiangCo2Keseluruhan += $TotalTiangCo2;
+                $totalTiangKarbonKeseluruhan += $TotalTiangKarbon;
+                $totalTiangBiomassaKeseluruhan += $TotalTiangBiomassa;
+
+                $totalPohonCo2Keseluruhan += $TotalPohonCo2;
+                $totalPohonKarbonKeseluruhan += $TotalPohonKarbon;
+                $totalPohonBiomassaKeseluruhan += $TotalPohonBiomassa;
+            }
+
+            // Hitung rata-rata
+            $rataPancangCo2 = $totalZona ? $totalPancangCo2Keseluruhan / $totalZona : 0;
+            $rataPancangKarbon = $totalZona ? $totalPancangKarbonKeseluruhan / $totalZona : 0;
+            $rataPancangBiomassa = $totalZona ? $totalPancangBiomassaKeseluruhan / $totalZona : 0;
+
+            $rataMangroveCo2 = $totalZona ? $totalMangroveCo2Keseluruhan / $totalZona : 0;
+            $rataMangroveKarbon = $totalZona ? $totalMangroveKarbonKeseluruhan / $totalZona : 0;
+            $rataMangroveBiomassa = $totalZona ? $totalMangroveBiomassaKeseluruhan / $totalZona : 0;
+
+            $rataTiangCo2 = $totalZona ? $totalTiangCo2Keseluruhan / $totalZona : 0;
+            $rataTiangKarbon = $totalZona ? $totalTiangKarbonKeseluruhan / $totalZona : 0;
+            $rataTiangBiomassa = $totalZona ? $totalTiangBiomassaKeseluruhan / $totalZona : 0;
+
+            $rataPohonCo2 = $totalZona ? $totalPohonCo2Keseluruhan / $totalZona : 0;
+            $rataPohonKarbon = $totalZona ? $totalPohonKarbonKeseluruhan / $totalZona : 0;
+            $rataPohonBiomassa = $totalZona ? $totalPohonBiomassaKeseluruhan / $totalZona : 0;
+            // dd([
+            //     'Rata-rata Pancang CO2' => $rataPancangCo2,
+            //     'Rata-rata Pancang Karbon' => $rataPancangKarbon,
+            //     'Rata-rata Pancang Biomassa' => $rataPancangBiomassa,
+
+            //     'Rata-rata Mangrove CO2' => $rataMangroveCo2,
+            //     'Rata-rata Mangrove Karbon' => $rataMangroveKarbon,
+            //     'Rata-rata Mangrove Biomassa' => $rataMangroveBiomassa,
+
+            //     'Rata-rata Tiang CO2' => $rataTiangCo2,
+            //     'Rata-rata Tiang Karbon' => $rataTiangKarbon,
+            //     'Rata-rata Tiang Biomassa' => $rataTiangBiomassa,
+
+            //     'Rata-rata Pohon CO2' => $rataPohonCo2,
+            //     'Rata-rata Pohon Karbon' => $rataPohonKarbon,
+            //     'Rata-rata Pohon Biomassa' => $rataPohonBiomassa,
+            // ]);
+
             // Perhitungan CO2 dari Serasah (dibagi berdasarkan jumlah nilai unik)
-            $uniqueSerasah = DB::table('serasah')
-                ->leftJoin('subplot', 'serasah.subplot_id', '=', 'subplot.id')
-                ->leftJoin('plot', 'subplot.plot_id', '=', 'plot.id')
-                ->leftJoin('hamparan', 'plot.hamparan_id', '=', 'hamparan.id')
-                ->leftJoin('zona', 'hamparan.zona_id', '=', 'zona.id')
-                ->where('zona.id', $zona->zona_id)
-                ->distinct()
-                ->count(); // Ambil jumlah unik zona_id
-            $uniqueSemai = DB::table('semai')
-                ->leftJoin('subplot', 'semai.subplot_id', '=', 'subplot.id')
-                ->leftJoin('plot', 'subplot.plot_id', '=', 'plot.id')
-                ->leftJoin('hamparan', 'plot.hamparan_id', '=', 'hamparan.id')
-                ->leftJoin('zona', 'hamparan.zona_id', '=', 'zona.id')
-                ->where('zona.id', $zona->zona_id)
-                ->distinct()
-                ->count();
-            $uniqueTumbuhanBawah = DB::table('tumbuhan_bawah')
-                ->leftJoin('subplot', 'tumbuhan_bawah.subplot_id', '=', 'subplot.id')
-                ->leftJoin('plot', 'subplot.plot_id', '=', 'plot.id')
-                ->leftJoin('hamparan', 'plot.hamparan_id', '=', 'hamparan.id')
-                ->leftJoin('zona', 'hamparan.zona_id', '=', 'zona.id')
-                ->where('zona.id', $zona->zona_id)
-                ->distinct()
-                ->count();
-            $uniqueNecromas = DB::table('necromass')
-                ->leftJoin('subplot', 'necromass.subplot_id', '=', 'subplot.id')
-                ->leftJoin('plot', 'subplot.plot_id', '=', 'plot.id')
-                ->leftJoin('hamparan', 'plot.hamparan_id', '=', 'hamparan.id')
-                ->leftJoin('zona', 'hamparan.zona_id', '=', 'zona.id')
-                ->where('zona.id', $zona->zona_id)
-                ->distinct()
-                ->count();
-
-            $zonaa = Zona::where('zona.id', $zona->zona_id)
-                ->leftJoin('hamparan', 'hamparan.zona_id', '=', 'zona.id') // Hamparan ke Zona
-                ->leftJoin('plot', 'plot.hamparan_id', '=', 'hamparan.id') // Plot ke Hamparan
+            $uniqueCounts = DB::table('zona')
+                ->leftJoin('hamparan', 'hamparan.zona_id', '=', 'zona.id')
+                ->leftJoin('plot', 'plot.hamparan_id', '=', 'hamparan.id')
                 ->leftJoin('subplot', 'subplot.plot_id', '=', 'plot.id')
                 ->leftJoin('serasah', 'serasah.subplot_id', '=', 'subplot.id')
                 ->leftJoin('semai', 'semai.subplot_id', '=', 'subplot.id')
                 ->leftJoin('tumbuhan_bawah', 'tumbuhan_bawah.subplot_id', '=', 'subplot.id')
                 ->leftJoin('necromass', 'necromass.subplot_id', '=', 'subplot.id')
+                ->where('zona.id', '=', $zona->zona_id)
+                // ->whereNotNull('zona.zona') // Pastikan zona tidak NULL
+                ->where('zona.zona', '!=', '')
                 ->select(
+                    DB::raw('COUNT(DISTINCT TRIM(zona.zona)) as total_zona'),
                     DB::raw('SUM(serasah.co2) as serasah_co2'),
                     DB::raw('SUM(serasah.kandungan_karbon) as serasah_kandungan_karbon'),
                     DB::raw('SUM(serasah.total_berat_kering) as serasah_total_berat_kering'),
@@ -192,63 +280,82 @@ class RingkasanController extends Controller
                     DB::raw('SUM(necromass.biomasa) as necromass_total_biomasa'),
                     DB::raw('SUM(necromass.carbon) as necromass_total_carbon')
                 )
-                ->first(); // Ambil satu objek, bukan Collection
+                ->first();
 
-            $hasilSerasahCo2 = ($uniqueSerasah > 0) ? ($zonaa->serasah_co2 / $uniqueSerasah) : 0;
-            $Serasahco2 = ((float) $hasilSerasahCo2 / 1000000) * 10000;
+            $totalZona = $uniqueCounts->total_zona;
 
-            $hasilSerasahKarbon = ($uniqueSerasah > 0) ? ($zonaa->serasah_kandungan_karbon / $uniqueSerasah) : 0;
-            $SerasahKarbon = ((float) $hasilSerasahKarbon / 1000000) * 10000;
+            $hasilSerasahCo2 = $uniqueCounts->serasah_co2 / $totalZona;;
+            $Serasahco2 = ($hasilSerasahCo2 / 1000000) * 10000;
+            // dd($hasilSerasahCo2);
+            $hasilSerasahKarbon = $uniqueCounts->serasah_kandungan_karbon / $totalZona;;
+            $SerasahKarbon = ($hasilSerasahKarbon / 1000000) * 10000;
 
-            $hasilSerasahberatkering = ($uniqueSerasah > 0) ? ($zonaa->serasah_total_berat_kering / $uniqueSerasah) : 0;
-            $Serasahberatkering = ((float) $hasilSerasahberatkering / 1000000) * 10000;
+            $hasilSerasahberatkering = $uniqueCounts->serasah_total_berat_kering / $totalZona;
+
+            $Serasahberatkering = ($hasilSerasahberatkering / 1000000) * 10000;
             // semai
-            $hasilsemaiCo2 = ($uniqueSemai > 0) ? ($zonaa->semai_co2 / $uniqueSemai) : 0;
-            $semaico2 = ((float) $hasilsemaiCo2 / 1000000) * 10000;
 
-            $hasilsemaiKarbon = ($uniqueSemai > 0) ? ($zonaa->semai_kandungan_karbon / $uniqueSemai) : 0;
-            $semaiKarbon = ((float) $hasilsemaiKarbon / 1000000) * 10000;
 
-            $hasilsemaiberatkering = ($uniqueSemai > 0) ? ($zonaa->semai_total_berat_kering / $uniqueSemai) : 0;
-            $semaiberatkering = ((float) $hasilsemaiberatkering / 1000000) * 10000;
+            $hasilsemaiCo2 = $uniqueCounts->semai_co2 / $totalZona;
+
+            $semaico2 = ($hasilsemaiCo2 / 1000000) * 10000;
+            // dd($uniqueCounts, $hasilsemaiCo2);
+            $hasilsemaiKarbon = $uniqueCounts->semai_kandungan_karbon / $totalZona;
+
+            $semaiKarbon = ($hasilsemaiKarbon / 1000000) * 10000;
+            // dd($uniqueCounts, $hasilsemaiKarbon);
+            $hasilsemaiberatkering = $uniqueCounts->semai_total_berat_kering / $totalZona;
+
+            $semaiberatkering = ($hasilsemaiberatkering / 1000000) * 10000;
             // tumbuhan bah
-            $hasiltumbuhan_bawahCo2 = ($uniqueTumbuhanBawah > 0) ? ($zonaa->tumbuhan_bawah_co2 / $uniqueTumbuhanBawah) : 0;
-            $tumbuhan_bawahco2 = ((float) $hasiltumbuhan_bawahCo2 / 1000000) * 10000;
+            $hasiltumbuhan_bawahCo2 = $uniqueCounts->tumbuhan_bawah_co2 / $totalZona;
 
-            $hasiltumbuhan_bawahKarbon = ($uniqueTumbuhanBawah > 0) ? ($zonaa->tumbuhan_bawah_kandungan_karbon / $uniqueTumbuhanBawah) : 0;
-            $tumbuhan_bawahKarbon = ((float) $hasiltumbuhan_bawahKarbon / 1000000) * 10000;
+            $tumbuhan_bawahco2 = ($hasiltumbuhan_bawahCo2 / 1000000) * 10000;
 
-            $hasiltumbuhan_bawahberatkering = ($uniqueTumbuhanBawah > 0) ? ($zonaa->tumbuhan_bawah_total_berat_kering / $uniqueTumbuhanBawah) : 0;
-            $tumbuhan_bawahberatkering = ((float) $hasiltumbuhan_bawahberatkering / 1000000) * 10000;
+            $hasiltumbuhan_bawahKarbon = $uniqueCounts->tumbuhan_bawah_kandungan_karbon / $totalZona;
+
+            $tumbuhan_bawahKarbon = ($hasiltumbuhan_bawahKarbon / 1000000) * 10000;
+
+            $hasiltumbuhan_bawahberatkering = $uniqueCounts->tumbuhan_bawah_total_berat_kering / $totalZona;
+
+            $tumbuhan_bawahberatkering = ($hasiltumbuhan_bawahberatkering / 1000000) * 10000;
 
 
             // Konversi nilai Necromass
-            $hasilNecromashCo2 = ($uniqueNecromas > 0) ? ($zonaa->necromass_co2 / $uniqueNecromas) : 0;
-            $Necromassco2 = ((float) $hasilNecromashCo2 / 1000000) * 10000 / 400;
 
-            $hasilNecromasbiomasa = ($uniqueNecromas > 0) ? ($zonaa->necromass_total_biomasa / $uniqueNecromas) : 0;
-            $Necromassbiomasa = ((float) $hasilNecromasbiomasa / 1000000) * 10000 / 400;
+            $hasilNecromashCo2 = $uniqueCounts->necromass_co2 / $totalZona;
 
-            $hasilNecromascarbon = ($uniqueNecromas > 0) ? ($zonaa->necromass_total_carbon / $uniqueNecromas) : 0;
-            $NecromassCarbon = ((float) $hasilNecromascarbon / 1000000) * 10000 / 400;
+            $Necromassco2 = ($hasilNecromashCo2 / 1000000) * 10000 / 400;
+
+            $hasilNecromasbiomasa = $uniqueCounts->necromass_total_biomasa / $totalZona;
+
+            $Necromassbiomasa = ($hasilNecromasbiomasa / 1000000) * 10000 / 400;
+
+            $hasilNecromascarbon = $uniqueCounts->necromass_total_carbon / $totalZona;
+
+            $NecromassCarbon = ($hasilNecromascarbon / 1000000) * 10000 / 400;
+
+            // dd($serasahBeratKering);
+
+            // dd($zonaa);
             // klandungan karbon
-            $Biomassadiataspermukaantanah = $TotalPancangbiomimasa +  $TotalTiangbiomasa + $TotalPohonbiomasa + $Serasahberatkering +  $semaiberatkering +  $tumbuhan_bawahberatkering +   $Necromassbiomasa;
-            $Kandungankarbon = $TotalPancangkarbon +  $TotalTiangKarbon + $TotalPohonkarbon + $SerasahKarbon +  $semaiKarbon + $tumbuhan_bawahKarbon + $NecromassCarbon;
-            $SerapanCO2  = $TotalPancangco2 + $TotalTiangco2 +   $TotalPohonco2 +  $Serasahco2 +  $semaico2 +  $tumbuhan_bawahco2 +  $Necromassco2;
+            $Biomassadiataspermukaantanah = $rataPancangBiomassa +  $rataTiangBiomassa + $rataPohonBiomassa + $Serasahberatkering +  $semaiberatkering +  $tumbuhan_bawahberatkering +   $Necromassbiomasa;
+            $Kandungankarbon = $rataPancangKarbon +  $rataTiangKarbon + $rataPohonKarbon + $SerasahKarbon +  $semaiKarbon + $tumbuhan_bawahKarbon + $NecromassCarbon;
+            $SerapanCO2  = $rataPancangCo2 + $rataTiangCo2 +   $rataPohonCo2 +  $Serasahco2 +  $semaico2 +  $tumbuhan_bawahco2 +  $Necromassco2;
             // TootaL Karbon
-            $TotalKandunganKarbon =  $zona->total_carbon_tanah + $hasilNecromascarbon + $SerasahKarbon + $semaiKarbon  + $tumbuhan_bawahKarbon + $TotalPohonkarbon + $TotalPancangkarbon + $TotalTiangKarbon;
+            $TotalKandunganKarbon =  $zona->total_carbon_tanah + $hasilNecromascarbon + $SerasahKarbon + $semaiKarbon  + $tumbuhan_bawahKarbon + $rataPohonKarbon + $rataPancangKarbon + $rataTiangKarbon;
             // Total carbon tanama kandungan karbon
-            $TotalCarbon =  $semaico2   + $TotalPohonco2 + $TotalPancangco2 + $TotalTiangco2 + $tumbuhan_bawahco2;
+            $TotalCarbon =  $semaico2   + $rataPohonCo2 + $rataPancangCo2 + $rataTiangCo2 + $tumbuhan_bawahco2;
             // serapan co2
             // Total berat biomassa tanaman/ AKAR
-            $totalBerat = $TotalPancangco2 + $TotalTiangco2 + $TotalPohonco2;
+            $totalBerat = $rataPancangCo2 + $rataTiangCo2 + $rataPohonCo2;
             $beratMasaAkar = $totalBerat * 0.37;
             // total karbon ]
-            $KarbonCo2 = $TotalPancangco2 + $beratMasaAkar + $TotalTiangco2 + $TotalPohonco2  + $Serasahco2 + $semaico2 + $tumbuhan_bawahco2 + $hasilNecromashCo2;
+            $KarbonCo2 = $rataPancangCo2 + $beratMasaAkar + $rataTiangCo2 + $rataPohonCo2  + $Serasahco2 + $semaico2 + $tumbuhan_bawahco2 + $hasilNecromashCo2;
             // Pendekatan Kerapatan
 
             // Total CO2 dari tanaman
-            $Co2Tanamannn = $TotalPancangco2 + $TotalTiangco2 + $TotalPohonco2;
+            $Co2Tanamannn = $rataPancangCo2 + $rataTiangCo2 + $rataPohonCo2;
             $totalCo2Lokasi = $Co2Tanamannn * $faktor;
 
             // Faktor konversi CO2
@@ -263,25 +370,29 @@ class RingkasanController extends Controller
             // Perhitungan Baseline Lahan Kosong
             $BaselineLahanKosong = $TotalKarbon5POL - (((10 + 4) / 2) * $faktor);
             // persen
+            // $hasilSerasahPersen = ($Serasa != 0) ? ($TotalKarbon5POL / $Serasa) * 100 : 0;
+            // $hasilNecromassPersen = ($Necromass != 0) ? ($TotalKarbon5POL / $Necromass) * 100 : 0;
+            // $hasilco2tanamanPersen = ($co2tanaman != 0) ? ($TotalKarbon5POL / $co2tanaman) * 100 : 0;
+            // $hasilakarPersen = ($akar != 0) ? ($TotalKarbon5POL / $akar) * 100 : 0;
+            // $hasiltanahPersen = ($tanah != 0) ? ($TotalKarbon5POL / $tanah) * 100 : 0;
             $hasilSerasahPersen = ($BaselineLahanKosong != 0) ? ($Serasa / $BaselineLahanKosong) * 100 : 0;
             $hasilNecromassPersen = ($BaselineLahanKosong != 0) ? ($Necromass / $BaselineLahanKosong) * 100 : 0;
             $hasilco2tanamanPersen = ($BaselineLahanKosong != 0) ? ($co2tanaman / $BaselineLahanKosong) * 100 : 0;
             $hasilakarPersen = ($BaselineLahanKosong != 0) ? ($akar / $BaselineLahanKosong) * 100 : 0;
             $hasiltanahPersen = ($BaselineLahanKosong != 0) ? ($tanah / $BaselineLahanKosong) * 100 : 0;
-
             return [
                 'zona' => $zona->zona_nama,
                 'Biomassadiataspermukaantanah' => number_format($Biomassadiataspermukaantanah ?? 0, 3, '.', ''),
                 'Kandungankarbon' => number_format($Kandungankarbon ?? 0, 3, '.', ''),
                 'SerapanCO2' => number_format($SerapanCO2 ?? 0, 3, '.', ''),
-                'TotalPancangco2' => number_format($TotalPancangco2 ?? 0, 3, '.', ''),
-                'TotalPancangkarbon' => number_format($TotalPancangkarbon ?? 0, 3, '.', ''),
+                'TotalPancangco2' => number_format($rataPancangCo2 ?? 0, 3, '.', ''),
+                'TotalPancangkarbon' => number_format($rataPancangKarbon ?? 0, 3, '.', ''),
                 'TotalMangroveKarbondioksida' => number_format($TotalMangroveKarbondioksida ?? 0, 3, '.', ''),
                 'TotalMangrovekarbon' => number_format($TotalMangrovekarbon ?? 0, 3, '.', ''),
-                'TotalTiangco2' => number_format($TotalTiangco2 ?? 0, 3, '.', ''),
-                'TotalTiangKarbon' => number_format($TotalTiangKarbon ?? 0, 3, '.', ''),
-                'TotalPohonco2' => number_format($TotalPohonco2 ?? 0, 3, '.', ''),
-                'TotalPohonkarbon' => number_format($TotalPohonkarbon ?? 0, 3, '.', ''),
+                'TotalTiangco2' => number_format($rataTiangCo2 ?? 0, 3, '.', ''),
+                'TotalTiangKarbon' => number_format($rataTiangKarbon ?? 0, 3, '.', ''),
+                'TotalPohonco2' => number_format($rataPohonCo2 ?? 0, 3, '.', ''),
+                'TotalPohonkarbon' => number_format($rataPohonKarbon ?? 0, 3, '.', ''),
                 'Serasahco2' => number_format($Serasahco2 ?? 0, 3, '.', ''),
                 'SerasahKarbon' => number_format($SerasahKarbon ?? 0, 3, '.', ''),
                 'semaico2' => number_format($semaico2 ?? 0, 3, '.', ''),
@@ -366,85 +477,154 @@ class RingkasanController extends Controller
             $faktor =   $zona->luas_lokasi ?? 11.5;
             // $faktor =  max((float) $zona->luas_lokasi, 11.5);
             // Perhitungan Pancang
-            $constantPancang = 25;
-            $TotalPancangco2 = ($zona->pancang_avg_co2 * ($zona->total_pohon_pancang / $constantPancang) * 10000) / 1000;
-            $TotalPancangkarbon = ($zona->pancang_avg_kandungan_karbon * ($zona->total_pohon_pancang / $constantPancang) * 10000) / 1000;
-            $TotalPancangbiomimasa = ($zona->pancang_avg_bio_di_atas_tanah * ($zona->total_pohon_pancang / $constantPancang) * 10000) / 1000;
-            // Perhitungan Mangrove
-            $constantMangrove = 25;
-            $TotalMangroveKarbondioksida = ($zona->mangrove_avg_karbondioksida * ($zona->total_mangrove / $constantMangrove) * 10000) / 1000;
-            $TotalMangrovekarbon = ($zona->mangrove_avg_kandungan_karbon * ($zona->total_mangrove / $constantMangrove) * 10000) / 1000;
-            $TotalMangrovebiomimasa = ($zona->mangrove_avg_biomasa * ($zona->total_mangrove / $constantMangrove) * 10000) / 1000;
-
-            // Perhitungan Tiang
-            $constantTiang = 100;
-            $TotalTiangco2 = ($zona->tiang_avg_co2 * ($zona->total_tiang / $constantTiang) * 10000) / 1000;
-            $TotalTiangKarbon = ($zona->tiang_avg_kandungan_karbon * ($zona->total_tiang / $constantTiang) * 10000) / 1000;
-            $TotalTiangbiomasa = ($zona->tiang_avg_bio_di_atas_tanah * ($zona->total_tiang / $constantTiang) * 10000) / 1000;
-
-            // Perhitungan Pohon
-            $constantPohon = 400;
-            $TotalPohonco2 = ($zona->pohon_avg_co2 * ($zona->total_pohon / $constantPohon) * 10000) / 1000;
-            $TotalPohonkarbon = ($zona->pohon_avg_kandungan_karbon * ($zona->total_pohon / $constantPohon) * 10000) / 1000;
-            $TotalPohonbiomasa = ($zona->pohon_avg_bio_di_atas_tanah * ($zona->total_pohon / $constantPohon) * 10000) / 1000;
-            // Perhitungan CO2 dari Serasah (dibagi berdasarkan jumlah nilai unik)
-            $zonaid = $zona->id;
-            $uniqueSerasah = DB::table('serasah')
-                ->leftJoin('subplot', 'serasah.subplot_id', '=', 'subplot.id')
-                ->leftJoin('plot', 'subplot.plot_id', '=', 'plot.id')
-                ->leftJoin('hamparan', 'plot.hamparan_id', '=', 'hamparan.id')
-                ->leftJoin('zona', 'hamparan.zona_id', '=', 'zona.id')
-                ->where('zona.polt_area_id', $zonaid)
-                ->select('zona.zona as nama_zona', DB::raw('COUNT(DISTINCT serasah.id) as total_serasah'))
-                ->groupBy('zona.zona')
-                ->get();
-            $uniqueSemai = DB::table('semai')
-                ->leftJoin('subplot', 'semai.subplot_id', '=', 'subplot.id') // Perbaikan: Menghubungkan semai ke subplot
-                ->leftJoin('plot', 'subplot.plot_id', '=', 'plot.id')
-                ->leftJoin('hamparan', 'plot.hamparan_id', '=', 'hamparan.id')
-                ->leftJoin('zona', 'hamparan.zona_id', '=', 'zona.id')
-                ->where('zona.polt_area_id', $zonaid)
-                ->select('zona.zona as nama_zona', DB::raw('COUNT(DISTINCT semai.id) as total_semai'))
-                ->groupBy('zona.zona') // Mengelompokkan berdasarkan nama zona
-                ->get();
-            $uniqueTumbuhanBawah = DB::table('tumbuhan_bawah')
-                ->leftJoin('subplot', 'tumbuhan_bawah.subplot_id', '=', 'subplot.id')
-                ->leftJoin('plot', 'subplot.plot_id', '=', 'plot.id')
-                ->leftJoin('hamparan', 'plot.hamparan_id', '=', 'hamparan.id')
-                ->leftJoin('zona', 'hamparan.zona_id', '=', 'zona.id')
-                ->where('zona.polt_area_id', $zonaid)
-                ->select('zona.zona as nama_zona', DB::raw('COUNT(DISTINCT tumbuhan_bawah.id) as total_tumbuhan_bawah'))
-                ->groupBy('zona.zona') // Mengelompokkan berdasarkan nama zona
-                ->get();
-            $uniqueNecromas = DB::table('necromass')
-                ->leftJoin('subplot', 'necromass.subplot_id', '=', 'subplot.id')
-                ->leftJoin('plot', 'subplot.plot_id', '=', 'plot.id')
-                ->leftJoin('hamparan', 'plot.hamparan_id', '=', 'hamparan.id')
-                ->leftJoin('zona', 'hamparan.zona_id', '=', 'zona.id')
-                ->where('zona.polt_area_id', $zonaid)
-                ->select('zona.zona as nama_zona', DB::raw('COUNT(DISTINCT necromass.id) as total_necromass'))
-                ->groupBy('zona.zona') // Mengelompokkan berdasarkan nama zona
-                ->get();
-
-            $zonaa = Zona::select(
-                DB::raw('SUM(serasah.co2) as serasah_co2'),
-                DB::raw('SUM(serasah.kandungan_karbon) as serasah_kandungan_karbon'),
-                DB::raw('SUM(serasah.total_berat_kering) as serasah_total_berat_kering'),
-
-                DB::raw('SUM(semai.co2) as semai_co2'),
-                DB::raw('SUM(semai.kandungan_karbon) as semai_kandungan_karbon'),
-                DB::raw('SUM(semai.total_berat_kering) as semai_total_berat_kering'),
-
-                DB::raw('SUM(tumbuhan_bawah.co2) as tumbuhan_bawah_co2'),
-                DB::raw('SUM(tumbuhan_bawah.kandungan_karbon) as tumbuhan_bawah_kandungan_karbon'),
-                DB::raw('SUM(tumbuhan_bawah.total_berat_kering) as tumbuhan_bawah_total_berat_kering'),
-
-                DB::raw('SUM(necromass.co2) as necromass_co2'),
-                DB::raw('SUM(necromass.biomasa) as necromass_total_biomasa'),
-                DB::raw('SUM(necromass.carbon) as necromass_total_carbon')
-            )
+            $zonaid = $zona->polt_area_id;
+            // dd($zona->zona_nama);
+            $zonaData = DB::table('zona')
                 ->leftJoin('hamparan', 'hamparan.zona_id', '=', 'zona.id')
+                ->leftJoin('plot', 'plot.hamparan_id', '=', 'hamparan.id')
+                ->leftJoin('subplot', 'subplot.plot_id', '=', 'plot.id')
+                ->leftJoin('pancang', 'pancang.subplot_id', '=', 'subplot.id')
+                ->leftJoin('tiang', 'tiang.subplot_id', '=', 'subplot.id')
+                ->leftJoin('pohon', 'pohon.subplot_id', '=', 'subplot.id')
+                ->leftJoin('serasah', 'serasah.subplot_id', '=', 'subplot.id')
+                ->leftJoin('semai', 'semai.subplot_id', '=', 'subplot.id')
+                ->leftJoin('necromass', 'necromass.subplot_id', '=', 'subplot.id')
+                ->leftJoin('tanah', 'tanah.subplot_id', '=', 'subplot.id')
+                ->leftJoin('tumbuhan_bawah', 'tumbuhan_bawah.subplot_id', '=', 'subplot.id')
+                ->leftJoin('mangrove', 'mangrove.subplot_id', '=', 'subplot.id')
+                ->where('zona.polt_area_id', $zonaid)
+                ->groupBy('zona.zona')
+                ->select(
+                    'zona.zona',
+                    DB::raw('AVG(pancang.bio_di_atas_tanah) as pancang_avg_bio_di_atas_tanah'),
+                    DB::raw('AVG(pancang.kandungan_karbon) as pancang_avg_kandungan_karbon'),
+                    DB::raw('AVG(pancang.co2) as pancang_avg_co2'),
+                    DB::raw('COUNT(pancang.no_pohon) as total_pohon_pancang'),
+                    // Tiang
+                    DB::raw('AVG(tiang.bio_di_atas_tanah) as tiang_avg_bio_di_atas_tanah'),
+                    DB::raw('AVG(tiang.kandungan_karbon) as tiang_avg_kandungan_karbon'),
+                    DB::raw('AVG(tiang.co2) as tiang_avg_co2'),
+                    DB::raw('COUNT(tiang.no_pohon) as total_tiang'),
+                    // Pohon
+                    DB::raw('AVG(pohon.bio_di_atas_tanah) as pohon_avg_bio_di_atas_tanah'),
+                    DB::raw('AVG(pohon.co2) as pohon_avg_co2'),
+                    DB::raw('AVG(pohon.kandungan_karbon) as pohon_avg_kandungan_karbon'),
+                    DB::raw('COUNT(pohon.no_pohon) as total_pohon'),
+                    // mangrove
+                    DB::raw('SUM(mangrove.biomasa) as mangrove_avg_biomasa'),
+                    DB::raw('SUM(mangrove.karbondioksida) as mangrove_avg_karbondioksida'),
+                    DB::raw('SUM(mangrove.kandungan_karbon) as mangrove_avg_kandungan_karbon'),
+                    DB::raw('COUNT(mangrove.no_pohon) as total_mangrove'),
+                    // Tanah
+                    DB::raw('SUM(tanah.carbonkg) as total_carbon_tanah'),
+                    DB::raw('SUM(tanah.co2kg) as total_co2_tanah'),
+                )
+                ->get();
+            //    dd( $zonaData);
+            // Perhitungan Pancang
 
+            $totalZona = count($zonaData); // Jumlah total zona yang dihitung
+            // $totalZonaa = $zonaData->total_zona;
+            // dd($totalZona);
+            // Inisialisasi total keseluruhan
+            $totalPancangCo2Keseluruhan = 0;
+            $totalPancangKarbonKeseluruhan = 0;
+            $totalPancangBiomassaKeseluruhan = 0;
+
+            $totalMangroveCo2Keseluruhan = 0;
+            $totalMangroveKarbonKeseluruhan = 0;
+            $totalMangroveBiomassaKeseluruhan = 0;
+
+            $totalTiangCo2Keseluruhan = 0;
+            $totalTiangKarbonKeseluruhan = 0;
+            $totalTiangBiomassaKeseluruhan = 0;
+
+            $totalPohonCo2Keseluruhan = 0;
+            $totalPohonKarbonKeseluruhan = 0;
+            $totalPohonBiomassaKeseluruhan = 0;
+
+            foreach ($zonaData as $zona) {
+                $constantPancang = 25;
+                $TotalPancangco2 = ($zona->pancang_avg_co2 * ($zona->total_pohon_pancang / $constantPancang) * 10000) / 1000;
+                $TotalPancangkarbon = ($zona->pancang_avg_kandungan_karbon * ($zona->total_pohon_pancang / $constantPancang) * 10000) / 1000;
+                $TotalPancangbiomassa = ($zona->pancang_avg_bio_di_atas_tanah * ($zona->total_pohon_pancang / $constantPancang) * 10000) / 1000;
+
+                $constantMangrove = 25;
+                $TotalMangroveCo2 = ($zona->mangrove_avg_karbondioksida * ($zona->total_mangrove / $constantMangrove) * 10000) / 1000;
+                $TotalMangrovekarbon = ($zona->mangrove_avg_kandungan_karbon * ($zona->total_mangrove / $constantMangrove) * 10000) / 1000;
+                $TotalMangrovebiomassa = ($zona->mangrove_avg_biomasa * ($zona->total_mangrove / $constantMangrove) * 10000) / 1000;
+
+                $constantTiang = 100;
+                $TotalTiangCo2 = ($zona->tiang_avg_co2 * ($zona->total_tiang / $constantTiang) * 10000) / 1000;
+                $TotalTiangKarbon = ($zona->tiang_avg_kandungan_karbon * ($zona->total_tiang / $constantTiang) * 10000) / 1000;
+                $TotalTiangBiomassa = ($zona->tiang_avg_bio_di_atas_tanah * ($zona->total_tiang / $constantTiang) * 10000) / 1000;
+
+                $constantPohon = 400;
+                $TotalPohonCo2 = ($zona->pohon_avg_co2 * ($zona->total_pohon / $constantPohon) * 10000) / 1000;
+                $TotalPohonKarbon = ($zona->pohon_avg_kandungan_karbon * ($zona->total_pohon / $constantPohon) * 10000) / 1000;
+                $TotalPohonBiomassa = ($zona->pohon_avg_bio_di_atas_tanah * ($zona->total_pohon / $constantPohon) * 10000) / 1000;
+                // Tambahkan ke total keseluruhan
+                $totalPancangCo2Keseluruhan += $TotalPancangco2;
+
+                $totalPancangKarbonKeseluruhan += $TotalPancangkarbon;
+                $totalPancangBiomassaKeseluruhan += $TotalPancangbiomassa;
+
+                $totalMangroveCo2Keseluruhan += $TotalMangroveCo2;
+                $totalMangroveKarbonKeseluruhan += $TotalMangrovekarbon;
+                $totalMangroveBiomassaKeseluruhan += $TotalMangrovebiomassa;
+
+                $totalTiangCo2Keseluruhan += $TotalTiangCo2;
+                $totalTiangKarbonKeseluruhan += $TotalTiangKarbon;
+                $totalTiangBiomassaKeseluruhan += $TotalTiangBiomassa;
+
+                $totalPohonCo2Keseluruhan += $TotalPohonCo2;
+                $totalPohonKarbonKeseluruhan += $TotalPohonKarbon;
+                $totalPohonBiomassaKeseluruhan += $TotalPohonBiomassa;
+            }
+            // dd($totalPancangCo2Keseluruhan);
+            // dd($totalPancangCo2Keseluruhan, $TotalPancangco2);
+            // Hitung rata-rata
+            $rataPancangCo2 = $totalZona ? $totalPancangCo2Keseluruhan / $totalZona : 0;
+            $rataPancangKarbon = $totalZona ? $totalPancangKarbonKeseluruhan / $totalZona : 0;
+            $rataPancangBiomassa = $totalZona ? $totalPancangBiomassaKeseluruhan / $totalZona : 0;
+
+            $rataMangroveCo2 = $totalZona ? $totalMangroveCo2Keseluruhan / $totalZona : 0;
+            $rataMangroveKarbon = $totalZona ? $totalMangroveKarbonKeseluruhan / $totalZona : 0;
+            $rataMangroveBiomassa = $totalZona ? $totalMangroveBiomassaKeseluruhan / $totalZona : 0;
+
+            $rataTiangCo2 = $totalZona ? $totalTiangCo2Keseluruhan / $totalZona : 0;
+            $rataTiangKarbon = $totalZona ? $totalTiangKarbonKeseluruhan / $totalZona : 0;
+            $rataTiangBiomassa = $totalZona ? $totalTiangBiomassaKeseluruhan / $totalZona : 0;
+
+            $rataPohonCo2 = $totalZona ? $totalPohonCo2Keseluruhan / $totalZona : 0;
+            $rataPohonKarbon = $totalZona ? $totalPohonKarbonKeseluruhan / $totalZona : 0;
+            $rataPohonBiomassa = $totalZona ? $totalPohonBiomassaKeseluruhan / $totalZona : 0;
+        //    dd($totalPancangCo2Keseluruhan, $totalTiangCo2Keseluruhan, $totalPohonCo2Keseluruhan);
+            // Tampilkan hasil
+            // dd([
+            //     'Rata-rata Pancang CO2' => $rataPancangCo2,
+            //     'Rata-rata Pancang Karbon' => $rataPancangKarbon,
+            //     'Rata-rata Pancang Biomassa' => $rataPancangBiomassa,
+
+            //     'Rata-rata Mangrove CO2' => $rataMangroveCo2,
+            //     'Rata-rata Mangrove Karbon' => $rataMangroveKarbon,
+            //     'Rata-rata Mangrove Biomassa' => $rataMangroveBiomassa,
+
+            //     'Rata-rata Tiang CO2' => $rataTiangCo2,
+            //     'Rata-rata Tiang Karbon' => $rataTiangKarbon,
+            //     'Rata-rata Tiang Biomassa' => $rataTiangBiomassa,
+
+            //     'Rata-rata Pohon CO2' => $rataPohonCo2,
+            //     'Rata-rata Pohon Karbon' => $rataPohonKarbon,
+            //     'Rata-rata Pohon Biomassa' => $rataPohonBiomassa,
+            // ]);
+
+            // Perhitungan CO2 dari Serasah (dibagi berdasarkan jumlah nilai unik)
+
+            // dd($zona->polt_area_id);
+
+            $uniqueCounts = DB::table('zona')
+                ->leftJoin('hamparan', 'hamparan.zona_id', '=', 'zona.id')
                 ->leftJoin('plot', 'plot.hamparan_id', '=', 'hamparan.id')
                 ->leftJoin('subplot', 'subplot.plot_id', '=', 'plot.id')
                 ->leftJoin('serasah', 'serasah.subplot_id', '=', 'subplot.id')
@@ -452,71 +632,103 @@ class RingkasanController extends Controller
                 ->leftJoin('tumbuhan_bawah', 'tumbuhan_bawah.subplot_id', '=', 'subplot.id')
                 ->leftJoin('necromass', 'necromass.subplot_id', '=', 'subplot.id')
                 ->where('zona.polt_area_id', $zonaid)
-                ->whereNull('zona.deleted_at')
-                ->first(); //Ambil satu objek, bukan Collection
-            // dd($zonaa);
-            // dd($uniqueSerasah, $uniqueSemai, $uniqueTumbuhanBawah, $uniqueNecromas);
-            $jumlahSerasah = $uniqueSerasah->first()->total_serasah ?? 0;
-            $hasilSerasahCo2 = ($jumlahSerasah > 0) ? ($zonaa->serasah_co2 / $jumlahSerasah) : 0;
-            $Serasahco2 = ((float) $hasilSerasahCo2 / 1000000) * 10000;
+                // ->whereNotNull('zona.zona') // Pastikan zona tidak NULL
+                ->where('zona.zona', '!=', '')
+                ->select(
+                    DB::raw('COUNT(DISTINCT TRIM(zona.zona)) as total_zona'),
+                    DB::raw('SUM(serasah.co2) as serasah_co2'),
+                    DB::raw('SUM(serasah.kandungan_karbon) as serasah_kandungan_karbon'),
+                    DB::raw('SUM(serasah.total_berat_kering) as serasah_total_berat_kering'),
 
-            $hasilSerasahKarbon = ($jumlahSerasah > 0) ? ($zonaa->serasah_kandungan_karbon / $jumlahSerasah) : 0;
-            $SerasahKarbon = ((float) $hasilSerasahKarbon / 1000000) * 10000;
+                    DB::raw('SUM(semai.co2) as semai_co2'),
+                    DB::raw('SUM(semai.kandungan_karbon) as semai_kandungan_karbon'),
+                    DB::raw('SUM(semai.total_berat_kering) as semai_total_berat_kering'),
 
-            $hasilSerasahberatkering = ($jumlahSerasah > 0) ? ($zonaa->serasah_total_berat_kering / $jumlahSerasah) : 0;
-            $Serasahberatkering = ((float) $hasilSerasahberatkering / 1000000) * 10000;
+                    DB::raw('SUM(tumbuhan_bawah.co2) as tumbuhan_bawah_co2'),
+                    DB::raw('SUM(tumbuhan_bawah.kandungan_karbon) as tumbuhan_bawah_kandungan_karbon'),
+                    DB::raw('SUM(tumbuhan_bawah.total_berat_kering) as tumbuhan_bawah_total_berat_kering'),
+
+                    DB::raw('SUM(necromass.co2) as necromass_co2'),
+                    DB::raw('SUM(necromass.biomasa) as necromass_total_biomasa'),
+                    DB::raw('SUM(necromass.carbon) as necromass_total_carbon')
+                )
+                ->first();
+
+            $totalZona = $uniqueCounts->total_zona;
+
+            $hasilSerasahCo2 = $uniqueCounts->serasah_co2 / $totalZona;;
+            $Serasahco2 = ($hasilSerasahCo2 / 1000000) * 10000;
+            // dd($hasilSerasahCo2);
+            $hasilSerasahKarbon = $uniqueCounts->serasah_kandungan_karbon / $totalZona;;
+            $SerasahKarbon = ($hasilSerasahKarbon / 1000000) * 10000;
+
+            $hasilSerasahberatkering = $uniqueCounts->serasah_total_berat_kering / $totalZona;
+
+            $Serasahberatkering = ($hasilSerasahberatkering / 1000000) * 10000;
+            // dd($hasilSerasahCo2, $hasilSerasahKarbon, $hasilSerasahberatkering );
             // semai
-            $jumlahSemai = $uniqueSemai->first()->total_semai ?? 0;
 
-            $hasilsemaiCo2 = ($jumlahSemai > 0) ? ($zonaa->semai_co2 / $jumlahSemai) : 0;
-            $semaico2 = ((float) $hasilsemaiCo2 / 1000000) * 10000;
 
-            $hasilsemaiKarbon = ($jumlahSemai > 0) ? ($zonaa->semai_kandungan_karbon / $jumlahSemai) : 0;
-            $semaiKarbon = ((float) $hasilsemaiKarbon / 1000000) * 10000;
+            $hasilsemaiCo2 = $uniqueCounts->semai_co2 / $totalZona;
 
-            $hasilsemaiberatkering = ($jumlahSemai > 0) ? ($zonaa->semai_total_berat_kering / $jumlahSemai) : 0;
-            $semaiberatkering = ((float) $hasilsemaiberatkering / 1000000) * 10000;
+            $semaico2 = ($hasilsemaiCo2 / 1000000) * 10000;
+            // dd($uniqueCounts, $hasilsemaiCo2);
+            $hasilsemaiKarbon = $uniqueCounts->semai_kandungan_karbon / $totalZona;
+
+            $semaiKarbon = ($hasilsemaiKarbon / 1000000) * 10000;
+            // dd($uniqueCounts, $hasilsemaiKarbon);
+            $hasilsemaiberatkering = $uniqueCounts->semai_total_berat_kering / $totalZona;
+
+            $semaiberatkering = ($hasilsemaiberatkering / 1000000) * 10000;
             // tumbuhan bah
-            $jumlahTumbuhanBawah = $uniqueTumbuhanBawah->first()->total_tumbuhan_bawah ?? 0;
-            $hasiltumbuhan_bawahCo2 = ($jumlahTumbuhanBawah > 0) ? ($zonaa->tumbuhan_bawah_co2 / $jumlahTumbuhanBawah) : 0;
-            $tumbuhan_bawahco2 = ((float) $hasiltumbuhan_bawahCo2 / 1000000) * 10000;
+            $hasiltumbuhan_bawahCo2 = $uniqueCounts->tumbuhan_bawah_co2 / $totalZona;
 
-            $hasiltumbuhan_bawahKarbon = ($jumlahTumbuhanBawah > 0) ? ($zonaa->tumbuhan_bawah_kandungan_karbon / $jumlahTumbuhanBawah) : 0;
-            $tumbuhan_bawahKarbon = ((float) $hasiltumbuhan_bawahKarbon / 1000000) * 10000;
+            $tumbuhan_bawahco2 = ($hasiltumbuhan_bawahCo2 / 1000000) * 10000;
 
-            $hasiltumbuhan_bawahberatkering = ($jumlahTumbuhanBawah > 0) ? ($zonaa->tumbuhan_bawah_total_berat_kering / $jumlahTumbuhanBawah) : 0;
-            $tumbuhan_bawahberatkering = ((float) $hasiltumbuhan_bawahberatkering / 1000000) * 10000;
+            $hasiltumbuhan_bawahKarbon = $uniqueCounts->tumbuhan_bawah_kandungan_karbon / $totalZona;
+
+            $tumbuhan_bawahKarbon = ($hasiltumbuhan_bawahKarbon / 1000000) * 10000;
+
+            $hasiltumbuhan_bawahberatkering = $uniqueCounts->tumbuhan_bawah_total_berat_kering / $totalZona;
+
+            $tumbuhan_bawahberatkering = ($hasiltumbuhan_bawahberatkering / 1000000) * 10000;
 
 
             // Konversi nilai Necromass
-            $jumlahNecromas = $uniqueNecromas->first()->total_necromass ?? 0;
 
-            $hasilNecromashCo2 = ($jumlahNecromas > 0) ? ($zonaa->necromass_co2 / $jumlahNecromas) : 0;
-            $Necromassco2 = ((float) $hasilNecromashCo2 / 1000000) * 10000 / 400;
+            $hasilNecromashCo2 = $uniqueCounts->necromass_co2 / $totalZona;
 
-            $hasilNecromasbiomasa = ($jumlahNecromas > 0) ? ($zonaa->necromass_total_biomasa / $jumlahNecromas) : 0;
-            $Necromassbiomasa = ((float) $hasilNecromasbiomasa / 1000000) * 10000 / 400;
+            $Necromassco2 = ($hasilNecromashCo2 / 1000000) * 10000 / 400;
 
-            $hasilNecromascarbon = ($jumlahNecromas > 0) ? ($zonaa->necromass_total_carbon / $jumlahNecromas) : 0;
-            $NecromassCarbon = ((float) $hasilNecromascarbon / 1000000) * 10000 / 400;
+            $hasilNecromasbiomasa = $uniqueCounts->necromass_total_biomasa / $totalZona;
+
+            $Necromassbiomasa = ($hasilNecromasbiomasa / 1000000) * 10000 / 400;
+
+            $hasilNecromascarbon = $uniqueCounts->necromass_total_carbon / $totalZona;
+
+            $NecromassCarbon = ($hasilNecromascarbon / 1000000) * 10000 / 400;
+
+            // dd($serasahBeratKering);
+
+            // dd($zonaa);
             // klandungan karbon
-            $Biomassadiataspermukaantanah = $TotalPancangbiomimasa +  $TotalTiangbiomasa + $TotalPohonbiomasa + $Serasahberatkering +  $semaiberatkering +  $tumbuhan_bawahberatkering +   $Necromassbiomasa;
-            $Kandungankarbon = $TotalPancangkarbon +  $TotalTiangKarbon + $TotalPohonkarbon + $SerasahKarbon +  $semaiKarbon + $tumbuhan_bawahKarbon + $NecromassCarbon;
-            $SerapanCO2  = $TotalPancangco2 + $TotalTiangco2 +   $TotalPohonco2 +  $Serasahco2 +  $semaico2 +  $tumbuhan_bawahco2 +  $Necromassco2;
+            $Biomassadiataspermukaantanah = $rataPancangBiomassa +  $rataTiangBiomassa + $rataPohonBiomassa + $Serasahberatkering +  $semaiberatkering +  $tumbuhan_bawahberatkering +   $Necromassbiomasa;
+            $Kandungankarbon = $rataPancangKarbon +  $rataTiangKarbon + $rataPohonKarbon + $SerasahKarbon +  $semaiKarbon + $tumbuhan_bawahKarbon + $NecromassCarbon;
+            $SerapanCO2  = $rataPancangCo2 + $rataTiangCo2 +   $rataPohonCo2 +  $Serasahco2 +  $semaico2 +  $tumbuhan_bawahco2 +  $Necromassco2;
             // TootaL Karbon
-            $TotalKandunganKarbon =  $zona->total_carbon_tanah + $hasilNecromascarbon + $SerasahKarbon + $semaiKarbon  + $tumbuhan_bawahKarbon + $TotalPohonkarbon + $TotalPancangkarbon + $TotalTiangKarbon;
+            $TotalKandunganKarbon =  $zona->total_carbon_tanah + $hasilNecromascarbon + $SerasahKarbon + $semaiKarbon  + $tumbuhan_bawahKarbon + $rataPohonKarbon + $rataPancangKarbon + $rataTiangKarbon;
             // Total carbon tanama kandungan karbon
-            $TotalCarbon =  $semaico2   + $TotalPohonco2 + $TotalPancangco2 + $TotalTiangco2 + $tumbuhan_bawahco2;
+            $TotalCarbon =  $semaico2   + $rataPohonCo2 + $rataPancangCo2 + $rataTiangCo2 + $tumbuhan_bawahco2;
             // serapan co2
             // Total berat biomassa tanaman/ AKAR
-            $totalBerat = $TotalPancangco2 + $TotalTiangco2 + $TotalPohonco2;
+            $totalBerat = $rataPancangCo2 + $rataTiangCo2 + $rataPohonCo2;
             $beratMasaAkar = $totalBerat * 0.37;
             // total karbon ]
-            $KarbonCo2 = $TotalPancangco2 + $beratMasaAkar + $TotalTiangco2 + $TotalPohonco2  + $Serasahco2 + $semaico2 + $tumbuhan_bawahco2 + $hasilNecromashCo2;
+            $KarbonCo2 = $rataPancangCo2 + $beratMasaAkar + $rataTiangCo2 + $rataPohonCo2  + $Serasahco2 + $semaico2 + $tumbuhan_bawahco2 + $hasilNecromashCo2;
             // Pendekatan Kerapatan
 
             // Total CO2 dari tanaman
-            $Co2Tanamannn = $TotalPancangco2 + $TotalTiangco2 + $TotalPohonco2;
+            $Co2Tanamannn = $rataPancangCo2 + $rataTiangCo2 + $rataPohonCo2;
             $totalCo2Lokasi = $Co2Tanamannn * $faktor;
 
             // Faktor konversi CO2
@@ -541,20 +753,27 @@ class RingkasanController extends Controller
             $hasilco2tanamanPersen = ($BaselineLahanKosong != 0) ? ($co2tanaman / $BaselineLahanKosong) * 100 : 0;
             $hasilakarPersen = ($BaselineLahanKosong != 0) ? ($akar / $BaselineLahanKosong) * 100 : 0;
             $hasiltanahPersen = ($BaselineLahanKosong != 0) ? ($tanah / $BaselineLahanKosong) * 100 : 0;
+            // dd([
+            //         'Rata-rata Pancang CO2' => $rataPancangCo2,
 
+
+            //         'Rata-rata Tiang CO2' => $rataTiangCo2,
+
+            //         'Rata-rata Pohon CO2' => $rataPohonCo2,
+            //     ]);
             return [
-                'zona' => $zona->zona_nama,
+                // 'zona' => $zona->zona_nama,
                 'Biomassadiataspermukaantanah' => number_format($Biomassadiataspermukaantanah ?? 0, 3, '.', ''),
                 'Kandungankarbon' => number_format($Kandungankarbon ?? 0, 3, '.', ''),
                 'SerapanCO2' => number_format($SerapanCO2 ?? 0, 3, '.', ''),
-                'TotalPancangco2' => number_format($TotalPancangco2 ?? 0, 3, '.', ''),
-                'TotalPancangkarbon' => number_format($TotalPancangkarbon ?? 0, 3, '.', ''),
+                'TotalPancangco2' => number_format($rataPancangCo2 ?? 0, 3, '.', ''),
+                'TotalPancangkarbon' => number_format($rataPancangKarbon ?? 0, 3, '.', ''),
                 'TotalMangroveKarbondioksida' => number_format($TotalMangroveKarbondioksida ?? 0, 3, '.', ''),
                 'TotalMangrovekarbon' => number_format($TotalMangrovekarbon ?? 0, 3, '.', ''),
-                'TotalTiangco2' => number_format($TotalTiangco2 ?? 0, 3, '.', ''),
-                'TotalTiangKarbon' => number_format($TotalTiangKarbon ?? 0, 3, '.', ''),
-                'TotalPohonco2' => number_format($TotalPohonco2 ?? 0, 3, '.', ''),
-                'TotalPohonkarbon' => number_format($TotalPohonkarbon ?? 0, 3, '.', ''),
+                'TotalTiangco2' => number_format($rataTiangCo2 ?? 0, 3, '.', ''),
+                'TotalTiangKarbon' => number_format($rataTiangKarbon ?? 0, 3, '.', ''),
+                'TotalPohonco2' => number_format($rataPohonCo2 ?? 0, 3, '.', ''),
+                'TotalPohonkarbon' => number_format($rataPohonKarbon ?? 0, 3, '.', ''),
                 'Serasahco2' => number_format($Serasahco2 ?? 0, 3, '.', ''),
                 'SerasahKarbon' => number_format($SerasahKarbon ?? 0, 3, '.', ''),
                 'semaico2' => number_format($semaico2 ?? 0, 3, '.', ''),

@@ -204,12 +204,13 @@ Route::middleware('auth')->group(function () {
     Route::controller(DataPlotController::class)->group(function () {
         Route::get('/dataPlot', 'index')->name('dataPlot.index');
         Route::get('/Lokasi', 'lokasi')->name('Lokasi.lokasi');
+        Route::get('/Lokasi/tim/{id}', 'create')->name('tim.create');
+        Route::post('/Lokasi/tim/{id}', 'storee')->name('tim.storee');
     });
     Route::controller(ManajermenUserController::class)->group(function () {
         Route::get('/Verifikasi', 'index')->name('Verifikasi.index');
         Route::get('/Verifikasi', 'view')->name('Verifikasi.index');
         Route::get('/veri/{slug}', 'menyetujui')->name('Verifikasi.menyetujui');
-
     });
     Route::controller(RingkasanController::class)->group(function () {
         Route::get("/Lokasi/zona/hitung/{slug}", 'index')->name('ringkasan.index');
@@ -237,7 +238,7 @@ Route::middleware('auth')->group(function () {
         Route::get("/Hamparan/{slugZ}/edit/{slugH}", "edit")->name('Hamparan.edit');
         Route::put("/Hamparan/{slugZ}/edit/{slugH}", "update")->name('Hamparan.update');
     });
-    Route::controller(PLotCOntroller::class)->group(function(){
+    Route::controller(PLotCOntroller::class)->group(function () {
         Route::get('/dataPlot', 'index')->name('dataPlot.index');
         Route::get('/Hamparan/Plot/{id}', 'getPlot')->name('plot.getPlot');
         Route::get('/Plot/SubPlot/{id}', 'getsubPlot')->name('DetailPlot.getsubPlot');

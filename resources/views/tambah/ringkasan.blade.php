@@ -43,7 +43,7 @@
 
     <!-- Favicon -->
     <link rel="icon" href="{{ asset('/images/logoCarbonStockID-LightMode.png') }}" type="image/x-icon" />
-    <title>@yield('title')</title>
+    <title>Ringkasan Hitungan  {{ $poltArea->daerah }}</title>
 </head>
 
 <body>

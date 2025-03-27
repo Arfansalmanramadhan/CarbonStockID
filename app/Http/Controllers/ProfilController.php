@@ -181,7 +181,7 @@ class ProfilController extends Controller
             ]);
             // Cari pengguna berdasarkan slug
             $user = User::where('slug', $slug)->firstOrFail();
-            dd($request->all());
+            // dd($request->all());
             // Mengupdate gambar profil jika ada file gambar baru
             if ($request->hasFile('foto')) {
                 // Hapus foto lama jika ada

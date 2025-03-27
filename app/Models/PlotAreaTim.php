@@ -12,7 +12,7 @@ class PlotAreaTim extends Model
     protected $table = 'polt_area_tim';
     protected $fillable = [
         'tim_id',
-        'polt-area_id',
+        'polt_area_id',
     ];
     protected $guarded = [];
     /**
@@ -26,6 +26,6 @@ class PlotAreaTim extends Model
     }
     public function poltArea(): BelongsTo
     {
-        return $this->belongsTo(PoltArea::class, 'polt-area_id');
+        return $this->belongsTo(PoltArea::class, 'polt_area_id');
     }
 }

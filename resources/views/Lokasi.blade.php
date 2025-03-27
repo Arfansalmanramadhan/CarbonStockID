@@ -48,6 +48,7 @@
                             <tr>
                                 <th class="kiriPancang">No</th>
                                 <th>Nama Lokasi</th>
+                                <th>Jumlah Tim</th>
                                 <th>Jenis Hutan</th>
                                 <th>Latitude</th>
                                 <th>Longitude</th>
@@ -84,14 +85,15 @@
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $index->daerah }}</td>
+                                    <td>{{ $index->plot_area_tim_count }}</td>
                                     <td>{{ $index->jenis_hutan }}</td>
                                     <td>{{ $index->latitude }}</td>
                                     <td>{{ $index->longitude }}</td>
                                     <td>{{ $index->periode_pengamatan }}</td>
-                                    <td>{{ $index->created_at }}</td>
+                                    <td>{{ $index->created_at }}</td>   
                                     <td class="hidden-column aksi-button">
-                                        {{-- <a href="{{ route('zona.getZona', ['slug' => $index->slug]) }}"
-                                            class="btn btn-info btn-sm">Detail</a> --}}
+                                        <a href="{{ route('tim.create', ['id' => $index->id]) }}"
+                                            class="btn btn-info btn-sm">TIM</a>
                                         <form action="{{ route('zona.getZona', ['slug' => $index->slug]) }}" method="get">
                                             <button type="submit" class="view-btn">
                                                 <img src="{{ asset('/images/Eye.svg') }}" alt="" />

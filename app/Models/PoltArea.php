@@ -90,9 +90,9 @@ class PoltArea extends Model
     {
         return $this->belongsTo(Zona::class, 'polt_area_id', 'id');
     }
-    public function PlotAreaTim(): BelongsTo
+    public function PlotAreaTim()
     {
-        return $this->belongsTo(PlotAreaTim::class, 'polt_area_id');
+        return $this->hasMany(PlotAreaTim::class, 'polt_area_id');
     }
     public function sluggable(): array
     {
