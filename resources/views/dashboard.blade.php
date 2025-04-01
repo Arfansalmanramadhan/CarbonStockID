@@ -8,123 +8,153 @@
     <div id="beranda-content" class="page-content content p-4">
         <h4 class="judul-beranda">Data Plot Area</h4>
         {{-- <table class="custom-table-hasil"> --}}
-        <table class="custom-table-hasil ">
-            <thead>
-                <tr>
-                    <th scope="col">NOMOR</th>
-                    <th scope="col">DAERAH</th>
-                    <th scope="col">LATITUDE</th>
-                    <th scope="col">LONGITUDE</th>
-                </tr>
-            </thead>
-            @forelse ($ringkasann as $item)
-                <tbody>
-
-                    <td>{{ $loop->iteration }}</td>
-                    <td>{{ $item['dareah'] ?? 'Data tidak tersedia' }}</td>
-                    <td>{{ $item['latitude'] ?? 'Data tidak tersedia' }} </td>
-                    <td>{{ $item['longitude'] ?? 'Data tidak tersedia' }} </td>
-                @empty
+        <div class="paginated-table table-container ">
+            <div class="table-header d-flex justify-content-between">
+                <div class="tampilkan">
+                    <label for="dataPerPage2">Tampilkan</label>
+                    <select class="dataPerPage">
+                        <option value="5">5</option>
+                        <option value="10">10</option>
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                    </select>
+                    <span class="ms-2">data</span>
+                </div>
+            </div>
+            <table class="custom-table-pancang table ">
+                <thead>
                     <tr>
-                        <td colspan="3" class="text-center">Belum ada data</td>
+                        <th scope="col">NOMOR</th>
+                        <th scope="col">DAERAH</th>
+                        <th scope="col">LATITUDE</th>
+                        <th scope="col">LONGITUDE</th>
                     </tr>
-            @endforelse
-            </tbody>
-        </table>
+                </thead>
+                @forelse ($ringkasann as $item)
+                    <tbody>
+
+                        <td>{{ $loop->iteration }}</td>
+                        <td>{{ $item['dareah'] ?? 'Data tidak tersedia' }}</td>
+                        <td>{{ $item['latitude'] ?? 'Data tidak tersedia' }} </td>
+                        <td>{{ $item['longitude'] ?? 'Data tidak tersedia' }} </td>
+                    @empty
+                        <tr>
+                            <td colspan="3" class="text-center">Belum ada data</td>
+                        </tr>
+                @endforelse
+                </tbody>
+            </table>
+            <div class="table-footer mt-5">
+                <!-- Informasi Rentang Data -->
+                <p>Menampilkan data <span class="fromNumber">1</span> sampai <span class="toNumber">5</span> dari <span
+                        class="totalData">0</span> data</p>
+
+                <!-- Tombol Pagination -->
+                <div class="pagination-controls">
+                    <button class="prevPage  btn-button" disabled>Sebelumnya</button>
+                    <span class="currentPage">1</span> dari <span class="totalPages">0</span>
+                    <button class="nextPage  btn-button">Berikutnya</button>
+                </div>
+            </div>
+        </div>
         <h4 class="judul-beranda mt-5">Dashboard Monitoring </h4>
         {{-- <div id="carbon-prediction-chart-2"></div> --}}
-        <div class="table-container">
+        <div class="table-container  paginated-table">
             {{-- <div class="table-wrapper"> --}}
             <div class="table-header d-flex justify-content-between">
                 <div class="tampilkan">
-                    <label for="show-entries">Tampilkan</label>
-                    <select id="show-entries">
+                    <label for="dataPerPage1">Tampilkan</label>
+                    <select class="dataPerPage">
                         <option value="5">5</option>
                         <option value="10">10</option>
-                        <option value="20">20</option>
+                        <option value="50">50</option>
+                        <option value="100">100</option>
                     </select>
                     <span>data</span>
                 </div>
             </div>
-            <div class="table-wrapper">
-                <table class="custom-table-pancang">
-                    <thead>
-                        <tr>
-                            <th class="kiriPancang" rowspan="2">No</th>
-                            <th rowspan="2">Daerah</th>
-                            <th rowspan="2">Tanah <br> (kandungan Kabon)</th>
-                            <th rowspan="2">Necromash <br> (kandungan Kabon)</th>
-                            <th colspan="2">Serasah</th>
-                            <th colspan="2">Tumbuhan Bawah</th>
-                            <th colspan="2">Pancang</th>
-                            <th colspan="2">Tiang</th>
-                            <th class="hidden-column" colspan="2">pohon</th>
-                            <th class="hidden-column"rowspan="2">Total karbon </th>
-                            <th class="hidden-column"rowspan="2">Total Serapan Karbon </th>
-                            <th class="hidden-column kananPancang" rowspan="2">Aksi</th>
-                        </tr>
-                        <tr>
-                            {{-- <th class="kiriPancang">No</th> --}}
-                            {{-- <th>Zona</th> --}}
-                            <th>Karbon</th>
-                            <th>Serapan <br>karbon</th>
-                            <th>Karbon</th>
-                            <th class="hidden-column">Serapan <br> Karobn</th>
-                            <th>Karbon</th>
-                            <th class="hidden-column">Serapan <br> Karobn</th>
-                            <th class="hidden-column">Karbon</th>
-                            <th class="hidden-column">serapan <br> karbon</th>
-                            <th class="hidden-column">Karbon</th>
-                            <th class="hidden-column">Serapan <br> serapan</th>
+            <div class="">
 
-                        </tr>
-                    </thead>
-                    @forelse ($ringkasann as $item)
-                        <tbody id="tableBody">
+                <div class="table-wrapper">
+                    <table class="custom-table-pancang  table">
+                        <thead>
                             <tr>
-                                <td>{{ $loop->iteration }}</td>
-                                <td>{{ $item['dareah'] ?? 'Data tidak tersedia' }}</td>
-                                <td>{{ $item['TanahCarbon'] ?? 0 }}</td>
-                                <td>{{ $item['NecromassCarbon'] ?? 0 }}</td>
-                                <td>{{ $item['Serasahco2'] ?? 0 }}</td>
-                                <td>{{ $item['SerasahKarbon'] ?? 0 }}</td>
-                                <td>{{ $item['tumbuhanbawahco2'] ?? 0 }}</td>
-                                <td class="hidden-column">{{ $item['tumbuhanbawahkarbon'] ?? 0 }}</td>
-                                <td class="hidden-column">{{ $item['TotalPancangco2'] ?? 0 }}</td>
-                                <td class="hidden-column">{{ $item['TotalPancangkarbon'] ?? 0 }}</td>
-                                <td class="hidden-column">{{ $item['TotalTiangco2'] ?? 0 }}</td>
-                                <td class="hidden-column">{{ $item['TotalTiangKarbon'] ?? 0 }}</td>
-                                <td class="hidden-column">{{ $item['TotalPohonco2'] ?? 0 }}</td>
-                                <td class="hidden-column">{{ $item['TotalPohonkarbon'] ?? 0 }}</td>
-                                <td class="hidden-column">{{ $item['TotalKandunganKarbon'] ?? 0 }}</td>
-                                <td class="hidden-column">{{ $item['KarbonCo2'] ?? 0 }}</td>
-                                <td class="hidden-column aksi-button">
-                                    <button class="delete-btn">
-                                        <img src="{{ asset('/images/Trash.svg') }}" alt="" />
-                                    </button>
-                                </td>
-                            @empty
-                            <tr>
-                                <td colspan="3" class="text-center">Belum ada data</td>
+                                <th class="kiriPancang" rowspan="2">No</th>
+                                <th rowspan="2">Daerah</th>
+                                <th rowspan="2">Tanah <br> (kandungan Kabon)</th>
+                                <th rowspan="2">Necromash <br> (kandungan Kabon)</th>
+                                <th colspan="2">Serasah</th>
+                                <th colspan="2">Tumbuhan Bawah</th>
+                                <th colspan="2">Pancang</th>
+                                <th colspan="2">Tiang</th>
+                                <th class="hidden-column" colspan="2">pohon</th>
+                                <th class="hidden-column"rowspan="2">Total karbon </th>
+                                <th class="hidden-column"rowspan="2">Total Serapan Karbon </th>
+                                <th class="hidden-column kananPancang" rowspan="2">Aksi</th>
                             </tr>
-                    @endforelse
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="table-footer mt-5">
-                <!-- Informasi Rentang Data -->
-                <p>Menampilkan data <span id="fromNumber">1</span> sampai <span id="toNumber">5</span> dari <span
-                        id="totalData">0</span> data</p>
+                            <tr>
+                                {{-- <th class="kiriPancang">No</th> --}}
+                                {{-- <th>Zona</th> --}}
+                                <th>Karbon</th>
+                                <th>Serapan <br>karbon</th>
+                                <th>Karbon</th>
+                                <th class="hidden-column">Serapan <br> Karobn</th>
+                                <th>Karbon</th>
+                                <th class="hidden-column">Serapan <br> Karobn</th>
+                                <th class="hidden-column">Karbon</th>
+                                <th class="hidden-column">serapan <br> karbon</th>
+                                <th class="hidden-column">Karbon</th>
+                                <th class="hidden-column">Serapan <br> serapan</th>
 
-                <!-- Tombol Pagination -->
-                <div id="pagination">
-                    <button onclick="prevPage()">Sebelumnya</button>
-                    <span id="pageNumber">1</span>
-                    <button onclick="nextPage()">Berikutnya</button>
+                            </tr>
+                        </thead>
+                        @forelse ($ringkasann as $item)
+                            <tbody class="tableBody">
+                                <tr class="data-row">
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $item['dareah'] ?? 'Data tidak tersedia' }}</td>
+                                    <td>{{ $item['TanahCarbon'] ?? 0 }}</td>
+                                    <td>{{ $item['NecromassCarbon'] ?? 0 }}</td>
+                                    <td>{{ $item['Serasahco2'] ?? 0 }}</td>
+                                    <td>{{ $item['SerasahKarbon'] ?? 0 }}</td>
+                                    <td>{{ $item['tumbuhanbawahco2'] ?? 0 }}</td>
+                                    <td class="hidden-column">{{ $item['tumbuhanbawahkarbon'] ?? 0 }}</td>
+                                    <td class="hidden-column">{{ $item['TotalPancangco2'] ?? 0 }}</td>
+                                    <td class="hidden-column">{{ $item['TotalPancangkarbon'] ?? 0 }}</td>
+                                    <td class="hidden-column">{{ $item['TotalTiangco2'] ?? 0 }}</td>
+                                    <td class="hidden-column">{{ $item['TotalTiangKarbon'] ?? 0 }}</td>
+                                    <td class="hidden-column">{{ $item['TotalPohonco2'] ?? 0 }}</td>
+                                    <td class="hidden-column">{{ $item['TotalPohonkarbon'] ?? 0 }}</td>
+                                    <td class="hidden-column">{{ $item['TotalKandunganKarbon'] ?? 0 }}</td>
+                                    <td class="hidden-column">{{ $item['KarbonCo2'] ?? 0 }}</td>
+                                    <td class="hidden-column aksi-button">
+                                        <button class="delete-btn">
+                                            <img src="{{ asset('/images/Trash.svg') }}" alt="" />
+                                        </button>
+                                    </td>
+                                @empty
+                                <tr>
+                                    <td colspan="3" class="text-center">Belum ada data</td>
+                                </tr>
+                        @endforelse
+                        </tr>
+                        </tbody>
+                    </table>
                 </div>
+                <div class="table-footer mt-5">
+                    <!-- Informasi Rentang Data -->
+                    <p>Menampilkan data <span class="fromNumber">1</span> sampai <span class="toNumber">5</span> dari <span
+                            class="totalData">0</span> data</p>
+
+                    <!-- Tombol Pagination -->
+                    <div class="pagination-controls">
+                        <button class="prevPage  btn-button" disabled>Sebelumnya</button>
+                        <span class="currentPage">1</span> dari <span class="totalPages">0</span>
+                        <button class="nextPage  btn-button">Berikutnya</button>
+                    </div>
+                </div>
+                {{-- </div> --}}
             </div>
-            {{-- </div> --}}
         </div>
         <div class="custom-table-pancang">
             {{-- <div class="row">
@@ -207,8 +237,6 @@
                 <div class="d-flex justify-content-between">
 
                     <h4 class="card-title mb-4">Data Subplot</h4>
-                    {{-- <button onclick="window.location.href='{{ route('hitung.plot') }}'"
-                        class="btn btn-tambah-data mb-4">Kalklasi perhitungan</button> --}}
                 </div>
                 <ul class=" nav nav-tabs nav-bordered nav-justified overflow-x-auto">
                     <li class="activee nav-item jarak" id="pertama">Serasah</li>
@@ -221,26 +249,21 @@
                     <li class="nav-item jarak" id="kedelapan">Tanah</li>
                 </ul>
                 <div class="tab-content ">
-                    <div class="tab-pane p-1" id="serasah">
+                    <div class="tab-pane p-1  paginated-table" id="serasah">
                         <div class="table-header d-flex justify-content-between">
-                            {{-- <form method="GET"
-                                action="{{ route('DetailPlot.getsubPlot', ['id' => $plot->id ?? 'default-slug']) }}">
-                                <div class="tampilkan">
-                                    <label for="show-entries">Tampilkan</label>
-                                    <select id="show-entries perPageSelect" class="number-selection" name="perPage"
-                                        onchange="this.form.submit()">
-                                        <option value="5" {{ request('perPage') == 5 ? 'selected' : '' }}>5</option>
-                                        <option value="10" {{ request('perPage') == 10 ? 'selected' : '' }}>10
-                                        </option>
-                                        <option value="20" {{ request('perPage') == 20 ? 'selected' : '' }}>20
-                                        </option>
-                                    </select>
-                                    <span class="ms-2">data</span>
-                                </div>
-                            </form> --}}
+                            <div class="tampilkan">
+                                <label for="dataPerPage2">Tampilkan</label>
+                                <select class="dataPerPage">
+                                    <option value="5">5</option>
+                                    <option value="10">10</option>
+                                    <option value="50">50</option>
+                                    <option value="100">100</option>
+                                </select>
+                                <span class="ms-2">data</span>
+                            </div>
                         </div>
-                        <div class="table-wrapper table-responsive">
-                            <table class="custom-table-pancang  table-striped">
+                        <div class="table-wrapper table-responsive ">
+                            <table class="custom-table-pancang table  table-striped">
                                 <thead>
                                     <tr>
                                         <th class="kiriPancang">No</th>
@@ -253,9 +276,9 @@
                                         <th class="hidden-column kananPancang">Aksi</th>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody class="tableBody">
                                     @forelse ($Serasah as $item)
-                                        <tr>
+                                        <tr class="data-row">
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ $item->total_berat_basah }} Gr</td>
                                             <td>{{ $item->sample_berat_basah }} Gr</td>
@@ -280,8 +303,8 @@
                                 </tbody>
                             </table>
                         </div>
-                        {{-- <div class="table-footer mt-5">
-                            <strong>
+                        <div class="table-footer mt-5">
+                            {{-- <strong>
                                 Menampilkan {{ $Serasah->firstItem() }} sampai {{ $Serasah->lastItem() }} dari
                                 {{ $Serasah->total() }}
                                 data
@@ -309,11 +332,23 @@
                                         <li class="page-item disabled"><span class="page-link">Lanjut</span></li>
                                     @endif
                                 </ul>
-                            </nav>
-                        </div> --}}
+                            </nav> --}}
+                            <!-- Informasi Rentang Data -->
+                            <p>Menampilkan data <span class="fromNumber">1</span> sampai <span class="toNumber">5</span>
+                                dari
+                                <span class="totalData">0</span> data
+                            </p>
+
+                            <!-- Tombol Pagination -->
+                            <div class="pagination-controls">
+                                <button class="  btn-button prevPage" disabled>Sebelumnya</button>
+                                <span class="currentPage">1</span> dari <span class="totalPages">0</span>
+                                <button class="  btn-button nextPage">Berikutnya</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="p-1" id="semai">
+                <div class="p-1 paginated-table" id="semai">
                     <div class="table-header d-flex justify-content-between">
                         {{-- <form method="GET"
                             action="{{ route('DetailPlot.getsubPlot', ['id' => $plot->id ?? 'default-slug']) }}">
@@ -328,9 +363,21 @@
                                 <span class="ms-2">data</span>
                             </div>
                         </form> --}}
+
+                        <div class="tampilkan">
+                            <label for="dataPerPage3">Tampilkan</label>
+                            <select class="dataPerPage">
+                                <option value="5">5</option>
+                                <option value="10">10</option>
+                                <option value="50">50</option>
+                                <option value="100">100</option>
+                            </select>
+                            <span class="ms-2">data</span>
+                        </div>
+
                     </div>
                     <div class="table-wrapper  table-responsive">
-                        <table class="custom-table-pancang table-striped">
+                        <table class="custom-table-pancang table table-striped">
                             <thead>
                                 <tr>
                                     <th class="kiriPancang">No</th>
@@ -343,9 +390,9 @@
                                     <th class="hidden-column kananPancang">Aksi</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody class="tableBody">
                                 @forelse ($Semai as $item)
-                                    <tr>
+                                    <tr class="data-row">
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $item->total_berat_basah }} Gr</td>
                                         <td>{{ $item->sample_berat_basah }} Gr</td>
@@ -370,8 +417,8 @@
                             </tbody>
                         </table>
                     </div>
-                    {{-- <div class="table-footer mt-5">
-                        <strong>
+                    <div class="table-footer mt-5">
+                        {{-- <strong>
                             Menampilkan {{ $Semai->firstItem() }} sampai {{ $Semai->lastItem() }} dari
                             {{ $Semai->total() }}
                             data
@@ -399,10 +446,21 @@
                                     <li class="page-item disabled"><span class="page-link">Lanjut</span></li>
                                 @endif
                             </ul>
-                        </nav>
-                    </div> --}}
+                        </nav> --}}
+                        <p>Menampilkan data <span class="fromNumber">1</span> sampai <span class="toNumber">5</span>
+                            dari
+                            <span class="totalData">0</span> data
+                        </p>
+
+                        <!-- Tombol Pagination -->
+                        <div class="pagination-controls">
+                            <button class=" btn-button prevPage" disabled>Sebelumnya</button>
+                            <span class="currentPage">1</span> dari <span class="totalPages">0</span>
+                            <button class=" btn-button nextPage">Berikutnya</button>
+                        </div>
+                    </div>
                 </div>
-                <div class="p-1" id="tumbuhanBawah">
+                <div class="p-1 paginated-table" id="tumbuhanBawah">
                     <div class="table-header d-flex justify-content-between">
                         {{-- <form method="GET"
                             action="{{ route('DetailPlot.getsubPlot', ['id' => $plot->id ?? 'default-slug']) }}">
@@ -417,9 +475,19 @@
                                 <span class="ms-2">data</span>
                             </div>
                         </form> --}}
+                        <div class="tampilkan">
+                            <label for="dataPerPage3">Tampilkan</label>
+                            <select class="dataPerPage">
+                                <option value="5">5</option>
+                                <option value="10">10</option>
+                                <option value="50">50</option>
+                                <option value="100">100</option>
+                            </select>
+                            <span class="ms-2">data</span>
+                        </div>
                     </div>
                     <div class="table-wrapper table-responsive">
-                        <table class="custom-table-pancang table-striped">
+                        <table class="custom-table-pancang table table-striped">
                             <thead>
                                 <tr>
                                     <th class="kiriPancang">No</th>
@@ -432,9 +500,9 @@
                                     <th class="hidden-column kananPancang">Aksi</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody class="tableBody">
                                 @forelse  ($TumbuhanBawah as $item)
-                                    <tr>
+                                    <tr class="data-row">
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $item->total_berat_basah }} Gr</td>
                                         <td>{{ $item->sample_berat_basah }} Gr</td>
@@ -458,8 +526,8 @@
                                 @endforelse
                         </table>
                     </div>
-                    {{-- <div class="table-footer mt-5">
-                        <strong>
+                    <div class="table-footer mt-5">
+                        {{-- <strong>
                             Menampilkan {{ $TumbuhanBawah->firstItem() }} sampai {{ $TumbuhanBawah->lastItem() }} dari
                             {{ $TumbuhanBawah->total() }}
                             data
@@ -487,10 +555,21 @@
                                     <li class="page-item disabled"><span class="page-link">Lanjut</span></li>
                                 @endif
                             </ul>
-                        </nav>
-                    </div> --}}
+                        </nav> --}}
+                        <p>Menampilkan data <span class="fromNumber">1</span> sampai <span class="toNumber">5</span>
+                            dari
+                            <span class="totalData">0</span> data
+                        </p>
+
+                        <!-- Tombol Pagination -->
+                        <div class="pagination-controls">
+                            <button class="  btn-button prevPage" disabled>Sebelumnya</button>
+                            <span class="currentPage">1</span> dari <span class="totalPages">0</span>
+                            <button class="  btn-button nextPage">Berikutnya</button>
+                        </div>
+                    </div>
                 </div>
-                <div class="p-1" id="tanah">
+                <div class="p-1 paginated-table" id="tanah">
                     <div class="table-header d-flex justify-content-between">
                         {{-- <form method="GET"
                             action="{{ route('DetailPlot.getsubPlot', ['id' => $plot->id ?? 'default-slug']) }}">
@@ -505,9 +584,19 @@
                                 <span class="ms-2">data</span>
                             </div>
                             </form> --}}
+                        <div class="tampilkan">
+                            <label for="dataPerPage3">Tampilkan</label>
+                            <select class="dataPerPage">
+                                <option value="5">5</option>
+                                <option value="10">10</option>
+                                <option value="50">50</option>
+                                <option value="100">100</option>
+                            </select>
+                            <span class="ms-2">data</span>
+                        </div>
                     </div>
                     <div class="table-wrapper table-responsive">
-                        <table class="custom-table-pancang  table-striped">
+                        <table class="custom-table-pancang table  table-striped">
                             <thead>
                                 <tr>
                                     <th class="kiriPancang">No</th>
@@ -520,9 +609,9 @@
                                     <th class="hidden-column kananPancang">Aksi</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody class="tableBody">
                                 @forelse ($tanah as $item)
-                                    <tr>
+                                    <tr class="data-row">
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $item->kedalaman_sample }} cm</td>
                                         <td>{{ $item->berat_jenis_tanah }} Gr/cm3</td>
@@ -548,8 +637,8 @@
                             </tbody>
                         </table>
                     </div>
-                    {{-- <div class="table-footer mt-5">
-                        <strong>
+                    <div class="table-footer mt-5">
+                        {{-- <strong>
                             Menampilkan {{ $tanah->firstItem() }} sampai {{ $tanah->lastItem() }} dari
                             {{ $tanah->total() }}
                             data
@@ -577,11 +666,21 @@
                                     <li class="page-item disabled"><span class="page-link">Lanjut</span></li>
                                 @endif
                             </ul>
-                        </nav>
-                    </div> --}}
+                        </nav> --}}
+                        <p>Menampilkan data <span class="fromNumber">1</span> sampai <span class="toNumber">5</span>
+                            dari
+                            <span class="totalData">0</span> data
+                        </p>
 
+                        <!-- Tombol Pagination -->
+                        <div class="pagination-controls">
+                            <button class=" btn-button prevPage" disabled>Sebelumnya</button>
+                            <span class="currentPage">1</span> dari <span class="totalPages">0</span>
+                            <button class=" btn-button nextPage">Berikutnya</button>
+                        </div>
+                    </div>
                 </div>
-                <div class="p-1" id="pancang">
+                <div class="p-1 paginated-table" id="pancang">
                     <div class="table-header d-flex justify-content-between">
                         {{-- <form method="GET"
                             action="{{ route('DetailPlot.getsubPlot', ['id' => $plot->id ?? 'default-slug']) }}">
@@ -596,9 +695,19 @@
                                 <span class="ms-2">data</span>
                             </div>
                         </form> --}}
+                        <div class="tampilkan">
+                            <label for="dataPerPage4">Tampilkan</label>
+                            <select class="dataPerPage">
+                                <option value="5">5</option>
+                                <option value="10">10</option>
+                                <option value="50">50</option>
+                                <option value="100">100</option>
+                            </select>
+                            <span class="ms-2">data</span>
+                        </div>
                     </div>
                     <div class="table-wrapper table-responsive">
-                        <table class="custom-table-pancang  table-striped">
+                        <table class="custom-table-pancang table  table-striped">
                             <thead>
                                 <tr>
                                     <th class="kiriPancang">No</th>
@@ -614,9 +723,9 @@
                                     <th class="hidden-column kananPancang">Aksi</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody class="tableBody">
                                 @forelse($pancang as $item)
-                                    <tr>
+                                    <tr class="data-row">
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $item->no_pohon }} cm</td>
                                         <td>{{ $item->keliling }} cm</td>
@@ -644,8 +753,8 @@
                             </tbody>
                         </table>
                     </div>
-                    {{-- <div class="table-footer mt-5">
-                        <strong>
+                    <div class="table-footer mt-5">
+                        {{-- <strong>
                             Menampilkan {{ $pancang->firstItem() }} sampai {{ $pancang->lastItem() }} dari
                             {{ $pancang->total() }}
                             data
@@ -673,11 +782,22 @@
                                     <li class="page-item disabled"><span class="page-link">Lanjut</span></li>
                                 @endif
                             </ul>
-                        </nav>
-                    </div> --}}
+                        </nav> --}}
+                        <p>Menampilkan data <span class="fromNumber">1</span> sampai <span class="toNumber">5</span>
+                            dari
+                            <span class="totalData">0</span> data
+                        </p>
+
+                        <!-- Tombol Pagination -->
+                        <div class="pagination-controls">
+                            <button class="  btn-button prevPage" disabled>Sebelumnya</button>
+                            <span class="currentPage">1</span> dari <span class="totalPages">0</span>
+                            <button class="  btn-button nextPage">Berikutnya</button>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="p-1" id="tiang">
+                <div class="p-1 paginated-table" id="tiang">
                     <div class="table-header d-flex justify-content-between">
                         {{-- <form method="GET"
                             action="{{ route('DetailPlot.getsubPlot', ['id' => $plot->id ?? 'default-slug']) }}">
@@ -692,9 +812,19 @@
                                 <span class="ms-2">data</span>
                             </div>
                         </form> --}}
+                        <div class="tampilkan">
+                            <label for="dataPerPage4">Tampilkan</label>
+                            <select class="dataPerPage">
+                                <option value="5">5</option>
+                                <option value="10">10</option>
+                                <option value="50">50</option>
+                                <option value="100">100</option>
+                            </select>
+                            <span class="ms-2">data</span>
+                        </div>
                     </div>
                     <div class="table-wrapper table-responsive">
-                        <table class="custom-table-pancang table-striped">
+                        <table class="custom-table-pancang table table-striped">
                             <thead>
                                 <tr>
                                     <th class="kiriPancang">No</th>
@@ -710,9 +840,9 @@
                                     <th class="hidden-column kananPancang">Aksi</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody class="tableBody">
                                 @forelse ($tiang as $item)
-                                    <tr>
+                                    <tr class="data-row">
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $item->no_pohon }} cm</td>
                                         <td>{{ $item->keliling }} cm</td>
@@ -740,8 +870,8 @@
                             </tbody>
                         </table>
                     </div>
-                    {{-- <div class="table-footer mt-5">
-                        <strong>
+                    <div class="table-footer mt-5">
+                        {{-- <strong>
                             Menampilkan {{ $tiang->firstItem() }} sampai {{ $tiang->lastItem() }} dari
                             {{ $tiang->total() }}
                             data
@@ -769,10 +899,21 @@
                                     <li class="page-item disabled"><span class="page-link">Lanjut</span></li>
                                 @endif
                             </ul>
-                        </nav>
-                    </div> --}}
+                        </nav> --}}
+                        <p>Menampilkan data <span class="fromNumber">1</span> sampai <span class="toNumber">5</span>
+                            dari
+                            <span class="totalData">0</span> data
+                        </p>
+
+                        <!-- Tombol Pagination -->
+                        <div class="pagination-controls">
+                            <button class=" btn-button prevPage" disabled>Sebelumnya</button>
+                            <span class="currentPage">1</span> dari <span class="totalPages">0</span>
+                            <button class=" btn-button nextPage">Berikutnya</button>
+                        </div>
+                    </div>
                 </div>
-                <div class="p-1" id="pohon">
+                <div class="p-1 paginated-table" id="pohon">
                     <div class="table-header d-flex justify-content-between">
                         {{-- <form method="GET"
                             action="{{ route('DetailPlot.getsubPlot', ['id' => $plot->id ?? 'default-slug']) }}">
@@ -787,9 +928,19 @@
                                 <span class="ms-2">data</span>
                             </div>
                         </form> --}}
+                        <div class="tampilkan">
+                            <label for="dataPerPage5">Tampilkan</label>
+                            <select class="dataPerPage">
+                                <option value="5">5</option>
+                                <option value="10">10</option>
+                                <option value="50">50</option>
+                                <option value="100">100</option>
+                            </select>
+                            <span class="ms-2">data</span>
+                        </div>
                     </div>
                     <div class="table-wrapper table-responsive">
-                        <table class="custom-table-pancang table-striped">
+                        <table class="custom-table-pancang table table-striped">
                             <thead>
                                 <tr>
                                     <th class="kiriPancang">No</th>
@@ -805,10 +956,10 @@
                                     <th class="hidden-column kananPancang">Aksi</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody class="tableBody">
 
                                 @forelse ($pohon as $item)
-                                    <tr>
+                                    <tr class="data-row">
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $item->no_pohon }} cm</td>
                                         <td>{{ $item->keliling }} cm</td>
@@ -836,8 +987,8 @@
                             </tbody>
                         </table>
                     </div>
-                    {{-- <div class="table-footer mt-5">
-                        <strong>
+                    <div class="table-footer mt-5">
+                        {{-- <strong>
                             Menampilkan {{ $pohon->firstItem() }} sampai {{ $pohon->lastItem() }} dari
                             {{ $pohon->total() }}
                             data
@@ -865,10 +1016,21 @@
                                     <li class="page-item disabled"><span class="page-link">Lanjut</span></li>
                                 @endif
                             </ul>
-                        </nav>
-                    </div> --}}
+                        </nav> --}}
+                        <p>Menampilkan data <span class="fromNumber">1</span> sampai <span class="toNumber">5</span>
+                            dari
+                            <span class="totalData">0</span> data
+                        </p>
+
+                        <!-- Tombol Pagination -->
+                        <div class="pagination-controls">
+                            <button class=" btn-button prevPage" disabled>Sebelumnya</button>
+                            <span class="currentPage">1</span> dari <span class="totalPages">0</span>
+                            <button class=" btn-button nextPage">Berikutnya</button>
+                        </div>
+                    </div>
                 </div>
-                <div class="p-1" id="nekromas">
+                <div class="p-1 paginated-table" id="nekromas">
                     <div class="table-header d-flex justify-content-between">
                         {{-- <form method="GET"
                             action="{{ route('DetailPlot.getsubPlot', ['id' => $plot->id ?? 'default-slug']) }}">
@@ -883,9 +1045,19 @@
                                 <span class="ms-2">data</span>
                             </div>
                         </form> --}}
+                        <div class="tampilkan">
+                            <label for="dataPerPage5">Tampilkan</label>
+                            <select class="dataPerPage">
+                                <option value="5">5</option>
+                                <option value="10">10</option>
+                                <option value="50">50</option>
+                                <option value="100">100</option>
+                            </select>
+                            <span class="ms-2">data</span>
+                        </div>
                     </div>
                     <div class="table-wrapper table-responsive">
-                        <table class="custom-table-pancang table-striped">
+                        <table class="custom-table-pancang table table-striped">
                             <thead>
                                 <tr>
                                     <th class="kiriPancang">No</th>
@@ -900,9 +1072,9 @@
                                     <th class="hidden-column kananPancang">Aksi</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody class="tableBody">
                                 @forelse($Necromas as $item)
-                                    <tr>
+                                    <tr class="data-row">
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $item->diameter_pangkal }} cm</td>
                                         <td>{{ $item->diameter_ujung }} cm</td>
@@ -929,8 +1101,8 @@
                             </tbody>
                         </table>
                     </div>
-                    {{-- <div class="table-footer mt-5">
-                        <strong>
+                    <div class="table-footer mt-5">
+                        {{-- <strong>
                             Menampilkan {{ $Necromas->firstItem() }} sampai {{ $Necromas->lastItem() }} dari
                             {{ $Necromas->total() }}
                             data
@@ -958,8 +1130,19 @@
                                     <li class="page-item disabled"><span class="page-link">Lanjut</span></li>
                                 @endif
                             </ul>
-                        </nav>
-                    </div> --}}
+                        </nav> --}}
+                        <p>Menampilkan data <span class="fromNumber">1</span> sampai <span class="toNumber">5</span>
+                            dari
+                            <span class="totalData">0</span> data
+                        </p>
+
+                        <!-- Tombol Pagination -->
+                        <div class="pagination-controls">
+                            <button class=" btn-button prevPage" disabled>Sebelumnya</button>
+                            <span class="currentPage">1</span> dari <span class="totalPages">0</span>
+                            <button class=" btn-button nextPage">Berikutnya</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1060,7 +1243,7 @@
                 y: {
                     formatter: function(val, opts) {
                         let total = opts?.w?.config?.series?.reduce((a, b) => a + b, 0) ||
-                            100.0; // Jika undefined, gunakan 1 agar tidak error
+                            10000000; // Jika undefined, gunakan 1 agar tidak error
                         let percentage = ((val / total) * 100).toFixed(1); // Hitung persentase
                         return `${val} Ton (${percentage}%)`; // Tooltip juga menampilkan data + persentase
                     }
@@ -1082,44 +1265,73 @@
 
         const pieChart = new ApexCharts(document.querySelector("#pie"), pieoptions);
         pieChart.render();
-            document.addEventListener("DOMContentLoaded", function() {
-                let currentPage = 1;
-                let rowsPerPage = 5;
-                let tableRows = document.querySelectorAll("#tableBody tr");
-                let totalData = tableRows.length;
+        document.addEventListener("DOMContentLoaded", function() {
+            let tables = document.querySelectorAll(".paginated-table");
 
-                document.getElementById("totalData").innerText = totalData;
+            tables.forEach((table) => {
+                let rows = table.querySelectorAll(".data-row");
+                let select = table.querySelector(".dataPerPage");
+                let prevBtn = table.querySelector(".prevPage");
+                let nextBtn = table.querySelector(".nextPage");
+                let currentPageElem = table.querySelector(".currentPage");
+                let totalDataElem = table.querySelector(".totalData");
+                let fromElem = table.querySelector(".fromNumber");
+                let toElem = table.querySelector(".toNumber");
+                let tableRows = table.querySelectorAll(".tableBody tr");
+                let totalPagesElem = table.querySelector(".totalPages");
+
+                let totalData = tableRows.length;
+                let currentPage = 1;
+                let rowsPerPage = parseInt(select.value) || 5;
+                let totalPages = Math.ceil(rows.length / rowsPerPage);
 
                 function displayRows() {
+                    rows = table.querySelectorAll(".data-row");
+                    totalPages = Math.ceil(rows.length / rowsPerPage);
+
                     let start = (currentPage - 1) * rowsPerPage;
                     let end = start + rowsPerPage;
 
-                    tableRows.forEach((row, index) => {
-                        row.style.display = (index >= start && index < end) ? "table-row" : "none";
+                    let fromNumber = start + 1;
+                    let toNumber = Math.min(end, rows.length);
+
+                    totalPagesElem.textContent = totalPages;
+                    currentPageElem.textContent = currentPage;
+                    fromElem.textContent = fromNumber;
+                    toElem.textContent = toNumber;
+                    totalDataElem.textContent = rows.length;
+
+                    rows.forEach((row, index) => {
+                        row.style.display = index >= start && index < end ? "" : "none";
                     });
 
-                    document.getElementById("pageNumber").innerText = currentPage;
-                    document.getElementById("fromNumber").innerText = start + 1;
-                    document.getElementById("toNumber").innerText = Math.min(end, totalData);
+                    prevBtn.disabled = currentPage === 1;
+                    nextBtn.disabled = currentPage === totalPages;
                 }
 
-                window.nextPage = function() {
-                    if (currentPage * rowsPerPage < totalData) {
-                        currentPage++;
-                        displayRows();
-                    }
-                };
+                select.addEventListener("change", function() {
+                    rowsPerPage = parseInt(this.value);
+                    currentPage = 1;
+                    displayRows();
+                });
 
-                window.prevPage = function() {
+                prevBtn.addEventListener("click", function() {
                     if (currentPage > 1) {
                         currentPage--;
                         displayRows();
                     }
-                };
+                });
+
+                nextBtn.addEventListener("click", function() {
+                    if (currentPage < totalPages) {
+                        currentPage++;
+                        displayRows();
+                    }
+                });
 
                 displayRows();
             });
-
+        });
     </script>
 
 @endsection

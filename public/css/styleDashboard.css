@@ -1175,6 +1175,31 @@ html, body {
     margin-top: 20px;
     margin-bottom: 20px;
 }
+.btn-button {
+    padding: 12px;
+    /* width: 245px;
+    height: 62px; */
+    /* display: flex; */
+    /* padding: ; */
+    justify-content: center;
+    align-items: center;
+    gap: 14px;
+    border-radius: 8px;
+    background: var(--Primary-0, #4caf4f);
+    color: var(--Warning,  #edf7ed);
+    font-family: "DM Sans";
+    font-size: 16px;
+
+    font-style: normal;
+    font-weight: 700;
+    line-height: 125%;
+    /* bottom: 35px;
+    right: 35px; */
+    border: none;
+    justify-content: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
 .table-wrapper {
     overflow-x: auto;
     /* white-space: nowrap; */
