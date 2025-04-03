@@ -128,29 +128,31 @@ Route::middleware('auth')->group(function () {
 
 
     Route::controller(SerasahController::class)->group(function () {
-        Route::post("/PlotA/store", "store")->name('Serasah.store');
-        Route::get("/PlotA", "index")->name('PlotA.index');
-        Route::post("/PlotA/update/{id}", "update");
+        Route::get("/Plot/SubPlot/edit/{id}", "edit")->name('edit.edit');
+        Route::put("/Plot/SubPlot/serasah/update/{id}", "update")->name('Serasah.update');
         Route::delete("/PlotA/{id}", "destroy");
     });;
 
     Route::controller(SemaiController::class)->group(function () {
         Route::post("/Semai/store", "store")->name('Semai.store');
-        Route::get("/Semai", "index");
-        Route::post("/Semai/update/{id}", "update");
+        // Route::get("/Plot/SubPlot/edit/{id}", "edit")->name('edit.edit');
+        // Route::get("/PlotA", "index");
+        Route::put("/Plot/SubPlot/semai/update/{id}", "update")->name('Semai.update');
         Route::delete("/Semai/{id}", "destroy");
     });
     Route::controller(TunmbuhanBawahController::class)->group(function () {
         Route::post("/Tumbuhanbawah/store", "store")->name('tumbuhanBawah.store');
+        // Route::get("/Plot/SubPlot/edit/{id}", "edit")->name('edit.edit');
         Route::get("/Tumbuhanbawah", "index");
-        Route::post("/Tumbuhanbawah/update/{id}", "update");
+        Route::put("/Plot/SubPlot/tumbuhanBawah/update/{id}", "update")->name('tumbuhanBawah.update');
         Route::delete("/Tumbuhanbawah/{id}", "destroy");
     });
     Route::controller(TanahController::class)->group(function () {
-        Route::post("/Tanah/store", "store")->name('tanah.store');
-        Route::get("/Tanah", "index");
-        Route::post("/Tanah/update/{id}", "update");
-        Route::delete("/Tanah/{id}", "destroy");
+        Route::get("/Plot/SubPlot/Tanah/Tambah/{id}", "index")->name('tanah.index');
+        // Route::get("/Plot/SubPlot/edit/{id}", "edit")->name('edit.edit');
+        Route::post("/Plot/SubPlot/Tanah/Tambah/{id}", "store")->name('tanah.store');
+        Route::put("/Plot/SubPlot/tanah/update/{id}", "update")->name('tanah.update');
+        Route::delete("/Plot/SubPlot/{id}", "destroy")->name('tanah.destroy');
     });
 
     Route::controller(PancangContrller::class)->group(function () {

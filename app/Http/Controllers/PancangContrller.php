@@ -6,8 +6,10 @@ use App\Models\Pancang;
 use App\Models\PoltArea;
 use Illuminate\Http\Request;
 use App\Http\Resources\PancangResouce;
+use App\Models\SubPlot;
 use App\Models\Zona;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class PancangContrller extends Controller
 {
@@ -154,23 +156,26 @@ class PancangContrller extends Controller
     }
     public function destroy(string $id)
     {
+        DB::beginTransaction();
         try {
-            // Cari data Pancang berdasarkan ID
-            $serasah = Pancang::findOrFail($id);
+            // Cari data Tanah berdasarkan ID
+            $tanah = Pancang::findOrFail($id);
 
-            // Hapus data
-            $serasah->delete();
+            // Pastikan subplot yang terkait ada
+            $subplot = SubPlot::findOrFail($tanah->subplot_id);
 
-            // Response sukses
-            return response()->json([
-                'message' => 'Pancang berhasil dihapus'
-            ], 200);
+            // Hapus data tanah
+            $tanah->delete();
+
+            DB::commit();
+
+            // Redirect dengan pesan sukses
+            return redirect()->back()->with('success', 'Data tanah berhasil dihapus.');
         } catch (\Exception $e) {
-            // Response error
-            return response()->json([
-                'message' => 'Gagal menghapus Pancang',
-                'error' => $e->getMessage()
-            ], 500);
+            DB::rollBack();
+
+            // Redirect dengan pesan error
+            return redirect()->back()->with('error', 'Gagal menghapus data tanah: ' . $e->getMessage());
         }
     }
 }

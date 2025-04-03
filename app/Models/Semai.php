@@ -18,7 +18,7 @@ class Semai extends Model
         'sample_berat_basah',
         'sample_berat_kering',
         'total_berat_kering',
-        ' ',
+        'kandungan_karbon ',
         'co2',
     ];
     // Jika ada atribut yang ingin di-guard (tidak bisa diisi langsung)

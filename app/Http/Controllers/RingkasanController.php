@@ -362,9 +362,9 @@ class RingkasanController extends Controller
             $Serasa = $Serasahco2 * $faktor;
             $Necromass = $Necromassco2 * $faktor;
             $co2tanaman = $Co2Tanamannn * $faktor;
-            $akar = $beratMasaAkar * $faktor; // Asumsi biomassa akar tanpa perubahan
-            $tanah = $zona->total_co2_tanah * $faktor;
-            $tanah = $zona->total_co2_tanah * $faktor;
+            $akar = $beratMasaAkar * 1.00; // Asumsi biomassa akar tanpa perubahan
+            $tanah = $zona->total_co2_tanah * 1.00;
+            $tanah = $zona->total_co2_tanah * 1.00;
             // Total Karbon
             $TotalKarbon5POL = $Serasa + $Necromass + $co2tanaman + $tanah + $akar;
             // Perhitungan Baseline Lahan Kosong
@@ -543,26 +543,26 @@ class RingkasanController extends Controller
             $totalPohonKarbonKeseluruhan = 0;
             $totalPohonBiomassaKeseluruhan = 0;
 
-            foreach ($zonaData as $zona) {
+            foreach ($zonaData as $zonaa) {
                 $constantPancang = 25;
-                $TotalPancangco2 = ($zona->pancang_avg_co2 * ($zona->total_pohon_pancang / $constantPancang) * 10000) / 1000;
-                $TotalPancangkarbon = ($zona->pancang_avg_kandungan_karbon * ($zona->total_pohon_pancang / $constantPancang) * 10000) / 1000;
-                $TotalPancangbiomassa = ($zona->pancang_avg_bio_di_atas_tanah * ($zona->total_pohon_pancang / $constantPancang) * 10000) / 1000;
+                $TotalPancangco2 = ($zonaa->pancang_avg_co2 * ($zonaa->total_pohon_pancang / $constantPancang) * 10000) / 1000;
+                $TotalPancangkarbon = ($zonaa->pancang_avg_kandungan_karbon * ($zonaa->total_pohon_pancang / $constantPancang) * 10000) / 1000;
+                $TotalPancangbiomassa = ($zonaa->pancang_avg_bio_di_atas_tanah * ($zonaa->total_pohon_pancang / $constantPancang) * 10000) / 1000;
 
                 $constantMangrove = 25;
-                $TotalMangroveCo2 = ($zona->mangrove_avg_karbondioksida * ($zona->total_mangrove / $constantMangrove) * 10000) / 1000;
-                $TotalMangrovekarbon = ($zona->mangrove_avg_kandungan_karbon * ($zona->total_mangrove / $constantMangrove) * 10000) / 1000;
-                $TotalMangrovebiomassa = ($zona->mangrove_avg_biomasa * ($zona->total_mangrove / $constantMangrove) * 10000) / 1000;
+                $TotalMangroveCo2 = ($zonaa->mangrove_avg_karbondioksida * ($zonaa->total_mangrove / $constantMangrove) * 10000) / 1000;
+                $TotalMangrovekarbon = ($zonaa->mangrove_avg_kandungan_karbon * ($zonaa->total_mangrove / $constantMangrove) * 10000) / 1000;
+                $TotalMangrovebiomassa = ($zonaa->mangrove_avg_biomasa * ($zonaa->total_mangrove / $constantMangrove) * 10000) / 1000;
 
                 $constantTiang = 100;
-                $TotalTiangCo2 = ($zona->tiang_avg_co2 * ($zona->total_tiang / $constantTiang) * 10000) / 1000;
-                $TotalTiangKarbon = ($zona->tiang_avg_kandungan_karbon * ($zona->total_tiang / $constantTiang) * 10000) / 1000;
-                $TotalTiangBiomassa = ($zona->tiang_avg_bio_di_atas_tanah * ($zona->total_tiang / $constantTiang) * 10000) / 1000;
+                $TotalTiangCo2 = ($zonaa->tiang_avg_co2 * ($zonaa->total_tiang / $constantTiang) * 10000) / 1000;
+                $TotalTiangKarbon = ($zonaa->tiang_avg_kandungan_karbon * ($zonaa->total_tiang / $constantTiang) * 10000) / 1000;
+                $TotalTiangBiomassa = ($zonaa->tiang_avg_bio_di_atas_tanah * ($zonaa->total_tiang / $constantTiang) * 10000) / 1000;
 
                 $constantPohon = 400;
-                $TotalPohonCo2 = ($zona->pohon_avg_co2 * ($zona->total_pohon / $constantPohon) * 10000) / 1000;
-                $TotalPohonKarbon = ($zona->pohon_avg_kandungan_karbon * ($zona->total_pohon / $constantPohon) * 10000) / 1000;
-                $TotalPohonBiomassa = ($zona->pohon_avg_bio_di_atas_tanah * ($zona->total_pohon / $constantPohon) * 10000) / 1000;
+                $TotalPohonCo2 = ($zonaa->pohon_avg_co2 * ($zonaa->total_pohon / $constantPohon) * 10000) / 1000;
+                $TotalPohonKarbon = ($zonaa->pohon_avg_kandungan_karbon * ($zonaa->total_pohon / $constantPohon) * 10000) / 1000;
+                $TotalPohonBiomassa = ($zonaa->pohon_avg_bio_di_atas_tanah * ($zonaa->total_pohon / $constantPohon) * 10000) / 1000;
                 // Tambahkan ke total keseluruhan
                 $totalPancangCo2Keseluruhan += $TotalPancangco2;
 
@@ -599,7 +599,7 @@ class RingkasanController extends Controller
             $rataPohonCo2 = $totalZona ? $totalPohonCo2Keseluruhan / $totalZona : 0;
             $rataPohonKarbon = $totalZona ? $totalPohonKarbonKeseluruhan / $totalZona : 0;
             $rataPohonBiomassa = $totalZona ? $totalPohonBiomassaKeseluruhan / $totalZona : 0;
-        //    dd($totalPancangCo2Keseluruhan, $totalTiangCo2Keseluruhan, $totalPohonCo2Keseluruhan);
+            //    dd($totalPancangCo2Keseluruhan, $totalTiangCo2Keseluruhan, $totalPohonCo2Keseluruhan);
             // Tampilkan hasil
             // dd([
             //     'Rata-rata Pancang CO2' => $rataPancangCo2,
@@ -735,9 +735,9 @@ class RingkasanController extends Controller
             $Serasa = $Serasahco2 * $faktor;
             $Necromass = $Necromassco2 * $faktor;
             $co2tanaman = $Co2Tanamannn * $faktor;
-            $akar = $beratMasaAkar * $faktor; // Asumsi biomassa akar tanpa perubahan
-            $tanah = $zona->total_co2_tanah * $faktor;
-            $tanah = $zona->total_co2_tanah * $faktor;
+            $akar = $beratMasaAkar * 1.00; // Asumsi biomassa akar tanpa perubahan
+            $tanah = $zona->total_co2_tanah * 1.00;
+            $tanah = $zona->total_co2_tanah * 1.00;
             // Total Karbon
             $TotalKarbon5POL = $Serasa + $Necromass + $co2tanaman + $tanah + $akar;
             // Perhitungan Baseline Lahan Kosong

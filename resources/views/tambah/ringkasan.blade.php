@@ -43,7 +43,7 @@
 
     <!-- Favicon -->
     <link rel="icon" href="{{ asset('/images/logoCarbonStockID-LightMode.png') }}" type="image/x-icon" />
-    <title>Ringkasan Hitungan  {{ $poltArea->daerah }}</title>
+    <title>Ringkasan Hitungan {{ $poltArea->daerah }}</title>
 </head>
 
 <body>
@@ -435,7 +435,7 @@
                                                 <td class="">4</td>
                                                 <td>Tanah</td>
                                                 <td>{{ $item['TanahCo2'] ?? 0 }} Ton C/Ha</td>
-                                                <td>{{ $item['faktor'] ?? 0 }} Ha</td>
+                                                <td>1.00 Ha</td>
                                                 <td>{{ $item['tanah'] ?? 0 }} Ton C/Ha</td>
                                                 <td>{{ $item['hasiltanahPersen'] ?? 0 }} %</td>
 
@@ -444,7 +444,7 @@
                                                 <td class="">5</td>
                                                 <td>Berat bioomasa akar</td>
                                                 <td>{{ $item['beratMasaAkar'] ?? 0 }} Ton C/Ha</td>
-                                                <td>{{ $item['faktor'] ?? 0 }} Ha</td>
+                                                <td>1.00 Ha</td>
                                                 <td>{{ $item['BeratBiomassaAkar'] ?? 0 }} Ton C/Ha</td>
                                                 <td>{{ $item['hasilakarPersen'] ?? 0 }} %</td>
 

@@ -6,6 +6,8 @@ use App\Models\PoltArea;
 use App\Models\Necromass;
 use Illuminate\Http\Request;
 use App\Http\Resources\NekromassResource;
+use App\Models\SubPlot;
+use Illuminate\Support\Facades\DB;
 
 class NekromasController extends Controller
 {
@@ -17,7 +19,7 @@ class NekromasController extends Controller
     public function store(Request $request)
     {
         // ambil poltArea berdasarkan id
-        $poltareaID = $request->input("polt-area_id"); // pastikan polt-area_id dikirim dari FE 
+        $poltareaID = $request->input("polt-area_id"); // pastikan polt-area_id dikirim dari FE
         $polt = PoltArea::find($poltareaID);
         if (!$poltareaID) {
             return response()->json([
@@ -117,7 +119,7 @@ class NekromasController extends Controller
 
             // Perhitungan serapan CO2 (kg)
             $co2 = $kandunganKarbon * (44 / 12);
-            // update data ke database, termaksud hasil pergitungan 
+            // update data ke database, termaksud hasil pergitungan
             $Necromass->update([
                 'diameter_pangkal' => $diameterPangkal,  // Simpan keliling dari input
                 'diameter_ujung' => $diameterUjung,  // Simpan hasil perhitungan diameter
@@ -144,23 +146,26 @@ class NekromasController extends Controller
     }
     public function destroy(string $id)
     {
+        DB::beginTransaction();
         try {
-            // Cari data Pohon berdasarkan ID
-            $Necromass = Necromass::findOrFail($id);
+            // Cari data Tanah berdasarkan ID
+            $tanah = Necromass::findOrFail($id);
 
-            // Hapus data
-            $Necromass->delete();
+            // Pastikan subplot yang terkait ada
+            $subplot = SubPlot::findOrFail($tanah->subplot_id);
 
-            // Response sukses
-            return response()->json([
-                'message' => 'Pohon berhasil dihapus'
-            ], 200);
+            // Hapus data tanah
+            $tanah->delete();
+
+            DB::commit();
+
+            // Redirect dengan pesan sukses
+            return redirect()->back()->with('success', 'Data tanah berhasil dihapus.');
         } catch (\Exception $e) {
-            // Response error
-            return response()->json([
-                'message' => 'Gagal menghapus Pohon',
-                'error' => $e->getMessage()
-            ], 500);
+            DB::rollBack();
+
+            // Redirect dengan pesan error
+            return redirect()->back()->with('error', 'Gagal menghapus data tanah: ' . $e->getMessage());
         }
     }
 }

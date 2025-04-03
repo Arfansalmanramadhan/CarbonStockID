@@ -321,9 +321,9 @@ class DashboardController extends Controller
             $Serasa = $Serasahco2 * $faktor;
             $Necromass = $Necromassco2 * $faktor;
             $co2tanaman = $Co2Tanamannn * $faktor;
-            $akar = $beratMasaAkar * $faktor; // Asumsi biomassa akar tanpa perubahan
-            $tanah = $zona->total_co2_tanah * $faktor;
-            $tanah = $zona->total_co2_tanah * $faktor;
+            $akar = $beratMasaAkar * 1.00; // Asumsi biomassa akar tanpa perubahan
+            $tanah = $zona->total_co2_tanah * 1.00;
+            $tanah = $zona->total_co2_tanah * 1.00;
             // Total Karbon
             $TotalKarbon5POL = $Serasa + $Necromass + $co2tanaman + $tanah + $akar;
             // Perhitungan Baseline Lahan Kosong

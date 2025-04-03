@@ -12,38 +12,50 @@
                 </div>
                 <div class="card-body-sup-plot">
                     <!-- Form -->
-                    <form method="POST" action="{{ route('Serasah.store') }}" id="SerasahForm">
+                    @if (session('success'))
+                        <div class="alert alert-success">
+                            {{ session('success') }}
+                        </div>
+                    @endif
+                    @if (session('error'))
+                        <div class="alert alert-danger">
+                            {{ session('error') }}
+                        </div>
+                    @endif
+                    <form method="POST" action="{{ route('Serasah.update', ['id' => $subplot->id]) }}" id="SerasahForm">
                         @csrf
-                        {{-- <input type="hidden" id="zona_id" name="zona_id" value="{{ $zona->id }}" /> --}}
+                        @method('PUT')
+                        <input type="hidden" id="subplot_id" name="subplot_id" value="{{ $subplot->id }}" />
                         <div class="mb-3">
                             <label for="plotName" class="form-label">Total Berat Basah</label>
-                            <input type="text" class="form-control" name="total_berat_basah" id="TotalBeratBasah"
+                            <input type="text" class="form-control" name="total_berat_basah" id="TotalBeratBasah" value="{{ $serasah ? $serasah->total_berat_basah : ""}}"
                                 placeholder="Masukkan total berat basah (gr)" />
                         </div>
                         <div class="mb-3">
                             <label for="plotName" class="form-label">Sample Berat Basah</label>
-                            <input type="text" class="form-control" name="sample_berat_basah" id="SampleBeratBasah"
+                            <input type="text" class="form-control" name="sample_berat_basah" id="SampleBeratBasah"  value="{{ $serasah ? $serasah->sample_berat_basah : ""}}"
                                 placeholder="Masukkan sample berat basah (gr)" />
                         </div>
                         <div class="mb-3">
                             <label for="plotName" class="form-label">Sample Berat Kering</label>
-                            <input type="text" class="form-control" name="sample_berat_kering" id="SampleBeratKering"
+                            <input type="text" class="form-control" name="sample_berat_kering" id="SampleBeratKering"  value="{{ $serasah ? $serasah->sample_berat_kering : ""}}"
                                 placeholder="Masukkan sample berat kering (gr)" />
                         </div>
                         <div class="mb-3">
                             <label for="plotName" class="form-label">Total Berat Kering</label>
-                            {{-- <input type="text" class="form-control-non" name="total_berat_kering" id="TotalBeratKering "
-                                value="{{ $PlotA ? $PlotA->total_berat_kering : '' }} " readonly /> --}}
+                            <input type="text" class="form-control-non" name="total_berat_kering" id="TotalBeratKering "
+                                value="{{ $serasah ? $serasah->total_berat_kering : "" }} " readonly />
                         </div>
                         <p class="form-label">Kandungan Karbon
-                            {{-- <span>{{ $PlotA ? $PlotA->kandungan_karbon : '' }} Kg</span> --}}
+                            <span>{{ $serasah ? $serasah->kandungan_karbon : "" }} Kg</span>
                         </p>
-                        {{-- <p class="form-label">Serapan CO2 <span>{{ $PlotA ? $PlotA->co2 : '' }} Kg</span></p> --}}
-                        <button type="submit"
+                        <p class="form-label">Serapan CO2 <span>{{ $serasah ?  $serasah->co2 : "" }} Kg</span></p>
+                        {{-- <button type="submit"
                             class="btn btn-success d-flex align-items-center justify-content-center"
                             id="submitSerasah">
                             <span>Submit</span>
-                        </button>
+                        </button> --}}
+                        <button type="submit" class="btn btn-success" id="submitButton">Submit</button>
                     </form>
                 </div>
             </div>
@@ -54,32 +66,43 @@
                 </div>
                 <div class="card-body-sup-plot">
                     <!-- Form -->
-                    <form method="POST" action="{{ route('Semai.store') }}" id="SemaiForm">
+                    @if (session('success'))
+                        <div class="alert alert-success">
+                            {{ session('success') }}
+                        </div>
+                    @endif
+                    @if (session('error'))
+                        <div class="alert alert-danger">
+                            {{ session('error') }}
+                        </div>
+                    @endif
+                    <form method="POST" action="{{ route('Semai.update',  ['id' => $subplot->id]) }}" id="SemaiForm">
                         @csrf
-                        {{-- <input type="hidden" id="zona_id" name="zona_id" value="{{ $zona->id }}" /> --}}
+                        @method('PUT')
+                        <input type="hidden" id="subplot_id" name="subplot_id" value="{{ $subplot->id }}" />
                         <div class="mb-3">
                             <label for="plotName" class="form-label">Total Berat Basah</label>
                             <input type="text" class="form-control" name="total_berat_basah" id="TotalBeratBasah"
-                                {{-- value="{{ $semai ? $semai->total_berat_basah : '' }}" --}} placeholder="Masukkan total berat basah (gr)" />
+                                value="{{  $semai ? $semai->total_berat_basah : "" }}" placeholder="Masukkan total berat basah (gr)" />
                         </div>
                         <div class="mb-3">
                             <label for="plotName" class="form-label">Sample Berat Basah</label>
                             <input type="text" class="form-control" name="sample_berat_basah" id="SampleBeratBasah"
-                                {{-- value="{{ $semai ? $semai->sample_berat_basah : '' }}" --}} placeholder="Masukkan sample berat basah (gr)" />
+                                value="{{  $semai ? $semai->sample_berat_basah : "" }}" placeholder="Masukkan sample berat basah (gr)" />
                         </div>
                         <div class="mb-3">
                             <label for="plotName" class="form-label">Sample Berat Kering</label>
                             <input type="text" class="form-control" name="sample_berat_kering" id="SampleBeratKering"
-                                {{-- value="{{ $semai ? $semai->sample_berat_kering : '' }}" --}} placeholder="Masukkan sample berat kering (gr)" />
+                                value="{{  $semai ? $semai->sample_berat_kering : "" }}" placeholder="Masukkan sample berat kering (gr)" />
                         </div>
                         <div class="mb-3">
                             <label for="plotName" class="form-label">Total Berat Kering</label>
-                            {{-- <input type="text" class="form-control-non" name="total_berat_kering" id="TotalBeratKering"
-                                value="{{ $semai ? $semai->kandungan_karbon : '' }}" readonly /> --}}
+                            <input type="text" class="form-control-non" name="total_berat_kering" id="TotalBeratKering"
+                                value="{{  $semai ? $semai->kandungan_karbon : "" }}" readonly />
                         </div>
-                        {{-- <p class="form-label">Kandungan Karbon <span>{{ $semai ? $semai->kandungan_karbon : '' }}
-                                Kg</span></p> --}}
-                        {{-- <p class="form-label">Serapan CO2 <span>{{ $semai ? $semai->co2 : '' }} Kg</span></p> --}}
+                        <p class="form-label">Kandungan Karbon <span>{{  $semai ? $semai->kandungan_karbon : "" }}
+                                Kg</span></p>
+                        <p class="form-label">Serapan CO2 <span>{{  $semai ? $semai->co2 : "" }} Kg</span></p>
                         <button type="submit" class="btn btn-success d-flex align-items-center justify-content-center"
                             id="submitSemai">
                             <span>Submit</span>
@@ -94,35 +117,46 @@
                 </div>
                 <div class="card-body-sup-plot">
                     <!-- Form -->
-                    <form method="POST" action="{{ route('tumbuhanBawah.store') }}" id="tumbuhanBawahForm">
+                    @if (session('success'))
+                        <div class="alert alert-success">
+                            {{ session('success') }}
+                        </div>
+                    @endif
+                    @if (session('error'))
+                        <div class="alert alert-danger">
+                            {{ session('error') }}
+                        </div>
+                    @endif
+                    <form method="POST" action="{{ route('tumbuhanBawah.update',  ['id' => $subplot->id] ) }}" id="tumbuhanBawahForm">
                         @csrf
-                        {{-- <input type="hidden" id="zona_id" name="zona_id" value="{{ $zona->id }}" /> --}}
+                        @method('PUT')
+                        <input type="hidden" id="subplot_id" name="subplot_id" value="{{ $subplot->id }}" />
                         <div class="mb-3">
                             <label for="plotName" class="form-label">Total Berat Basah</label>
                             <input type="text" class="form-control" name="total_berat_basah" id="TotalBeratBasah"
-                                placeholder="Masukkan total berat basah (gr)" />
+                                placeholder="Masukkan total berat basah (gr)"  value="{{ $tumbuhanbawah ? $tumbuhanbawah->total_berat_basah : "" }}" />
                         </div>
                         <div class="mb-3">
                             <label for="plotName" class="form-label">Sample Berat Basah</label>
                             <input type="text" class="form-control" name="sample_berat_basah" id="SampleBeratBasah"
-                                {{-- value="{{ $tumbuhanbawah ? $tumbuhanbawah->sample_berat_basah : '' }}" --}} placeholder="Masukkan sample berat basah (gr)" />
+                                value="{{ $tumbuhanbawah ? $tumbuhanbawah->sample_berat_basah : "" }}" placeholder="Masukkan sample berat basah (gr)" />
                         </div>
                         <div class="mb-3">
                             <label for="plotName" class="form-label">Sample Berat Kering</label>
                             <input type="text" class="form-control" name="sample_berat_kering" id="SampleBeratKering"
-                                {{-- value="{{ $tumbuhanbawah ? $tumbuhanbawah->sample_berat_kering : '' }}" --}} placeholder="Masukkan sample berat kering (gr)" />
+                                value="{{ $tumbuhanbawah ? $tumbuhanbawah->sample_berat_kering : "" }}" placeholder="Masukkan sample berat kering (gr)" />
                         </div>
                         <div class="mb-3">
                             <label for="plotName" class="form-label">Total Berat Kering</label>
-                            {{-- <input type="text" class="form-control-non" name="total_berat_kering"
+                            <input type="text" class="form-control-non" name="total_berat_kering"
                                 id="TotalBeratKering"
-                                value="{{ $tumbuhanbawah ? $tumbuhanbawah->total_berat_kering : '' }}" readonly /> --}}
+                                value="{{ $tumbuhanbawah ? $tumbuhanbawah->total_berat_kering : "" }}" readonly />
                         </div>
                         <p class="form-label">Kandungan Karbon
-                            {{-- <span>{{ $tumbuhanbawah ? $tumbuhanbawah->kandungan_karbon : '' }} Kg</span> --}}
+                            <span>{{ $tumbuhanbawah ? $tumbuhanbawah->kandungan_karbon : "" }} Kg</span>
                         </p>
-                        {{-- <p class="form-label">Serapan CO2 <span>{{ $tumbuhanbawah ? $tumbuhanbawah->co2 : '' }}
-                                Kg</span></p> --}}
+                        <p class="form-label">Serapan CO2 <span>{{ $tumbuhanbawah ? $tumbuhanbawah->co2 : "" }}
+                                Kg</span></p>
                         <button type="submit" class="btn btn-success d-flex align-items-center justify-content-center"
                             id="submitButton">
                             <span>Submit</span>
@@ -137,29 +171,40 @@
                 </div>
                 <div class="card-body-sup-plot-last">
                     <!-- Form -->
-                    <form method="POST" action="{{ route('tanah.store') }}" id="tanahForm">
+                    @if (session('success'))
+                        <div class="alert alert-success">
+                            {{ session('success') }}
+                        </div>
+                    @endif
+                    @if (session('error'))
+                        <div class="alert alert-danger">
+                            {{ session('error') }}
+                        </div>
+                    @endif
+                    <form method="POST" action="{{ route('tanah.update' ,  ['id' => $subplot->id]) }}" id="tanahForm">
                         @csrf
-                        {{-- <input type="hidden" id="zona_id" name="zona_id" value="{{ $zona->id }}" /> --}}
+                        @method('PUT')
+                        <input type="hidden" id="subplot_id" name="subplot_id" value="{{ $subplot->id }}" />
                         <div class="mb-3">
                             <label for="plotName" class="form-label">Kedalaman Sample</label>
                             <input type="text" class="form-control" name="kedalaman_sample" id="KedalamanSample"
-                                {{-- value="{{ $tanah ? $tanah->kedalaman_sample : ' ' }} " --}} placeholder="Masukkan kedalaman sample (cm)" />
+                                value="{{ $tanah ? $tanah->kedalaman_sample : ""}} " placeholder="Masukkan kedalaman sample (cm)" />
                         </div>
                         <div class="mb-3">
                             <label for="plotName" class="form-label">Sample Berat Basah</label>
                             <input type="text" class="form-control" name="berat_jenis_tanah" id="SampleBeratBasah"
-                                {{-- value="{{ $tanah ? $tanah->berat_jenis_tanah : ' ' }} " --}} placeholder="Masukkan berat jenis tanah " />
+                                value="{{ $tanah ? $tanah->berat_jenis_tanah : ""}} " placeholder="Masukkan berat jenis tanah " />
                         </div>
-                        {{-- <div class="mb-3">
+                        <div class="mb-3">
                             <label for="plotName" class="form-label">C Organic Tanah</label>
                             <input type="text" class="form-control" name="C_organic_tanah" id="COrganikTanah"
-                                value="{{ $tanah ? $tanah->C_organic_tanah : ' ' }} "
+                                value="{{ $tanah ? $tanah->C_organic_tanah : ""}} "
                                 placeholder="Masukkan c organic tanah (%)" />
                         </div>
-                        <p class="form-label">Carbon <span>{{ $tanah ? $tanah->carbongr : ' ' }} Gr/Cm3</span></p>
-                        <p class="form-label">Carbon <span>{{ $tanah ? $tanah->carbonton : '' }} Ton/Ha</span></p>
-                        <p class="form-label">Carbon <span>{{ $tanah ? $tanah->carbonkg : '' }} Kg</span></p>
-                        <p class="form-label">Serapan CO2 <span>{{ $tanah ? $tanah->co2kg : '' }} Kg</span></p> --}}
+                        <p class="form-label">Carbon <span>{{ $tanah ? $tanah->carbongr : ""}} Gr/Cm3</span></p>
+                        <p class="form-label">Carbon <span>{{ $tanah ? $tanah->carbonton : "" }} Ton/Ha</span></p>
+                        <p class="form-label">Carbon <span>{{ $tanah ? $tanah->carbonkg : "" }} Kg</span></p>
+                        <p class="form-label">Serapan CO2 <span>{{ $tanah ? $tanah->co2kg : "" }} Kg</span></p>
                         <button type="submit" class="btn btn-success d-flex align-items-center justify-content-center"
                             id="submitButton">
                             <span>Submit</span>

@@ -5,10 +5,15 @@ namespace App\Http\Controllers;
 use App\Http\Resources\SerasahResource;
 use App\Models\Profil;
 use App\Models\PoltArea;
+use App\Models\Semai;
 use App\Models\Serasah;
+use App\Models\SubPlot;
+use App\Models\Tanah;
+use App\Models\TumbuhanBawah;
 use Illuminate\Http\Request;
 use App\Models\Zona;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Symfony\Component\Console\Input\Input;
 
 class SerasahController extends Controller
@@ -22,9 +27,9 @@ class SerasahController extends Controller
         // return SerasahResource::collection($serasah);
         $user = Auth::user();
         $poltArea = PoltArea::where('id', $user->id);
-        $zona = Zona::where('polt-area_id', $user->id );
-        $PlotAser = Serasah::where('zona_id' );
-        return view('tambah.PlotA', compact('user', 'poltArea', 'zona', 'PlotAser'));
+        $zona = Zona::where('polt-area_id', $user->id);
+        $serasah = Serasah::where('zona_id');
+        return view('tambah.PlotA', compact('user', 'poltArea', 'zona', 'serasah'));
     }
 
     /**
@@ -170,7 +175,15 @@ class SerasahController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $subplot = SubPlot::findOrFail($id);
+
+        // Mengambil data dari setiap tabel yang berhubungan dengan subplot_id
+        $tumbuhanbawah = TumbuhanBawah::where('subplot_id', $subplot->id)->first();
+        $semai = Semai::where('subplot_id', $subplot->id)->first();
+        $serasah = Serasah::where('subplot_id', $subplot->id)->first();
+        $tanah = Tanah::where('subplot_id', $subplot->id)->first(); // Tanah sudah benar
+
+        return view('edit.PlotA', compact('subplot', 'tumbuhanbawah', 'semai', 'serasah', 'tanah'));
     }
 
     /**
@@ -178,20 +191,22 @@ class SerasahController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        // validasi reques
+        $validatedData = $request->validate([
+            'subplot_id' => 'required|integer|exists:subplot,id',
+            'total_berat_basah' => 'required|numeric|min:0',
+            'sample_berat_basah' => 'required|numeric|min:0',
+            'sample_berat_kering' => 'required|numeric|min:0',
+        ]);
+        // dd( $request->all());
+        DB::beginTransaction();
         try {
-            // validasi reques
-            $validatedData = $request->validate([
-                'total_berat_basah' => 'required|numeric|min:0',
-                'sample_berat_basah' => 'required|numeric|min:0',
-                'sample_berat_kering' => 'required|numeric|min:0',
-            ]);
             // Cari data Serasah berdasarkan ID
-            $serasah = Serasah::findOrFail($id);
+            $subplot = SubPlot::findOrFail($id);
+            $serasah = Serasah::where('subplot_id', $subplot->id)->first();
             // Pastikan tidak ada pembagian dengan nol
-            if ($request->sample_berat_basah == 0) {
-                return response()->json([
-                    'message' => 'Sample berat basah tidak boleh nol.'
-                ], 400);
+            if (!$serasah) {
+                return redirect()->back()->with('error', 'Data Serasah tidak ditemukan.');
             }
             // lakuan perhitungan
             $TotalBeratKering = ($request->sample_berat_kering / $request->sample_berat_basah) * $request->total_berat_basah;
@@ -206,18 +221,17 @@ class SerasahController extends Controller
                 'kandungan_karbon' => $kandunganKarbon,
                 'co2' => $co2,
             ]);
-
+            // dd( $serasah);
             // Response sukses
-            return response()->json([
-                'message' => 'Serasah berhasil diupdate',
-                'data' => $serasah
-            ], 201);
+            DB::commit();
+            // Redirect dengan pesan sukses
+            return redirect()->back()->with('success', 'Serasah berhasil diperbarui.');
         } catch (\Exception $e) {
             // Response error
-            return response()->json([
-                'message' => 'Gagal mengapdate Serasah',
-                'error' => $e->getMessage()
-            ], 500);
+            DB::rollBack();
+
+            // Redirect dengan pesan error
+            return redirect()->back()->with('error', 'Gagal mengupdate Serasah: ' . $e->getMessage());
         }
     }
 

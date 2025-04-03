@@ -6,8 +6,11 @@ use App\Models\Tiang;
 use App\Models\PoltArea;
 use Illuminate\Http\Request;
 use App\Http\Resources\PancangResouce;
+use App\Models\SubPlot;
 use App\Models\Zona;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+
 class TiangController extends Controller
 {
     public function index()
@@ -153,23 +156,26 @@ class TiangController extends Controller
     }
     public function destroy(string $id)
     {
-        try {
-            // Cari data Tiang berdasarkan ID
-            $serasah = Tiang::findOrFail($id);
+        DB::beginTransaction();
+    try {
+        // Cari data Tanah berdasarkan ID
+        $tanah = Tiang::findOrFail($id);
 
-            // Hapus data
-            $serasah->delete();
+        // Pastikan subplot yang terkait ada
+        $subplot = SubPlot::findOrFail($tanah->subplot_id);
 
-            // Response sukses
-            return response()->json([
-                'message' => 'Tiang berhasil dihapus'
-            ], 200);
-        } catch (\Exception $e) {
-            // Response error
-            return response()->json([
-                'message' => 'Gagal menghapus Tiang',
-                'error' => $e->getMessage()
-            ], 500);
-        }
+        // Hapus data tanah
+        $tanah->delete();
+
+        DB::commit();
+
+        // Redirect dengan pesan sukses
+        return redirect()->back()->with('success', 'Data tanah berhasil dihapus.');
+    } catch (\Exception $e) {
+        DB::rollBack();
+
+        // Redirect dengan pesan error
+        return redirect()->back()->with('error', 'Gagal menghapus data tanah: ' . $e->getMessage());
+    }
     }
 }

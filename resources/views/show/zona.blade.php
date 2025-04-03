@@ -30,7 +30,7 @@
                         <form method="GET"
                             action="{{ route('zona.getZona', ['slug' => $poltArea->slug ?? 'default-slug']) }}">
                             <div class="d-flex align-items-center">
-                                <div class="form-control-space">    
+                                <div class="form-control-space">
                                     <input type="text" id="searchInput" name="search" placeholder="Cari..."
                                         class="form-control" value="{{ request('search') }}">
                                 </div>
@@ -1153,7 +1153,7 @@
                                         <td class="">4</td>
                                         <td>Tanah</td>
                                         <td>{{ $item['TanahCo2'] ?? 0 }} Ton C/Ha</td>
-                                        <td>{{ $item['faktor'] ?? 0 }} Ha</td>
+                                        <td>1.00 Ha</td>
                                         <td>{{ $item['tanah'] ?? 0 }} Ton C/Ha</td>
                                         <td>{{ $item['hasiltanahPersen'] ?? 0 }} %</td>
 
@@ -1162,7 +1162,7 @@
                                         <td class="">5</td>
                                         <td>Berat bioomasa akar</td>
                                         <td>{{ $item['beratMasaAkar'] ?? 0 }} Ton C/Ha</td>
-                                        <td>{{ $item['faktor'] ?? 0 }} Ha</td>
+                                        <td>1.00 Ha</td>
                                         <td>{{ $item['BeratBiomassaAkar'] ?? 0 }} Ton C/Ha</td>
                                         <td>{{ $item['hasilakarPersen'] ?? 0 }} %</td>
 

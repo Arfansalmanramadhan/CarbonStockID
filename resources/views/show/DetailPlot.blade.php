@@ -72,7 +72,9 @@
                                             <td class="hidden-column">{{ $item->kandungan_karbon }}gr/cm3</td>
                                             <td class="hidden-column">{{ $item->co2 }} kg</td>
                                             <td class="hidden-column aksi-button">
-                                                <button class="edit-btn">
+                                                <button
+                                                    onclick="window.location.href='{{ route('edit.edit', ['id' => $subplot->id]) }}'"
+                                                    class="edit-btn">
                                                     <img src="{{ asset('/images/PencilSquare.svg') }}" alt="" />
                                                 </button>
                                                 <button class="delete-btn">
@@ -162,7 +164,9 @@
                                         <td class="hidden-column">{{ $item->kandungan_karbon }}Kg</td>
                                         <td class="hidden-column">{{ $item->co2 }} kg</td>
                                         <td class="hidden-column aksi-button">
-                                            <button class="edit-btn">
+                                            <button
+                                                onclick="window.location.href='{{ route('edit.edit', ['id' => $subplot->id]) }}'"
+                                                class="edit-btn">
                                                 <img src="{{ asset('/images/PencilSquare.svg') }}" alt="" />
                                             </button>
                                             <button class="delete-btn">
@@ -251,7 +255,9 @@
                                         <td class="hidden-column">{{ $item->kandungan_karbon }}Kg</td>
                                         <td class="hidden-column">{{ $item->co2 }} kg</td>
                                         <td class="hidden-column aksi-button">
-                                            <button class="edit-btn">
+                                            <button
+                                                onclick="window.location.href='{{ route('edit.edit', ['id' => $subplot->id]) }}'"
+                                                class="edit-btn">
                                                 <img src="{{ asset('/images/PencilSquare.svg') }}" alt="" />
                                             </button>
                                             <button class="delete-btn">
@@ -300,7 +306,7 @@
                 </div>
                 <div class="p-1" id="tanah">
                     <div class="table-header d-flex justify-content-between">
-                        <<form method="GET"
+                        <form method="GET"
                             action="{{ route('DetailPlot.getsubPlot', ['id' => $plot->id ?? 'default-slug']) }}">
                             <div class="tampilkan">
                                 <label for="show-entries">Tampilkan</label>
@@ -312,7 +318,21 @@
                                 </select>
                                 <span class="ms-2">data</span>
                             </div>
-                            </form>
+                        </form>
+                        <div class="d-flex align-items-center">
+                            <button onclick="window.location.href='{{ route('tanah.index', ['id' => $subplot->id]) }}'"
+                                class="btn btn-tambah-data mt-3 ">Tambah</button>
+                        </div>
+                        @if (session('success'))
+                            <div class="alert alert-success">
+                                {{ session('success') }}
+                            </div>
+                        @endif
+                        @if (session('error'))
+                            <div class="alert alert-danger">
+                                {{ session('error') }}
+                            </div>
+                        @endif
                     </div>
                     <div class="table-wrapper table-responsive">
                         <table class="custom-table-pancang  table-striped">
@@ -320,11 +340,12 @@
                                 <tr>
                                     <th class="kiriPancang">No</th>
                                     <th>Kedalaman Sample</th>
-                                    <th>Sample Berat Basah</th>
-                                    <th>C organik Tanah</th>
+                                    <th>Berat Jenis Basah</th>
+                                    <th>C Organik Tanah</th>
                                     <th>karbon Gr</th>
                                     <th>karbon Ton/Ha</th>
                                     <th>Karbon Ton</th>
+                                    <th>Serapan CO2</th>
                                     <th class="hidden-column kananPancang">Aksi</th>
                                 </tr>
                             </thead>
@@ -340,12 +361,20 @@
                                         <td class="hidden-column">{{ $item->carbonkg }} Ton</td>
                                         <td class="hidden-column">{{ $item->co2kg }}kg</td>
                                         <td class="hidden-column aksi-button">
-                                            <button class="edit-btn">
+                                            <button
+                                                onclick="window.location.href='{{ route('edit.edit', ['id' => $subplot->id]) }}'"
+                                                class="edit-btn">
                                                 <img src="{{ asset('/images/PencilSquare.svg') }}" alt="" />
                                             </button>
-                                            <button class="delete-btn">
-                                                <img src="{{ asset('/images/Trash.svg') }}" alt="" />
-                                            </button>
+                                            <form action="{{ route('tanah.destroy', ['id' => $tanah->id]) }}"
+                                                method="POST">
+                                                {{-- <form action="{{ route('tanah.destroy', ['id' => $subplot->id]) }}" method="POST" onsubmit="return confirm('Yakin ingin menghapus data ini?');"> --}}
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="delete-btn">
+                                                    <img src="{{ asset('/images/Trash.svg') }}" alt="Delete" />
+                                                </button>
+                                            </form>
                                         </td>
                                     </tr>
                                 @empty
