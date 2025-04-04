@@ -35,7 +35,7 @@
                     @endif
                     <!-- Form -->
                     <dd></dd>
-                    <form method="POST" action="{{ route('zona.store', ['id' => $poltArea->id]) }}" id="plotAreaForm">
+                    <form method="POST" action="{{ route('zona.store', ['slug' => $poltArea->slug]) }}" id="plotAreaForm">
                         @csrf
                         {{-- <input type="hidden" id="polt-area_id" name="polt-area_id" value="{{ $poltArea->id }}" /> --}}
                         <div class="mb-4">

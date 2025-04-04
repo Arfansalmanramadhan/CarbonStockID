@@ -20,6 +20,7 @@ class DashboardController extends Controller
     {
         $user = Auth::user();
         $dataDaerah = PoltArea::pluck('daerah')->toArray();
+        // $poltArea = PoltArea::where('id', $user->id)->first();
         $ringkasann = PoltArea::leftJoin('zona', function ($join) {
             $join->on('zona.polt_area_id', '=', 'polt_area.id')
                 ->whereNull('zona.deleted_at');
@@ -504,6 +505,7 @@ class DashboardController extends Controller
         return view('dashboard', compact(
             'user',
             'dataDaerah',
+            // 'poltArea',
             'ringkasann',
             'Serasah',
             'Semai',

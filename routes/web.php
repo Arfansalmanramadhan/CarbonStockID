@@ -68,11 +68,7 @@ Route::controller(AuthController::class)->group(function () {
 });
 Route::middleware('auth')->group(function () {
 
-    Route::controller(DashboardController::class)->group(function () {
-        Route::get('/dashboard', 'index')->name('dashboard');
-        Route::get('/dashboard', 'showChart')->name('dashboard');
-        // Route::get('/dashboard/showChartPie', 'showChartPie')->name('dashboard.showChartPie');
-    });
+
     // Route::get('/dashboard', function () {
     //     $user = Auth::user();
     //     $poltArea = PoltArea::where('id', $user->id)->first();
@@ -220,6 +216,11 @@ Route::middleware('auth')->group(function () {
         Route::get("/Lokasi/zona/hitung/pdf/{slug}", "downloadRingkasan")->name('downloadRingkasan.ringkasan');
         Route::get("/ringkasan", 'indexx')->name('ringkasan.indexx');
     });
+    Route::controller(DashboardController::class)->group(function () {
+        Route::get('/dashboard', 'index')->name('dashboard');
+        Route::get('/dashboard', 'showChart')->name('dashboard');
+        // Route::get('/dashboard/showChartPie', 'showChartPie')->name('dashboard.showChartPie');
+    });
     Route::controller(zonaController::class)->group(function () {
         Route::get("/zona", "index")->name('zona.index');
         // Route::get("/Lokasi/zona/{slug}", "subplot")->name('zona.subplot');
@@ -228,7 +229,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/Lokasi/zona/{slug}', 'getZona')->name('zona.getZona');
         // Route::get("/zona/{id}/tambah", "tambah")->name('TambahZona.tambah');
         Route::get("/zona/{id}/tambah", "create")->name('TambahZona.tambah');
-        Route::post("/zona/{id}/tambah", "store")->name('zona.store');
+        Route::post("/zona/{slug}/tambah", "store")->name('zona.store');
         Route::get("/zona/{slugP}/edit/{slugZ}", "edit")->name('zona.edit');
         Route::put("/zona/{slugP}/edit/{slugZ}", "update")->name('zona.update');
     });

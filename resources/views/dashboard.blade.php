@@ -31,18 +31,20 @@
                     </tr>
                 </thead>
                 @forelse ($ringkasann as $item)
-                    <tbody>
+                    <tbody class="tableBody">
+                        <tr class="data-row">
 
-                        <td>{{ $loop->iteration }}</td>
-                        <td>{{ $item['dareah'] ?? 'Data tidak tersedia' }}</td>
-                        <td>{{ $item['latitude'] ?? 'Data tidak tersedia' }} </td>
-                        <td>{{ $item['longitude'] ?? 'Data tidak tersedia' }} </td>
+                            <td>{{ $loop->iteration }}</td>
+                            <td>{{ $item['dareah'] ?? 'Data tidak tersedia' }}</td>
+                            <td>{{ $item['latitude'] ?? 'Data tidak tersedia' }} </td>
+                            <td>{{ $item['longitude'] ?? 'Data tidak tersedia' }} </td>
+                        </tr>
                     @empty
                         <tr>
                             <td colspan="3" class="text-center">Belum ada data</td>
                         </tr>
+                    </tbody>
                 @endforelse
-                </tbody>
             </table>
             <div class="table-footer mt-5">
                 <!-- Informasi Rentang Data -->
@@ -128,6 +130,15 @@
                                     <td class="hidden-column">{{ $item['TotalKandunganKarbon'] ?? 0 }}</td>
                                     <td class="hidden-column">{{ $item['KarbonCo2'] ?? 0 }}</td>
                                     <td class="hidden-column aksi-button">
+                                        @foreach ($poltArea as $itemm)
+                                            {{-- {{ dd($poltArea) }} --}}
+                                            <form action="{{ route('zona.getZona', ['slug' => $itemm->slug]) }}"
+                                                method="get">
+                                                <button type="submit" class="view-btn">
+                                                    <img src="{{ asset('/images/Eye.svg') }}" alt="" />
+                                                </button>
+                                            </form>
+                                        @endforeach
                                         <button class="delete-btn">
                                             <img src="{{ asset('/images/Trash.svg') }}" alt="" />
                                         </button>
