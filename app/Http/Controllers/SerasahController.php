@@ -238,25 +238,18 @@ class SerasahController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(string $subplot_id)
     {
+        DB::beginTransaction();
         try {
-            // Cari data Serasah berdasarkan ID
-            $serasah = Serasah::findOrFail($id);
-
-            // Hapus data
-            $serasah->delete();
-
-            // Response sukses
-            return response()->json([
-                'message' => 'Serasah berhasil dihapus'
-            ], 200);
+            $tanah = Serasah::where('subplot_id', $subplot_id)->first();
+            // dd($subplot_id, Tanah::where('subplot_id', $subplot_id)->first());
+            $tanah->delete();
+            DB::commit();
+            return redirect()->back()->with('success', 'Data Serasah berhasil dihapus.');
         } catch (\Exception $e) {
-            // Response error
-            return response()->json([
-                'message' => 'Gagal menghapus Serasah',
-                'error' => $e->getMessage()
-            ], 500);
+            DB::rollBack();
+            return redirect()->back()->with('error', 'Gagal menghapus data Serasah: ' . $e->getMessage());
         }
     }
 }

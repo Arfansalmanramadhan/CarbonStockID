@@ -76,6 +76,15 @@ class PoltArea extends Model
             $poltArea->necromas()->withTrashed()->restore();
             $poltArea->mangrove()->withTrashed()->restore();
         });
+        // static::deleting(function ($polt) {
+        //     foreach ($polt->zona as $zonas) {
+        //         $polt->isForceDeleting() ? $zonas->forceDelete() : $zonas->delete();
+        //     }
+        // });
+
+        // static::restoring(function ($polt) {
+        //     $polt->zona()->withTrashed()->restore();
+        // });
     }
     /**
      * Get the profil that owns the Profil

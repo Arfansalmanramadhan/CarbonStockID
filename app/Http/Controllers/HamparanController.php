@@ -19,7 +19,7 @@ class HamparanController extends Controller
         $perPage = $request->query('per_page', 5);
         $poltArea = PoltArea::with('zona')->get();
         $zona = Zona::with('hamparan')->get();
-        $query = Hamparan::with(['zona.poltArea']);
+        $query = Hamparan::with(['zona.poltArea'])->whereNull('hamparan.deleted_at');
 
         // Pencarian
         if (!empty($search)) {
@@ -49,7 +49,7 @@ class HamparanController extends Controller
         }
         $poltArea = $zona->poltArea;
         // dd($id, $poltArea);
-        $query = Hamparan::where('zona_id', $zona->id);
+        $query = Hamparan::where('zona_id', $zona->id)->whereNull('hamparan.deleted_at');
         // $poltArea = PoltArea::where("slug", $poltSlug)->firstOrFail();
         // $zona = Zona::where("slug", $zonaSlug)
         // ->where('polt_area_id', $poltArea->id);
@@ -131,6 +131,20 @@ class HamparanController extends Controller
         } catch (\Exception $e) {
             DB::rollBack();
             return redirect()->back()->with('error', 'Gagal memperbarui data: ' . $e->getMessage());
+        }
+    }
+    public function destroy(string $zona_id)
+    {
+        DB::beginTransaction();
+        try {
+            $tanah = Hamparan::where('zona_id', $zona_id)->first();
+            // dd($subplot_id, Tanah::where('subplot_id', $subplot_id)->first());
+            $tanah->delete();
+            DB::commit();
+            return redirect()->back()->with('success', 'Data tanah berhasil dihapus.');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->back()->with('error', 'Gagal menghapus data tanah: ' . $e->getMessage());
         }
     }
 }

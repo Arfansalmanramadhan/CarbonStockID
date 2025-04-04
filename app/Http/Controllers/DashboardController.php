@@ -20,21 +20,60 @@ class DashboardController extends Controller
     {
         $user = Auth::user();
         $dataDaerah = PoltArea::pluck('daerah')->toArray();
-        $ringkasann = PoltArea::leftJoin('zona', 'zona.polt_area_id', '=', 'polt_area.id')
-            ->leftJoin('hamparan', 'hamparan.zona_id', '=', 'zona.id')
-            ->leftJoin('plot', 'plot.hamparan_id', '=', 'hamparan.id')
-            ->leftJoin('subplot', 'subplot.plot_id', '=', 'plot.id')
+        $ringkasann = PoltArea::leftJoin('zona', function ($join) {
+            $join->on('zona.polt_area_id', '=', 'polt_area.id')
+                ->whereNull('zona.deleted_at');
+        })
+            ->leftJoin('hamparan', function ($join) {
+                $join->on('hamparan.zona_id', '=', 'zona.id')
+                    ->whereNull('hamparan.deleted_at');
+            })
+            ->leftJoin('plot', function ($join) {
+                $join->on('plot.hamparan_id', '=', 'hamparan.id')
+                    ->whereNull('plot.deleted_at');
+            })
+            ->leftJoin('subplot', function ($join) {
+                $join->on('subplot.plot_id', '=', 'plot.id')
+                    ->whereNull('subplot.deleted_at');
+            })
 
             // Semua entitas yang berhubungan dengan subplot
-            ->leftJoin('pancang', 'pancang.subplot_id', '=', 'subplot.id')
-            ->leftJoin('tiang', 'tiang.subplot_id', '=', 'subplot.id')
-            ->leftJoin('pohon', 'pohon.subplot_id', '=', 'subplot.id')
-            ->leftJoin('serasah', 'serasah.subplot_id', '=', 'subplot.id')
-            ->leftJoin('semai', 'semai.subplot_id', '=', 'subplot.id')
-            ->leftJoin('necromass', 'necromass.subplot_id', '=', 'subplot.id')
-            ->leftJoin('tanah', 'tanah.subplot_id', '=', 'subplot.id')
-            ->leftJoin('tumbuhan_bawah', 'tumbuhan_bawah.subplot_id', '=', 'subplot.id')
-            ->leftJoin('mangrove', 'mangrove.subplot_id', '=', 'subplot.id')
+            ->leftJoin('pancang', function ($join) {
+                $join->on('pancang.subplot_id', '=', 'subplot.id')
+                    ->whereNull('pancang.deleted_at');
+            })
+            ->leftJoin('tiang', function ($join) {
+                $join->on('tiang.subplot_id', '=', 'subplot.id')
+                    ->whereNull('tiang.deleted_at');
+            })
+            ->leftJoin('pohon', function ($join) {
+                $join->on('pohon.subplot_id', '=', 'subplot.id')
+                    ->whereNull('pohon.deleted_at');
+            })
+            ->leftJoin('serasah', function ($join) {
+                $join->on('serasah.subplot_id', '=', 'subplot.id')
+                    ->whereNull('serasah.deleted_at');
+            })
+            ->leftJoin('semai', function ($join) {
+                $join->on('semai.subplot_id', '=', 'subplot.id')
+                    ->whereNull('semai.deleted_at');
+            })
+            ->leftJoin('necromass', function ($join) {
+                $join->on('necromass.subplot_id', '=', 'subplot.id')
+                    ->whereNull('necromass.deleted_at');
+            })
+            ->leftJoin('tanah', function ($join) {
+                $join->on('tanah.subplot_id', '=', 'subplot.id')
+                    ->whereNull('tanah.deleted_at');
+            })
+            ->leftJoin('tumbuhan_bawah', function ($join) {
+                $join->on('tumbuhan_bawah.subplot_id', '=', 'subplot.id')
+                    ->whereNull('tumbuhan_bawah.deleted_at');
+            })
+            ->leftJoin('mangrove', function ($join) {
+                $join->on('mangrove.subplot_id', '=', 'subplot.id')
+                    ->whereNull('mangrove.deleted_at');
+            })
             ->select(
                 'polt_area.id as polt_area_id',
                 'polt_area.daerah as daerah',
@@ -75,18 +114,56 @@ class DashboardController extends Controller
             $zonaid = $zona->polt_area_id;
             // dd($zona->zona_nama);
             $zonaData = DB::table('zona')
-                ->leftJoin('hamparan', 'hamparan.zona_id', '=', 'zona.id')
-                ->leftJoin('plot', 'plot.hamparan_id', '=', 'hamparan.id')
-                ->leftJoin('subplot', 'subplot.plot_id', '=', 'plot.id')
-                ->leftJoin('pancang', 'pancang.subplot_id', '=', 'subplot.id')
-                ->leftJoin('tiang', 'tiang.subplot_id', '=', 'subplot.id')
-                ->leftJoin('pohon', 'pohon.subplot_id', '=', 'subplot.id')
-                ->leftJoin('serasah', 'serasah.subplot_id', '=', 'subplot.id')
-                ->leftJoin('semai', 'semai.subplot_id', '=', 'subplot.id')
-                ->leftJoin('necromass', 'necromass.subplot_id', '=', 'subplot.id')
-                ->leftJoin('tanah', 'tanah.subplot_id', '=', 'subplot.id')
-                ->leftJoin('tumbuhan_bawah', 'tumbuhan_bawah.subplot_id', '=', 'subplot.id')
-                ->leftJoin('mangrove', 'mangrove.subplot_id', '=', 'subplot.id')
+                ->leftJoin('hamparan', function ($join) {
+                    $join->on('hamparan.zona_id', '=', 'zona.id')
+                        ->whereNull('hamparan.deleted_at');
+                })
+                ->leftJoin('plot', function ($join) {
+                    $join->on('plot.hamparan_id', '=', 'hamparan.id')
+                        ->whereNull('plot.deleted_at');
+                })
+                ->leftJoin('subplot', function ($join) {
+                    $join->on('subplot.plot_id', '=', 'plot.id')
+                        ->whereNull('subplot.deleted_at');
+                })
+
+                // Semua entitas yang berhubungan dengan subplot
+                ->leftJoin('pancang', function ($join) {
+                    $join->on('pancang.subplot_id', '=', 'subplot.id')
+                        ->whereNull('pancang.deleted_at');
+                })
+                ->leftJoin('tiang', function ($join) {
+                    $join->on('tiang.subplot_id', '=', 'subplot.id')
+                        ->whereNull('tiang.deleted_at');
+                })
+                ->leftJoin('pohon', function ($join) {
+                    $join->on('pohon.subplot_id', '=', 'subplot.id')
+                        ->whereNull('pohon.deleted_at');
+                })
+                ->leftJoin('serasah', function ($join) {
+                    $join->on('serasah.subplot_id', '=', 'subplot.id')
+                        ->whereNull('serasah.deleted_at');
+                })
+                ->leftJoin('semai', function ($join) {
+                    $join->on('semai.subplot_id', '=', 'subplot.id')
+                        ->whereNull('semai.deleted_at');
+                })
+                ->leftJoin('necromass', function ($join) {
+                    $join->on('necromass.subplot_id', '=', 'subplot.id')
+                        ->whereNull('necromass.deleted_at');
+                })
+                ->leftJoin('tanah', function ($join) {
+                    $join->on('tanah.subplot_id', '=', 'subplot.id')
+                        ->whereNull('tanah.deleted_at');
+                })
+                ->leftJoin('tumbuhan_bawah', function ($join) {
+                    $join->on('tumbuhan_bawah.subplot_id', '=', 'subplot.id')
+                        ->whereNull('tumbuhan_bawah.deleted_at');
+                })
+                ->leftJoin('mangrove', function ($join) {
+                    $join->on('mangrove.subplot_id', '=', 'subplot.id')
+                        ->whereNull('mangrove.deleted_at');
+                })
                 ->where('zona.polt_area_id', $zonaid)
                 ->groupBy('zona.zona')
                 ->select(
@@ -198,13 +275,39 @@ class DashboardController extends Controller
             $zonaid = $zona->polt_area_id;
 
             $uniqueCounts = DB::table('zona')
-                ->leftJoin('hamparan', 'hamparan.zona_id', '=', 'zona.id')
-                ->leftJoin('plot', 'plot.hamparan_id', '=', 'hamparan.id')
-                ->leftJoin('subplot', 'subplot.plot_id', '=', 'plot.id')
-                ->leftJoin('serasah', 'serasah.subplot_id', '=', 'subplot.id')
-                ->leftJoin('semai', 'semai.subplot_id', '=', 'subplot.id')
-                ->leftJoin('tumbuhan_bawah', 'tumbuhan_bawah.subplot_id', '=', 'subplot.id')
-                ->leftJoin('necromass', 'necromass.subplot_id', '=', 'subplot.id')
+                ->leftJoin('hamparan', function ($join) {
+                    $join->on('hamparan.zona_id', '=', 'zona.id')
+                        ->whereNull('hamparan.deleted_at');
+                })
+                ->leftJoin('plot', function ($join) {
+                    $join->on('plot.hamparan_id', '=', 'hamparan.id')
+                        ->whereNull('plot.deleted_at');
+                })
+                ->leftJoin('subplot', function ($join) {
+                    $join->on('subplot.plot_id', '=', 'plot.id')
+                        ->whereNull('subplot.deleted_at');
+                })
+
+                // Semua entitas yang berhubungan dengan subplot
+
+                ->leftJoin('serasah', function ($join) {
+                    $join->on('serasah.subplot_id', '=', 'subplot.id')
+                        ->whereNull('serasah.deleted_at');
+                })
+                ->leftJoin('semai', function ($join) {
+                    $join->on('semai.subplot_id', '=', 'subplot.id')
+                        ->whereNull('semai.deleted_at');
+                })
+                ->leftJoin('necromass', function ($join) {
+                    $join->on('necromass.subplot_id', '=', 'subplot.id')
+                        ->whereNull('necromass.deleted_at');
+                })
+
+                ->leftJoin('tumbuhan_bawah', function ($join) {
+                    $join->on('tumbuhan_bawah.subplot_id', '=', 'subplot.id')
+                        ->whereNull('tumbuhan_bawah.deleted_at');
+                })
+
                 // ->where('zona.polt_area_id', $zonaid)
                 ->select(
                     DB::raw('COUNT(DISTINCT zona.zona) as total_zona'),
@@ -389,14 +492,14 @@ class DashboardController extends Controller
 
         // dd($ringkasan);
         // dd($ringkasann);
-        $Serasah = DB::table('serasah')->get();
-        $Semai = DB::table('semai')->get();
-        $TumbuhanBawah = DB::table('tumbuhan_bawah')->get();
-        $pancang = DB::table('pancang')->get();
-        $tiang = DB::table('tiang')->get();
-        $pohon = DB::table('pohon')->get();
-        $Necromas = DB::table('necromass')->get();
-        $tanah = DB::table('tanah')->get();
+        $Serasah = DB::table('serasah')->whereNull('serasah.deleted_at')->get();
+        $Semai = DB::table('semai')->whereNull('semai.deleted_at')->get();
+        $TumbuhanBawah = DB::table('tumbuhan_bawah')->whereNull('tumbuhan_bawah.deleted_at')->get();
+        $pancang = DB::table('pancang')->whereNull('pancang.deleted_at')->get();
+        $tiang = DB::table('tiang')->whereNull('tiang.deleted_at')->get();
+        $pohon = DB::table('pohon')->whereNull('pohon.deleted_at')->get();
+        $Necromas = DB::table('necromass')->whereNull('necromass.deleted_at')->get();
+        $tanah = DB::table('tanah')->whereNull('tanah.deleted_at')->get();
 
         return view('dashboard', compact(
             'user',

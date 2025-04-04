@@ -101,12 +101,14 @@
                                             </button>
                                         </form>
                                     @endforeach
-                                        <button {{-- onclick="window.location.href='{{ route('plot.edit', ['slugP' => $poltArea->slug, 'slugZ' => $item->slug]) }}'" --}} class="add-btn">
-                                            <img src="{{ asset('/images/PencilSquare.svg') }}" alt="Add" />
-                                        </button>
-                                        <button class="delete-btn">
+                                    <form action="{{ route('plot.destroy', ['hamparan_id' => $hamparan->id]) }}"
+                                        method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="delete-btn">
                                             <img src="{{ asset('/images/Trash.svg') }}" alt="Delete" />
                                         </button>
+                                    </form>
                                     </td>
                                 </tr>
                             @empty

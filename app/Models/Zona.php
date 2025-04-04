@@ -35,6 +35,15 @@ class Zona extends Model
         static::saving(function ($model) {
             $model->slug = Str::slug($model->zona);
         });
+        // static::deleting(function ($zona) {
+        //     foreach ($zona->hamparan as $hamparans) {
+        //         $zona->isForceDeleting() ? $hamparans->forceDelete() : $hamparans->delete();
+        //     }
+        // });
+
+        // static::restoring(function ($zona) {
+        //     $zona->hamparan()->withTrashed()->restore();
+        // });
     }
     /**
      * Get the profil that owns the Profil

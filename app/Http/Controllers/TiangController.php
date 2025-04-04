@@ -154,15 +154,13 @@ class TiangController extends Controller
             ], 500);
         }
     }
-    public function destroy(string $id)
+    public function destroy(string $subplot_id)
     {
         DB::beginTransaction();
     try {
         // Cari data Tanah berdasarkan ID
-        $tanah = Tiang::findOrFail($id);
+        $tanah = Tiang::where('subplot_id', $subplot_id)->first();
 
-        // Pastikan subplot yang terkait ada
-        $subplot = SubPlot::findOrFail($tanah->subplot_id);
 
         // Hapus data tanah
         $tanah->delete();
@@ -170,12 +168,12 @@ class TiangController extends Controller
         DB::commit();
 
         // Redirect dengan pesan sukses
-        return redirect()->back()->with('success', 'Data tanah berhasil dihapus.');
+        return redirect()->back()->with('success', 'Data Tiang berhasil dihapus.');
     } catch (\Exception $e) {
         DB::rollBack();
 
         // Redirect dengan pesan error
-        return redirect()->back()->with('error', 'Gagal menghapus data tanah: ' . $e->getMessage());
+        return redirect()->back()->with('error', 'Gagal menghapus data Tiang: ' . $e->getMessage());
     }
     }
 }

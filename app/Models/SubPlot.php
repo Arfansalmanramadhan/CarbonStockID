@@ -31,6 +31,19 @@ class SubPlot extends Model
         static::saving(function ($model) {
             $model->slug = Str::slug($model->nama_suplort);
         });
+        // static::deleting(function ($subplot) {
+        //     foreach (['pancangs', 'pohons', 'serasahs', 'semais', 'tumbuhanBawah'] as $relation) {
+        //         foreach ($subplot->$relation as $item) {
+        //             $subplot->isForceDeleting() ? $item->forceDelete() : $item->delete();
+        //         }
+        //     }
+        // });
+
+        // static::restoring(function ($subplot) {
+        //     foreach (['pancangs', 'pohons', 'serasahs', 'semais', 'tumbuhanBawah'] as $relation) {
+        //         $subplot->$relation()->withTrashed()->restore();
+        //     }
+        // });
     }
     /**
      * Get the profil that owns the Profil

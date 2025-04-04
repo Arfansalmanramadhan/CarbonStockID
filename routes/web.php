@@ -130,7 +130,7 @@ Route::middleware('auth')->group(function () {
     Route::controller(SerasahController::class)->group(function () {
         Route::get("/Plot/SubPlot/edit/{id}", "edit")->name('edit.edit');
         Route::put("/Plot/SubPlot/serasah/update/{id}", "update")->name('Serasah.update');
-        Route::delete("/PlotA/{id}", "destroy");
+        Route::delete("/Plot/SubPlot/Serasah/{subplot_id}", "destroy")->name('Serasah.destroy');
     });;
 
     Route::controller(SemaiController::class)->group(function () {
@@ -138,47 +138,47 @@ Route::middleware('auth')->group(function () {
         // Route::get("/Plot/SubPlot/edit/{id}", "edit")->name('edit.edit');
         // Route::get("/PlotA", "index");
         Route::put("/Plot/SubPlot/semai/update/{id}", "update")->name('Semai.update');
-        Route::delete("/Semai/{id}", "destroy");
+        Route::delete("/Plot/SubPlot/Semai/{subplot_id}", "destroy")->name('Semai.destroy');
     });
     Route::controller(TunmbuhanBawahController::class)->group(function () {
         Route::post("/Tumbuhanbawah/store", "store")->name('tumbuhanBawah.store');
         // Route::get("/Plot/SubPlot/edit/{id}", "edit")->name('edit.edit');
         Route::get("/Tumbuhanbawah", "index");
         Route::put("/Plot/SubPlot/tumbuhanBawah/update/{id}", "update")->name('tumbuhanBawah.update');
-        Route::delete("/Tumbuhanbawah/{id}", "destroy");
+        Route::delete("/Plot/SubPlot/TumbuhanBawah/{subplot_id}", "destroy")->name('tumbuhanBawah.destroy');
     });
     Route::controller(TanahController::class)->group(function () {
         Route::get("/Plot/SubPlot/Tanah/Tambah/{id}", "index")->name('tanah.index');
         // Route::get("/Plot/SubPlot/edit/{id}", "edit")->name('edit.edit');
         Route::post("/Plot/SubPlot/Tanah/Tambah/{id}", "store")->name('tanah.store');
         Route::put("/Plot/SubPlot/tanah/update/{id}", "update")->name('tanah.update');
-        Route::delete("/Plot/SubPlot/{id}", "destroy")->name('tanah.destroy');
+        Route::delete("/Plot/SubPlot/Tanah/{subplot_id}", "destroy")->name('tanah.destroy');
     });
 
     Route::controller(PancangContrller::class)->group(function () {
         Route::post("/PlotB/store", "store")->name('pancang.store');
         Route::get("/PlotB", "index")->name('PlotB.index');
         Route::post("/PlotB/update/{id}", "update");
-        Route::delete("/PlotB/{id}", "destroy");
+        Route::delete("/Plot/SubPlot/Pancang{subplot_id}", "destroy")->name('pancang.destroy');
     });
 
     Route::controller(NekromasController::class)->group(function () {
         Route::post("/Nekromass/store", "store")->name('nekromas.store');
         Route::get("/Nekromass", "index");
         Route::post("/Nekromass/update/{id}", "update");
-        Route::delete("/Nekromass/{id}", "destroy");
+        Route::delete("/Plot/SubPlot/Nekromas{subplot_id}", "destroy")->name('nekromas.destroy');
     });
     Route::controller(TiangController::class)->group(function () {
         Route::post("/Tiang/buat", "store")->name('tiang.store');
         Route::get("/PlotC", "index")->name('PlotC.index');
         Route::post("/Tiang/update/{id}", "update");
-        Route::delete("/Tiang/{id}", "destroy");
+        Route::delete("/Plot/SubPlot/Tiang/{subplot_id}", "destroy")->name('tiang.destroy');
     });
     Route::controller(PohonController::class)->group(function () {
         Route::post("/Pohon/buat", "store")->name('pohon.store');
         Route::get("/PlotD", "index")->name('PlotD.index');
         Route::post("/Pohon/update/{id}", "update");
-        Route::delete("/Pohon/{id}", "destroy");
+        Route::delete("/Plot/SubPlot/Pohon/{subplot_id}", "destroy")->name('pohon.destroy');
     });
 
     Route::controller(PeriodeController::class)->group(function () {
@@ -247,5 +247,6 @@ Route::middleware('auth')->group(function () {
         Route::get('/Plot/{slug}/tambah', 'tambah')->name('Plot.tambah');
         Route::get('/Plot/{slug}/tambah', 'create')->name('Plot.tambah');
         Route::post('/Plot/{slug}/tambah', 'store')->name('Plot.store');
+        Route::delete("/Plot/{hamparan_id}", "destroy")->name('plot.destroy');
     });
 });

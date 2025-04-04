@@ -137,12 +137,12 @@ class SemaiController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(string $subplot_id)
     {
         DB::beginTransaction();
         try {
             // Cari data Tanah berdasarkan ID
-            $semai = Semai::findOrFail($id);
+            $semai = Semai::where('subplot_id', $subplot_id)->first();
 
             // Pastikan subplot yang terkait ada
             $subplot = SubPlot::findOrFail($semai->subplot_id);
@@ -153,12 +153,12 @@ class SemaiController extends Controller
             DB::commit();
 
             // Redirect dengan pesan sukses
-            return redirect()->back()->with('success', 'Data tanah berhasil dihapus.');
+            return redirect()->back()->with('success', 'Data semai berhasil dihapus.');
         } catch (\Exception $e) {
             DB::rollBack();
 
             // Redirect dengan pesan error
-            return redirect()->back()->with('error', 'Gagal menghapus data tanah: ' . $e->getMessage());
+            return redirect()->back()->with('error', 'Gagal menghapus data semai: ' . $e->getMessage());
         }
     }
 }

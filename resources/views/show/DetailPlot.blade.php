@@ -48,7 +48,7 @@
                             </form>
                         </div>
                         <div class="table-wrapper table-responsive">
-                            <table class="custom-table-pancang  table-striped">
+                            <table class="custom-table-pancang table table-striped">
                                 <thead>
                                     <tr>
                                         <th class="kiriPancang">No</th>
@@ -77,9 +77,14 @@
                                                     class="edit-btn">
                                                     <img src="{{ asset('/images/PencilSquare.svg') }}" alt="" />
                                                 </button>
-                                                <button class="delete-btn">
-                                                    <img src="{{ asset('/images/Trash.svg') }}" alt="" />
-                                                </button>
+                                                <form action="{{ route('Serasah.destroy', ['subplot_id' => $subplot->id]) }}"
+                                                    method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="delete-btn">
+                                                        <img src="{{ asset('/images/Trash.svg') }}" alt="Delete" />
+                                                    </button>
+                                                </form>
                                             </td>
                                         </tr>
                                     @empty
@@ -140,7 +145,7 @@
                         </form>
                     </div>
                     <div class="table-wrapper  table-responsive">
-                        <table class="custom-table-pancang table-striped">
+                        <table class="custom-table-pancang table table-striped">
                             <thead>
                                 <tr>
                                     <th class="kiriPancang">No</th>
@@ -169,9 +174,14 @@
                                                 class="edit-btn">
                                                 <img src="{{ asset('/images/PencilSquare.svg') }}" alt="" />
                                             </button>
-                                            <button class="delete-btn">
-                                                <img src="{{ asset('/images/Trash.svg') }}" alt="" />
-                                            </button>
+                                            <form action="{{ route('Semai.destroy', ['subplot_id' => $subplot->id]) }}"
+                                                method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="delete-btn">
+                                                    <img src="{{ asset('/images/Trash.svg') }}" alt="Delete" />
+                                                </button>
+                                            </form>
                                         </td>
                                     </tr>
                                 @empty
@@ -231,7 +241,7 @@
                         </form>
                     </div>
                     <div class="table-wrapper table-responsive">
-                        <table class="custom-table-pancang table-striped">
+                        <table class="custom-table-pancang table table-striped">
                             <thead>
                                 <tr>
                                     <th class="kiriPancang">No</th>
@@ -260,9 +270,14 @@
                                                 class="edit-btn">
                                                 <img src="{{ asset('/images/PencilSquare.svg') }}" alt="" />
                                             </button>
-                                            <button class="delete-btn">
-                                                <img src="{{ asset('/images/Trash.svg') }}" alt="" />
-                                            </button>
+                                            <form action="{{ route('tumbuhanBawah.destroy', ['subplot_id' => $subplot->id]) }}"
+                                                method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="delete-btn">
+                                                    <img src="{{ asset('/images/Trash.svg') }}" alt="Delete" />
+                                                </button>
+                                            </form>
                                         </td>
                                     </tr>
                                 @empty
@@ -323,16 +338,6 @@
                             <button onclick="window.location.href='{{ route('tanah.index', ['id' => $subplot->id]) }}'"
                                 class="btn btn-tambah-data mt-3 ">Tambah</button>
                         </div>
-                        @if (session('success'))
-                            <div class="alert alert-success">
-                                {{ session('success') }}
-                            </div>
-                        @endif
-                        @if (session('error'))
-                            <div class="alert alert-danger">
-                                {{ session('error') }}
-                            </div>
-                        @endif
                     </div>
                     <div class="table-wrapper table-responsive">
                         <table class="custom-table-pancang  table-striped">
@@ -366,9 +371,8 @@
                                                 class="edit-btn">
                                                 <img src="{{ asset('/images/PencilSquare.svg') }}" alt="" />
                                             </button>
-                                            <form action="{{ route('tanah.destroy', ['id' => $tanah->id]) }}"
+                                            <form action="{{ route('tanah.destroy', ['subplot_id' => $subplot->id]) }}"
                                                 method="POST">
-                                                {{-- <form action="{{ route('tanah.destroy', ['id' => $subplot->id]) }}" method="POST" onsubmit="return confirm('Yakin ingin menghapus data ini?');"> --}}
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="delete-btn">
@@ -379,7 +383,7 @@
                                     </tr>
                                 @empty
                                     <tr>
-                                        <td colspan="7" class="text-center">Belum ada data</td>
+                                        <td colspan="9" class="text-center">Belum ada data</td>
                                     </tr>
                                 @endforelse
                             </tbody>
@@ -435,7 +439,7 @@
                         </form>
                     </div>
                     <div class="table-wrapper table-responsive">
-                        <table class="custom-table-pancang  table-striped">
+                        <table class="custom-table-pancang table table-striped">
                             <thead>
                                 <tr>
                                     <th class="kiriPancang">No</th>
@@ -468,9 +472,14 @@
                                             <button class="edit-btn">
                                                 <img src="{{ asset('/images/PencilSquare.svg') }}" alt="" />
                                             </button>
-                                            <button class="delete-btn">
-                                                <img src="{{ asset('/images/Trash.svg') }}" alt="" />
-                                            </button>
+                                            <form action="{{ route('pancang.destroy', ['subplot_id' => $subplot->id]) }}"
+                                                method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="delete-btn">
+                                                    <img src="{{ asset('/images/Trash.svg') }}" alt="Delete" />
+                                                </button>
+                                            </form>
                                         </td>
                                     </tr>
                                 @empty
@@ -531,7 +540,7 @@
                         </form>
                     </div>
                     <div class="table-wrapper table-responsive">
-                        <table class="custom-table-pancang table-striped">
+                        <table class="custom-table-pancang table table-striped">
                             <thead>
                                 <tr>
                                     <th class="kiriPancang">No</th>
@@ -561,12 +570,15 @@
                                         <td class="hidden-column">{{ $item->kandungan_karbon }}kg</td>
                                         <td class="hidden-column">{{ $item->co2 }} kg</td>
                                         <td class="hidden-column aksi-button">
-                                            <button class="edit-btn">
-                                                <img src="{{ asset('/images/PencilSquare.svg') }}" alt="" />
-                                            </button>
-                                            <button class="delete-btn">
-                                                <img src="{{ asset('/images/Trash.svg') }}" alt="" />
-                                            </button>
+
+                                            <form action="{{ route('tiang.destroy', ['subplot_id' => $subplot->id]) }}"
+                                                method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="delete-btn">
+                                                    <img src="{{ asset('/images/Trash.svg') }}" alt="Delete" />
+                                                </button>
+                                            </form>
                                         </td>
                                     </tr>
                                 @empty
@@ -626,7 +638,7 @@
                         </form>
                     </div>
                     <div class="table-wrapper table-responsive">
-                        <table class="custom-table-pancang table-striped">
+                        <table class="custom-table-pancang table table-striped">
                             <thead>
                                 <tr>
                                     <th class="kiriPancang">No</th>
@@ -657,12 +669,15 @@
                                         <td class="hidden-column">{{ $item->kandungan_karbon }}kg</td>
                                         <td class="hidden-column">{{ $item->co2 }} kg</td>
                                         <td class="hidden-column aksi-button">
-                                            <button class="edit-btn">
-                                                <img src="{{ asset('/images/PencilSquare.svg') }}" alt="" />
-                                            </button>
-                                            <button class="delete-btn">
-                                                <img src="{{ asset('/images/Trash.svg') }}" alt="" />
-                                            </button>
+
+                                            <form action="{{ route('pohon.destroy', ['subplot_id' => $subplot->id]) }}"
+                                                method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="delete-btn">
+                                                    <img src="{{ asset('/images/Trash.svg') }}" alt="Delete" />
+                                                </button>
+                                            </form>
                                         </td>
                                     </tr>
                                 @empty
@@ -722,7 +737,7 @@
                         </form>
                     </div>
                     <div class="table-wrapper table-responsive">
-                        <table class="custom-table-pancang table-striped">
+                        <table class="custom-table-pancang table table-striped">
                             <thead>
                                 <tr>
                                     <th class="kiriPancang">No</th>
@@ -750,12 +765,15 @@
                                         <td class="hidden-column">{{ $item->carbon }}kg</td>
                                         <td class="hidden-column">{{ $item->co2 }} kg</td>
                                         <td class="hidden-column aksi-button">
-                                            <button class="edit-btn">
-                                                <img src="{{ asset('/images/PencilSquare.svg') }}" alt="" />
-                                            </button>
-                                            <button class="delete-btn">
-                                                <img src="{{ asset('/images/Trash.svg') }}" alt="" />
-                                            </button>
+                                            
+                                            <form action="{{ route('nekromas.destroy', ['subplot_id' => $subplot->id]) }}"
+                                                method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="delete-btn">
+                                                    <img src="{{ asset('/images/Trash.svg') }}" alt="Delete" />
+                                                </button>
+                                            </form>
                                         </td>
                                     </tr>
                                 @empty

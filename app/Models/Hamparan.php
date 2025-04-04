@@ -31,6 +31,15 @@ class Hamparan extends Model
         static::saving(function ($model) {
             $model->slug = Str::slug($model->nama_hamparan);
         });
+        // static::deleting(function ($hamparan) {
+        //     foreach ($hamparan->plots as $plot) {
+        //         $hamparan->isForceDeleting() ? $plot->forceDelete() : $plot->delete();
+        //     }
+        // });
+
+        // static::restoring(function ($hamparan) {
+        //     $hamparan->plots()->withTrashed()->restore();
+        // });
     }
     /**
      * Get the profil that owns the Profil

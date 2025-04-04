@@ -138,15 +138,12 @@ class TunmbuhanBawahController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(string $subplot_id)
     {
         DB::beginTransaction();
         try {
             // Cari data Tanah berdasarkan ID
-            $tumbuhanbawah = TumbuhanBawah::findOrFail($id);
-
-            // Pastikan subplot yang terkait ada
-            $subplot = SubPlot::findOrFail($tumbuhanbawah->subplot_id);
+            $tumbuhanbawah = TumbuhanBawah::fwhere('subplot_id', $subplot_id)->first();;
 
             // Hapus data tumbuhanbawah
             $tumbuhanbawah->delete();
@@ -154,12 +151,12 @@ class TunmbuhanBawahController extends Controller
             DB::commit();
 
             // Redirect dengan pesan sukses
-            return redirect()->back()->with('success', 'Data tanah berhasil dihapus.');
+            return redirect()->back()->with('success', 'Data tumbuhan bawah berhasil dihapus.');
         } catch (\Exception $e) {
             DB::rollBack();
 
             // Redirect dengan pesan error
-            return redirect()->back()->with('error', 'Gagal menghapus data tanah: ' . $e->getMessage());
+            return redirect()->back()->with('error', 'Gagal menghapus data tumbuhan bawah: ' . $e->getMessage());
         }
     }
 }

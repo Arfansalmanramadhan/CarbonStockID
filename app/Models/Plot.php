@@ -31,6 +31,15 @@ class Plot extends Model
         static::saving(function ($model) {
             $model->slug = Str::slug($model->nama_plot);
         });
+        // static::deleting(function ($plot) {
+        //     foreach ($plot->subplot as $subplots) {
+        //         $plot->isForceDeleting() ? $subplots->forceDelete() : $subplots->delete();
+        //     }
+        // });
+
+        // static::restoring(function ($plot) {
+        //     $plot->subplot()->withTrashed()->restore();
+        // });
     }
     /**
      * Get the profil that owns the Profil

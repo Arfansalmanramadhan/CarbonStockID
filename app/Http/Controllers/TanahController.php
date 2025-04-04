@@ -210,14 +210,12 @@ class TanahController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(string $subplot_id)
     {
-
-        dd($id); // Cek ID yang diterima sebelum hapus data
-
     DB::beginTransaction();
     try {
-        $tanah = Tanah::findOrFail($id);
+        $tanah = Tanah::where('subplot_id', $subplot_id)->first();
+        // dd($subplot_id, Tanah::where('subplot_id', $subplot_id)->first());
         $tanah->delete();
         DB::commit();
         return redirect()->back()->with('success', 'Data tanah berhasil dihapus.');
