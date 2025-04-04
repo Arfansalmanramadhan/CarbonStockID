@@ -208,7 +208,7 @@ Route::middleware('auth')->group(function () {
     Route::controller(ManajermenUserController::class)->group(function () {
         Route::get('/Verifikasi', 'index')->name('Verifikasi.index');
         Route::get('/Verifikasi', 'view')->name('Verifikasi.index');
-        Route::get('/veri/{slug}', 'menyetujui')->name('Verifikasi.menyetujui');
+        Route::get('/veri/{id}', 'menyetujui')->name('Verifikasi.menyetujui');
     });
     Route::controller(RingkasanController::class)->group(function () {
         Route::get("/Lokasi/zona/hitung/{slug}", 'index')->name('ringkasan.index');

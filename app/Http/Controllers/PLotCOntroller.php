@@ -22,7 +22,7 @@ class PLotCOntroller extends Controller
         $user = Auth::user();
         $search = $request->query('search');
         $perPage = $request->query('per_page', 5);
-        $query = Plot::with(['hamparan.zona.poltArea'])->whereNull('plot.deleted_at');
+        $query = Plot::with(['hamparan.zona.poltArea'])->whereNull('plot.deleted_at')->where('status', '=', 'aktif');
         if (!empty($search)) {
             $query->where('nama_plot', 'ILIKE', "%{$search}%")
                 ->orWhere('type_plot', 'ILIKE', "%{$search}%")
@@ -52,7 +52,7 @@ class PLotCOntroller extends Controller
         $poltArea = $zona->poltArea;
         $subplot = SubPlot::all();
         // dd($zona, $poltArea, $subplot );
-        $query = Plot::query()->whereNull('plot.deleted_at')
+        $query = Plot::query()->whereNull('plot.deleted_at')->where('status', '=', 'aktif')
             ->where('hamparan_id', $hamparan->id);
         if (!empty($search)) {
             $query->where('nama_plot', 'ILIKE', "%{$search}%")

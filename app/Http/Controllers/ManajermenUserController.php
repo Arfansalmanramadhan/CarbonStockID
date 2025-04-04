@@ -32,15 +32,13 @@ class ManajermenUserController extends Controller
         ]);
         return view("Verifikasi", compact('user', 'plot', 'search', 'perPage'));
     }
-    public function menyetujui($slug)
+    public function menyetujui($id)
     {
-        $Plot = Plot::where('slug', $slug)->first();
-        if (!$Plot) {
-            return redirect()->back()->with("error", "Data plot tslugak ditemukan");
-        }
+        $plot = Plot::findOrFail($id);
 
-        $Plot->status = 'aktif';
-        $Plot->save();
-        return redirect("veri/" . $slug)->with("status", "Menetujui perngguna sukses");
+        $plot->status = 'aktif';
+        $plot->save();
+
+        return redirect()->back()->with("status", "Menyetujui pengguna sukses");;
     }
 }

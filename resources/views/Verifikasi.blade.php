@@ -86,15 +86,20 @@
                                     <td>{{ $item->latitude }}</td>
                                     <td>{{ $item->longitude }}</td>
                                     <td class="hidden-column aksi-button">
-                                        @if ($Plot->status == 'tidakaktif')
-                                            <a href="/veri/{{ $plot->slug }}" class="btn btn-info">Menyetujui
-                                                Pernggua</a>
+                                        @if ($item->status === 'tidakaktif')
+                                            <a href="{{ url('/veri/' . $item->id) }}" class="btn btn-info">
+                                                Menyetujui Pengguna
+                                            </a>
                                         @endif
                                         {{-- <a href="{{ route('hamparan.getHamparan', ['slug' => $item->slug]) }}"
                                             class="btn btn-info btn-sm">Detail</a> --}}
-                                        <button class="view-btn">
-                                            <img src="{{ asset('/images/Eye.svg') }}" alt="View" />
-                                        </button>
+                                            @foreach ($item->subplot as $subplost)
+                                            <form action="{{ route('DetailPlot.getsubPlot', ['id' => $subplost->id]) }}" method="get">
+                                                <button type="submit" class="view-btn">
+                                                    <img src="{{ asset('/images/Eye.svg') }}" alt="View" />
+                                                </button>
+                                            </form>
+                                        @endforeach
                                         {{-- <button
                                             onclick="window.location.href='{{ route('plot.edit', ['slugP' => $poltArea->slug, 'slugZ' => $item->slug]) }}'"
                                             class="add-btn">
