@@ -30,6 +30,17 @@
                             class="d-inline-block align-middle me-2" />
                         <span>CarbonStockID</span>
                     </div>
+                    @if ($errors->has('surveyor'))
+                        <div class="alert alert-success rounded-3 shadow-sm">
+                            {{ $errors->first('surveyor') }}
+                        </div>
+                    @endif
+
+                    @if ($errors->has('login'))
+                        <div class="alert alert-danger rounded-3 shadow-sm">
+                            {{ $errors->first('login') }}
+                        </div>
+                    @endif
                     <div class="judul mb-4">
                         <h1>Masuk ke Akun Anda</h1>
                     </div>
@@ -77,7 +88,7 @@
                 <div class="bg-holder" style="background-image: url({{ asset('/images/frameLogin.svg') }})"></div>
                 <div
                     class="penjelasan position-absolute top-50 start-50 translate-middle text-white text-center p-3 content-overlay">
-                    <h2>Hitung, Kelola  Cadangan Karbon Jadi Mudah dan Efisien</h2>
+                    <h2>Hitung, Kelola Cadangan Karbon Jadi Mudah dan Efisien</h2>
                     <p>Masuk ke akun anda! untuk menikmati fitur - fitur platform CarbonStockID.</p>
                 </div>
             </div>

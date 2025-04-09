@@ -61,6 +61,11 @@
                                 placeholder="Masukkan username" />
                         </div>
                         <div class="mb-2">
+                            <label for="name" class="form-label">Nama lengkap</label>
+                            <input type="text" class="form-control" id="name" name="nama"
+                                placeholder="Masukkan nama lengkap" />
+                        </div>
+                        <div class="mb-2">
                             <label for="email" class="form-label">Email</label>
                             <input type="email" class="form-control" id="email" name="email"
                                 placeholder="Masukkan Email" />
@@ -72,8 +77,8 @@
                         </div>
                         <div class="mb-2">
                             <label for="password_confirmation" class="form-label">Konfirmasi Sandi</label>
-                            <input type="password" class="form-control" id="password_confirmation" name="password_confirmation"
-                                placeholder="Masukkan Sandi" />
+                            <input type="password" class="form-control" id="password_confirmation"
+                                name="password_confirmation" placeholder="Masukkan Sandi" />
                         </div>
                         <div class="mb-2">
                             <label for="nip" class="form-label">NIP</label>
@@ -91,9 +96,9 @@
                                 id="formFile"accept="image/jpeg,image/png,image/jpg" name="foto">
                         </div>
                         <div class="mb-2">
-                            <label for="formFile" class="form-label">Foto KTP</label>
+                            <label for="formFilektp" class="form-label">Foto KTP</label>
                             <input class="form-control" type="file"
-                                id="formFile"accept="image/jpeg,image/png,image/jpg" name="foto_ktp">
+                                id="formFilektp"accept="image/jpeg,image/png,image/jpg" name="foto_ktp">
                         </div>
                         <button type="submit" class="btn btn-success w-100 mb-2">Daftar</button>
                         <div class="teks text-center">
@@ -112,6 +117,68 @@
 
     <!-- Bootstrap Bundle with Popper -->
     <script src="{{ asset('/js/bootstrap.min.js') }}"></script>
+    <script>
+        document.getElementById("formFile").addEventListener("change", function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                if (file.size > 2 * 1024 * 1024) {
+                    alert("File harus berukuran tidak lebih dari 2MB.");
+                    event.target.value = "";
+                    return;
+                }
+
+                const img = new Image();
+                img.src = URL.createObjectURL(file);
+
+                img.onload = function() {
+                    const width = img.width;
+                    const height = img.height;
+
+                    if (width !== height) {
+                        alert("File harus memiliki rasio 1:1.");
+                        event.target.value = "";
+                    } else {
+                        const profileImage = document.querySelector('img[alt="User Photo"]');
+                        profileImage.src = img.src;
+                        profileImage.style.borderRadius = "8px";
+                    }
+
+                    URL.revokeObjectURL(img.src);
+                };
+            }
+        });
+        document.getElementById("formFilektp").addEventListener("change", function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                if (file.size > 2 * 1024 * 1024) {
+                    alert("File harus berukuran tidak lebih dari 2MB.");
+                    event.target.value = "";
+                    return;
+                }
+
+                const img = new Image();
+                img.src = URL.createObjectURL(file);
+
+                img.onload = function() {
+                    const width = img.width;
+                    const height = img.height;
+                    const ratio = width / height;
+                    const expectedRatio = 4 / 3;
+
+                    if (Math.abs(ratio - expectedRatio) > 0.01) {
+                        alert("File harus memiliki rasio 4:3.");
+                        event.target.value = "";
+                    } else {
+                        const profileImage = document.querySelector('img[alt="User Photo"]');
+                        profileImage.src = img.src;
+                        profileImage.style.borderRadius = "8px";
+                    }
+
+                    URL.revokeObjectURL(img.src);
+                };
+            }
+        });
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 

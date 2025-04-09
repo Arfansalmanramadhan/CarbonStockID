@@ -1283,9 +1283,9 @@ html, body {
 
 }
 
-/* .custom-table-pancang tbody tr {
+.custom-table-pancang tbody tr {
               border: 1px solid #4caf4f;
-            } */
+            }
 
 .custom-table-pancang tr td {
     /* background-color: #4caf4f; */
@@ -1293,7 +1293,7 @@ html, body {
     /* color: white; */
     font-weight: bold;
     padding: 19px ;
-    margin: 12px 0;
+    /* margin: 12px 0; */
     text-align: left;
     z-index: 66;
 }

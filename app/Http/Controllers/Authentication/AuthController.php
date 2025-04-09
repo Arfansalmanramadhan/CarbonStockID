@@ -36,6 +36,7 @@ class AuthController extends Controller
             // Validasi data input
             $validator = Validator::make($request->all(), [
                 'username' => 'required',
+                'nama' => 'required',
                 'email' => 'required|email|unique:registrasi',
                 'password' => 'required|min:8|confirmed', // Menggunakan password_confirmation
                 'password_confirmation' => 'required|same:password|min:8', // Menggunakan password_confirmation
@@ -43,8 +44,8 @@ class AuthController extends Controller
                 'no_hp' => 'required|unique:registrasi',
                 'foto' => 'nullable|file|mimes:jpeg,png,jpg',
                 'foto_ktp' => 'nullable|file|mimes:jpeg,png,jpg',
-                // 'foto' => 'required|mimes:jpeg,png,jpg,gif|max:2048|dimensions:ratio=1/1',
-                // 'foto_ktp' => 'required|mimes:jpeg,png,jpg,gif|max:2048|dimensions:ratio=4/3',
+                'foto' => 'required',
+                'foto_ktp' => 'required',
             ]);
             // dd($validator->errors());
             // dd($request->all());
@@ -58,6 +59,7 @@ class AuthController extends Controller
             // Buat user baru
             $user = User::create([
                 'username' => $request->username,
+                'nama' => $request->nama,
                 'email' => $request->email,
                 'password' => $request['password'],
                 'nip' => $request->nip,
@@ -152,9 +154,19 @@ class AuthController extends Controller
         // Tentukan apakah input adalah email atau username
         $loginField = filter_var($credentials['login'], FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
         if (Auth::attempt([$loginField => $credentials['login'], 'password' => $credentials['password']])) {
-            $request->session()->regenerate();
+            // Cek role_id == 2 (dilarang login)
+            if (Auth::user()->role_id == 2) {
+                Auth::logout();
+                $request->session()->invalidate();
+                $request->session()->regenerate();
 
-            return redirect()->intended('dashboard');
+                return back()->withErrors([
+                    'surveyor' => 'Akun kamu tidak diizinkan masuk.',
+                ])->onlyInput('login');
+            }
+
+            // Regenerasi session untuk keamanan
+            $request->session()->regenerate();
         }
         return back()->withErrors([
             'login' => 'Email/Username atau Password salah.',
