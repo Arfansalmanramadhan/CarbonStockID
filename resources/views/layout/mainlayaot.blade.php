@@ -143,7 +143,8 @@
                                 <span>Data Plot</span>
                             </a>
                         </li>
-                        <li class="sidebar-item">
+                        {{-- <li class="sidebar-item">
+
                             <a href="#" class="sidebar-link has-dropdown collapsed" data-bs-toggle="collapse"
                             data-bs-target="#auth" aria-expanded="false" aria-controls="auth">
                                 <i class="lni lni-shield-2-check"></i>
@@ -157,13 +158,19 @@
                                     <a href="#" class="sidebar-link">List Surveyor</a>
                                 </li>
                             </ul>
-                        </li>
+                        </li> --}}
                         <li class="sidebar-item">
+                            <a href="{{ route('Verifikasi.index') }}" class="sidebar-link">
+                                <i class="lni lni-shield-2-check"></i>
+                                <span>Surveyor</span>
+                            </a>
+                        </li>
+                        {{-- <li class="sidebar-item">
                             <a href="{{ route('Sampah.index') }}" class="sidebar-link">
                                 <i class="lni lni-trash-3"></i>
                                 <span>Sampah</span>
                             </a>
-                        </li>
+                        </li> --}}
                     </ul>
                 </aside>
                 <div class="main p-3">

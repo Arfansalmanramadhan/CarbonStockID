@@ -16,7 +16,7 @@ class HamparanController extends Controller
     {
         $user = Auth::user();
         $search = $request->query("search");
-        $perPage = $request->query('per_page', 5);
+        $perPage = $request->query('per_page');
         $poltArea = PoltArea::with('zona')->get();
         $zona = Zona::with('hamparan')->get();
         $query = Hamparan::with(['zona.poltArea'])->whereNull('hamparan.deleted_at');
@@ -42,7 +42,7 @@ class HamparanController extends Controller
     {
         $user = Auth::user();
         $search = $request->query('search');
-        $perPage = $request->query('per_page', 5);
+        $perPage = $request->query('per_page');
         $zona = Zona::find($id);
         if (!$zona) {
             return abort(404, "Zona tidak ditemukan");

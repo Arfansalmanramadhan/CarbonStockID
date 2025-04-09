@@ -36,7 +36,7 @@
                             </div>
                         </form>
                     </div>
-                    <table class="custom-table-pancang">
+                    <table class="custom-table-pancang table  table-striped">
                         <thead>
                             <tr>
                                 <th class="kiriPancang">No</th>

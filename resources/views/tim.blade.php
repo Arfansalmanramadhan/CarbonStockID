@@ -34,8 +34,20 @@
                     </div>
             </form>
             <div class="table-container">
-                <div class="table-wrapper">
-                    <table class="custom-table-pancang">
+                <div class="table-wrapper paginated-table">
+                    <div class="table-header d-flex justify-content-between">
+                        <div class="tampilkan">
+                            <label for="dataPerPage5">Tampilkan</label>
+                            <select class="dataPerPage">
+                                <option value="5">5</option>
+                                <option value="10">10</option>
+                                <option value="50">50</option>
+                                <option value="100">100</option>
+                            </select>
+                            <span class="ms-2">data</span>
+                        </div>
+                    </div>
+                    <table class="custom-table-pancang table table-striped">
                         <thead>
                             <tr>
                                 <th class="kiriPancang">No</th>
@@ -44,15 +56,15 @@
                                 <th class="hidden-column kananPancang">Aksi</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody class="tableBody">
                             {{-- {{dd($anggota);}} --}}
                             @if ($anggota->isNotEmpty())
                                 @forelse($anggota as $index => $t)
-                                    <tr>
+                                    <tr  class="data-row">
                                         <td>{{ $index + 1 }}</td>
                                         <td>{{ $t->nama_lokasi }}</td>
                                         <td>{{ $t->tim }}</td>
-                                        {{-- <td class="hidden-column aksi-button">
+                                        <td class="hidden-column aksi-button">
                                             <button class="view-btn">
                                                 <img src="{{ asset('/images/Eye.svg') }}" alt="" />
                                             </button>
@@ -63,7 +75,7 @@
                                             <button class="delete-btn">
                                                 <img src="{{ asset('/images/Trash.svg') }}" alt="" />
                                             </button>
-                                        </td> --}}
+                                        </td>
                                     </tr>
                                 @endforeach
                             @else
@@ -73,17 +85,19 @@
                             @endif
                         </tbody>
                     </table>
-                    {{-- <div class="table-footer mt-5">
-                        <span>Menampilkan 1 sampai 5 dari 40 data</span>
-                        <div class="pagination">
-                            <button class="page-btn">Kembali</button>
-                            <button class="page-btn active">1</button>
-                            <button class="page-btn">2</button>
-                            <button class="page-btn">3</button>
-                            <button class="page-btn">4</button>
-                            <button class="page-btn">Lanjut</button>
+                    <div class="table-footer mt-5">
+                        <p>Menampilkan data <span class="fromNumber">1</span> sampai <span class="toNumber">5</span>
+                            dari
+                            <span class="totalData">0</span> data
+                        </p>
+
+                        <!-- Tombol Pagination -->
+                        <div class="pagination-controls">
+                            <button class=" btn-button prevPage" disabled>Sebelumnya</button>
+                            <span class="currentPage">1</span> dari <span class="totalPages">0</span>
+                            <button class=" btn-button nextPage">Berikutnya</button>
                         </div>
-                    </div> --}}
+                    </div>
                 </div>
             </div>
         </div>

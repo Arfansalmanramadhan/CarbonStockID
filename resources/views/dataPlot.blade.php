@@ -11,9 +11,9 @@
                 <p class="large-text">Data Plot Area</p>
             </div>
         </div>
-        <div class="table-container">
+        <div class="table-container paginated-table">
             <div class="table-header d-flex justify-content-between">
-                <form method="GET" action="{{ route('dataPlot.index') }}">
+                {{-- <form method="GET" action="{{ route('dataPlot.index') }}">
                     <div class="tampilkan">
                         <label for="show-entries">Tampilkan</label>
                         <select id="show-entries perPageSelect" class="number-selection" name="perPage"
@@ -24,7 +24,17 @@
                         </select>
                         <span class="ms-2">data</span>
                     </div>
-                </form>
+                </form> --}}
+                <div class="tampilkan">
+                    <label for="dataPerPage6">Tampilkan</label>
+                    <select class="dataPerPage">
+                        <option value="5">5</option>
+                        <option value="10">10</option>
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                    </select>
+                    <span class="ms-2">data</span>
+                </div>
                 <div class="d-flex align-items-center">
                     <form method="GET" action="{{ route('dataPlot.index') }}">
                         <div class="d-flex align-items-center">
@@ -42,7 +52,7 @@
                 </div>
             </div>
             <div class="table-wrapper">
-                <table class="custom-table-hasil">
+                <table class="custom-table-hasil  table table-striped">
                     <thead>
                         <tr>
                             <th>NOMOR</th>
@@ -56,9 +66,9 @@
                             <th>AKSI</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody class="tableBody">
                         @forelse ($plot as $index => $item)
-                            <tr>
+                            <tr class="data-row">
                                 <td>{{ $plot->firstItem() + $index }}</td>
                                 <td>{{ optional($item->hamparan->zona->poltArea)->daerah ?? '-' }}</td>
                                 <td>{{ optional($item->hamparan->zona)->zona ?? '-' }}</td>
@@ -91,7 +101,7 @@
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="5" class="text-center">Belum ada data</td>
+                                <td colspan="9" class="text-center">Belum ada data</td>
                             </tr>
                         @endforelse
                         {{-- <tr>
@@ -243,13 +253,13 @@
                 </table>
             </div>
             <div class="table-footer mt-5">
-                <strong>
+                {{-- <strong>
                     Menampilkan {{ $plot->firstItem() }} sampai {{ $plot->lastItem() }} dari
                     {{ $plot->total() }} data
                 </strong>
                 <nav>
                     <ul class="pagination">
-                        {{-- Tombol Kembali --}}
+                       
                         @if ($plot->onFirstPage())
                             <li class="page-item disabled"><span class="page-link">Kembali</span></li>
                         @else
@@ -257,14 +267,14 @@
                             </li>
                         @endif
 
-                        {{-- Nomor Halaman --}}
+
                         @foreach ($plot->getUrlRange(1, $plot->lastPage()) as $page => $url)
                             <li class="page-item {{ $plot->currentPage() == $page ? 'active' : '' }}">
                                 <a class="page-link" href="{{ $url }}">{{ $page }}</a>
                             </li>
                         @endforeach
 
-                        {{-- Tombol Lanjut --}}
+
                         @if ($plot->hasMorePages())
                             <li class="page-item"><a class="page-link" href="{{ $plot->nextPageUrl() }}">Lanjut</a>
                             </li>
@@ -272,7 +282,18 @@
                             <li class="page-item disabled"><span class="page-link">Lanjut</span></li>
                         @endif
                     </ul>
-                </nav>
+                </nav> --}}
+                <p>Menampilkan data <span class="fromNumber">1</span> sampai <span class="toNumber">5</span>
+                    dari
+                    <span class="totalData">0</span> data
+                </p>
+
+                <!-- Tombol Pagination -->
+                <div class="pagination-controls">
+                    <button class=" btn-button prevPage" disabled>Sebelumnya</button>
+                    <span class="currentPage">1</span> dari <span class="totalPages">0</span>
+                    <button class=" btn-button nextPage">Berikutnya</button>
+                </div>
             </div>
             <!-- Pagination -->
 

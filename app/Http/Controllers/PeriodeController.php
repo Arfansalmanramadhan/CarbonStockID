@@ -20,7 +20,7 @@ class PeriodeController extends Controller
     {
         $user = Auth::user();
         $search = $request->query('search');
-        $perPage = $request->query('per_page', 5);
+        $perPage = $request->query('per_page');
         $query = Tim::withCount('anggotaTim')->with('periode');
         if (!empty($search)) {
             $query->where('nama', 'ILIKE', "%{$search}%");
@@ -55,7 +55,7 @@ class PeriodeController extends Controller
         // dd($request->all());
         // Validasi request
         $validatedData = $request->validate([
-            'nama' => 'required|string|max:255',
+            'nama' => 'required|string|max',
             // 'tim_id' => 'required|exists:tim,id',
             'tanggal_mulai' => 'required|date',
             'tanggal_berakhir' => 'required|date|after_or_equal:tanggal_mulai',

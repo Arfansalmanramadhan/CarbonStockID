@@ -10,9 +10,9 @@
         </div>
         <div id="carbon-prediction-chart">
             <div class="table-container">
-                <div class="table-wrapper">
+                <div class="table-wrapper paginated-table">
                     <div class="table-header d-flex justify-content-between">
-                        <form method="GET"
+                        {{-- <form method="GET"
                             action="{{ route('Verifikasi.index', ['slug' => $plot->slug ?? 'default-slug']) }}">
                             <div class="tampilkan">
                                 <label for="show-entries">Tampilkan</label>
@@ -24,7 +24,17 @@
                                 </select>
                                 <span class="ms-2">data</span>
                             </div>
-                        </form>
+                        </form> --}}
+                        <div class="tampilkan">
+                            <label for="dataPerPage6">Tampilkan</label>
+                            <select class="dataPerPage">
+                                <option value="5">5</option>
+                                <option value="10">10</option>
+                                <option value="50">50</option>
+                                <option value="100">100</option>
+                            </select>
+                            <span class="ms-2">data</span>
+                        </div>
                         <div class="d-flex align-items-center">
                             <form method="GET"
                                 action="{{ route('Verifikasi.index', ['slug' => $plot->slug ?? 'default-slug']) }}">
@@ -40,10 +50,8 @@
                             <button onclick="window.location.href='{{ route('TambahZona.tambah',['slug' => $poltArea->slug]) }}'"
                             class="btn btn-tambah-data m-3">Tambah</button> --}}
                         </div>
-
                     </div>
-
-                    <table class="custom-table-pancang">
+                    <table class="custom-table-pancang table  table-striped">
                         <thead>
                             <tr>
                                 <th class="kiriPancang">No</th>
@@ -77,9 +85,9 @@
                                 </td>
                             </tr> --}}
                         </tbody>
-                        <tbody id="data-table ">
+                        <tbody class="tableBody">
                             @forelse ($plot as $index => $item)
-                                <tr>
+                                <tr class="data-row">
                                     <td>{{ $plot->firstItem() + $index }}</td>
                                     <td>{{ $item->nama_plot }}</td>
                                     <td>{{ $item->type_plot }}</td>
@@ -120,7 +128,7 @@
 
                     </table>
                     <div class="table-footer mt-5">
-                        <strong>
+                        {{-- <strong>
                             Menampilkan {{ $plot->firstItem() }} sampai {{ $plot->lastItem() }} dari
                             {{ $plot->total() }} data
                         </strong>
@@ -150,6 +158,17 @@
                     </div>
                     <div class="d-flex justify-content-between">
                         {{ $plot->links() }}
+                    </div> --}}
+                    <p>Menampilkan data <span class="fromNumber">1</span> sampai <span class="toNumber">5</span>
+                        dari
+                        <span class="totalData">0</span> data
+                    </p>
+
+                    <!-- Tombol Pagination -->
+                    <div class="pagination-controls">
+                        <button class=" btn-button prevPage" disabled>Sebelumnya</button>
+                        <span class="currentPage">1</span> dari <span class="totalPages">0</span>
+                        <button class=" btn-button nextPage">Berikutnya</button>
                     </div>
                 </div>
             </div>

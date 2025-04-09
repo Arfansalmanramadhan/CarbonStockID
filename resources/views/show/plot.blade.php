@@ -11,22 +11,19 @@
             </div>
         </div>
         <div class="table-container">
-            <div class="table-container">
+            <div class="table-container paginated-table">
                 <div class="table-wrapper">
                     <div class="table-header d-flex justify-content-between">
-                        <form method="GET"
-                            action="{{ route('plot.getPlot', ['id' => $plot->id ?? 'default-id']) }}">
-                            <div class="tampilkan">
-                                <label for="show-entries">Tampilkan</label>
-                                <select id="show-entries perPageSelect" class="number-selection" name="perPage"
-                                    onchange="this.form.submit()">
-                                    <option value="5" {{ request('perPage') == 5 ? 'selected' : '' }}>5</option>
-                                    <option value="10" {{ request('perPage') == 10 ? 'selected' : '' }}>10</option>
-                                    <option value="20" {{ request('perPage') == 20 ? 'selected' : '' }}>20</option>
-                                </select>
-                                <span class="ms-2">data</span>
-                            </div>
-                        </form>
+                        <div class="tampilkan">
+                            <label for="dataPerPage3">Tampilkan</label>
+                            <select class="dataPerPage">
+                                <option value="5">5</option>
+                                <option value="10">10</option>
+                                <option value="50">50</option>
+                                <option value="100">100</option>
+                            </select>
+                            <span class="ms-2">data</span>
+                        </div>
                         <div class="d-flex align-items-center">
                             <form method="GET"
                                 action="{{ route('plot.getPlot', ['id' => $plot->id ?? 'default-slug']) }}">
@@ -45,7 +42,7 @@
                         </div>
 
                     </div>
-                    <table class="custom-table-pancang">
+                    <table class="custom-table-pancang table table-striped">
                         <thead>
                             <tr>
                                 <th class="kiriPancang">No</th>
@@ -82,9 +79,9 @@
                                 </td>
                             </tr> --}}
                         </tbody>
-                        <tbody id="data-table ">
+                        <tbody class="tableBody">
                             @forelse ($plot as $index )
-                                <tr>
+                                <tr class="data-row">
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $poltArea->daerah }}</td>
                                     <td>{{ $zona->zona }}</td>
@@ -121,7 +118,7 @@
 
                     </table>
                     <div class="table-footer mt-5">
-                        <strong>
+                        {{-- <strong>
                             Menampilkan {{ $plot->firstItem() }} sampai {{ $plot->lastItem() }} dari
                             {{ $plot->total() }} data
                         </strong>
@@ -147,7 +144,18 @@
                                     <li class="page-item disabled"><span class="page-link">Lanjut</span></li>
                                 @endif
                             </ul>
-                        </nav>
+                        </nav> --}}
+                        <p>Menampilkan data <span class="fromNumber">1</span> sampai <span class="toNumber">5</span>
+                            dari
+                            <span class="totalData">0</span> data
+                        </p>
+
+                        <!-- Tombol Pagination -->
+                        <div class="pagination-controls">
+                            <button class=" btn-button prevPage" disabled>Sebelumnya</button>
+                            <span class="currentPage">1</span> dari <span class="totalPages">0</span>
+                            <button class=" btn-button nextPage">Berikutnya</button>
+                        </div>
                     </div>
 
                 </div>

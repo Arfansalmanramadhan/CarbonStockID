@@ -68,10 +68,10 @@
         <div class="container  me h-100 position-relative">
             <div class="row">
                 <div class="col-lg-6 hero-tagline  ">
-                    <h1>Hitung, Kelola dan Prediksi Cadangan Karbon Jadi <span>Mudah dan Efisien</span></h1>
+                    <h1>Hitung, Kelola  Cadangan Karbon Jadi <span>Mudah dan Efisien</span></h1>
                     <p>Solusi terintegrasi untuk perhitungan dan pengelolaan cadangan karbon yang akurat dan efisien.
-                        Mengoptimalan carbon trading di Indonesia dengan teknologi machine learning.</p>
-                    <a href="login.html" class="btn btn-success button-hero">Mulai sekarang</a>
+                        Mengoptimalan carbon trading di Indonesia dengan.</p>
+                    <a href="{{ route('login') }}" class="btn btn-success button-hero">Mulai sekarang</a>
                 </div>
                 <div class="col-lg-6">
                     <img src="{{ asset('/images/imagehero.png') }}" alt="Hero Image"
@@ -238,7 +238,7 @@
                 <div class="col-md-6 penjelasan">
                     <h3>Perubahan iklim, yang disebabkan oleh emisi GRK seperti CO2, menjadi isu global.</h3>
                     <h4>Sebagai bagian dari upaya pengurangan emisi, aplikasi “CarbonStockID” dikembangkan untuk
-                        mengukur dan memprediksi cadangan karbon dengan teknologi Machine Learning sesuai standar SNI,
+                        mengukur  cadangan karbon  sesuai standar SNI,
                         mendukung mekanisme carbon trading.</h4>
                 </div>
                 <div class="col-md-6 video-container">

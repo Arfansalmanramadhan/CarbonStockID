@@ -11,10 +11,10 @@
             </div>
         </div>
         <div class="table-container">
-            <div class="table-container">
+            <div class="table-container paginated-table">
                 {{-- <div class="table-wrapper"> --}}
                 <div class="table-header d-flex justify-content-between">
-                    <form method="GET" action="{{ route('Lokasi.lokasi') }}">
+                    {{-- <form method="GET" action="{{ route('Lokasi.lokasi') }}">
                         <div class="tampilkan">
                             <label for="show-entries">Tampilkan</label>
                             <select id="show-entries perPageSelect" class="number-selection" name="perPage"
@@ -25,7 +25,17 @@
                             </select>
                             <span class="ms-2">data</span>
                         </div>
-                    </form>
+                    </form> --}}
+                    <div class="tampilkan">
+                        <label for="dataPerPage6">Tampilkan</label>
+                        <select class="dataPerPage">
+                            <option value="5">5</option>
+                            <option value="10">10</option>
+                            <option value="50">50</option>
+                            <option value="100">100</option>
+                        </select>
+                        <span class="ms-2">data</span>
+                    </div>
                     <div class="d-flex align-items-center">
                         <form method="GET" action="{{ route('Lokasi.lokasi') }}">
                             <div class="d-flex align-items-center">
@@ -43,7 +53,7 @@
                     </div>
                 </div>
                 <div class="table-wrapper">
-                    <table class="custom-table-pancang table">
+                    <table class="custom-table-pancang table  table-striped">
                         <thead>
                             <tr>
                                 <th class="kiriPancang">No</th>
@@ -80,9 +90,9 @@
                                     </td>
                                 </tr> --}}
                         </tbody>
-                        <tbody id="data-table ">
+                        <tbody class="tableBody">
                             @forelse ($lokasi as $index)
-                                <tr>
+                                <tr class="data-row">
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $index->daerah }}</td>
                                     <td>{{ $index->plot_area_tim_count }}</td>
@@ -90,11 +100,12 @@
                                     <td>{{ $index->latitude }}</td>
                                     <td>{{ $index->longitude }}</td>
                                     <td>{{ $index->periode_pengamatan }}</td>
-                                    <td>{{ $index->created_at }}</td>   
+                                    <td>{{ $index->created_at }}</td>
                                     <td class="hidden-column aksi-button">
                                         <a href="{{ route('tim.create', ['id' => $index->id]) }}"
-                                            class="btn btn-info btn-sm">TIM</a>
-                                        <form action="{{ route('zona.getZona', ['slug' => $index->slug]) }}" method="get">
+                                            class="btn add-btn ">TIM</a>
+                                        <form action="{{ route('zona.getZona', ['slug' => $index->slug]) }}"
+                                            method="get">
                                             <button type="submit" class="view-btn">
                                                 <img src="{{ asset('/images/Eye.svg') }}" alt="" />
                                             </button>
@@ -120,13 +131,13 @@
                     </table>
                 </div>
                 <div class="table-footer mt-5">
-                    <strong>
+                    {{-- <strong>
                         Menampilkan {{ $lokasi->firstItem() }} sampai {{ $lokasi->lastItem() }} dari
                         {{ $lokasi->total() }} data
                     </strong>
                     <nav>
                         <ul class="pagination">
-                            {{-- Tombol Kembali --}}
+
                             @if ($lokasi->onFirstPage())
                                 <li class="page-item disabled"><span class="page-link">Kembali</span></li>
                             @else
@@ -134,14 +145,13 @@
                                         href="{{ $lokasi->previousPageUrl() }}">Kembali</a></li>
                             @endif
 
-                            {{-- Nomor Halaman --}}
                             @foreach ($lokasi->getUrlRange(1, $lokasi->lastPage()) as $page => $url)
                                 <li class="page-item {{ $lokasi->currentPage() == $page ? 'active' : '' }}">
                                     <a class="page-link" href="{{ $url }}">{{ $page }}</a>
                                 </li>
                             @endforeach
 
-                            {{-- Tombol Lanjut --}}
+
                             @if ($lokasi->hasMorePages())
                                 <li class="page-item"><a class="page-link" href="{{ $lokasi->nextPageUrl() }}">Lanjut</a>
                                 </li>
@@ -149,7 +159,18 @@
                                 <li class="page-item disabled"><span class="page-link">Lanjut</span></li>
                             @endif
                         </ul>
-                    </nav>
+                    </nav> --}}
+                    <p>Menampilkan data <span class="fromNumber">1</span> sampai <span class="toNumber">5</span>
+                        dari
+                        <span class="totalData">0</span> data
+                    </p>
+
+                    <!-- Tombol Pagination -->
+                    <div class="pagination-controls">
+                        <button class=" btn-button prevPage" disabled>Sebelumnya</button>
+                        <span class="currentPage">1</span> dari <span class="totalPages">0</span>
+                        <button class=" btn-button nextPage">Berikutnya</button>
+                    </div>
                 </div>
                 <!-- Pagination -->
                 {{-- <div class="d-flex justify-content-between">

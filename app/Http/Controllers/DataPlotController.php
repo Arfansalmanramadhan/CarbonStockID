@@ -17,7 +17,7 @@ class DataPlotController extends Controller
     {
         $user = Auth::user();
         $search = $request->query('search');
-        $perPage = $request->query('per_page', 5);
+        $perPage = $request->query('per_page');
         $query = Plot::where('status', '=', 'aktif');
         if (!empty($search)) {
             $query->where('nama_plot', 'ILIKE', "%{$search}%")
@@ -33,7 +33,7 @@ class DataPlotController extends Controller
     {
         $user = Auth::user();
         $search = $request->query('search');
-        $perPage = $request->query('per_page', 5); // Default 5 item per halaman
+        $perPage = $request->query('per_page'); // Default 5 item per halaman
 
         $query = PoltArea::withCount('PlotAreaTim');
 

@@ -1089,7 +1089,7 @@ html, body {
 
 .aksi-button {
   display: flex;
-  width: 100%;
+  /* width: 100%; */
   align-items: center;
   gap: 14px 20px;
 
@@ -1176,7 +1176,8 @@ html, body {
     margin-bottom: 20px;
 }
 .btn-button {
-    padding: 12px;
+    margin:0 5px ;
+    padding: 5px 10px;
     /* width: 245px;
     height: 62px; */
     /* display: flex; */
@@ -1234,6 +1235,7 @@ html, body {
     /* overflow: hidden; */
     text-align: center !important;
     border-bottom: 1px solid #4caf4f;
+    z-index: 999;
 }
 
 .custom-table-pancang th,

@@ -27,7 +27,7 @@ class zonaController extends Controller
     {
         $user = Auth::user();
         $search = $request->query('search');
-        $perPage = $request->query('per_page', 5);
+        $perPage = $request->query('per_page');
         $poltAreaId = $request->query('polt_area_id');
         $poltArea = PoltArea::with('zona')->get();
         $query = Zona::query()->whereNull('zona.deleted_at');
@@ -52,7 +52,7 @@ class zonaController extends Controller
     {
         $user = Auth::user();
         $search = $request->query('search');
-        $perPage = $request->query('per_page', 5);
+        $perPage = $request->query('per_page');
         $poltArea = PoltArea::where("slug", $slug)->firstOrFail();
         // $poltAreaa = PoltArea::find($id);
         // dd($poltArea);
@@ -83,8 +83,7 @@ class zonaController extends Controller
             ->leftJoin('zona', 'hamparan.zona_id', '=', 'zona.id')
             ->where('polt_area_id', $poltArea->id)
             ->whereNull('serasah.deleted_at')
-            ->paginate($perPage)
-            ->appends(['per_page' => $perPage]);
+            ->get();
         // dd( $Serasah);
         $Semai = DB::table('semai')
             ->leftJoin('subplot', 'semai.subplot_id', '=', 'subplot.id')
@@ -93,8 +92,7 @@ class zonaController extends Controller
             ->leftJoin('zona', 'hamparan.zona_id', '=', 'zona.id')
             ->where('polt_area_id', $poltArea->id)
             ->whereNull('semai.deleted_at')
-            ->paginate($perPage)
-            ->appends(['per_page' => $perPage]);
+            ->get();
 
         $TumbuhanBawah = DB::table('tumbuhan_bawah')
             ->leftJoin('subplot', 'tumbuhan_bawah.subplot_id', '=', 'subplot.id')
@@ -103,8 +101,7 @@ class zonaController extends Controller
             ->leftJoin('zona', 'hamparan.zona_id', '=', 'zona.id')
             ->where('polt_area_id', $poltArea->id)
             ->whereNull('tumbuhan_bawah.deleted_at')
-            ->paginate($perPage)
-            ->appends(['per_page' => $perPage]);
+            ->get();
 
         $pancang = DB::table('pancang')
             ->leftJoin('subplot', 'pancang.subplot_id', '=', 'subplot.id')
@@ -113,8 +110,7 @@ class zonaController extends Controller
             ->leftJoin('zona', 'hamparan.zona_id', '=', 'zona.id')
             ->where('polt_area_id', $poltArea->id)
             ->whereNull('pancang.deleted_at')
-            ->paginate($perPage)
-            ->appends(['per_page' => $perPage]);
+            ->get();
         $tiang = DB::table('tiang')
             ->leftJoin('subplot', 'tiang.subplot_id', '=', 'subplot.id')
             ->leftJoin('plot', 'subplot.plot_id', '=', 'plot.id')
@@ -122,8 +118,7 @@ class zonaController extends Controller
             ->leftJoin('zona', 'hamparan.zona_id', '=', 'zona.id')
             ->where('polt_area_id', $poltArea->id)
             ->whereNull('tiang.deleted_at')
-            ->paginate($perPage)
-            ->appends(['per_page' => $perPage]);
+            ->get();
         $pohon = DB::table('pohon')
             ->leftJoin('subplot', 'pohon.subplot_id', '=', 'subplot.id')
             ->leftJoin('plot', 'subplot.plot_id', '=', 'plot.id')
@@ -131,8 +126,7 @@ class zonaController extends Controller
             ->leftJoin('zona', 'hamparan.zona_id', '=', 'zona.id')
             ->where('polt_area_id', $poltArea->id)
             ->whereNull('pohon.deleted_at')
-            ->paginate($perPage)
-            ->appends(['per_page' => $perPage]);
+            ->get();
         $Necromas = DB::table('necromass')
             ->leftJoin('subplot', 'necromass.subplot_id', '=', 'subplot.id')
             ->leftJoin('plot', 'subplot.plot_id', '=', 'plot.id')
@@ -140,8 +134,7 @@ class zonaController extends Controller
             ->leftJoin('zona', 'hamparan.zona_id', '=', 'zona.id')
             ->where('polt_area_id', $poltArea->id)
             ->whereNull('necromass.deleted_at')
-            ->paginate($perPage)
-            ->appends(['per_page' => $perPage]);
+            ->get();
         $tanah = DB::table('tanah')
             ->leftJoin('subplot', 'tanah.subplot_id', '=', 'subplot.id')
             ->leftJoin('plot', 'subplot.plot_id', '=', 'plot.id')
@@ -149,8 +142,7 @@ class zonaController extends Controller
             ->leftJoin('zona', 'hamparan.zona_id', '=', 'zona.id')
             ->where('polt_area_id', $poltArea->id)
             ->whereNull('tanah.deleted_at')
-            ->paginate($perPage)
-            ->appends(['per_page' => $perPage]);
+            ->get();
         return view('show.zona', compact(
             'zona',
             "user",

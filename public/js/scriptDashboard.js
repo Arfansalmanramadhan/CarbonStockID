@@ -29,7 +29,73 @@ document.addEventListener("DOMContentLoaded", function () {
         sidebarCondition.classList.remove("no-transition");
     }, 100);
 });
+document.addEventListener("DOMContentLoaded", function() {
+    let tables = document.querySelectorAll(".paginated-table");
 
+    tables.forEach((table) => {
+        let rows = table.querySelectorAll(".data-row");
+        let select = table.querySelector(".dataPerPage");
+        let prevBtn = table.querySelector(".prevPage");
+        let nextBtn = table.querySelector(".nextPage");
+        let currentPageElem = table.querySelector(".currentPage");
+        let totalDataElem = table.querySelector(".totalData");
+        let fromElem = table.querySelector(".fromNumber");
+        let toElem = table.querySelector(".toNumber");
+        let tableRows = table.querySelectorAll(".tableBody tr");
+        let totalPagesElem = table.querySelector(".totalPages");
+
+        let totalData = tableRows.length;
+        let currentPage = 1;
+        let rowsPerPage = parseInt(select.value) || 5;
+        let totalPages = Math.ceil(rows.length / rowsPerPage);
+
+        function displayRows() {
+            rows = table.querySelectorAll(".data-row");
+            totalPages = Math.ceil(rows.length / rowsPerPage);
+
+            let start = (currentPage - 1) * rowsPerPage;
+            let end = start + rowsPerPage;
+
+            let fromNumber = start + 1;
+            let toNumber = Math.min(end, rows.length);
+
+            totalPagesElem.textContent = totalPages;
+            currentPageElem.textContent = currentPage;
+            fromElem.textContent = fromNumber;
+            toElem.textContent = toNumber;
+            totalDataElem.textContent = rows.length;
+
+            rows.forEach((row, index) => {
+                row.style.display = index >= start && index < end ? "" : "none";
+            });
+
+            prevBtn.disabled = currentPage === 1;
+            nextBtn.disabled = currentPage === totalPages;
+        }
+
+        select.addEventListener("change", function() {
+            rowsPerPage = parseInt(this.value);
+            currentPage = 1;
+            displayRows();
+        });
+
+        prevBtn.addEventListener("click", function() {
+            if (currentPage > 1) {
+                currentPage--;
+                displayRows();
+            }
+        });
+
+        nextBtn.addEventListener("click", function() {
+            if (currentPage < totalPages) {
+                currentPage++;
+                displayRows();
+            }
+        });
+
+        displayRows();
+    });
+});
 // Toggle sidebar dan simpan status
 hamburger.addEventListener("click", function () {
     sidebarCondition.classList.toggle("expand");

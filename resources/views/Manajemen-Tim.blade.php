@@ -51,10 +51,10 @@
                     </div> --}}
                 </div>
             </form>
-            <div class="table-container">
+            <div class="table-container paginated-table">
                 {{-- <div class="table-wrapper"> --}}
                 <div class="table-header  d-flex justify-content-between">
-                    <form method="GET" action="{{ route('Manajemen-Tim.index') }}">
+                    {{-- <form method="GET" action="{{ route('Manajemen-Tim.index') }}">
                         <div class="tampilkan">
                             <label for="show-entries">Tampilkan</label>
                             <select id="show-entries perPageSelect" class="number-selection" name="perPage"
@@ -65,14 +65,24 @@
                             </select>
                             <span class="ms-2">data</span>
                         </div>
-                    </form>
+                    </form> --}}
+                    <div class="tampilkan">
+                        <label for="dataPerPage5">Tampilkan</label>
+                        <select class="dataPerPage">
+                            <option value="5">5</option>
+                            <option value="10">10</option>
+                            <option value="50">50</option>
+                            <option value="100">100</option>
+                        </select>
+                        <span class="ms-2">data</span>
+                    </div>
                     <div class="form-control-space">
                         <input type="text" id="searchInput" placeholder="Cari..." class="form-control mb-3"
                             value="{{ $search }}" onkeyup="searchTable()">
                     </div>
                 </div>
                 <div class="table-wrapper">
-                    <table class="custom-table-pancang">
+                    <table class="custom-table-pancang table  table-striped">
                         <thead>
                             <tr>
                                 <th class="kiriPancang">No</th>
@@ -83,9 +93,9 @@
                                 <th class="hidden-column kananPancang">Aksi</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody class="tableBody">
                             @forelse($tim as $index => $t)
-                                <tr>
+                                <tr class="data-row">
                                     <td>{{ $index + 1 }}</td>
                                     <td>{{ $t->nama }}</td>
                                     <td>{{ optional($t->periode)->tanggal_mulai  }}</td>
@@ -183,13 +193,13 @@
                         </div>
                     </div> --}}
                 <div class="table-footer mt-5">
-                    <strong>
+                    {{-- <strong>
                         Menampilkan {{ $tim->firstItem() }} sampai {{ $tim->lastItem() }} dari
                         {{ $tim->total() }} data
                     </strong>
                     <nav>
                         <ul class="pagination">
-                            {{-- Tombol Kembali --}}
+
                             @if ($tim->onFirstPage())
                                 <li class="page-item disabled"><span class="page-link">Kembali</span></li>
                             @else
@@ -197,14 +207,14 @@
                                 </li>
                             @endif
 
-                            {{-- Nomor Halaman --}}
+
                             @foreach ($tim->getUrlRange(1, $tim->lastPage()) as $page => $url)
                                 <li class="page-item {{ $tim->currentPage() == $page ? 'active' : '' }}">
                                     <a class="page-link" href="{{ $url }}">{{ $page }}</a>
                                 </li>
                             @endforeach
 
-                            {{-- Tombol Lanjut --}}
+
                             @if ($tim->hasMorePages())
                                 <li class="page-item"><a class="page-link" href="{{ $tim->nextPageUrl() }}">Lanjut</a>
                                 </li>
@@ -212,12 +222,23 @@
                                 <li class="page-item disabled"><span class="page-link">Lanjut</span></li>
                             @endif
                         </ul>
-                    </nav>
+                    </nav> --}}
+                    <p>Menampilkan data <span class="fromNumber">1</span> sampai <span class="toNumber">5</span>
+                        dari
+                        <span class="totalData">0</span> data
+                    </p>
+
+                    <!-- Tombol Pagination -->
+                    <div class="pagination-controls">
+                        <button class=" btn-button prevPage" disabled>Sebelumnya</button>
+                        <span class="currentPage">1</span> dari <span class="totalPages">0</span>
+                        <button class=" btn-button nextPage">Berikutnya</button>
+                    </div>
                 </div>
                 <!-- 🔄 Pagination -->
-                <div class="d-flex justify-content-center">
+                {{-- <div class="d-flex justify-content-center">
                     {{ $tim->links() }}
-                </div>
+                </div> --}}
                 {{-- </div> --}}
             </div>
         </div>
