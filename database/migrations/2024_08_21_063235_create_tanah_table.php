@@ -22,8 +22,8 @@ return new class extends Migration
             $table->decimal('carbonton', 10, 2)->default(0);
             $table->decimal('carbonkg', 10, 2)->default(0);
             $table->decimal('co2kg', 10, 2)->default(0);
+            $table->date('deleted_at')->nullable();
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 

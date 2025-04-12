@@ -18,8 +18,8 @@ return new class extends Migration
             $table->foreign("registrasi_id")->references("id")->on("registrasi")->onDelete('cascade')->onUpdate('cascade');
             $table->unsignedBigInteger("tim_id");
             $table->foreign("tim_id")->references("id")->on("tim")->onDelete('cascade')->onUpdate('cascade');
+            $table->date('deleted_at')->nullable();
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 

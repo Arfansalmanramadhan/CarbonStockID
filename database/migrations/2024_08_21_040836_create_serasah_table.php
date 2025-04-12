@@ -21,8 +21,8 @@ return new class extends Migration
             $table->decimal('total_berat_kering', 8, 2)->default(0);
             $table->decimal('kandungan_karbon', 10, 2)->default(0);
             $table->decimal('co2', 10, 2)->default(0);
+            $table->date('deleted_at')->nullable();
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 

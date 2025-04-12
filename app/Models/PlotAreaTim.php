@@ -5,14 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\SoftDeletes;
+// use Illuminate\Database\Eloquent\SoftDeletes;
 class PlotAreaTim extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory;
     protected $table = 'polt_area_tim';
     protected $fillable = [
         'tim_id',
         'polt_area_id',
+        'deleted_at',
     ];
     protected $guarded = [];
     /**

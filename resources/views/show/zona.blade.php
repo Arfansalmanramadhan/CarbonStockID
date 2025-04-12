@@ -82,13 +82,14 @@
                                                 <img src="{{ asset('/images/Eye.svg') }}" alt="" />
                                             </button>
                                         </form>
-                                        {{-- <button class="view-btn">
-                                            <img src="{{ asset('/images/Eye.svg') }}" alt="View" />
-                                        </button> --}}
-
-                                        <button class="delete-btn">
-                                            <img src="{{ asset('/images/Trash.svg') }}" alt="Delete" />
-                                        </button>
+                                        <form action="{{ route('zona.destroy', ['polt_area_id' => $index->id]) }}"
+                                            method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="delete-btn">
+                                                <img src="{{ asset('/images/Trash.svg') }}" alt="Delete" />
+                                            </button>
+                                        </form>
                                     </td>
                                 </tr>
                             @empty

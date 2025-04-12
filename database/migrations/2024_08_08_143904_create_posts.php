@@ -17,8 +17,8 @@ return new class extends Migration
             $table->foreign("registrasi_id")->references("id")->on("registrasi")->onDelete('cascade')->onUpdate('cascade');
             $table->string("title", 255)->nullable();
             $table->string("body_text", 255)->nullable();
+            $table->date('deleted_at')->nullable();
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 

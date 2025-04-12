@@ -18,8 +18,8 @@ return new class extends Migration
             $table->string("nama_periode",255)->nullable();
             $table->date("tanggal_mulai");
             $table->date("tanggal_berakhir");
+            $table->date('deleted_at')->nullable();
             $table->timestamps();
-            $table->softDeletes();
             $table->boolean('visible')->default(true);
         });
     }

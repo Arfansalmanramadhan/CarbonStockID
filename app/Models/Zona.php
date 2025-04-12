@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
+// use Illuminate\Database\Eloquent\SoftDeletes;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Symfony\Component\HttpFoundation\ServerBag;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -14,7 +14,7 @@ class Zona extends Model
 {
     use HasFactory;
     use Sluggable;
-    use SoftDeletes;
+    // use SoftDeletes;
     protected $table = 'zona';
     protected $fillable = [
         'polt_area_id',
@@ -24,9 +24,10 @@ class Zona extends Model
         'longitude',
         "jenis_hutan",
         "foto_area",
+        'deleted_at',
     ];
     // Jika ada atribut yang ingin di-guard (tidak bisa diisi langsung)
-    protected $guarded = [];
+    // protected $guarded = [];
     protected static function boot()
     {
         parent::boot();

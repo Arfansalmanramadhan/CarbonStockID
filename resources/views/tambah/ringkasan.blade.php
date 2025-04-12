@@ -120,10 +120,11 @@
                     </div>
                 </form>
                 <div class="plot-info">
-                    <p>Nama : {{ $user->nama }}</p>
-                    <p>Daerah Plot : {{ $poltArea->daerah }}</p>
-                    <p>Latitude :{{ $poltArea->latitude }}</p>
-                    <p>Longitude : {{ $poltArea->longitude }}</p>
+                    <p>Nama                 : {{ $user->nama }}</p>
+                    <p>Daerah Plot          : {{ $poltArea->daerah }}</p>
+                    <p>Latitude             : {{ $poltArea->latitude }}</p>
+                    <p>Longitude            : {{ $poltArea->longitude }}</p>
+                    <p>Tanggal di dowload   : {{ $formattedDate }}</p>
                 </div>
                 <div class="row mb-3">
                     @foreach ($ringkasan as $item)

@@ -5,15 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\SoftDeletes;
+// use Illuminate\Database\Eloquent\SoftDeletes;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Support\Str;
 class Tim extends Model
 {
-    use HasFactory, SoftDeletes, Sluggable;
+    use HasFactory, Sluggable;
     protected $table = 'tim';
     protected $fillable = [
         'nama',
+        'deleted_at',
     ];
     protected $guarded = [];
     protected static function boot()
@@ -37,6 +38,10 @@ class Tim extends Model
     public function PlotAreaTim(): BelongsTo
     {
         return $this->belongsTo(PlotAreaTim::class, 'tim_id');
+    }
+    public function poltArea(): BelongsTo
+    {
+        return $this->belongsTo(PoltArea::class, 'tim_id');
     }
     public function periode()
     {

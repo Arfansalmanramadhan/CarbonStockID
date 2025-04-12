@@ -22,7 +22,7 @@ return new class extends Migration
             $table->decimal('biomasa', 10, 2)->default(0);
             $table->decimal('kandungan_karbon', 10, 2)->default(0);
             $table->decimal('karbondioksida', 10, 2)->default(0);
-            $table->softDeletes();
+            $table->date('deleted_at')->nullable();
             $table->timestamps();
         });
     }

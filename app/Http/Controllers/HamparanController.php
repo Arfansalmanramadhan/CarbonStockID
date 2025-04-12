@@ -19,7 +19,7 @@ class HamparanController extends Controller
         $perPage = $request->query('per_page');
         $poltArea = PoltArea::with('zona')->get();
         $zona = Zona::with('hamparan')->get();
-        $query = Hamparan::with(['zona.poltArea'])->whereNull('hamparan.deleted_at');
+        $query = Hamparan::with(['zona.poltArea']);
 
         // Pencarian
         if (!empty($search)) {
@@ -49,7 +49,7 @@ class HamparanController extends Controller
         }
         $poltArea = $zona->poltArea;
         // dd($id, $poltArea);
-        $query = Hamparan::where('zona_id', $zona->id)->whereNull('hamparan.deleted_at');
+        $query = Hamparan::where('zona_id', $zona->id);
         // $poltArea = PoltArea::where("slug", $poltSlug)->firstOrFail();
         // $zona = Zona::where("slug", $zonaSlug)
         // ->where('polt_area_id', $poltArea->id);

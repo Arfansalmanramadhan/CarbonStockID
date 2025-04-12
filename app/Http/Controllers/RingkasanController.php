@@ -25,7 +25,8 @@ class RingkasanController extends Controller
         $user = Auth::user();
         $poltArea = PoltArea::where('slug', $slug)->firstOrFail();
         $zona = Zona::where('polt_area_id', $poltArea->id)->get();
-        $formattedDate = Carbon::parse($poltArea->created_at)->format('d M Y');
+        $now = Carbon::now('Asia/Jakarta');
+        $formattedDate = $now->format('d M Y H:i:s');
         $ringkasan = $this->ringkasann($slug)->getData()['ringkasan'];
         $ringkasann = $this->ringkasann($slug)->getData()['ringkasann'];
         return view("tambah.ringkasan", compact("user",  'poltArea', 'zona', 'ringkasan', 'ringkasann', 'formattedDate'));
@@ -35,6 +36,8 @@ class RingkasanController extends Controller
         $user = Auth::user();
         $poltArea = PoltArea::where('slug', $slug)->firstOrFail();
         $zona = Zona::where('polt_area_id', $poltArea->id)->get();
+        $now = Carbon::now('Asia/Jakarta');
+        $formattedDate = $now->format('d M Y H:i:s');
         $ringkasan = $this->ringkasann($slug)->getData()['ringkasan'];
         $ringkasann = $this->ringkasann($slug)->getData()['ringkasann'];
 
@@ -46,7 +49,7 @@ class RingkasanController extends Controller
             'ringkasan' => $ringkasan,
             'ringkasann' => $ringkasann,
             'user' => $user,
-            'zona' => $zona,
+            'formattedDate' => $formattedDate,
             'pdf' => true // Tambahkan ini
         ])->setPaper('portrait')
             ->set_option('isHtml5ParserEnabled', true);

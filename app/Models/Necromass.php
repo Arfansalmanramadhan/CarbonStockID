@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\SoftDeletes;
+// use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Necromass extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory;
     protected $table = 'necromass';
     protected $fillable = [
         'subplot_id',
@@ -21,6 +21,7 @@ class Necromass extends Model
         'biomasa',
         'carbon',
         'co2',
+        'deleted_at',
     ];
     // Jika ada atribut yang ingin di-guard (tidak bisa diisi langsung)
     protected $guarded = [];

@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\SoftDeletes;
+// use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Tiang extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory;
     protected $table = 'tiang';
     protected $fillable = [
         'subplot_id',
@@ -22,6 +22,7 @@ class Tiang extends Model
         'bio_di_atas_tanah',
         'kandungan_karbon',
         'co2',
+        'deleted_at',
     ];
     // Jika ada atribut yang ingin di-guard (tidak bisa diisi langsung)
     protected $guarded = [];

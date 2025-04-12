@@ -23,7 +23,8 @@ return new class extends Migration
             $table->decimal('biomasa', 10, 2)->default(0);
             $table->decimal('carbon', 10, 2)->default(0);
             $table->decimal('co2', 10, 2)->default(0);
-            $table->softDeletes();
+            $table->date('deleted_at')->nullable();
+            $table->timestamps();
         });
     }
 

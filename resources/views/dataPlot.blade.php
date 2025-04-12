@@ -52,7 +52,7 @@
                 </div>
             </div>
             <div class="table-wrapper">
-                <table class="custom-table-hasil  table table-striped">
+                <table class="custom-table-pancang  table table-striped">
                     <thead>
                         <tr>
                             <th>NOMOR</th>
@@ -259,7 +259,7 @@
                 </strong>
                 <nav>
                     <ul class="pagination">
-                       
+
                         @if ($plot->onFirstPage())
                             <li class="page-item disabled"><span class="page-link">Kembali</span></li>
                         @else

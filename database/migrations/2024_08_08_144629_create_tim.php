@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string("nama")->nullable();
             $table->string("slug");
+            $table->date('deleted_at')->nullable();
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 

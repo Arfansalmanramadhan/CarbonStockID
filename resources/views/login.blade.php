@@ -58,10 +58,6 @@
                         </div>
                         <button type="submit" class="btn-success w-100">Masuk</button>
                         <p class="masuk-dengan text-center mt-2 mb-2"><span>Atau masuk dengan</span></p>
-                        {{-- <a type="button" class="btn btn-outline-dark w-100 mt-2" href="dashboard.html">
-                <img src="{{ asset('/images/iconGoogle.png') }}" alt="Google Icon" class="me-2" style="width: 20px" />
-                Masuk dengan Google
-              </a> --}}
                         <div class="teks text-center">
                             <p>
                                 Anda belum memiliki akun?
@@ -69,11 +65,6 @@
                             </p>
                         </div>
                     </form>
-                    @if ($errors->any())
-                        <div>
-                            <strong>{{ $errors->first('login') }}</strong>
-                        </div>
-                    @endif
                     {{-- @if (session('success'))
                 <div>{{ session('success') }}</div>
             @endif

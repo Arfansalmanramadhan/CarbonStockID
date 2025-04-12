@@ -73,15 +73,16 @@ class DataPlotController extends Controller
     {
         // Validasi input
         $validatedData = $request->validate([
+            // 'polt_area_id' => 'required|exists:polt_area,id',
             'tim_id' => 'required|exists:tim,id',
         ]);
 
         DB::beginTransaction();
         try {
             // Cek apakah user sudah menjadi anggota tim
-            $existingMember = PlotAreaTim::where('polt_area_id', $id)
-                ->where('tim_id', $validatedData['tim_id'])
-                ->exists();
+            $existingMember = PlotAreaTim::where('polt_area_id', $request->polt_area_id)
+            ->where('tim_id', $request->tim_id)
+            ->exists();
 
             if ($existingMember) {
                 return redirect()->back()->with('success', 'User sudah menjadi anggota tim.');

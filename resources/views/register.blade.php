@@ -96,9 +96,9 @@
                                 id="formFile"accept="image/jpeg,image/png,image/jpg" name="foto">
                         </div>
                         <div class="mb-2">
-                            <label for="formFilektp" class="form-label">Foto KTP</label>
+                            <label for="formFile" class="form-label">Foto KTP</label>
                             <input class="form-control" type="file"
-                                id="formFilektp"accept="image/jpeg,image/png,image/jpg" name="foto_ktp">
+                                id="formFile"accept="image/jpeg,image/png,image/jpg" name="foto_ktp">
                         </div>
                         <button type="submit" class="btn btn-success w-100 mb-2">Daftar</button>
                         <div class="teks text-center">

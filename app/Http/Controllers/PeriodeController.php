@@ -55,7 +55,7 @@ class PeriodeController extends Controller
         // dd($request->all());
         // Validasi request
         $validatedData = $request->validate([
-            'nama' => 'required|string|max',
+            'nama' => 'required|string',
             // 'tim_id' => 'required|exists:tim,id',
             'tanggal_mulai' => 'required|date',
             'tanggal_berakhir' => 'required|date|after_or_equal:tanggal_mulai',

@@ -161,7 +161,7 @@ class AuthController extends Controller
                 $request->session()->regenerate();
 
                 return back()->withErrors([
-                    'surveyor' => 'Akun kamu tidak diizinkan masuk.',
+                    'surveyor' => 'Siiakan ke aplikasi mobile.',
                 ])->onlyInput('login');
             }
 

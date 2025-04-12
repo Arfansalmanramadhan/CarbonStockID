@@ -24,8 +24,8 @@ return new class extends Migration
             $table->decimal('bio_di_atas_tanah', 10, 2)->default(0);
             $table->decimal('kandungan_karbon', 10, 2)->default(0);
             $table->decimal('co2', 10, 2)->default(0);
+            $table->date('deleted_at')->nullable();
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 

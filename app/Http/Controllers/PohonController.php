@@ -139,7 +139,7 @@ class PohonController extends Controller
                 'co2' => $co2,
             ]);
 
-            // Response sukses
+            // Response suksesqur
             return response()->json([
                 'message' => 'Pohon berhasil diupdate',
                 'data' => $pancnag

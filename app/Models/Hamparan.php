@@ -7,12 +7,12 @@ use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\SoftDeletes;
+// use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Hamparan extends Model
 {
     use HasFactory;
-    use SoftDeletes;
+    // use SoftDeletes;
     use Sluggable;
     protected $table = 'hamparan';
     protected $fillable = [
@@ -21,6 +21,7 @@ class Hamparan extends Model
         'slug',
         'latitude',
         'longitude',
+        'deleted_at',
     ];
     protected $guarded = [];
     protected static function boot()

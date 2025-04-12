@@ -17,8 +17,8 @@ return new class extends Migration
             $table->foreign("tim_id")->references("id")->on("tim")->onDelete('cascade')->onUpdate('cascade');
             $table->unsignedBigInteger("polt_area_id");
             $table->foreign("polt_area_id")->references("id")->on("polt_area")->onDelete('cascade');
+            $table->date('deleted_at')->nullable();
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 

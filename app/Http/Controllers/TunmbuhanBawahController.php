@@ -40,7 +40,7 @@ class TunmbuhanBawahController extends Controller
             // Pastikan tidak ada pembagian dengan nol
             if ($request->sample_berat_basah == 0) {
                 return response()->json([
-                    'message' => 'Sample berat basah tidak boleh nol.'
+                    'message' => 'Sample berat basah tidak boleh nol.'  
                 ], 400);
             }
             // lakuan perhitungan

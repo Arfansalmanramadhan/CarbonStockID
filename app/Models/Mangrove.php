@@ -5,12 +5,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\SoftDeletes;
+// use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model;
 
 class Mangrove extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory;
     protected $table = 'mangrove';
     protected $fillable = [
         'subplot_id',
@@ -20,7 +20,8 @@ class Mangrove extends Model
         'jumlah_tanaman',
         'biomasa',
         'kandungan_karbon',
-        'karbondioksida'
+        'karbondioksida',
+        'deleted_at',
     ];
     // Jika ada atribut yang ingin di-guard (tidak bisa diisi langsung)
     protected $guarded = [];

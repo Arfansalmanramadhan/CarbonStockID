@@ -20,8 +20,10 @@ return new class extends Migration
             $table->decimal('longitude', 11, 8);
             $table->decimal('luas_lokasi',10,2)->default(0);
             $table->string('periode_pengamatan');
+            $table->date('deleted_at')->nullable();
             $table->timestamps();
-            $table->softDeletes();
+            $table->unsignedBigInteger("tim_id")->nullable();
+            $table->foreign("tim_id")->references("id")->on("tim")->onDelete('cascade');
             $table->unsignedBigInteger("periode_id");
             $table->foreign("periode_id")->references("id")->on("periode")->onDelete('cascade');
         });

@@ -232,6 +232,7 @@ Route::middleware('auth')->group(function () {
         Route::post("/zona/{slug}/tambah", "store")->name('zona.store');
         Route::get("/zona/{slugP}/edit/{slugZ}", "edit")->name('zona.edit');
         Route::put("/zona/{slugP}/edit/{slugZ}", "update")->name('zona.update');
+        Route::delete("/zona/{polt_area_id}", "destroy")->name('zona.destroy');
     });
     Route::controller(HamparanController::class)->group(function () {
         Route::get('/Hamparan', 'index')->name('Hamparan.index');
@@ -240,6 +241,7 @@ Route::middleware('auth')->group(function () {
         Route::post("/Hamparan/{id}/tambah", "store")->name('Hamparan.store');
         Route::get("/Hamparan/{slugZ}/edit/{slugH}", "edit")->name('Hamparan.edit');
         Route::put("/Hamparan/{slugZ}/edit/{slugH}", "update")->name('Hamparan.update');
+        Route::delete("/Hamparan/{zona_id}", "destroy")->name('hamparan.destroy');
     });
     Route::controller(PLotCOntroller::class)->group(function () {
         Route::get('/dataPlot', 'index')->name('dataPlot.index');

@@ -94,9 +94,14 @@
                                                 class="add-btn">
                                                 <img src="{{ asset('/images/PencilSquare.svg') }}" alt="Add" />
                                             </button>
-                                            <button class="delete-btn">
-                                                <img src="{{ asset('/images/Trash.svg') }}" alt="Delete" />
-                                            </button>
+                                            <form action="{{ route('hamparan.destroy', ['zona_id' => $zona->id]) }}"
+                                                method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="delete-btn">
+                                                    <img src="{{ asset('/images/Trash.svg') }}" alt="Delete" />
+                                                </button>
+                                            </form>
                                         </td>
                                     </tr>
                                 @empty

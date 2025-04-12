@@ -21,7 +21,8 @@ class ManajermenUserController extends Controller
         $user = Auth::user();
         $search = $request->query('search');
         $perPage = $request->query('per_page', 5);
-        $query = Plot::where('status', '=', 'tidakaktif');
+        // $query = Plot::query();
+        $query = Plot::where('status', '=', null);
         if (!empty($search)) {
             $query->where('nama_plot', 'ILIKE', "%{$search}%")
                 ->orWhere('type_plot', 'ILIKE', "%{$search}%");

@@ -6,12 +6,12 @@ use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\SoftDeletes;
+// use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Str;
 
 class SubPlot extends Model
 {
-    use HasFactory, SoftDeletes, Sluggable;
+    use HasFactory, Sluggable;
     protected $table = 'subplot';
     // protected $primaryKey = 'id';
     // public $timestamps = true;
@@ -21,6 +21,7 @@ class SubPlot extends Model
         'slug',
         'latitude',
         'longitude',
+        'deleted_at',
     ];
     protected $guarded = [];
     protected static function boot()

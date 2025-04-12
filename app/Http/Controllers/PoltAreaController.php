@@ -75,7 +75,9 @@ class PoltAreaController extends Controller
                 "periode_pengamatan" => $periode_pengamatan, // Gabungan tanggal mulai dan berakhir
                 "periode_id" => $periode->id,
                 "slug" => Str::slug($validatedData['daerah']),
+                "tim_id" => $request->tim_id,
             ]);
+            // dd($poltArea);
             // dd($poltArea);
             // Response berhasil
             // return response()->json([
@@ -83,7 +85,7 @@ class PoltAreaController extends Controller
             //     'data' => $poltArea
             // ], 201);
             DB::commit();
-            return redirect()->back()->with('success', 'Lokasi berhasil ditambahkan!');
+            return redirect()->route('Lokasi.lokasi')->with('success', 'Lokasi berhasil ditambahkan!');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Gagal membuat data: ' . $e->getMessage());
         }
@@ -170,7 +172,7 @@ class PoltAreaController extends Controller
                 "periode_id" => $periode->id,
                 "slug" => $newSlug, // Update slug dengan yang baru
             ]);
-
+            dd($poltArea);
             DB::commit();
             return redirect()->route('Lokasi.lokasi', ['slug' => $slug])->with('success', 'Lokasi berhasil diperbarui!');
         } catch (\Exception $e) {
@@ -240,7 +242,7 @@ class PoltAreaController extends Controller
             return response()->json(['pesan' => 'PoltArea tidak ditemukan'], 404);
         }
 
-        $poltArea->forceDelete(); // Hard delete
+        $poltArea->delete(); // Hard delete
 
         return response()->json(['pesan' => 'PoltArea berhasil dihapus secara permanen'], 200);
     }

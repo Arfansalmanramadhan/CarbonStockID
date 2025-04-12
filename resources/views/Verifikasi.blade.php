@@ -51,7 +51,7 @@
                             class="btn btn-tambah-data m-3">Tambah</button> --}}
                         </div>
                     </div>
-                    <table class="custom-table-pancang table  table-striped">
+                    <table class="custom-table-pancang table ">
                         <thead>
                             <tr>
                                 <th class="kiriPancang">No</th>
@@ -94,9 +94,9 @@
                                     <td>{{ $item->latitude }}</td>
                                     <td>{{ $item->longitude }}</td>
                                     <td class="hidden-column aksi-button">
-                                        @if ($item->status === 'tidakaktif')
+                                        @if ($item->status !== 'aktif')
                                             <a href="{{ url('/veri/' . $item->id) }}" class="btn btn-info">
-                                                Menyetujui Pengguna
+                                                Menyetujui
                                             </a>
                                         @endif
                                         {{-- <a href="{{ route('hamparan.getHamparan', ['slug' => $item->slug]) }}"

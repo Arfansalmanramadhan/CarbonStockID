@@ -29,7 +29,16 @@
 
 
                     <div id="map" style="width: 100%; height: 400px;"></div>
-
+                    @if (session('success'))
+                        <div class="alert alert-success">
+                            {{ session('success') }}
+                        </div>
+                    @endif
+                    @if (session('error'))
+                        <div class="alert alert-danger">
+                            {{ session('error') }}
+                        </div>
+                    @endif
                     <!-- Form -->
                     <dd></dd>
                     <form method="POST" action="{{ route('Lokasi.store') }}" id="plotAreaForm">
@@ -57,9 +66,10 @@
                         </div>
                         <div class="mb-4">
                             <label for="plotName" class="form-label">Jenis hutan</label>
-                            <select class="form-select  form-control" aria-label="Default select example" name="jenis_hutan">
+                            <select class="form-select  form-control" aria-label="Default select example"
+                                name="jenis_hutan">
                                 <option selected>Jenis hutan</option>
-                                <option value="Hutan Tropis">Hutan  Tropis</option>
+                                <option value="Hutan Tropis">Hutan Tropis</option>
                                 <option value="Hutan Bakau">Hutan Bakau</option>
                                 <option value="Hutan Sabana">Hutan Sabana</option>
                                 <option value="Hutan Rawa Gambut">Hutan Rawa Gambut</option>
@@ -92,10 +102,13 @@
                     </form>
                 </div>
             </div>
-            <div class="option">
-                <a href="{{ route('zona.index') }}" class=" btn btn-success " id="submitButton"><span>Berikutnya</span>
-                    <img src="{{ asset('/images/ArrowRight.svg') }}" alt="Arrow Icon" class="ms-2" />
-                </a>
+            <div class="d-flex jarak ">
+                <div class="option m-2">
+                    <a href="{{ route('Lokasi.lokasi') }}" class=" btn btn-back " id="submitButton"><img
+                            src="{{ asset('/images/ArrowLeft.svg') }}" alt="Arrow Icon" class="ms-2" />
+                        <span>Sebelumnya</span>
+                    </a>
+                </div>
             </div>
         </div>
     </div>
