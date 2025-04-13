@@ -308,7 +308,7 @@ class DashboardController extends Controller
             // TootaL Karbon
             $TotalKandunganKarbon =  $zona->total_carbon_tanah + $hasilNecromascarbon + $SerasahKarbon + $semaiKarbon  + $tumbuhan_bawahKarbon + $rataPohonKarbon + $rataPancangKarbon + $rataTiangKarbon;
             // Total carbon tanama kandungan karbon
-            $TotalCarbon = $zona->total_co2_tanah + $semaico2   + $rataPohonCo2 + $rataPancangCo2 + $rataTiangCo2 + $tumbuhan_bawahco2;
+            $TotalCarbon =  $semaico2   + $rataPohonCo2 + $rataPancangCo2 + $rataTiangCo2 + $tumbuhan_bawahco2;
             // serapan co2
             // Total berat biomassa tanaman/ AKAR
             $totalBerat = $rataPancangCo2 + $rataTiangCo2 + $rataPohonCo2;
@@ -373,13 +373,13 @@ class DashboardController extends Controller
                 'Serasah' => number_format($Serasa ?? 0, 3, '.', ''),
                 'Necromass' => number_format($Necromass ?? 0, 3, '.', ''),
                 'Co2Tanaman' => number_format($co2tanaman ?? 0, 3, '.', ''),
-                'TanahCo2' => number_format($zona->total_co2_tanah ?? 0, 4, '.', ''),
-                'TanahCarbon' => number_format($zona->total_carbon_tanah ?? 0, 4, '.', ''),
-                'BeratBiomassaAkar' => number_format($akar ?? 0, 4, '.', ''),
-                'tanah' => number_format($tanah ?? 0, 4, '.', ''),
-                'beratMasaAkar' => number_format($beratMasaAkar ?? 0, 4, '.', ''),
+                'TanahCo2' => number_format($zona->total_co2_tanah ?? 0, 3, '.', ''),
+                'TanahCarbon' => number_format($zona->total_carbon_tanah ?? 0, 3, '.', ''),
+                'BeratBiomassaAkar' => number_format($akar ?? 0, 3, '.', ''),
+                'tanah' => number_format($tanah ?? 0, 3, '.', ''),
+                'beratMasaAkar' => number_format($beratMasaAkar ?? 0, 3, '.', ''),
                 'faktor' => number_format($faktor ?? 0, 0, '.', ''),
-                'TotalKaoobon' => number_format($TotalKarbon5POL ?? 0, 4, '.', ''),
+                'TotalKaoobon' => number_format($TotalKarbon5POL ?? 0, 3, '.', ''),
                 'BaselineLahanKosong' => number_format($BaselineLahanKosong ?? 0, 2, '.', ''),
                 'hasilSerasahPersen' => number_format($hasilSerasahPersen ?? 0, 2, '.', ''),
                 'hasilNecromassPersen' => number_format($hasilNecromassPersen ?? 0, 2, '.', ''),

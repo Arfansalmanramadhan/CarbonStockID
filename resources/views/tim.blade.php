@@ -21,7 +21,8 @@
                 <div class="row">
                     @csrf
                     <label for="tim_id">Pilih Tim:</label>
-                    <select name="tim_id" required>
+                    <select name="tim_id"  class="form-control" required>
+                        <option value="">-- Pilih Tim --</option>
                         @foreach ($tim as $tims)
                             <option value="{{ $tims->id }}">{{ $tims->nama }} </option>
                         @endforeach

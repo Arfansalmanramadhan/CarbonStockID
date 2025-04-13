@@ -165,12 +165,12 @@
                                 <span>Surveyor</span>
                             </a>
                         </li>
-                        {{-- <li class="sidebar-item">
+                        <li class="sidebar-item">
                             <a href="{{ route('Sampah.index') }}" class="sidebar-link">
                                 <i class="lni lni-trash-3"></i>
                                 <span>Sampah</span>
                             </a>
-                        </li> --}}
+                        </li>
                     </ul>
                 </aside>
                 <div class="main p-3">

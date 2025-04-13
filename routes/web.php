@@ -198,6 +198,7 @@ Route::middleware('auth')->group(function () {
     });
     Route::controller(SampahController::class)->group(function () {
         Route::get('/Sampah', 'index')->name('Sampah.index');
+        Route::post('/Sampah', 'hitung')->name('Sampah.hitung');
     });
     Route::controller(DataPlotController::class)->group(function () {
         Route::get('/dataPlot', 'index')->name('dataPlot.index');

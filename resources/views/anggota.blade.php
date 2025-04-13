@@ -21,7 +21,8 @@
                 <div class="row">
                     @csrf
                     <label for="registrasi_id">Pilih Anggota:</label>
-                    <select name="registrasi_id" required>
+                    <select name="registrasi_id"  class="form-control" required>
+                        <option value="">-- Pilih Nama --</option>
                         @foreach ($registrasi as $user)
                             <option value="{{ $user->id }}">{{ $user->nama }} ({{ $user->username }})</option>
                         @endforeach
