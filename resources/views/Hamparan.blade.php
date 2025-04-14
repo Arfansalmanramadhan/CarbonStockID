@@ -12,9 +12,9 @@
         </div>
         <div class="table-container">
             <div class="table-container">
-                <div class="table-wrapper">
+                <div class="table-wrapper  paginated-table">
                     <div class="table-header d-flex justify-content-between">
-                        <form method="GET" action="{{ route('Hamparan.index') }}">
+                        {{-- <form method="GET" action="{{ route('Hamparan.index') }}">
                             <div class="tampilkan">
                                 <label for="show-entries">Tampilkan</label>
                                 <select id="show-entries perPageSelect" class="number-selection" name="perPage"
@@ -25,7 +25,17 @@
                                 </select>
                                 <span class="ms-2">data</span>
                             </div>
-                        </form>
+                        </form> --}}
+                        <div class="tampilkan">
+                            <label for="dataPerPage6">Tampilkan</label>
+                            <select class="dataPerPage">
+                                <option value="5">5</option>
+                                <option value="10">10</option>
+                                <option value="50">50</option>
+                                <option value="100">100</option>
+                            </select>
+                            <span class="ms-2">data</span>
+                        </div>
                         <form method="GET" action="{{ route('Hamparan.index') }}">
                             <div class="d-flex align-items-center">
                                 <div class="form-control-space">
@@ -71,9 +81,9 @@
                                 </td>
                             </tr> --}}
                         </tbody>
-                        <tbody id="data-table ">
+                        <tbody class="tableBody">
                             @forelse ($hamparan as $index => $h)
-                                <tr>
+                                <tr class="data-row">
                                     <td>{{ $hamparan->firstItem() + $index }}</td>
                                     <td>{{ optional($h->zona)->poltArea->daerah ?? '-' }}</td>
                                     <td>{{ optional($h->zona)->zona ?? '-' }}</td>
@@ -103,7 +113,7 @@
 
                     </table>
                     <div class="table-footer mt-5">
-                        <strong>
+                        {{-- <strong>
                             Menampilkan {{ $hamparan->firstItem() }} sampai {{ $hamparan->lastItem() }} dari
                             {{ $hamparan->total() }} data
                         </strong>
@@ -130,7 +140,18 @@
                                     <li class="page-item disabled"><span class="page-link">Lanjut</span></li>
                                 @endif
                             </ul>
-                        </nav>
+                        </nav> --}}
+                        <p>Menampilkan data <span class="fromNumber">1</span> sampai <span class="toNumber">5</span>
+                            dari
+                            <span class="totalData">0</span> data
+                        </p>
+
+                        <!-- Tombol Pagination -->
+                        <div class="pagination-controls">
+                            <button class=" btn-button prevPage" disabled>Sebelumnya</button>
+                            <span class="currentPage">1</span> dari <span class="totalPages">0</span>
+                            <button class=" btn-button nextPage">Berikutnya</button>
+                        </div>
                     </div>
                     {{-- <div class="d-flex justify-content-between">
                         {{ $hamparan->links() }}

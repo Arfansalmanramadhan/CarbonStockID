@@ -206,7 +206,7 @@ class DashboardController extends Controller
                 ->leftJoin('semai', 'semai.subplot_id', '=', 'subplot.id')
                 ->leftJoin('tumbuhan_bawah', 'tumbuhan_bawah.subplot_id', '=', 'subplot.id')
                 ->leftJoin('necromass', 'necromass.subplot_id', '=', 'subplot.id')
-                ->where('plot.status', 'aktif')
+                // ->where('plot.status', 'aktif')
 
                 // ->where('zona.polt_area_id', $zonaid)
                 ->select(
@@ -243,7 +243,7 @@ class DashboardController extends Controller
                 ->leftJoin('tumbuhan_bawah', 'tumbuhan_bawah.subplot_id', '=', 'subplot.id')
                 ->leftJoin('necromass', 'necromass.subplot_id', '=', 'subplot.id')
                 ->where('zona.polt_area_id', $zonaid)
-                ->where('plot.status', 'aktif')
+                // ->where('plot.status', 'aktif')
                 // ->whereNull('zona.deleted_at')
                 ->first(); //Ambil satu objek, bukan Collection
             // dd($zonaa);

@@ -193,13 +193,13 @@ class PLotCOntroller extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $hamparan_id)
+    public function destroy(string $id)
     {
         DB::beginTransaction();
         try {
-            $tanah = Plot::where('hamparan_id', $hamparan_id)->first();
+            $plot = Plot::findOrFail($id);
             // dd($hamparan_id,  Plot::where('hamparan_id', $hamparan_id)->first());
-            $tanah->delete();
+            $plot->delete();
             DB::commit();
             return redirect()->back()->with('success', 'Data tanah berhasil dihapus.');
         } catch (\Exception $e) {

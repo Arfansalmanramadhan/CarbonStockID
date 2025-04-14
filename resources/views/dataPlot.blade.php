@@ -55,14 +55,12 @@
                 <table class="custom-table-pancang  table table-striped">
                     <thead>
                         <tr>
-                            <th>NOMOR</th>
+                            <th>No</th>
                             <th>Nama Lokasi</th>
                             <th>Nama zona</th>
                             <th>Nama Hamparan</th>
-                            <th>nama plot</th>
-                            <th>TIPE PLOT</th>
-                            <th>latitude </th>
-                            <th>longitude</th>
+                            <th>Nama plot</th>
+                            <th>Tipe Plot</th>
                             <th>AKSI</th>
                         </tr>
                     </thead>
@@ -75,25 +73,30 @@
                                 <td>{{ optional($item->hamparan)->nama_hamparan ?? '-' }}</td>
                                 <td>{{ $item->nama_plot }}</td>
                                 <td>{{ $item->type_plot }}</td>
-                                <td>{{ $item->latitude }}</td>
-                                <td>{{ $item->longitude }}</td>
                                 <td class="hidden-column aksi-button">
-                                    <form action="{{ route('DetailPlot.getsubPlot', ['id' => $item->id]) }}"
-                                        method="get">
-                                        <button type="submit" class="view-btn">
-                                            <img src="{{ asset('/images/Eye.svg') }}" alt="" />
-                                        </button>
-                                    </form>
+                                    @foreach ($item->subplot as $subplost)
+                                        <form action="{{ route('DetailPlot.getsubPlot', ['id' => $subplost->id]) }}"
+                                            method="get">
+                                            <button type="submit" class="view-btn">
+                                                <img src="{{ asset('/images/Eye.svg') }}" alt="" />
+                                            </button>
+                                        </form>
+                                    @endforeach
                                     {{-- <button class="view-btn">
                                         <img src="{{ asset('/images/Eye.svg') }}" alt="" />
                                     </button> --}}
-                                    <button onclick="window.location.href='{{ route('Lokasi.edit', $item->slug) }}'"
+                                    {{-- <button onclick="window.location.href='{{ route('Lokasi.edit', $item->slug) }}'"
                                         class="add-btn">
                                         <img src="{{ asset('/images/PencilSquare.svg') }}" alt="Add" />
-                                    </button>
-                                    <button class="delete-btn">
-                                        <img src="{{ asset('/images/Trash.svg') }}" alt="" />
-                                    </button>
+                                    </button> --}}
+                                    <form action="{{ route('plot.destroy', ['id' => $item->id]) }}"
+                                        method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="delete-btn">
+                                            <img src="{{ asset('/images/Trash.svg') }}" alt="Delete" />
+                                        </button>
+                                    </form>
                                     {{-- <button>👁️</button>
                                             <button>➕</button>
                                             <button>🗑️</button> --}}

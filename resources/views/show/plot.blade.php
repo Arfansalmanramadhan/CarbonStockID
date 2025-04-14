@@ -98,7 +98,7 @@
                                             </button>
                                         </form>
                                     @endforeach
-                                    <form action="{{ route('plot.destroy', ['hamparan_id' => $hamparan->id]) }}"
+                                    <form action="{{ route('plot.destroy', ['hamparan_id' => $item->id]) }}"
                                         method="POST">
                                         @csrf
                                         @method('DELETE')

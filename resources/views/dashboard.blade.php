@@ -1,6 +1,6 @@
 @extends('layout.mainlayaot')
 
-@section('title', 'Buku')
+@section('title', 'Dashbopard')
 @section('content')
     <style>
 
@@ -78,7 +78,7 @@
             <div class="">
 
                 <div class="table-wrapper">
-                    <table class="custom-table-pancang  table table-striped">
+                    <table class="custom-table-pancang  table ">
                         <thead>
                             <tr>
                                 <th class="kiriPancang" rowspan="2">No</th>
@@ -274,7 +274,7 @@
                             </div>
                         </div>
                         <div class="table-wrapper table-responsive ">
-                            <table class="custom-table-pancang table  table-striped">
+                            <table class="custom-table-pancang table  ">
                                 <thead>
                                     <tr>
                                         <th class="kiriPancang">No</th>
@@ -379,7 +379,7 @@
 
                     </div>
                     <div class="table-wrapper  table-responsive">
-                        <table class="custom-table-pancang table table-striped">
+                        <table class="custom-table-pancang table ">
                             <thead>
                                 <tr>
                                     <th class="kiriPancang">No</th>
@@ -480,7 +480,7 @@
                         </div>
                     </div>
                     <div class="table-wrapper table-responsive">
-                        <table class="custom-table-pancang table table-striped">
+                        <table class="custom-table-pancang table ">
                             <thead>
                                 <tr>
                                     <th class="kiriPancang">No</th>
@@ -580,7 +580,7 @@
                         </div>
                     </div>
                     <div class="table-wrapper table-responsive">
-                        <table class="custom-table-pancang table  table-striped">
+                        <table class="custom-table-pancang table  ">
                             <thead>
                                 <tr>
                                     <th class="kiriPancang">No</th>
@@ -683,7 +683,7 @@
                         </div>
                     </div>
                     <div class="table-wrapper table-responsive">
-                        <table class="custom-table-pancang table  table-striped">
+                        <table class="custom-table-pancang table  ">
                             <thead>
                                 <tr>
                                     <th class="kiriPancang">No</th>
@@ -702,7 +702,7 @@
                                 @forelse($pancang as $item)
                                     <tr class="data-row">
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $item->no_pohon }} cm</td>
+                                        <td>{{ $item->no_pohon }}</td>
                                         <td>{{ $item->keliling }} cm</td>
                                         <td>{{ $item->diameter }} cm</td>
                                         <td>{{ $item->nama_lokal }}</td>
@@ -791,7 +791,7 @@
                         </div>
                     </div>
                     <div class="table-wrapper table-responsive">
-                        <table class="custom-table-pancang table table-striped">
+                        <table class="custom-table-pancang table ">
                             <thead>
                                 <tr>
                                     <th class="kiriPancang">No</th>
@@ -810,7 +810,7 @@
                                 @forelse ($tiang as $item)
                                     <tr class="data-row">
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $item->no_pohon }} cm</td>
+                                        <td>{{ $item->no_pohon }}</td>
                                         <td>{{ $item->keliling }} cm</td>
                                         <td>{{ $item->diameter }} cm</td>
                                         <td>{{ $item->nama_lokal }}</td>
@@ -899,7 +899,7 @@
                         </div>
                     </div>
                     <div class="table-wrapper table-responsive">
-                        <table class="custom-table-pancang table table-striped">
+                        <table class="custom-table-pancang table ">
                             <thead>
                                 <tr>
                                     <th class="kiriPancang">No</th>
@@ -919,7 +919,7 @@
                                 @forelse ($pohon as $item)
                                     <tr class="data-row">
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $item->no_pohon }} cm</td>
+                                        <td>{{ $item->no_pohon }}</td>
                                         <td>{{ $item->keliling }} cm</td>
                                         <td>{{ $item->diameter }} cm</td>
                                         <td>{{ $item->nama_lokal }}</td>
@@ -1007,7 +1007,7 @@
                         </div>
                     </div>
                     <div class="table-wrapper table-responsive">
-                        <table class="custom-table-pancang table table-striped">
+                        <table class="custom-table-pancang table ">
                             <thead>
                                 <tr>
                                     <th class="kiriPancang">No</th>

@@ -99,7 +99,7 @@ class PeriodeController extends Controller
     public function indexx($id)
     {
         $tim = Tim::findOrFail($id);
-        $registrasi = User::all();
+        $registrasi = User::all()->where('role_id', '=', 2);
         $anggota = DB::table('tim')
         ->leftJoin('anggota_tim', 'tim.id', '=', 'anggota_tim.tim_id')
         ->leftJoin('registrasi', 'anggota_tim.registrasi_id', '=', 'registrasi.id')

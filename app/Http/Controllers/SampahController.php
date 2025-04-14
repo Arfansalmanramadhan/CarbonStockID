@@ -29,6 +29,7 @@ class SampahController extends Controller
             ->join('polt_area', 'zona.polt_area_id', '=', 'polt_area.id')
             ->where('polt_area.id', $lokasiId)
             ->select('pancang.nama_ilmiah', 'pancang.no_pohon')
+            ->where('plot.status', 'aktif')
             ->get();
 
         $tiang = DB::table('tiang')
@@ -39,6 +40,7 @@ class SampahController extends Controller
             ->join('polt_area', 'zona.polt_area_id', '=', 'polt_area.id')
             ->where('polt_area.id', $lokasiId)
             ->select('tiang.nama_ilmiah', 'tiang.no_pohon')
+            ->where('plot.status', 'aktif')
             ->get();
 
         $pohon = DB::table('pohon')
@@ -49,6 +51,7 @@ class SampahController extends Controller
             ->join('polt_area', 'zona.polt_area_id', '=', 'polt_area.id')
             ->where('polt_area.id', $lokasiId)
             ->select('pohon.nama_ilmiah', 'pohon.no_pohon')
+            ->where('plot.status', 'aktif')
             ->get();
 
         // dd($data);

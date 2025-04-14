@@ -1,6 +1,6 @@
 @extends('layout.mainlayaot')
 
-@section('title', 'Buku')
+@section('title', 'Verifikasi')
 
 @section('content')
     <div id="prediksi-content" class="page-content content p-4 w-10">
@@ -55,10 +55,11 @@
                         <thead>
                             <tr>
                                 <th class="kiriPancang">No</th>
-                                <th>Nama Plot</th>
+                                <th>Nama Lokasi</th>
+                                <th>Nama zona</th>
+                                <th>Nama Hamparan</th>
+                                <th>Nama plot</th>
                                 <th>Tipe Plot</th>
-                                <th>Latitude</th>
-                                <th>Longitude</th>
                                 <th class="hidden-column kananPancang">Aksi</th>
                             </tr>
                         </thead>
@@ -89,11 +90,20 @@
                             @forelse ($plot as $index => $item)
                                 <tr class="data-row">
                                     <td>{{ $plot->firstItem() + $index }}</td>
+                                    <td>{{ optional($item->hamparan->zona->poltArea)->daerah ?? '-' }}</td>
+                                    <td>{{ optional($item->hamparan->zona)->zona ?? '-' }}</td>
+                                    <td>{{ optional($item->hamparan)->nama_hamparan ?? '-' }}</td>
                                     <td>{{ $item->nama_plot }}</td>
                                     <td>{{ $item->type_plot }}</td>
-                                    <td>{{ $item->latitude }}</td>
-                                    <td>{{ $item->longitude }}</td>
                                     <td class="hidden-column aksi-button">
+                                        @foreach ($item->subplot as $subplost)
+                                            <form action="{{ route('DetailPlot.getsubPlot', ['id' => $subplost->id]) }}"
+                                                method="get">
+                                                <button type="submit" class="view-btn">
+                                                    Detail
+                                                </button>
+                                            </form>
+                                        @endforeach
                                         @if ($item->status !== 'aktif')
                                             <a href="{{ url('/veri/' . $item->id) }}" class="btn btn-info">
                                                 Menyetujui
@@ -101,21 +111,21 @@
                                         @endif
                                         {{-- <a href="{{ route('hamparan.getHamparan', ['slug' => $item->slug]) }}"
                                             class="btn btn-info btn-sm">Detail</a> --}}
-                                            @foreach ($item->subplot as $subplost)
-                                            <form action="{{ route('DetailPlot.getsubPlot', ['id' => $subplost->id]) }}" method="get">
-                                                <button type="submit" class="view-btn">
-                                                    <img src="{{ asset('/images/Eye.svg') }}" alt="View" />
-                                                </button>
-                                            </form>
-                                        @endforeach
+                                        <form action="{{ route('plot.destroy', ['id' => $item->id]) }}"
+                                            method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="delete-btn">
+                                                Tidak Menyetujuin
+                                            </button>
+                                        </form>
+
                                         {{-- <button
                                             onclick="window.location.href='{{ route('plot.edit', ['slugP' => $poltArea->slug, 'slugZ' => $item->slug]) }}'"
                                             class="add-btn">
                                             <img src="{{ asset('/images/PencilSquare.svg') }}" alt="Add" />
                                         </button> --}}
-                                        <button class="delete-btn">
-                                            <img src="{{ asset('/images/Trash.svg') }}" alt="Delete" />
-                                        </button>
+
                                     </td>
                                 </tr>
                             @empty
@@ -159,19 +169,19 @@
                     <div class="d-flex justify-content-between">
                         {{ $plot->links() }}
                     </div> --}}
-                    <p>Menampilkan data <span class="fromNumber">1</span> sampai <span class="toNumber">5</span>
-                        dari
-                        <span class="totalData">0</span> data
-                    </p>
+                        <p>Menampilkan data <span class="fromNumber">1</span> sampai <span class="toNumber">5</span>
+                            dari
+                            <span class="totalData">0</span> data
+                        </p>
 
-                    <!-- Tombol Pagination -->
-                    <div class="pagination-controls">
-                        <button class=" btn-button prevPage" disabled>Sebelumnya</button>
-                        <span class="currentPage">1</span> dari <span class="totalPages">0</span>
-                        <button class=" btn-button nextPage">Berikutnya</button>
+                        <!-- Tombol Pagination -->
+                        <div class="pagination-controls">
+                            <button class=" btn-button prevPage" disabled>Sebelumnya</button>
+                            <span class="currentPage">1</span> dari <span class="totalPages">0</span>
+                            <button class=" btn-button nextPage">Berikutnya</button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-@endsection
+    @endsection

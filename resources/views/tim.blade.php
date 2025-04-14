@@ -48,7 +48,7 @@
                             <span class="ms-2">data</span>
                         </div>
                     </div>
-                    <table class="custom-table-pancang table table-striped">
+                    <table class="custom-table-pancang table ">
                         <thead>
                             <tr>
                                 <th class="kiriPancang">No</th>

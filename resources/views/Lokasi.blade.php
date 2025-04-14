@@ -114,9 +114,14 @@
                                             class="add-btn">
                                             <img src="{{ asset('/images/PencilSquare.svg') }}" alt="Add" />
                                         </button> --}}
-                                        <button class="delete-btn">
-                                            <img src="{{ asset('/images/Trash.svg') }}" alt="" />
-                                        </button>
+                                        <form action="{{ route('Lokasi.destroy', ['id' => $index->id]) }}"
+                                            method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="delete-btn">
+                                                <img src="{{ asset('/images/Trash.svg') }}" alt="Delete" />
+                                            </button>
+                                        </form>
                                         {{-- <button>👁️</button>
                                             <button>➕</button>
                                             <button>🗑️</button> --}}

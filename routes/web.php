@@ -117,6 +117,7 @@ Route::middleware('auth')->group(function () {
         Route::get("/Lokasi/tambah", "create")->name('Lokasi.index');
         Route::get("/Lokasi/edit/{slug}", "edit")->name('Lokasi.edit');
         Route::put("/Lokasi/edit/{slug}", "update")->name('Lokasi.update');
+        Route::put("/Lokasi/{id}", "destroy")->name('Lokasi.destroy');
         Route::get("/TambahPlot", "tambah")->name('TambahPlot.tambah');
     });
     // Route::post('/Serasah/store', [SerasahController::class, 'store'])->name('Serasah.store');
@@ -197,8 +198,8 @@ Route::middleware('auth')->group(function () {
         Route::get('/panduan', 'index')->name('panduan.index');
     });
     Route::controller(SampahController::class)->group(function () {
-        Route::get('/Sampah', 'index')->name('Sampah.index');
-        Route::post('/Sampah', 'hitung')->name('Sampah.hitung');
+        Route::get('/Jumlah-Pohon', 'index')->name('Sampah.index');
+        Route::post('/Jumlah-Pohon', 'hitung')->name('Sampah.hitung');
     });
     Route::controller(DataPlotController::class)->group(function () {
         Route::get('/dataPlot', 'index')->name('dataPlot.index');
@@ -251,6 +252,6 @@ Route::middleware('auth')->group(function () {
         Route::get('/Plot/{slug}/tambah', 'tambah')->name('Plot.tambah');
         Route::get('/Plot/{slug}/tambah', 'create')->name('Plot.tambah');
         Route::post('/Plot/{slug}/tambah', 'store')->name('Plot.store');
-        Route::delete("/Plot/{hamparan_id}", "destroy")->name('plot.destroy');
+        Route::delete("/Plot/{id}", "destroy")->name('plot.destroy');
     });
 });

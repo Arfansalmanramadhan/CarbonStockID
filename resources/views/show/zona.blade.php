@@ -52,7 +52,7 @@
                     </div>
                 </div>
                 <div class="table-wrapper">
-                    <table class="custom-table-pancang table table-striped">
+                    <table class="custom-table-pancang table ">
                         <thead>
                             <tr>
                                 <th class="kiriPancang">No</th>
@@ -185,7 +185,7 @@
                                 </div>
                             </div>
                             <div class="table-wrapper table-responsive ">
-                                <table class="custom-table-pancang table  table-striped">
+                                <table class="custom-table-pancang table  ">
                                     <thead>
                                         <tr>
                                             <th class="kiriPancang">No</th>
@@ -195,7 +195,6 @@
                                             <th>Total Berat Kering</th>
                                             <th>Kanduungan Karbn</th>
                                             <th>Serapan CO2</th>
-                                            <th class="hidden-column kananPancang">Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody class="tableBody">
@@ -208,19 +207,10 @@
                                                 <td>{{ $item->total_berat_kering }} Gr</td>
                                                 <td class="hidden-column">{{ $item->kandungan_karbon }}gr/cm3</td>
                                                 <td class="hidden-column">{{ $item->co2 }} kg</td>
-                                                <td class="hidden-column aksi-button">
-                                                    <button class="edit-btn">
-                                                        <img src="{{ asset('/images/PencilSquare.svg') }}"
-                                                            alt="" />
-                                                    </button>
-                                                    <button class="delete-btn">
-                                                        <img src="{{ asset('/images/Trash.svg') }}" alt="" />
-                                                    </button>
-                                                </td>
                                             </tr>
                                         @empty
                                             <tr>
-                                                <td colspan="8" class="text-center">Belum ada data</td>
+                                                <td colspan="7" class="text-center">Belum ada data</td>
                                             </tr>
                                         @endforelse
                                     </tbody>
@@ -301,7 +291,7 @@
 
                         </div>
                         <div class="table-wrapper  table-responsive">
-                            <table class="custom-table-pancang table table-striped">
+                            <table class="custom-table-pancang table ">
                                 <thead>
                                     <tr>
                                         <th class="kiriPancang">No</th>
@@ -311,7 +301,6 @@
                                         <th>Total Berat Keriing</th>
                                         <th>Kandungan karbon</th>
                                         <th>Serapan</th>
-                                        <th class="hidden-column kananPancang">Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody class="tableBody">
@@ -324,18 +313,10 @@
                                             <td>{{ $item->total_berat_kering }} Gr</td>
                                             <td class="hidden-column">{{ $item->kandungan_karbon }}Kg</td>
                                             <td class="hidden-column">{{ $item->co2 }} kg</td>
-                                            <td class="hidden-column aksi-button">
-                                                <button class="edit-btn">
-                                                    <img src="{{ asset('/images/PencilSquare.svg') }}" alt="" />
-                                                </button>
-                                                <button class="delete-btn">
-                                                    <img src="{{ asset('/images/Trash.svg') }}" alt="" />
-                                                </button>
-                                            </td>
                                         </tr>
                                     @empty
                                         <tr>
-                                            <td colspan="8" class="text-center">Belum ada data</td>
+                                            <td colspan="7" class="text-center">Belum ada data</td>
                                         </tr>
                                     @endforelse
                                 </tbody>
@@ -411,7 +392,7 @@
                             </div>
                         </div>
                         <div class="table-wrapper table-responsive">
-                            <table class="custom-table-pancang table table-striped">
+                            <table class="custom-table-pancang table ">
                                 <thead>
                                     <tr>
                                         <th class="kiriPancang">No</th>
@@ -421,7 +402,6 @@
                                         <th>Total Berat Keriing</th>
                                         <th>Kandungan karbon</th>
                                         <th>Serapan</th>
-                                        <th class="hidden-column kananPancang">Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody class="tableBody">
@@ -434,18 +414,10 @@
                                             <td>{{ $item->total_berat_kering }} Gr</td>
                                             <td class="hidden-column">{{ $item->kandungan_karbon }}Kg</td>
                                             <td class="hidden-column">{{ $item->co2 }} kg</td>
-                                            <td class="hidden-column aksi-button">
-                                                <button class="edit-btn">
-                                                    <img src="{{ asset('/images/PencilSquare.svg') }}" alt="" />
-                                                </button>
-                                                <button class="delete-btn">
-                                                    <img src="{{ asset('/images/Trash.svg') }}" alt="" />
-                                                </button>
-                                            </td>
                                         </tr>
                                     @empty
                                         <tr>
-                                            <td colspan="8" class="text-center">Belum ada data</td>
+                                            <td colspan="7" class="text-center">Belum ada data</td>
                                         </tr>
                                     @endforelse
                             </table>
@@ -520,7 +492,7 @@
                             </div>
                         </div>
                         <div class="table-wrapper table-responsive">
-                            <table class="custom-table-pancang table  table-striped">
+                            <table class="custom-table-pancang table  ">
                                 <thead>
                                     <tr>
                                         <th class="kiriPancang">No</th>
@@ -531,7 +503,6 @@
                                         <th>karbon Ton/Ha</th>
                                         <th>Karbon Ton</th>
                                         <th>Serapan Co2</th>
-                                        <th class="hidden-column kananPancang">Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody class="tableBody">
@@ -545,18 +516,10 @@
                                             <td class="hidden-column">{{ $item->carbonton }}Ton/Ha</td>
                                             <td class="hidden-column">{{ $item->carbonkg }} Ton</td>
                                             <td class="hidden-column">{{ $item->co2kg }}kg</td>
-                                            <td class="hidden-column aksi-button">
-                                                <button class="edit-btn">
-                                                    <img src="{{ asset('/images/PencilSquare.svg') }}" alt="" />
-                                                </button>
-                                                <button class="delete-btn">
-                                                    <img src="{{ asset('/images/Trash.svg') }}" alt="" />
-                                                </button>
-                                            </td>
                                         </tr>
                                     @empty
                                         <tr>
-                                            <td colspan="9" class="text-center">Belum ada data</td>
+                                            <td colspan="8" class="text-center">Belum ada data</td>
                                         </tr>
                                     @endforelse
                                 </tbody>
@@ -632,7 +595,7 @@
                             </div>
                         </div>
                         <div class="table-wrapper table-responsive">
-                            <table class="custom-table-pancang table  table-striped">
+                            <table class="custom-table-pancang table  ">
                                 <thead>
                                     <tr>
                                         <th class="kiriPancang">No</th>
@@ -644,15 +607,14 @@
                                         <th>Kerapatan Jenis Kayu</th>
                                         <th>Bio diatas tanah</th>
                                         <th>Kandungan karbon</th>
-                                        <th>Serapan CO2 : ''</th>
-                                        <th class="hidden-column kananPancang">Aksi</th>
+                                        <th>Serapan CO2 </th>
                                     </tr>
                                 </thead>
                                 <tbody class="tableBody">
                                     @forelse($pancang as $item)
                                         <tr class="data-row">
                                             <td>{{ $loop->iteration }}</td>
-                                            <td>{{ $item->no_pohon }} cm</td>
+                                            <td>{{ $item->no_pohon }}</td>
                                             <td>{{ $item->keliling }} cm</td>
                                             <td>{{ $item->diameter }} cm</td>
                                             <td>{{ $item->nama_lokal }}</td>
@@ -661,18 +623,10 @@
                                             <td class="hidden-column">{{ $item->bio_di_atas_tanah }} kg</td>
                                             <td class="hidden-column">{{ $item->kandungan_karbon }}kg</td>
                                             <td class="hidden-column">{{ $item->co2 }} kg</td>
-                                            <td class="hidden-column aksi-button">
-                                                <button class="edit-btn">
-                                                    <img src="{{ asset('/images/PencilSquare.svg') }}" alt="" />
-                                                </button>
-                                                <button class="delete-btn">
-                                                    <img src="{{ asset('/images/Trash.svg') }}" alt="" />
-                                                </button>
-                                            </td>
                                         </tr>
                                     @empty
                                         <tr>
-                                            <td colspan="11" class="text-center">Belum ada data</td>
+                                            <td colspan="10" class="text-center">Belum ada data</td>
                                         </tr>
                                     @endforelse
                                 </tbody>
@@ -749,7 +703,7 @@
                             </div>
                         </div>
                         <div class="table-wrapper table-responsive">
-                            <table class="custom-table-pancang table table-striped">
+                            <table class="custom-table-pancang table ">
                                 <thead>
                                     <tr>
                                         <th class="kiriPancang">No</th>
@@ -761,15 +715,14 @@
                                         <th>Kerapatan Jenis Kayu</th>
                                         <th>Bio diatas tanah</th>
                                         <th>Kandungan karbon</th>
-                                        <th>Serapan CO2 : ''</th>
-                                        <th class="hidden-column kananPancang">Aksi</th>
+                                        <th>Serapan CO2 </th>
                                     </tr>
                                 </thead>
                                 <tbody class="tableBody">
                                     @forelse ($tiang as $item)
                                         <tr class="data-row">
                                             <td>{{ $loop->iteration }}</td>
-                                            <td>{{ $item->no_pohon }} cm</td>
+                                            <td>{{ $item->no_pohon }}</td>
                                             <td>{{ $item->keliling }} cm</td>
                                             <td>{{ $item->diameter }} cm</td>
                                             <td>{{ $item->nama_lokal }}</td>
@@ -778,18 +731,10 @@
                                             <td class="hidden-column">{{ $item->bio_di_atas_tanah }} kg</td>
                                             <td class="hidden-column">{{ $item->kandungan_karbon }}kg</td>
                                             <td class="hidden-column">{{ $item->co2 }} kg</td>
-                                            <td class="hidden-column aksi-button">
-                                                <button class="edit-btn">
-                                                    <img src="{{ asset('/images/PencilSquare.svg') }}" alt="" />
-                                                </button>
-                                                <button class="delete-btn">
-                                                    <img src="{{ asset('/images/Trash.svg') }}" alt="" />
-                                                </button>
-                                            </td>
                                         </tr>
                                     @empty
                                         <tr>
-                                            <td colspan="11" class="text-center">Belum ada data</td>
+                                            <td colspan="10" class="text-center">Belum ada data</td>
                                         </tr>
                                     @endforelse
                                 </tbody>
@@ -865,7 +810,7 @@
                             </div>
                         </div>
                         <div class="table-wrapper table-responsive">
-                            <table class="custom-table-pancang table table-striped">
+                            <table class="custom-table-pancang table ">
                                 <thead>
                                     <tr>
                                         <th class="kiriPancang">No</th>
@@ -877,8 +822,7 @@
                                         <th>Kerapatan Jenis Kayu</th>
                                         <th>Bio diatas tanah</th>
                                         <th>Kandungan karbon</th>
-                                        <th>Serapan CO2 : ''</th>
-                                        <th class="hidden-column kananPancang">Aksi</th>
+                                        <th>Serapan CO2 </th>
                                     </tr>
                                 </thead>
                                 <tbody class="tableBody">
@@ -886,7 +830,7 @@
                                     @forelse ($pohon as $item)
                                         <tr class="data-row">
                                             <td>{{ $loop->iteration }}</td>
-                                            <td>{{ $item->no_pohon }} cm</td>
+                                            <td>{{ $item->no_pohon }}</td>
                                             <td>{{ $item->keliling }} cm</td>
                                             <td>{{ $item->diameter }} cm</td>
                                             <td>{{ $item->nama_lokal }}</td>
@@ -895,18 +839,10 @@
                                             <td class="hidden-column">{{ $item->bio_di_atas_tanah }} kg</td>
                                             <td class="hidden-column">{{ $item->kandungan_karbon }}kg</td>
                                             <td class="hidden-column">{{ $item->co2 }} kg</td>
-                                            <td class="hidden-column aksi-button">
-                                                <button class="edit-btn">
-                                                    <img src="{{ asset('/images/PencilSquare.svg') }}" alt="" />
-                                                </button>
-                                                <button class="delete-btn">
-                                                    <img src="{{ asset('/images/Trash.svg') }}" alt="" />
-                                                </button>
-                                            </td>
                                         </tr>
                                     @empty
                                         <tr>
-                                            <td colspan="11" class="text-center">Belum ada data</td>
+                                            <td colspan="10" class="text-center">Belum ada data</td>
                                         </tr>
                                     @endforelse
                                 </tbody>
@@ -982,7 +918,7 @@
                             </div>
                         </div>
                         <div class="table-wrapper table-responsive">
-                            <table class="custom-table-pancang table table-striped">
+                            <table class="custom-table-pancang table ">
                                 <thead>
                                     <tr>
                                         <th class="kiriPancang">No</th>
@@ -994,7 +930,6 @@
                                         <th class="hidden-column">Bio diatas tanah</th>
                                         <th class="hidden-column">Kandungan karbon</th>
                                         <th class="hidden-column">Serapan CO2</th>
-                                        <th class="hidden-column kananPancang">Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody class="tableBody">
@@ -1009,18 +944,10 @@
                                             <td class="hidden-column">{{ $item->biomasa }} kg</td>
                                             <td class="hidden-column">{{ $item->carbon }}kg</td>
                                             <td class="hidden-column">{{ $item->co2 }} kg</td>
-                                            <td class="hidden-column aksi-button">
-                                                <button class="edit-btn">
-                                                    <img src="{{ asset('/images/PencilSquare.svg') }}" alt="" />
-                                                </button>
-                                                <button class="delete-btn">
-                                                    <img src="{{ asset('/images/Trash.svg') }}" alt="" />
-                                                </button>
-                                            </td>
                                         </tr>
                                     @empty
                                         <tr>
-                                            <td colspan="10" class="text-center">Belum ada data</td>
+                                            <td colspan="0" class="text-center">Belum ada data</td>
                                         </tr>
                                     @endforelse
                                 </tbody>
@@ -1332,7 +1259,7 @@
 
 
                             <div class="table-wrapper table-responsive">
-                                <table class="custom-table-pancang table-striped table">
+                                <table class="custom-table-pancang  table">
                                     <thead>
                                         <tr>
                                             <th class="kiriPancang">No</th>

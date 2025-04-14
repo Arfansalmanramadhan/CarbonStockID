@@ -184,21 +184,18 @@ class PoltAreaController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($slug)
+    public function destroy($id)
     {
-        $poltArea = PoltArea::where('slug', $slug)->first();
-
-        if (!$poltArea) {
-            return response()->json([
-                'pesan' => 'PoltArea tidak ditemukan'
-            ], 404);
+        DB::beginTransaction();
+        try {
+            $poltArea = PoltArea::find($id);
+            $poltArea->delete(); // Soft delete
+            DB::commit();
+            return redirect()->back()->with('success', 'PoltArea berhasil dihapus.');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->back()->with('error', 'PoltArea tidak ditemukan.');
         }
-
-        $poltArea->delete(); // Soft delete
-
-        return response()->json([
-            'pesan' => 'PoltArea berhasil dihapus'
-        ], 200);
     }
     public function restore($slug)
     {

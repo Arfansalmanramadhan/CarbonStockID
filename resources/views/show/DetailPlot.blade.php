@@ -1,6 +1,6 @@
 @extends('layout.mainlayaot')
 
-@section('title', 'Hamparan')
+@section('title', 'Subplot')
 
 @section('content')
     <div id="prediksi-content" class="page-content content p-4">
@@ -532,7 +532,7 @@
                                     <th>Kerapatan Jenis Kayu</th>
                                     <th>Bio diatas tanah</th>
                                     <th>Kandungan karbon</th>
-                                    <th>Serapan CO2 : ''</th>
+                                    <th>Serapan CO2</th>
                                     <th class="hidden-column kananPancang">Aksi</th>
                                 </tr>
                             </thead>
@@ -652,7 +652,7 @@
                                     <th>Kerapatan Jenis Kayu</th>
                                     <th>Bio diatas tanah</th>
                                     <th>Kandungan karbon</th>
-                                    <th>Serapan CO2 : ''</th>
+                                    <th>Serapan CO2 </th>
                                     <th class="hidden-column kananPancang">Aksi</th>
                                 </tr>
                             </thead>
@@ -770,7 +770,7 @@
                                     <th>Kerapatan Jenis Kayu</th>
                                     <th>Bio diatas tanah</th>
                                     <th>Kandungan karbon</th>
-                                    <th>Serapan CO2 : ''</th>
+                                    <th>Serapan CO2 </th>
                                     <th class="hidden-column kananPancang">Aksi</th>
                                 </tr>
                             </thead>

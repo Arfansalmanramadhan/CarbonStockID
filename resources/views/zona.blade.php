@@ -47,7 +47,7 @@
                     </form>
                 </div>
                 <div class="table-wrapper">
-                    <table class="custom-table-pancang table table-striped">
+                    <table class="custom-table-pancang table">
                         <thead>
                             <tr>
                                 <th class="kiriPancang">No</th>

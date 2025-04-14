@@ -1,6 +1,6 @@
 @extends('layout.mainlayaot')
 
-@section('title', 'Surveyor')
+@section('title', 'Manajemen Tim')
 
 @section('content')
     <div id="prediksi-content" class="page-content content p-4">
@@ -82,7 +82,7 @@
                     </div>
                 </div>
                 <div class="table-wrapper">
-                    <table class="custom-table-pancang table  table-striped">
+                    <table class="custom-table-pancang table  ">
                         <thead>
                             <tr>
                                 <th class="kiriPancang">No</th>
@@ -98,8 +98,8 @@
                                 <tr class="data-row">
                                     <td>{{ $index + 1 }}</td>
                                     <td>{{ $t->nama }}</td>
-                                    <td>{{ optional($t->periode)->tanggal_mulai  }}</td>
-                                    <td>{{ optional($t->periode)->tanggal_berakhir  }}</td>
+                                    <td>{{ optional($t->periode)->tanggal_mulai }}</td>
+                                    <td>{{ optional($t->periode)->tanggal_berakhir }}</td>
                                     <td>{{ $t->anggota_tim_count }}</td>
                                     <td class="hidden-column aksi-button">
                                         {{-- <a href="{{ route('anggota.indexx', $t->id) }}"
@@ -109,75 +109,15 @@
                                                 <img src="{{ asset('/images/Eye.svg') }}" alt="" />
                                             </button>
                                         </form>
-                                            {{-- <button class="view-btn">
-                                                <img src="{{ asset('/images/Eye.svg') }}" alt="" />
-                                            </button>
-                                            <button onclick="window.location.href='{{ route('Tambah-Surveyor.indexx') }}'"
-                                                class="add-btn">
-                                                <img src="{{ asset('/images/AddIcon.svg') }}" alt="" />
-                                            </button>
-                                            <button class="delete-btn">
-                                                <img src="{{ asset('/images/Trash.svg') }}" alt="" />
-                                            </button> --}}
-                                        </td>
+
+                                    </td>
                                 </tr>
                             @empty
                                 <tr>
                                     <td colspan="5" class="text-center">Belum ada data</td>
                                 </tr>
                             @endforelse
-                            {{-- @forelse($tim as $index => $t)
-                                    @if ($t->anggotaTim->isNotEmpty())
-                                        @foreach ($t->anggotaTim as $anggota)
-                                            @foreach ($anggota->periode as $periode)
-                                                <tr>
-                                                    <td>{{ $tim->firstItem() + $index }}</td>
-                                                    <td>{{ $t->nama }}</td>
-                                                    <td>{{ $periode->tanggal_mulai }}</td>
-                                                    <td>{{ $periode->tanggal_berakhir }}</td>
-                                                    <td>{{ $t->jumlah_anggota }}</td>
-                                                    <td>
-                                                        <a href="{{ route('anggota.indexx', $t->id) }}"
-                                                            class="btn btn-info btn-sm">Detail</a>
-                                                        <a href="{{ route('tim.edit', $t->id) }}"
-                                                            class="btn btn-warning btn-sm">Edit</a>
-                                                        <form action="{{ route('tim.destroy', $t->id) }}" method="POST"
-                                                            class="d-inline">
-                                                            @csrf
-                                                            @method('DELETE')
-                                                            <button type="submit" class="btn btn-danger btn-sm"
-                                                                onclick="return confirm('Yakin ingin menghapus?')">Hapus</button>
-                                                        </form>
-                                                    </td>
-                                                </tr>
-                                            @endforeach
-                                        @endforeach
-                                    @else
-                                        <tr>
-                                            <td>{{ $tim->firstItem() + $index }}</td>
-                                            <td>{{ $t->nama }}</td>
-                                            <td colspan="3" class="text-center">Tidak ada periode</td>
-                                            <td>{{ $t->jumlah_anggota }}</td>
-                                            <td>
-                                                <a href="{{ route('tim.show', $t->id) }}"
-                                                    class="btn btn-info btn-sm">Detail</a>
-                                                <a href="{{ route('tim.edit', $t->id) }}"
-                                                    class="btn btn-warning btn-sm">Edit</a>
-                                                <form action="{{ route('tim.destroy', $t->id) }}" method="POST"
-                                                    class="d-inline">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger btn-sm"
-                                                        onclick="return confirm('Yakin ingin menghapus?')">Hapus</button>
-                                                </form>
-                                            </td>
-                                        </tr>
-                                    @endif
-                                @empty
-                                    <tr>
-                                        <td colspan="6" class="text-center">Belum ada data</td>
-                                    </tr>
-                                @endforelse --}}
+
                         </tbody>
                     </table>
                 </div>
