@@ -24,6 +24,7 @@ class SUrveyorController extends Controller
     public function surveyor(Request $request)
     {
         $user = Auth::user();
+        $keyword = $request->input('search');
         $registrasi = User::all()->where('role_id', '=', 2);
         $anggota = DB::table('registrasi')
             ->leftJoin('anggota_tim', 'registrasi.id', '=', 'anggota_tim.registrasi_id')
@@ -40,6 +41,16 @@ class SUrveyorController extends Controller
                 DB::raw("COALESCE(registrasi.nik, 'Belum ada NIK') as nik")
             )
             ->where('role_id', '=', 2)
+            ->when($keyword, function ($query, $keyword) {
+                $query->where(function ($subQuery) use ($keyword) {
+                    $subQuery->where('registrasi.nama', 'ILIKE', "%$keyword%")
+                        ->orWhere('registrasi.username', 'ILIKE', "%$keyword%")
+                        ->orWhere('registrasi.email', 'ILIKE', "%$keyword%")
+                        ->orWhere('registrasi.nip', 'ILIKE', "%$keyword%")
+                        ->orWhere('registrasi.nik', 'ILIKE', "%$keyword%")
+                        ->orWhere('registrasi.no_hp', 'ILIKE', "%$keyword%");
+                });
+            })
             ->groupBy(
                 'registrasi.nama',
                 'registrasi.username',

@@ -35,7 +35,7 @@
                         </select>
                         <span class="ms-2">data</span>
                     </div>
-                    {{-- <form method="GET" action="{{ route('zona.index') }}">
+                    <form method="GET" action="{{ route('Surveyor.surveyor') }}">
                         <div class="d-flex align-items-center">
                             <div class="form-control-space">
                                 <input type="text" id="searchInput" name="search" placeholder="Cari..."
@@ -43,7 +43,7 @@
                             </div>
                             <button type="submit" class="btn btn-tambah-data">Cari</button>
                         </div>
-                    </form> --}}
+                    </form>
                 </div>
                 <div class="table-wrapper">
                     @if (session('success'))

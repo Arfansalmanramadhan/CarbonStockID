@@ -52,7 +52,7 @@
         <div class="image-container">
             <img src="{{ asset('images/frameProfile.svg') }}" alt="" class="img-normal" />
             <div class="text-overlay">
-                <p class="large-text">Profil Pengguna</p>
+                <p class="large-text">Profil Admin</p>
             </div>
         </div>
         <div class="card p-4 shadow-sm">
