@@ -26,7 +26,7 @@ class PoltArea extends Model
         'periode_pengamatan',
         "status",
         'deleted_at',
-        'periode_id',
+        // 'periode_id',
         'tim_id',
     ];
     // Jika ada atribut yang ingin di-guard (tidak bisa diisi langsung)

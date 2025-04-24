@@ -77,8 +77,16 @@
                         <span class="ms-2">data</span>
                     </div>
                     <div class="form-control-space">
-                        <input type="text" id="searchInput" placeholder="Cari..." class="form-control mb-3"
-                            value="{{ $search }}" onkeyup="searchTable()">
+                        <form method="GET"
+                            action="{{ route('Manajemen-Tim.index', ['id' => $tim->id ?? 'default-slug']) }}">
+                            <div class="d-flex align-items-center">
+                                <div class="form-control-space">
+                                    <input type="text" id="searchInput" name="search" placeholder="Cari..."
+                                        class="form-control " value="{{ request('search') }}">
+                                </div>
+                                <button type="submit" class="btn btn-tambah-data m-3">Cari</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
                 <div class="table-wrapper">
@@ -86,7 +94,7 @@
                         <thead>
                             <tr>
                                 <th class="kiriPancang">No</th>
-                                <th>Nama TIM</th>
+                                <th>Nama Tim</th>
                                 <th>Tanggal Mulai </th>
                                 <th>Tanggal berakhir </th>
                                 <th>Jumlah anggota </th>
@@ -109,7 +117,14 @@
                                                 <img src="{{ asset('/images/Eye.svg') }}" alt="" />
                                             </button>
                                         </form>
-
+                                        <form action="{{ route('Manajemen-Tim.deleteTim', ['id' => $t->id]) }}"
+                                            method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="delete-btn">
+                                                <img src="{{ asset('/images/Trash.svg') }}" alt="Delete" />
+                                            </button>
+                                        </form>
                                     </td>
                                 </tr>
                             @empty

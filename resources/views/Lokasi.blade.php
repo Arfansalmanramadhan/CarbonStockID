@@ -58,7 +58,7 @@
                             <tr>
                                 <th class="kiriPancang">No</th>
                                 <th>Nama Lokasi</th>
-                                <th>Jumlah Tim</th>
+                                <th>Nama Tim</th>
                                 <th>Jenis Hutan</th>
                                 <th>Latitude</th>
                                 <th>Longitude</th>
@@ -95,27 +95,34 @@
                                 <tr class="data-row">
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $index->daerah }}</td>
-                                    <td>{{ $index->plot_area_tim_count }}</td>
+                                    <td>
+                                        @if ($index->tim)
+                                            {{ $index->tim->nama }}
+                                        @else
+                                            <form action="{{ route('tim.create', ['lokasi_id' => $index->id]) }}" method="GET">
+                                                <button type="submit" class="add-btn" title="Tambah Tim">
+                                                    <img src="{{ asset('/images/AddIcon.svg') }}" alt="Tambah Tim" />
+                                                </button>
+                                            </form>
+                                        @endif
+                                    </td>
                                     <td>{{ $index->jenis_hutan }}</td>
                                     <td>{{ $index->latitude }}</td>
                                     <td>{{ $index->longitude }}</td>
                                     <td>{{ $index->periode_pengamatan }}</td>
                                     <td>{{ $index->created_at }}</td>
                                     <td class="hidden-column aksi-button">
-                                        <a href="{{ route('tim.create', ['id' => $index->id]) }}"
-                                            class="btn add-btn ">TIM</a>
                                         <form action="{{ route('zona.getZona', ['slug' => $index->slug]) }}"
                                             method="get">
                                             <button type="submit" class="view-btn">
                                                 <img src="{{ asset('/images/Eye.svg') }}" alt="" />
                                             </button>
                                         </form>
-                                        {{-- <button onclick="window.location.href='{{ route('Lokasi.edit', $index->slug) }}'"
+                                        <button onclick="window.location.href='{{ route('Lokasi.edit', $index->slug) }}'"
                                             class="add-btn">
                                             <img src="{{ asset('/images/PencilSquare.svg') }}" alt="Add" />
-                                        </button> --}}
-                                        <form action="{{ route('Lokasi.destroy', ['id' => $index->id]) }}"
-                                            method="POST">
+                                        </button>
+                                        <form action="{{ route('Lokasi.destroy', ['id' => $index->id]) }}" method="POST">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="delete-btn">

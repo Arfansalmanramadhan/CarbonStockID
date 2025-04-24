@@ -112,9 +112,10 @@ class TanahController extends Controller
     }
     public function edit(string $id)
     {
+        $user = Auth::user();
         $subplot = SubPlot::findOrFail($id);
         $tanah = Tanah::where('subplot_id', $subplot->id)->firstOrFail();
-        return view('edit.PlotA', compact('subplot', 'tanah'));
+        return view('edit.PlotA', compact('subplot', 'tanah', 'user'));
     }
     public function update(Request $request, string $id)
     {
@@ -210,18 +211,18 @@ class TanahController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $subplot_id)
+    public function destroy(string $id)
     {
-    DB::beginTransaction();
-    try {
-        $tanah = Tanah::where('subplot_id', $subplot_id)->first();
-        // dd($subplot_id, Tanah::where('subplot_id', $subplot_id)->first());
-        $tanah->delete();
-        DB::commit();
-        return redirect()->back()->with('success', 'Data tanah berhasil dihapus.');
-    } catch (\Exception $e) {
-        DB::rollBack();
-        return redirect()->back()->with('error', 'Gagal menghapus data tanah: ' . $e->getMessage());
-    }
+        DB::beginTransaction();
+        try {
+            $tanah = Tanah::findOrFail($id);
+            // dd($subplot_id, Tanah::where('subplot_id', $subplot_id)->first());
+            $tanah->delete();
+            DB::commit();
+            return redirect()->back()->with('success', 'Data tanah berhasil dihapus.');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->back()->with('error', 'Gagal menghapus data tanah: ' . $e->getMessage());
+        }
     }
 }

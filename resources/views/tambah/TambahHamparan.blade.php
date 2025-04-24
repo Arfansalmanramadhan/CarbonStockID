@@ -62,6 +62,14 @@
                     </form>
                 </div>
             </div>
+            <div class="d-flex jarak ">
+                <div class="option m-2">
+                    <a href="{{ route('hamparan.getHamparan',['id' => $zona->id]) }}" class=" btn btn-back " id="submitButton"><img
+                            src="{{ asset('/images/ArrowLeft.svg') }}" alt="Arrow Icon" class="ms-2" />
+                        <span>Sebelumnya</span>
+                    </a>
+                </div>
+            </div>
         </div>
     </div>
     <script src="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js"></script>

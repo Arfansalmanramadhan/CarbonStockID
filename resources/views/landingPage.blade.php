@@ -99,17 +99,26 @@
                 </div>
             </div>
             <div class="row text-center mt-5">
-                <div class="col-lg-6 mt-2">
+                <div class="col-lg-4 mt-2">
                     <div class="card">
                         <img src="{{ asset('/images/fitur1.svg') }}" class="card-img-top" alt="...">
                         <div class="card-body">
                             <h5 class="card-title">Management Data Plot</h5>
-                            <p class="card-text">Memudahkan pengguna dalam mengelola data plot area pengukuran serta sub
+                            <p class="card-text">Memudahkan pengguna dalam mengelola data lokasi pengukuran serta sub
                                 plot.</p>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-6 mt-2">
+                <div class="col-lg-4 mt-2">
+                    <div class="card">
+                        <img src="{{ asset('/images/image.png') }}" class="card-img-top" alt="..." height="260px">
+                        <div class="card-body">
+                            <h5 class="card-title">Diagram </h5>
+                            <p class="card-text">Memudahkan pengguna dalam mengelola data serapan dan karbon setiap  lokasi pengukuran .</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 mt-2">
                     <div class="card">
                         <img src="{{ asset('/images/fitur3.svg') }}" class="card-img-top" alt="...">
                         <div class="card-body">
@@ -141,8 +150,7 @@
                             <img src="{{ asset('/images/ChevronDown.png') }}" alt="" />
                         </div>
                         <div class="pertanyaan-body">
-                            <span>Aplikasi inovatif yang dirancang untuk membantu pengguna mengukur, mengelola, dan
-                                memprediksi cadangan karbon.</span>
+                            <span>CarbonStockID adalah aplikasi inovatif berbasis web dan mobile yang dirancang untuk membantu pengguna dalam mengukur, mengelola, dan memprediksi cadangan karbon di berbagai lokasi hutan atau lahan berdasarkan data lapangan.</span>
                         </div>
                     </div>
                     <div class="card-pertanyaan" onclick="toggleAnswer(this)">
@@ -152,8 +160,12 @@
                             <img src="{{ asset('/images/ChevronDown.png') }}" alt="" />
                         </div>
                         <div class="pertanyaan-body">
-                            <span>Aplikasi inovatif yang dirancang untuk membantu pengguna mengukur, mengelola, dan
-                                memprediksi cadangan karbon.</span>
+                            <span>CarbonStockID dapat digunakan oleh dua jenis pengguna:
+                                <ul>
+                                    <li>Surveyor, yang bertugas menginput data hasil pengukuran di lapangan</li>
+                                    <li>Admin, yang bertugas melakukan kalkulasi, validasi, serta pengolahan data dan hasil akhir.</li>
+                                </ul>
+                            </span>
                         </div>
                     </div>
                     <div class="card-pertanyaan" onclick="toggleAnswer(this)">
@@ -163,8 +175,9 @@
                             <img src="{{ asset('/images/ChevronDown.png') }}" alt="" />
                         </div>
                         <div class="pertanyaan-body">
-                            <span>Aplikasi inovatif yang dirancang untuk membantu pengguna mengukur, mengelola, dan
-                                memprediksi cadangan karbon.</span>
+                            <span>Surveyor memasukkan data biomassa dari pohon, semai, serasah, dan nekromas melalui form isian di aplikasi. Data ini kemudian dihitung oleh sistem menggunakan rumus dari SNI 7724 untuk menghasilkan estimasi cadangan karbon. Hasilnya ditampilkan dan dapat diunduh melalui dashboard admin.
+
+                            </span>
                         </div>
                     </div>
                     <div class="card-pertanyaan" onclick="toggleAnswer(this)">
@@ -174,8 +187,7 @@
                             <img src="{{ asset('/images/ChevronDown.png') }}" alt="" />
                         </div>
                         <div class="pertanyaan-body">
-                            <span>Aplikasi inovatif yang dirancang untuk membantu pengguna mengukur, mengelola, dan
-                                memprediksi cadangan karbon.</span>
+                            <span>Pengguna dapat mulai dengan membuat akun sebagai admin atau surveyor. Setelah login, pengguna dapat langsung mengakses dashboard dan fitur-fitur sesuai peran masing-masing untuk mulai menginput atau memproses data.</span>
                         </div>
                     </div>
                 </div>
@@ -187,8 +199,7 @@
                             <img src="{{ asset('/images/ChevronDown.png') }}" alt="" />
                         </div>
                         <div class="pertanyaan-body">
-                            <span>Aplikasi inovatif yang dirancang untuk membantu pengguna mengukur, mengelola, dan
-                                memprediksi cadangan karbon.</span>
+                            <span>Ya. Data pengguna disimpan secara aman dan dikelola melalui sistem autentikasi yang dibedakan antara admin dan surveyor. Aplikasi ini terhubung dengan Supabase untuk menjamin keamanan data secara real-time.</span>
                         </div>
                     </div>
                     <div class="card-pertanyaan" onclick="toggleAnswer(this)">
@@ -198,8 +209,7 @@
                             <img src="{{ asset('/images/ChevronDown.png') }}" alt="" />
                         </div>
                         <div class="pertanyaan-body">
-                            <span>Aplikasi inovatif yang dirancang untuk membantu pengguna mengukur, mengelola, dan
-                                memprediksi cadangan karbon.</span>
+                            <span>Bisa. Admin dapat mengunduh hasil kalkulasi cadangan karbon dalam bentuk laporan terstruktur yang mencakup biomassa, kandungan karbon, dan estimasi serapan CO₂.</span>
                         </div>
                     </div>
                     <div class="card-pertanyaan" onclick="toggleAnswer(this)">
@@ -209,19 +219,7 @@
                             <img src="{{ asset('/images/ChevronDown.png') }}" alt="" />
                         </div>
                         <div class="pertanyaan-body">
-                            <span>Aplikasi inovatif yang dirancang untuk membantu pengguna mengukur, mengelola, dan
-                                memprediksi cadangan karbon.</span>
-                        </div>
-                    </div>
-                    <div class="card-pertanyaan" onclick="toggleAnswer(this)">
-                        <div class="pertanyaan-header">
-                            <p>Bagaimana jika saya mengalami masalah?</p>
-                            <i class="fas fa-chevron-down"></i>
-                            <img src="{{ asset('/images/ChevronDown.png') }}" alt="" />
-                        </div>
-                        <div class="pertanyaan-body">
-                            <span>Aplikasi inovatif yang dirancang untuk membantu pengguna mengukur, mengelola, dan
-                                memprediksi cadangan karbon.</span>
+                            <span>Ya. Aplikasi ini mengacu pada SNI 7724 sebagai standar dalam penghitungan biomassa dan cadangan karbon, sehingga hasilnya valid dan dapat dipertanggungjawabkan secara ilmiah.</span>
                         </div>
                     </div>
                 </div>

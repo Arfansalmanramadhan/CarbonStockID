@@ -91,7 +91,7 @@ class PeriodeController extends Controller
             ]);
             // dd( $periode);
             DB::commit();
-            return redirect()->back()->with('success', 'Periode berhasil ditambahkan!');
+            return redirect()->back()->with('success', 'Tim berhasil ditambahkan!');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Gagal membuat data: ' . $e->getMessage());
         }
@@ -101,19 +101,20 @@ class PeriodeController extends Controller
         $tim = Tim::findOrFail($id);
         $registrasi = User::all()->where('role_id', '=', 2);
         $anggota = DB::table('tim')
-        ->leftJoin('anggota_tim', 'tim.id', '=', 'anggota_tim.tim_id')
-        ->leftJoin('registrasi', 'anggota_tim.registrasi_id', '=', 'registrasi.id')
+            ->leftJoin('anggota_tim', 'tim.id', '=', 'anggota_tim.tim_id')
+            ->leftJoin('registrasi', 'anggota_tim.registrasi_id', '=', 'registrasi.id')
             ->select(
+                'anggota_tim.id as anggota_id',
                 'tim.id as tim_id',
                 'tim.nama as nama_tim',
 
                 DB::raw("COALESCE(registrasi.nama, 'Belum ada anggota') as nama_anggota"),
                 DB::raw("COALESCE(registrasi.username, 'Belum ada anggota') as username")
             )
-            ->where('tim.id',$id)
+            ->where('tim.id', $id)
             ->get();
-            // dd($anggota);
-            // dd($anggota);
+        // dd($anggota);
+        // dd($anggota);
         return view("Anggota", compact('registrasi', 'anggota', 'tim'));
     }
     public function storee(Request $request, $id)
@@ -150,9 +151,33 @@ class PeriodeController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function deleteanggota(string $id)
     {
-        //
+        DB::beginTransaction();
+        try {
+            $tanah = AnggotaTim::findOrFail($id);
+            // dd($subplot_id, Tanah::where('subplot_id', $subplot_id)->first());
+            $tanah->delete();
+            DB::commit();
+            return redirect()->back()->with('success', 'Data anggota tim berhasil dihapus.');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->back()->with('error', 'Gagal menghapus data anggota tim: ' . $e->getMessage());
+        }
+    }
+    public function deleteTim(string $id)
+    {
+        DB::beginTransaction();
+        try {
+            $tanah = Tim::findOrFail($id);
+            // dd($subplot_id, Tanah::where('subplot_id', $subplot_id)->first());
+            $tanah->delete();
+            DB::commit();
+            return redirect()->back()->with('success', 'Data tim berhasil dihapus.');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->back()->with('error', 'Gagal menghapus data tim: ' . $e->getMessage());
+        }
     }
 
     /**

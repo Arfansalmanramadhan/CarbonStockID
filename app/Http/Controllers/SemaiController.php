@@ -137,16 +137,12 @@ class SemaiController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $subplot_id)
+    public function destroy(string $id)
     {
         DB::beginTransaction();
         try {
             // Cari data Tanah berdasarkan ID
-            $semai = Semai::where('subplot_id', $subplot_id)->first();
-
-            // Pastikan subplot yang terkait ada
-            $subplot = SubPlot::findOrFail($semai->subplot_id);
-
+            $semai = Semai::findOrFail($id);
             // Hapus data tanah
             $semai->delete();
 

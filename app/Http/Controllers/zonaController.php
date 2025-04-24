@@ -48,7 +48,7 @@ class zonaController extends Controller
         ]);
         return view('zona', compact('zona', "user", 'search', 'perPage', 'poltArea'));
     }
-    public function getZona(Request $request, $slug,)
+    public function getZona(Request $request, $slug)
     {
         $user = Auth::user();
         $search = $request->query('search');
@@ -267,11 +267,11 @@ class zonaController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $polt_area_id)
+    public function destroy(string $id)
     {
         DB::beginTransaction();
         try {
-            $tanah = Zona::where('polt_area_id', $polt_area_id)->first();
+            $tanah = Zona::findOrFail($id);
             // dd($subplot_id, Tanah::where('subplot_id', $subplot_id)->first());
             $tanah->delete();
             DB::commit();
@@ -347,9 +347,10 @@ class zonaController extends Controller
             $faktor =   $zona->luas_lokasi ?? 11.5;
             // $faktor =  max( $zona->luas_lokasi, 11.5);
             // Perhitungan Pancang
-            // dd($zona);
+            // dd($faktor);
+
             $zonaid = $zona->polt_area_id;
-            // dd($zona->zona_nama);
+            // dd($zona->pohon_avg_co2);
             $zonaData = DB::table('zona')
                 ->leftJoin('hamparan', 'hamparan.zona_id', '=', 'zona.id')
                 ->leftJoin('plot', 'plot.hamparan_id', '=', 'hamparan.id')
@@ -454,21 +455,36 @@ class zonaController extends Controller
             }
 
             // Hitung rata-rata
-            $rataPancangCo2 = $totalZona ? $totalPancangCo2Keseluruhan / $totalZona : 0;
-            $rataPancangKarbon = $totalZona ? $totalPancangKarbonKeseluruhan / $totalZona : 0;
-            $rataPancangBiomassa = $totalZona ? $totalPancangBiomassaKeseluruhan / $totalZona : 0;
+            $rataPancangCo22 = $totalZona ? $totalPancangCo2Keseluruhan / $totalZona : 0;
+            $rataPancangKarbonn = $totalZona ? $totalPancangKarbonKeseluruhan / $totalZona : 0;
+            $rataPancangBiomassas = $totalZona ? $totalPancangBiomassaKeseluruhan / $totalZona : 0;
 
             $rataMangroveCo2 = $totalZona ? $totalMangroveCo2Keseluruhan / $totalZona : 0;
             $rataMangroveKarbon = $totalZona ? $totalMangroveKarbonKeseluruhan / $totalZona : 0;
             $rataMangroveBiomassa = $totalZona ? $totalMangroveBiomassaKeseluruhan / $totalZona : 0;
 
-            $rataTiangCo2 = $totalZona ? $totalTiangCo2Keseluruhan / $totalZona : 0;
-            $rataTiangKarbon = $totalZona ? $totalTiangKarbonKeseluruhan / $totalZona : 0;
-            $rataTiangBiomassa = $totalZona ? $totalTiangBiomassaKeseluruhan / $totalZona : 0;
+            $rataTiangCo22 = $totalZona ? $totalTiangCo2Keseluruhan / $totalZona : 0;
+            $rataTiangKarbonn = $totalZona ? $totalTiangKarbonKeseluruhan / $totalZona : 0;
+            $rataTiangBiomassaa = $totalZona ? $totalTiangBiomassaKeseluruhan / $totalZona : 0;
 
-            $rataPohonCo2 = $totalZona ? $totalPohonCo2Keseluruhan / $totalZona : 0;
-            $rataPohonKarbon = $totalZona ? $totalPohonKarbonKeseluruhan / $totalZona : 0;
-            $rataPohonBiomassa = $totalZona ? $totalPohonBiomassaKeseluruhan / $totalZona : 0;
+            $rataPohonCo22 = $totalZona ? $totalPohonCo2Keseluruhan / $totalZona : 0;
+            $rataPohonKarbonn = $totalZona ? $totalPohonKarbonKeseluruhan / $totalZona : 0;
+            $rataPohonBiomassaa = $totalZona ? $totalPohonBiomassaKeseluruhan / $totalZona : 0;
+            $rataPancangCo2 =  $faktor * $rataPancangCo22;
+            $rataPancangKarbon = $faktor * $rataPancangKarbonn;
+            $rataPancangBiomassa = $faktor * $rataPancangBiomassas;
+
+            $rataMangroveCo2 = $totalZona ? $totalMangroveCo2Keseluruhan / $totalZona : 0;
+            $rataMangroveKarbon = $totalZona ? $totalMangroveKarbonKeseluruhan / $totalZona : 0;
+            $rataMangroveBiomassa = $totalZona ? $totalMangroveBiomassaKeseluruhan / $totalZona : 0;
+
+            $rataTiangCo2 = $faktor * $rataTiangCo22;
+            $rataTiangKarbon = $faktor * $rataTiangKarbonn;
+            $rataTiangBiomassa = $faktor * $rataTiangBiomassaa;
+
+            $rataPohonCo2 = $faktor * $rataPohonCo22;
+            $rataPohonKarbon = $faktor * $rataPohonKarbonn;
+            $rataPohonBiomassa = $faktor * $rataPohonBiomassaa;
             // dd([
             //     'Rata-rata Pancang CO2' => $rataPancangCo2,
             //     'Rata-rata Pancang Karbon' => $rataPancangKarbon,
@@ -607,16 +623,11 @@ class zonaController extends Controller
             // Perhitungan Baseline Lahan Kosong
             $BaselineLahanKosong = $TotalKarbon5POL - (((10 + 4) / 2) * $faktor);
             // persen
-            // $hasilSerasahPersen = ($Serasa != 0) ? ($TotalKarbon5POL / $Serasa) * 100 : 0;
-            // $hasilNecromassPersen = ($Necromass != 0) ? ($TotalKarbon5POL / $Necromass) * 100 : 0;
-            // $hasilco2tanamanPersen = ($co2tanaman != 0) ? ($TotalKarbon5POL / $co2tanaman) * 100 : 0;
-            // $hasilakarPersen = ($akar != 0) ? ($TotalKarbon5POL / $akar) * 100 : 0;
-            // $hasiltanahPersen = ($tanah != 0) ? ($TotalKarbon5POL / $tanah) * 100 : 0;
-            $hasilSerasahPersen = ($BaselineLahanKosong != 0) ? ($Serasa / $BaselineLahanKosong) * 100 : 0;
-            $hasilNecromassPersen = ($BaselineLahanKosong != 0) ? ($Necromass / $BaselineLahanKosong) * 100 : 0;
-            $hasilco2tanamanPersen = ($BaselineLahanKosong != 0) ? ($co2tanaman / $BaselineLahanKosong) * 100 : 0;
-            $hasilakarPersen = ($BaselineLahanKosong != 0) ? ($akar / $BaselineLahanKosong) * 100 : 0;
-            $hasiltanahPersen = ($BaselineLahanKosong != 0) ? ($tanah / $BaselineLahanKosong) * 100 : 0;
+            $hasilSerasahPersen     = ($TotalKarbon5POL != 0) ? ($Serasa / $TotalKarbon5POL) * 100 : 0;
+            $hasilNecromassPersen   = ($TotalKarbon5POL != 0) ? ($Necromass / $TotalKarbon5POL) * 100 : 0;
+            $hasilco2tanamanPersen  = ($TotalKarbon5POL != 0) ? ($co2tanaman / $TotalKarbon5POL) * 100 : 0;
+            $hasilakarPersen        = ($TotalKarbon5POL != 0) ? ($akar / $TotalKarbon5POL) * 100 : 0;
+            $hasiltanahPersen       = ($TotalKarbon5POL != 0) ? ($tanah / $TotalKarbon5POL) * 100 : 0;
             return [
                 'zona' => $zona->zona_nama,
                 'Biomassadiataspermukaantanah' => number_format($Biomassadiataspermukaantanah ?? 0, 3, '.', ''),
@@ -644,13 +655,13 @@ class zonaController extends Controller
                 'Serasah' => number_format($Serasa ?? 0, 3, '.', ''),
                 'Necromass' => number_format($Necromass ?? 0, 3, '.', ''),
                 'Co2Tanaman' => number_format($co2tanaman ?? 0, 3, '.', ''),
-                'TanahCo2' => number_format($zona->total_co2_tanah ?? 0, 4, '.', ''),
-                'TanahCarbon' => number_format($zona->total_carbon_tanah ?? 0, 4, '.', ''),
-                'BeratBiomassaAkar' => number_format($akar ?? 0, 4, '.', ''),
-                'tanah' => number_format($tanah ?? 0, 4, '.', ''),
-                'beratMasaAkar' => number_format($beratMasaAkar ?? 0, 4, '.', ''),
+                'TanahCo2' => number_format($zona->total_co2_tanah ?? 0, 3, '.', ''),
+                'TanahCarbon' => number_format($zona->total_carbon_tanah ?? 0, 3, '.', ''),
+                'BeratBiomassaAkar' => number_format($akar ?? 0, 3, '.', ''),
+                'tanah' => number_format($tanah ?? 0, 3, '.', ''),
+                'beratMasaAkar' => number_format($beratMasaAkar ?? 0, 3, '.', ''),
                 'faktor' => number_format($faktor ?? 0, 0, '.', ''),
-                'TotalKaoobon' => number_format($TotalKarbon5POL ?? 0, 4, '.', ''),
+                'TotalKaoobon' => number_format($TotalKarbon5POL ?? 0, 3, '.', ''),
                 'BaselineLahanKosong' => number_format($BaselineLahanKosong ?? 0, 2, '.', ''),
                 'hasilSerasahPersen' => number_format($hasilSerasahPersen ?? 0, 2, '.', ''),
                 'hasilNecromassPersen' => number_format($hasilNecromassPersen ?? 0, 2, '.', ''),
@@ -835,21 +846,36 @@ class zonaController extends Controller
             // dd($totalPancangCo2Keseluruhan);
             // dd($totalPancangCo2Keseluruhan, $TotalPancangco2);
             // Hitung rata-rata
-            $rataPancangCo2 = $totalZona ? $totalPancangCo2Keseluruhan / $totalZona : 0;
-            $rataPancangKarbon = $totalZona ? $totalPancangKarbonKeseluruhan / $totalZona : 0;
-            $rataPancangBiomassa = $totalZona ? $totalPancangBiomassaKeseluruhan / $totalZona : 0;
+            $rataPancangCo22 = $totalZona ? $totalPancangCo2Keseluruhan / $totalZona : 0;
+            $rataPancangKarbonn = $totalZona ? $totalPancangKarbonKeseluruhan / $totalZona : 0;
+            $rataPancangBiomassas = $totalZona ? $totalPancangBiomassaKeseluruhan / $totalZona : 0;
 
             $rataMangroveCo2 = $totalZona ? $totalMangroveCo2Keseluruhan / $totalZona : 0;
             $rataMangroveKarbon = $totalZona ? $totalMangroveKarbonKeseluruhan / $totalZona : 0;
             $rataMangroveBiomassa = $totalZona ? $totalMangroveBiomassaKeseluruhan / $totalZona : 0;
 
-            $rataTiangCo2 = $totalZona ? $totalTiangCo2Keseluruhan / $totalZona : 0;
-            $rataTiangKarbon = $totalZona ? $totalTiangKarbonKeseluruhan / $totalZona : 0;
-            $rataTiangBiomassa = $totalZona ? $totalTiangBiomassaKeseluruhan / $totalZona : 0;
+            $rataTiangCo22 = $totalZona ? $totalTiangCo2Keseluruhan / $totalZona : 0;
+            $rataTiangKarbonn = $totalZona ? $totalTiangKarbonKeseluruhan / $totalZona : 0;
+            $rataTiangBiomassaa = $totalZona ? $totalTiangBiomassaKeseluruhan / $totalZona : 0;
 
-            $rataPohonCo2 = $totalZona ? $totalPohonCo2Keseluruhan / $totalZona : 0;
-            $rataPohonKarbon = $totalZona ? $totalPohonKarbonKeseluruhan / $totalZona : 0;
-            $rataPohonBiomassa = $totalZona ? $totalPohonBiomassaKeseluruhan / $totalZona : 0;
+            $rataPohonCo22 = $totalZona ? $totalPohonCo2Keseluruhan / $totalZona : 0;
+            $rataPohonKarbonn = $totalZona ? $totalPohonKarbonKeseluruhan / $totalZona : 0;
+            $rataPohonBiomassaa = $totalZona ? $totalPohonBiomassaKeseluruhan / $totalZona : 0;
+            $rataPancangCo2 =  $faktor * $rataPancangCo22;
+            $rataPancangKarbon = $faktor * $rataPancangKarbonn;
+            $rataPancangBiomassa = $faktor * $rataPancangBiomassas;
+
+            $rataMangroveCo2 = $totalZona ? $totalMangroveCo2Keseluruhan / $totalZona : 0;
+            $rataMangroveKarbon = $totalZona ? $totalMangroveKarbonKeseluruhan / $totalZona : 0;
+            $rataMangroveBiomassa = $totalZona ? $totalMangroveBiomassaKeseluruhan / $totalZona : 0;
+
+            $rataTiangCo2 = $faktor * $rataTiangCo22;
+            $rataTiangKarbon = $faktor * $rataTiangKarbonn;
+            $rataTiangBiomassa = $faktor * $rataTiangBiomassaa;
+
+            $rataPohonCo2 = $faktor * $rataPohonCo22;
+            $rataPohonKarbon = $faktor * $rataPohonKarbonn;
+            $rataPohonBiomassa = $faktor * $rataPohonBiomassaa;
             //    dd($totalPancangCo2Keseluruhan, $totalTiangCo2Keseluruhan, $totalPohonCo2Keseluruhan);
             // Tampilkan hasil
             // dd([
@@ -1001,11 +1027,11 @@ class zonaController extends Controller
             // $hasilco2tanamanPersen = ($co2tanaman != 0) ? ($TotalKarbon5POL / $co2tanaman) * 100 : 0;
             // $hasilakarPersen = ($akar != 0) ? ($TotalKarbon5POL / $akar) * 100 : 0;
             // $hasiltanahPersen = ($tanah != 0) ? ($TotalKarbon5POL / $tanah) * 100 : 0;
-            $hasilSerasahPersen = ($BaselineLahanKosong != 0) ? ($Serasa / $BaselineLahanKosong) * 100 : 0;
-            $hasilNecromassPersen = ($BaselineLahanKosong != 0) ? ($Necromass / $BaselineLahanKosong) * 100 : 0;
-            $hasilco2tanamanPersen = ($BaselineLahanKosong != 0) ? ($co2tanaman / $BaselineLahanKosong) * 100 : 0;
-            $hasilakarPersen = ($BaselineLahanKosong != 0) ? ($akar / $BaselineLahanKosong) * 100 : 0;
-            $hasiltanahPersen = ($BaselineLahanKosong != 0) ? ($tanah / $BaselineLahanKosong) * 100 : 0;
+            $hasilSerasahPersen     = ($TotalKarbon5POL != 0) ? ($Serasa / $TotalKarbon5POL) * 100 : 0;
+            $hasilNecromassPersen   = ($TotalKarbon5POL != 0) ? ($Necromass / $TotalKarbon5POL) * 100 : 0;
+            $hasilco2tanamanPersen  = ($TotalKarbon5POL != 0) ? ($co2tanaman / $TotalKarbon5POL) * 100 : 0;
+            $hasilakarPersen        = ($TotalKarbon5POL != 0) ? ($akar / $TotalKarbon5POL) * 100 : 0;
+            $hasiltanahPersen       = ($TotalKarbon5POL != 0) ? ($tanah / $TotalKarbon5POL) * 100 : 0;
             // dd([
             //         'Rata-rata Pserapan' => $hasilSerasahPersen,
 
@@ -1044,13 +1070,13 @@ class zonaController extends Controller
                 'Serasah' => number_format($Serasa ?? 0, 3, '.', ''),
                 'Necromass' => number_format($Necromass ?? 0, 3, '.', ''),
                 'Co2Tanaman' => number_format($co2tanaman ?? 0, 3, '.', ''),
-                'TanahCo2' => number_format($zona->total_co2_tanah ?? 0, 4, '.', ''),
-                'TanahCarbon' => number_format($zona->total_carbon_tanah ?? 0, 4, '.', ''),
-                'BeratBiomassaAkar' => number_format($akar ?? 0, 4, '.', ''),
-                'tanah' => number_format($tanah ?? 0, 4, '.', ''),
-                'beratMasaAkar' => number_format($beratMasaAkar ?? 0, 4, '.', ''),
+                'TanahCo2' => number_format($zona->total_co2_tanah ?? 0, 3, '.', ''),
+                'TanahCarbon' => number_format($zona->total_carbon_tanah ?? 0, 3, '.', ''),
+                'BeratBiomassaAkar' => number_format($akar ?? 0, 3, '.', ''),
+                'tanah' => number_format($tanah ?? 0, 3, '.', ''),
+                'beratMasaAkar' => number_format($beratMasaAkar ?? 0, 3, '.', ''),
                 'faktor' => number_format($faktor ?? 0, 0, '.', ''),
-                'TotalKaoobon' => number_format($TotalKarbon5POL ?? 0, 4, '.', ''),
+                'TotalKaoobon' => number_format($TotalKarbon5POL ?? 0, 3, '.', ''),
                 'BaselineLahanKosong' => number_format($BaselineLahanKosong ?? 0, 2, '.', ''),
                 'hasilSerasahPersen' => number_format($hasilSerasahPersen ?? 0, 2, '.', ''),
                 'hasilNecromassPersen' => number_format($hasilNecromassPersen ?? 0, 2, '.', ''),

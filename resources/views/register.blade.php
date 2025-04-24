@@ -32,7 +32,7 @@
                 </div>
                 <div
                     class="penjelasan position-absolute top-50 start-50 translate-middle text-white text-center p-3 content-overlay">
-                    <h2>Hitung, Kelola dan Prediksi Cadangan Karbon Jadi Mudah dan Efisien</h2>
+                    <h2>Hitung, Kelola Cadangan Karbon Jadi Mudah dan Efisien</h2>
                     <p>Daftarkan akun anda! untuk menikmati fitur - fitur platform CarbonStockID.</p>
                 </div>
             </div>
@@ -48,6 +48,15 @@
                     @if (session('error'))
                         <div class="alert alert-danger">
                             {{ session('error') }}
+                        </div>
+                    @endif
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul class="mb-0">
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
                         </div>
                     @endif
                     <div class="judul mb-3">
@@ -66,9 +75,12 @@
                                 placeholder="Masukkan nama lengkap" />
                         </div>
                         <div class="mb-2">
+                            @error('email')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                             <label for="email" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="email" name="email"
-                                placeholder="Masukkan Email" />
+                            <input type="email" class="form-control" id="email"
+                                name="email" value="{{ old('email') }}" placeholder="Masukkan Email" />
                         </div>
                         <div class="mb-2">
                             <label for="password" class="form-label">Sandi</label>
@@ -81,25 +93,39 @@
                                 name="password_confirmation" placeholder="Masukkan Sandi" />
                         </div>
                         <div class="mb-2">
+                            @error('nip')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                             <label for="nip" class="form-label">NIP</label>
-                            <input type="text" class="form-control" id="nip" name="nip"
-                                placeholder="Masukkan nip" />
+                            <input type="number" class="form-control" id="nip" name="nip" value="{{ old('nip') }}"
+                                placeholder="Masukkan NIP" />
                         </div>
                         <div class="mb-2">
+                            @error('no_hp')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                             <label for="no_hp" class="form-label ">Nomor Telepon</label>
-                            <input type="text" class="form-control" name="no_hp" id="no_hp"
+                            <input type="number" class="form-control" name="no_hp" id="no_hp" value="{{ old('no_hp') }}"
                                 placeholder="Masukan no Telepon" />
                         </div>
                         <div class="mb-2">
+                            @error('nik')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                            <label for="nik" class="form-label ">NIK</label>
+                            <input type="number" class="form-control" name="nik" id="nik" value="{{ old('nik') }}"
+                                placeholder="Masukan NIK" />
+                        </div>
+                        {{-- <div class="mb-2">
                             <label for="formFile" class="form-label">Foto Pribadi</label>
                             <input class="form-control" type="file"
                                 id="formFile"accept="image/jpeg,image/png,image/jpg" name="foto">
-                        </div>
-                        <div class="mb-2">
+                        </div> --}}
+                        {{-- <div class="mb-2">
                             <label for="formFile" class="form-label">Foto KTP</label>
                             <input class="form-control" type="file"
                                 id="formFile"accept="image/jpeg,image/png,image/jpg" name="foto_ktp">
-                        </div>
+                        </div> --}}
                         <button type="submit" class="btn btn-success w-100 mb-2">Daftar</button>
                         <div class="teks text-center">
                             <p>

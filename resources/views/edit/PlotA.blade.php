@@ -12,16 +12,6 @@
                 </div>
                 <div class="card-body-sup-plot">
                     <!-- Form -->
-                    @if (session('success'))
-                        <div class="alert alert-success">
-                            {{ session('success') }}
-                        </div>
-                    @endif
-                    @if (session('error'))
-                        <div class="alert alert-danger">
-                            {{ session('error') }}
-                        </div>
-                    @endif
                     <form method="POST" action="{{ route('Serasah.update', ['id' => $subplot->id]) }}" id="SerasahForm">
                         @csrf
                         @method('PUT')
@@ -66,16 +56,6 @@
                 </div>
                 <div class="card-body-sup-plot">
                     <!-- Form -->
-                    @if (session('success'))
-                        <div class="alert alert-success">
-                            {{ session('success') }}
-                        </div>
-                    @endif
-                    @if (session('error'))
-                        <div class="alert alert-danger">
-                            {{ session('error') }}
-                        </div>
-                    @endif
                     <form method="POST" action="{{ route('Semai.update',  ['id' => $subplot->id]) }}" id="SemaiForm">
                         @csrf
                         @method('PUT')
@@ -117,16 +97,6 @@
                 </div>
                 <div class="card-body-sup-plot">
                     <!-- Form -->
-                    @if (session('success'))
-                        <div class="alert alert-success">
-                            {{ session('success') }}
-                        </div>
-                    @endif
-                    @if (session('error'))
-                        <div class="alert alert-danger">
-                            {{ session('error') }}
-                        </div>
-                    @endif
                     <form method="POST" action="{{ route('tumbuhanBawah.update',  ['id' => $subplot->id] ) }}" id="tumbuhanBawahForm">
                         @csrf
                         @method('PUT')
@@ -171,16 +141,6 @@
                 </div>
                 <div class="card-body-sup-plot-last">
                     <!-- Form -->
-                    @if (session('success'))
-                        <div class="alert alert-success">
-                            {{ session('success') }}
-                        </div>
-                    @endif
-                    @if (session('error'))
-                        <div class="alert alert-danger">
-                            {{ session('error') }}
-                        </div>
-                    @endif
                     <form method="POST" action="{{ route('tanah.update' ,  ['id' => $subplot->id]) }}" id="tanahForm">
                         @csrf
                         @method('PUT')
@@ -214,15 +174,9 @@
             </div>
             <div class="d-flex jarak">
                 <div class="option">
-                    <a href="{{ route('zona.index') }}" class=" btn btn-back  " id="submitButton">
+                    <a href="{{ route('DetailPlot.getsubPlot', ['id' => $subplot->id]) }}" class=" btn btn-back  " id="submitButton">
                         <img src="{{ asset('/images/ArrowLeft.svg') }}" alt="Arrow Icon" class="ms-2" />
                         <span>Sebelumnya</span>
-                    </a>
-                </div>
-                <div class="option">
-                    <a href="{{ route('PlotB.index') }}" class=" btn btn-success "
-                        id="submitButton"><span>Berikutnya</span>
-                        <img src="{{ asset('/images/ArrowRight.svg') }}" alt="Arrow Icon" class="ms-2" />
                     </a>
                 </div>
             </div>

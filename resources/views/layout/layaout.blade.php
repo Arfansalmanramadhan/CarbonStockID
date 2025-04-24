@@ -23,6 +23,7 @@
     <link rel="stylesheet" href="{{ asset('css/tambahData.css') }}" />
 
 
+
     <!-- Font Awesome -->
     {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" /> --}}
 
@@ -45,45 +46,36 @@
                     <span>CarbonStockID</span>
                 </a>
             </div>
-            <div class="d-flex align-items-center">
-                <button class="btn btn-light btn-plot-area d-flex justify-content-between align-items-center">
-                    <span>Plot Area</span>
-                    <img src="{{ asset('/images/CaretUpFill.svg') }}" alt="Caret Icon" />
-                </button>
-                <div class="dropdown-plot-area" id="dropdownPlotArea" style="display: none">
-                    <ul>
-                        <li class="header-dropdown">Plot Area</li>
-                        <li id="plotA">Sub Plot A</li>
-                        <li id="plotB">Sub Plot B</li>
-                        <li id="plotC">Sub Plot C</li>
-                        <li id="plotD">Sub Plot D</li>
-                        <li id="hasilHitung" class="akhir">Hasil Hitung</li>
-                    </ul>
-                </div>
-                <img src="{{ asset('/images/userIcon.png') }}" alt="User Avatar" id="userIcon"
+            {{-- <div class="d-flex align-items-center">
+
+                <img src="{{ asset('/images/logoCarbonStockID-DarkMode.png') }}" alt="User Avatar" id="userIcon"
                     class="ms-3 user-avatar" />
                 <div class="user-profile-dropdown" id="userProfileDropdown" style="display: none">
                     <div class="user-info">
-                        <img src="{{ asset('/images/userIcon.png') }}" alt="User Avatar" class="user-avatar" />
+                        <img src="{{ asset('/images/logoCarbonStockID-DarkMode.png') }}" alt="User Avatar"
+                            class="user-avatar" />
                         <div class="user-details">
-                            <h4>Chistoper Govert</h4>
-                            <p>chistoper@gmail.com</p>
+                            <h4>{{ $user->username }}</h4>
+                            <p>{{ $user->email }}</p>
                         </div>
                     </div>
                     <hr />
                     <div class="user-options">
                         <div class="option">
-                            <img class="me-1" src="{{ asset('/images/PersonFill.svg') }}" alt="" />
-                            <a href="{{ url('/profile') }}"><span>Profil Saya</span></a>
-                        </div>
-                        <div class="option">
                             <img class="ms-1 me-1" src="{{ asset('/images/majesticons_logout.svg') }}"
                                 alt="" />
-                            <a href="{{ url('') }}"><span>Keluar</span></a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                style="display: inline;">
+                                @csrf
+                                <button type="submit"
+                                    style="border: none; background: none; padding: 0; cursor: pointer;">
+                                    <span>Keluar</span>
+                                </button>
+                            </form>
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
         </div>
     </nav>
 

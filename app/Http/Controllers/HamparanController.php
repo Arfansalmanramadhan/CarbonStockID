@@ -133,11 +133,11 @@ class HamparanController extends Controller
             return redirect()->back()->with('error', 'Gagal memperbarui data: ' . $e->getMessage());
         }
     }
-    public function destroy(string $zona_id)
+    public function destroy(string $id)
     {
         DB::beginTransaction();
         try {
-            $tanah = Hamparan::where('zona_id', $zona_id)->first();
+            $tanah = Hamparan::findOrFail($id);
             // dd($subplot_id, Tanah::where('subplot_id', $subplot_id)->first());
             $tanah->delete();
             DB::commit();

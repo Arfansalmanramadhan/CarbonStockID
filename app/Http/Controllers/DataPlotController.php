@@ -34,15 +34,15 @@ class DataPlotController extends Controller
         $user = Auth::user();
         $search = $request->query('search');
         $perPage = $request->query('per_page'); // Default 5 item per halaman
-
-        $query = PoltArea::withCount('PlotAreaTim');
+        // $tim = Tim::with('poltArea')->get();
+        $query = PoltArea::with('tim');
 
         if (!empty($search)) {
             $query->where('daerah', 'ILIKE', "%{$search}%")
                 ->orWhere('jenis_hutan', 'ILIKE', "%{$search}%");
         }
 
-        $query->orderByDesc('plot_area_tim_count');
+        // $query->orderByDesc('plot_area_tim_count');
 
         /// Ambil data dengan pagination
         $lokasi = $query->paginate($perPage)->appends([
@@ -81,8 +81,8 @@ class DataPlotController extends Controller
         try {
             // Cek apakah user sudah menjadi anggota tim
             $existingMember = PlotAreaTim::where('polt_area_id', $request->polt_area_id)
-            ->where('tim_id', $request->tim_id)
-            ->exists();
+                ->where('tim_id', $request->tim_id)
+                ->exists();
 
             if ($existingMember) {
                 return redirect()->back()->with('success', 'User sudah menjadi anggota tim.');

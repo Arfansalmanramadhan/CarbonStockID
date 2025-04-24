@@ -21,51 +21,48 @@ class SampahController extends Controller
         $lokasiId = $request->lokasi_id;
         $lokasi = DB::table('polt_area')->select('id', 'daerah')->get();
 
-        $pancang = DB::table('pancang')
-            ->join('subplot', 'pancang.subplot_id', '=', 'subplot.id')
-            ->join('plot', 'subplot.plot_id', '=', 'plot.id')
-            ->join('hamparan', 'plot.hamparan_id', '=', 'hamparan.id')
-            ->join('zona', 'hamparan.zona_id', '=', 'zona.id')
-            ->join('polt_area', 'zona.polt_area_id', '=', 'polt_area.id')
+        $pohon = DB::table('jumlah_pohon')
+            ->join('polt_area', 'jumlah_pohon.polt_area_id', '=', 'polt_area.id')
             ->where('polt_area.id', $lokasiId)
-            ->select('pancang.nama_ilmiah', 'pancang.no_pohon')
-            ->where('plot.status', 'aktif')
+            ->select('jumlah_pohon.nama_tanaman', 'jumlah_pohon.jumlah_tanaman')
+            // ->where('plot.status', 'aktif')
             ->get();
 
-        $tiang = DB::table('tiang')
-            ->join('subplot', 'tiang.subplot_id', '=', 'subplot.id')
-            ->join('plot', 'subplot.plot_id', '=', 'plot.id')
-            ->join('hamparan', 'plot.hamparan_id', '=', 'hamparan.id')
-            ->join('zona', 'hamparan.zona_id', '=', 'zona.id')
-            ->join('polt_area', 'zona.polt_area_id', '=', 'polt_area.id')
-            ->where('polt_area.id', $lokasiId)
-            ->select('tiang.nama_ilmiah', 'tiang.no_pohon')
-            ->where('plot.status', 'aktif')
-            ->get();
+        // $tiang = DB::table('tiang')
+        //     ->join('subplot', 'tiang.subplot_id', '=', 'subplot.id')
+        //     ->join('plot', 'subplot.plot_id', '=', 'plot.id')
+        //     ->join('hamparan', 'plot.hamparan_id', '=', 'hamparan.id')
+        //     ->join('zona', 'hamparan.zona_id', '=', 'zona.id')
+        //     ->join('polt_area', 'zona.polt_area_id', '=', 'polt_area.id')
+        //     ->where('polt_area.id', $lokasiId)
+        //     ->select('tiang.nama_ilmiah', 'tiang.no_pohon')
+        //     ->where('plot.status', 'aktif')
+        //     ->get();
 
-        $pohon = DB::table('pohon')
-            ->join('subplot', 'pohon.subplot_id', '=', 'subplot.id')
-            ->join('plot', 'subplot.plot_id', '=', 'plot.id')
-            ->join('hamparan', 'plot.hamparan_id', '=', 'hamparan.id')
-            ->join('zona', 'hamparan.zona_id', '=', 'zona.id')
-            ->join('polt_area', 'zona.polt_area_id', '=', 'polt_area.id')
-            ->where('polt_area.id', $lokasiId)
-            ->select('pohon.nama_ilmiah', 'pohon.no_pohon')
-            ->where('plot.status', 'aktif')
-            ->get();
+        // $pohon = DB::table('pohon')
+        //     ->join('subplot', 'pohon.subplot_id', '=', 'subplot.id')
+        //     ->join('plot', 'subplot.plot_id', '=', 'plot.id')
+        //     ->join('hamparan', 'plot.hamparan_id', '=', 'hamparan.id')
+        //     ->join('zona', 'hamparan.zona_id', '=', 'zona.id')
+        //     ->join('polt_area', 'zona.polt_area_id', '=', 'polt_area.id')
+        //     ->where('polt_area.id', $lokasiId)
+        //     ->select('pohon.nama_ilmiah', 'pohon.no_pohon')
+        //     ->where('plot.status', 'aktif')
+        //     ->get();
 
         // dd($data);
-        $dataGabungan = collect()->merge($pancang)->merge($tiang)->merge($pohon);
+        // $dataGabungan = collect()->merge($pohon);
 
         $spesies_counter = [];
 
-        foreach ($dataGabungan as $item) {
-            if ($item->nama_ilmiah && $item->no_pohon) {
-                $spesies_counter[$item->nama_ilmiah] = ($spesies_counter[$item->nama_ilmiah] ?? 0) + 1;
+        foreach ($pohon as $item) {
+            if ($item->nama_tanaman && $item->jumlah_tanaman) {
+                $spesies_counter[$item->nama_tanaman] = ($spesies_counter[$item->nama_tanaman] ?? 0) + $item->jumlah_tanaman;
             }
         }
-        // dd($spesies_counter[$item->nama_ilmiah] ,$spesies_counter[$item->nama_ilmiah] ?? 0);
+        // dd($spesies_counter[$item->nama_tanaman] ,$spesies_counter[$item->nama_tanaman] ?? 0);
         $total = array_sum($spesies_counter);
+        // dd($total);
         $detail = [];
         $h = 0;
 
@@ -74,7 +71,7 @@ class SampahController extends Controller
             $ln_pi = log($pi);
             $neg_pi_ln_pi = -$pi * $ln_pi;
             $h += $neg_pi_ln_pi;
-
+            // dd($pi,  $ln_pi , $neg_pi_ln_pi, $h, $jumlah, $total);
             $detail[] = [
                 'spesies' => $spesies,
                 'jumlah_individu' => $jumlah,

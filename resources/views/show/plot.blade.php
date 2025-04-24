@@ -35,10 +35,6 @@
                                     <button type="submit" class="btn btn-tambah-data">Cari</button>
                                 </div>
                             </form>
-
-                            <button onclick="window.location.href='{{ route('Plot.tambah', ['slug' => $hamparan->slug]) }}'"
-                                class="btn btn-tambah-data m-3
-                                ">Tambah</button>
                         </div>
 
                     </div>
@@ -51,8 +47,6 @@
                                 <th>Nama Hamparan</th>
                                 <th>Nama Plot</th>
                                 <th>Tipe Plot</th>
-                                <th>Latitude</th>
-                                <th>Longitude</th>
                                 <th class="hidden-column kananPancang">Aksi</th>
                             </tr>
                         </thead>
@@ -83,13 +77,11 @@
                             @forelse ($plot as $index )
                                 <tr class="data-row">
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $poltArea->daerah }}</td>
-                                    <td>{{ $zona->zona }}</td>
-                                    <td>{{ $hamparan->nama_hamparan }}</td>
+                                    <td>{{ optional($index->hamparan->zona->poltArea)->daerah ?? '-' }}</td>
+                                    <td>{{ optional($index->hamparan->zona)->zona ?? '-' }}</td>
+                                    <td>{{ optional($index->hamparan)->nama_hamparan ?? '-' }}</td>
                                     <td>{{ $index->nama_plot }}</td>
                                     <td>{{ $index->type_plot }}</td>
-                                    <td>{{ $index->latitude }}</td>
-                                    <td>{{ $index->longitude }}</td>
                                     <td class="hidden-column aksi-button">
                                         @foreach ($index->subplot as $subplost)
                                         <form action="{{ route('DetailPlot.getsubPlot', ['id' => $subplost->id]) }}" method="get">
@@ -98,7 +90,7 @@
                                             </button>
                                         </form>
                                     @endforeach
-                                    <form action="{{ route('plot.destroy', ['hamparan_id' => $item->id]) }}"
+                                    <form action="{{ route('plot.destroy', ['id' => $index->id]) }}"
                                         method="POST">
                                         @csrf
                                         @method('DELETE')
@@ -110,7 +102,7 @@
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="7" class="text-center">Belum ada data</td>
+                                    <td colspan="9" class="text-center">Belum ada data</td>
                                 </tr>
                             @endforelse
 

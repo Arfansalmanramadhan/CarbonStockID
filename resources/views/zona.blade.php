@@ -60,7 +60,6 @@
                             </tr>
                         </thead>
                         <tbody class="tableBody">
-
                             @forelse ($zona as $index => $item)
                                 <tr class="data-row">
                                     <td>{{ $zona->firstItem() + $index }}</td>
@@ -82,9 +81,14 @@
                                         class="add-btn">
                                         <img src="{{ asset('/images/PencilSquare.svg') }}" alt="Add" />
                                     </button> --}}
-                                        <button class="delete-btn">
+                                    <form action="{{ route('zona.destroy', ['id' => $item->id]) }}"
+                                        method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="delete-btn">
                                             <img src="{{ asset('/images/Trash.svg') }}" alt="Delete" />
                                         </button>
+                                    </form>
                                     </td>
                                 </tr>
                             @empty

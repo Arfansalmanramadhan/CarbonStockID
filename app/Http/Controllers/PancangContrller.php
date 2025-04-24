@@ -19,8 +19,8 @@ class PancangContrller extends Controller
         // return PancangResouce::collection($pancang);
         $user = Auth::user();
         $poltArea = PoltArea::where('id', $user->id);
-        $zona = Zona::where('polt-area_id', $user->id );
-        $PlotB = Pancang::where('zona_id' );
+        $zona = Zona::where('polt-area_id', $user->id);
+        $PlotB = Pancang::where('zona_id');
         return view('tambah.PlotB', compact('user', 'poltArea', 'zona', 'PlotB'));
     }
     public function store(Request $request)
@@ -160,10 +160,7 @@ class PancangContrller extends Controller
         try {
             // Cari data Tanah berdasarkan ID
             $tanah = Pancang::findOrFail($id);
-
-            // Pastikan subplot yang terkait ada
-            $subplot = SubPlot::findOrFail($tanah->subplot_id);
-
+            // dd($tanah);
             // Hapus data tanah
             $tanah->delete();
 

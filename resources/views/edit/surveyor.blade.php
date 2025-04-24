@@ -7,7 +7,7 @@
         <div class="container-isi">
             <div class="card plot-info-card">
                 <div class="card-header d-flex align-items-center">
-                    <h5 class="ms-3 mt-2">Tambah data zona</h5>
+                    <h5 class="ms-3 mt-2">Edit Data Surveyor</h5>
                     @session('success')
                         {{-- <h5 class="ms-3 mt-2">sdsadsa</h5> --}}
                         <div class="toast position-fixed left-0 bottom-0 z-3 ms-4 p-2 mb-3" role="alert" aria-live="assertive"
@@ -26,7 +26,6 @@
                 </div>
                 <div class="card-body">
                     <!-- Map Section -->
-                    <div id="map"></div>
                     @if (session('success'))
                         <div class="alert alert-success">{{ session('success') }}</div>
                     @endif
@@ -35,45 +34,35 @@
                     @endif
                     <!-- Form -->
                     <dd></dd>
-                    <form method="POST" action="{{ route('zona.store', ['slug' => $poltArea->slug]) }}" id="plotAreaForm">
+                    <form method="POST" action="{{ route('Surveyor.update', ['slug' => $user->slug]) }}" id="plotAreaForm">
                         @csrf
+                        @method('PUT')
                         {{-- <input type="hidden" id="polt-area_id" name="polt-area_id" value="{{ $poltArea->id }}" /> --}}
                         <div class="mb-4">
-                            <label for="plotName" class="form-label">Zona Area</label>
-                            <select class="form-select  form-control" aria-label="Default select example" name="zona">
-                                <option selected>Zona</option>
-                                <option value="Zona 1">Zona 1</option>
-                                <option value="Zona 2">Zona 2</option>
-                                <option value="Zona 3">Zona 3</option>
-                                <option value="Zona 4">Zona 4</option>
-                                <option value="Zona 5">Zona 5</option>
-                            </select>
+                            <label for="nama" class="form-label">Nama Lengkap</label>
+                            <input type="text" class="form-control" name="nama" id="nama"
+                                value="{{ old('nama', $user->nama) }}" />
                         </div>
                         <div class="mb-4">
-                            <label for="latitude" class="form-label">Latitude</label>
-                            <input type="text" class="form-control-non" name="latitude" id="latitude" />
+                            <label for="username" class="form-label">Username</label>
+                            <input type="text" class="form-control" name="username" id="username"
+                                value="{{ old('username', $user->username) }}" />
                         </div>
                         <div class="mb-4">
-                            <label for="longitude" class="form-label">Longitude</label>
-                            <input type="text" class="form-control-non" name="longitude" id="longitude" />
+                            <label for="nip" class="form-label">NIP</label>
+                            <input type="text" class="form-control" name="nip" id="nip"
+                                value="{{ old('nip', $user->nip) }}" />
                         </div>
 
                         <div class="mb-4">
-                            <label for="plotName" class="form-label">Jenis hutan</label>
-                            <select class="form-select  form-control" aria-label="Default select example"
-                                name="jenis_hutan">
-                                <option selected>Jenis hutan</option>
-                                <option value="Hutan Tropis">Hutan Tropis</option>
-                                <option value="Hutan Bakau">Hutan Bakau</option>
-                                <option value="Hutan Sabana">Hutan Sabana</option>
-                                <option value="Hutan Rawa Gambut">Hutan Rawa Gambut</option>
-                                <option value="Hutan Musim ">Hutan Musim </option>
-                                <option value="Hutan Homongen ">Hutan Homongen </option>
-                                <option value="Hutan Heterogen ">Hutan Heterogen </option>
-                                <option value="Hutan Lindung ">Hutan Lindung </option>
-                                <option value="Hutan Suaka Alam ">Hutan Suaka Alam </option>
-                                <option value="Hutan Produksi ">Hutan Produksi </option>
-                            </select>
+                            <label for="no_hp" class="form-label">No Telepon</label>
+                            <input type="text" class="form-control" name="no_hp" id="no_hp"
+                                value="{{ old('no_hp', $user->no_hp) }}" />
+                        </div>
+                        <div class="mb-4">
+                            <label for="nik" class="form-label">NIK</label>
+                            <input type="text" class="form-control" name="nik" id="nik"
+                                value="{{ old('nik', $user->nik) }}" />
                         </div>
                         <button type="submit" class="btn btn-success" id="submitButton">Submit</button>
                         </a>
@@ -82,7 +71,7 @@
             </div>
             <div class="d-flex jarak ">
                 <div class="option m-2">
-                    <a href="{{ route('zona.getZona',['slug' => $poltArea->slug]) }}" class=" btn btn-back " id="submitButton"><img
+                    <a href="{{ route('Surveyor.surveyor') }}" class=" btn btn-back " id="submitButton"><img
                             src="{{ asset('/images/ArrowLeft.svg') }}" alt="Arrow Icon" class="ms-2" />
                         <span>Sebelumnya</span>
                     </a>

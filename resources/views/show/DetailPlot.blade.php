@@ -15,6 +15,9 @@
                 <div class="d-flex justify-content-between">
 
                     <h4 class="card-title mb-4">Data Subplot</h4>
+                    <p class=" card-title  mb-4">{{$poltArea->daerah}}</p>
+                    {{-- <p class=" mb-4">{{$poltArea}}</p> --}}
+
                 </div>
                 <ul class=" nav nav-tabs nav-bordered nav-justified overflow-x-auto">
                     <li class="activee nav-item jarak" id="pertama">Serasah</li>
@@ -58,11 +61,11 @@
                                     @forelse ($Serasah as $item)
                                         <tr class="data-row">
                                             <td>{{ $loop->iteration }}</td>
-                                            <td>{{ $item->total_berat_basah }} Gr</td>
-                                            <td>{{ $item->sample_berat_basah }} Gr</td>
-                                            <td>{{ $item->sample_berat_kering }} Gr</td>
-                                            <td>{{ $item->total_berat_kering }} Gr</td>
-                                            <td class="hidden-column">{{ $item->kandungan_karbon }}gr/cm3</td>
+                                            <td>{{ $item->total_berat_basah }} gr</td>
+                                            <td>{{ $item->sample_berat_basah }} gr</td>
+                                            <td>{{ $item->sample_berat_kering }} gr</td>
+                                            <td>{{ $item->total_berat_kering }} gr</td>
+                                            <td class="hidden-column">{{ $item->kandungan_karbon }}kg</td>
                                             <td class="hidden-column">{{ $item->co2 }} kg</td>
                                             <td class="hidden-column aksi-button">
                                                 <button
@@ -70,8 +73,7 @@
                                                     class="edit-btn">
                                                     <img src="{{ asset('/images/PencilSquare.svg') }}" alt="" />
                                                 </button>
-                                                <form
-                                                    action="{{ route('Serasah.destroy', ['subplot_id' => $subplot->id]) }}"
+                                                <form action="{{ route('Serasah.destroy', ['id' => $item->id]) }}"
                                                     method="POST">
                                                     @csrf
                                                     @method('DELETE')
@@ -180,11 +182,11 @@
                                 @forelse ($Semai as $item)
                                     <tr class="data-row">
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $item->total_berat_basah }} Gr</td>
-                                        <td>{{ $item->sample_berat_basah }} Gr</td>
-                                        <td>{{ $item->sample_berat_kering }} Gr</td>
-                                        <td>{{ $item->total_berat_kering }} Gr</td>
-                                        <td class="hidden-column">{{ $item->kandungan_karbon }}Kg</td>
+                                        <td>{{ $item->total_berat_basah }} gr</td>
+                                        <td>{{ $item->sample_berat_basah }} gr</td>
+                                        <td>{{ $item->sample_berat_kering }} gr</td>
+                                        <td>{{ $item->total_berat_kering }} gr</td>
+                                        <td class="hidden-column">{{ $item->kandungan_karbon }}kg</td>
                                         <td class="hidden-column">{{ $item->co2 }} kg</td>
                                         <td class="hidden-column aksi-button">
                                             <button
@@ -192,7 +194,7 @@
                                                 class="edit-btn">
                                                 <img src="{{ asset('/images/PencilSquare.svg') }}" alt="" />
                                             </button>
-                                            <form action="{{ route('Semai.destroy', ['subplot_id' => $subplot->id]) }}"
+                                            <form action="{{ route('Semai.destroy', ['id' => $item->id]) }}"
                                                 method="POST">
                                                 @csrf
                                                 @method('DELETE')
@@ -297,11 +299,11 @@
                                 @forelse  ($TumbuhanBawah as $item)
                                     <tr class="data-row">
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $item->total_berat_basah }} Gr</td>
-                                        <td>{{ $item->sample_berat_basah }} Gr</td>
-                                        <td>{{ $item->sample_berat_kering }} Gr</td>
-                                        <td>{{ $item->total_berat_kering }} Gr</td>
-                                        <td class="hidden-column">{{ $item->kandungan_karbon }}Kg</td>
+                                        <td>{{ $item->total_berat_basah }} gr</td>
+                                        <td>{{ $item->sample_berat_basah }} gr</td>
+                                        <td>{{ $item->sample_berat_kering }} gr</td>
+                                        <td>{{ $item->total_berat_kering }} gr</td>
+                                        <td class="hidden-column">{{ $item->kandungan_karbon }}kg</td>
                                         <td class="hidden-column">{{ $item->co2 }} kg</td>
                                         <td class="hidden-column aksi-button">
                                             <button
@@ -309,8 +311,7 @@
                                                 class="edit-btn">
                                                 <img src="{{ asset('/images/PencilSquare.svg') }}" alt="" />
                                             </button>
-                                            <form
-                                                action="{{ route('tumbuhanBawah.destroy', ['subplot_id' => $subplot->id]) }}"
+                                            <form action="{{ route('tumbuhanBawah.destroy', ['id' => $item->id]) }}"
                                                 method="POST">
                                                 @csrf
                                                 @method('DELETE')
@@ -420,11 +421,11 @@
                                     <tr class="data-row">
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $item->kedalaman_sample }} cm</td>
-                                        <td>{{ $item->berat_jenis_tanah }} Gr/cm3</td>
-                                        <td>{{ $item->C_organic_tanah }} %</td>
-                                        <td>{{ $item->carbongr }} Gr/m2</td>
-                                        <td class="hidden-column">{{ $item->carbonton }}Ton/Ha</td>
-                                        <td class="hidden-column">{{ $item->carbonkg }} Ton</td>
+                                        <td>{{ $item->berat_jenis_tanah }} gr/cm<sup>3</sup></td>
+                                        <td>{{ number_format($item->C_organic_tanah, 0) }} %</td>
+                                        <td>{{ $item->carbongr }} gr/m<SUP>3</SUP></td>
+                                        <td class="hidden-column">{{ $item->carbonton }}ton/Ha</td>
+                                        <td class="hidden-column">{{ $item->carbonkg }} ton</td>
                                         <td class="hidden-column">{{ $item->co2kg }}kg</td>
                                         <td class="hidden-column aksi-button">
                                             <button
@@ -432,7 +433,7 @@
                                                 class="edit-btn">
                                                 <img src="{{ asset('/images/PencilSquare.svg') }}" alt="" />
                                             </button>
-                                            <form action="{{ route('tanah.destroy', ['subplot_id' => $subplot->id]) }}"
+                                            <form action="{{ route('tanah.destroy', ['id' => $item->id]) }}"
                                                 method="POST">
                                                 @csrf
                                                 @method('DELETE')
@@ -524,7 +525,7 @@
                             <thead>
                                 <tr>
                                     <th class="kiriPancang">No</th>
-                                    <th>No Pohon</th>
+                                    <th>Jumlah Pohon</th>
                                     <th>Keliling</th>
                                     <th>Diameter</th>
                                     <th>Nama Lokal</th>
@@ -538,20 +539,21 @@
                             </thead>
                             <tbody class="tableBody">
                                 @forelse($pancang as $item)
+                                    {{-- @dd($item) --}}
                                     <tr class="data-row">
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $item->no_pohon }} cm</td>
+                                        <td>{{ number_format($item->no_pohon, 0) }}</td>
                                         <td>{{ $item->keliling }} cm</td>
                                         <td>{{ $item->diameter }} cm</td>
                                         <td>{{ $item->nama_lokal }}</td>
                                         <td>{{ $item->nama_ilmiah }}</td>
-                                        <td class="hidden-column">{{ $item->kerapatan_jenis_kayu }}gr/cm3</td>
+                                        <td class="hidden-column">{{ $item->kerapatan_jenis_kayu }}gr/cm<SUP>3</SUP></td>
                                         <td class="hidden-column">{{ $item->bio_di_atas_tanah }} kg</td>
                                         <td class="hidden-column">{{ $item->kandungan_karbon }}kg</td>
                                         <td class="hidden-column">{{ $item->co2 }} kg</td>
                                         <td class="hidden-column aksi-button">
 
-                                            <form action="{{ route('pancang.destroy', ['subplot_id' => $subplot->id]) }}"
+                                            <form action="{{ route('pancang.destroy', ['id' => $item->id]) }}"
                                                 method="POST">
                                                 @csrf
                                                 @method('DELETE')
@@ -644,7 +646,7 @@
                             <thead>
                                 <tr>
                                     <th class="kiriPancang">No</th>
-                                    <th>No Pohon</th>
+                                    <th>Jumlah Pohon</th>
                                     <th>Keliling</th>
                                     <th>Diameter</th>
                                     <th>Nama Lokal</th>
@@ -658,19 +660,20 @@
                             </thead>
                             <tbody class="tableBody">
                                 @forelse ($tiang as $item)
+                                    {{-- @dd($item) --}}
                                     <tr class="data-row">
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $item->no_pohon }} cm</td>
-                                        <td>{{ $item->keliling }} cm</td>
-                                        <td>{{ $item->diameter }} cm</td>
-                                        <td>{{ $item->nama_lokal }}</td>
-                                        <td>{{ $item->nama_ilmiah }}</td>
-                                        <td class="hidden-column">{{ $item->kerapatan_jenis_kayu }}gr/cm3</td>
-                                        <td class="hidden-column">{{ $item->bio_di_atas_tanah }} kg</td>
-                                        <td class="hidden-column">{{ $item->kandungan_karbon }}kg</td>
-                                        <td class="hidden-column">{{ $item->co2 }} kg</td>
+                                            <td>{{ number_format($item->no_pohon, 0) }}</td>
+                                            <td>{{ $item->keliling }} cm</td>
+                                            <td>{{ $item->diameter }} cm</td>
+                                            <td>{{ $item->nama_lokal }}</td>
+                                            <td>{{ $item->nama_ilmiah }}</td>
+                                            <td class="hidden-column">{{ $item->kerapatan_jenis_kayu }}gr/cm<SUP>3</SUP></td>
+                                            <td class="hidden-column">{{ $item->bio_di_atas_tanah }} kg</td>
+                                            <td class="hidden-column">{{ $item->kandungan_karbon }}kg</td>
+                                            <td class="hidden-column">{{ $item->co2 }} kg</td>
                                         <td class="hidden-column aksi-button">
-                                            <form action="{{ route('tiang.destroy', ['subplot_id' => $subplot->id]) }}"
+                                            <form action="{{ route('tiang.destroy', ['id' => $item->id]) }}"
                                                 method="POST">
                                                 @csrf
                                                 @method('DELETE')
@@ -762,7 +765,7 @@
                             <thead>
                                 <tr>
                                     <th class="kiriPancang">No</th>
-                                    <th>No Pohon</th>
+                                    <th>Jumlah Pohon</th>
                                     <th>Keliling</th>
                                     <th>Diameter</th>
                                     <th>Nama Lokal</th>
@@ -779,17 +782,17 @@
                                 @forelse ($pohon as $item)
                                     <tr class="data-row">
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $item->no_pohon }} cm</td>
-                                        <td>{{ $item->keliling }} cm</td>
-                                        <td>{{ $item->diameter }} cm</td>
-                                        <td>{{ $item->nama_lokal }}</td>
-                                        <td>{{ $item->nama_ilmiah }}</td>
-                                        <td class="hidden-column">{{ $item->kerapatan_jenis_kayu }}gr/cm3</td>
-                                        <td class="hidden-column">{{ $item->bio_di_atas_tanah }} kg</td>
-                                        <td class="hidden-column">{{ $item->kandungan_karbon }}kg</td>
-                                        <td class="hidden-column">{{ $item->co2 }} kg</td>
+                                            <td>{{ number_format($item->no_pohon, 0) }}</td>
+                                            <td>{{ $item->keliling }} cm</td>
+                                            <td>{{ $item->diameter }} cm</td>
+                                            <td>{{ $item->nama_lokal }}</td>
+                                            <td>{{ $item->nama_ilmiah }}</td>
+                                            <td class="hidden-column">{{ $item->kerapatan_jenis_kayu }}gr/cm<SUP>3</SUP></td>
+                                            <td class="hidden-column">{{ $item->bio_di_atas_tanah }} kg</td>
+                                            <td class="hidden-column">{{ $item->kandungan_karbon }}kg</td>
+                                            <td class="hidden-column">{{ $item->co2 }} kg</td>
                                         <td class="hidden-column aksi-button">
-                                            <form action="{{ route('pohon.destroy', ['subplot_id' => $subplot->id]) }}"
+                                            <form action="{{ route('pohon.destroy', ['id' => $item->id]) }}"
                                                 method="POST">
                                                 @csrf
                                                 @method('DELETE')
@@ -896,24 +899,23 @@
                                 @forelse($Necromas as $item)
                                     <tr class="data-row">
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $item->diameter_pangkal }} cm</td>
-                                        <td>{{ $item->diameter_ujung }} cm</td>
-                                        <td>{{ $item->panjang }}</td>
-                                        <td>{{ $item->volume }}</td>
-                                        <td class="hidden-column">{{ $item->berat_jenis_kayu }}gr/cm3</td>
-                                        <td class="hidden-column">{{ $item->biomasa }} kg</td>
-                                        <td class="hidden-column">{{ $item->carbon }}kg</td>
-                                        <td class="hidden-column">{{ $item->co2 }} kg</td>
+                                            <td>{{ $item->diameter_pangkal }} cm</td>
+                                            <td>{{ $item->diameter_ujung }} cm</td>
+                                            <td>{{ $item->panjang }} m</td>
+                                            <td>{{ $item->volume }} m<SUP>3</SUP></td>
+                                            <td class="hidden-column">{{ $item->berat_jenis_kayu }}gr/cm<SUP>3</SUP></td>
+                                            <td class="hidden-column">{{ $item->biomasa }} kg</td>
+                                            <td class="hidden-column">{{ $item->carbon }}kg</td>
+                                            <td class="hidden-column">{{ $item->co2 }} kg</td>
                                         <td class="hidden-column aksi-button">
-                                            <form
-                                            action="{{ route('nekromas.destroy', ['subplot_id' => $subplot->id]) }}"
-                                            method="POST">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="delete-btn">
-                                                <img src="{{ asset('/images/Trash.svg') }}" alt="Delete" />
-                                            </button>
-                                        </form>
+                                            <form action="{{ route('nekromas.destroy', ['id' => $item->id]) }}"
+                                                method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="delete-btn">
+                                                    <img src="{{ asset('/images/Trash.svg') }}" alt="Delete" />
+                                                </button>
+                                            </form>
                                         </td>
                                     </tr>
                                 @empty

@@ -24,8 +24,8 @@ return new class extends Migration
             $table->timestamps();
             $table->unsignedBigInteger("tim_id")->nullable();
             $table->foreign("tim_id")->references("id")->on("tim")->onDelete('cascade');
-            $table->unsignedBigInteger("periode_id");
-            $table->foreign("periode_id")->references("id")->on("periode")->onDelete('cascade');
+            // $table->unsignedBigInteger("periode_id");
+            // $table->foreign("periode_id")->references("id")->on("periode")->onDelete('cascade');
         });
     }
 

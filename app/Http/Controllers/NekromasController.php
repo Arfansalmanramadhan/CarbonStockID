@@ -144,12 +144,12 @@ class NekromasController extends Controller
             ], 500);
         }
     }
-    public function destroy(string $subplot_id)
+    public function destroy(string $id)
     {
         DB::beginTransaction();
         try {
             // Cari data Tanah berdasarkan ID
-            $necromas = Necromass::where('subplot_id', $subplot_id)->first();
+            $necromas = Necromass::findOrFail($id);
 
 
 

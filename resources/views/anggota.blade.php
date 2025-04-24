@@ -21,7 +21,7 @@
                 <div class="row">
                     @csrf
                     <label for="registrasi_id">Pilih Anggota:</label>
-                    <select name="registrasi_id"  class="form-control" required>
+                    <select name="registrasi_id" class="form-control" required>
                         <option value="">-- Pilih Nama --</option>
                         @foreach ($registrasi as $user)
                             <option value="{{ $user->id }}">{{ $user->nama }} ({{ $user->username }})</option>
@@ -36,14 +36,14 @@
             </form>
             <div class="table-container">
                 <div class="table-wrapper">
-                    <table class="custom-table-pancang table  table-striped">
+                    <table class="custom-table-pancang table ">
                         <thead>
                             <tr>
                                 <th class="kiriPancang">No</th>
                                 <th>Nama Anggota</th>
                                 <th>Username</th>
                                 <th>Nama Tim</th>
-                                {{-- <th class="hidden-column kananPancang">Aksi</th> --}}
+                                <th class="hidden-column kananPancang">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -54,18 +54,24 @@
                                         <td>{{ $t->nama_anggota }}</td>
                                         <td>{{ $t->username }}</td>
                                         <td>{{ $t->nama_tim }}</td>
-                                        {{-- <td class="hidden-column aksi-button">
-                                            <button class="view-btn">
-                                                <img src="{{ asset('/images/Eye.svg') }}" alt="" />
-                                            </button>
-                                            <button onclick="window.location.href='{{ route('Tambah-Surveyor.indexx') }}'"
+                                        <td class="hidden-column aksi-button">
+                                            {{-- <button onclick="window.location.href='{{ route('Tambah-Surveyor.indexx') }}'"
                                                 class="add-btn">
                                                 <img src="{{ asset('/images/AddIcon.svg') }}" alt="" />
-                                            </button>
-                                            <button class="delete-btn">
-                                                <img src="{{ asset('/images/Trash.svg') }}" alt="" />
-                                            </button>
-                                        </td> --}}
+                                            </button> --}}
+                                            {{-- <pre>{{ dd($index) }}</pre> --}}
+                                            @if ($t->anggota_id)
+                                                <form
+                                                    action="{{ route('anggota.deleteanggota', ['id' => $t->anggota_id]) }}"
+                                                    method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="delete-btn">
+                                                        <img src="{{ asset('/images/Trash.svg') }}" alt="Delete" />
+                                                    </button>
+                                                </form>
+                                            @endif
+                                        </td>
                                     </tr>
                                 @endforeach
                             @else

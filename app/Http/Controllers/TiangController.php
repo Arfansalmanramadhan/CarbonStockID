@@ -19,8 +19,8 @@ class TiangController extends Controller
         // return PancangResouce::collection($Tiang);
         $user = Auth::user();
         $poltArea = PoltArea::where('id', $user->id);
-        $zona = Zona::where('polt-area_id', $user->id );
-        $PlotC= Tiang::where('zona_id' );
+        $zona = Zona::where('polt-area_id', $user->id);
+        $PlotC = Tiang::where('zona_id');
         return view('tambah.PlotC', compact('user', 'poltArea', 'zona', 'PlotC'));
     }
     public function store(Request $request)
@@ -154,26 +154,26 @@ class TiangController extends Controller
             ], 500);
         }
     }
-    public function destroy(string $subplot_id)
+    public function destroy(string $id)
     {
         DB::beginTransaction();
-    try {
-        // Cari data Tanah berdasarkan ID
-        $tanah = Tiang::where('subplot_id', $subplot_id)->first();
+        try {
+            // Cari data Tanah berdasarkan ID
+            $tanah = Tiang::findOrFail($id);
 
 
-        // Hapus data tanah
-        $tanah->delete();
+            // Hapus data tanah
+            $tanah->delete();
 
-        DB::commit();
+            DB::commit();
 
-        // Redirect dengan pesan sukses
-        return redirect()->back()->with('success', 'Data Tiang berhasil dihapus.');
-    } catch (\Exception $e) {
-        DB::rollBack();
+            // Redirect dengan pesan sukses
+            return redirect()->back()->with('success', 'Data Tiang berhasil dihapus.');
+        } catch (\Exception $e) {
+            DB::rollBack();
 
-        // Redirect dengan pesan error
-        return redirect()->back()->with('error', 'Gagal menghapus data Tiang: ' . $e->getMessage());
-    }
+            // Redirect dengan pesan error
+            return redirect()->back()->with('error', 'Gagal menghapus data Tiang: ' . $e->getMessage());
+        }
     }
 }

@@ -63,7 +63,7 @@
                     @method('PUT')
                     <input type="hidden" id="registrasi_id" name="registrasi_id" value="{{ $user->id }}"
                         enctype="multipart/form-data">
-                    <div class="profile-container d-flex align-items-center">
+                    {{-- <div class="profile-container d-flex align-items-center">
                         <img id="previewImage"
                             src="{{ $user->foto ? asset($user->foto) : asset('/images/profileImage.svg') }}"
                             alt="User Photo" width="168" />
@@ -74,7 +74,7 @@
                             <p class="text-muted">Gambar Profile Anda sebaiknya memiliki rasio 1:1 dan berukuran tidak
                                 lebih dari 2MB.</p>
                         </div>
-                    </div>
+                    </div> --}}
                     <div class="mb-2">
                         <label for="nama" class="form-label ms-1">Nama Lengkap</label>
                         <input type="text" class="form-control" id="nama" name="nama"
@@ -106,7 +106,7 @@
                         <input type="text" class="form-control" name="nik" id="nik"
                             placeholder="masukan NIK" value="{{ old('nik', $user->nik) }}" />
                     </div>
-                    <div class="mb-3">
+                    {{-- <div class="mb-3">
                         <label for="formFile" class="form-label">Foto KTP</label>
                         <input class="form-control" type="file"
                             id="formFile"accept="image/jpeg,image/png,image/jpg,application/pdf" name="foto_ktp"
@@ -117,7 +117,7 @@
                         <input class="form-control" type="file"
                             id="formFile"accept="image/jpeg,image/png,image/jpg,application/pdf"
                             name="foto_tandatangan" value="{{ old('foto_tandatangan', $user->foto_tandatangan) }}">
-                    </div>
+                    </div> --}}
 
                     <button type="submit" class="btn btn-simpan-perubahan">Simpan Perubahan</button>
                 </form>

@@ -180,21 +180,37 @@ class DashboardController extends Controller
             // dd($totalPancangCo2Keseluruhan);
             // dd($totalPancangCo2Keseluruhan, $TotalPancangco2);
             // Hitung rata-rata
-            $rataPancangCo2 = $totalZona ? $totalPancangCo2Keseluruhan / $totalZona : 0;
-            $rataPancangKarbon = $totalZona ? $totalPancangKarbonKeseluruhan / $totalZona : 0;
-            $rataPancangBiomassa = $totalZona ? $totalPancangBiomassaKeseluruhan / $totalZona : 0;
+
+            $rataPancangCo22 = $totalZona ? $totalPancangCo2Keseluruhan / $totalZona : 0;
+            $rataPancangKarbonn = $totalZona ? $totalPancangKarbonKeseluruhan / $totalZona : 0;
+            $rataPancangBiomassas = $totalZona ? $totalPancangBiomassaKeseluruhan / $totalZona : 0;
 
             $rataMangroveCo2 = $totalZona ? $totalMangroveCo2Keseluruhan / $totalZona : 0;
             $rataMangroveKarbon = $totalZona ? $totalMangroveKarbonKeseluruhan / $totalZona : 0;
             $rataMangroveBiomassa = $totalZona ? $totalMangroveBiomassaKeseluruhan / $totalZona : 0;
 
-            $rataTiangCo2 = $totalZona ? $totalTiangCo2Keseluruhan / $totalZona : 0;
-            $rataTiangKarbon = $totalZona ? $totalTiangKarbonKeseluruhan / $totalZona : 0;
-            $rataTiangBiomassa = $totalZona ? $totalTiangBiomassaKeseluruhan / $totalZona : 0;
+            $rataTiangCo22 = $totalZona ? $totalTiangCo2Keseluruhan / $totalZona : 0;
+            $rataTiangKarbonn = $totalZona ? $totalTiangKarbonKeseluruhan / $totalZona : 0;
+            $rataTiangBiomassaa = $totalZona ? $totalTiangBiomassaKeseluruhan / $totalZona : 0;
 
-            $rataPohonCo2 = $totalZona ? $totalPohonCo2Keseluruhan / $totalZona : 0;
-            $rataPohonKarbon = $totalZona ? $totalPohonKarbonKeseluruhan / $totalZona : 0;
-            $rataPohonBiomassa = $totalZona ? $totalPohonBiomassaKeseluruhan / $totalZona : 0;
+            $rataPohonCo22 = $totalZona ? $totalPohonCo2Keseluruhan / $totalZona : 0;
+            $rataPohonKarbonn = $totalZona ? $totalPohonKarbonKeseluruhan / $totalZona : 0;
+            $rataPohonBiomassaa = $totalZona ? $totalPohonBiomassaKeseluruhan / $totalZona : 0;
+            $rataPancangCo2 =  $faktor * $rataPancangCo22;
+            $rataPancangKarbon = $faktor * $rataPancangKarbonn;
+            $rataPancangBiomassa = $faktor * $rataPancangBiomassas;
+
+            $rataMangroveCo2 = $totalZona ? $totalMangroveCo2Keseluruhan / $totalZona : 0;
+            $rataMangroveKarbon = $totalZona ? $totalMangroveKarbonKeseluruhan / $totalZona : 0;
+            $rataMangroveBiomassa = $totalZona ? $totalMangroveBiomassaKeseluruhan / $totalZona : 0;
+
+            $rataTiangCo2 = $faktor * $rataTiangCo22;
+            $rataTiangKarbon = $faktor * $rataTiangKarbonn;
+            $rataTiangBiomassa = $faktor * $rataTiangBiomassaa;
+
+            $rataPohonCo2 = $faktor * $rataPohonCo22;
+            $rataPohonKarbon = $faktor * $rataPohonKarbonn;
+            $rataPohonBiomassa = $faktor * $rataPohonBiomassaa;
             // Perhitungan CO2 dari Serasah (dibagi berdasarkan jumlah nilai unik)
             $zonaid = $zona->polt_area_id;
 
@@ -206,7 +222,7 @@ class DashboardController extends Controller
                 ->leftJoin('semai', 'semai.subplot_id', '=', 'subplot.id')
                 ->leftJoin('tumbuhan_bawah', 'tumbuhan_bawah.subplot_id', '=', 'subplot.id')
                 ->leftJoin('necromass', 'necromass.subplot_id', '=', 'subplot.id')
-                // ->where('plot.status', 'aktif')
+                ->where('plot.status', 'aktif')
 
                 // ->where('zona.polt_area_id', $zonaid)
                 ->select(
@@ -243,63 +259,63 @@ class DashboardController extends Controller
                 ->leftJoin('tumbuhan_bawah', 'tumbuhan_bawah.subplot_id', '=', 'subplot.id')
                 ->leftJoin('necromass', 'necromass.subplot_id', '=', 'subplot.id')
                 ->where('zona.polt_area_id', $zonaid)
-                // ->where('plot.status', 'aktif')
+                ->where('plot.status', 'aktif')
                 // ->whereNull('zona.deleted_at')
                 ->first(); //Ambil satu objek, bukan Collection
             // dd($zonaa);
             // dd($uniqueSerasah, $uniqueSemai, $uniqueTumbuhanBawah, $uniqueNecromas);
             $totalZona = $uniqueCounts->total_zona;
 
-            $hasilSerasahCo2 = $zonaa->serasah_co2 / $totalZona;;
+            $hasilSerasahCo2 = $totalZona > 0 ? $zonaa->serasah_co2 / $totalZona : 0;
             $Serasahco2 = ($hasilSerasahCo2 / 1000000) * 10000;
             // dd($hasilSerasahCo2);
-            $hasilSerasahKarbon = $zonaa->serasah_kandungan_karbon / $totalZona;;
+            $hasilSerasahKarbon = $totalZona > 0 ? $zonaa->serasah_kandungan_karbon / $totalZona : 0;
             $SerasahKarbon = ($hasilSerasahKarbon / 1000000) * 10000;
 
-            $hasilSerasahberatkering = $zonaa->serasah_total_berat_kering / $totalZona;
+            $hasilSerasahberatkering = $totalZona > 0 ? $zonaa->serasah_total_berat_kering / $totalZona : 0;
 
             $Serasahberatkering = ($hasilSerasahberatkering / 1000000) * 10000;
             // semai
 
 
-            $hasilsemaiCo2 = $zonaa->semai_co2 / $totalZona;
+            $hasilsemaiCo2 = $totalZona > 0 ? $zonaa->semai_co2 / $totalZona : 0;
 
             $semaico2 = ($hasilsemaiCo2 / 1000000) * 10000;
             // dd($zonaa, $hasilsemaiCo2);
-            $hasilsemaiKarbon = $zonaa->semai_kandungan_karbon / $totalZona;
+            $hasilsemaiKarbon = $totalZona > 0 ? $zonaa->semai_kandungan_karbon / $totalZona : 0;
 
             $semaiKarbon = ($hasilsemaiKarbon / 1000000) * 10000;
             // dd($zonaa, $hasilsemaiKarbon);
-            $hasilsemaiberatkering = $zonaa->semai_total_berat_kering / $totalZona;
+            $hasilsemaiberatkering = $totalZona > 0 ? $zonaa->semai_total_berat_kering / $totalZona : 0;
 
             $semaiberatkering = ($hasilsemaiberatkering / 1000000) * 10000;
             // tumbuhan bah
-            $hasiltumbuhan_bawahCo2 = $zonaa->tumbuhan_bawah_co2 / $totalZona;
+            $hasiltumbuhan_bawahCo2 = $totalZona > 0 ? $zonaa->tumbuhan_bawah_co2 / $totalZona : 0;
 
             $tumbuhan_bawahco2 = ($hasiltumbuhan_bawahCo2 / 1000000) * 10000;
 
-            $hasiltumbuhan_bawahKarbon = $zonaa->tumbuhan_bawah_kandungan_karbon / $totalZona;
+            $hasiltumbuhan_bawahKarbon = $totalZona > 0 ? $zonaa->tumbuhan_bawah_kandungan_karbon / $totalZona : 0;
 
             $tumbuhan_bawahKarbon = ($hasiltumbuhan_bawahKarbon / 1000000) * 10000;
 
-            $hasiltumbuhan_bawahberatkering = $zonaa->tumbuhan_bawah_total_berat_kering / $totalZona;
+            $hasiltumbuhan_bawahberatkering = $totalZona > 0 ? $zonaa->tumbuhan_bawah_total_berat_kering / $totalZona : 0;
 
             $tumbuhan_bawahberatkering = ($hasiltumbuhan_bawahberatkering / 1000000) * 10000;
 
 
             // Konversi nilai Necromass
 
-            $hasilNecromashCo2 = $zonaa->necromass_co2 / $totalZona;
+            $hasilNecromashCo2 = $totalZona > 0 ? $zonaa->necromass_co2 / $totalZona : 0;
 
             $Necromassco2 = ($hasilNecromashCo2 / 1000000) * 10000 / 400;
 
-            $hasilNecromasbiomasa = $zonaa->necromass_total_biomasa / $totalZona;
+            $hasilNecromasbiomasa = $totalZona > 0 ? $zonaa->necromass_total_biomasa / $totalZona : 0;
 
             $Necromassbiomasa = ($hasilNecromasbiomasa / 1000000) * 10000 / 400;
 
-            $hasilNecromascarbon = $zonaa->necromass_total_carbon / $totalZona;
+            $hasilNecromascarbon = $totalZona > 0 ? $zonaa->necromass_total_carbon / $totalZona : 0;
 
-            $NecromassCarbon = ($hasilNecromascarbon / 1000000) * 10000 / 400;
+            $NecromassCarbon =  ($hasilNecromascarbon / 1000000) * 10000 / 400;
 
             // klandungan karbon
             $Biomassadiataspermukaantanah = $rataPancangBiomassa +  $rataTiangBiomassa + $rataPohonBiomassa + $Serasahberatkering +  $semaiberatkering +  $tumbuhan_bawahberatkering +   $Necromassbiomasa;
@@ -646,7 +662,7 @@ class DashboardController extends Controller
     //     // dd($zonaa);
     //     // dd($uniqueSerasah, $uniqueSemai, $uniqueTumbuhanBawah, $uniqueNecromas);
     //     $jumlahSerasah = $uniqueSerasah->first()->total_serasah ?? 0;
-    //     $hasilSerasahCo2 = ($jumlahSerasah > 0) ? ($zonaa->serasah_co2 / $jumlahSerasah) : 0;
+    //     $hasilSerasahCo2 = ($jumlahSerasah > 0) ? ($totalZona > 0 ?$zonaa->serasah_co2 / $jumlahSerasah) : 0;
     //     $Serasahco2 = ((float) $hasilSerasahCo2 / 1000000) * 10000;
 
     //     $hasilSerasahKarbon = ($jumlahSerasah > 0) ? ($zonaa->serasah_kandungan_karbon / $jumlahSerasah) : 0;

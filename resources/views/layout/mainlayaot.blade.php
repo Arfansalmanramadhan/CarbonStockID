@@ -56,8 +56,8 @@
                         alt="User Avatar" id="userIcon" class="ms-3 user-avatar" />
                     <div class="user-usere-dropdown parent-container " id="userProfileDropdown" style="display: none">
                         <div class="user-info">
-                            <img src="{{ $user->image ? asset($user->image) : asset('/images/PersonFill.svg') }}"
-                                alt="User Avatar" id="userIcon" class="ms-3 user-avatar" />
+                            {{-- <img src="{{ $user->image ? asset($user->image) : asset('/images/PersonFill.svg') }}"
+                                alt="User Avatar" id="userIcon" class="ms-3 user-avatar" /> --}}
                             <div class="user-details">
                                 <h4>{{ $user->username }}</h4>
                                 <p>{{ $user->email }}</p>
@@ -161,13 +161,19 @@
                         <li class="sidebar-item">
                             <a href="{{ route('Verifikasi.index') }}" class="sidebar-link">
                                 <i class="lni lni-shield-2-check"></i>
-                                <span>Surveyor</span>
+                                <span>Verifikasi</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
                             <a href="{{ route('Sampah.index') }}" class="sidebar-link">
-                                <i class="lni lni-trash-3"></i>
-                                <span>Sampah</span>
+                                <i class="lni lni-tree-2"></i>
+                                <span>Keanekkaragaman <br>Hayati</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="{{ route('Surveyor.surveyor') }}" class="sidebar-link">
+                                <i class="lni lni-shield-2-check"></i>
+                                <span>Surveyor</span>
                             </a>
                         </li>
                     </ul>

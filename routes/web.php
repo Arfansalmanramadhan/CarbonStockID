@@ -117,7 +117,7 @@ Route::middleware('auth')->group(function () {
         Route::get("/Lokasi/tambah", "create")->name('Lokasi.index');
         Route::get("/Lokasi/edit/{slug}", "edit")->name('Lokasi.edit');
         Route::put("/Lokasi/edit/{slug}", "update")->name('Lokasi.update');
-        Route::put("/Lokasi/{id}", "destroy")->name('Lokasi.destroy');
+        Route::delete("/Lokasi/{id}", "destroy")->name('Lokasi.destroy');
         Route::get("/TambahPlot", "tambah")->name('TambahPlot.tambah');
     });
     // Route::post('/Serasah/store', [SerasahController::class, 'store'])->name('Serasah.store');
@@ -127,7 +127,7 @@ Route::middleware('auth')->group(function () {
     Route::controller(SerasahController::class)->group(function () {
         Route::get("/Plot/SubPlot/edit/{id}", "edit")->name('edit.edit');
         Route::put("/Plot/SubPlot/serasah/update/{id}", "update")->name('Serasah.update');
-        Route::delete("/Plot/SubPlot/Serasah/{subplot_id}", "destroy")->name('Serasah.destroy');
+        Route::delete("/Plot/SubPlot/Serasah/{id}", "destroy")->name('Serasah.destroy');
     });;
 
     Route::controller(SemaiController::class)->group(function () {
@@ -135,47 +135,48 @@ Route::middleware('auth')->group(function () {
         // Route::get("/Plot/SubPlot/edit/{id}", "edit")->name('edit.edit');
         // Route::get("/PlotA", "index");
         Route::put("/Plot/SubPlot/semai/update/{id}", "update")->name('Semai.update');
-        Route::delete("/Plot/SubPlot/Semai/{subplot_id}", "destroy")->name('Semai.destroy');
+        Route::delete("/Plot/SubPlot/Semai/{id}", "destroy")->name('Semai.destroy');
     });
     Route::controller(TunmbuhanBawahController::class)->group(function () {
         Route::post("/Tumbuhanbawah/store", "store")->name('tumbuhanBawah.store');
         // Route::get("/Plot/SubPlot/edit/{id}", "edit")->name('edit.edit');
         Route::get("/Tumbuhanbawah", "index");
         Route::put("/Plot/SubPlot/tumbuhanBawah/update/{id}", "update")->name('tumbuhanBawah.update');
-        Route::delete("/Plot/SubPlot/TumbuhanBawah/{subplot_id}", "destroy")->name('tumbuhanBawah.destroy');
+        Route::delete("/Plot/SubPlot/TumbuhanBawah/{id}", "destroy")->name('tumbuhanBawah.destroy');
     });
     Route::controller(TanahController::class)->group(function () {
         Route::get("/Plot/SubPlot/Tanah/Tambah/{id}", "index")->name('tanah.index');
         // Route::get("/Plot/SubPlot/edit/{id}", "edit")->name('edit.edit');
         Route::post("/Plot/SubPlot/Tanah/Tambah/{id}", "store")->name('tanah.store');
         Route::put("/Plot/SubPlot/tanah/update/{id}", "update")->name('tanah.update');
-        Route::delete("/Plot/SubPlot/Tanah/{subplot_id}", "destroy")->name('tanah.destroy');
+        Route::delete("/Plot/SubPlot/Tanah/{id}", "destroy")->name('tanah.destroy');
     });
 
     Route::controller(PancangContrller::class)->group(function () {
         Route::post("/PlotB/store", "store")->name('pancang.store');
         Route::get("/PlotB", "index")->name('PlotB.index');
         Route::post("/PlotB/update/{id}", "update");
-        Route::delete("/Plot/SubPlot/Pancang{subplot_id}", "destroy")->name('pancang.destroy');
+        // Route::delete("/Plot/SubPlot/{id}", "destroy")->name('pancang.destroy');
+        Route::delete("/Plot/SubPlot/Pancang/{id}", "destroy")->name('pancang.destroy');
     });
 
     Route::controller(NekromasController::class)->group(function () {
         Route::post("/Nekromass/store", "store")->name('nekromas.store');
         Route::get("/Nekromass", "index");
         Route::post("/Nekromass/update/{id}", "update");
-        Route::delete("/Plot/SubPlot/Nekromas{subplot_id}", "destroy")->name('nekromas.destroy');
+        Route::delete("/Plot/SubPlot/Nekromas/{id}", "destroy")->name('nekromas.destroy');
     });
     Route::controller(TiangController::class)->group(function () {
         Route::post("/Tiang/buat", "store")->name('tiang.store');
         Route::get("/PlotC", "index")->name('PlotC.index');
         Route::post("/Tiang/update/{id}", "update");
-        Route::delete("/Plot/SubPlot/Tiang/{subplot_id}", "destroy")->name('tiang.destroy');
+        Route::delete("/Plot/SubPlot/Tiang/{id}", "destroy")->name('tiang.destroy');
     });
     Route::controller(PohonController::class)->group(function () {
         Route::post("/Pohon/buat", "store")->name('pohon.store');
         Route::get("/PlotD", "index")->name('PlotD.index');
         Route::post("/Pohon/update/{id}", "update");
-        Route::delete("/Plot/SubPlot/Pohon/{subplot_id}", "destroy")->name('pohon.destroy');
+        Route::delete("/Plot/SubPlot/Pohon/{id}", "destroy")->name('pohon.destroy');
     });
 
     Route::controller(PeriodeController::class)->group(function () {
@@ -183,10 +184,14 @@ Route::middleware('auth')->group(function () {
         Route::post('/Manajemen-Tim', 'store')->name('Manajemen-Tim.store');
         Route::get('/Manajemen-Tim/anggota/{id}', 'indexx')->name('anggota.indexx');
         Route::post('/Manajemen-Tim/anggota/{id}', 'storee')->name('anggota.storee'); // Perbaiki
-        // Route::get('/Manajemen-Tim/anggota/{id}', 'create')->name('anggota.create');
+        Route::delete('/Manajemen-Tim/anggota/{id}', 'deleteanggota')->name('anggota.deleteanggota');
+        Route::delete('/Manajemen-Tim/{id}', 'deleteTim')->name('Manajemen-Tim.deleteTim');
     });
     Route::controller(SUrveyorController::class)->group(function () {
         Route::get('/Surveyor/Tambah-Surveyor', 'indexx')->name('Tambah-Surveyor.indexx');
+        Route::get('/Surveyor', 'surveyor')->name('Surveyor.surveyor');
+        Route::get('/Surveyor/edit{slug}', 'show')->name('Surveyor.show');
+        Route::put('/Surveyor/edit{slug}', 'update')->name('Surveyor.update');
     });
     Route::get('/profile', [ProfilController::class, 'index'])->name('profile.index');
     // Route::post('/profile/{id}', [ProfilController::class, 'store'])->name('profile.store');
@@ -234,7 +239,7 @@ Route::middleware('auth')->group(function () {
         Route::post("/zona/{slug}/tambah", "store")->name('zona.store');
         Route::get("/zona/{slugP}/edit/{slugZ}", "edit")->name('zona.edit');
         Route::put("/zona/{slugP}/edit/{slugZ}", "update")->name('zona.update');
-        Route::delete("/zona/{polt_area_id}", "destroy")->name('zona.destroy');
+        Route::delete("/zona/{id}", "destroy")->name('zona.destroy');
     });
     Route::controller(HamparanController::class)->group(function () {
         Route::get('/Hamparan', 'index')->name('Hamparan.index');
@@ -243,7 +248,7 @@ Route::middleware('auth')->group(function () {
         Route::post("/Hamparan/{id}/tambah", "store")->name('Hamparan.store');
         Route::get("/Hamparan/{slugZ}/edit/{slugH}", "edit")->name('Hamparan.edit');
         Route::put("/Hamparan/{slugZ}/edit/{slugH}", "update")->name('Hamparan.update');
-        Route::delete("/Hamparan/{zona_id}", "destroy")->name('hamparan.destroy');
+        Route::delete("/Hamparan/{id}", "destroy")->name('hamparan.destroy');
     });
     Route::controller(PLotCOntroller::class)->group(function () {
         Route::get('/dataPlot', 'index')->name('dataPlot.index');

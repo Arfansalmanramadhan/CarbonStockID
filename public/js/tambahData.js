@@ -1,14 +1,14 @@
 
 // Profile pop up
 
-document.getElementById("userIcon").addEventListener("click", function () {
-  var dropdown = document.getElementById("userProfileDropdown");
-  if (dropdown.style.display === "none" || dropdown.style.display === "") {
-    dropdown.style.display = "block";
-  } else {
-    dropdown.style.display = "none";
-  }
-});
+// document.getElementById("userIcon").addEventListener("click", function () {
+//   var dropdown = document.getElementById("userProfileDropdown");
+//   if (dropdown.style.display === "none" || dropdown.style.display === "") {
+//     dropdown.style.display = "block";
+//   } else {
+//     dropdown.style.display = "none";
+//   }
+// });
 
 // Close dropdown if clicked outside
 window.addEventListener("click", function (e) {
@@ -20,19 +20,19 @@ window.addEventListener("click", function (e) {
 // Profile Pop up
 
 //  dropdown plot area
-document.querySelector(".btn-plot-area").addEventListener("click", function () {
-  var dropdown = document.getElementById("dropdownPlotArea");
-  var button = this.getBoundingClientRect(); // Dapatkan posisi tombol
+// document.querySelector(".btn-plot-area").addEventListener("click", function () {
+//   var dropdown = document.getElementById("dropdownPlotArea");
+//   var button = this.getBoundingClientRect(); // Dapatkan posisi tombol
 
-  if (dropdown.style.display === "none" || dropdown.style.display === "") {
-    // Posisi dropdown berdasarkan tombol
-    dropdown.style.top = button.bottom + window.scrollY + "px";
-    dropdown.style.left = button.left + "px";
-    dropdown.style.display = "block";
-  } else {
-    dropdown.style.display = "none";
-  }
-});
+//   if (dropdown.style.display === "none" || dropdown.style.display === "") {
+//     // Posisi dropdown berdasarkan tombol
+//     dropdown.style.top = button.bottom + window.scrollY + "px";
+//     dropdown.style.left = button.left + "px";
+//     dropdown.style.display = "block";
+//   } else {
+//     dropdown.style.display = "none";
+//   }
+// });
 
 // Fungsi untuk memperbarui posisi saat window diresize
 window.addEventListener("resize", function () {

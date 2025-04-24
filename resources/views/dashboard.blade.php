@@ -213,7 +213,7 @@
                 <div class="col-12 col-lg-6 mb-3">
                     <div class="card bg-boxshadow full-height">
                         <div class="card-header bg-transparent d-flex align-items-center justify-content-between">
-                            <h3 class="card-title mb-0">Data Carbon Stock dari tiap AREA</h3>
+                            <h3 class="card-title mb-0">Data Carbon Stock dari tiap area</h3>
                             {{-- <label for="tahun">Pilih Tahun:</label>
                             <select id="tahun" onchange="redirectToYear(this.value)">
                                 @for ($i = date('Y'); $i >= 2020; $i--)
@@ -290,11 +290,11 @@
                                     @forelse ($Serasah as $item)
                                         <tr class="data-row">
                                             <td>{{ $loop->iteration }}</td>
-                                            <td>{{ $item->total_berat_basah }} Gr</td>
-                                            <td>{{ $item->sample_berat_basah }} Gr</td>
-                                            <td>{{ $item->sample_berat_kering }} Gr</td>
-                                            <td>{{ $item->total_berat_kering }} Gr</td>
-                                            <td class="hidden-column">{{ $item->kandungan_karbon }}gr/cm3</td>
+                                            <td>{{ $item->total_berat_basah }} gr</td>
+                                            <td>{{ $item->sample_berat_basah }} gr</td>
+                                            <td>{{ $item->sample_berat_kering }} gr</td>
+                                            <td>{{ $item->total_berat_kering }} gr</td>
+                                            <td class="hidden-column">{{ $item->kandungan_karbon }}kg</td>
                                             <td class="hidden-column">{{ $item->co2 }} kg</td>
                                         </tr>
                                     @empty
@@ -395,11 +395,11 @@
                                 @forelse ($Semai as $item)
                                     <tr class="data-row">
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $item->total_berat_basah }} Gr</td>
-                                        <td>{{ $item->sample_berat_basah }} Gr</td>
-                                        <td>{{ $item->sample_berat_kering }} Gr</td>
-                                        <td>{{ $item->total_berat_kering }} Gr</td>
-                                        <td class="hidden-column">{{ $item->kandungan_karbon }}Kg</td>
+                                        <td>{{ $item->total_berat_basah }} gr</td>
+                                        <td>{{ $item->sample_berat_basah }} gr</td>
+                                        <td>{{ $item->sample_berat_kering }} gr</td>
+                                        <td>{{ $item->total_berat_kering }} gr</td>
+                                        <td class="hidden-column">{{ $item->kandungan_karbon }}kg</td>
                                         <td class="hidden-column">{{ $item->co2 }} kg</td>
                                     </tr>
                                 @empty
@@ -496,11 +496,11 @@
                                 @forelse  ($TumbuhanBawah as $item)
                                     <tr class="data-row">
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $item->total_berat_basah }} Gr</td>
-                                        <td>{{ $item->sample_berat_basah }} Gr</td>
-                                        <td>{{ $item->sample_berat_kering }} Gr</td>
-                                        <td>{{ $item->total_berat_kering }} Gr</td>
-                                        <td class="hidden-column">{{ $item->kandungan_karbon }}Kg</td>
+                                        <td>{{ $item->total_berat_basah }} gr</td>
+                                        <td>{{ $item->sample_berat_basah }} gr</td>
+                                        <td>{{ $item->sample_berat_kering }} gr</td>
+                                        <td>{{ $item->total_berat_kering }} gr</td>
+                                        <td class="hidden-column">{{ $item->kandungan_karbon }}kg</td>
                                         <td class="hidden-column">{{ $item->co2 }} kg</td>
                                     </tr>
                                 @empty
@@ -598,9 +598,9 @@
                                     <tr class="data-row">
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $item->kedalaman_sample }} cm</td>
-                                        <td>{{ $item->berat_jenis_tanah }} Gr/cm3</td>
-                                        <td>{{ $item->C_organic_tanah }} %</td>
-                                        <td>{{ $item->carbongr }} Gr/m2</td>
+                                        <td>{{ $item->berat_jenis_tanah }} Gr/cm<sup>3</sup></td>
+                                        <td>{{ number_format($item->C_organic_tanah, 0) }} %</td>
+                                        <td>{{ $item->carbongr }} gr/m<SUP>2</SUP></td>
                                         <td class="hidden-column">{{ $item->carbonton }}Ton/Ha</td>
                                         <td class="hidden-column">{{ $item->carbonkg }} Ton</td>
                                         <td class="hidden-column">{{ $item->co2kg }}kg</td>
@@ -687,7 +687,7 @@
                             <thead>
                                 <tr>
                                     <th class="kiriPancang">No</th>
-                                    <th>No Pohon</th>
+                                    <th>Jumlah Pohon</th>
                                     <th>Keliling</th>
                                     <th>Diameter</th>
                                     <th>Nama Lokal</th>
@@ -702,12 +702,12 @@
                                 @forelse($pancang as $item)
                                     <tr class="data-row">
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $item->no_pohon }}</td>
+                                        <td>{{ number_format($item->no_pohon, 0) }}</td>
                                         <td>{{ $item->keliling }} cm</td>
                                         <td>{{ $item->diameter }} cm</td>
                                         <td>{{ $item->nama_lokal }}</td>
                                         <td>{{ $item->nama_ilmiah }}</td>
-                                        <td class="hidden-column">{{ $item->kerapatan_jenis_kayu }}gr/cm3</td>
+                                        <td class="hidden-column">{{ $item->kerapatan_jenis_kayu }}gr/cm<sup>3</sup></td>
                                         <td class="hidden-column">{{ $item->bio_di_atas_tanah }} kg</td>
                                         <td class="hidden-column">{{ $item->kandungan_karbon }}kg</td>
                                         <td class="hidden-column">{{ $item->co2 }} kg</td>
@@ -795,7 +795,7 @@
                             <thead>
                                 <tr>
                                     <th class="kiriPancang">No</th>
-                                    <th>No Pohon</th>
+                                    <th>Jumlah Pohon</th>
                                     <th>Keliling</th>
                                     <th>Diameter</th>
                                     <th>Nama Lokal</th>
@@ -810,12 +810,12 @@
                                 @forelse ($tiang as $item)
                                     <tr class="data-row">
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $item->no_pohon }}</td>
+                                        <td>{{ number_format($item->no_pohon, 0) }}</td>
                                         <td>{{ $item->keliling }} cm</td>
                                         <td>{{ $item->diameter }} cm</td>
                                         <td>{{ $item->nama_lokal }}</td>
                                         <td>{{ $item->nama_ilmiah }}</td>
-                                        <td class="hidden-column">{{ $item->kerapatan_jenis_kayu }}gr/cm3</td>
+                                        <td class="hidden-column">{{ $item->kerapatan_jenis_kayu }}gr/cm<SUP>3</SUP></td>
                                         <td class="hidden-column">{{ $item->bio_di_atas_tanah }} kg</td>
                                         <td class="hidden-column">{{ $item->kandungan_karbon }}kg</td>
                                         <td class="hidden-column">{{ $item->co2 }} kg</td>
@@ -903,7 +903,7 @@
                             <thead>
                                 <tr>
                                     <th class="kiriPancang">No</th>
-                                    <th>No Pohon</th>
+                                    <th>Jumlah Pohon</th>
                                     <th>Keliling</th>
                                     <th>Diameter</th>
                                     <th>Nama Lokal</th>
@@ -919,12 +919,12 @@
                                 @forelse ($pohon as $item)
                                     <tr class="data-row">
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $item->no_pohon }}</td>
+                                        <td>{{ number_format($item->no_pohon, 0) }}</td>
                                         <td>{{ $item->keliling }} cm</td>
                                         <td>{{ $item->diameter }} cm</td>
                                         <td>{{ $item->nama_lokal }}</td>
                                         <td>{{ $item->nama_ilmiah }}</td>
-                                        <td class="hidden-column">{{ $item->kerapatan_jenis_kayu }}gr/cm3</td>
+                                        <td class="hidden-column">{{ $item->kerapatan_jenis_kayu }}gr/cm<SUP>3</SUP></td>
                                         <td class="hidden-column">{{ $item->bio_di_atas_tanah }} kg</td>
                                         <td class="hidden-column">{{ $item->kandungan_karbon }}kg</td>
                                         <td class="hidden-column">{{ $item->co2 }} kg</td>
@@ -1027,9 +1027,9 @@
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $item->diameter_pangkal }} cm</td>
                                         <td>{{ $item->diameter_ujung }} cm</td>
-                                        <td>{{ $item->panjang }}</td>
-                                        <td>{{ $item->volume }}</td>
-                                        <td class="hidden-column">{{ $item->berat_jenis_kayu }}gr/cm3</td>
+                                        <td>{{ $item->panjang }} m</td>
+                                        <td>{{ $item->volume }} m<sup>3</sup></td>
+                                        <td class="hidden-column">{{ $item->berat_jenis_kayu }}gr/cm <SUP>3</SUP></td>
                                         <td class="hidden-column">{{ $item->biomasa }} kg</td>
                                         <td class="hidden-column">{{ $item->carbon }}kg</td>
                                         <td class="hidden-column">{{ $item->co2 }} kg</td>

@@ -42,10 +42,13 @@ class AuthController extends Controller
                 'password_confirmation' => 'required|same:password|min:8', // Menggunakan password_confirmation
                 'nip' => 'required|unique:registrasi',
                 'no_hp' => 'required|unique:registrasi',
-                'foto' => 'nullable|file|mimes:jpeg,png,jpg',
-                'foto_ktp' => 'nullable|file|mimes:jpeg,png,jpg',
-                'foto' => 'required',
-                'foto_ktp' => 'required',
+                'nik' => 'required|unique:registrasi',
+
+            ], [
+                'email.unique' => 'Email ini sudah terdaftar.',
+                'nip.unique' => 'NIP ini sudah digunakan.',
+                'no_hp.unique' => 'Nomor HP sudah terdaftar.',
+                'nik.unique' => 'NIK sudah terdaftar.',
             ]);
             // dd($validator->errors());
             // dd($request->all());
@@ -64,8 +67,8 @@ class AuthController extends Controller
                 'password' => $request['password'],
                 'nip' => $request->nip,
                 'no_hp' => $request->no_hp,
-                'foto' => $request->foto,
-                'foto_ktp' => $request->foto_ktp,
+                'nik' => $request->nik,
+
             ]);
 
             // Proses upload foto
@@ -183,28 +186,6 @@ class AuthController extends Controller
         ], 200); */
     }
 
-
-    public function forgotPassword(Request $request)
-    {
-        //validasi email
-        $request->validate([
-            'email' => 'required|email|exists:registrasi,email'
-        ]);
-        // Mengirim link reset password ke email pengguna
-        $status = Password::sendResetLink(
-            $request->only('email')
-        );
-        // Mengembalikan respon berdasarkan status pengiriman email
-        if ($status === Password::PASSWORD_RESET) {
-            return response()->json([
-                'pesan'  => "Password Anda telah berhasil direset."
-            ], 200);
-        } else {
-            return response()->json([
-                'pesan' => 'Terjadi kesalahan saat mengirim link reset password.'
-            ], 400);
-        }
-    }
     public function resetPassword(Request $request)
     {
         $request->validate([

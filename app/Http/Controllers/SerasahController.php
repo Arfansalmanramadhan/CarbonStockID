@@ -238,11 +238,11 @@ class SerasahController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $subplot_id)
+    public function destroy(string $id)
     {
         DB::beginTransaction();
         try {
-            $tanah = Serasah::where('subplot_id', $subplot_id)->first();
+            $tanah = Serasah::findOrFail( $id);
             // dd($subplot_id, Tanah::where('subplot_id', $subplot_id)->first());
             $tanah->delete();
             DB::commit();

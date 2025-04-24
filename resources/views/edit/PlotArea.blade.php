@@ -86,6 +86,18 @@
                             <!-- Input hidden untuk menyimpan periode_pengamatan -->
                             <input type="hidden" name="periode_pengamatan" id="periode_pengamatan" value="{{ old('periode_pengamatan', $poltArea->periode_pengamatan) }}">
                         </div>
+                        <div class="mb-4">
+                            <label for="tim_id">Pilih Tim:</label>
+                            <select name="tim_id" id="tim_id" class="form-control" required>
+                                {{-- <option value="{{ old('tim_id', $poltArea->tim_id->nama) }}">{{$poltArea->tim_id->nama}}</option> --}}
+                                @foreach ($tim as $tims)
+                                    {{-- {{dd($poltArea)}} --}}
+                                    <option value="{{ $tims->id }}">{{ $tims->nama }} </option>
+                                @endforeach
+                            </select>
+                            <!-- Input hidden untuk menyimpan periode_pengamatan -->
+                            {{-- <input type="hidden" name="tim_id" id="tim_id"> --}}
+                        </div>
 
                         <!-- Tombol Submit -->
                         <button type="submit" class="btn btn-success">Submit</button>

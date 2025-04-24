@@ -40,7 +40,7 @@ class TunmbuhanBawahController extends Controller
             // Pastikan tidak ada pembagian dengan nol
             if ($request->sample_berat_basah == 0) {
                 return response()->json([
-                    'message' => 'Sample berat basah tidak boleh nol.'  
+                    'message' => 'Sample berat basah tidak boleh nol.'
                 ], 400);
             }
             // lakuan perhitungan
@@ -97,7 +97,7 @@ class TunmbuhanBawahController extends Controller
             $subplot = SubPlot::findOrFail($id);
             $tumbuhanbawah = TumbuhanBawah::where('subplot_id', $subplot->id)->first();;
             // Pastikan tidak ada pembagian dengan nol
-             if (!$tumbuhanbawah) {
+            if (!$tumbuhanbawah) {
                 return redirect()->back()->with('error', 'Data Serasah tidak ditemukan.');
             }
             // lakuan perhitungan
@@ -120,8 +120,8 @@ class TunmbuhanBawahController extends Controller
             //     'data' => $serasah
             // ], 201);
             DB::commit();
-        // Redirect dengan pesan sukses
-        return redirect()->back()->with('success', 'Tumbuhan bawah berhasil diperbarui.');
+            // Redirect dengan pesan sukses
+            return redirect()->back()->with('success', 'Tumbuhan bawah berhasil diperbarui.');
         } catch (\Exception $e) {
             // Response error
             // return response()->json([
@@ -138,12 +138,12 @@ class TunmbuhanBawahController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $subplot_id)
+    public function destroy(string $id)
     {
         DB::beginTransaction();
         try {
             // Cari data Tanah berdasarkan ID
-            $tumbuhanbawah = TumbuhanBawah::fwhere('subplot_id', $subplot_id)->first();;
+            $tumbuhanbawah = TumbuhanBawah::findOrFail($id);
 
             // Hapus data tumbuhanbawah
             $tumbuhanbawah->delete();

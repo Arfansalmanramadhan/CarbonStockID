@@ -8,6 +8,7 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Resources\PoltAreaResorce;
 use App\Models\Periode;
+use App\Models\Tim;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Symfony\Component\HttpKernel\Profiler\Profile;
@@ -41,7 +42,8 @@ class PoltAreaController extends Controller
     public function create()
     {
         $periodes = Periode::all(); // Ambil semua periode dari database
-        return view('tambah.PlotArea', compact('periodes'));
+        $tim = Tim::all(); // Ambil semua periode dari database
+        return view('tambah.PlotArea', compact('periodes', 'tim'));
     }
 
 
@@ -124,8 +126,9 @@ class PoltAreaController extends Controller
 
         // Ambil daftar periode untuk dropdown
         $periodes = Periode::all();
+        $tim = Tim::all();
 
-        return view('edit.PlotArea', compact('poltArea', 'periodes'));
+        return view('edit.PlotArea', compact('poltArea', 'periodes','tim'));
     }
 
     /**
@@ -171,8 +174,9 @@ class PoltAreaController extends Controller
                 "periode_pengamatan" => $periode_pengamatan,
                 "periode_id" => $periode->id,
                 "slug" => $newSlug, // Update slug dengan yang baru
+                "tim_id" => $request->tim_id,
             ]);
-            dd($poltArea);
+            // dd($poltArea);
             DB::commit();
             return redirect()->route('Lokasi.lokasi', ['slug' => $slug])->with('success', 'Lokasi berhasil diperbarui!');
         } catch (\Exception $e) {
@@ -188,7 +192,7 @@ class PoltAreaController extends Controller
     {
         DB::beginTransaction();
         try {
-            $poltArea = PoltArea::find($id);
+            $poltArea = PoltArea::findOrFail($id);
             $poltArea->delete(); // Soft delete
             DB::commit();
             return redirect()->back()->with('success', 'PoltArea berhasil dihapus.');

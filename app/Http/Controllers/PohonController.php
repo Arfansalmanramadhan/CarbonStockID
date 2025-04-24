@@ -8,6 +8,8 @@ use App\Http\Resources\PancangResouce;
 use App\Models\Pohon;
 use App\Models\Zona;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+
 class PohonController extends Controller
 {
     public function index()
@@ -17,8 +19,8 @@ class PohonController extends Controller
 
         $user = Auth::user();
         $poltArea = PoltArea::where('id', $user->id);
-        $zona = Zona::where('polt-area_id', $user->id );
-        $PlotD= Pohon::where('zona_id' );
+        $zona = Zona::where('polt-area_id', $user->id);
+        $PlotD = Pohon::where('zona_id');
         return view('tambah.PlotD', compact('user', 'poltArea', 'zona', 'PlotD'));
     }
     public function store(Request $request)
@@ -51,7 +53,7 @@ class PohonController extends Controller
             $diameter = $keliling / pi();  // pi() memberikan nilai π (3.1416)
 
             // Tentukan rentang diameter (2-9 atau 10-19)
-            if ( $diameter < 20.00) {
+            if ($diameter < 20.00) {
                 // return response()->json([
                 //     "pesan" => "Diameter harus diantara 20 cm.",
                 // ], 404);
@@ -114,7 +116,7 @@ class PohonController extends Controller
             $diameter = $keliling / pi();  // pi() memberikan nilai π (3.1416)
 
             // Tentukan rentang diameter (2-9 atau 10-19)
-            if ( $diameter < 20.00) {
+            if ($diameter < 20.00) {
                 return response()->json([
                     "pesan" => "Diameter harus diantara 20 cm.",
                 ], 404);
@@ -154,23 +156,25 @@ class PohonController extends Controller
     }
     public function destroy(string $id)
     {
+        DB::beginTransaction();
         try {
+            // dd($id);
             // Cari data Pohon berdasarkan ID
-            $serasah = Pohon::findOrFail($id);
+            $pohon = Pohon::findOrFail($id);
 
             // Hapus data
-            $serasah->delete();
+            $pohon->delete();
 
-            // Response sukses
-            return response()->json([
-                'message' => 'Pohon berhasil dihapus'
-            ], 200);
+
+            DB::commit();
+
+            // Redirect dengan pesan sukses
+            return redirect()->back()->with('success', 'Data pohon berhasil dihapus.');
         } catch (\Exception $e) {
-            // Response error
-            return response()->json([
-                'message' => 'Gagal menghapus Pohon',
-                'error' => $e->getMessage()
-            ], 500);
+            DB::rollBack();
+
+            // Redirect dengan pesan error
+            return redirect()->back()->with('error', 'Gagal menghapus data pohon: ' . $e->getMessage());
         }
     }
 }
