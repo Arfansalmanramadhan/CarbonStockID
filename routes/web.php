@@ -64,7 +64,7 @@ Route::controller(AuthController::class)->group(function () {
     Route::post('/login', 'login')->middleware('only_guest');
     Route::get('/register', 'registasii')->name('register')->middleware('only_guest');
     Route::post('/register', 'registasi')->name('daftar')->middleware('only_guest');
-    Route::post('/logout', 'logout')->name('logout');
+    Route::post('/logout', 'logout')->name('logout')->middleware("auth");
 });
 Route::middleware('auth')->group(function () {
 
