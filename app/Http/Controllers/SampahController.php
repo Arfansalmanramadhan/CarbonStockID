@@ -85,4 +85,10 @@ class SampahController extends Controller
         $lokasi_nama = DB::table('polt_area')->where('id', $lokasiId)->value('daerah');
         return view('Sampah', compact('user', 'lokasi', 'detail', 'total', 'h', 'lokasiId', 'lokasi_nama'));
     }
+    public function peta()
+    {
+        $user = Auth::user();
+        $lokasi = DB::table('polt_area')->select('id', 'daerah')->get();
+        return view("Peta", compact('user', 'lokasi'));
+    }
 }

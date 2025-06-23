@@ -17,7 +17,7 @@ class DataPlotController extends Controller
     {
         $user = Auth::user();
         $search = $request->query('search');
-        $perPage = $request->query('per_page');
+        $perPage = $request->query('per_page',100000);
         $query = Plot::where('status', '=', 'aktif');
         if (!empty($search)) {
             $query->where('nama_plot', 'ILIKE', "%{$search}%")
@@ -33,10 +33,11 @@ class DataPlotController extends Controller
     {
         $user = Auth::user();
         $search = $request->query('search');
-        $perPage = $request->query('per_page'); // Default 5 item per halaman
-        // $tim = Tim::with('poltArea')->get();
-        $query = PoltArea::with('tim');
+        $perPage = $request->query('per_page',100000); // Default 5 item per halaman
+        // $allPoltArea = PoltArea::with('tim')->get(); // Untuk keperluan lain, misalnya dropdown dll
 
+        $query = PoltArea::with('tim');
+        // dd($query );
         if (!empty($search)) {
             $query->where('daerah', 'ILIKE', "%{$search}%")
                 ->orWhere('jenis_hutan', 'ILIKE', "%{$search}%");

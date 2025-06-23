@@ -20,7 +20,7 @@ class ManajermenUserController extends Controller
     {
         $user = Auth::user();
         $search = $request->query('search');
-        $perPage = $request->query('per_page', 5);
+        $perPage = $request->query('per_page',100000);
         // $query = Plot::query();
         $query = Plot::where('status', '=', null);
         if (!empty($search)) {

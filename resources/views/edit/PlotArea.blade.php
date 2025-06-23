@@ -38,28 +38,30 @@
                         <!-- Input Daerah -->
                         <div class="mb-4">
                             <label for="plotName" class="form-label">Daerah Plot Area</label>
-                            <input type="text" class="form-control" name="daerah" id="plotName" value="{{ old('daerah', $poltArea->daerah) }}"
-                                placeholder="Masukkan nama daerah pengamatan" required />
+                            <input type="text" class="form-control" name="daerah" id="plotName"
+                                value="{{ old('daerah', $poltArea->daerah) }}" placeholder="Masukkan nama daerah pengamatan"
+                                required />
                         </div>
 
                         <!-- Input Latitude -->
                         <div class="mb-4">
                             <label for="latitude" class="form-label">Latitude</label>
-                            <input type="text" class="form-control" placeholder="Latitude" name="latitude" id="latitude"value="{{ old('latitude', $poltArea->latitude) }}"
-                                required />
+                            <input type="text" class="form-control" placeholder="Latitude" name="latitude"
+                                id="latitude"value="{{ old('latitude', $poltArea->latitude) }}" required />
                         </div>
 
                         <!-- Input Longitude -->
                         <div class="mb-4">
                             <label for="longitude" class="form-label">Longitude</label>
-                            <input type="text" class="form-control" placeholder="Longitude" name="longitude" value="{{ old('longitude', $poltArea->longitude) }}"
-                                id="longitude" required />
+                            <input type="text" class="form-control" placeholder="Longitude" name="longitude"
+                                value="{{ old('longitude', $poltArea->longitude) }}" id="longitude" required />
                         </div>
                         <div class="mb-4">
                             <label for="plotName" class="form-label">Jenis hutan</label>
-                            <select class="form-select  form-control" aria-label="Default select example" name="jenis_hutan" value="{{ old('jenis_tanah', $poltArea->jenis_tanah) }}">
-                                <option selected>{{$poltArea->jenis_hutan}}</option>
-                                <option value="Hutan Tropis">Hutan  Tropis</option>
+                            <select class="form-select  form-control" aria-label="Default select example" name="jenis_hutan"
+                                value="{{ old('jenis_tanah', $poltArea->jenis_tanah) }}">
+                                <option selected>{{ $poltArea->jenis_hutan }}</option>
+                                <option value="Hutan Tropis">Hutan Tropis</option>
                                 <option value="Hutan Bakau">Hutan Bakau</option>
                                 <option value="Hutan Sabana">Hutan Sabana</option>
                                 <option value="Hutan Rawa Gambut">Hutan Rawa Gambut</option>
@@ -75,7 +77,8 @@
                         <div class="mb-4">
                             <label for="periode_id">Pilih Periode:</label>
                             <select name="periode_id" id="periode_id" class="form-control" required>
-                                <option value="{{ old('periode_id', $poltArea->periode_id) }}">{{$poltArea->periode_pengamatan}}</option>
+                                <option value="{{ old('periode_id', $poltArea->periode_id) }}">
+                                    {{ $poltArea->periode_pengamatan }}</option>
                                 @foreach ($periodes as $periode)
                                     <option value="{{ $periode->id }}" data-mulai="{{ $periode->tanggal_mulai }}"
                                         data-berakhir="{{ $periode->tanggal_berakhir }}">
@@ -84,7 +87,8 @@
                                 @endforeach
                             </select>
                             <!-- Input hidden untuk menyimpan periode_pengamatan -->
-                            <input type="hidden" name="periode_pengamatan" id="periode_pengamatan" value="{{ old('periode_pengamatan', $poltArea->periode_pengamatan) }}">
+                            <input type="hidden" name="periode_pengamatan" id="periode_pengamatan"
+                                value="{{ old('periode_pengamatan', $poltArea->periode_pengamatan) }}">
                         </div>
                         <div class="mb-4">
                             <label for="tim_id">Pilih Tim:</label>
@@ -104,10 +108,14 @@
                     </form>
                 </div>
             </div>
-            <div class="option">
-                <a href="{{ route('zona.index') }}" class=" btn btn-success " id="submitButton"><span>Berikutnya</span>
-                    <img src="{{ asset('/images/ArrowRight.svg') }}" alt="Arrow Icon" class="ms-2" />
-                </a>
+            <div class="d-flex jarak ">
+                <div class="option m-2">
+                    <a href="{{ route('Lokasi.lokasi') }}" class=" btn btn-back "
+                        id="submitButton"><img src="{{ asset('/images/ArrowLeft.svg') }}" alt="Arrow Icon"
+                            class="ms-2" />
+                        <span>Sebelumnya</span>
+                    </a>
+                </div>
             </div>
         </div>
     </div>

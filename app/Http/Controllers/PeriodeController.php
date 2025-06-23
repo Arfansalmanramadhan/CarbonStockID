@@ -20,7 +20,7 @@ class PeriodeController extends Controller
     {
         $user = Auth::user();
         $search = $request->query('search');
-        $perPage = $request->query('per_page');
+        $perPage = $request->query('per_page',100000);
         $query = Tim::withCount('anggotaTim')->with('periode');
         if (!empty($search)) {
             $query->where('nama', 'ILIKE', "%{$search}%");

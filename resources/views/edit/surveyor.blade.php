@@ -64,14 +64,14 @@
                             <input type="text" class="form-control" name="nik" id="nik"
                                 value="{{ old('nik', $user->nik) }}" />
                         </div>
-                        <button type="submit" class="btn btn-success" id="submitButton">Submit</button>
+                        <button type="submit" class="btn btn-success" >Submit</button>
                         </a>
                     </form>
                 </div>
             </div>
             <div class="d-flex jarak ">
                 <div class="option m-2">
-                    <a href="{{ route('Surveyor.surveyor') }}" class=" btn btn-back " id="submitButton"><img
+                    <a href="{{ route('Surveyor.surveyor') }}" class=" btn btn-back " ><img
                             src="{{ asset('/images/ArrowLeft.svg') }}" alt="Arrow Icon" class="ms-2" />
                         <span>Sebelumnya</span>
                     </a>

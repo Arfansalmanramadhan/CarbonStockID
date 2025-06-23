@@ -89,60 +89,60 @@
         </nav>
 
         {{-- <section class="d-flex main "> --}}
-            <div class="wrapper">
-                <aside id="sidebar">
-                    <div class="d-flex">
-                        <button id="toogle-btn" type="button">
-                            <i class="lni lni-dashboard-square-1"></i>
-                        </button>
-                        <div class="sidebar-logo">
-                            <a href="#">Menu</a>
-                        </div>
+        <div class="wrapper">
+            <aside id="sidebar">
+                <div class="d-flex">
+                    <button id="toogle-btn" type="button">
+                        <i class="lni lni-dashboard-square-1"></i>
+                    </button>
+                    <div class="sidebar-logo">
+                        <a href="#">Menu</a>
                     </div>
-                    <ul class="sidebar-nav">
-                        <li class="sidebar-item">
-                            <a href="{{ route('dashboard') }}" class="sidebar-link">
-                                <i class="lni lni-home-2"></i>
-                                <span>Dashboard</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item">
-                            <a href="{{ route('panduan.index') }}" class="sidebar-link">
-                                <i class="lni lni-file-multiple"></i>
-                                <span>Panduan</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item">
-                            <a href="{{ route('Manajemen-Tim.index') }}" class="sidebar-link">
-                                <i class="lni lni-user-multiple-4"></i>
-                                <span>Manajemen Tim</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item">
-                            <a href="{{ route('Lokasi.lokasi') }}" class="sidebar-link">
-                                <i class="lni lni-map-marker-1"></i>
-                                <span>Lokasi</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item">
-                            <a href="{{ route('zona.index') }}" class="sidebar-link">
-                                <i class="lni lni-map-marker-5"></i>
-                                <span>Zona</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item">
-                            <a href="{{ route('Hamparan.index') }}" class="sidebar-link">
-                                <i class="lni lni-map-marker-5"></i>
-                                <span>Hamparan</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item">
-                            <a href="{{ route('dataPlot.index') }}" class="sidebar-link">
-                                <i class="lni lni-notebook-1"></i>
-                                <span>Data Plot</span>
-                            </a>
-                        </li>
-                        {{-- <li class="sidebar-item">
+                </div>
+                <ul class="sidebar-nav">
+                    <li class="sidebar-item">
+                        <a href="{{ route('dashboard') }}" class="sidebar-link">
+                            <i class="lni lni-home-2"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a href="{{ route('panduan.index') }}" class="sidebar-link">
+                            <i class="lni lni-file-multiple"></i>
+                            <span>Panduan</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a href="{{ route('Manajemen-Tim.index') }}" class="sidebar-link">
+                            <i class="lni lni-user-multiple-4"></i>
+                            <span>Manajemen Tim</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a href="{{ route('Lokasi.lokasi') }}" class="sidebar-link">
+                            <i class="lni lni-map-marker-1"></i>
+                            <span>Lokasi</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a href="{{ route('zona.index') }}" class="sidebar-link">
+                            <i class="lni lni-map-marker-5"></i>
+                            <span>Zona</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a href="{{ route('Hamparan.index') }}" class="sidebar-link">
+                            <i class="lni lni-map-marker-5"></i>
+                            <span>Hamparan</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a href="{{ route('dataPlot.index') }}" class="sidebar-link">
+                            <i class="lni lni-notebook-1"></i>
+                            <span>Data Plot</span>
+                        </a>
+                    </li>
+                    {{-- <li class="sidebar-item">
 
                             <a href="#" class="sidebar-link has-dropdown collapsed" data-bs-toggle="collapse"
                             data-bs-target="#auth" aria-expanded="false" aria-controls="auth">
@@ -158,33 +158,39 @@
                                 </li>
                             </ul>
                         </li> --}}
-                        <li class="sidebar-item">
-                            <a href="{{ route('Verifikasi.index') }}" class="sidebar-link">
-                                <i class="lni lni-shield-2-check"></i>
-                                <span>Verifikasi</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item">
-                            <a href="{{ route('Sampah.index') }}" class="sidebar-link">
-                                <i class="lni lni-tree-2"></i>
-                                <span>Keanekkaragaman <br>Hayati</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item">
-                            <a href="{{ route('Surveyor.surveyor') }}" class="sidebar-link">
-                                <i class="lni lni-shield-2-check"></i>
-                                <span>Surveyor</span>
-                            </a>
-                        </li>
-                    </ul>
-                </aside>
-                <div class="main p-3">
-                    {{-- <div class="text-center"> --}}
-                        @yield('content')
-                    {{-- </div> --}}
-                </div>
+                    <li class="sidebar-item">
+                        <a href="{{ route('Verifikasi.index') }}" class="sidebar-link">
+                            <i class="lni lni-shield-2-check"></i>
+                            <span>Verifikasi</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a href="{{ route('Sampah.index') }}" class="sidebar-link">
+                            <i class="lni lni-tree-2"></i>
+                            <span>Keanekkaragaman <br>Hayati</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a href="{{ route('peta.peta') }}" class="sidebar-link">
+                            <i class="lni lni-tree-2"></i>
+                            <span>Peta</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a href="{{ route('Surveyor.surveyor') }}" class="sidebar-link">
+                            <i class="lni lni-shield-2-check"></i>
+                            <span>Surveyor</span>
+                        </a>
+                    </li>
+                </ul>
+            </aside>
+            <div class="main p-3">
+                {{-- <div class="text-center"> --}}
+                @yield('content')
+                {{-- </div> --}}
             </div>
-            {{-- <div class="row  h-100 ">
+        </div>
+        {{-- <div class="row  h-100 ">
                 <div class="sidebar col-lg-2 collapse d-lg-block bg-dark" id="sidebar">
                     <ul class="nav flex-column">
                         <li class="nav-item">
