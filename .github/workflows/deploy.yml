@@ -19,5 +19,5 @@ jobs:
           script: |
             cd /var/www/CarbonStockID
             git reset --hard HEAD
-            git pull origin master --rebase
+            git pull origin main --rebase
             sudo systemctl restart apache2.service
