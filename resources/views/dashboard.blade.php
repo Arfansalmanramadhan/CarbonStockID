@@ -3,7 +3,13 @@
 @section('title', 'Dashbopard')
 @section('content')
     <style>
-
+        .form-controll {
+            width: 389px;
+            height: 62px;
+            border-radius: 8px;
+            appearance: none;
+            padding-left: 15px;
+        }
     </style>
     <div id="beranda-content" class="page-content content p-4">
         <h4 class="judul-beranda">Data Plot Area</h4>
@@ -11,7 +17,7 @@
         <div class="paginated-table table-container ">
             <div class="table-header d-flex justify-content-between">
                 <div class="tampilkan">
-                    <label for="dataPerPage2">Tampilkan</label>
+                    <label for="dataPerPage2">Tampilkan data tahun {{ $tahun }}</label>
                     <select class="dataPerPage">
                         <option value="5">5</option>
                         <option value="10">10</option>
@@ -41,7 +47,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="3" class="text-center">Belum ada data</td>
+                            <td colspan="4" class="text-center">Belum ada data</td>
                         </tr>
                     </tbody>
                 @endforelse
@@ -150,7 +156,7 @@
                                     </td> --}}
                                 @empty
                                 <tr>
-                                    <td colspan="3" class="text-center">Belum ada data</td>
+                                    <td colspan="18" class="text-center">Belum ada data</td>
                                 </tr>
                         @endforelse
                         </tr>
@@ -218,14 +224,14 @@
                 <div class="col-12 col-lg-6 mb-3">
                     <div class="card bg-boxshadow full-height">
                         <div class="card-header bg-transparent d-flex align-items-center justify-content-between">
-                            <h3 class="card-title mb-0">Data Carbon Stock dari tiap area</h3>
-                            {{-- <label for="tahun">Pilih Tahun:</label>
-                            <select id="tahun" onchange="redirectToYear(this.value)">
+                            <h3 class="card-title mb-0">Data Carbon Stock dari tiap area </h3>
+                            <label for="tahun">Pilih Tahun:</label>
+                            <select id="tahun" onchange="redirectToYear(this.value)" class="form-controll">
                                 @for ($i = date('Y'); $i >= 2020; $i--)
                                     <option value="{{ $i }}" {{ $i == $tahun ? 'selected' : '' }}>
                                         {{ $i }}</option>
                                 @endfor
-                            </select> --}}
+                            </select>
                         </div>
                         <div class="card-body d-flex justify-content-center">
                             <div id="bar" style="width: 100%; height: 400px;"></div>
@@ -237,7 +243,7 @@
                 <div class="col-12 col-lg-6 mb-3">
                     <div class="card bg-boxshadow full-height">
                         <div class="card-header bg-transparent d-flex align-items-center justify-content-between">
-                            <h3 class="card-title mb-0">Total Pendataan</h3>
+                            <h3 class="card-title mb-0">Total Pendataan data tahun {{ $tahun }}</h3>
                         </div>
                         <div class="card-body d-flex justify-content-center">
                             <div id="pie" style="width: 80%; height: 400px;"></div>

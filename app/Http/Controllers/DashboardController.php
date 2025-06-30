@@ -19,8 +19,10 @@ class DashboardController extends Controller
     public function showChart(Request $request)
     {
         $user = Auth::user();
+        $tahun =  $request->input('tahun', date('Y'));
         $dataDaerah = PoltArea::pluck('daerah')->toArray();
         // $poltArea = PoltArea::where('id', $user->id)->first();
+        $tahun = $request->input('tahun', date('Y'));
         $ringkasann = PoltArea::leftJoin('zona', 'zona.polt_area_id', '=', 'polt_area.id')
             ->leftJoin('hamparan', 'hamparan.zona_id', '=', 'zona.id')
             ->leftJoin('plot', 'plot.hamparan_id', '=', 'hamparan.id')
@@ -35,6 +37,7 @@ class DashboardController extends Controller
             ->leftJoin('tanah', 'tanah.subplot_id', '=', 'subplot.id')
             ->leftJoin('tumbuhan_bawah', 'tumbuhan_bawah.subplot_id', '=', 'subplot.id')
             ->leftJoin('mangrove', 'mangrove.subplot_id', '=', 'subplot.id')
+            ->whereYear('polt_area.created_at', $tahun)
             ->select(
                 'polt_area.id as polt_area_id',
                 'polt_area.daerah as daerah',
@@ -68,10 +71,13 @@ class DashboardController extends Controller
             ->get()
             ->map(fn($item) => (object) $item);
         // Lakukan perhitungan tambahan untuk masing-masing zona
-        $ringkasann = $ringkasann->map(function ($zona) {
+        // dd( $tahun);
+        $ringkasann = $ringkasann->map(function ($zona) use ($tahun) {
             $faktor =   $zona->luas_lokasi ?? 11.5;
             // $faktor =  max((float) $zona->luas_lokasi, 11.5);
             // Perhitungan Pancang
+            // dd( $zona);
+            // $tahun = $zona->input('tahun', date('Y'));
             $zonaid = $zona->polt_area_id;
             // dd($zona->zona_nama);
             $tanahh = DB::table('tanah')
@@ -79,6 +85,7 @@ class DashboardController extends Controller
                 ->leftJoin('plot', 'subplot.plot_id', '=', 'plot.id')
                 ->leftJoin('hamparan', 'plot.hamparan_id', '=', 'hamparan.id')
                 ->leftJoin('zona', 'hamparan.zona_id', '=', 'zona.id')
+                // ->whereYear('tanah.created_at', $tahun)
                 ->where('zona.polt_area_id', $zonaid)
                 // ->where('plot.status', 'aktif')
                 // ->select(
@@ -95,6 +102,7 @@ class DashboardController extends Controller
                 ->leftJoin('plot', 'subplot.plot_id', '=', 'plot.id')
                 ->leftJoin('hamparan', 'plot.hamparan_id', '=', 'hamparan.id')
                 ->leftJoin('zona', 'hamparan.zona_id', '=', 'zona.id')
+                // ->whereYear('pancang.created_at', $tahun)
                 ->where('zona.polt_area_id', $zonaid)
                 ->where('plot.status', 'aktif')
                 ->groupBy('plot.id')
@@ -131,6 +139,7 @@ class DashboardController extends Controller
                 ->leftJoin('plot', 'subplot.plot_id', '=', 'plot.id')
                 ->leftJoin('hamparan', 'plot.hamparan_id', '=', 'hamparan.id')
                 ->leftJoin('zona', 'hamparan.zona_id', '=', 'zona.id')
+                // ->whereYear('tiang.created_at', $tahun)
                 ->where('zona.polt_area_id', $zonaid)
                 ->where('plot.status', 'aktif')
                 ->groupBy('plot.id')
@@ -167,6 +176,7 @@ class DashboardController extends Controller
                 ->leftJoin('plot', 'subplot.plot_id', '=', 'plot.id')
                 ->leftJoin('hamparan', 'plot.hamparan_id', '=', 'hamparan.id')
                 ->leftJoin('zona', 'hamparan.zona_id', '=', 'zona.id')
+                // ->whereYear('pohon.created_at', $tahun)
                 ->where('zona.polt_area_id', $zonaid)
                 ->where('plot.status', 'aktif')
                 ->groupBy('plot.id')
@@ -231,6 +241,7 @@ class DashboardController extends Controller
                 ->leftJoin('hamparan', 'plot.hamparan_id', '=', 'hamparan.id')
                 ->leftJoin('zona', 'hamparan.zona_id', '=', 'zona.id')
                 ->leftJoin('polt_area', 'zona.polt_area_id', '=', 'zona.id')
+                // ->whereYear('serasah.created_at', $tahun)
                 ->where('zona.polt_area_id', $zonaid)
                 ->whereNotNull('plot.id')
                 ->select(
@@ -247,6 +258,7 @@ class DashboardController extends Controller
                 ->leftJoin('hamparan', 'plot.hamparan_id', '=', 'hamparan.id')
                 ->leftJoin('zona', 'hamparan.zona_id', '=', 'zona.id')
                 ->leftJoin('polt_area', 'zona.polt_area_id', '=', 'zona.id')
+                // ->whereYear('semai.created_at', $tahun)
                 ->where('zona.polt_area_id', $zonaid)
                 ->whereNotNull('plot.id')
                 ->select(
@@ -263,6 +275,7 @@ class DashboardController extends Controller
                 ->leftJoin('hamparan', 'plot.hamparan_id', '=', 'hamparan.id')
                 ->leftJoin('zona', 'hamparan.zona_id', '=', 'zona.id')
                 ->leftJoin('polt_area', 'zona.polt_area_id', '=', 'zona.id')
+                // ->whereYear('tumbuhan_bawah.created_at', $tahun)
                 ->where('zona.polt_area_id', $zonaid)
                 ->whereNotNull('plot.id')
                 ->select(
@@ -279,6 +292,7 @@ class DashboardController extends Controller
                 ->leftJoin('hamparan', 'plot.hamparan_id', '=', 'hamparan.id')
                 ->leftJoin('zona', 'hamparan.zona_id', '=', 'zona.id')
                 ->leftJoin('polt_area', 'zona.polt_area_id', '=', 'zona.id')
+                // ->whereYear('necromass.created_at', $tahun)
                 ->where('zona.polt_area_id', $zonaid)
                 ->whereNotNull('plot.id')
                 ->select(
@@ -432,8 +446,14 @@ class DashboardController extends Controller
                 'hasilco2tanamanPersen' => number_format($hasilco2tanamanPersen * 1, 2, '.', ''),
                 'hasilakarPersen' => number_format($hasilakarPersen * 1, 2, '.', ''),
                 'hasiltanahPersen' => number_format($hasiltanahPersen * 1, 2, '.', ''),
+                'tahun' => $tahun,
             ];
-            // dd($zon  a, $TotalPancangco2, $TotalPancangkarbon, $TotalMangroveKarbondioksida);
+
+            // return view('dashboard', [
+            //     'ringkasann' => $ringkasann,
+            //     'tahun' => $tahun, // pastikan dikirim dari controller
+            // ]);
+            // // dd($zon  a, $TotalPancangco2, $TotalPancangkarbon, $TotalMangroveKarbondioksida);
         });
         // keselluhan
 
@@ -492,7 +512,8 @@ class DashboardController extends Controller
             'pancang',
             'tiang',
             'pohon',
-            'tanah'
+            'tanah',
+            'tahun',
         ));
 
         // $tahun = $request->input('tahun', date('Y')); // Default tahun sekarang jika tidak ada input
