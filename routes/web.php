@@ -37,6 +37,7 @@ use App\Http\Controllers\SUrveyorController;
 use App\Http\Controllers\zonaController;
 use App\Models\Role;
 use Illuminate\Routing\Route as RoutingRoute;
+use App\Http\Controllers\ZonaApiController as ZonaApiController;
 
 // use App\Models\PlotArea;
 
@@ -57,6 +58,19 @@ use Illuminate\Routing\Route as RoutingRoute;
 Route::get('/', function () {
     return view('landingPage');
 });
+
+
+// Route::prefix('zones')->group(function () {
+//     Route::get('/', [ZonaApiController::class, 'getAllZones']);
+//     Route::get('/{slug}/summary', [ZonaApiController::class, 'getZoneSummary']);
+//     Route::get('/polt-area/{poltAreaId}', [ZonaApiController::class, 'getZonesByPoltArea']);
+// });
+Route::controller(ZonaApiController::class)->group(function () {
+    Route::get('/zones', 'getAllZones')->name('api.zones.all');
+    Route::get('/zones/{slug}/summary', 'ringkasann')->name('api.zones.summary');
+    Route::get('/zones/plot-area', 'getAllPlotArea')->name('api.zones.allPlotArea');
+});
+
 
 // Rute untuk halaman login
 Route::controller(AuthController::class)->group(function () {
