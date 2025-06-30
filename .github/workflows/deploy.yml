@@ -20,5 +20,5 @@ jobs:
             cd /var/www/CarbonStockID
             git reset --hard HEAD
             git pull origin main --rebase
-            composer update --no-interaction
+            COMPOSER_ALLOW_SUPERUSER=1 composer update --no-interaction
             sudo systemctl restart apache2.service
