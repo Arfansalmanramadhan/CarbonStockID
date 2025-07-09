@@ -63,7 +63,7 @@ class SUrveyorController extends Controller
             )
             ->get();
 
-        return view("Percobaan", compact('registrasi', 'anggota', 'user'));
+        return view("percobaan", compact('registrasi', 'anggota', 'user'));
     }
     public function show(string $slug)
     {
