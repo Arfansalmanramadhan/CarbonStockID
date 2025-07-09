@@ -63,7 +63,7 @@ class HamparanController extends Controller
             'per_page' => $perPage
         ]);
 
-        return view('show.Hamparan', compact('hamparan', 'user', 'search', 'perPage', 'zona', 'poltArea'));
+        return view('show.hamparan', compact('hamparan', 'user', 'search', 'perPage', 'zona', 'poltArea'));
     }
     public function tambah($id)
     {
