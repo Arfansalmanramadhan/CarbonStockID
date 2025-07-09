@@ -3,21 +3,13 @@
 @section('title', 'Peta Plot Area')
 
 @section('content')
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-12 position-relative">
-                <div class="card">
-                    <div class="card-header">
-                        <h3 class="card-title">Peta Plot Area</h3>
-                    </div>
-                    <div class="card-body" style="position: relative;">
-                        <div id="map" style="height: 600px; width: 100%;"></div>
-                        <div id="info-panel" class="info-panel">
-                            <p>Klik marker untuk melihat detail plot area</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12 position-relative">
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title"><strong>Peta Monitoring Karbon</strong></h3>
         </div>
     </div>
 
