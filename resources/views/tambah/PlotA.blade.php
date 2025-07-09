@@ -47,8 +47,7 @@
                         <p class="form-label">Carbon <span>{{ $tanah ? $tanah->carbonton : '' }} Ton/Ha</span></p>
                         <p class="form-label">Carbon <span>{{ $tanah ? $tanah->carbonkg : '' }} Kg</span></p>
                         <p class="form-label">Serapan CO2 <span>{{ $tanah ? $tanah->co2kg : '' }} Kg</span></p>
-                        <button type="submit" class="btn btn-success d-flex align-items-center justify-content-center"
-                            id="submitButton">
+                        <button type="submit" class="btn btn-success d-flex align-items-center justify-content-center">
                             <span>Submit</span>
                         </button>
                     </form>
@@ -56,7 +55,7 @@
             </div>
             {{-- <div class="d-flex jarak"> --}}
             <div class="option">
-                <a href="{{ route('zona.index') }}" class=" btn btn-back  " id="submitButton">
+                <a href="{{ route('zona.index') }}" class=" btn btn-back  ">
                     <img src="{{ asset('/images/ArrowLeft.svg') }}" alt="Arrow Icon" class="ms-2" />
                     <span>Kembali</span>
                 </a>

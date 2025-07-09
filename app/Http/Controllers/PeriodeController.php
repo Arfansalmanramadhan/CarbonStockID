@@ -43,7 +43,7 @@ class PeriodeController extends Controller
         $tim = Tim::findOrFail($id);
         $users = User::all();
         $anggota = AnggotaTim::where('tim_id', $id)->get(); // Ambil semua user
-        return view('Anggota', compact('tim', 'users', 'anggota'));
+        return view('anggota', compact('tim', 'users', 'anggota'));
     }
 
 
