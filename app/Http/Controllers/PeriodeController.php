@@ -115,7 +115,7 @@ class PeriodeController extends Controller
             ->get();
         // dd($anggota);
         // dd($anggota);
-        return view("Anggota", compact('registrasi', 'anggota', 'tim'));
+        return view("anggota", compact('registrasi', 'anggota', 'tim'));
     }
     public function storee(Request $request, $id)
     {
