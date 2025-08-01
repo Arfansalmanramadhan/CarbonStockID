@@ -1,13 +1,13 @@
 @extends('layout.layaout')
 
-@section('title', 'Buku')
+@section('title', 'Tambah Lokasi')
 
 @section('content')
     <div class="container-tambah-data mt-5" id="currentContent">
         <div class="container-isi">
             <div class="card plot-info-card">
                 <div class="card-header d-flex align-items-center">
-                    <h5 class="ms-3 mt-2">Informasi Lokasi</h5>
+                    <h5 class="ms-3 mt-2">Tambah Lokasi</h5>
                     @session('success')
                         {{-- <h5 class="ms-3 mt-2">sdsadsa</h5> --}}
                         <div class="toast position-fixed left-0 bottom-0 z-3 ms-4 p-2 mb-3" role="alert" aria-live="assertive"

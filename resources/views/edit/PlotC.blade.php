@@ -1,6 +1,6 @@
 @extends('layout.layaout')
 
-@section('title', 'Plot C')
+@section('title', 'Edit Plot C')
 
 @section('content')
     <div class="container-tambah-data hidden mt-5" id="newContent3">
@@ -21,7 +21,7 @@
                     </div>
                     <div class="d-flex align-items-center">
                         <button class="btn btn-tambah-data me-3" id="addData2" data-bs-toggle="modal"
-                            data-bs-target="#dataModal2">Tambah</button>
+                            data-bs-target="#dataModal2">Edit</button>
 
                         <!-- Modal -->
                         <div class="modal" id="dataModal2" aria-hidden="true">

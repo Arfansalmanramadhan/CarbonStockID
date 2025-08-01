@@ -1,6 +1,6 @@
 @extends('layout.layaout')
 
-@section('title', 'TambahPlot')
+@section('title', 'Tambah Plot')
 
 @section('content')
     <div class="container-tambah-data mt-5" id="currentContent">

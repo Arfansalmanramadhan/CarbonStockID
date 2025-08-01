@@ -1,6 +1,6 @@
 @extends('layout.layaout')
 
-@section('title', 'Plot A')
+@section('title', 'Edit Plot A')
 
 @section('content')
     <div class="container-tambah-data hidden mt-5" id="newContent">
@@ -39,7 +39,7 @@
                         <p class="form-label">Kandungan Karbon
                             <span>{{ $serasah ? $serasah->kandungan_karbon : "" }} Kg</span>
                         </p>
-                        <p class="form-label">Serapan CO2 <span>{{ $serasah ?  $serasah->co2 : "" }} Kg</span></p>
+                        <p class="form-label">Serapan CO<sub>2</sub> <span>{{ $serasah ?  $serasah->co2 : "" }} Kg</span></p>
                         {{-- <button type="submit"
                             class="btn btn-success d-flex align-items-center justify-content-center"
                             id="submitSerasah">
@@ -82,7 +82,7 @@
                         </div>
                         <p class="form-label">Kandungan Karbon <span>{{  $semai ? $semai->kandungan_karbon : "" }}
                                 Kg</span></p>
-                        <p class="form-label">Serapan CO2 <span>{{  $semai ? $semai->co2 : "" }} Kg</span></p>
+                        <p class="form-label">Serapan CO<sub>2</sub> <span>{{  $semai ? $semai->co2 : "" }} Kg</span></p>
                         <button type="submit" class="btn btn-success d-flex align-items-center justify-content-center"
                             id="submitSemai">
                             <span>Submit</span>
@@ -125,7 +125,7 @@
                         <p class="form-label">Kandungan Karbon
                             <span>{{ $tumbuhanbawah ? $tumbuhanbawah->kandungan_karbon : "" }} Kg</span>
                         </p>
-                        <p class="form-label">Serapan CO2 <span>{{ $tumbuhanbawah ? $tumbuhanbawah->co2 : "" }}
+                        <p class="form-label">Serapan CO<sub>2</sub> <span>{{ $tumbuhanbawah ? $tumbuhanbawah->co2 : "" }}
                                 Kg</span></p>
                         <button type="submit" class="btn btn-success d-flex align-items-center justify-content-center"
                             id="submitButton">
@@ -164,7 +164,7 @@
                         <p class="form-label">Carbon <span>{{ $tanah ? $tanah->carbongr : ""}} Gr/Cm3</span></p>
                         <p class="form-label">Carbon <span>{{ $tanah ? $tanah->carbonton : "" }} Ton/Ha</span></p>
                         <p class="form-label">Carbon <span>{{ $tanah ? $tanah->carbonkg : "" }} Kg</span></p>
-                        <p class="form-label">Serapan CO2 <span>{{ $tanah ? $tanah->co2kg : "" }} Kg</span></p>
+                        <p class="form-label">Serapan CO<sub>2</sub> <span>{{ $tanah ? $tanah->co2kg : "" }} Kg</span></p>
                         <button type="submit" class="btn btn-success d-flex align-items-center justify-content-center"
                             id="submitButton">
                             <span>Submit</span>

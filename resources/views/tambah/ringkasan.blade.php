@@ -148,7 +148,7 @@
                                         </p>
                                     </div>
                                     <div class="mt-3">
-                                        <p class="text-dark">Serapan CO2 (ton/ha):</p>
+                                        <p class="text-dark">Serapan CO<sub>2</sub> (ton/ha):</p>
                                         <p class="card-text text-start text-success ">
                                             {{ $item['SerapanCO2'] ?? 0 }}</p>
                                     </div>
@@ -272,7 +272,7 @@
                         <div class="col-md-6  height-card box-margin">
                             <div class="card  text-center">
                                 <div class="card-body ">
-                                    <h4 class="card-title mb-0">Summary Serapan CO2</h4>
+                                    <h4 class="card-title mb-0">Summary Serapan CO<sub>2</sub></h4>
                                     <p class="mb-3">Bagian ini untuk menampilkan hitungan total serapa CO2 untuk
                                         lokasi
                                         {{ $poltArea->daerah }}</p>

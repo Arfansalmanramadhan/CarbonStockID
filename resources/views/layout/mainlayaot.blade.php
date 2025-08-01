@@ -182,6 +182,12 @@
                             <span>Surveyor</span>
                         </a>
                     </li>
+                    {{-- <li class="sidebar-item">
+                        <a href="{{ route('Galeri.index') }}" class="sidebar-link">
+                            <i class="lni lni-shield-2-check"></i>
+                            <span>Galeri</span>
+                        </a>
+                    </li> --}}
                 </ul>
             </aside>
             <div class="main p-3">

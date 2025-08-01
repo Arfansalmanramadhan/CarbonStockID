@@ -2,26 +2,137 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Periode;
+use App\Models\Galery;
 use App\Models\PoltArea;
 use App\Models\Zona;
+use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Str;
-use App\Models\Pancang;
-use App\Models\Tiang;
-use App\Models\Pohon;
-use App\Models\Serasah;
-use App\Models\Semai;
-use App\Models\TumbuhanBawah;
-use App\Models\Necromass;
-use App\Models\Tanah;
 use Illuminate\Support\Facades\Log;
 
-class ZonaApiController extends Controller
+class LandingPageController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     */
+    public function index()
+    {
+        return view('landingPage');
+    }
 
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create(Request $request)
+    {
+        $user = Auth::user();
+        $search = $request->query('search');
+        $perPage = $request->query('per_page', 100000);
+        $query = Galery::query();
+        if (!empty($search)) {
+            $query->where('nama_judul', 'ILIKE', "%{$search}%");
+        }
+
+        // Ambil data dengan pagination
+        $galery = $query->paginate($perPage)->appends([
+            'search' => $search,
+            'per_page' => $perPage
+        ]);
+        return view('galeri', compact('user', 'galery'));
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request)
+    {
+        try {
+            $validated = $request->validate([
+                'tanggal' => 'nullable| date',
+                'nama_judul' => 'nullable |string',
+                'foto' => 'nullable|url',
+                'video' => 'nullable|url',
+                // 'foto' => 'nullable|file|mimes:jpg,jpeg,png|max:10048',
+                // 'video' => 'nullable|file|mimes:mp4,avi,mov|max:20480',
+            ]);
+            DB::beginTransaction();
+            $galeri = new Galery();
+            $galeri->registrasi_id = Auth::id();
+            $galeri->nama_judul = $request->nama_judul;
+            $galeri->tanggal = $request->tanggal;
+            $galeri->foto = $request->foto; // 🟢 Harus ada nilai URL
+            $galeri->video = $request->video;
+
+            $galeri->nama_judul = $validated['nama_judul'] ?? null;
+            $galeri->tanggal = $validated['tanggal'] ?? null;
+            $galeri->foto = $validated['foto'] ?? null;
+            $galeri->video = $validated['video'] ?? null;
+            $galeri->save();
+            // dd($validated, $galeri, $request->all());
+            // dd($request);
+            // Simpan user tanpa foto dulu
+            // $galeri = Galery::create([
+            //     'registrasi_id' => Auth::id(), //
+            //     'tanggal' => $request->tanggal,
+            //     'nama_judul' => $request->nama_judul
+            // ]);
+
+            // // Upload ke Supabase
+            // if ($request->hasFile('foto')) {
+            //     $file = $request->file('foto');
+            //     $filename = 'foto/galeri-' . $galeri->id . '-' . time() . '.' . $file->getClientOriginalExtension();
+
+            //     $client = new Client();
+            //     $response = $client->request('PUT', env('SUPABASE_URL') . '/storage/v1/object/' . env('SUPABASE_BUCKET') . '/' . $filename, [
+            //         'headers' => [
+            //             'apikey' => env('SUPABASE_API_KEY'),
+            //             'Authorization' => 'Bearer ' . env('SUPABASE_API_KEY'),
+            //             'Content-Type' => $file->getClientMimeType(),
+            //             'x-upsert' => 'true', // allow replace file
+            //         ],
+            //         'body' => file_get_contents($file->getRealPath()),
+            //     ]);
+
+            //     dd($file->getSize());
+            //     if (in_array($response->getStatusCode(), [200, 201])) {
+            //         $galeri->foto = env('SUPABASE_URL') . '/storage/v1/object/public/' . env('SUPABASE_BUCKET') . '/' . $filename;
+            //         $galeri->save();
+            //     }
+            // }
+            // // Upload ke Supabase
+            // if ($request->hasFile('video')) {
+            //     $file = $request->file('video');
+            //     $filename = 'video/galeri-' . $galeri->id . '-' . time() . '.' . $file->getClientOriginalExtension();
+
+            //     $client = new Client();
+            //     $response = $client->request('PUT', env('SUPABASE_URL') . '/storage/v1/object/' . env('SUPABASE_BUCKET') . '/' . $filename, [
+            //         'headers' => [
+            //             'apikey' => env('SUPABASE_API_KEY'),
+            //             'Authorization' => 'Bearer ' . env('SUPABASE_API_KEY'),
+            //             'Content-Type' => $file->getClientMimeType(),
+            //             'x-upsert' => 'true', // allow replace file
+            //         ],
+            //         'body' => file_get_contents($file->getRealPath()),
+            //     ]);
+
+            //     if (in_array($response->getStatusCode(), [200, 201])) {
+            //         $galeri->video = env('SUPABASE_URL') . '/storage/v1/object/public/' . env('SUPABASE_BUCKET') . '/' . $filename;
+            //         $galeri->save();
+            //     }
+            // }
+            // // dd($galeri);
+            DB::commit();
+
+            // return response()->json(['message' => 'Galeri tersimpan']);
+            return redirect()->route('Galeri.index')->with('success', 'simpat berhasil!');
+        } catch (\Exception $e) {
+            DB::rollBack();
+
+            return response()->json(['message' => 'Galeri gagal' . $e->getMessage()], 500);
+            // return redirect()->back()->with('error', 'Gagal simpan: ' . $e->getMessage());
+        }
+    }
     public function getAllPlotArea()
     {
         $plotAreas = PoltArea::all();
@@ -33,149 +144,6 @@ class ZonaApiController extends Controller
             'data'       => $plotAreas,
         ], 200);
     }
-
-    public function getZona(Request $request, $slug)
-    {
-        $user = Auth::user();
-        $search = $request->query('search');
-        $perPage = $request->query('per_page',100000);
-        $poltArea = PoltArea::where("slug", $slug)->firstOrFail();
-        // $poltAreaa = PoltArea::find($id);
-        // dd($poltArea);
-
-        $query = Zona::where("polt_area_id", $poltArea->id);
-        // dd($query);/
-        // $query = Zona::query();
-        if (!empty($search)) {
-            $query->where('zona', 'ILIKE', "%{$search}%")
-                ->orWhere('jenis_hutan', 'ILIKE', "%{$search}%");
-        }
-        // dd($poltArea);
-        // $poltArea = $query->paginate($perPage);
-
-        /// Ambil data dengan pagination
-        $zona = $query->paginate($perPage)->appends([
-            'search' => $search,
-            'per_page' => $perPage
-        ]);
-        // dd($poltArea->id, $zona);
-        // dd($zona->toArray());
-        $ringkasan = $this->ringkasan($slug)->getData()['ringkasan'];
-        $ringkasann = $this->ringkasann($slug)->getData()['ringkasann'];
-        $Serasah = DB::table('serasah')
-            ->leftJoin('subplot', 'serasah.subplot_id', '=', 'subplot.id')
-            ->leftJoin('plot', 'subplot.plot_id', '=', 'plot.id')
-            ->leftJoin('hamparan', 'plot.hamparan_id', '=', 'hamparan.id')
-            ->leftJoin('zona', 'hamparan.zona_id', '=', 'zona.id')
-            ->where('polt_area_id', $poltArea->id)
-            ->where('plot.status', 'aktif')
-            // ->whereNull('serasah.deleted_at')
-            ->get();
-        // dd( $Serasah);
-        $Semai = DB::table('semai')
-            ->leftJoin('subplot', 'semai.subplot_id', '=', 'subplot.id')
-            ->leftJoin('plot', 'subplot.plot_id', '=', 'plot.id')
-            ->leftJoin('hamparan', 'plot.hamparan_id', '=', 'hamparan.id')
-            ->leftJoin('zona', 'hamparan.zona_id', '=', 'zona.id')
-            ->where('polt_area_id', $poltArea->id)
-            ->where('plot.status', 'aktif')
-            // ->whereNull('semai.deleted_at')
-            ->get();
-
-        $TumbuhanBawah = DB::table('tumbuhan_bawah')
-            ->leftJoin('subplot', 'tumbuhan_bawah.subplot_id', '=', 'subplot.id')
-            ->leftJoin('plot', 'subplot.plot_id', '=', 'plot.id')
-            ->leftJoin('hamparan', 'plot.hamparan_id', '=', 'hamparan.id')
-            ->leftJoin('zona', 'hamparan.zona_id', '=', 'zona.id')
-            ->where('polt_area_id', $poltArea->id)
-            ->where('plot.status', 'aktif')
-            // ->whereNull('tumbuhan_bawah.deleted_at')
-            ->get();
-
-        $pancang = DB::table('pancang')
-            ->leftJoin('subplot', 'pancang.subplot_id', '=', 'subplot.id')
-            ->leftJoin('plot', 'subplot.plot_id', '=', 'plot.id')
-            ->leftJoin('hamparan', 'plot.hamparan_id', '=', 'hamparan.id')
-            ->leftJoin('zona', 'hamparan.zona_id', '=', 'zona.id')
-            ->where('polt_area_id', $poltArea->id)
-            ->where('plot.status', 'aktif')
-            // ->whereNull('pancang.deleted_at')
-            ->get();
-        $tiang = DB::table('tiang')
-            ->leftJoin('subplot', 'tiang.subplot_id', '=', 'subplot.id')
-            ->leftJoin('plot', 'subplot.plot_id', '=', 'plot.id')
-            ->leftJoin('hamparan', 'plot.hamparan_id', '=', 'hamparan.id')
-            ->leftJoin('zona', 'hamparan.zona_id', '=', 'zona.id')
-            ->where('polt_area_id', $poltArea->id)
-            ->where('plot.status', 'aktif')
-            // ->whereNull('tiang.deleted_at')
-            ->get();
-        $pohon = DB::table('pohon')
-            ->leftJoin('subplot', 'pohon.subplot_id', '=', 'subplot.id')
-            ->leftJoin('plot', 'subplot.plot_id', '=', 'plot.id')
-            ->leftJoin('hamparan', 'plot.hamparan_id', '=', 'hamparan.id')
-            ->leftJoin('zona', 'hamparan.zona_id', '=', 'zona.id')
-            ->where('polt_area_id', $poltArea->id)
-            ->where('plot.status', 'aktif')
-            // ->whereNull('pohon.deleted_at')
-            ->get();
-        $Necromas = DB::table('necromass')
-            ->leftJoin('subplot', 'necromass.subplot_id', '=', 'subplot.id')
-            ->leftJoin('plot', 'subplot.plot_id', '=', 'plot.id')
-            ->leftJoin('hamparan', 'plot.hamparan_id', '=', 'hamparan.id')
-            ->leftJoin('zona', 'hamparan.zona_id', '=', 'zona.id')
-            ->where('polt_area_id', $poltArea->id)
-            ->where('plot.status', 'aktif')
-            // ->whereNull('necromass.deleted_at')
-            ->get();
-        $tanah = DB::table('tanah')
-            ->leftJoin('subplot', 'tanah.subplot_id', '=', 'subplot.id')
-            ->leftJoin('plot', 'subplot.plot_id', '=', 'plot.id')
-            ->leftJoin('hamparan', 'plot.hamparan_id', '=', 'hamparan.id')
-            ->leftJoin('zona', 'hamparan.zona_id', '=', 'zona.id')
-            ->where('polt_area_id', $poltArea->id)
-            ->where('plot.status', 'aktif')
-            // ->whereNull('tanah.deleted_at')
-            ->get();
-        return view('show.zona', compact(
-            'zona',
-            "user",
-            'search',
-            'perPage',
-            'poltArea',
-            'ringkasan',
-            'ringkasann',
-            'Serasah',
-            'Semai',
-            'TumbuhanBawah',
-            'Necromas',
-            'pancang',
-            'tiang',
-            'pohon',
-            'tanah'
-        ));
-    }
-    public function tambah($slug)
-    {
-        $user = Auth::user();
-        $poltArea = PoltArea::where('slug', $slug)->firstOrFail();
-        return view('tambah.TambahZona', compact('user', 'poltArea'));
-    }
-
-    public function create($id)
-    {
-        $user = Auth::user();
-        $poltArea = PoltArea::findOrFail($id);
-        return view('tambah.TambahZona', compact('poltArea'));
-    }
-
-    public function subplot($slug)
-    {
-
-        return view('show.zona', compact('Serasah', 'Semai', 'TumbuhanBawah', 'Necromas'));
-        dd($uniqueSerasah);
-    }
-
     public function ringkasann($slug)
     {
         $poltArea = PoltArea::where('slug', $slug)->firstOrFail();
@@ -242,6 +210,8 @@ class ZonaApiController extends Controller
             // $tanah = $tanah->total_carbon_tanah *1.00;
             // dd( $tanah);
             // dd($zona->zona_nama);
+            // 'latitude' => $zona->latitude,
+            //     'longitude' => $zona->longitude,
             $tanahh = DB::table('tanah')
                 ->leftJoin('subplot', 'tanah.subplot_id', '=', 'subplot.id')
                 ->leftJoin('plot', 'subplot.plot_id', '=', 'plot.id')
@@ -576,6 +546,7 @@ class ZonaApiController extends Controller
             //         'Rata-rata tanah' => $hasiltanahPersen,
             //     ]);
             // dd()
+            dd($zona->latitude);
             return [
                 // 'zona' => $zona->zona_nama,
                 'latitude' => $zona->latitude,
@@ -631,5 +602,35 @@ class ZonaApiController extends Controller
             'data' => $ringkasann,
         ], 200);
     }
+    /**
+     * Display the specified resource.
+     */
+    public function show(string $id)
+    {
+        //
+    }
 
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(string $id)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, string $id)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(string $id)
+    {
+        //
+    }
 }

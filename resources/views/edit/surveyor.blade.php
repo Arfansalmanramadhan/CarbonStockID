@@ -1,6 +1,6 @@
 @extends('layout.layaout')
 
-@section('title', 'TambahZona')
+@section('title', 'Edit Data Surveyor')
 
 @section('content')
     <div class="container-tambah-data mt-5" id="currentContent">

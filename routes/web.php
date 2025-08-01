@@ -28,6 +28,7 @@ use App\Http\Controllers\Authentication\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DataPlotController;
 use App\Http\Controllers\HamparanController;
+use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\ManajermenUserController;
 use App\Http\Controllers\PeriodeController;
 use App\Http\Controllers\PLotCOntroller;
@@ -55,16 +56,24 @@ use App\Http\Controllers\ZonaApiController as ZonaApiController;
 |
 */
 
-Route::get('/', function () {
-    return view('landingPage');
-});
-
-
+// Route::get('/', function () {
+//     return view('landingPage');
+// });
+// Route::post('/Serasah/store', [SerasahController::class, 'store'])->name('Serasah.store');
+// Route::get('/', [LandingPageController::class, 'index']);
 // Route::prefix('zones')->group(function () {
 //     Route::get('/', [ZonaApiController::class, 'getAllZones']);
 //     Route::get('/{slug}/summary', [ZonaApiController::class, 'getZoneSummary']);
 //     Route::get('/polt-area/{poltAreaId}', [ZonaApiController::class, 'getZonesByPoltArea']);
 // });
+Route::controller(LandingPageController::class)->group(function () {
+        Route::get('/', 'index')->name('Galeri.index');
+        Route::get('/Galeri', 'create')->name('Galeri.index');
+        Route::post('/Galeri', 'store')->name('Galeri.store');
+        Route::get('/zones', 'getAllZones')->name('api.zones.all');
+        Route::get('/zones/{slug}/summary', 'ringkasann')->name('api.zones.summary');
+        Route::get('/zones/plot-area', 'getAllPlotArea')->name('api.zones.allPlotArea');
+    });
 Route::controller(ZonaApiController::class)->group(function () {
     Route::get('/zones', 'getAllZones')->name('api.zones.all');
     Route::get('/zones/{slug}/summary', 'ringkasann')->name('api.zones.summary');
@@ -136,7 +145,13 @@ Route::middleware('auth')->group(function () {
     });
     // Route::post('/Serasah/store', [SerasahController::class, 'store'])->name('Serasah.store');
 
-
+    // Route::controller(LandingPageController::class)->group(function () {
+    //     Route::get('/Galeri', 'create')->name('Galeri.index');
+    //     Route::post('/Galeri', 'store')->name('Galeri.store');
+    //     Route::get('/zones', 'getAllZones')->name('api.zones.all');
+    //     Route::get('/zones/{slug}/summary', 'ringkasann')->name('api.zones.summary');
+    //     Route::get('/zones/plot-area', 'getAllPlotArea')->name('api.zones.allPlotArea');
+    // });
 
     Route::controller(SerasahController::class)->group(function () {
         Route::get("/Plot/SubPlot/edit/{id}", "edit")->name('edit.edit');

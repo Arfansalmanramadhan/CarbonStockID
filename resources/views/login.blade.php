@@ -16,7 +16,7 @@
 
     <!-- Logo Title -->
     <link rel="icon" href="{{ asset('/images/logoCarbonStockID-LightMode.png') }}" type="image/x-icon" />
-    <title>CarbonStockID</title>
+    <title>Login</title>
 </head>
 
 <body>

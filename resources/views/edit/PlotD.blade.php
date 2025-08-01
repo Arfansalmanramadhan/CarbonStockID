@@ -24,7 +24,7 @@
                         </div>
                         <div class="d-flex align-items-center">
                             <button class="btn btn-tambah-data me-3" id="addData3" data-bs-toggle="modal"
-                                data-bs-target="#dataModal3">Tambah</button>
+                                data-bs-target="#dataModal3">Edit</button>
 
                             <!-- Modal -->
                             <div class="modal" id="dataModal3" aria-hidden="true">

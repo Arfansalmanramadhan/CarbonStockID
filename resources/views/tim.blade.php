@@ -1,6 +1,6 @@
 @extends('layout.mainlayaot')
 
-@section('title', 'tim')
+@section('title', 'Tim')
 
 @section('content')
     <div id="prediksi-content" class="page-content content p-4">

@@ -75,7 +75,7 @@
             <div class="card plot-info-card batas">
                 <div class="card-header d-flex align-items-center">
                     <img class="ms-3" src="assets/img/ChevronDown.svg" alt="" />
-                    <h5 class="ms-3 mt-2">Kalkulasi Penghitungan Serapa CO2</h5>
+                    <h5 class="ms-3 mt-2">Kalkulasi Penghitungan Serapa CO<sub>2</sub></h5>
                 </div>
                 <div class="card-body-sup-plot">
                     <!-- Form -->

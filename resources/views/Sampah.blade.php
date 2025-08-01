@@ -1,13 +1,13 @@
 @extends('layout.mainlayaot')
 
-@section('title', 'Keanekkaragaman Hayati')
+@section('title', 'Keanekaragaman Hayati')
 
 @section('content')
     <div id="sampah-content" class="page-content content p-4 w-100">
         <div class="image-container mt-4">
             <img src="{{ asset('/images/dataPlot-Image.svg') }}" alt="" class="mb-4 img-normal" />
             <div class="text-overlay">
-                <p class="large-text">Keanekkaragaman Hayati </p>
+                <p class="large-text">Keanekaragaman Hayati </p>
             </div>
         </div>
         <div class="table-container">

@@ -1,6 +1,6 @@
 @extends('layout.layaout')
 
-@section('title', 'Plot B')
+@section('title', 'Edit Plot B')
 
 @section('content')
     <div class="container-tambah-data hidden mt-5" id="newContent2">
@@ -8,7 +8,6 @@
             <div class="table-container">
                 <div class="h2-pancang-container">
                     <h2 class="active m-3" id="utama">Pancang</h2>
-                    <h2 class=" " id="kedua">Mangrove</h2>
                 </div>
                 <div id="pancang">
                     <div class="table-header d-flex justify-content-between">
@@ -24,7 +23,7 @@
                         <div class="d-flex align-items-center">
                             <!-- Button to trigger modal -->
                             <button class="btn btn-tambah-data me-3" id="addData" data-bs-toggle="modal"
-                                data-bs-target="#dataModal">Tambah</button>
+                                data-bs-target="#dataModal">Edit</button>
 
                             <!-- Modal -->
                             <div class="modal" id="dataModal" aria-hidden="true">

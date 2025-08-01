@@ -182,10 +182,16 @@ section {
   z-index: 1; /* Memastikan gambar berada di belakang teks */
 }
 
+#Gambar {
+  padding: 67px 78px;
+  background-color: #edf7ed;
+}
 /* Fitur Section */
 #Fitur {
   padding: 67px 78px;
-  background-color: #edf7ed;
+  background-color:  var(--pr-color2);
+  height: auto;
+  transition: height 0.3s ease;
 }
 
 h2 {
@@ -245,7 +251,7 @@ p {
 /* Pertanyaan Section */
 #Pertanyaan {
   padding: 67px 78px;
-  background-color: var(--pr-color2);
+  background-color: #edf7ed;
   height: auto;
   transition: height 0.3s ease; /* Smooth transition */
 }
@@ -324,7 +330,7 @@ p {
 
 #TentangKami {
   padding: 67px 78px;
-  background-color: var(--pr-color9); /* Sesuaikan dengan warna latar belakang gambar */
+  background-color:  var(--pr-color2); /* Sesuaikan dengan warna latar belakang gambar */
 }
 
 #TentangKami h2 {

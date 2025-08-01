@@ -53,7 +53,7 @@
                                         <th>Sample Berat Basah</th>
                                         <th>Total Berat Kering</th>
                                         <th>Kanduungan Karbn</th>
-                                        <th>Serapan CO<SUP>2</SUP></th>
+                                        <th>Serapan CO<SUb>2</SUb></th>
                                         <th class="hidden-column kananPancang">Aksi</th>
                                     </tr>
                                 </thead>
@@ -174,7 +174,7 @@
                                     <th>Sample Berat Kering</th>
                                     <th>Total Berat Keriing</th>
                                     <th>Kandungan karbon</th>
-                                    <th>Serapan</th>
+                                    <th>Serapan CO<sub>2</sub></th>
                                     <th class="hidden-column kananPancang">Aksi</th>
                                 </tr>
                             </thead>
@@ -291,7 +291,7 @@
                                     <th>Sample Berat Kering</th>
                                     <th>Total Berat Keriing</th>
                                     <th>Kandungan karbon</th>
-                                    <th>Serapan</th>
+                                    <th>Serapan CO<sub>2</sub></th>
                                     <th class="hidden-column kananPancang">Aksi</th>
                                 </tr>
                             </thead>
@@ -412,7 +412,7 @@
                                     <th>karbon Gr</th>
                                     <th>karbon Ton/Ha</th>
                                     <th>Karbon Ton</th>
-                                    <th>Serapan Co2</th>
+                                    <th>Serapan CO<sub>2</sub></th>
                                     <th class="hidden-column kananPancang">Aksi</th>
                                 </tr>
                             </thead>
@@ -423,7 +423,7 @@
                                         <<td>{{ number_format($item->kedalaman_sample, 2) }} Cm</td>
                                             <td>{{ number_format($item->berat_jenis_tanah, 2) }} Gr/Cm<sup>3</sup></td>
                                             <td>{{ number_format($item->C_organic_tanah, 0) }} %</td>
-                                            <td>{{ number_format($item->carbongr, 2) }} Gr/Cm<SUP>2</SUP></td>
+                                            <td>{{ number_format($item->carbongr, 2) }} Gr/Cm<SUb>2</SUb></td>
                                             <td class="hidden-column">{{ number_format($item->carbonton, 2) }}Ton/Ha</td>
                                             <td class="hidden-column">{{ number_format($item->carbonkg, 2) }} Ton</td>
                                             <td class="hidden-column">{{ number_format($item->co2kg, 2) }}Kg</td>
@@ -533,7 +533,7 @@
                                     <th>Kerapatan Jenis Kayu</th>
                                     <th>Biomasa</th>
                                     <th>Kandungan karbon</th>
-                                    <th>Serapan CO<SUP>2</SUP></th>
+                                    <th>Serapan CO<SUb>2</SUb></th>
                                     <th class="hidden-column kananPancang">Aksi</th>
                                 </tr>
                             </thead>
@@ -548,7 +548,7 @@
                                         <td>{{ $item->nama_lokal }}</td>
                                         <td>{{ $item->nama_ilmiah }}</td>
                                         <td class="hidden-column">
-                                            {{ number_format($item->kerapatan_jenis_kayu, 2) }}Gr/Cm<SUP>3</SUP></td>
+                                            {{ number_format($item->kerapatan_jenis_kayu, 2) }}Gr/Cm<SUb>3</SUb></td>
                                         <td class="hidden-column">{{ number_format($item->bio_di_atas_tanah, 2) }} Kg</td>
                                         <td class="hidden-column">{{ number_format($item->kandungan_karbon, 2) }}Kg</td>
                                         <td class="hidden-column">{{ number_format($item->co2, 2) }} Kg</td>
@@ -655,7 +655,7 @@
                                     <th>Kerapatan Jenis Kayu</th>
                                     <th>Biomasa</th>
                                     <th>Kandungan karbon</th>
-                                    <th>Serapan CO<SUP>2</SUP> </th>
+                                    <th>Serapan CO<SUb>2</SUb> </th>
                                     <th class="hidden-column kananPancang">Aksi</th>
                                 </tr>
                             </thead>
@@ -670,7 +670,7 @@
                                         <td>{{ $item->nama_lokal }}</td>
                                         <td>{{ $item->nama_ilmiah }}</td>
                                         <td class="hidden-column">
-                                            {{ number_format($item->kerapatan_jenis_kayu, 2) }}Gr/Cm<SUP>3</SUP></td>
+                                            {{ number_format($item->kerapatan_jenis_kayu, 2) }}Gr/Cm<SUb>3</SUb></td>
                                         <td class="hidden-column">{{ number_format($item->bio_di_atas_tanah, 2) }} Kg</td>
                                         <td class="hidden-column">{{ number_format($item->kandungan_karbon, 2) }}Kg</td>
                                         <td class="hidden-column">{{ number_format($item->co2, 2) }} Kg</td>
@@ -775,7 +775,7 @@
                                     <th>Kerapatan Jenis Kayu</th>
                                     <th>Biomasa</th>
                                     <th>Kandungan karbon</th>
-                                    <th>Serapan CO<SUP>2</SUP> </th>
+                                    <th>Serapan CO<SUb>2</SUb> </th>
                                     <th class="hidden-column kananPancang">Aksi</th>
                                 </tr>
                             </thead>
@@ -790,7 +790,7 @@
                                         <td>{{ $item->nama_lokal }}</td>
                                         <td>{{ $item->nama_ilmiah }}</td>
                                         <td class="hidden-column">
-                                            {{ number_format($item->kerapatan_jenis_kayu, 2) }}Gr/Cm<SUP>3</SUP></td>
+                                            {{ number_format($item->kerapatan_jenis_kayu, 2) }}Gr/Cm<SUb>3</SUb></td>
                                         <td class="hidden-column">{{ number_format($item->bio_di_atas_tanah, 2) }} Kg</td>
                                         <td class="hidden-column">{{ number_format($item->kandungan_karbon, 2) }}Kg</td>
                                         <td class="hidden-column">{{ number_format($item->co2, 2) }} Kg</td>
@@ -894,7 +894,7 @@
                                     <th class="hidden-column">Berat Jenis Kayur</th>
                                     <th class="hidden-column">Biomasa</th>
                                     <th class="hidden-column">Kandungan karbon</th>
-                                    <th class="hidden-column">Serapan CO<SUP>2</SUP></th>
+                                    <th class="hidden-column">Serapan CO<SUb>2</SUb></th>
                                     <th class="hidden-column kananPancang">Aksi</th>
                                 </tr>
                             </thead>
@@ -905,9 +905,9 @@
                                         <td>{{ number_format($item->diameter_pangkal, 2) }} M</td>
                                         <td>{{ number_format($item->diameter_ujung, 2) }} M</td>
                                         <td>{{ number_format($item->panjang, 2) }} M</td>
-                                        <td>{{ number_format($item->volume, 3) }} M<SUP>3</SUP></td>
+                                        <td>{{ number_format($item->volume, 3) }} M<SUb>3</SUb></td>
                                         <td class="hidden-column">
-                                            {{ number_format($item->berat_jenis_kayu, 2) }}Gr/M<SUP>3</SUP></td>
+                                            {{ number_format($item->berat_jenis_kayu, 2) }}Gr/M<SUb>3</SUb></td>
                                         <td class="hidden-column">{{ number_format($item->biomasa, 2) }} Kg</td>
                                         <td class="hidden-column">{{ number_format($item->carbon, 2) }}Kg</td>
                                         <td class="hidden-column">{{ number_format($item->co2, 2) }} Kg</td>
