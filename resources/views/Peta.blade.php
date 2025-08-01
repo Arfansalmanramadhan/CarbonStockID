@@ -176,9 +176,9 @@
             <tr>
               <th>No</th>
               <th>Nama Penghitungan</th>
-              <th>Total CO₂</th>
-              <th>Luas Tanah (ha)</th>
-              <th>Total</th>
+              <th>Total CO₂ (Ton C/Ha)</th>
+              <th>Luas Tanah (Ha)</th>
+              <th>Total <br>(Ton C/Ha) </th>
               <th>Persen</th>
             </tr>
           </thead>
@@ -190,9 +190,9 @@
           <tr>
             <td>${i+1}</td>
             <td>${r.label}</td>
-            <td>${r.co2.toFixed(2)} Ton C/Ha</td>
-            <td>${r.luas.toFixed(2)} Ha</td>
-            <td>${r.total.toFixed(2)} Ton C/Ha</td>
+            <td>${r.co2.toFixed(2)} </td>
+            <td>${r.luas.toFixed(2)} </td>
+            <td>${r.total.toFixed(2)} </td>
             <td>${r.persen.toFixed(2)} %</td>
           </tr>
         `;
