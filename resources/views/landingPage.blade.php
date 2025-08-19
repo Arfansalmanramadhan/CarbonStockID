@@ -45,7 +45,7 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav mx-auto">
                     <li class="nav-item me-2">
-                        <a class="nav-link" href="#Gambar">Galeri</a>
+                        <a class="nav-link" href="#Gambar">Peta</a>
                     </li>
                     <li class="nav-item me-2">
                         <a class="nav-link" href="#Fitur">Fitur</a>
@@ -565,33 +565,33 @@
         </table>
       `;
 
-        //                 rows.forEach((r, i) => {
-        //                     html += `
-        //   <tr>
-        //     <td>${i+1}</td>
-        //     <td>${r.label}</td>
-        //     <td>${r.co2.toFixed(2)} Ton C/Ha</td>
-        //     <td>${r.luas.toFixed(2)} Ha</td>
-        //     <td>${r.total.toFixed(2)} Ton C/Ha</td>
-        //     <td>${r.persen.toFixed(2)} %</td>
-        //   </tr>
-        // `;
-        //                 });
-        //                 // console.log(obj.latitude);
-        //                 html += `
-        //   </tfoot>
-        //   <tfoot>
-        //     <tr>
-        //       <td colspan="4"><strong>Total Carbon 5 Poll</strong></td>
-        //       <td colspan="2">${obj.latitude ? parseFloat(obj.latitude).toFixed(8) : '-'} Ton</td>
-        //     </tr>
-        //     <tr>
-        //       <td colspan="4"><strong>Baseline Lahan Kosong</strong></td>
-        //       <td colspan="2">${obj.longitude ? parseFloat(obj.longitude).toFixed(8) : '-'} Ton C/Ha</td>
-        //     </tr>
-        //   </tfoot>
-        // </table>
-    //   `;
+                        //                 rows.forEach((r, i) => {
+                        //                     html += `
+                    //   <tr>
+                    //     <td>${i+1}</td>
+                    //     <td>${r.label}</td>
+                    //     <td>${r.co2.toFixed(2)} Ton C/Ha</td>
+                    //     <td>${r.luas.toFixed(2)} Ha</td>
+                    //     <td>${r.total.toFixed(2)} Ton C/Ha</td>
+                    //     <td>${r.persen.toFixed(2)} %</td>
+                    //   </tr>
+                    // `;
+                        //                 });
+                        //                 // console.log(obj.latitude);
+                        //                 html += `
+                    //   </tfoot>
+                    //   <tfoot>
+                    //     <tr>
+                    //       <td colspan="4"><strong>Total Carbon 5 Poll</strong></td>
+                    //       <td colspan="2">${obj.latitude ? parseFloat(obj.latitude).toFixed(8) : '-'} Ton</td>
+                    //     </tr>
+                    //     <tr>
+                    //       <td colspan="4"><strong>Baseline Lahan Kosong</strong></td>
+                    //       <td colspan="2">${obj.longitude ? parseFloat(obj.longitude).toFixed(8) : '-'} Ton C/Ha</td>
+                    //     </tr>
+                    //   </tfoot>
+                    // </table>
+                    //   `;
                         //                         let html = `
                     //     <h6 class="mb-3">Informasi Lokasi Plot</h6>
                     //     <table>
