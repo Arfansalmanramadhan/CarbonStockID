@@ -74,14 +74,14 @@ php artisan serve
 ### UX/UI Designer
 [Link](https://www.figma.com/design/NLM2yXRX5v81TgP7kYcosY/PA-Carbon?node-id=1-1387&p=f&t=XXybktfPkJkQfROh-0)
 
-## Blue Print Team (Versi pertama):
+## Blue Print Team (Versi pertama)
 - **Back end Deceloper & Front end Deceloper**: Arfan Salman Ramadhan
 - **Front end Developer**: Najmi Iqbal Hanif [Github](https://github.com/pendosataubat) & [instragram](https://www.instagram.com/hnf_.45/)
 - **UI/UX Designer**: Syfanadya Wenning Adi  [Github](https://github.com/syfanadya) & [instragram](https://www.instagram.com/syfa.ndya)
 - **Machine Learningr**: Vina Namira Andrina Andidi  [Github](https://github.com/vinanamira) & [instragram](https://www.instagram.com/vinanamiraa16/)
 
-## apliikasi versi kedua 
-### Team Developer:
+## Apliikasi Versi Kedua 
+### Tim Developer:
 - **Full Stack Web Deceloper**: Arfan Salman Ramadhan
 - **Android Developer**: Muhammad Fadhlan Jamil [instragram](https://www.instagram.com/fdhlan_jmail/)
 - **Android Developer**: Dzaki Alwan Firjatullah [instragram](https://www.instagram.com/dzakialwan_05/)
