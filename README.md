@@ -89,6 +89,7 @@ Selain itu, versi awal CarbonStockID berhasil masuk Top 10 pada kompetisi inovas
 #### Tim Pengembangan
 - **Back end Deceloper & Front end Deceloper**: Arfan Salman Ramadhan
 - **Front end Developer**: Najmi Iqbal Hanif 
+
 [Github](https://github.com/pendosataubat) 
 [instragram](https://www.instagram.com/hnf_.45/)
 - **UI/UX Designer**: Syfanadya Wenning Adi  
